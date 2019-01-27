@@ -150,6 +150,7 @@
                 });
                 if(this.resp.quotes.USDCOP<=3030){
                     window.location.href = 'index';
+                    //this.$router.go('/index') 
                 }
                 var status =  this.resp.date;
                 console.log(status,this.resp.quotes.USDCOP);

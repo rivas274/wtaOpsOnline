@@ -32,18 +32,9 @@
 
         created: function()
         {
-            this.fetchItems();
+           this.fetchData('http://apilayer.net/api/historical?access_key=3da0e9a1d2bb1bee46cb1dc1b2302aa7&date=2018-09-19&source=USD&currencies=COP')
         },
 
-        methods: {
-            fetchItems()
-            {
-              let uri = 'http://localhost:8081/api/customers';
-              this.axios.get(uri).then((response) => {
-                  this.tickets = response.data;
-                  console.log(response)
-              });
-            }
-        }
+        
     }
 </script>
