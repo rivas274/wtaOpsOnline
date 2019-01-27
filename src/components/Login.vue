@@ -17,6 +17,12 @@
 								</h3>
 							</div>
 							<form class="m-login__form m-form" action="">
+                                <div v-if="this.valid == true">
+                                    <div  class="m-alert m-alert--outline alert-danger alert alert-dismissible" role="alert">
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                                        <span>Test</span>
+                                    </div>
+                                </div>
 								<div class="form-group m-form__group">
 									<input class="form-control m-input"   type="text" placeholder="Email" name="email" autocomplete="off" v-model="inputsData.email">
 								</div>
@@ -140,7 +146,8 @@
         data: function () {
             return {
                 inputsData: {},
-                resp:{}
+                resp:{},
+                valid: false
             }
         },
         methods : {
@@ -148,9 +155,12 @@
                 this.axios.get('http://apilayer.net/api/historical?access_key=3da0e9a1d2bb1bee46cb1dc1b2302aa7&date=2018-09-19&source=USD&currencies=COP').then((response) => {
                     this.resp = response.data;
                 });
-                if(this.resp.quotes.USDCOP<=3030){
-                    window.location.href = 'index';
+                if(this.resp.quotes.USDCOP==3030){
+                    //window.location.href = 'index';
+                    this.valid = true;
                     //this.$router.go('/index') 
+                }else{
+                    this.valid = false;
                 }
                 var status =  this.resp.date;
                 console.log(status,this.resp.quotes.USDCOP);
