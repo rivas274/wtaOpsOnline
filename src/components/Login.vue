@@ -7,6 +7,9 @@
   max-height: 60% !important;
   margin-top: 1em;
 }
+.m-form__group.has-danger .form-control-feedback{
+    font-size: 1.1rem !important;
+}
 </style>
 
 <template>
@@ -29,9 +32,6 @@
             </a>
           </div>
           <div class="m-login__signin">
-            <div class="m-login__head">
-              <h3 class="m-login__title">Sign In To Admin</h3>
-            </div>
             <form class="m-login__form m-form" @submit.prevent="validLogin">
               <div
                 v-show="resp.STATUS == 'ERROR'"
@@ -45,7 +45,7 @@
                 <input
                   class="form-control m-input"
                   type="text"
-                  placeholder="user"
+                  placeholder="User"
                   name="user"
                   autocomplete="off"
                   v-model.lazy="inputsData.user"
