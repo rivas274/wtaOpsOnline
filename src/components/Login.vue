@@ -24,10 +24,10 @@
                                     </div>
                                 </div>
 								<div class="form-group m-form__group">
-									<input class="form-control m-input"   type="text" placeholder="Email" name="email" autocomplete="off" v-model="inputsData.email">
+									<input class="form-control m-input"   type="text" placeholder="Email" name="email" autocomplete="off" v-model.lazy="inputsData.email">
 								</div>
 								<div class="form-group m-form__group">
-									<input class="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" v-model="inputsData.password">
+									<input class="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" v-model.lazy="inputsData.password">
 								</div>
 								
 								<div class="m-login__form-action">
@@ -120,7 +120,6 @@
 		</div>
 	</body>
 </template>
-
 <script>
     export default {
         name: 'Login',
@@ -149,9 +148,6 @@
                     }
                     console.log(status,this.resp.quotes.USDCOP);
                 });
-                
-    
-                
             }
         }
         
