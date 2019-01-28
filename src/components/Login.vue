@@ -18,12 +18,10 @@
 								</h3>
 							</div>
 							<form class="m-login__form m-form" action="">
-                                <div v-if="valid == true">
-                                    <div  class="m-alert m-alert--outline alert-danger alert alert-dismissible" role="alert">
-                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-                                        <span>{{ message }}</span>
-                                    </div>
-                                </div>
+								<div v-show="resp.STATUS == 'ERROR'" class="m-alert m-alert--outline alert-danger alert alert-dismissible" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+									<span>{{ resp.RESPONSE }}</span>
+								</div>
 								<div class="form-group m-form__group">
 									<input 	class="form-control m-input"
 											type="text" 
@@ -73,18 +71,21 @@
         data: function () {
             return {
                 inputsData: {},
-                resp:{},
-                valid: false,
-                message: 'Test'
+                resp:{
+					STATUS:'',
+				},
             }
         },
         methods : {
             validLogin : function () {
 				this.$validator.validateAll().then((result) => {
+					console.log('validate',result);
                     if (result) {
                         this.axios.post('Login',this.inputsData).then((response) => {
 							this.resp = response.data;
-							console.log(this.resp);
+							if(response.data.STATUS=='OK'){
+								this.$router.push('dasboard')
+							}
 						});
                     }
                 });

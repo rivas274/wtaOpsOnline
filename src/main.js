@@ -17,47 +17,40 @@ const customAxios = axios.create({
 });
 Vue.use(VueAxios, customAxios);
 Vue.use(VueRouter);
-
-/*Vue.mixin({
-  methods: {
-    fetchData: function (url,method,request) {
-      let uri = url;
-      if (method == 'get') {
-        return this.axios.get(uri).then((response) => {
-          return response.data;
-        });
-
-      } else if (method == 'post') {
-        
-        return this.axios.post(uri,qs.stringify(request)).then((response) => {
-          return response.data; 
-        });
-        
-      }
-     
-    }
-  }
-});
-*/
-
 const routes = [
   {
-      name: 'add',
-      path: '/add',
-      component: AddTicket
+    name: 'add',
+    path: '/add',
+    component: AddTicket,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
-    name: 'index',
-    path: '/index',
-    component: TicketView
+    name: 'dasboard',
+    path: '/dasboard',
+    component: TicketView,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     name: 'Login',
-    path: '/login',
-    component: Login
+    path: '/',
+    component: Login,
   }
-  
 ];
+/* router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const session = Vue.prototype.$session;
+    if (session.exists('user')){
+      console.log('test session storage');
+    }
+    if (to.path === '/') {
+      next();
+    }
+  }
+}); */
 const router = new VueRouter({ mode: 'history', routes: routes });
 
 Vue.config.productionTip = false;
@@ -65,5 +58,4 @@ Vue.config.productionTip = false;
 new Vue({
   render: h => h(App),
   router
-
 }).$mount('#app')
