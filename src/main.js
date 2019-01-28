@@ -6,7 +6,9 @@ import VueAxios from 'vue-axios';
 import AddTicket from './components/AddTicket.vue';
 import TicketView from './components/TicketView.vue';
 import Login from './components/Login.vue';
+import VeeValidate from 'vee-validate';
 
+Vue.use(VeeValidate);
 Vue.use(VueAxios, axios);
 Vue.use(VueRouter);
 
