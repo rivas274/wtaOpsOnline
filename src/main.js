@@ -3,7 +3,7 @@ import App from './App.vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import AddTicket from './components/AddTicket.vue';
+import Assist from './components/Assist.vue';
 import TicketView from './components/TicketView.vue';
 import Login from './components/Login.vue';
 import VeeValidate from 'vee-validate';
@@ -19,9 +19,9 @@ Vue.use(VueAxios, customAxios);
 Vue.use(VueRouter);
 const routes = [
   {
-    name: 'add',
-    path: '/add',
-    component: AddTicket,
+    name: 'Assist',
+    path: '/Assist/:code',
+    component: Assist,
     meta: {
       requiresAuth: true
     }
