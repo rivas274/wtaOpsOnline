@@ -108,8 +108,8 @@ export default {
     validLogin: function() {
       if(!this.disableForm){
         this.$validator.validateAll().then(result => {
-          this.disableForm=true;
           if (result) {
+            this.disableForm=true;
             this.axios.post("Login", this.inputsData).then(response => {
               this.resp = response.data;
               this.disableForm=false;
