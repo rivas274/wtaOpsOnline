@@ -1,5 +1,5 @@
 <template>
-    <span v-show="errors_form.has(attribute_name)" class="help brand-color">{{ errors_form.first(attribute_name) }}</span>
+    <span v-show="errors_form.has(attribute_name)" class="form-control-feedback">{{ errors_form.first(attribute_name) }}</span>
 </template>
 
 <script>

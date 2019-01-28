@@ -1,12 +1,23 @@
+<style>
+.m-login__logo{
+  padding: 1em;
+}
+.m-login__logo img{
+  max-width: 70% !important;
+  max-height: 60% !important;
+  margin-top: 1em;
+}
+</style>
+
 <template>
 <body
   class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"
 >
   <div class="m-grid m-grid--hor m-grid--root m-page">
     <div
-      class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-3"
+      class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2"
       id="m_login"
-      style="background-image: url(./assets/app/media/login/login.jpg);"
+      style="background-image: url(assets/img/login/login.jpg);"
     >
       <div class="m-grid__item m-grid__item--fluid m-login__wrapper">
         <div class="m-login__container">
@@ -30,7 +41,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
                 <span>{{ resp.RESPONSE }}</span>
               </div>
-              <div class="form-group m-form__group">
+              <div class="form-group m-form__group" :class="{'has-danger': errors.has('user')}">
                 <input
                   class="form-control m-input"
                   type="text"
@@ -39,11 +50,11 @@
                   autocomplete="off"
                   v-model.lazy="inputsData.user"
                   v-validate="'required|min:4|max:12|'"
-                  :class="{'has-error': errors.has('user')}"
+                  
                 >
                 <FormError :attribute_name="'user'" :errors_form="errors"></FormError>
               </div>
-              <div class="form-group m-form__group">
+              <div class="form-group m-form__group" :class="{'has-danger': errors.has('password')}">
                 <input
                   class="form-control m-input m-login__form-input--last"
                   type="password"
@@ -51,16 +62,18 @@
                   name="password"
                   v-model.lazy="inputsData.password"
                   v-validate="'required|min:4|max:12|'"
-                  :class="{'has-error': errors.has('password')}"
                 >
-              </div>
               <FormError :attribute_name="'password'" :errors_form="errors"></FormError>
+              </div>
               <div class="m-login__form-action">
                 <button
                   type="submit"
                   id="m_login_signin_submit"
                   class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn"
+                  :disabled="disableForm"
+                  :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
                 >Sign In</button>
+                
               </div>
             </form>
           </div>
@@ -87,23 +100,26 @@ export default {
       inputsData: {},
       resp: {
         STATUS: ""
-      }
-    };
+      },
+      disableForm:false
+    }
   },
   methods: {
     validLogin: function() {
-      this.$validator.validateAll().then(result => {
-        console.log("validate", result);
-        if (result) {
-          this.axios.post("Login", this.inputsData).then(response => {
-            this.resp = response.data;
-            console.log(response);
-            if (response.data.STATUS == "OK") {
-              this.$router.push("dasboard");
-            }
-          });
-        }
-      });
+      if(!this.disableForm){
+        this.$validator.validateAll().then(result => {
+          this.disableForm=true;
+          if (result) {
+            this.axios.post("Login", this.inputsData).then(response => {
+              this.resp = response.data;
+              this.disableForm=false;
+              if (response.data.STATUS == "OK") {
+                this.$router.push("dasboard");
+              }
+            });
+          }
+        });
+      }
     }
   }
 };
