@@ -17,7 +17,7 @@
 									Sign In To Admin
 								</h3>
 							</div>
-							<form class="m-login__form m-form" action="">
+							<form class="m-login__form m-form"  @submit.prevent='validLogin'>
 								<div v-show="resp.STATUS == 'ERROR'" class="m-alert m-alert--outline alert-danger alert alert-dismissible" role="alert">
 									<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
 									<span>{{ resp.RESPONSE }}</span>
@@ -44,7 +44,7 @@
 								</div>
 								<FormError :attribute_name="'password'" :errors_form="errors"> </FormError>
 								<div class="m-login__form-action">
-									<button type="button" v-on:click="validLogin" id="m_login_signin_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn">
+									<button type="submit" id="m_login_signin_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn">
 										Sign In
 									</button>
 								</div>
@@ -83,6 +83,7 @@
                     if (result) {
                         this.axios.post('Login',this.inputsData).then((response) => {
 							this.resp = response.data;
+							console.log(response);
 							if(response.data.STATUS=='OK'){
 								this.$router.push('dasboard')
 							}
