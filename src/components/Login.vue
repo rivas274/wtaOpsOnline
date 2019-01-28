@@ -70,9 +70,6 @@
 		components: {
             FormError
         },
-        props: {
-            msg: String
-        },
         data: function () {
             return {
                 inputsData: {},
@@ -83,18 +80,13 @@
         },
         methods : {
             validLogin : function () {
+				
 				this.$validator.validateAll().then((result) => {
                     if (result) {
-                        this.axios.get('http://apilayer.net/api/historical?access_key=3da0e9a1d2bb1bee46cb1dc1b2302aa7&date=2018-09-19&source=USD&currencies=COP').then((response) => {
+                        this.axios.post('Login',this.inputsData).then((response) => {
 							this.resp = response.data;
-							if(this.resp.quotes.USDCOP<=3030){
-								//window.location.href = 'index';
-								this.valid = true;
-								this.message = 'Error'
-								//this.$router.go('/index') 
-							}else{
-								this.valid = false;
-							}
+							console.log(this.resp);
+							
 						});
                     }
                 });

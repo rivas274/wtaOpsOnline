@@ -9,7 +9,13 @@ import Login from './components/Login.vue';
 import VeeValidate from 'vee-validate';
 
 Vue.use(VeeValidate);
-Vue.use(VueAxios, axios);
+const customAxios = axios.create({
+  baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
+  headers: {
+    'debug': true
+  }
+});
+Vue.use(VueAxios, customAxios);
 Vue.use(VueRouter);
 
 /*Vue.mixin({
