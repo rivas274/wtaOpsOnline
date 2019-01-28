@@ -27,13 +27,13 @@
 								<div class="form-group m-form__group">
 									<input 	class="form-control m-input"
 											type="text" 
-											placeholder="Email" 
-											name="email"
+											placeholder="user" 
+											name="user"
 											autocomplete="off" 
-											v-model.lazy="inputsData.email"
-											v-validate="'required|min:6|max:35|'"
-                							:class="{'has-error': errors.has('email')}">
-									<FormError :attribute_name="'email'" :errors_form="errors"> </FormError>
+											v-model.lazy="inputsData.user"
+											v-validate="'required|min:4|max:12|'"
+                							:class="{'has-error': errors.has('user')}">
+									<FormError :attribute_name="'user'" :errors_form="errors"> </FormError>
 								</div>
 								<div class="form-group m-form__group">
 									<input 	class="form-control m-input m-login__form-input--last" 
@@ -41,7 +41,7 @@
 											placeholder="Password" 
 											name="password" 
 											v-model.lazy="inputsData.password"
-											v-validate="'required|min:6|max:35|'"
+											v-validate="'required|min:4|max:12|'"
 											:class="{'has-error': errors.has('password')}">
 								</div>
 								<FormError :attribute_name="'password'" :errors_form="errors"> </FormError>
@@ -80,13 +80,11 @@
         },
         methods : {
             validLogin : function () {
-				
 				this.$validator.validateAll().then((result) => {
                     if (result) {
                         this.axios.post('Login',this.inputsData).then((response) => {
 							this.resp = response.data;
 							console.log(this.resp);
-							
 						});
                     }
                 });

@@ -12,7 +12,7 @@ Vue.use(VeeValidate);
 const customAxios = axios.create({
   baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
   headers: {
-    'debug': true
+    DEBUG: true
   }
 });
 Vue.use(VueAxios, customAxios);
