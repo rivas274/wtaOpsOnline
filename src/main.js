@@ -7,16 +7,23 @@ import Assist from './components/Assist.vue';
 import TicketView from './components/TicketView.vue';
 import Login from './components/Login.vue';
 import VeeValidate from 'vee-validate';
+import VueSession from 'vue-session';
 
-Vue.use(VeeValidate);
 const customAxios = axios.create({
   baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
   headers: {
     DEBUG: true
   }
 });
+const VueSessionOptions = {
+  persist: true
+}
 Vue.use(VueAxios, customAxios);
 Vue.use(VueRouter);
+Vue.use(VeeValidate);
+
+
+Vue.use(VueSession, VueSessionOptions);
 const routes = [
   {
     name: 'Assist',

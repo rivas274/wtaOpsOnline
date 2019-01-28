@@ -1,0 +1,12 @@
+.m-login__logo{
+    padding: 1em;
+}
+
+.m-login__logo img{
+    max-width: 70% !important;
+    max-height: 60% !important;
+    margin-top: 1em;
+}
+.m-form__group.has-danger .form-control-feedback{
+    font-size: 1.1rem !important;
+}

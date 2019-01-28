@@ -1,17 +1,16 @@
 <style>
-.m-login__logo{
+.m-login__logo {
   padding: 1em;
 }
-.m-login__logo img{
+.m-login__logo img {
   max-width: 70% !important;
   max-height: 60% !important;
   margin-top: 1em;
 }
-.m-form__group.has-danger .form-control-feedback{
-    font-size: 1.1rem !important;
+.m-form__group.has-danger .form-control-feedback {
+  font-size: 1.1rem !important;
 }
 </style>
-
 <template>
 <body
   class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"
@@ -26,9 +25,7 @@
         <div class="m-login__container">
           <div class="m-login__logo">
             <a href="#">
-              <img
-                src="https://wtaops.com/app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png"
-              >
+              <img src="https://wtaops.com/app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png">
             </a>
           </div>
           <div class="m-login__signin">
@@ -36,8 +33,7 @@
               <div
                 v-show="resp.STATUS == 'ERROR'"
                 class="m-alert m-alert--outline alert-danger alert alert-dismissible"
-                role="alert"
-              >
+                role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
                 <span>{{ resp.RESPONSE }}</span>
               </div>
@@ -50,7 +46,6 @@
                   autocomplete="off"
                   v-model.lazy="inputsData.user"
                   v-validate="'required|min:4|max:12|'"
-                  
                 >
                 <FormError :attribute_name="'user'" :errors_form="errors"></FormError>
               </div>
@@ -63,7 +58,7 @@
                   v-model.lazy="inputsData.password"
                   v-validate="'required|min:4|max:12|'"
                 >
-              <FormError :attribute_name="'password'" :errors_form="errors"></FormError>
+                <FormError :attribute_name="'password'" :errors_form="errors"></FormError>
               </div>
               <div class="m-login__form-action">
                 <button
@@ -73,7 +68,6 @@
                   :disabled="disableForm"
                   :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
                 >Sign In</button>
-                
               </div>
             </form>
           </div>
@@ -101,18 +95,19 @@ export default {
       resp: {
         STATUS: ""
       },
-      disableForm:false
-    }
+      disableForm: false
+    };
   },
   methods: {
     validLogin: function() {
-      if(!this.disableForm){
+      if (!this.disableForm) {
         this.$validator.validateAll().then(result => {
           if (result) {
-            this.disableForm=true;
+            this.disableForm = true;
             this.axios.post("Login", this.inputsData).then(response => {
+              console.log(response);
               this.resp = response.data;
-              this.disableForm=false;
+              this.disableForm = false;
               if (response.data.STATUS == "OK") {
                 this.$router.push("dasboard");
               }
@@ -122,5 +117,5 @@ export default {
       }
     }
   }
-};
+}
 </script>
