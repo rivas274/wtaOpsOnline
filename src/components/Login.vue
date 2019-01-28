@@ -31,7 +31,7 @@
 											name="email"
 											autocomplete="off" 
 											v-model.lazy="inputsData.email"
-											v-validate="'required'"
+											v-validate="'required|min:6|max:35|'"
                 							:class="{'has-error': errors.has('email')}">
 									<FormError :attribute_name="'email'" :errors_form="errors"> </FormError>
 								</div>
@@ -41,7 +41,7 @@
 											placeholder="Password" 
 											name="password" 
 											v-model.lazy="inputsData.password"
-											v-validate="'required'"
+											v-validate="'required|min:6|max:35|'"
 											:class="{'has-error': errors.has('password')}">
 								</div>
 								<FormError :attribute_name="'password'" :errors_form="errors"> </FormError>
