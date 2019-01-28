@@ -2,12 +2,12 @@
     <body  class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page">
-			<div class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-3" id="m_login" style="background-image: url(assets/app/media/img//bg/bg-2.jpg);">
+			<div class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-3" id="m_login" style="background-image: url(https://www.elindependiente.com/wp-content/uploads/2017/04/800x600_1454094354_A380_on_ground_front_shot-1440x808.jpg);">
 				<div class="m-grid__item m-grid__item--fluid	m-login__wrapper">
 					<div class="m-login__container">
 						<div class="m-login__logo">
 							<a href="#">
-								<img src="assets/app/media/img//logos/logo-1.png">
+								<img src="https://wtaops.com/app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png">
 							</a>
 						</div>
 						<div class="m-login__signin">
@@ -17,10 +17,10 @@
 								</h3>
 							</div>
 							<form class="m-login__form m-form" action="">
-                                <div v-if="this.valid == true">
+                                <div v-if="valid == true">
                                     <div  class="m-alert m-alert--outline alert-danger alert alert-dismissible" role="alert">
                                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-                                        <span>Test</span>
+                                        <span>{{ message }}</span>
                                     </div>
                                 </div>
 								<div class="form-group m-form__group">
@@ -29,20 +29,7 @@
 								<div class="form-group m-form__group">
 									<input class="form-control m-input m-login__form-input--last" type="password" placeholder="Password" name="password" v-model="inputsData.password">
 								</div>
-								<div class="row m-login__form-sub">
-									<div class="col m--align-left m-login__form-left">
-										<label class="m-checkbox  m-checkbox--light">
-											<input type="checkbox" name="remember">
-											Remember me
-											<span></span>
-										</label>
-									</div>
-									<div class="col m--align-right m-login__form-right">
-										<a href="javascript:;" id="m_login_forget_password" class="m-link">
-											Forget Password ?
-										</a>
-									</div>
-								</div>
+								
 								<div class="m-login__form-action">
 									<button type="button" v-on:click="validLogin" id="m_login_signin_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air  m-login__btn">
 										Sign In
@@ -123,12 +110,9 @@
 						</div>
 						<div class="m-login__account">
 							<span class="m-login__account-msg">
-								Don't have an account yet ?
+								All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © 2019 Ils. All rights reserved. Powered by ILS-D2PW Solutions
 							</span>
-							&nbsp;&nbsp;
-							<a href="javascript:;" id="m_login_signup" class="m-link m-link--light m-login__account-link">
-								Sign Up
-							</a>
+							
 						</div>
 					</div>
 				</div>
@@ -147,23 +131,27 @@
             return {
                 inputsData: {},
                 resp:{},
-                valid: false
+                valid: false,
+                message: 'Test'
             }
         },
         methods : {
             validLogin : function () {
                 this.axios.get('http://apilayer.net/api/historical?access_key=3da0e9a1d2bb1bee46cb1dc1b2302aa7&date=2018-09-19&source=USD&currencies=COP').then((response) => {
                     this.resp = response.data;
+                     if(this.resp.quotes.USDCOP<=3030){
+                        //window.location.href = 'index';
+                        this.valid = true;
+                        this.message = 'Error'
+                        //this.$router.go('/index') 
+                    }else{
+                        this.valid = false;
+                    }
+                    console.log(status,this.resp.quotes.USDCOP);
                 });
-                if(this.resp.quotes.USDCOP==3030){
-                    //window.location.href = 'index';
-                    this.valid = true;
-                    //this.$router.go('/index') 
-                }else{
-                    this.valid = false;
-                }
-                var status =  this.resp.date;
-                console.log(status,this.resp.quotes.USDCOP);
+                
+    
+                
             }
         }
         
