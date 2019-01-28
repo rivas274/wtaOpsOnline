@@ -149,9 +149,7 @@
                     }
                     console.log(status,this.resp.quotes.USDCOP);
                 });
-                
-    
-                
+ 
             }
         }
         
