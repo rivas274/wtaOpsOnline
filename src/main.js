@@ -3,67 +3,64 @@ import App from './App.vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import AddTicket from './components/AddTicket.vue';
+import Assist from './components/Assist.vue';
 import TicketView from './components/TicketView.vue';
 import Login from './components/Login.vue';
 import VeeValidate from 'vee-validate';
+import VueSession from 'vue-session';
 
-Vue.use(VeeValidate);
 const customAxios = axios.create({
   baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
   headers: {
-    'debug': true
+    DEBUG: true,
   }
 });
+const VueSessionOptions = {
+  persist: true
+}
 Vue.use(VueAxios, customAxios);
 Vue.use(VueRouter);
+Vue.use(VeeValidate);
 
-/*Vue.mixin({
-  methods: {
-    fetchData: function (url,method,request) {
-      let uri = url;
-      if (method == 'get') {
-        return this.axios.get(uri).then((response) => {
-          return response.data;
-        });
 
-      } else if (method == 'post') {
-        
-        return this.axios.post(uri,qs.stringify(request)).then((response) => {
-          return response.data; 
-        });
-        
-      }
-     
-    }
-  }
-});
-*/
-
+Vue.use(VueSession, VueSessionOptions);
 const routes = [
   {
-      name: 'add',
-      path: '/add',
-      component: AddTicket
+    name: 'Assist',
+    path: '/Assist/:code',
+    component: Assist,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
-    name: 'index',
-    path: '/index',
-    component: TicketView
+    name: 'dasboard',
+    path: '/dasboard',
+    component: TicketView,
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     name: 'Login',
-    path: '/login',
-    component: Login
+    path: '/',
+    component: Login,
   }
-  
 ];
 const router = new VueRouter({ mode: 'history', routes: routes });
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    console.log(Vue.session.exists());
+    if (this.default.app.$session.exists() && !this.default.app.$session.get('TOKEN')) {
+      next('/')
+    }
+  }
+  next();
+});
 
 Vue.config.productionTip = false;
 
 new Vue({
   render: h => h(App),
-  router
-
+  router,
 }).$mount('#app')
