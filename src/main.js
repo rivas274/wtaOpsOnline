@@ -12,7 +12,7 @@ import VueSession from 'vue-session';
 const customAxios = axios.create({
   baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
   headers: {
-    DEBUG: true
+    DEBUG: true,
   }
 });
 const VueSessionOptions = {
@@ -47,22 +47,20 @@ const routes = [
     component: Login,
   }
 ];
-/* router.beforeEach((to, from, next) => {
+const router = new VueRouter({ mode: 'history', routes: routes });
+router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
-    const session = Vue.prototype.$session;
-    if (session.exists('user')){
-      console.log('test session storage');
-    }
-    if (to.path === '/') {
-      next();
+    console.log(Vue.session.exists());
+    if (this.default.app.$session.exists() && !this.default.app.$session.get('TOKEN')) {
+      next('/')
     }
   }
-}); */
-const router = new VueRouter({ mode: 'history', routes: routes });
+  next();
+});
 
 Vue.config.productionTip = false;
 
 new Vue({
   render: h => h(App),
-  router
+  router,
 }).$mount('#app')

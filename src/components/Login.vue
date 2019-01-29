@@ -25,7 +25,9 @@
         <div class="m-login__container">
           <div class="m-login__logo">
             <a href="#">
-              <img src="https://wtaops.com/app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png">
+              <img
+                src="https://wtaops.com/app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png"
+              >
             </a>
           </div>
           <div class="m-login__signin">
@@ -33,7 +35,8 @@
               <div
                 v-show="resp.STATUS == 'ERROR'"
                 class="m-alert m-alert--outline alert-danger alert alert-dismissible"
-                role="alert">
+                role="alert"
+              >
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
                 <span>{{ resp.RESPONSE }}</span>
               </div>
@@ -105,10 +108,13 @@ export default {
           if (result) {
             this.disableForm = true;
             this.axios.post("Login", this.inputsData).then(response => {
-              console.log(response);
               this.resp = response.data;
               this.disableForm = false;
               if (response.data.STATUS == "OK") {
+                this.$session.start();
+                this.$session.set("TOKEN", response.data.TOKEN);
+                console.log(this.axios.defaults.headers.common['TOKEN']=response.data.TOKEN);
+                console.log(this.axios.defaults.headers.post['TOKEN']=response.data.TOKEN);
                 this.$router.push("dasboard");
               }
             });
@@ -117,5 +123,5 @@ export default {
       }
     }
   }
-}
+};
 </script>
