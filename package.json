@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "serve": "vue-cli-service serve;webpack --env.API_URL=http://localhost:8000 --config webpack.config.dev.js",
+    "build": "vue-cli-service build;webpack --env.API_URL=https://www.myapi.com --config webpack.config.build.js",
+    "lint": "vue-cli-service lint;webpack --env.API_URL=http://localhost:8000 --config webpack.config.dev.js",
   },
   "dependencies": {
     "axios": "^0.18.0",

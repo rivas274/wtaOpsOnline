@@ -45,10 +45,14 @@ const routes = [
     name: 'Login',
     path: '/',
     component: Login,
+    meta: {
+        isPublic: true
+    }
   }
 ];
+process.env.API_URL;
 const router = new VueRouter({ mode: 'history', routes: routes });
-router.beforeEach((to, from, next) => {
+/* router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     console.log(Vue.session.exists());
     if (this.default.app.$session.exists() && !this.default.app.$session.get('TOKEN')) {
@@ -56,7 +60,7 @@ router.beforeEach((to, from, next) => {
     }
   }
   next();
-});
+}); */
 
 Vue.config.productionTip = false;
 
