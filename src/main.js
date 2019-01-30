@@ -18,12 +18,12 @@ const customAxios = axios.create({
 const VueSessionOptions = {
   persist: true
 }
+
 Vue.use(VueAxios, customAxios);
-Vue.use(VueRouter);
-Vue.use(VeeValidate);
-
-
 Vue.use(VueSession, VueSessionOptions);
+Vue.use(VeeValidate);
+Vue.use(VueRouter);
+
 const routes = [
   {
     name: 'Assist',
@@ -46,6 +46,7 @@ const routes = [
 ];
 const router = new VueRouter({ mode: 'history', routes: routes });
 router.beforeEach((to, from, next) => {
+  Vue.$sessin
   if (to.meta.isPublic) {
     if (to.name == "Login" && (localStorage.getItem('TOKEN')||'').length == 16) {
       next('/dasboard');
