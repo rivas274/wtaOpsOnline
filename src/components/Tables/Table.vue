@@ -1,5 +1,5 @@
 <template>
-	<content class="m-content">
+	<div class="m-content container-fluid">
 		<div class="row">
 			<div class="col-xl-12">
 				<!--begin:: Widgets/Sale Reports-->
@@ -40,126 +40,94 @@
 											<!--begin::Thead-->
 											<thead>
 												<tr>
-													<td class="m-widget11__label">
-														#
+													<td class="m-widget11__app">
+														Numero de Caso
 													</td>
 													<td class="m-widget11__app">
-														Application
+														Compania
 													</td>
-													<td class="m-widget11__sales">
-														Sales
+													<td class="m-widget11__app">
+														Voucher
 													</td>
-													<td class="m-widget11__price">
-														Avg Price
+													<td class="m-widget11__app">
+														Pasajeros
 													</td>
-													<td class="m-widget11__total m--align-right">
-														Total
+													<td class="m-widget11__app">
+														Sintomas
+													</td>
+													<td class="m-widget11__app">
+														Tipo de Caso
+													</td>
+													<td class="m-widget11__app ">
+														Fecha Evento
+													</td>
+													<td class="m-widget11__app ">
+														Fecha Apertura
+													</td>
+													
+													<td class="m-widget11__app ">
+														Pais
 													</td>
 												</tr>
 											</thead>
 											<!--end::Thead-->
 											<!--begin::Tbody-->
 											<tbody>
-												<tr>
+												<tr v-for="(value, key) in resp.results">
+													
 													<td>
-														<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
-															<input type="checkbox">
-															<span></span>
-														</label>
+														<span class="m-widget11__title">
+															{{value.codeAssist}}
+														</span>
 													</td>
 													<td>
 														<span class="m-widget11__title">
-															Vertex 2.0
+															{{value.clientName}}
 														</span>
-														<span class="m-widget11__sub">
-															Vertex To By Again
-														</span>
-													</td>
-													<td>
-														19,200
-													</td>
-													<td>
-														$63
-													</td>
-													<td class="m--align-right m--font-brand">
-														$14,740
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
-															<input type="checkbox">
-															<span></span>
-														</label>
 													</td>
 													<td>
 														<span class="m-widget11__title">
-															Metronic
+															{{value.codigo}}
 														</span>
-														<span class="m-widget11__sub">
-															Powerful Admin Theme
-														</span>
-													</td>
-													<td>
-														24,310
-													</td>
-													<td>
-														$39
-													</td>
-													<td class="m--align-right m--font-brand">
-														$16,010
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
-															<input type="checkbox">
-															<span></span>
-														</label>
 													</td>
 													<td>
 														<span class="m-widget11__title">
-															Apex
+															{{value.fisrtName+' '+value.lastName}}
 														</span>
-														<span class="m-widget11__sub">
-															The Best Selling App
-														</span>
-													</td>
-													<td>
-														9,076
-													</td>
-													<td>
-														$105
-													</td>
-													<td class="m--align-right m--font-brand">
-														$37,200
-													</td>
-												</tr>
-												<tr>
-													<td>
-														<label class="m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand">
-															<input type="checkbox">
-															<span></span>
-														</label>
 													</td>
 													<td>
 														<span class="m-widget11__title">
-															Cascades
-														</span>
-														<span class="m-widget11__sub">
-															Design Tool
+															{{value.symptom}}
 														</span>
 													</td>
 													<td>
-														11,094
+														<span class="m-widget11__title">
+															{{value.descCaseType}}
+														</span>
 													</td>
 													<td>
-														$16
+														<span class="m-widget11__title">
+															{{value.reportedDate.date}}
+														</span>
+														<span class="m-widget11__title">
+															{{value.reportedDate.hour}}
+														</span>
 													</td>
-													<td class="m--align-right m--font-brand">
-														$8,520
+													<td>
+														<span class="m-widget11__title">
+															{{value.registeredDate.date}}
+														</span>
+														<span class="m-widget11__title">
+															{{value.registeredDate.hour}}
+														</span>
+													</td>
+													<td>
+														<span class="m-widget11__title">
+															<img :src="'https://wtaops.com/app/images/flags_iso/svg/'+value.isoCountry.toLowerCase()+'.svg'" width="40px"/>
+														</span>
 													</td>
 												</tr>
+												
 											</tbody>
 											<!--end::Tbody-->
 										</table>
@@ -177,11 +145,6 @@
 				</div>
 			</div>
 		</div>
-	</content>
+	</div>
 </template>
-<script>
-export default {
-  name: 'Content',
-  
-}
-</script>
+<script src="./Table.js"></script>

@@ -12,7 +12,8 @@ import VueSession from 'vue-session';
 const customAxios = axios.create({
   baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
   headers: {
-    DEBUG: true,
+    DEBUG: false,
+    'Content-Type':'multipart/form-data'
   }
 });
 const VueSessionOptions = {
@@ -48,7 +49,7 @@ const routes = [
   }
 ];
 const router = new VueRouter({ mode: 'history', routes: routes });
-router.beforeEach((to, from, next) => {
+/*router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     console.log(Vue.session.exists());
     if (this.default.app.$session.exists() && !this.default.app.$session.get('TOKEN')) {
@@ -56,7 +57,7 @@ router.beforeEach((to, from, next) => {
     }
   }
   next();
-});
+});*/
 
 Vue.config.productionTip = false;
 

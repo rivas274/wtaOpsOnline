@@ -1,9 +1,13 @@
 <template>
-	<body>
+	<body style="font-family: roboto;">
 		<div class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 			<Header></Header>
-			<Menu></Menu>
-			<Table></Table>
+			<div class="m-grid m-grid--hor m-grid--root m-page">
+        		<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+					<Menu></Menu>
+					<Table></Table>
+        		</div>
+        	</div>
 		</div>
 	<Footer></Footer>
 	</body>
@@ -13,7 +17,7 @@
 import Footer from './Footer.vue';
 import Menu from './Menu.vue';
 import Header from './Header.vue';
-import Table from './Table.vue';
+import Table from './Tables/Table.vue';
 
 export default {
   name: 'Content',

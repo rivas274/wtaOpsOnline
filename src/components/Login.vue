@@ -110,9 +110,11 @@ export default {
             this.axios.post("Login", this.inputsData).then(response => {
               this.resp = response.data;
               this.disableForm = false;
+              console.log(response.data);
               if (response.data.STATUS == "OK") {
                 this.$session.start();
                 this.$session.set("TOKEN", response.data.TOKEN);
+                this.$session.set("NAME_USER", response.data.RESPONSE.firstName+' '+response.data.RESPONSE.lastName);
                 console.log(this.axios.defaults.headers.common['TOKEN']=response.data.TOKEN);
                 console.log(this.axios.defaults.headers.post['TOKEN']=response.data.TOKEN);
                 this.$router.push("dasboard");
