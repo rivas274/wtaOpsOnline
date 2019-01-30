@@ -29,17 +29,11 @@ const routes = [
     name: 'Assist',
     path: '/Assist/:code',
     component: Assist,
-    meta: {
-      requiresAuth: true
-    }
   },
   {
     name: 'dasboard',
     path: '/dasboard',
     component: Content,
-    meta: {
-      requiresAuth: true
-    }
   },
   {
     name: 'Login',
@@ -50,18 +44,22 @@ const routes = [
     }
   }
 ];
-process.env.API_URL;
 const router = new VueRouter({ mode: 'history', routes: routes });
-/* router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth) {
-    console.log(Vue.session.exists());
-    if (this.default.app.$session.exists() && !this.default.app.$session.get('TOKEN')) {
-      next('/')
+router.beforeEach((to, from, next) => {
+  if (to.meta.isPublic) {
+    if (to.name == "Login" && (localStorage.getItem('TOKEN')||'').length == 16) {
+      next('/dasboard');
+    } else {
+      next();
+    }
+  } else {
+    if (localStorage.getItem('TOKEN') || localStorage.getItem('USER')) {
+      next();
+    } else {
+      next('/');
     }
   }
-  next();
-}); */
-
+});
 Vue.config.productionTip = false;
 
 new Vue({
