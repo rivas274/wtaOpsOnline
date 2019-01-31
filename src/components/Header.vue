@@ -138,14 +138,13 @@
 export default {
   name: 'Header',
   data: function () {
-      var dataUser = JSON.parse(localStorage.getItem('USERDATA')),
-      nameUser = dataUser.firstName + ' '+dataUser.lastName;
       return {
-          nameUser : nameUser
+          nameUser : ''
       }
   },
   mounted: function(){
-      console.log(this.nameUser);
+      var dataUser = JSON.parse(this.$session.get('USERDATA'));
+      this.nameUser = dataUser.firstName + ' '+dataUser.lastName;
   }
 }
 </script>
