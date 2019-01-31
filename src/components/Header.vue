@@ -35,7 +35,7 @@
                                
                                 <a href="#" class="m-nav__link m-dropdown__toggle">
                                     <span class="m-topbar__userpic">
-                                        <img src="assets/app/media/img/users/user3.jpg" alt=""/>
+                                        <img src="https://otoneurologico.com/wp-content/uploads/2017/07/man-user-t-1.png" alt=""/>
                                     </span>
                                 </a>
                                 <div class="m-dropdown__wrapper">
@@ -138,9 +138,14 @@
 export default {
   name: 'Header',
   data: function () {
+      var dataUser = JSON.parse(localStorage.getItem('USERDATA')),
+      nameUser = dataUser.firstName + ' '+dataUser.lastName;
       return {
-          nameUser : this.$session.get('NAME_USER')
+          nameUser : nameUser
       }
+  },
+  mounted: function(){
+      console.log(this.nameUser);
   }
 }
 </script>

@@ -48,7 +48,7 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
-    if (localStorage.getItem('TOKEN') || localStorage.getItem('USER')) {
+    if (localStorage.getItem('TOKEN') || localStorage.getItem('USERDATA')) {
       next();
     } else {
       next('/');
