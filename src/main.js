@@ -7,8 +7,6 @@ import Assist from './components/Assist.vue';
 import Content from './components/Content.vue';
 import Login from './components/Login.vue';
 import VeeValidate from 'vee-validate';
-import VueSession from 'vue-session';
-
 const customAxios = axios.create({
   baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
   headers: {
@@ -16,39 +14,33 @@ const customAxios = axios.create({
     'Content-Type':'multipart/form-data'
   }
 });
-const VueSessionOptions = {
-  persist: true
-}
+
 Vue.use(VueAxios, customAxios);
-Vue.use(VueRouter);
 Vue.use(VeeValidate);
+Vue.use(VueRouter);
 
-
-Vue.use(VueSession, VueSessionOptions);
 const routes = [
   {
     name: 'Assist',
     path: '/Assist/:code',
     component: Assist,
-    meta: {
-      requiresAuth: true
-    }
   },
   {
     name: 'dasboard',
     path: '/dasboard',
     component: Content,
-    meta: {
-      requiresAuth: true
-    }
   },
   {
     name: 'Login',
     path: '/',
     component: Login,
+    meta: {
+        isPublic: true
+    }
   }
 ];
 const router = new VueRouter({ mode: 'history', routes: routes });
+<<<<<<< HEAD
 /*router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     console.log(Vue.session.exists());
@@ -59,6 +51,23 @@ const router = new VueRouter({ mode: 'history', routes: routes });
   next();
 });*/
 
+=======
+router.beforeEach((to, from, next) => {
+  if (to.meta.isPublic) {
+    if (to.name == "Login" && (localStorage.getItem('TOKEN')||'').length == 16) {
+      next('/dasboard');
+    } else {
+      next();
+    }
+  } else {
+    if (localStorage.getItem('TOKEN') || localStorage.getItem('USER')) {
+      next();
+    } else {
+      next('/');
+    }
+  }
+});
+>>>>>>> 28b767f5cf39997189a510750439531098c4c6b5
 Vue.config.productionTip = false;
 
 new Vue({
