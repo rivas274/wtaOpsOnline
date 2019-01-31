@@ -40,18 +40,6 @@ const routes = [
   }
 ];
 const router = new VueRouter({ mode: 'history', routes: routes });
-<<<<<<< HEAD
-/*router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth) {
-    console.log(Vue.session.exists());
-    if (this.default.app.$session.exists() && !this.default.app.$session.get('TOKEN')) {
-      next('/')
-    }
-  }
-  next();
-});*/
-
-=======
 router.beforeEach((to, from, next) => {
   if (to.meta.isPublic) {
     if (to.name == "Login" && (localStorage.getItem('TOKEN')||'').length == 16) {
@@ -67,7 +55,6 @@ router.beforeEach((to, from, next) => {
     }
   }
 });
->>>>>>> 28b767f5cf39997189a510750439531098c4c6b5
 Vue.config.productionTip = false;
 
 new Vue({
