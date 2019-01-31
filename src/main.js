@@ -7,20 +7,14 @@ import Assist from './components/Assist.vue';
 import Content from './components/Content.vue';
 import Login from './components/Login.vue';
 import VeeValidate from 'vee-validate';
-import VueSession from 'vue-session';
-
 const customAxios = axios.create({
   baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
   headers: {
     DEBUG: true,
   }
 });
-const VueSessionOptions = {
-  persist: true
-}
 
 Vue.use(VueAxios, customAxios);
-Vue.use(VueSession, VueSessionOptions);
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
 
@@ -46,7 +40,6 @@ const routes = [
 ];
 const router = new VueRouter({ mode: 'history', routes: routes });
 router.beforeEach((to, from, next) => {
-  Vue.$sessin
   if (to.meta.isPublic) {
     if (to.name == "Login" && (localStorage.getItem('TOKEN')||'').length == 16) {
       next('/dasboard');
