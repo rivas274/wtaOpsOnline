@@ -112,11 +112,10 @@ export default {
               this.disableForm = false;
               console.log(response.data);
               if (response.data.STATUS == "OK") {
-                this.$session.start();
-                this.$session.set("TOKEN", response.data.TOKEN);
-                this.$session.set("NAME_USER", response.data.RESPONSE.firstName+' '+response.data.RESPONSE.lastName);
-                console.log(this.axios.defaults.headers.common['TOKEN']=response.data.TOKEN);
-                console.log(this.axios.defaults.headers.post['TOKEN']=response.data.TOKEN);
+                this.axios.defaults.headers.common['TOKEN']=response.data.TOKEN;
+                this.axios.defaults.headers.common['USER']=response.data.RESPONSE.user;
+                localStorage.setItem('TOKEN',response.data.TOKEN);
+                localStorage.setItem('USERDATA',JSON.stringify(response.data.RESPONSE));
                 this.$router.push("dasboard");
               }
             });
