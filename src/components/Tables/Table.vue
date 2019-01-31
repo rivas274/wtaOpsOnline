@@ -1,4 +1,5 @@
 <template>
+
 	<div class="m-content container-fluid">
 		<div class="row">
 			<div class="col-xl-12">
@@ -46,22 +47,22 @@
 													<td class="m-widget11__app">
 														Compania
 													</td>
-													<td class="m-widget11__app">
+													<td class="m-widget11__sales">
 														Voucher
 													</td>
 													<td class="m-widget11__app">
 														Pasajeros
 													</td>
-													<td class="m-widget11__app">
+													<td class="">
 														Sintomas
 													</td>
-													<td class="m-widget11__app">
+													<td class="m-widget11__sales">
 														Tipo de Caso
 													</td>
-													<td class="m-widget11__app ">
+													<td class="m-widget11__app m--align-center">
 														Fecha Evento
 													</td>
-													<td class="m-widget11__app ">
+													<td class="m-widget11__app  m--align-center">
 														Fecha Apertura
 													</td>
 													
@@ -86,38 +87,38 @@
 														</span>
 													</td>
 													<td>
-														<span class="m-widget11__title">
+														<span class="">
 															{{value.codigo}}
 														</span>
 													</td>
 													<td>
 														<span class="m-widget11__title">
-															{{value.fisrtName+' '+value.lastName}}
+															{{value.fisrtName}}
 														</span>
 													</td>
 													<td>
-														<span class="m-widget11__title">
+														<span class="">
 															{{value.symptom}}
 														</span>
 													</td>
 													<td>
-														<span class="m-widget11__title">
+														<span class="">
 															{{value.descCaseType}}
 														</span>
 													</td>
 													<td>
-														<span class="m-widget11__title">
+														<span class="m-widget11__title m--align-center">
 															{{value.reportedDate.date}}
 														</span>
-														<span class="m-widget11__title">
+														<span class="m-widget11__title m--align-center">
 															{{value.reportedDate.hour}}
 														</span>
 													</td>
 													<td>
-														<span class="m-widget11__title">
+														<span class="m-widget11__title m--align-center">
 															{{value.registeredDate.date}}
 														</span>
-														<span class="m-widget11__title">
+														<span class="m-widget11__title m--align-center">
 															{{value.registeredDate.hour}}
 														</span>
 													</td>
