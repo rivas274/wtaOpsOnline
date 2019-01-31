@@ -56,7 +56,14 @@ router.beforeEach((to, from, next) => {
   }
 });
 Vue.config.productionTip = false;
-
+Vue.mixin({
+  beforeCreate: function () {
+    if ((localStorage.getItem('TOKEN') || '').length == 16) { 
+      this.axios.defaults.headers.common['TOKEN']=localStorage.getItem('TOKEN');
+      this.axios.defaults.headers.common['USER']=localStorage.getItem('USER');
+    }
+  }
+})
 new Vue({
   render: h => h(App),
   router,
