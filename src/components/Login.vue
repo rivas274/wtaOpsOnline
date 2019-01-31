@@ -102,7 +102,7 @@ export default {
     };
   },
   methods: {
-    validLogin: function() {
+      validLogin: function() {
       if (!this.disableForm) {
         this.$validator.validateAll().then(result => {
           if (result) {
@@ -112,9 +112,8 @@ export default {
               this.disableForm = false;
               console.log(response.data);
               if (response.data.STATUS == "OK") {
-                this.axios.defaults.headers.common['TOKEN']=response.data.TOKEN;
-                this.axios.defaults.headers.common['USER']=response.data.RESPONSE.user;
                 localStorage.setItem('TOKEN',response.data.TOKEN);
+                localStorage.setItem('USER',response.data.RESPONSE.user);
                 localStorage.setItem('USERDATA',JSON.stringify(response.data.RESPONSE));
                 this.$router.push("dasboard");
               }
