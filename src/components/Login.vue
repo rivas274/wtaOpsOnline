@@ -110,7 +110,6 @@ export default {
             this.axios.post("Login", this.inputsData).then(response => {
               this.resp = response.data;
               this.disableForm = false;
-              console.log(response.data);
               if (response.data.STATUS == "OK") {
                 localStorage.setItem('TOKEN',response.data.TOKEN);
                 localStorage.setItem('USER',response.data.RESPONSE.user);

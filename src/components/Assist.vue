@@ -10,8 +10,6 @@
                 codigoAssist: this.$route.params.code
             }
         },
-        mounted(){
-            console.log('aca obtendria la asistencia')
-        }
+       
     }
 </script>

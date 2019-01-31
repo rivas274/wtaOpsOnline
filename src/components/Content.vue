@@ -17,7 +17,7 @@
 import Footer from './Footer.vue';
 import Menu from './Menu.vue';
 import Header from './Header.vue';
-import Tables from './Tables/Table.vue';
+import Tables from './Tables/TableList.vue';
 
 export default {
   name: 'Content',

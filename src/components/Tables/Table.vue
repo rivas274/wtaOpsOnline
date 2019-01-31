@@ -1,5 +1,4 @@
 <template>
-
 	<div class="m-content container-fluid">
 		<div class="row">
 			<div class="col-xl-12">
