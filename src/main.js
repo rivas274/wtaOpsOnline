@@ -66,13 +66,16 @@ router.beforeEach((to, from, next) => {
 Vue.config.productionTip = false;
 Vue.mixin({
   beforeCreate: function () {
-    if ((Vue._session.get('TOKEN') || '').length == 16) { 
-      this.axios.defaults.headers.common['TOKEN']=Vue._session.get('TOKEN');
-      this.axios.defaults.headers.common['USER']=Vue._session.get('USER');
+    if ((this.$session.get('TOKEN') || '').length == 16 && (this.axios.defaults.headers.common['TOKEN'] || '').length == 0) { 
+      this.axios.defaults.headers.common['TOKEN']=this.$session.get('TOKEN');
+      this.axios.defaults.headers.common['USER']=this.$session.get('USER');
     }
   },
 })
 new Vue({
   render: h => h(App),
   router,
+  beforeCreate: function () { 
+    Vue._sess=this.$session;
+  }
 }).$mount('#app')
