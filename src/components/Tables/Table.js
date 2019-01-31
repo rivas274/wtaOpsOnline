@@ -13,9 +13,7 @@ export default {
         }
         
     },
-    mounted: function () {
+    mounted() {
         this.getAssistance()
-        
     },
-
 }
