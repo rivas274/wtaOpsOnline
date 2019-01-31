@@ -110,11 +110,11 @@ export default {
             this.axios.post("Login", this.inputsData).then(response => {
               this.resp = response.data;
               this.disableForm = false;
-              console.log(response.data);
               if (response.data.STATUS == "OK") {
-                localStorage.setItem('TOKEN',response.data.TOKEN);
-                localStorage.setItem('USER',response.data.RESPONSE.user);
-                localStorage.setItem('USERDATA',JSON.stringify(response.data.RESPONSE));
+                this.$session.start();
+                this.$session.set('TOKEN',response.data.TOKEN);
+                this.$session.set('USER',response.data.RESPONSE.user);
+                this.$session.set('USERDATA',JSON.stringify(response.data.RESPONSE));
                 this.$router.push("dasboard");
               }
             });
