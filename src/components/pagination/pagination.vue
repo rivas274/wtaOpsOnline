@@ -1,6 +1,6 @@
 <template>
-  <div class="m-datatable__pager m-datatable--paging-loaded clearfix" v-if="showPages.length>1">
-    <ul class="m-datatable__pager-nav">
+  <div class="m-datatable__pager m-datatable--paging-loaded clearfix" >
+    <ul class="m-datatable__pager-nav" v-show="showPages.length>1">
       <li v-show="currentPage!=1">
         <a
           title="First"
@@ -48,34 +48,19 @@
       </li>
     </ul>
     <div class="m-datatable__pager-info">
-      <div class="dropdown bootstrap-select m-datatable__pager-size" style="width: 70px;">
-        <select
-          class="selectpicker m-datatable__pager-size"
-          v-model="max"
-          title="Select page size"
-          @change="changeSize"
-          tabindex="-98">
-          <option v-for="range in ranges" :value="range">{{ range }}</option>
-        </select>
-        <button
-          type="button"
-          class="btn dropdown-toggle btn-light"
-          data-toggle="dropdown"
-          role="button">
-          <div class="filter-option">
-            <div class="filter-option-inner">{{ max }}</div>
-          </div>&nbsp;
-          <span class="bs-caret">
-            <span class="caret"></span>
-          </span>
-        </button>
-        <div class="dropdown-menu" role="combobox">
-          <div class="inner show" role="listbox" aria-expanded="false" tabindex="-1">
-            <ul class="dropdown-menu inner show"></ul>
-          </div>
-        </div>
+      <div class="dataTables_length">
+        <label v-show="showPages.length>1">
+          <select
+            class="custom-select custom-select-sm form-control form-control-sm"
+            v-model="max"
+            title="Select page size"
+            @change="changeSize"
+            tabindex="-98">
+            <option v-for="range in ranges" :value="range">{{ range }}</option>
+          </select>
+        </label>
+        &nbsp;&nbsp;<b>{{ init+1 }}</b> - <b>{{ max*currentPage }}</b> of <b>{{ total }}</b> records
       </div>
-      <span class="m-datatable__pager-detail">{{ init }} - {{ max*currentPage }} of {{ total }} records</span>
     </div>
   </div>
 </template>
@@ -85,7 +70,7 @@ export default {
   data: function() {
     return {
       init: (this.start||0),
-      max: (this.limit||10),
+      max: (this.limit||15),
       total: (this.size||0),
       ranges:[15,30,50,70,100],
     };
@@ -95,7 +80,7 @@ export default {
       this.$emit("paginate", 'start', (value-1)*this.max);
     },
     changeSize:function(){
-      this.$emit("paginate", 'size', this.max);
+      this.$emit("paginate", 'limit', this.max);
     },
     getPages(init,final){
       var A = [init],step = 1;

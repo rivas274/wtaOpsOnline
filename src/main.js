@@ -3,60 +3,47 @@ import App from './App.vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import Assist from './components/Assist.vue';
-import ListAsistencia from './components/ListAsistencia.vue';
-import Content from './components/Content.vue';
-import Login from './components/Login.vue';
 import VeeValidate from 'vee-validate';
 import VueSession from './custom/vue-session-custom';
+import routes from './custom/routes';
 
+Vue.use(VueRouter);
+Vue.use(VeeValidate);
+Vue.use(VueSession, { persist: true });
+Vue.use(VueAxios, customAxios);
+
+const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
   baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
   headers: {
     DEBUG: false,
-    'Content-Type':'multipart/form-data'
-  },
-  requestInterceptor: (config,element) => {
-    console.log('requestInterceptor',config,element);
-    //config.headers.common['Authorization'] = 'Bearer ' + store.state.token
-    return config
+    'Content-Type': 'multipart/form-data'
   }
 });
-
-Vue.use(VueAxios, customAxios);
-Vue.use(VeeValidate);
-Vue.use(VueRouter);
-Vue.use(VueSession,{persist: true});
-
-const routes = [
-  {
-    name: 'Assist',
-    path: '/Assist/:code',
-    component: Assist,
+customAxios.interceptors.response.use(
+  function (response) {
+    return response;
   },
-  {
-    name: 'dasboard',
-    path: '/dasboard',
-    component: ListAsistencia,
-  },
-  {
-    name: 'Content',
-    path: '/Content',
-    component: Content,
-  },
-  {
-    name: 'Login',
-    path: '/',
-    component: Login,
-    meta: {
-        isPublic: true
+  function (error) {
+    if (error.response.status == 401 && router.currentRoute.fullPath!=='/') {
+      router.push('/');
     }
+    return error.response;
   }
-];
-const router = new VueRouter({ mode: 'history', routes: routes });
+);
+customAxios.interceptors.request.use(function (config) {
+  if ((Vue._session.get('TOKEN') || '').length == 16 && (config.headers.common['TOKEN'] || '').length == 0) {
+    config.headers.common['TOKEN'] = Vue._session.get('TOKEN');
+    config.headers.common['USER'] = Vue._session.get('USER');
+  }
+  return config;
+}, function (err) {
+  return Promise.reject(err);
+});
+
 router.beforeEach((to, from, next) => {
   if (to.meta.isPublic) {
-    if (to.name == "Login" && (Vue._session.get('TOKEN')||'').length == 16) {
+    if (to.name == "Login" && (Vue._session.get('TOKEN') || '').length == 16) {
       next('/dasboard');
     } else {
       next();
@@ -69,19 +56,10 @@ router.beforeEach((to, from, next) => {
     }
   }
 });
+
 Vue.config.productionTip = false;
-Vue.mixin({
-  beforeCreate: function () {
-    if ((this.$session.get('TOKEN') || '').length == 16 && (this.axios.defaults.headers.common['TOKEN'] || '').length == 0) { 
-      this.axios.defaults.headers.common['TOKEN']=this.$session.get('TOKEN');
-      this.axios.defaults.headers.common['USER']=this.$session.get('USER');
-    }
-  },
-})
+
 new Vue({
   render: h => h(App),
-  router,
-  beforeCreate: function () { 
-    Vue._sess=this.$session;
-  }
+  router
 }).$mount('#app')
