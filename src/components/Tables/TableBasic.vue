@@ -1,6 +1,6 @@
 <template>
   <div class="m-content container-fluid">
-    <div class="col-xl-12">
+    <div class="col-xl-12 m--padding-bottom-20">
       <div class="m-portlet m-portlet--mobile">
         <div class="m-portlet__head" v-if="$slots.header">
           <div class="m-portlet__head-caption">
@@ -38,6 +38,7 @@
         </div>
       </div>
     </div>
+    <div class="clearfix"></div>
   </div>
 </template>
 <script>

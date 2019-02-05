@@ -15,14 +15,16 @@ const customAxios = axios.create({
   headers: {
     DEBUG: false,
     'Content-Type':'multipart/form-data'
-  },
-  requestInterceptor: (config,element) => {
-    console.log('requestInterceptor',config,element);
-    //config.headers.common['Authorization'] = 'Bearer ' + store.state.token
-    return config
   }
 });
-
+customAxios.interceptors.response.use(null, function (error) {
+  alert('status: '+error.status);
+  if (error.status === 401) {
+    return 'hola';
+  }
+  return Promise.reject(error);
+});
+console.log(customAxios.interceptors);
 Vue.use(VueAxios, customAxios);
 Vue.use(VeeValidate);
 Vue.use(VueRouter);
