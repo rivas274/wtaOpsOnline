@@ -1,31 +1,28 @@
 <template>
-	<div>
-		<div class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
-			<div class="m-grid m-grid--hor m-grid--root m-page">
-				<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
-					<Menu></Menu>
-					<Tables :thead="headerTable" :tbody="bodyTable" :tfooter="footerTable">
-						<template slot="header">
-							Asistencias
-						</template>
-						<template slot="filters">
-							<inputFromTable 
-								name='searchPassager' 
-								watermark='Passager' 
-								v-on:input="setDataFilter"
-								></inputFromTable>
-						</template>
-						<template slot="footer">
-							<pagination 
-								:start="footerTable.start"
-								:limit="footerTable.limit"
-								:size="footerTable.size"
-								v-on:paginate="setDataPaginate">
-							</pagination>
-						</template>
-					</Tables>
-        		</div>
-        	</div>
+	<div class="m-grid m-grid--hor m-grid--root m-page">
+		<Header></Header>
+		<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+			<Menu></Menu>
+			<Tables :thead="headerTable" :tbody="bodyTable" :tfooter="footerTable">
+				<template slot="header">
+					Asistencias
+				</template>
+				<template slot="filters">
+					<inputFromTable 
+						name='searchPassager' 
+						watermark='Passager' 
+						v-on:input="setDataFilter"
+						></inputFromTable>
+				</template>
+				<template slot="footer">
+					<pagination 
+						:start="footerTable.start"
+						:limit="footerTable.limit"
+						:size="footerTable.size"
+						v-on:paginate="setDataPaginate">
+					</pagination>
+				</template>
+			</Tables>
 		</div>
 		<Footer></Footer>
 	</div>
