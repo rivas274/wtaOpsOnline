@@ -102,7 +102,7 @@ export default {
     };
   },
   methods: {
-    validLogin: function() {
+      validLogin: function() {
       if (!this.disableForm) {
         this.$validator.validateAll().then(result => {
           if (result) {
