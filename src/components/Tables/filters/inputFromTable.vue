@@ -6,7 +6,8 @@
           type="text"
           class="form-control m-input"
           :placeholder="watermark"
-          :id="'Search'+nameInput"
+          :id="'Search'+name"
+          :name="name"
           v-model="value" 
           @change="input" 
         >
@@ -21,13 +22,11 @@
 </template>
 <script>
 export default {
-  props: ['placeholder','name','icon'],
+  props: ['watermark','name','icon'],
   data: function() {
     return {
-      nameInput: this.name,
       ico: (this.icon||'la-search'),
       value: "",
-      watermark: this.placeholder
     };
   },
   methods: {
