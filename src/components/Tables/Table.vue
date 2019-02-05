@@ -1,151 +1,94 @@
 <template>
-
-	<div class="m-content container-fluid">
-		<div class="row">
-			<div class="col-xl-12">
-				<!--begin:: Widgets/Sale Reports-->
-				<div class="m-portlet m-portlet--full-height ">
-					<div class="m-portlet__head">
-						<div class="m-portlet__head-caption">
-							<div class="m-portlet__head-title">
-								<h3 class="m-portlet__head-text">
-									Sales Reports
-								</h3>
-							</div>
-						</div>
-						<div class="m-portlet__head-tools">
-							<ul class="nav nav-pills nav-pills--brand m-nav-pills--align-right m-nav-pills--btn-pill m-nav-pills--btn-sm" role="tablist">
-								<li class="nav-item m-tabs__item">
-									<a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_widget11_tab1_content" role="tab">
-										Last Month
-									</a>
-								</li>
-								<li class="nav-item m-tabs__item">
-									<a class="nav-link m-tabs__link" data-toggle="tab" href="#m_widget11_tab2_content" role="tab">
-										All Time
-									</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="m-portlet__body">
-					<!--Begin::Tab Content-->
-						<div class="tab-content">
-						<!--begin::tab 1 content-->
-							<div class="tab-pane active" id="m_widget11_tab1_content">
-								<!--begin::Widget 11-->
-								<div class="m-widget11">
-									<div class="table-responsive">
-										<!--begin::Table-->
-										<table class="table">
-											<!--begin::Thead-->
-											<thead>
-												<tr>
-													<td class="m-widget11__app">
-														Numero de Caso
-													</td>
-													<td class="m-widget11__app">
-														Compania
-													</td>
-													<td class="m-widget11__sales">
-														Voucher
-													</td>
-													<td class="m-widget11__app">
-														Pasajeros
-													</td>
-													<td class="">
-														Sintomas
-													</td>
-													<td class="m-widget11__sales">
-														Tipo de Caso
-													</td>
-													<td class="m-widget11__app m--align-center">
-														Fecha Evento
-													</td>
-													<td class="m-widget11__app  m--align-center">
-														Fecha Apertura
-													</td>
-													
-													<td class="m-widget11__app ">
-														Pais
-													</td>
-												</tr>
-											</thead>
-											<!--end::Thead-->
-											<!--begin::Tbody-->
-											<tbody>
-												<tr v-for="(value, key) in resp.results">
-													
-													<td>
-														<span class="m-widget11__title">
-															{{value.codeAssist}}
-														</span>
-													</td>
-													<td>
-														<span class="m-widget11__title">
-															{{value.clientName}}
-														</span>
-													</td>
-													<td>
-														<span class="">
-															{{value.codigo}}
-														</span>
-													</td>
-													<td>
-														<span class="m-widget11__title">
-															{{value.fisrtName}}
-														</span>
-													</td>
-													<td>
-														<span class="">
-															{{value.symptom}}
-														</span>
-													</td>
-													<td>
-														<span class="">
-															{{value.descCaseType}}
-														</span>
-													</td>
-													<td>
-														<span class="m-widget11__title m--align-center">
-															{{value.reportedDate.date}}
-														</span>
-														<span class="m-widget11__title m--align-center">
-															{{value.reportedDate.hour}}
-														</span>
-													</td>
-													<td>
-														<span class="m-widget11__title m--align-center">
-															{{value.registeredDate.date}}
-														</span>
-														<span class="m-widget11__title m--align-center">
-															{{value.registeredDate.hour}}
-														</span>
-													</td>
-													<td>
-														<span class="m-widget11__title">
-															<img :src="'https://wtaops.com/app/images/flags_iso/svg/'+value.isoCountry.toLowerCase()+'.svg'" width="40px"/>
-														</span>
-													</td>
-												</tr>
-												
-											</tbody>
-											<!--end::Tbody-->
-										</table>
-										<!--end::Table-->
-									</div>
-									<div class="m-widget11__action m--align-right">
-										<button type="button" class="btn m-btn--pill btn-outline-brand m-btn m-btn--custom">
-											Import Report
-										</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="m-content container-fluid">
+    <div class="col-xl-12">
+      <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">
+                <slot name="header"></slot>
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="m-portlet__body">
+          <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+            <div class="row align-items-center">
+              <div class="col-xl-8 order-2 order-xl-1">
+                <slot name="filters"></slot>
+              </div>
+            </div>
+          </div>
+          <div class="m-datatable m-datatable--default m-datatable--brand m-datatable--loaded">
+            <table
+              class="m-datatable__table"
+              id="html_table"
+              width="100%"
+              style="display: block; min-height: 300px; position: static; zoom: 1; overflow-x: auto;"
+            >
+              <thead class="m-datatable__head">
+                <tr class="m-datatable__row" style="left: 0px;">
+                  <th v-for="head in title" class="m-datatable__cell m-datatable__cell--sort">
+                    <span style="width: 110px;">{{ head }}</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="m-datatable__body">
+                <tr
+                  v-for="(row, index) in content"
+                  :class="{ 'm-datatable__row--even': index % 2 == 0 }"
+                  class="m-datatable__row"
+                  style="left: 0px;"
+                >
+                  <td v-for="campo in row" class="m-datatable__cell">
+                    <span>{{ campo }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <slot name="footer"></slot>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
-<script src="./Table.js"></script>
+<script>
+export default {
+  props: ["thead", "tbody"],
+  data: function() {
+    return {
+      head: this.thead,
+      body: this.tbody,
+    };
+  },
+  computed: {
+    title: function() {
+      return this.head.map(function(value, index) {
+        return value["label"];
+      });
+    },
+    content: function() {
+      var head = this.head;
+      return this.body.map(function(valueRow) {
+        var row = valueRow;
+        return head.map(function(value, campo) {
+          switch (typeof value.filter) {
+            case "function":
+              return value.filter(row[value.prop]);
+              break;
+            default:
+              return row[value.prop];
+              break;
+          }
+        });
+      });
+    }
+  },
+  watch: {
+    tbody: function(newVal, oldVal) {
+      this.body = newVal;
+    }
+  }
+};
+</script>
