@@ -12,9 +12,8 @@ export default {
         }
         
     },
-    mounted: function () {
+    mounted() {
+        console.log(this.axios.defaults.headers.common['TOKEN'],this.axios.defaults.headers.common['USER']);
         this.getAssistance()
-        
     },
-
 }

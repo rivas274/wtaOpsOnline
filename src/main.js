@@ -40,6 +40,7 @@ const routes = [
   }
 ];
 const router = new VueRouter({ mode: 'history', routes: routes });
+<<<<<<< HEAD
 
 Vue.config.productionTip = false;
 Vue.mixin({
@@ -52,6 +53,32 @@ Vue.mixin({
 })
 
 
+=======
+router.beforeEach((to, from, next) => {
+  if (to.meta.isPublic) {
+    if (to.name == "Login" && (localStorage.getItem('TOKEN')||'').length == 16) {
+      next('/dasboard');
+    } else {
+      next();
+    }
+  } else {
+    if (localStorage.getItem('TOKEN') || localStorage.getItem('USER')) {
+      next();
+    } else {
+      next('/');
+    }
+  }
+});
+Vue.config.productionTip = false;
+Vue.mixin({
+  beforeCreate: function () {
+    if ((localStorage.getItem('TOKEN') || '').length == 16) { 
+      this.axios.defaults.headers.common['TOKEN']=localStorage.getItem('TOKEN');
+      this.axios.defaults.headers.common['USER']=localStorage.getItem('USER');
+    }
+  }
+})
+>>>>>>> hrivas
 new Vue({
   render: h => h(App),
   router,
