@@ -34,9 +34,6 @@
         <th>
           <span>Pais</span>
         </th>
-        <th>
-          <span>Tipo</span>
-        </th>
       </tr>
     </template>
     <template slot="tbody">
