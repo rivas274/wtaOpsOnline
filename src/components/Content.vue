@@ -1,9 +1,9 @@
 <template>
-	<body style="font-family: roboto;">
+	<div>
 		<div class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
 			
 			<div class="m-grid m-grid--hor m-grid--root m-page">
-        		<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+				<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
 					<Menu></Menu>
 					<Tables :thead="headerTable" :tbody="bodyTable" :tfooter="footerTable">
 						<template slot="header">
@@ -28,8 +28,8 @@
         		</div>
         	</div>
 		</div>
-	<Footer></Footer>
-	</body>
+		<Footer></Footer>
+	</div>
 </template>
 <script>
 
