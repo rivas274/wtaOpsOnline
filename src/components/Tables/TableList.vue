@@ -1,6 +1,6 @@
 <template>
   <div class="m-content container-fluid">
-    <div class="col-xl-12">
+    <div class="col-xl-10">
       <div class="m-portlet m-portlet--mobile">
         <div class="m-portlet__head">
           <div class="m-portlet__head-caption">
@@ -247,376 +247,39 @@
                 </tr>
               </thead>
               <tbody class="m-datatable__body" style>
-                <tr data-row="0" class="m-datatable__row" style="left: 0px;">
+                <tr data-row="0" class="m-datatable__row" style="left: 0px;" v-for="(value, key) in resp.results">
                   <td data-field="Order ID" class="m-datatable__cell">
-                    <span style="width: 110px;">57520-0405</span>
+                    <span style="width: 110px;">{{value.codeAssist}}</span>
                   </td>
                   <td data-field="Owner" class="m-datatable__cell">
-                    <span style="width: 110px;">Sunny Garton</span>
+                    <span style="width: 110px;">{{value.clientName}}</span>
                   </td>
                   <td data-field="Contact" class="m-datatable__cell">
-                    <span style="width: 110px;">(288) 1417941</span>
+                    <span style="width: 110px;">{{value.codigo}}</span>
                   </td>
                   <td data-field="Car Make" class="m-datatable__cell">
-                    <span style="width: 110px;">GMC</span>
+                    <span style="width: 110px;">{{value.fisrtName}}</span>
                   </td>
                   <td data-field="Car Model" class="m-datatable__cell">
-                    <span style="width: 110px;">Savana 2500</span>
+                    <span style="width: 110px;">{{value.symptom}}</span>
                   </td>
                   <td data-field="Color" class="m-datatable__cell">
-                    <span style="width: 110px;">Yellow</span>
+                    <span style="width: 110px;">{{value.descCaseType}}</span>
                   </td>
                   <td data-field="Deposit Paid" class="m-datatable__cell">
-                    <span style="width: 110px;">$99799.94</span>
+                    <span style="width: 110px;">{{value.reportedDate.date}}</span>
                   </td>
                   <td data-field="Order Date" class="m-datatable__cell">
-                    <span style="width: 110px;">2016-03-23</span>
+                    <span style="width: 110px;">{{value.registeredDate.date}}</span>
                   </td>
                   <td data-field="Status" class="m-datatable__cell">
                     <span style="width: 110px;">
-                      <span class="m-badge m-badge--info m-badge--wide">Info</span>
-                    </span>
-                  </td>
-                  <td data-field="Type" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--primary m-badge--dot"></span>&nbsp;
-                      <span class="m--font-bold m--font-primary">Retail</span>
+                      <img :src="'https://wtaops.com/app/images/flags_iso/svg/'+value.isoCountry.toLowerCase()+'.svg'" width="40px"/>
+                      <!--<span class="m-badge m-badge--info m-badge--wide">Info</span>-->
                     </span>
                   </td>
                 </tr>
-                <tr data-row="1" class="m-datatable__row m-datatable__row--even" style="left: 0px;">
-                  <td data-field="Order ID" class="m-datatable__cell">
-                    <span style="width: 110px;">43269-858</span>
-                  </td>
-                  <td data-field="Owner" class="m-datatable__cell">
-                    <span style="width: 110px;">Sandor Engley</span>
-                  </td>
-                  <td data-field="Contact" class="m-datatable__cell">
-                    <span style="width: 110px;">(411) 8011040</span>
-                  </td>
-                  <td data-field="Car Make" class="m-datatable__cell">
-                    <span style="width: 110px;">Chevrolet</span>
-                  </td>
-                  <td data-field="Car Model" class="m-datatable__cell">
-                    <span style="width: 110px;">Avalanche</span>
-                  </td>
-                  <td data-field="Color" class="m-datatable__cell">
-                    <span style="width: 110px;">Fuscia</span>
-                  </td>
-                  <td data-field="Deposit Paid" class="m-datatable__cell">
-                    <span style="width: 110px;">$88746.22</span>
-                  </td>
-                  <td data-field="Order Date" class="m-datatable__cell">
-                    <span style="width: 110px;">2017-06-04</span>
-                  </td>
-                  <td data-field="Status" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--success m-badge--wide">Success</span>
-                    </span>
-                  </td>
-                  <td data-field="Type" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--accent m-badge--dot"></span>&nbsp;
-                      <span class="m--font-bold m--font-accent">Direct</span>
-                    </span>
-                  </td>
-                </tr>
-                <tr data-row="2" class="m-datatable__row" style="left: 0px;">
-                  <td data-field="Order ID" class="m-datatable__cell">
-                    <span style="width: 110px;">68084-462</span>
-                  </td>
-                  <td data-field="Owner" class="m-datatable__cell">
-                    <span style="width: 110px;">Morgan Cradey</span>
-                  </td>
-                  <td data-field="Contact" class="m-datatable__cell">
-                    <span style="width: 110px;">(818) 9105042</span>
-                  </td>
-                  <td data-field="Car Make" class="m-datatable__cell">
-                    <span style="width: 110px;">Dodge</span>
-                  </td>
-                  <td data-field="Car Model" class="m-datatable__cell">
-                    <span style="width: 110px;">Dakota</span>
-                  </td>
-                  <td data-field="Color" class="m-datatable__cell">
-                    <span style="width: 110px;">Maroon</span>
-                  </td>
-                  <td data-field="Deposit Paid" class="m-datatable__cell">
-                    <span style="width: 110px;">$57944.55</span>
-                  </td>
-                  <td data-field="Order Date" class="m-datatable__cell">
-                    <span style="width: 110px;">2017-08-03</span>
-                  </td>
-                  <td data-field="Status" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--primary m-badge--wide">Canceled</span>
-                    </span>
-                  </td>
-                  <td data-field="Type" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--primary m-badge--dot"></span>&nbsp;
-                      <span class="m--font-bold m--font-primary">Retail</span>
-                    </span>
-                  </td>
-                </tr>
-                <tr data-row="3" class="m-datatable__row m-datatable__row--even" style="left: 0px;">
-                  <td data-field="Order ID" class="m-datatable__cell">
-                    <span style="width: 110px;">44356-0001</span>
-                  </td>
-                  <td data-field="Owner" class="m-datatable__cell">
-                    <span style="width: 110px;">Tedd Alton</span>
-                  </td>
-                  <td data-field="Contact" class="m-datatable__cell">
-                    <span style="width: 110px;">(906) 2530404</span>
-                  </td>
-                  <td data-field="Car Make" class="m-datatable__cell">
-                    <span style="width: 110px;">Pontiac</span>
-                  </td>
-                  <td data-field="Car Model" class="m-datatable__cell">
-                    <span style="width: 110px;">Grand Prix</span>
-                  </td>
-                  <td data-field="Color" class="m-datatable__cell">
-                    <span style="width: 110px;">Khaki</span>
-                  </td>
-                  <td data-field="Deposit Paid" class="m-datatable__cell">
-                    <span style="width: 110px;">$45530.20</span>
-                  </td>
-                  <td data-field="Order Date" class="m-datatable__cell">
-                    <span style="width: 110px;">2017-10-10</span>
-                  </td>
-                  <td data-field="Status" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--success m-badge--wide">Success</span>
-                    </span>
-                  </td>
-                  <td data-field="Type" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--danger m-badge--dot"></span>&nbsp;
-                      <span class="m--font-bold m--font-danger">Online</span>
-                    </span>
-                  </td>
-                </tr>
-                <tr data-row="4" class="m-datatable__row" style="left: 0px;">
-                  <td data-field="Order ID" class="m-datatable__cell">
-                    <span style="width: 110px;">55550-031</span>
-                  </td>
-                  <td data-field="Owner" class="m-datatable__cell">
-                    <span style="width: 110px;">Barrie Bedow</span>
-                  </td>
-                  <td data-field="Contact" class="m-datatable__cell">
-                    <span style="width: 110px;">(658) 1061197</span>
-                  </td>
-                  <td data-field="Car Make" class="m-datatable__cell">
-                    <span style="width: 110px;">Ford</span>
-                  </td>
-                  <td data-field="Car Model" class="m-datatable__cell">
-                    <span style="width: 110px;">Focus</span>
-                  </td>
-                  <td data-field="Color" class="m-datatable__cell">
-                    <span style="width: 110px;">Goldenrod</span>
-                  </td>
-                  <td data-field="Deposit Paid" class="m-datatable__cell">
-                    <span style="width: 110px;">$87192.06</span>
-                  </td>
-                  <td data-field="Order Date" class="m-datatable__cell">
-                    <span style="width: 110px;">2016-03-08</span>
-                  </td>
-                  <td data-field="Status" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--brand m-badge--wide">Pending</span>
-                    </span>
-                  </td>
-                  <td data-field="Type" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--danger m-badge--dot"></span>&nbsp;
-                      <span class="m--font-bold m--font-danger">Online</span>
-                    </span>
-                  </td>
-                </tr>
-                <tr data-row="5" class="m-datatable__row m-datatable__row--even" style="left: 0px;">
-                  <td data-field="Order ID" class="m-datatable__cell">
-                    <span style="width: 110px;">63304-963</span>
-                  </td>
-                  <td data-field="Owner" class="m-datatable__cell">
-                    <span style="width: 110px;">Rhoda Marunchak</span>
-                  </td>
-                  <td data-field="Contact" class="m-datatable__cell">
-                    <span style="width: 110px;">(677) 6736776</span>
-                  </td>
-                  <td data-field="Car Make" class="m-datatable__cell">
-                    <span style="width: 110px;">Mazda</span>
-                  </td>
-                  <td data-field="Car Model" class="m-datatable__cell">
-                    <span style="width: 110px;">MX-3</span>
-                  </td>
-                  <td data-field="Color" class="m-datatable__cell">
-                    <span style="width: 110px;">Maroon</span>
-                  </td>
-                  <td data-field="Deposit Paid" class="m-datatable__cell">
-                    <span style="width: 110px;">$41307.59</span>
-                  </td>
-                  <td data-field="Order Date" class="m-datatable__cell">
-                    <span style="width: 110px;">2017-09-14</span>
-                  </td>
-                  <td data-field="Status" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--danger m-badge--wide">Danger</span>
-                    </span>
-                  </td>
-                  <td data-field="Type" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--accent m-badge--dot"></span>&nbsp;
-                      <span class="m--font-bold m--font-accent">Direct</span>
-                    </span>
-                  </td>
-                </tr>
-                <tr data-row="6" class="m-datatable__row" style="left: 0px;">
-                  <td data-field="Order ID" class="m-datatable__cell">
-                    <span style="width: 110px;">52685-372</span>
-                  </td>
-                  <td data-field="Owner" class="m-datatable__cell">
-                    <span style="width: 110px;">Andie Mitro</span>
-                  </td>
-                  <td data-field="Contact" class="m-datatable__cell">
-                    <span style="width: 110px;">(700) 3368557</span>
-                  </td>
-                  <td data-field="Car Make" class="m-datatable__cell">
-                    <span style="width: 110px;">Volkswagen</span>
-                  </td>
-                  <td data-field="Car Model" class="m-datatable__cell">
-                    <span style="width: 110px;">rio</span>
-                  </td>
-                  <td data-field="Color" class="m-datatable__cell">
-                    <span style="width: 110px;">Green</span>
-                  </td>
-                  <td data-field="Deposit Paid" class="m-datatable__cell">
-                    <span style="width: 110px;">$85507.97</span>
-                  </td>
-                  <td data-field="Order Date" class="m-datatable__cell">
-                    <span style="width: 110px;">2016-09-15</span>
-                  </td>
-                  <td data-field="Status" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--danger m-badge--wide">Danger</span>
-                    </span>
-                  </td>
-                  <td data-field="Type" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--danger m-badge--dot"></span>&nbsp;
-                      <span class="m--font-bold m--font-danger">Online</span>
-                    </span>
-                  </td>
-                </tr>
-                <tr data-row="7" class="m-datatable__row m-datatable__row--even" style="left: 0px;">
-                  <td data-field="Order ID" class="m-datatable__cell">
-                    <span style="width: 110px;">36987-2160</span>
-                  </td>
-                  <td data-field="Owner" class="m-datatable__cell">
-                    <span style="width: 110px;">Amalita Bimrose</span>
-                  </td>
-                  <td data-field="Contact" class="m-datatable__cell">
-                    <span style="width: 110px;">(904) 5507463</span>
-                  </td>
-                  <td data-field="Car Make" class="m-datatable__cell">
-                    <span style="width: 110px;">BMW</span>
-                  </td>
-                  <td data-field="Car Model" class="m-datatable__cell">
-                    <span style="width: 110px;">Z4</span>
-                  </td>
-                  <td data-field="Color" class="m-datatable__cell">
-                    <span style="width: 110px;">Fuscia</span>
-                  </td>
-                  <td data-field="Deposit Paid" class="m-datatable__cell">
-                    <span style="width: 110px;">$37483.51</span>
-                  </td>
-                  <td data-field="Order Date" class="m-datatable__cell">
-                    <span style="width: 110px;">2016-09-15</span>
-                  </td>
-                  <td data-field="Status" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--primary m-badge--wide">Canceled</span>
-                    </span>
-                  </td>
-                  <td data-field="Type" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--primary m-badge--dot"></span>&nbsp;
-                      <span class="m--font-bold m--font-primary">Retail</span>
-                    </span>
-                  </td>
-                </tr>
-                <tr data-row="8" class="m-datatable__row" style="left: 0px;">
-                  <td data-field="Order ID" class="m-datatable__cell">
-                    <span style="width: 110px;">24451-133</span>
-                  </td>
-                  <td data-field="Owner" class="m-datatable__cell">
-                    <span style="width: 110px;">Karie Worham</span>
-                  </td>
-                  <td data-field="Contact" class="m-datatable__cell">
-                    <span style="width: 110px;">(462) 5326515</span>
-                  </td>
-                  <td data-field="Car Make" class="m-datatable__cell">
-                    <span style="width: 110px;">Ford</span>
-                  </td>
-                  <td data-field="Car Model" class="m-datatable__cell">
-                    <span style="width: 110px;">F-Series</span>
-                  </td>
-                  <td data-field="Color" class="m-datatable__cell">
-                    <span style="width: 110px;">Pink</span>
-                  </td>
-                  <td data-field="Deposit Paid" class="m-datatable__cell">
-                    <span style="width: 110px;">$85033.65</span>
-                  </td>
-                  <td data-field="Order Date" class="m-datatable__cell">
-                    <span style="width: 110px;">2016-07-09</span>
-                  </td>
-                  <td data-field="Status" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--info m-badge--wide">Info</span>
-                    </span>
-                  </td>
-                  <td data-field="Type" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--danger m-badge--dot"></span>&nbsp;
-                      <span class="m--font-bold m--font-danger">Online</span>
-                    </span>
-                  </td>
-                </tr>
-                <tr data-row="9" class="m-datatable__row m-datatable__row--even" style="left: 0px;">
-                  <td data-field="Order ID" class="m-datatable__cell">
-                    <span style="width: 110px;">35000-861</span>
-                  </td>
-                  <td data-field="Owner" class="m-datatable__cell">
-                    <span style="width: 110px;">Faythe Hallede</span>
-                  </td>
-                  <td data-field="Contact" class="m-datatable__cell">
-                    <span style="width: 110px;">(933) 6821247</span>
-                  </td>
-                  <td data-field="Car Make" class="m-datatable__cell">
-                    <span style="width: 110px;">Volkswagen</span>
-                  </td>
-                  <td data-field="Car Model" class="m-datatable__cell">
-                    <span style="width: 110px;">Passat</span>
-                  </td>
-                  <td data-field="Color" class="m-datatable__cell">
-                    <span style="width: 110px;">Indigo</span>
-                  </td>
-                  <td data-field="Deposit Paid" class="m-datatable__cell">
-                    <span style="width: 110px;">$42290.64</span>
-                  </td>
-                  <td data-field="Order Date" class="m-datatable__cell">
-                    <span style="width: 110px;">2017-12-30</span>
-                  </td>
-                  <td data-field="Status" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--metal m-badge--wide">Delivered</span>
-                    </span>
-                  </td>
-                  <td data-field="Type" class="m-datatable__cell">
-                    <span style="width: 110px;">
-                      <span class="m-badge m-badge--accent m-badge--dot"></span>&nbsp;
-                      <span class="m--font-bold m--font-accent">Direct</span>
-                    </span>
-                  </td>
-                </tr>
+
               </tbody>
             </table>
             <div class="m-datatable__pager m-datatable--paging-loaded clearfix">

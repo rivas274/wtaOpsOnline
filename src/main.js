@@ -40,21 +40,7 @@ const routes = [
   }
 ];
 const router = new VueRouter({ mode: 'history', routes: routes });
-router.beforeEach((to, from, next) => {
-  if (to.meta.isPublic) {
-    if (to.name == "Login" && (localStorage.getItem('TOKEN')||'').length == 16) {
-      next('/dasboard');
-    } else {
-      next();
-    }
-  } else {
-    if (localStorage.getItem('TOKEN') || localStorage.getItem('USER')) {
-      next();
-    } else {
-      next('/');
-    }
-  }
-});
+
 Vue.config.productionTip = false;
 Vue.mixin({
   beforeCreate: function () {
