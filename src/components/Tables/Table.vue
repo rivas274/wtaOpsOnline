@@ -29,8 +29,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  v-for="(row, index) in content">
+                <tr v-for="(row, index) in content">
                   <td v-for="campo in row">
                     <span>{{ campo }}</span>
                   </td>
