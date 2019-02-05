@@ -410,13 +410,11 @@
 </template>
 <script>
 export default {
-  name: "Header",
-  data: function() {
-    var dataUser = JSON.parse(localStorage.getItem("USERDATA")),
-      nameUser = dataUser.firstName + " " + dataUser.lastName;
-    return {
-      nameUser: nameUser.replace(/\b\w/g, l => l.toUpperCase())
-    };
+  name: 'Header',
+  data: function () {
+      return {
+          //nameUser : (this.$session.get('NAME_USER')||'').replace(/\b\w/g, l => l.toUpperCase())
+      }
   }
 };
 </script>
