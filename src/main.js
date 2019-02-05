@@ -10,8 +10,6 @@ import routes from './custom/routes';
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
 Vue.use(VueSession, { persist: true });
-Vue.use(VueAxios, customAxios);
-
 const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
   baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
@@ -40,7 +38,7 @@ customAxios.interceptors.request.use(function (config) {
 }, function (err) {
   return Promise.reject(err);
 });
-
+Vue.use(VueAxios, customAxios);
 router.beforeEach((to, from, next) => {
   if (to.meta.isPublic) {
     if (to.name == "Login" && (Vue._session.get('TOKEN') || '').length == 16) {
@@ -56,9 +54,7 @@ router.beforeEach((to, from, next) => {
     }
   }
 });
-
 Vue.config.productionTip = false;
-
 new Vue({
   render: h => h(App),
   router
