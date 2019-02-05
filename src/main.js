@@ -4,7 +4,7 @@ import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import Assist from './components/Assist.vue';
-import Content from './components/Content.vue';
+import ListAsistencia from './components/ListAsistencia.vue';
 import Login from './components/Login.vue';
 import VeeValidate from 'vee-validate';
 import VueSession from './custom/vue-session-custom';
@@ -36,7 +36,7 @@ const routes = [
   {
     name: 'dasboard',
     path: '/dasboard',
-    component: Content,
+    component: ListAsistencia,
   },
   {
     name: 'Login',
