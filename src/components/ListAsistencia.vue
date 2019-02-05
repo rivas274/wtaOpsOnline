@@ -1,16 +1,77 @@
 <template>
-  <TableBasic :thead="headerTable" :tbody="bodyTable" :tfooter="footerTable">
-    <template slot="header">
-      <Flag iso="ve"></Flag>Asistencias
-    </template>
+<div>
+  <TableBasic>
+    <template slot="header">Asistencias</template>
     <template slot="filters">
       <inputFromTable name="searchPassager" watermark="Passager" v-on:input="setDataFilter"></inputFromTable>
     </template>
     <template slot="thead">
-      <inputFromTable name="searchPassager" watermark="Passager" v-on:input="setDataFilter"></inputFromTable>
+      <tr>
+        <th>
+          <span>Numero de Caso</span>
+        </th>
+        <th>
+          <span>Compania</span>
+        </th>
+        <th>
+          <span>Voucher</span>
+        </th>
+        <th>
+          <span>Pasajeros</span>
+        </th>
+        <th>
+          <span>Sintomas</span>
+        </th>
+        <th>
+          <span>Tipo de Caso</span>
+        </th>
+        <th>
+          <span>Fecha Evento</span>
+        </th>
+        <th>
+          <span>Fecha Apertura</span>
+        </th>
+        <th>
+          <span>Pais</span>
+        </th>
+        <th>
+          <span>Tipo</span>
+        </th>
+      </tr>
     </template>
     <template slot="tbody">
-      <inputFromTable name="searchPassager" watermark="Passager" v-on:input="setDataFilter"></inputFromTable>
+      <tr v-for="assist in results">
+        <td>
+          <span>{{assist.codeAssist}}</span>
+        </td>
+        <td>
+          <span>{{assist.clientName}}</span>
+        </td>
+        <td>
+          <span>{{assist.codigo}}</span>
+        </td>
+        <td>
+          <span>{{assist.fisrtName}}</span>
+        </td>
+        <td>
+          <span>{{assist.symptom}}</span>
+        </td>
+        <td>
+          <span>{{assist.descCaseType}}</span>
+        </td>
+        <td>
+          <span>{{assist.reportedDate.date}}</span>
+        </td>
+        <td>
+          <span>{{assist.registeredDate.date}}</span>
+        </td>
+        <td>
+          <span>
+            <Flag :iso="assist.isoCountry"></Flag>
+            <!--<span class="m-badge m-badge--info m-badge--wide">Info</span>-->
+          </span>
+        </td>
+      </tr>
     </template>
     <template slot="footer">
       <pagination
@@ -21,6 +82,7 @@
       ></pagination>
     </template>
   </TableBasic>
+  </div>
 </template>
 <script>
 import inputFromTable from "./Tables/filters/inputFromTable.vue";
@@ -57,7 +119,7 @@ export default {
           prefix: JSON.stringify(this.$session.get("USERDATA")).prefix
         })
         .then(response => {
-          this.bodyTable = response.data.results;
+          this.results = response.data.results;
           this.footerTable = {
             start: response.data.start,
             limit: response.data.limit,

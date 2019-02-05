@@ -1,18 +1,14 @@
-<style scoped>
-    img{
-        height:28px;
-        width:37px;
-    }
-</style>
 <template>
-    <img :onerror="imgErrorFlag" :src="srcFlag">
+    <img :onerror="imgErrorFlag" :src="srcFlag" :height='height' :width='width'>
 </template>
 <script>
 export default {
-    props:["iso"],
+    props:["iso","f-height","f-width"],
     data:function () {
         return{
-            flag: this.iso
+            flag: this.iso,
+            height: (this.fHeight||30),
+            width: (this.fWidth||40),
         }
     },
     mounted:{

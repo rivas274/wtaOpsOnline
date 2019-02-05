@@ -4,8 +4,8 @@
       <HeaderCustom></HeaderCustom>
       <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
         <Menu></Menu>
+        <router-view></router-view>
       </div>
-      <router-view></router-view>
       <FooterCustom></FooterCustom>
     </div>
   </div>

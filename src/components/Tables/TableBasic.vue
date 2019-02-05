@@ -2,7 +2,7 @@
   <div class="m-content container-fluid">
     <div class="col-xl-12">
       <div class="m-portlet m-portlet--mobile">
-        <div class="m-portlet__head">
+        <div class="m-portlet__head" v-if="$slots.header">
           <div class="m-portlet__head-caption">
             <div class="m-portlet__head-title">
               <h3 class="m-portlet__head-text">
@@ -22,16 +22,16 @@
           <div class="m-section__content">
             <table class="table-responsive table table-striped m-table--head-bg-success">
               <thead>
-                <slot name="thead"></slot>
+                <slot name="thead" v-if="$slots.thead"></slot>
               </thead>
-              <tbody>
+              <tbody v-if="$slots.tbody">
                 <slot name="tbody"></slot>
               </tbody>
-              <tfooter>
-                <slot name="tfooter"></slot>
-              </tfooter>
+              <tfoot v-if="$slots.tfoot">
+                <slot name="tfoot"></slot>
+              </tfoot>
             </table>
-						<div class='m-datatable m-datatable--default'>
+						<div class='m-datatable m-datatable--default' v-if="$slots.footer">
             	<slot name="footer"></slot>
 						</div>
           </div>

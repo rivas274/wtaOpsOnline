@@ -17,16 +17,16 @@
   </Tables>
 </template>
 <script>
-import Tables from "./Tables/Table.vue";
+import Tables from "./Tables/DataTableBasic.vue";
 import inputFromTable from "./Tables/filters/inputFromTable.vue";
 import pagination from "./pagination/pagination.vue";
-import Flag from "./Tables/Flag.vue";
+import flag from "./Tables/Flag.vue";
 export default {
   components: {
     Tables,
     inputFromTable,
     pagination,
-    Flag
+    flag
   },
   data: function() {
     return {
@@ -56,6 +56,13 @@ export default {
             return val.date + " " + val.hour;
           },
           label: "Codigo voucher"
+        },
+        {
+          prop: "registeredDate",
+          filter: function(val) {
+            return "<Flag iso='ve'></Flag>";
+          },
+          label: "country"
         }
       ],
       bodyTable: [],

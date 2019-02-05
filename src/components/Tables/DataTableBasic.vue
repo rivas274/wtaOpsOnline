@@ -31,7 +31,7 @@
               <tbody>
                 <tr v-for="(row, index) in content">
                   <td v-for="campo in row">
-                    <span>{{ campo }}</span>
+                    <span v-html="campo"></span>
                   </td>
                 </tr>
               </tbody>
