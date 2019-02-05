@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="m-section__content">
-            <table class="table-responsive table table-striped">
+            <table class="table-responsive table table-striped m-table--head-bg-success">
               <thead>
                 <tr>
                   <th v-for="head in title">
