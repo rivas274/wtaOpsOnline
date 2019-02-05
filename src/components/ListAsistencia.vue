@@ -51,7 +51,7 @@
           <span>{{assist.codigo}}</span>
         </td>
         <td>
-          <span>{{assist.fisrtName}} {{assist.lastName}}</span>
+          <span v-html="assist.fisrtName+' '+assist.lastName"></span>
         </td>
         <td>
           <span>{{assist.symptom}}</span>
