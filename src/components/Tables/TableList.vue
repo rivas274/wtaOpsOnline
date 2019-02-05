@@ -167,7 +167,8 @@
             </div>
             <!--end: Search Form -->
     <!--begin: Datatable -->
-            <div class="m-datatable m-datatable--default m-datatable--brand m-datatable--loaded"><table class="m-datatable__table" id="html_table" width="100%" style="display: block; min-height: 300px; position: static; zoom: 1; overflow-x: auto;">
+            <div class="m-datatable m-datatable--default m-datatable--brand m-datatable--loaded">
+                <table class="m-datatable__table" id="html_table" width="100%" style="display: block; min-height: 300px; position: static; zoom: 1; overflow-x: auto;">
                 <thead class="m-datatable__head">
                     <tr class="m-datatable__row" style="left: 0px;">
                         <th title="Field #1" class="m-datatable__cell m-datatable__cell--sort"><span style="width: 110px;">

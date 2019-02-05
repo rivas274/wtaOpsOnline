@@ -1,7 +1,7 @@
 <template>
 	<body style="font-family: roboto;">
 		<div class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
-			<Header></Header>
+			
 			<div class="m-grid m-grid--hor m-grid--root m-page">
         		<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
 					<Menu></Menu>
@@ -11,13 +11,18 @@
 						</template>
 						<template slot="filters">
 							<inputFromTable 
-								name='search' 
-								watermark='Code Case/Asisst' 
+								name='searchPassager' 
+								watermark='Passager' 
 								v-on:input="setDataFilter"
 								></inputFromTable>
 						</template>
 						<template slot="footer">
-							<pagination></pagination>
+							<pagination 
+								:start="footerTable.start"
+								:limit="footerTable.limit"
+								:size="footerTable.size"
+								v-on:paginate="setDataPaginate">
+							</pagination>
 						</template>
 					</Tables>
         		</div>
@@ -30,7 +35,6 @@
 
 import Footer from './Footer.vue';
 import Menu from './Menu.vue';
-import Header from './Header.vue';
 import Tables from './Tables/Table.vue';
 import inputFromTable from './Tables/filters/inputFromTable.vue';
 import pagination from "./pagination/pagination.vue";
@@ -39,14 +43,15 @@ export default {
 	components: {
 		Footer,
 		Menu,
-		Header,
 		Tables,
 		inputFromTable,
 		pagination,
 	},
     data: function () {
         return {
-			filters:{},
+			filters:{
+				searchPassager:''
+			},
 			headerTable:[
 				{
 					prop: "codeAssist",
@@ -55,6 +60,14 @@ export default {
 				{
 					prop: "codigo",
 					label: "Codigo voucher"
+				},
+				{
+					prop: "fisrtName",
+					label: "fisrt Name"
+				},
+				{
+					prop: "lastName",
+					label: "Last Name"
 				},
 				{
 					prop: "registeredDate",
@@ -67,14 +80,19 @@ export default {
 			bodyTable: [],
 			footerTable:{
 				start: 0,
-				limit: 0,
+				limit: 15,
 				size: 0,
 			}
         }
     },
     methods: {
         getAssistance: function () {
-            this.axios.post("getAssistance", {'start':'0','limit':'4'}).then(response => {
+            this.axios.post("getAssistance", {
+					'start':this.footerTable.start,
+					'limit':this.footerTable.limit,
+					'size':this.footerTable.size,
+					'passenger':this.filters.searchPassager,
+				}).then(response => {
                 this.bodyTable = response.data.results;
                 this.footerTable = {
 					start:response.data.start,
@@ -84,11 +102,16 @@ export default {
             });
         },
         setDataFilter: function (campo, value) {
-            this.filters[campo] = value;
+			this.filters[campo] = value;
+			this.getAssistance();
+        },
+        setDataPaginate: function (campo, value) {
+			this.footerTable[campo] = value;
+			this.getAssistance();
         },
     },
     mounted() {
-        this.getAssistance()
+        this.getAssistance();
     },
 }
 

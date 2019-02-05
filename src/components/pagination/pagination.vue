@@ -1,76 +1,48 @@
 <template>
-  <div class="m-datatable__pager m-datatable--paging-loaded clearfix">
+  <div class="m-datatable__pager m-datatable--paging-loaded clearfix" v-if="showPages.length>1">
     <ul class="m-datatable__pager-nav">
-      <li>
+      <li v-show="currentPage!=1">
         <a
           title="First"
-          class="m-datatable__pager-link m-datatable__pager-link--first m-datatable__pager-link--disabled"
-          data-page="1"
-          disabled="disabled">
+          class="m-datatable__pager-link m-datatable__pager-link--first"
+          @click="paginate(1)">
           <i class="la la-angle-double-left"></i>
         </a>
       </li>
-      <li>
+      <li v-show="currentPage!=1">
         <a
           title="Previous"
-          class="m-datatable__pager-link m-datatable__pager-link--prev m-datatable__pager-link--disabled"
-          data-page="1"
-          disabled="disabled">
+          class="m-datatable__pager-link m-datatable__pager-link--prev"
+          @click="paginate(currentPage-1)">
           <i class="la la-angle-left"></i>
-        </a>
-      </li>
-      <li style="display: none;">
-        <a
-          title="More pages"
-          class="m-datatable__pager-link m-datatable__pager-link--more-prev"
-          data-page="1">
-          <i class="la la-ellipsis-h"></i>
         </a>
       </li>
       <li style="display: none;">
         <input type="text" class="m-pager-input form-control" title="Page number">
       </li>
-      <li>
+      <li v-for="page in showPages">
         <a
-          class="m-datatable__pager-link m-datatable__pager-link-number m-datatable__pager-link--active"
-          data-page="1"
-          title="1"
-        >1</a>
+          class="m-datatable__pager-link m-datatable__pager-link-number"
+          :class="{'m-datatable__pager-link--active':(currentPage==page)}"
+          :data-page="page"
+          :title="page"
+          @click="paginate(page)"
+        >{{ page }}</a>
       </li>
-      <li>
-        <a class="m-datatable__pager-link m-datatable__pager-link-number" data-page="2" title="2">2</a>
-      </li>
-      <li>
-        <a class="m-datatable__pager-link m-datatable__pager-link-number" data-page="3" title="3">3</a>
-      </li>
-      <li>
-        <a class="m-datatable__pager-link m-datatable__pager-link-number" data-page="4" title="4">4</a>
-      </li>
-      <li>
-        <a class="m-datatable__pager-link m-datatable__pager-link-number" data-page="5" title="5">5</a>
-      </li>
-      <li>
-        <a class="m-datatable__pager-link m-datatable__pager-link-number" data-page="6" title="6">6</a>
-      </li>
-      <li>
-        <a
-          title="More pages"
-          class="m-datatable__pager-link m-datatable__pager-link--more-next"
-          data-page="7"
-        >
-          <i class="la la-ellipsis-h"></i>
-        </a>
-      </li>
-      <li>
-        <a title="Next" class="m-datatable__pager-link m-datatable__pager-link--next" data-page="2">
+      <li v-show="currentPage!=totalPage">
+        <a  title="Next" 
+            class="m-datatable__pager-link m-datatable__pager-link--next"
+            :class="{'m-datatable__pager-link--disabled':(currentPage==totalPage)}"
+            :disabled="(currentPage==totalPage)>0"
+            @click="paginate(currentPage+1)">
           <i class="la la-angle-right"></i>
         </a>
       </li>
-      <li>
+      <li v-show="currentPage!=totalPage">
         <a
           title="Last"
           class="m-datatable__pager-link m-datatable__pager-link--last"
-          data-page="15">
+          @click="paginate(totalPage)">
           <i class="la la-angle-double-right"></i>
         </a>
       </li>
@@ -79,13 +51,10 @@
       <div class="dropdown bootstrap-select m-datatable__pager-size" style="width: 70px;">
         <select
           class="selectpicker m-datatable__pager-size"
-          title="Select page size"
           data-width="70px"
-          data-selected="10"
-          tabindex="-98"
-        >
-        <option class="bs-title-option">Select page size</option>
-          <option v-for="(row, index) in content" :value="index">{{ index }}}</option>
+          tabindex="-98">
+          <option class="bs-title-option" v-model="max" @change="changeSize">Select page size</option>
+          <option v-for="(row, index) in content" :value="index">{{ index }}</option>
         </select>
         <button
           type="button"
@@ -93,7 +62,7 @@
           data-toggle="dropdown"
           role="button">
           <div class="filter-option">
-            <div class="filter-option-inner">10</div>
+            <div class="filter-option-inner">{{ max }}</div>
           </div>&nbsp;
           <span class="bs-caret">
             <span class="caret"></span>
@@ -111,18 +80,47 @@
 </template>
 <script>
 export default {
-  props: ["start", "limit", "size","range-size"],
+  props: ["start", "limit", "size"],
   data: function() {
     return {
       init: (this.start||0),
-      max: (this.limit||0),
+      max: (this.limit||10),
       total: (this.size||0),
-      ranges:(this.rangeSize||[10,20,30,50,100])
+      ranges:[10,20,30,50,100],
     };
+  },
+  methods: {
+    paginate: function(value) {
+      this.$emit("paginate", 'start', (value-1)*this.max);
+    },
+    changeSize:function(){
+      this.$emit("paginate", 'size', this.max);
+    },
+    getPages(init,final){
+      var A = [init],step = 1;
+      while(init+step<= final){
+        A[A.length]= init+= step;
+      }
+      return A;
+    }
   },
   computed: {
     totalPage: function() {
       return Math.ceil(this.total / this.max);
+    },
+    currentPage:function(){
+      return Math.floor(this.init / this.max)+1;
+    },
+    showPages:function(){
+      var init=(this.currentPage-3),fin=(this.currentPage+3);
+      if(init<1){
+        fin=fin+Math.abs(init);
+        init=1;
+      }
+      if(fin>this.totalPage){
+        fin=this.totalPage;
+      }
+      return (this.getPages(init,fin)||[]);
     }
   },
   watch: {
@@ -132,9 +130,9 @@ export default {
     limit: function(newVal, oldVal) {
       this.max = newVal;
     },
-    total: function(newVal, oldVal) {
+    size: function(newVal, oldVal) {
       this.total = newVal;
-    }
+    },
   }
 };
 </script>
