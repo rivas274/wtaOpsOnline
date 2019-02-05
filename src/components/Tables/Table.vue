@@ -79,7 +79,7 @@ export default {
     }
   },
   watch: {
-    tbody: function(newVal, oldVal) {
+    tbody: function(newVal) {
       this.body = newVal;
     }
   }

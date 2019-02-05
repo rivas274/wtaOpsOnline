@@ -1,6 +1,6 @@
 <template>
 	<div class="m-grid m-grid--hor m-grid--root m-page">
-		<Header></Header>
+		<HeaderCustom></HeaderCustom>
 		<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
 			<Menu></Menu>
 			<Tables :thead="headerTable" :tbody="bodyTable" :tfooter="footerTable">
@@ -24,19 +24,21 @@
 				</template>
 			</Tables>
 		</div>
-		<Footer></Footer>
+		<FooterCustom></FooterCustom>
 	</div>
 </template>
 <script>
 
-import Footer from './Footer.vue';
+import FooterCustom from './Footer.vue';
+import HeaderCustom from './Header.vue';
 import Menu from './Menu.vue';
 import Tables from './Tables/Table.vue';
 import inputFromTable from './Tables/filters/inputFromTable.vue';
 import pagination from "./pagination/pagination.vue";
 export default {
 	components: {
-		Footer,
+		FooterCustom,
+		HeaderCustom,
 		Menu,
 		Tables,
 		inputFromTable,

@@ -413,7 +413,7 @@ export default {
   name: 'Header',
   data: function () {
       return {
-          nameUser : this.$session.get('NAME_USER').replace(/\b\w/g, l => l.toUpperCase())
+          //nameUser : (this.$session.get('NAME_USER')||'').replace(/\b\w/g, l => l.toUpperCase())
       }
   }
 };
