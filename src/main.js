@@ -3,50 +3,15 @@ import App from './App.vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import Assist from './components/Assist.vue';
-import ListAsistencia from './components/ListAsistencia.vue';
-import Content from './components/Content.vue';
-import Login from './components/Login.vue';
 import VeeValidate from 'vee-validate';
 import VueSession from './custom/vue-session-custom';
-import http404 from './components/http404.vue';
+import routes from './custom/routes';
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
 Vue.use(VueSession, { persist: true });
-const routes = [
-  {
-    name: 'Assist',
-    path: '/Assist/:code',
-    component: Assist,
-  },
-  {
-    name: 'dasboard',
-    path: '/dasboard',
-    component: ListAsistencia,
-  },
-  {
-    name: 'Content',
-    path: '/Content',
-    component: Content,
-  },
-  {
-    name: 'Login',
-    path: '/',
-    component: Login,
-    meta: {
-      isPublic: true
-    }
-  },
-  {
-    path: "**",
-    name: "http404",
-    component: http404,
-    meta: {
-      isPublic: true
-    }
-  }
-];
+Vue.use(VueAxios, customAxios);
+
 const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
   baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
@@ -75,7 +40,7 @@ customAxios.interceptors.request.use(function (config) {
 }, function (err) {
   return Promise.reject(err);
 });
-Vue.use(VueAxios, customAxios);
+
 router.beforeEach((to, from, next) => {
   if (to.meta.isPublic) {
     if (to.name == "Login" && (Vue._session.get('TOKEN') || '').length == 16) {
@@ -91,7 +56,9 @@ router.beforeEach((to, from, next) => {
     }
   }
 });
+
 Vue.config.productionTip = false;
+
 new Vue({
   render: h => h(App),
   router
