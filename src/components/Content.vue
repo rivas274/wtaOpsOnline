@@ -1,7 +1,6 @@
 <template>
 	<div>
 		<div class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default">
-			
 			<div class="m-grid m-grid--hor m-grid--root m-page">
 				<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
 					<Menu></Menu>
@@ -39,7 +38,6 @@ import Tables from './Tables/Table.vue';
 import inputFromTable from './Tables/filters/inputFromTable.vue';
 import pagination from "./pagination/pagination.vue";
 export default {
-  	name: 'Content',
 	components: {
 		Footer,
 		Menu,
@@ -75,6 +73,13 @@ export default {
 						return val.date+' '+val.hour;
 					},
 					label: "Codigo voucher"
+				},
+				{
+					prop: "registeredDate",
+					filter:function(val){
+						return val.date+' '+val.hour;
+					},
+					label: "Country"
 				}
 			],
 			bodyTable: [],
@@ -90,8 +95,8 @@ export default {
             this.axios.post("getAssistance", {
 					'start':this.footerTable.start,
 					'limit':this.footerTable.limit,
-					'size':this.footerTable.size,
 					'passenger':this.filters.searchPassager,
+					'prefix':JSON.stringify(this.$session.get('USERDATA')).prefix,
 				}).then(response => {
                 this.bodyTable = response.data.results;
                 this.footerTable = {
@@ -103,6 +108,7 @@ export default {
         },
         setDataFilter: function (campo, value) {
 			this.filters[campo] = value;
+			this.footerTable.start=0;
 			this.getAssistance();
         },
         setDataPaginate: function (campo, value) {

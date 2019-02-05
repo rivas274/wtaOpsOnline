@@ -51,10 +51,11 @@
       <div class="dropdown bootstrap-select m-datatable__pager-size" style="width: 70px;">
         <select
           class="selectpicker m-datatable__pager-size"
-          data-width="70px"
+          v-model="max"
+          title="Select page size"
+          @change="changeSize"
           tabindex="-98">
-          <option class="bs-title-option" v-model="max" @change="changeSize">Select page size</option>
-          <option v-for="(row, index) in content" :value="index">{{ index }}</option>
+          <option v-for="range in ranges" :value="range">{{ range }}</option>
         </select>
         <button
           type="button"
@@ -74,7 +75,7 @@
           </div>
         </div>
       </div>
-      <span class="m-datatable__pager-detail">Displaying {{ init }} - {{ max*init }} of {{ total }} records</span>
+      <span class="m-datatable__pager-detail">{{ init }} - {{ max*currentPage }} of {{ total }} records</span>
     </div>
   </div>
 </template>
@@ -86,7 +87,7 @@ export default {
       init: (this.start||0),
       max: (this.limit||10),
       total: (this.size||0),
-      ranges:[10,20,30,50,100],
+      ranges:[15,30,50,70,100],
     };
   },
   methods: {
@@ -124,13 +125,13 @@ export default {
     }
   },
   watch: {
-    start: function(newVal, oldVal) {
+    start: function(newVal) {
       this.init = newVal;
     },
-    limit: function(newVal, oldVal) {
+    limit: function(newVal) {
       this.max = newVal;
     },
-    size: function(newVal, oldVal) {
+    size: function(newVal) {
       this.total = newVal;
     },
   }
