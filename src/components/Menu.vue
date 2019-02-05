@@ -17,7 +17,7 @@
               <span class="m-menu__link-text">Asistencias</span>
             </a>
           </li>
-          <li
+          <!--<li
             class="m-menu__item m-menu__item--submenu"
             aria-haspopup="true"
             m-menu-submenu-toggle="hover"
@@ -562,7 +562,7 @@
                 </li>
               </ul>
             </div>
-          </li>
+          </li>-->
         </ul>
       </div>
       <!-- END: Aside Menu -->
