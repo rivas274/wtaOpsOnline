@@ -56,7 +56,7 @@
             title="Select page size"
             @change="changeSize"
             tabindex="-98">
-            <option v-for="range in ranges" :value="range">{{ range }}</option>
+            <option v-for="(range, index) in ranges" :value="range">{{ range }}</option>
           </select>
         </label>
         &nbsp;&nbsp;<b>{{ init+1 }}</b> - <b>{{ max*currentPage }}</b> of <b>{{ total }}</b> records
