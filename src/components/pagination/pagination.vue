@@ -1,6 +1,6 @@
 <template>
-  <div class="m-datatable__pager m-datatable--paging-loaded clearfix" v-if="showPages.length>1">
-    <ul class="m-datatable__pager-nav">
+  <div class="m-datatable__pager m-datatable--paging-loaded clearfix" >
+    <ul class="m-datatable__pager-nav" v-show="showPages.length>1">
       <li v-show="currentPage!=1">
         <a
           title="First"
@@ -49,7 +49,7 @@
     </ul>
     <div class="m-datatable__pager-info">
       <div class="dataTables_length">
-        <label>
+        <label v-show="showPages.length>1">
           <select
             class="custom-select custom-select-sm form-control form-control-sm"
             v-model="max"

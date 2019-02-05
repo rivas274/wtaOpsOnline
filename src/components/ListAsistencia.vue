@@ -116,7 +116,7 @@ export default {
           start: this.footerTable.start,
           limit: this.footerTable.limit,
           passenger: this.filters.searchPassager,
-          prefix: JSON.stringify(this.$session.get("USERDATA")).prefix
+          prefix: JSON.parse(this.$session.get("USERDATA")).prefix
         })
         .then(response => {
           this.results = response.data.results;

@@ -1,5 +1,5 @@
 <template>
-    <img :onerror="imgErrorFlag" :src="srcFlag" :height='height' :width='width'>
+    <img @error="imgUrlAlt" :src="srcFlag" :height='height' :width='width'>
 </template>
 <script>
 export default {
@@ -11,14 +11,15 @@ export default {
             width: (this.fWidth||40),
         }
     },
-    mounted:{
-        onerror:function () {
-            this.flag='_unknown';
-        }
-    },
     computed:{
         srcFlag:function() {
             return this.axios.defaults.baseURL.split('/app/')[0]+"/app/images/flags_iso/svg/"+this.flag.toString().toLowerCase()+".svg";
+        }
+    },
+    methods:{
+        imgUrlAlt:function (event) {
+            this.flag='_unknown';
+            event.target.src=this.srcFlag;
         }
     }
 }
