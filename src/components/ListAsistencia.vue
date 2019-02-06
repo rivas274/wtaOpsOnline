@@ -131,9 +131,11 @@ export default {
     };
   },
   methods: {
-    
     getAssistance: function() {
-      let arrPrefix = (this.filters.arrPrefix.length==0)?JSON.parse(this.$session.get("USERDATA")).prefix:this.filters.arrPrefix;
+      let arrPrefix =
+        this.filters.arrPrefix.length == 0
+          ? JSON.parse(this.$session.get("USERDATA")).prefix
+          : this.filters.arrPrefix;
       this.axios
         .post("getAssistance", {
           start: this.footerTable.start,
@@ -152,13 +154,17 @@ export default {
         });
     },
     getClients: function() {
-      this.axios.post("getClient", {}).then(response => {
-        let data = response.data.results;
+      this.axios
+        .post("getClient", {
+          prefix: JSON.parse(this.$session.get("USERDATA")).prefix
+        })
+        .then(response => {
+          let data = response.data.results;
 
-        this.clients = data.map(function(value, key) {
-          return { name: value.clientName, code: value.prefix };
+          this.clients = data.map(function(value, key) {
+            return { name: value.clientName, code: value.prefix };
+          });
         });
-      });
     },
 
     setDataFilter: function(campo, value) {
