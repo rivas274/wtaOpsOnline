@@ -131,15 +131,15 @@ export default {
     };
   },
   methods: {
+    
     getAssistance: function() {
+      let arrPrefix = (this.filters.arrPrefix.length==0)?JSON.parse(this.$session.get("USERDATA")).prefix:this.filters.arrPrefix;
       this.axios
         .post("getAssistance", {
           start: this.footerTable.start,
           limit: this.footerTable.limit,
           passenger: this.filters.searchPassager,
-          prefix:
-            this.filters.arrPrefix ||
-            JSON.parse(this.$session.get("USERDATA")).prefix,
+          prefix: arrPrefix,
           code: this.filters.code.trim()
         })
         .then(response => {
