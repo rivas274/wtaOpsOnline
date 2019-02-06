@@ -1,8 +1,23 @@
+<style>
+img[alt]:after {  
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  text-align: center;
+  content: attr(alt);
+}
+</style>
 <template>
-    <img @error="imgUrlAlt" 
+    <img v-show="imgUrlAlt"
+        @error="imgUrlAlt"
         :src="srcFlag" 
         :class="{ class: true }" 
-        :style="{ maxHeight: cssActivePx(height), maxWidth: cssActivePx(width)}">
+        :style="{ maxHeight: cssActivePx(height), maxWidth: cssActivePx(width)}"
+        alt>
 </template>
 <script>
 export default {
