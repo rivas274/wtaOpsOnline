@@ -1,88 +1,102 @@
 <template>
+  <div>
+    <TableBasic>
+      <template slot="header">Asistencias</template>
+      <template slot="filters">
+        <inputFromTable
+          name="searchPassager"
+          watermark="Passenger"
+          icon="flaticon-avatar"
+          v-on:input="setDataFilter"
+        ></inputFromTable>
+        <inputFromTable
+          name="code"
+          watermark="Code"
+          icon="flaticon-interface-5"
+          v-on:input="setDataFilter"
+        ></inputFromTable>
+        <Multiselects
+          name="arrPrefix"
+          watermark="Search Clients"
+          :options="clients"
+          v-on:input="setDataFilter"
+        ></Multiselects>
+      </template>
 
-<div>
-  <TableBasic>
-    <template slot="header">Asistencias</template>
-    <template slot="filters">
-      <inputFromTable name="searchPassager" watermark="Passenger" icon="flaticon-avatar" v-on:input="setDataFilter"></inputFromTable>
-      <inputFromTable name="code" watermark="Code" icon="flaticon-interface-5" v-on:input="setDataFilter"></inputFromTable>
-      <Multiselects watermark="Search Clients"></Multiselects>
-    </template>
-    
-    <template slot="thead">
-      <tr>
-        <th>
-          <span>Numero de Caso</span>
-        </th>
-        <th>
-          <span>Compania</span>
-        </th>
-        <th>
-          <span>Voucher</span>
-        </th>
-        <th>
-          <span>Pasajeros</span>
-        </th>
-        <th>
-          <span>Sintomas</span>
-        </th>
-        <th>
-          <span>Tipo de Caso</span>
-        </th>
-        <th>
-          <span>Fecha Evento</span>
-        </th>
-        <th>
-          <span>Fecha Apertura</span>
-        </th>
-        <th>
-          <span>Pais</span>
-        </th>
-      </tr>
-    </template>
-    <template slot="tbody">
-      <tr v-for="assist in results">
-        <td>
-          <span>{{assist.codeAssist}}</span>
-        </td>
-        <td>
-          <span>{{assist.clientName}}</span>
-        </td>
-        <td>
-          <span>{{assist.codigo}}</span>
-        </td>
-        <td>
-          <span>{{assist.fisrtName}}</span>
-        </td>
-        <td>
-          <span>{{assist.symptom}}</span>
-        </td>
-        <td>
-          <span>{{assist.descCaseType}}</span>
-        </td>
-        <td>
-          <span>{{assist.reportedDate.date}}</span>
-        </td>
-        <td>
-          <span>{{assist.registeredDate.date}}</span>
-        </td>
-        <td>
-          <span>
-            <Flag :iso="assist.isoCountry"></Flag>
-            <!--<span class="m-badge m-badge--info m-badge--wide">Info</span>-->
-          </span>
-        </td>
-      </tr>
-    </template>
-    <template slot="footer">
-      <pagination
-        :start="footerTable.start"
-        :limit="footerTable.limit"
-        :size="footerTable.size"
-        v-on:paginate="setDataPaginate"
-      ></pagination>
-    </template>
-  </TableBasic>
+      <template slot="thead">
+        <tr>
+          <th>
+            <span>Numero de Caso</span>
+          </th>
+          <th>
+            <span>Compania</span>
+          </th>
+          <th>
+            <span>Voucher</span>
+          </th>
+          <th>
+            <span>Pasajeros</span>
+          </th>
+          <th>
+            <span>Sintomas</span>
+          </th>
+          <th>
+            <span>Tipo de Caso</span>
+          </th>
+          <th>
+            <span>Fecha Evento</span>
+          </th>
+          <th>
+            <span>Fecha Apertura</span>
+          </th>
+          <th>
+            <span>Pais</span>
+          </th>
+        </tr>
+      </template>
+      <template slot="tbody">
+        <tr v-for="assist in results">
+          <td>
+            <span>{{assist.codeAssist}}</span>
+          </td>
+          <td>
+            <span>{{assist.clientName}}</span>
+          </td>
+          <td>
+            <span>{{assist.codigo}}</span>
+          </td>
+          <td>
+            <span>{{assist.fisrtName}}</span>
+          </td>
+          <td>
+            <span>{{assist.symptom}}</span>
+          </td>
+          <td>
+            <span>{{assist.descCaseType}}</span>
+          </td>
+          <td>
+            <span>{{assist.reportedDate.date}}</span>
+          </td>
+          <td>
+            <span>{{assist.registeredDate.date}}</span>
+          </td>
+          <td>
+            <span>
+              <Flag :iso="assist.isoCountry"></Flag>
+              <!--<span class="m-badge m-badge--info m-badge--wide">Info</span>-->
+            </span>
+          </td>
+        </tr>
+      </template>
+      <template slot="footer">
+        <pagination
+          :start="footerTable.start"
+          :limit="footerTable.limit"
+          :size="footerTable.size"
+          v-on:paginate="setDataPaginate"
+        ></pagination>
+      </template>
+    </TableBasic>
   </div>
 </template>
 <script>
@@ -104,15 +118,16 @@ export default {
     return {
       filters: {
         searchPassager: "",
-        code:"",
-        valueMiltiSelect:""
+        code: "",
+        arrPrefix: []
       },
       results: [],
       footerTable: {
         start: 0,
         limit: 15,
         size: 0
-      }
+      },
+      clients: []
     };
   },
   methods: {
@@ -122,7 +137,9 @@ export default {
           start: this.footerTable.start,
           limit: this.footerTable.limit,
           passenger: this.filters.searchPassager,
-          prefix: JSON.parse(this.$session.get("USERDATA")).prefix,
+          prefix:
+            this.filters.arrPrefix ||
+            JSON.parse(this.$session.get("USERDATA")).prefix,
           code: this.filters.code.trim()
         })
         .then(response => {
@@ -134,6 +151,16 @@ export default {
           };
         });
     },
+    getClients: function() {
+      this.axios.post("getClient", {}).then(response => {
+        let data = response.data.results;
+
+        this.clients = data.map(function(value, key) {
+          return { name: value.clientName, code: value.prefix };
+        });
+      });
+    },
+
     setDataFilter: function(campo, value) {
       this.filters[campo] = value;
       this.footerTable.start = 0;
@@ -146,6 +173,7 @@ export default {
   },
   mounted() {
     this.getAssistance();
+    this.getClients();
   }
 };
 </script>
