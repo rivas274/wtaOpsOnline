@@ -31,8 +31,8 @@
           <div class="m-login__signin">
             <form class="m-login__form m-form" @submit.prevent="validLogin">
               <div
-                v-show="resp.STATUS == 'ERROR'"
-                class="m-alert m-alert--outline alert-danger alert alert-dismissible"
+                v-show="resp.STATUS == 'ERROR'"alert alert-danger
+                class="alert-danger alert alert-dismissible"
                 role="alert"
               >
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>

@@ -6,8 +6,10 @@ import VueAxios from 'vue-axios';
 import VeeValidate from 'vee-validate';
 import VueSession from './custom/vue-session-custom';
 import routes from './custom/routes';
+import globalFilters from'./custom/vue-global-filters';
 
 Vue.use(VueRouter);
+Vue.use(globalFilters);
 Vue.use(VeeValidate);
 Vue.use(VueSession, { persist: true });
 const router = new VueRouter({ mode: 'history', routes: routes });
@@ -24,7 +26,8 @@ customAxios.interceptors.response.use(
   },
   function (error) {
     if (error.response.status == 401 && router.currentRoute.fullPath!=='/') {
-      router.push('/');
+      Vue._session.destroy();
+      router.go('/');
     }
     return error.response;
   }

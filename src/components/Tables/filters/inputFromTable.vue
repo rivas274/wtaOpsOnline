@@ -6,6 +6,7 @@
           class="form-control m-input"
           :placeholder="watermark"
           :id="'Search'+name"
+          :name="name"
           v-model="value" 
           @change="input" 
         >
