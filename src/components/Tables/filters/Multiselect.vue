@@ -1,22 +1,22 @@
-<template slot="tag" slot-scope="props">
-  <div class="col-md-6">
-      <Moultiselect
-        v-model="value"
-        :options="option"
-        :multiple="true"
-        label="name"
-        track-by="name"
-        :close-on-select="false"
-        :clear-on-select="false"
-        :placeholder="watermark"
-        @input="changeMultiSelect"
-      ></Moultiselect>
+<template>
+  <div :class="{class:true}">
+    <Moultiselect
+      v-model="value"
+      :options="option"
+      :multiple="true"
+      label="name"
+      track-by="name"
+      :close-on-select="false"
+      :clear-on-select="false"
+      :placeholder="watermark"
+      @input="changeMultiSelect"
+    ></Moultiselect>
   </div>
 </template>
 <script>
 import Moultiselect from "vue-multiselect";
 export default {
-  props: ["watermark", "options","values","name"],
+  props: ["watermark", "options", "values", "name","class"],
   components: {
     Moultiselect
   },
@@ -24,16 +24,16 @@ export default {
     return {
       value: [],
       results: {},
-      option: (this.options||{code:'',name:'selected'})
+      option: this.options || { code: "", name: "selected" }
     };
   },
-  methods:{
-    changeMultiSelect : function () {
-        let values = this.value.map(function (value,key) {
-            return value.code;
-        })
-        this.$emit("input", this.name, values);
-    },
+  methods: {
+    changeMultiSelect: function() {
+      let values = this.value.map(function(value, key) {
+        return value.code;
+      });
+      this.$emit("input", this.name, values);
+    }
   },
   watch: {
     options: function(newVal) {
@@ -43,3 +43,28 @@ export default {
 };
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+
+<style>
+.multiselect__tags {
+  min-height: 35px;
+  padding: 6px 40px 0 8px;
+  font-size: 1rem;
+}
+.multiselect * {
+  font-size: 1rem !important;
+}
+.multiselect__placeholder {
+  padding-top: 0px;
+  margin-bottom: 7px;
+}
+.multiselect {
+  min-height: 35px;
+}
+.multiselect__select {
+  height: 35px;
+}
+.multiselect__tag {
+  margin-bottom: 0px;
+  font-size: 1rem;
+}
+</style>

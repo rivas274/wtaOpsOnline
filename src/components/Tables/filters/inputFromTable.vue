@@ -1,5 +1,5 @@
 <template>
-    <div class="col-md-3">
+    <div :class="{class:true}">
       <div class="m-input-icon m-input-icon--left">
         <input
           type="text"
@@ -20,7 +20,7 @@
 </template>
 <script>
 export default {
-  props: ['watermark','name','icon'],
+  props: ['watermark','name','icon','class'],
   data: function() {
     return {
       ico: (this.icon||'la-search'),

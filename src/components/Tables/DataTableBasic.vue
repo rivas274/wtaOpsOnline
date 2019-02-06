@@ -1,7 +1,7 @@
 <template>
   <div class="m-content container-fluid">
     <div class="col-xl-12 m--margin-bottom-10">
-      <div class="m-portlet m-portlet--mobile m--padding-bottom-20">
+      <div class="m-portlet m-portlet--mobile m--padding-bottom-10">
         <div class="m-portlet__head">
           <div class="m-portlet__head-caption">
             <div class="m-portlet__head-title">

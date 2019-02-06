@@ -3,30 +3,40 @@
     <TableBasic>
       <template slot="header">Assistance</template>
       <template slot="filters">
-        <input-from-table
-          name="passager"
-          watermark="Passenger"
-          icon="flaticon-avatar"
-          v-on:input="setDataFilter"
-        ></input-from-table>
-        <input-from-table
-          name="code"
-          watermark="Code"
-          icon="flaticon-interface-5"
-          v-on:input="setDataFilter"
-        ></input-from-table>
-        <Multiselects
-          name="arrPrefix"
-          watermark="Search Clients"
-          :options="clients"
-          v-on:input="setDataFilter"
-        ></Multiselects>
-        <date-range-bt 
-          name="date" 
-          watermark="Select date range" 
-          v-on:input="setDataFilter"
-        ></date-range-bt>
-        <button class="btn btn-brand" @click="getAssistance(0)">Search</button>
+        <div class="form-group m-form__group row">
+          <date-range-bt 
+            class="col-md-4 m-form__group-sub"
+            name="date" 
+            watermark="Select date range" 
+            v-on:input="setDataFilter"
+          ></date-range-bt>
+          <input-from-table
+            class="col-md-4 m-form__group-sub"
+            name="code"
+            watermark="Code"
+            icon="flaticon-interface-5"
+            v-on:input="setDataFilter"
+          ></input-from-table>
+          <input-from-table
+            class="col-md-4 m-form__group-sub"
+            name="passager"
+            watermark="Passenger"
+            icon="flaticon-avatar"
+            v-on:input="setDataFilter"
+          ></input-from-table>
+        </div>
+        <div class="form-group m-form__group row">
+          <multi-selects
+            class="col-md-4 m-form__group-sub"
+            name="arrPrefix"
+            watermark="Search Clients"
+            :options="clients"
+            v-on:input="setDataFilter"
+          ></multi-selects>
+          <!-- <div class="col m--align-right">
+            <button class="btn btn-brand" @click="getAssistance(0)">Search</button>
+          </div> -->
+        </div>
       </template>
       <template slot="thead">
         <tr>
@@ -56,11 +66,7 @@
           </th>
           <th>
             <span>Pais</span>
-          </th><<<<<<< HEAD
-          =======
-          <th>
-            <span>Tipo</span>
-          </th>>>>>>>> hrivas
+          </th>
         </tr>
       </template>
       <template slot="tbody">
@@ -114,7 +120,7 @@ import inputFromTable from "./Tables/filters/inputFromTable.vue";
 import pagination from "./pagination/pagination.vue";
 import Flag from "./Tables/Flag.vue";
 import TableBasic from "./Tables/TableBasic.vue";
-import Multiselects from "./Tables/filters/Multiselect.vue";
+import MultiSelects from "./Tables/filters/Multiselect.vue";
 
 export default {
   components: {
@@ -123,7 +129,7 @@ export default {
     dateRangeBt,
     pagination,
     Flag,
-    Multiselects
+    MultiSelects
   },
   data: function() {
     return {
@@ -151,7 +157,7 @@ export default {
         this.filters.arrPrefix.length == 0
           ? JSON.parse(this.$session.get("USERDATA")).prefix
           : this.filters.arrPrefix;
-      pg=Number.isInteger(pg)?pg:this.footerTable.start;
+      pg = Number.isInteger(pg) ? pg : this.footerTable.start;
       this.axios
         .post("getAssistance", {
           start: pg,
@@ -160,8 +166,7 @@ export default {
           code: this.filters.code.trim(),
           passenger: this.filters.passager.trim(),
           endDate: this.filters.date.endDate,
-          startDate: this.filters.date.startDate,
-          prefix: JSON.parse(this.$session.get("USERDATA")).prefix
+          startDate: this.filters.date.startDate
         })
         .then(response => {
           this.results = response.data.results;
@@ -187,6 +192,7 @@ export default {
     },
     setDataFilter: function(campo, value) {
       this.filters[campo] = value;
+      this.getAssistance(0);
     },
     setDataPaginate: function(campo, value) {
       this.footerTable[campo] = value;

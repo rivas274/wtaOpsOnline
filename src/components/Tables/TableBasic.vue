@@ -1,5 +1,5 @@
 <template>
-  <div class="m-content container-fluid">
+  <div class="m-content">
     <div class="col-xl-12 m--padding-bottom-20">
       <div class="m-portlet m-portlet--mobile">
         <div class="m-portlet__head" v-if="$slots.header">
@@ -15,19 +15,24 @@
           <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-20">
             <div class="row align-items-center">
               <div class="col-xl-12 order-2 order-xl-1">
-                  <div class="form-group m-form__group row align-items-center">
-                    <slot name="filters"></slot>
-                  </div>
+                <slot name="filters"></slot>
               </div>
             </div>
           </div>
           <div class="m-section__content">
-            <table class="table-responsive table table-striped">
+            <table class="table table-striped table-bordered table-hover">
               <thead>
-                <slot name="thead" v-if="$slots.thead"></slot>
+                <slot name="thead"></slot>
               </thead>
-              <tbody v-if="$slots.tbody">
+              <tbody>
                 <slot name="tbody"></slot>
+                <template v-if="!$slots.tbody">
+                  <tr>
+                    <td :colspan="$slots.thead[0].children.length" class="text-center">
+                      <strong class="text-danger">No records found</strong>
+                    </td>
+                  </tr>
+                </template>
               </tbody>
               <tfoot v-if="$slots.tfoot">
                 <slot name="tfoot"></slot>
@@ -45,5 +50,9 @@
 </template>
 <script>
 export default {
+  mounted(){
+    console.log(this.$slots.thead[0].children.length)
+    console.log(this.$slots.thead.$children.length)
+  }
 };
 </script>

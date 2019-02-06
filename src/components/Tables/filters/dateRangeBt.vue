@@ -1,27 +1,25 @@
 <template>
-  <div class="form-group m-form__group row align-items-center">
-    <div class="col-md-4">
-      <div class="m-input-icon m-input-icon--left date-bt-vue" :id="'Search'+name">
-        <input
-          type="text"
-          :name="name"
-          class="form-control m-input"
-          :placeholder="watermark"
-          v-model="value"
-          readonly
-        >
-        <span class="m-input-icon__icon m-input-icon__icon--left">
-          <span>
-            <i class="la la-calendar-check-o"></i>
-          </span>
+  <div :class="{class:true}">
+    <div class="m-input-icon m-input-icon--left date-bt-vue" :id="'Search'+name">
+      <input
+        type="text"
+        :name="name"
+        class="form-control m-input"
+        :placeholder="watermark"
+        v-model="value"
+        readonly
+      >
+      <span class="m-input-icon__icon m-input-icon__icon--left">
+        <span>
+          <i class="la la-calendar-check-o"></i>
         </span>
-      </div>
+      </span>
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: ["watermark", "name"],
+  props: ["watermark", "name",'class'],
   mounted() {
     let _self = this;
     $(_self.$el)
