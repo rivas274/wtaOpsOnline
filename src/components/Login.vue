@@ -12,9 +12,7 @@
 }
 </style>
 <template>
-<body
-  class="m--skin- m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"
->
+
   <div class="m-grid m-grid--hor m-grid--root m-page">
     <div
       class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2"
@@ -33,8 +31,8 @@
           <div class="m-login__signin">
             <form class="m-login__form m-form" @submit.prevent="validLogin">
               <div
-                v-show="resp.STATUS == 'ERROR'"
-                class="m-alert m-alert--outline alert-danger alert alert-dismissible"
+                v-show="resp.STATUS == 'ERROR'"alert alert-danger
+                class="alert-danger alert alert-dismissible"
                 role="alert"
               >
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
@@ -83,7 +81,6 @@
       </div>
     </div>
   </div>
-</body>
 </template>
 <script>
 import FormError from "./FormError";
@@ -102,7 +99,7 @@ export default {
     };
   },
   methods: {
-    validLogin: function() {
+      validLogin: function() {
       if (!this.disableForm) {
         this.$validator.validateAll().then(result => {
           if (result) {
