@@ -1,10 +1,14 @@
 <template>
+
 <div>
   <TableBasic>
     <template slot="header">Asistencias</template>
     <template slot="filters">
-      <inputFromTable name="searchPassager" watermark="Passager" v-on:input="setDataFilter"></inputFromTable>
+      <inputFromTable name="searchPassager" watermark="Passenger" icon="flaticon-avatar" v-on:input="setDataFilter"></inputFromTable>
+      <inputFromTable name="code" watermark="Code" icon="flaticon-interface-5" v-on:input="setDataFilter"></inputFromTable>
+      <Multiselects watermark="Search Clients"></Multiselects>
     </template>
+    
     <template slot="thead">
       <tr>
         <th>
@@ -86,17 +90,22 @@ import inputFromTable from "./Tables/filters/inputFromTable.vue";
 import pagination from "./pagination/pagination.vue";
 import Flag from "./Tables/Flag.vue";
 import TableBasic from "./Tables/TableBasic.vue";
+import Multiselects from "./Tables/filters/Multiselect.vue";
+
 export default {
   components: {
     TableBasic,
     inputFromTable,
     pagination,
-    Flag
+    Flag,
+    Multiselects
   },
   data: function() {
     return {
       filters: {
-        searchPassager: ""
+        searchPassager: "",
+        code:"",
+        valueMiltiSelect:""
       },
       results: [],
       footerTable: {
@@ -113,7 +122,8 @@ export default {
           start: this.footerTable.start,
           limit: this.footerTable.limit,
           passenger: this.filters.searchPassager,
-          prefix: JSON.parse(this.$session.get("USERDATA")).prefix
+          prefix: JSON.parse(this.$session.get("USERDATA")).prefix,
+          code: this.filters.code.trim()
         })
         .then(response => {
           this.results = response.data.results;

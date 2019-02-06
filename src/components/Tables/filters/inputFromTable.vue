@@ -1,12 +1,11 @@
 <template>
-  <div class="form-group m-form__group row align-items-center">
     <div class="col-md-4">
       <div class="m-input-icon m-input-icon--left">
         <input
           type="text"
           class="form-control m-input"
           :placeholder="watermark"
-          :id="'Search'+nameInput"
+          :id="'Search'+name"
           v-model="value" 
           @change="input" 
         >
@@ -17,17 +16,14 @@
         </span>
       </div>
     </div>
-  </div>
 </template>
 <script>
 export default {
-  props: ['placeholder','name','icon'],
+  props: ['watermark','name','icon'],
   data: function() {
     return {
-      nameInput: this.name,
       ico: (this.icon||'la-search'),
-      value: "",
-      watermark: this.placeholder
+      value: ""
     };
   },
   methods: {
