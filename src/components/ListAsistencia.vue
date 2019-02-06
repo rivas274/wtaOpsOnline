@@ -1,90 +1,92 @@
 <template>
-<div>
-  <TableBasic>
-    <template slot="header">Asistencias</template>
-    <template slot="filters">
-      <inputFromTable name="searchPassager" watermark="Passager" v-on:input="setDataFilter"></inputFromTable>
-    </template>
-    <template slot="thead">
-      <tr>
-        <th>
-          <span>Numero de Caso</span>
-        </th>
-        <th>
-          <span>Compania</span>
-        </th>
-        <th>
-          <span>Voucher</span>
-        </th>
-        <th>
-          <span>Pasajeros</span>
-        </th>
-        <th>
-          <span>Sintomas</span>
-        </th>
-        <th>
-          <span>Tipo de Caso</span>
-        </th>
-        <th>
-          <span>Fecha Evento</span>
-        </th>
-        <th>
-          <span>Fecha Apertura</span>
-        </th>
-        <th>
-          <span>Pais</span>
-        </th>
-        <th>
-          <span>Tipo</span>
-        </th>
-      </tr>
-    </template>
-    <template slot="tbody">
-      <tr v-for="assist in results">
-        <td>
-          <span>{{assist.codeAssist}}</span>
-        </td>
-        <td>
-          <span>{{assist.clientName}}</span>
-        </td>
-        <td>
-          <span>{{assist.codigo}}</span>
-        </td>
-        <td>
-          <span v-html="assist.fisrtName+' '+assist.lastName"></span>
-        </td>
-        <td>
-          <span>{{assist.symptom}}</span>
-        </td>
-        <td>
-          <span>{{assist.descCaseType}}</span>
-        </td>
-        <td>
-          <span>{{assist.reportedDate.date}}</span>
-        </td>
-        <td>
-          <span>{{assist.registeredDate.date}}</span>
-        </td>
-        <td>
-          <span>
-            <Flag :iso="assist.isoCountry"></Flag>
-            <!--<span class="m-badge m-badge--info m-badge--wide">Info</span>-->
-          </span>
-        </td>
-      </tr>
-    </template>
-    <template slot="footer">
-      <pagination
-        :start="footerTable.start"
-        :limit="footerTable.limit"
-        :size="footerTable.size"
-        v-on:paginate="setDataPaginate"
-      ></pagination>
-    </template>
-  </TableBasic>
+  <div>
+    <TableBasic>
+      <template slot="header">Asistencias</template>
+      <template slot="filters">
+        <input-from-table name="passager" watermark="Passager" v-on:input="setDataFilter"></input-from-table>
+        <date-range-bt name="date" watermark="Select date range" v-on:input="setDataFilter"></date-range-bt>
+      </template>
+      <template slot="thead">
+        <tr>
+          <th>
+            <span>Numero de Caso</span>
+          </th>
+          <th>
+            <span>Compania</span>
+          </th>
+          <th>
+            <span>Voucher</span>
+          </th>
+          <th>
+            <span>Pasajeros</span>
+          </th>
+          <th>
+            <span>Sintomas</span>
+          </th>
+          <th>
+            <span>Tipo de Caso</span>
+          </th>
+          <th>
+            <span>Fecha Evento</span>
+          </th>
+          <th>
+            <span>Fecha Apertura</span>
+          </th>
+          <th>
+            <span>Pais</span>
+          </th>
+          <th>
+            <span>Tipo</span>
+          </th>
+        </tr>
+      </template>
+      <template slot="tbody">
+        <tr v-for="assist in results">
+          <td>
+            <span>{{assist.codeAssist}}</span>
+          </td>
+          <td>
+            <span>{{assist.clientName}}</span>
+          </td>
+          <td>
+            <span>{{assist.codigo}}</span>
+          </td>
+          <td>
+            <span v-html="assist.fisrtName+' '+assist.lastName"></span>
+          </td>
+          <td>
+            <span>{{assist.symptom}}</span>
+          </td>
+          <td>
+            <span>{{assist.descCaseType}}</span>
+          </td>
+          <td>
+            <span>{{assist.reportedDate.date}}</span>
+          </td>
+          <td>
+            <span>{{assist.registeredDate.date}}</span>
+          </td>
+          <td>
+            <span>
+              <Flag :iso="assist.isoCountry"></Flag>
+              <!--<span class="m-badge m-badge--info m-badge--wide">Info</span>-->
+            </span>
+          </td>
+        </tr>
+      </template>
+      <template slot="footer">
+        <pagination
+          :start="footerTable.start"
+          :limit="footerTable.limit"
+          :size="footerTable.size"
+          v-on:paginate="setDataPaginate"
+        ></pagination>
+      </template>
+    </TableBasic>
   </div>
 </template>
 <script>
+import dateRangeBt from "./Tables/filters/dateRangeBt.vue";
 import inputFromTable from "./Tables/filters/inputFromTable.vue";
 import pagination from "./pagination/pagination.vue";
 import Flag from "./Tables/Flag.vue";
@@ -93,13 +95,18 @@ export default {
   components: {
     TableBasic,
     inputFromTable,
+    dateRangeBt,
     pagination,
     Flag
   },
   data: function() {
     return {
       filters: {
-        searchPassager: ""
+        passager: "",
+        date: {
+          endDate: "",
+          startDate: ""
+        }
       },
       results: [],
       footerTable: {
@@ -115,7 +122,9 @@ export default {
         .post("getAssistance", {
           start: this.footerTable.start,
           limit: this.footerTable.limit,
-          passenger: this.filters.searchPassager,
+          passenger: this.filters.passager,
+          endDate: this.filters.date.endDate,
+          startDate: this.filters.date.startDate,
           prefix: JSON.parse(this.$session.get("USERDATA")).prefix
         })
         .then(response => {

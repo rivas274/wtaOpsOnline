@@ -14,13 +14,13 @@
         <div class="m-portlet__body">
           <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-20">
             <div class="row align-items-center">
-              <div class="col-xl-8 order-2 order-xl-1">
+              <div class="col-xl-12 order-2 order-xl-1">
                 <slot name="filters"></slot>
               </div>
             </div>
           </div>
           <div class="m-section__content">
-            <table class="table-responsive table table-striped m-table--head-bg-success">
+            <table class="table-responsive table table-striped">
               <thead>
                 <slot name="thead" v-if="$slots.thead"></slot>
               </thead>
