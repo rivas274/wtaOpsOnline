@@ -5,6 +5,7 @@
       <template slot="filters">
         <input-from-table name="passager" watermark="Passager" v-on:input="setDataFilter"></input-from-table>
         <date-range-bt name="date" watermark="Select date range" v-on:input="setDataFilter"></date-range-bt>
+        <button class="btn btn-brand" @click="getAssistance(0)">Submit</button>
       </template>
       <template slot="thead">
         <tr>
@@ -117,10 +118,11 @@ export default {
     };
   },
   methods: {
-    getAssistance: function() {
+    getAssistance: function(pg) {
+      pg=Number.isInteger(pg)?pg:this.footerTable.start;
       this.axios
         .post("getAssistance", {
-          start: this.footerTable.start,
+          start: pg,
           limit: this.footerTable.limit,
           passenger: this.filters.passager,
           endDate: this.filters.date.endDate,
@@ -138,8 +140,6 @@ export default {
     },
     setDataFilter: function(campo, value) {
       this.filters[campo] = value;
-      this.footerTable.start = 0;
-      this.getAssistance();
     },
     setDataPaginate: function(campo, value) {
       this.footerTable[campo] = value;
