@@ -51,7 +51,8 @@
                 <li class="m-nav__separator m-nav__separator--fit"></li>
                 <li class="m-nav__item">
                   <a @click.prevent="logOut"
-                    class="btn m-btn--pill btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
+                    class="btn m-btn--pill btn-outline-primary m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
+                    :class="{'m-login__btn--primary m-loader m-loader--right': spin}"
                   >Logout</a>
                 </li>
               </ul>
@@ -66,7 +67,9 @@ import customImg from "./custom-img.vue";
 export default {
   components:{customImg},
   data: function () {
-    return JSON.parse(this.$session.get("USERDATA"));
+    let user=JSON.parse(this.$session.get("USERDATA"));
+    user['spin']=false;
+    return user;
   },
   computed:{
     fullName:function(){
@@ -75,6 +78,7 @@ export default {
   },
   methods:{
     logOut:function(){
+      this.spin=true;
       this.$session.destroy();
       this.$router.go('/');
     }

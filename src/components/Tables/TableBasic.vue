@@ -22,7 +22,7 @@
             </div>
           </div>
           <div class="m-section__content">
-            <table class="table-responsive table table-striped m-table--head-bg-success">
+            <table class="table-responsive table table-striped">
               <thead>
                 <slot name="thead" v-if="$slots.thead"></slot>
               </thead>

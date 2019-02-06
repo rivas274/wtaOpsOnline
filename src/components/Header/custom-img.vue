@@ -1,12 +1,27 @@
+<style>
+img[alt]:after {  
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  text-align: center;
+  content: attr(alt);
+}
+</style>
 <template>
-    <img @error="imgUrlAlt" 
+    <img v-show="imgUrlAlt"
+        @error="imgUrlAlt"
         :src="srcFlag" 
         :class="{ class: true }" 
-        :style="{ maxHeight: cssActivePx(fHeight), maxWidth: cssActivePx(fWidth)}">
+        :style="{ maxHeight: cssActivePx(height), maxWidth: cssActivePx(width)}"
+        alt>
 </template>
 <script>
 export default {
-    props:["path","src","default","f-height","f-width",'class'],
+    props:["path","src","default","height","width",'class'],
     data:function () {
         return{
             image: this.src,
