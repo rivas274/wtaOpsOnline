@@ -1,16 +1,16 @@
 <template>
-  <div id="app">
-    <div class="m-grid m-grid--hor m-grid--root m-page" v-if="($session.get('TOKEN')||'').length == 16">
+  <div id="app" class="m-grid m-grid--hor m-grid--root m-page">
+    <template  v-if="showMenu()">
       <header-custom></header-custom>
       <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
         <Menu></Menu>
         <router-view></router-view>
       </div>
       <footer-custom></footer-custom>
-    </div>
-    <div v-else>
+    </template>
+    <template v-else>
       <router-view></router-view>
-    </div>
+    </template>
   </div>
 </template>
 <script>
@@ -22,6 +22,11 @@ export default {
     FooterCustom,
     HeaderCustom,
     Menu
+  },
+  methods:{
+    showMenu:function(){
+      return (this.$session.get('TOKEN')||'').length == 16 && this.$route.name !='http404'
+    }  
   }
 };
 </script>

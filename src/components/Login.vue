@@ -31,7 +31,7 @@
           <div class="m-login__signin">
             <form class="m-login__form m-form" @submit.prevent="validLogin">
               <div
-                v-show="resp.STATUS == 'ERROR'"alert alert-danger
+                v-if="resp.STATUS == 'ERROR'"
                 class="alert-danger alert alert-dismissible"
                 role="alert"
               >
