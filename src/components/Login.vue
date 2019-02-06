@@ -1,18 +1,9 @@
 <style>
-.m-login__logo {
-  padding: 1em;
-}
-.m-login__logo img {
-  max-width: 70% !important;
-  max-height: 60% !important;
-  margin-top: 1em;
-}
 .m-form__group.has-danger .form-control-feedback {
   font-size: 1.1rem !important;
 }
 </style>
 <template>
-
   <div class="m-grid m-grid--hor m-grid--root m-page">
     <div
       class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2"
@@ -22,11 +13,7 @@
       <div class="m-grid__item m-grid__item--fluid m-login__wrapper">
         <div class="m-login__container">
           <div class="m-login__logo">
-            <a href="#">
-              <img
-                src="https://wtaops.com/app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png"
-              >
-            </a>
+            <custom-img height="80" width="280" default="/app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png"></custom-img>
           </div>
           <div class="m-login__signin">
             <form class="m-login__form m-form" @submit.prevent="validLogin">
@@ -35,7 +22,7 @@
                 class="alert-danger alert alert-dismissible"
                 role="alert"
               >
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                <button type="button" class="close" @click="resp.STATUS=''"></button>
                 <span>{{ resp.RESPONSE }}</span>
               </div>
               <div class="form-group m-form__group" :class="{'has-danger': errors.has('user')}">
@@ -83,11 +70,13 @@
   </div>
 </template>
 <script>
+import customImg from "./Header/custom-img.vue";
 import FormError from "./FormError";
 export default {
   name: "Login",
   components: {
-    FormError
+    FormError,
+    customImg
   },
   data: function() {
     return {
@@ -99,7 +88,7 @@ export default {
     };
   },
   methods: {
-      validLogin: function() {
+    validLogin: function() {
       if (!this.disableForm) {
         this.$validator.validateAll().then(result => {
           if (result) {
@@ -109,9 +98,12 @@ export default {
               this.disableForm = false;
               if (response.data.STATUS == "OK") {
                 this.$session.start();
-                this.$session.set('TOKEN',response.data.TOKEN);
-                this.$session.set('USER',response.data.RESPONSE.user);
-                this.$session.set('USERDATA',JSON.stringify(response.data.RESPONSE));
+                this.$session.set("TOKEN", response.data.TOKEN);
+                this.$session.set("USER", response.data.RESPONSE.user);
+                this.$session.set(
+                  "USERDATA",
+                  JSON.stringify(response.data.RESPONSE)
+                );
                 this.$router.push("dasboard");
               }
             });

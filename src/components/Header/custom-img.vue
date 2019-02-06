@@ -2,11 +2,11 @@
     <img @error="imgUrlAlt" 
         :src="srcFlag" 
         :class="{ class: true }" 
-        :style="{ maxHeight: cssActivePx(fHeight), maxWidth: cssActivePx(fWidth)}">
+        :style="{ maxHeight: cssActivePx(height), maxWidth: cssActivePx(width)}">
 </template>
 <script>
 export default {
-    props:["path","src","default","f-height","f-width",'class'],
+    props:["path","src","default","height","width",'class'],
     data:function () {
         return{
             image: this.src,
