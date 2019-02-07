@@ -21,7 +21,7 @@ img[alt]:after {
 </template>
 <script>
 export default {
-    props:["path","src","default","height","width",'class'],
+    props:["src","default","height","width",'class'],
     data:function () {
         return{
             image: this.src,

@@ -63,7 +63,7 @@
     </li>
 </template>
 <script>
-import customImg from "./custom-img.vue";
+import customImg from "../Element/custom-img.vue";
 export default {
   components:{customImg},
   data: function () {

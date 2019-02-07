@@ -14,19 +14,19 @@
           <h3 class="m-subheader__title m-subheader__title--separator">
             <slot name="title"></slot>
           </h3>
-          <ul class="m-subheader__breadcrumbs m-nav m-nav--inline" v-if="navigation">
+          <ul class="m-subheader__breadcrumbs m-nav m-nav--inline" v-if="nav">
             <li class="m-nav__item m-nav__item--home">
               <a href class="m-nav__link m-nav__link--icon">
                 <i class="m-nav__link-icon la la-home"></i>
               </a>
             </li>
-            <template v-for="nav in navigation">
-              <li class="m-nav__separator">-</li>
+            <template v-for="navi in nav">
+              <li class="m-nav__separator"><strong>-</strong></li>
               <li class="m-nav__item">
-                <a class="m-nav__link" v-if="nav.link">
-                  <span class="m-nav__link-text">{{ nav.title }}</span>
+                <a class="m-nav__link" v-if="navi.link">
+                  <strong class="m-nav__link-text">{{ navi.title }}</strong>
                 </a>
-                <span v-else class="m-nav__link-text">{{ nav.title }}</span>
+                <strong v-else class="m-nav__link-text">{{ navi.title }}</strong>
               </li>
             </template>
           </ul>
@@ -57,6 +57,15 @@
 </template>
 <script>
 export default {
-  props: ["navigation"]
+  props: ["navigation"],
+  data(){
+    return {nav:this.navigation}
+  },
+  watch:{
+    navigation:function(newVal){
+      console.log('navigation',newVal);
+      this.nav=newVal;
+    }
+  }
 };
 </script>

@@ -7,8 +7,10 @@ import VeeValidate from 'vee-validate';
 import VueSession from './custom/vue-session-custom';
 import routes from './custom/routes';
 import globalFilters from'./custom/vue-global-filters';
+import globalDirectives from'./custom/vue-global-directives';
 
 Vue.use(VueRouter);
+Vue.use(globalDirectives);
 Vue.use(globalFilters);
 Vue.use(VeeValidate);
 Vue.use(VueSession, { persist: true });

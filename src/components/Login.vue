@@ -70,7 +70,7 @@
   </div>
 </template>
 <script>
-import customImg from "./Header/custom-img.vue";
+import customImg from "./Element/custom-img.vue";
 import FormError from "./FormError";
 export default {
   name: "Login",

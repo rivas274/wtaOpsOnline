@@ -2,37 +2,84 @@
 .m-tabs-line .m-tabs__item {
   margin-right: 5px;
 }
-.m-tabs-line .m-tabs__item a{
+.m-tabs-line .m-tabs__item a {
   padding-right: 15px;
-  font-size: 1.3rem;
 }
-.m-tabs-line .m-tabs__item .fa{
+.m-tabs__link > .fa {
   font-size: 1.5rem !important;
+}
+.m-tabs-line .m-tabs__item a .close-tab {
+  margin-left: 4px;
+  margin-right: -6px;
+  font-size: 14px !important;
+  background-color: white;
+  color: #7b7e8a;
+}
+.m-tabs-line .m-tabs__item a > * {
+  margin-left: 3px;
+  padding-left: 3px;
+  border-left: 1.2px solid #7b7e8a;
+}
+.m-tabs__link,
+.m-tabs__link > * {
+  cursor: pointer;
+  display: inline-block;
+}
+.m-tabs-line.m-tabs-line--2x .m-tabs__link.active,
+.m-tabs-line.m-tabs-line--2x .m-tabs__link:hover {
+  border-bottom-width: 4px !important;
+}
+.m-tabs__item {
+  height: 49px;
+}
+.close-tab {
+  position: relative;
+  top: -16px;
+  left: -12px;
+  font-size: 11px !important;
 }
 </style>
 <template>
-  <content-m :navigation="[{title:'list'}]">
+  <content-m :navigation="[{title:'Assistance'}]">
     <template slot="title">Assistance</template>
-    <!-- <template slot="header">Assistance</template> -->
     <template slot="body">
       <ul class="nav nav-tabs m-tabs-line m-tabs-line--success m-tabs-line--2x" role="tablist">
         <li class="nav-item m-tabs__item">
-          <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_tab_list">
-            <i class="fa fa-briefcase-medical" aria-hidden="true"></i>
+          <a
+            class="nav-link m-tabs__link"
+            :class="{active:tabShow=='List'}"
+            @click.prevent="showTab('List')"
+          >
+            <i class="fa fa-life-ring" aria-hidden="true"></i>
             List
           </a>
         </li>
-        <li class="nav-item m-tabs__item" v-for="(assist,code) in assistances" :key="code" :data-assist="assist">
-          <a class="nav-link m-tabs__link" data-toggle="tab" :href="'#m_tab_assit'+assist.code">{{ assist.code }}</a>
+        <li class="nav-item m-tabs__item" v-for="assist in assistances" :key="assist.codeAssist">
+          <span>
+            <Flag :iso="assist.isoCountry" height="18"></Flag>
+            <a
+              @click.prevent="showTab(assist.codeAssist)"
+              class="nav-link m-tabs__link"
+              :class="{active:tabShow==assist.codeAssist}"
+            >
+              <strong>{{ assist.codeAssist }}</strong>
+              <small v-html="assist.fisrtName+' '+assist.lastName"></small>
+              <small>{{ assist.codigo }}</small>
+            </a>
+            <i class="fa fa-window-close close-tab" @click="removeAssist(assist)"></i>
+          </span>
         </li>
       </ul>
       <div class="tab-content">
-        <div class="tab-pane active" id="m_tab_list" role="tabpanel">
-          <ListAsistencia v-on:addAssist="addAssist"></ListAsistencia>
+        <div class="tab-pane" :class="{active:tabShow=='List'}">
+          <ListAsistencia v-on:addAssist="addAssist" :open-asist='assistances'></ListAsistencia>
         </div>
-        <div v-for="(assist,code) in assistances" :key="code" class="tab-pane" :id="'m_tab_assit'+code" role="tabpanel">
-          {{assist}}
-        </div>
+        <div
+          class="tab-pane"
+          v-for="assist in assistances"
+          :key="assist.codeAssist"
+          :class="{active:tabShow==assist.codeAssist}"
+        >{{assist}}</div>
       </div>
     </template>
   </content-m>
@@ -40,28 +87,40 @@
 <script>
 import contentM from "../Content.vue";
 import ListAsistencia from "./ListAsistencia.vue";
+import Flag from "../Element/Flag.vue";
 export default {
   components: {
     contentM,
-    ListAsistencia
+    ListAsistencia,
+    Flag
   },
-  data(){
-      return{
-          assistances: []
+  data() {
+    return {
+      assistances: [],
+      tabShow: "List"
+    };
+  },
+  methods: {
+    addAssist: function(assist) {
+      let tab = this.assistances.filter(function(v) {
+        return v.codeAssist == assist.codeAssist;
+      });
+      if (tab.length == 0) {
+        this.assistances.push(assist);
+      } else {
+        this.showTab(tab[0].codeAssist);
       }
-  },
-  mounted(){
-    let _self = this;
-    $(_self.$el).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
-      console.log(e,this,$(this).data('assist'));
-    });
-  },
-  methods:{
-    addAssist:function (assist) {
-      this.assistances[assist.code]=assist;
     },
-    removeAssist:function({code}){
-      delete this.assistances[code];
+    removeAssist: function({ codeAssist }) {
+      if (codeAssist == this.tabShow) {
+        this.showTab("List");
+      }
+      this.assistances = this.assistances.filter(function(v) {
+        return v.codeAssist != codeAssist;
+      });
+    },
+    showTab(tab) {
+      this.tabShow = tab;
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h1>{{ codigoAssist }}</h1>
+        <pre>{{ codigoAssist }}</pre>
     </div>
 </template>
 <script>

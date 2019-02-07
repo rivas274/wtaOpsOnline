@@ -1,3 +1,9 @@
+<style>
+.table > tbody > tr > td,.table > thead > tr > th {
+     vertical-align: middle;
+}
+</style>
+
 <template>
   <div>
     <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-20">

@@ -3,7 +3,6 @@
   font-size: 1.4rem;
 }
 </style>
-
 <template>
   <TableBasic>
     <template slot="filters">
@@ -29,7 +28,7 @@
           v-on:input="setDataFilter"
         ></input-from-table>
       </div>
-      <div class="form-group m-form__group row">
+      <div class="form-group m-form__group row" v-if="clients.length>0">
         <multi-selects
           class="col-md-4 m-form__group-sub"
           name="arrPrefix"
@@ -44,7 +43,7 @@
     </template>
     <template slot="thead">
       <tr>
-        <th>
+        <th style="width: 85px;">
           <span>Nro Case</span>
         </th>
         <th>
@@ -62,11 +61,11 @@
         <th>
           <span>Type of Case</span>
         </th>
-        <th>
+        <th style="width: 90px;">
           <span>Date Event</span>
         </th>
-        <th>
-          <span>Opening date</span>
+        <th style="width: 90px;">
+          <span>Opening Date</span>
         </th>
         <th>
           <span>Country</span>
@@ -75,7 +74,7 @@
           <span>Status</span>
         </th>
         <th>
-          <span>See</span>
+          <span>Options</span>
         </th>
       </tr>
     </template>
@@ -111,15 +110,18 @@
             <!--<span class="m-badge m-badge--info m-badge--wide">Info</span>-->
           </span>
         </td>
-        <td>
-          <span class="fa-status">
+        <td class="text-center fa-status">
+          <span>
             <i  :class="infoStatus(assist.statusAssist).ico" 
-                :title="infoStatus(assist.statusAssist).label"></i>
+                v-tooltip:top="infoStatus(assist.statusAssist).label"></i>
           </span>
         </td>
-        <td>
-          <span>addAssist
-            <!--<span class="m-badge m-badge--info m-badge--wide">Info</span>-->
+        <td class="text-center fa-status">
+          <span>
+            <a @click.prevent="addAssist(assist)"
+            class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
+              <i class="fa" :class="[open.indexOf(assist.codeAssist)>-1?'fa-location-arrow':'fa-pencil-alt']" ></i>
+            </a>
           </span>
         </td>
       </tr>
@@ -139,7 +141,7 @@ import contentM from "../Content.vue";
 import dateRangeBt from "../Tables/filters/dateRangeBt.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
 import pagination from "../pagination/pagination.vue";
-import Flag from "../Tables/Flag.vue";
+import Flag from "../Element/Flag.vue";
 import TableBasic from "../Tables/TableBasic.vue";
 import MultiSelects from "../Tables/filters/Multiselect.vue";
 export default {
@@ -151,6 +153,7 @@ export default {
     Flag,
     MultiSelects
   },
+  props:["open-asist"],
   data: function() {
     return {
       filters: {
@@ -168,7 +171,8 @@ export default {
         limit: 15,
         size: 0
       },
-      clients: []
+      clients: [],
+      open:[]
     };
   },
   methods: {
@@ -245,6 +249,11 @@ export default {
   mounted() {
     this.getAssistance();
     this.getClients();
+  },
+  watch:{
+    openAsist:function(newVal){
+      this.open=(newVal||[]).map(function(value){ return value.codeAssist; });
+    }
   }
 };
 </script>
