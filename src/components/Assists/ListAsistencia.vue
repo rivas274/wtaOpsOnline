@@ -1,3 +1,9 @@
+<style>
+.fa-status .fa{
+  font-size: 1.4rem;
+}
+</style>
+
 <template>
   <TableBasic>
     <template slot="filters">
@@ -39,31 +45,37 @@
     <template slot="thead">
       <tr>
         <th>
-          <span>Numero de Caso</span>
+          <span>Nro Case</span>
         </th>
         <th>
-          <span>Compania</span>
+          <span>Company</span>
         </th>
         <th>
           <span>Voucher</span>
         </th>
         <th>
-          <span>Pasajeros</span>
+          <span>Passengers</span>
         </th>
         <th>
-          <span>Sintomas</span>
+          <span>Symptom</span>
         </th>
         <th>
-          <span>Tipo de Caso</span>
+          <span>Type of Case</span>
         </th>
         <th>
-          <span>Fecha Evento</span>
+          <span>Date Event</span>
         </th>
         <th>
-          <span>Fecha Apertura</span>
+          <span>Opening date</span>
         </th>
         <th>
-          <span>Pais</span>
+          <span>Country</span>
+        </th>
+        <th>
+          <span>Status</span>
+        </th>
+        <th>
+          <span>See</span>
         </th>
       </tr>
     </template>
@@ -96,6 +108,17 @@
         <td>
           <span>
             <Flag :iso="assist.isoCountry"></Flag>
+            <!--<span class="m-badge m-badge--info m-badge--wide">Info</span>-->
+          </span>
+        </td>
+        <td>
+          <span class="fa-status">
+            <i  :class="infoStatus(assist.statusAssist).ico" 
+                :title="infoStatus(assist.statusAssist).label"></i>
+          </span>
+        </td>
+        <td>
+          <span>addAssist
             <!--<span class="m-badge m-badge--info m-badge--wide">Info</span>-->
           </span>
         </td>
@@ -194,6 +217,29 @@ export default {
     setDataPaginate: function(campo, value) {
       this.footerTable[campo] = value;
       this.getAssistance();
+    },
+    addAssist:function(assist){
+      this.$emit('addAssist',assist);
+    },
+    infoStatus:function(status){
+      let label={
+        1:'Opening',
+        2:'Validation',
+        3:'In progress',
+        4:'Monitoring',
+        5:'Closed',
+      };
+      let ico={
+        1:'fa fa-unlock',
+        2:'fa fa-check-square-o',
+        3:'fa fa-history',
+        4:'fa fa-eye',
+        5:'fa fa-lock',
+      };
+      return {
+        label:label[status],
+        ico:ico[status],
+      };
     }
   },
   mounted() {

@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="m-section__content">
-      <table class="table table-striped table-bordered table-hover">
+      <table class="table table-striped table-bordered table-hover table-responsive">
         <thead>
           <slot name="thead"></slot>
         </thead>

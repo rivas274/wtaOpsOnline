@@ -1,14 +1,14 @@
 <style>
-  .m-tabs-line .m-tabs__item {
-    margin-right: 5px;
-  }
-  .m-tabs-line .m-tabs__item a{
-    padding-right: 15px;
-    font-size: 1.3rem;
-  }
-  .m-tabs-line .m-tabs__item .fa{
-    font-size: 1.5rem !important;
-  }
+.m-tabs-line .m-tabs__item {
+  margin-right: 5px;
+}
+.m-tabs-line .m-tabs__item a{
+  padding-right: 15px;
+  font-size: 1.3rem;
+}
+.m-tabs-line .m-tabs__item .fa{
+  font-size: 1.5rem !important;
+}
 </style>
 <template>
   <content-m :navigation="[{title:'list'}]">
@@ -22,15 +22,15 @@
             List
           </a>
         </li>
-        <li class="nav-item m-tabs__item" v-for="assist in assistances" :key="assist.code" :data-assist="assist">
+        <li class="nav-item m-tabs__item" v-for="(assist,code) in assistances" :key="code" :data-assist="assist">
           <a class="nav-link m-tabs__link" data-toggle="tab" :href="'#m_tab_assit'+assist.code">{{ assist.code }}</a>
         </li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane active" id="m_tab_list" role="tabpanel">
-          <ListAsistencia></ListAsistencia>
+          <ListAsistencia v-on:addAssist="addAssist"></ListAsistencia>
         </div>
-        <div v-for="assist in assistances" :key="assist.code" class="tab-pane" :id="'m_tab_assit'+assist.code" role="tabpanel">
+        <div v-for="(assist,code) in assistances" :key="code" class="tab-pane" :id="'m_tab_assit'+code" role="tabpanel">
           {{assist}}
         </div>
       </div>
@@ -40,7 +40,6 @@
 <script>
 import contentM from "../Content.vue";
 import ListAsistencia from "./ListAsistencia.vue";
-import func from './vue-temp/vue-editor-bridge';
 export default {
   components: {
     contentM,
@@ -48,7 +47,7 @@ export default {
   },
   data(){
       return{
-          assistances: [{code:''}]
+          assistances: []
       }
   },
   mounted(){
@@ -58,11 +57,11 @@ export default {
     });
   },
   methods:{
-    addAssist:function (code) {
-      
+    addAssist:function (assist) {
+      this.assistances[assist.code]=assist;
     },
-    removeAssist:function(code){
-
+    removeAssist:function({code}){
+      delete this.assistances[code];
     }
   }
 };
