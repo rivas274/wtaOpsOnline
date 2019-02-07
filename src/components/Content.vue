@@ -1,108 +1,41 @@
 <template>
-  <Tables :thead="headerTable" :tbody="bodyTable" :tfooter="footerTable">
-    <template slot="header">
-      <Flag iso="ve"></Flag>Asistencias
-    </template>
-    <template slot="filters">
-      <inputFromTable name="searchPassager" watermark="Passager" v-on:input="setDataFilter"></inputFromTable>
-    </template>
-    <template slot="footer">
-      <pagination
-        :start="footerTable.start"
-        :limit="footerTable.limit"
-        :size="footerTable.size"
-        v-on:paginate="setDataPaginate"
-      ></pagination>
-    </template>
-  </Tables>
+  <div class="m-grid__item m-grid__item--fluid m-wrapper">
+    <div class="m-subheader">
+      <div class="d-flex align-items-center">
+        <div class="mr-auto">
+          <h3 class="m-subheader__title m-subheader__title--separator">
+              <a href class="m-nav__link">
+                <slot name="title"></slot>
+              </a>
+          </h3>
+          <ul class="m-subheader__breadcrumbs m-nav m-nav--inline" v-if="navigation">
+            <li class="m-nav__item m-nav__item--home">
+                <i class="m-nav__link-icon la la-home"></i>
+            </li>
+            <template v-for="nav in navigation">
+                <li class="m-nav__separator">-</li>
+                <li class="m-nav__item">
+                  <a class="m-nav__link" v-if="nav.link">
+                    <span class="m-nav__link-text">{{ nav.title }}</span>
+                  </a>
+                  <span v-else class="m-nav__link-text">{{ nav.title }}</span>
+                </li>
+            </template>  
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="m-content">
+      <div class="row">
+        <div class="col-lg-12">
+          <slot name="body"></slot>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
-import Tables from "./Tables/DataTableBasic.vue";
-import inputFromTable from "./Tables/filters/inputFromTable.vue";
-import pagination from "./pagination/pagination.vue";
-import flag from "./Tables/Flag.vue";
 export default {
-  components: {
-    Tables,
-    inputFromTable,
-    pagination,
-    flag
-  },
-  data: function() {
-    return {
-      filters: {
-        searchPassager: ""
-      },
-      headerTable: [
-        {
-          prop: "codeAssist",
-          label: "Codigo de asistencia"
-        },
-        {
-          prop: "codigo",
-          label: "Codigo voucher"
-        },
-        {
-          prop: "fisrtName",
-          label: "fisrt Name"
-        },
-        {
-          prop: "lastName",
-          label: "Last Name"
-        },
-        {
-          prop: "registeredDate",
-          filter: function(val) {
-            return val.date + " " + val.hour;
-          },
-          label: "Codigo voucher"
-        },
-        {
-          prop: "registeredDate",
-          filter: function(val) {
-            return "<Flag iso='ve'></Flag>";
-          },
-          label: "country"
-        }
-      ],
-      bodyTable: [],
-      footerTable: {
-        start: 0,
-        limit: 15,
-        size: 0
-      }
-    };
-  },
-  methods: {
-    getAssistance: function() {
-      this.axios
-        .post("getAssistance", {
-          start: this.footerTable.start,
-          limit: this.footerTable.limit,
-          passenger: this.filters.searchPassager,
-          prefix: JSON.stringify(this.$session.get("USERDATA")).prefix
-        })
-        .then(response => {
-          this.bodyTable = response.data.results;
-          this.footerTable = {
-            start: response.data.start,
-            limit: response.data.limit,
-            size: response.data.size
-          };
-        });
-    },
-    setDataFilter: function(campo, value) {
-      this.filters[campo] = value;
-      this.footerTable.start = 0;
-      this.getAssistance();
-    },
-    setDataPaginate: function(campo, value) {
-      this.footerTable[campo] = value;
-      this.getAssistance();
-    }
-  },
-  mounted() {
-    this.getAssistance();
-  }
+  props:['navigation']
 };
 </script>
