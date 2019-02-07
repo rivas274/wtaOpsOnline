@@ -4,9 +4,7 @@
       <header-custom></header-custom>
       <div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
         <Menu></Menu>
-        <div class="m-grid__item m-grid__item--fluid m-wrapper">
-          <router-view></router-view>
-        </div>
+        <router-view></router-view>
       </div>
       <footer-custom></footer-custom>
     </template>

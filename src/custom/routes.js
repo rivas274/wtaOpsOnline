@@ -1,23 +1,11 @@
-import Assist from '../components/Assist.vue';
-import ListAsistencia from '../components/ListAsistencia.vue';
-import Content from '../components/Content.vue';
 import Login from '../components/Login.vue';
 import http404 from '../components/http404.vue';
+import MainAsistencia from '../components/Assists/MainAsistencia.vue';
 export default [
-  {
-    name: 'Assist',
-    path: '/Assist/:code',
-    component: Assist,
-  },
   {
     name: 'dasboard',
     path: '/dasboard',
-    component: ListAsistencia,
-  },
-  {
-    name: 'Content',
-    path: '/Content',
-    component: Content,
+    component: MainAsistencia,
   },
   {
     name: 'Login',
