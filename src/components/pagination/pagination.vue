@@ -48,7 +48,7 @@
     </ul>
     <div class="m-datatable__pager-info" v-show="typeof init=='number'">
       <div class="dataTables_length">
-        <label v-show="showPages.length>1">
+        <label v-show="total>15">
           <select
             class="custom-select custom-select-sm form-control form-control-sm"
             v-model="max"

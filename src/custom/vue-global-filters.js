@@ -9,10 +9,10 @@ export default {
         Vue.filter("lower", str => {
             return str.toLowerCase();
         });
-        Vue.filter("currency", amount => {
+        Vue.filter("currency", (amount,currency) => {
             let formatter=new Intl.NumberFormat('es', {
                 style: 'currency',
-                currency: 'USD',
+                currency: (currency||'USD'),
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             })

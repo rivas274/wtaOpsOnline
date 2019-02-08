@@ -1,3 +1,9 @@
+<style>
+.options-btn{
+  display: inline-flex;
+}
+</style>
+
 <template>
   <TableBasic :show-loader="showLoader">
     <template slot="filters">
@@ -25,7 +31,7 @@
         <th>
           <span>Deference</span>
         </th>
-        <th>
+        <th style="width: 90px;">
           <span>Bill Date</span>
         </th>
         <th>
@@ -44,44 +50,63 @@
           <span>Covered Amount</span>
         </th>
         <th>
+          <span>Bill Status</span>
+        </th>
+        <th>
           <span>Options</span>
         </th>
       </tr>
     </template>
     <template slot="tbody">
-      <tr v-for="assist in results" :key="assist.codeAssist">
-        <td>
-          <span>{{assist.idFile}}</span>
-        </td>
-        <td>
-          <span>{{assist.reference||'N/A'}}</span>
-        </td>
-        <td>
-          <span>{{assist.billDate||'N/A'}}</span>
-        </td>
-        <td>
-          <span>{{assist.provider.providerName}}</span>
-        </td>
-        <td>
-          <span v-tooltip="'Currency '+assist.currency">{{ assist.originalAmount | currency(assist.currency) }}</span>
-        </td>
-        <td>
-          <span>{{ assist.exchangeRate }}</span>
-        </td>
-        <td>
-          <span v-tooltip="'Currency USD'">{{ assist.usdAmount | currency("USD") }}</span>
-        </td>
-        <td>
-          <span v-tooltip="'Currency USD'">{{ assist.coveredAmount | currency("USD") }}</span>
-        </td>
-        <td class="text-center fa-status">
-          <span>
-            <a class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
-              <i class="fa fa-pencil-alt"></i>
-            </a>
-          </span>
-        </td>
-      </tr>
+      <template v-for="bill in results">
+        <tr :key="bill.idFile">
+          <td>
+            <span>{{bill.idFile}}</span>
+          </td>
+          <td>
+            <span>{{bill.reference||'N/A'}}</span>
+          </td>
+          <td>
+            <span>{{bill.billDate||'N/A'}}</span>
+          </td>
+          <td>
+            <span>{{bill.provider.providerName||'N/A'}}</span>
+          </td>
+          <td>
+            <span v-tooltip="'Currency '+bill.currency">{{ bill.originalAmount | currency(bill.currency) }}</span>
+          </td>
+          <td>
+            <span>{{ bill.exchangeRate }}</span>
+          </td>
+          <td>
+            <span v-tooltip="'Currency USD'">{{ bill.usdAmount | currency("USD") }}</span>
+          </td>
+          <td>
+            <span v-tooltip="'Currency USD'">{{ bill.coveredAmount | currency("USD") }}</span>
+          </td>
+          <td class="text-center">
+            <span class="m-badge m-badge--wide" :class="[billStatusColor(bill.billStatus)]">{{ bill.billStatusDesc }}</span>
+          </td>
+          <td class="text-center fa-status">
+            <span class="options-btn">
+              <a @click="togleBill(bill)"
+              class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
+                <i class="fa" :class="[checkVisibility(bill)?'fa-eye-slash':'fa-eye']"></i>
+              </a>
+              <a :href="download(bill)" target="_blank"
+                class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
+                <i class="fa fa-cloud-download-alt"></i>
+              </a>
+            </span>
+          </td>
+        </tr>
+        <tr :key="bill.idFile"></tr>
+        <tr :key="bill.idFile" v-show="checkVisibility(bill)">
+          <td class="text-center fa-status" colspan="10">
+            <span>{{bill}}</span>
+          </td>
+        </tr>
+      </template>  
     </template>
     <template slot="footer">
       <pagination
@@ -123,7 +148,8 @@ export default {
         limit: 15,
         size: 0
       },
-      showLoader:false
+      showLoader:false,
+      view:[]
     };
   },
   methods: {
@@ -156,6 +182,36 @@ export default {
     setDataPaginate: function(campo, value) {
       this.footerTable[campo] = value;
       this.getBill();
+    },
+    billStatusColor(status){
+      let colors={
+        1:'m-badge--accent',
+        2:'m-badge--success',
+        3:'m-badge--danger',
+        4:'m-badge--warning',
+        5:'m-badge--focus',
+      };
+      return colors[status];
+    },
+    togleBill: function({idFile}) {
+      let tab = this.view.filter(function(v) {
+        return v== idFile;
+      });
+      if (tab.length == 0) {
+        this.view.push(idFile);
+      }else{
+        this.view = this.view.filter(function(v) {
+          return v != idFile;
+        });
+      }
+    },
+    checkVisibility({idFile}){
+      return this.view.filter(function(v) {
+        return v== idFile;
+      }).length!=0;
+    },
+    download({fileName}){
+      return this.axios.defaults.baseURL.split('/app/')[0]+"/download/"+fileName;
     },
   },
   mounted() {
