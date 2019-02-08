@@ -15,16 +15,18 @@ img[alt]:after {
     <img v-show="imgUrlAlt"
         @error="imgUrlAlt"
         :src="srcFlag" 
-        :class="{ class: true }" 
+        :class="[bindingclass]"
+        v-tooltip="title"
         :style="{ maxHeight: cssActivePx(height), maxWidth: cssActivePx(width)}"
         alt>
 </template>
 <script>
 export default {
-    props:["src","default","height","width",'class'],
+    props:["src","default","height","width","class","title"],
     data:function () {
         return{
             image: this.src,
+            bindingclass: this.class,
         }
     },
     computed:{

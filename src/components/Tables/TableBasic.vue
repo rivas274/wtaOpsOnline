@@ -1,11 +1,12 @@
 <style>
-.table > tbody > tr > td,.table > thead > tr > th {
-     vertical-align: middle;
+.table > tbody > tr > td,
+.table > thead > tr > th {
+  vertical-align: middle;
 }
 </style>
-
+<style src="../Element/custom-m-loader.css"></style>
 <template>
-  <div>
+  <div :class="{'m-loader m-loader--metal m-loader--div':loader}">
     <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-20">
       <div class="row align-items-center">
         <div class="col-xl-12 order-2 order-xl-1">
@@ -13,8 +14,8 @@
         </div>
       </div>
     </div>
-    <div class="m-section__content">
-      <table class="table table-striped table-bordered table-hover table-responsive">
+    <div class="m-section__content table-responsive">
+      <table class="table table-striped table-bordered table-hover">
         <thead>
           <slot name="thead"></slot>
         </thead>
@@ -39,5 +40,15 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  props:['show-loader'],
+  data(){
+    return{loader:this.showLoader}
+  },
+  watch:{
+    showLoader:function(newVal){
+      this.loader=newVal;
+    }
+  }
+};
 </script>

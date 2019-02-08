@@ -1,5 +1,5 @@
 <template>
-  <div :class="{class:true}">
+  <div :class="[bindingclass]">
     <Moultiselect
       v-model="value"
       :options="option"
@@ -24,7 +24,8 @@ export default {
     return {
       value: [],
       results: {},
-      option: this.options || { code: "", name: "selected" }
+      option: this.options || { code: "", name: "selected" },
+      bindingclass:this.class
     };
   },
   methods: {

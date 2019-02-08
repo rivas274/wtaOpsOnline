@@ -79,7 +79,7 @@ export default {
   methods:{
     logOut:function(){
       this.spin=true;
-      this.$session.destroy();
+      this.$session.set("TOKEN",'');
       this.$router.go('/');
     }
   }

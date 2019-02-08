@@ -4,7 +4,7 @@
 }
 </style>
 <template>
-  <TableBasic>
+  <TableBasic :show-loader="showLoader">
     <template slot="filters">
       <div class="form-group m-form__group row">
         <date-range-bt
@@ -172,7 +172,8 @@ export default {
         size: 0
       },
       clients: [],
-      open:[]
+      open:[],
+      showLoader:false
     };
   },
   methods: {
@@ -182,6 +183,7 @@ export default {
           ? JSON.parse(this.$session.get("USERDATA")).prefix
           : this.filters.arrPrefix;
       pg = Number.isInteger(pg) ? pg : this.footerTable.start;
+      this.showLoader=true;
       this.axios
         .post("getAssistance", {
           start: pg,
@@ -193,6 +195,7 @@ export default {
           startDate: this.filters.date.startDate
         })
         .then(response => {
+          this.showLoader=false;
           this.results = response.data.results;
           this.footerTable = {
             start: response.data.start,

@@ -1,5 +1,5 @@
 <template>
-  <div :class="{class:true}">
+  <div :class="[bindingclass]">
     <div class="m-input-icon m-input-icon--left date-bt-vue" :id="'Search'+name">
       <input
         type="text"
@@ -20,6 +20,9 @@
 <script>
 export default {
   props: ["watermark", "name",'class'],
+  data(){
+    return {bindingclass:this.class}
+  },
   mounted() {
     let _self = this;
     $(_self.$el)

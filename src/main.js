@@ -28,7 +28,7 @@ customAxios.interceptors.response.use(
   },
   function (error) {
     if (error.response.status == 401 && router.currentRoute.fullPath!=='/') {
-      Vue._session.destroy();
+      Vue._session.set('TOKEN','');
       router.go('/');
     }
     return error.response;
@@ -52,7 +52,7 @@ router.beforeEach((to, from, next) => {
       next();
     }
   } else {
-    if (Vue._session.exists() && Vue._session.get('USER')) {
+    if (Vue._session.exists() && (Vue._session.get('TOKEN') || '').length == 16) {
       next();
     } else {
       next('/');

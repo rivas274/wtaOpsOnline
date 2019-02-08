@@ -1,11 +1,13 @@
 export default {
     install(Vue) {
-        Vue.directive('tooltip', function(el, binding){
-            $(el).tooltip({
-                title: binding.value,
-                placement: binding.arg,
-                trigger: 'hover'
-            });
+        Vue.directive('tooltip', function (el, binding) {
+            if (binding.value) {
+                $(el).tooltip({
+                    title: binding.value,
+                    placement: (binding.arg || 'top'),
+                    trigger: 'hover'
+                });
+            }
         })
     }
 }

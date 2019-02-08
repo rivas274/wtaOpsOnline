@@ -80,7 +80,10 @@ export default {
   },
   data: function() {
     return {
-      inputsData: {},
+      inputsData: {
+        user:this.$session.get("USER"),
+        password:''
+      },
       resp: {
         STATUS: ""
       },

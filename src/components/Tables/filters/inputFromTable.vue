@@ -1,5 +1,5 @@
 <template>
-    <div :class="{class:true}">
+    <div :class="[bindingclass]">
       <div class="m-input-icon m-input-icon--left">
         <input
           type="text"
@@ -24,7 +24,8 @@ export default {
   data: function() {
     return {
       ico: (this.icon||'la-search'),
-      value: ""
+      value: "",
+      bindingclass:this.class
     };
   },
   methods: {
