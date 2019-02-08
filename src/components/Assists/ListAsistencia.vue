@@ -79,7 +79,7 @@
       </tr>
     </template>
     <template slot="tbody">
-      <tr v-for="assist in results">
+      <tr v-for="assist in results" :key="assist.codeAssist">
         <td>
           <span>{{assist.codeAssist}}</span>
         </td>

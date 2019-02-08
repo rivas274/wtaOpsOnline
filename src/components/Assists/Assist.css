@@ -47,4 +47,8 @@
 }
 .tabs-left {
   display: inline-block;
+  min-width: 100px;
+}
+.tab-pane{
+  margin-left: 15px;
 }

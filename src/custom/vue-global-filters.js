@@ -8,6 +8,15 @@ export default {
         });
         Vue.filter("lower", str => {
             return str.toLowerCase();
-        })
+        });
+        Vue.filter("currency", amount => {
+            let formatter=new Intl.NumberFormat('es', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            })
+            return formatter.format(amount);
+        });
     }
 }

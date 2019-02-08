@@ -20,7 +20,7 @@
       <li style="display: none;">
         <input type="text" class="m-pager-input form-control" title="Page number">
       </li>
-      <li v-for="page in showPages">
+      <li v-for="page in showPages" :key="page">
         <a
           class="m-datatable__pager-link m-datatable__pager-link-number"
           :class="{'m-datatable__pager-link--active':(currentPage==page)}"
@@ -46,7 +46,7 @@
         </a>
       </li>
     </ul>
-    <div class="m-datatable__pager-info">
+    <div class="m-datatable__pager-info" v-show="typeof init=='number'">
       <div class="dataTables_length">
         <label v-show="showPages.length>1">
           <select
@@ -55,7 +55,7 @@
             title="Select page size"
             @change="changeSize"
             tabindex="-98">
-            <option v-for="range in ranges" :value="range">{{ range }}</option>
+            <option v-for="range in ranges" :value="range" :key="range">{{ range }}</option>
           </select>
         </label>
         &nbsp;&nbsp;<b>{{ init+1 }}</b> - <b>{{ max*currentPage }}</b> of <b>{{ total }}</b> records
@@ -68,9 +68,9 @@ export default {
   props: ["start", "limit", "size"],
   data: function() {
     return {
-      init: (this.start||0),
-      max: (this.limit||15),
-      total: (this.size||0),
+      init: parseInt(this.start||0),
+      max: parseInt(this.limit||15),
+      total: parseInt(this.size||0),
       ranges:[15,30,50,70,100],
     };
   },

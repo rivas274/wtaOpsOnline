@@ -21,8 +21,8 @@
               </a>
             </li>
             <template v-for="navi in nav">
-              <li class="m-nav__separator"><strong>-</strong></li>
-              <li class="m-nav__item">
+              <li class="m-nav__separator" :key="navi.link"><strong>-</strong></li>
+              <li class="m-nav__item" :key="navi.link">
                 <a class="m-nav__link" v-if="navi.link">
                   <strong class="m-nav__link-text">{{ navi.title }}</strong>
                 </a>
@@ -63,7 +63,6 @@ export default {
   },
   watch:{
     navigation:function(newVal){
-      console.log('navigation',newVal);
       this.nav=newVal;
     }
   }
