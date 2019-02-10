@@ -35,7 +35,7 @@ export default {
         }
     },
     methods:{
-        imgUrlAlt:function (event) {
+        imgUrlAlt:function () {
             this.image=this.default;
         },
         cssActivePx:function(val){

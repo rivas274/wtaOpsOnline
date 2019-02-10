@@ -137,7 +137,6 @@
   </TableBasic>
 </template>
 <script>
-import contentM from "../Content.vue";
 import dateRangeBt from "../Tables/filters/dateRangeBt.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
 import pagination from "../pagination/pagination.vue";
@@ -211,8 +210,7 @@ export default {
         })
         .then(response => {
           let data = response.data.results;
-
-          this.clients = data.map(function(value, key) {
+          this.clients = data.map(function(value) {
             return { name: value.clientName, code: value.prefix };
           });
         });

@@ -119,7 +119,6 @@
   </TableBasic>
 </template>
 <script>
-import contentM from "../Content.vue";
 import dateRangeBt from "../Tables/filters/dateRangeBt.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
 import pagination from "../pagination/pagination.vue";

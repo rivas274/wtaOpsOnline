@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     changeMultiSelect: function() {
-      let values = this.value.map(function(value, key) {
+      let values = this.value.map(function(value) {
         return value.code;
       });
       this.$emit("input", this.name, values);
