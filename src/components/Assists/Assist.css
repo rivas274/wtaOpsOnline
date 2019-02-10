@@ -49,6 +49,6 @@
   display: inline-block;
   min-width: 100px;
 }
-.tab-pane{
-  margin-left: 15px;
+.tab-pane .m-loader.m-loader--div::after{
+  left: -15px;
 }
