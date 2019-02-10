@@ -1,9 +1,6 @@
 .tabs-left.nav-tabs > li > a:focus,
 .tabs-left.nav-tabs > li > a:hover {
-  -webkit-border-radius: 4px 0 0 4px;
-  -moz-border-radius: 4px 0 0 4px;
-  -ms-border-radius: 4px 0 0 4px;
-  -o-border-radius: 4px 0 0 4px;
+  border-radius: 4px 0 0 4px;
 }
 .tabs-left.nav-tabs {
   border-bottom: 0;
