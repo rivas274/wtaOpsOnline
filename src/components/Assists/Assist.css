@@ -44,6 +44,7 @@
 }
 .content-tabs-left {
   display: inline-flex;
+  width: 100%;
 }
 .tabs-left {
   display: inline-block;
@@ -51,4 +52,7 @@
 }
 .tab-pane .m-loader.m-loader--div::after{
   left: -15px;
+}
+.tab-content {
+  width: 100%;
 }

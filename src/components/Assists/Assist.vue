@@ -1,6 +1,6 @@
 <style scoped src="./Assist.css"></style>
 <template>
-  <div class="content-tabs-left container-fluid">
+  <div class="content-tabs-left">
     <ul class="nav nav-tabs tabs-left">
       <li :class="{active:tabShow=='General'}">
         <a
@@ -23,14 +23,12 @@
         </a>
       </li>
     </ul>
-    <div class="container-fluid">
-      <div class="tab-content">
-        <div class="tab-pane" :class="{active:tabShow=='General'}">General
-          <pre>{{ $data }}</pre>
-        </div>
-        <div class="tab-pane" :class="{active:tabShow=='Bills'}">
-          <list-bill :id-assist="assistBase.idAsist"></list-bill>
-        </div>
+    <div class="tab-content container">
+      <div class="tab-pane" :class="{active:tabShow=='General'}">General
+        <pre>{{ $data }}</pre>
+      </div>
+      <div class="tab-pane" :class="{active:tabShow=='Bills'}">
+        <list-bill :id-assist="assistBase.idAsist"></list-bill>
       </div>
     </div>
   </div>

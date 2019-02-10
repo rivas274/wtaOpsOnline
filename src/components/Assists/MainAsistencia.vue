@@ -23,7 +23,7 @@
             >
               <Flag :iso="assist.isoCountry" height="18"></Flag>
               <strong>{{ assist.codeAssist }}</strong>
-              <small v-html="assist.fisrtName+' '+assist.lastName"></small>
+              <small v-html="assist.fisrtName+' '+assist.lastName" class="m--hidden-mobile"></small>
               <small>{{ assist.codigo }}</small>
             </a>
             <i class="fa fa-window-close close-tab" @click="removeAssist(assist)"></i>
