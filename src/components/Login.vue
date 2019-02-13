@@ -100,7 +100,6 @@ export default {
               this.resp = response.data;
               this.disableForm = false;
               if (response.data.STATUS == "OK") {
-                this.$session.start();
                 this.$session.set("TOKEN", response.data.TOKEN);
                 this.$session.set("USER", response.data.RESPONSE.user);
                 this.$session.set(

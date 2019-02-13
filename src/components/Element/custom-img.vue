@@ -31,7 +31,7 @@ export default {
     },
     computed:{
         srcFlag:function() {
-            return this.axios.defaults.baseURL.split('/app/')[0]+this.image;
+            return this.axios.defaults.baseURL.split('/app/')[0]+'/'+this.image;
         }
     },
     methods:{

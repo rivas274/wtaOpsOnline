@@ -27,6 +27,7 @@ customAxios.interceptors.response.use(
     return response;
   },
   function (error) {
+    console.log(error.response);
     if (error.response.status == 401 && router.currentRoute.fullPath!=='/') {
       Vue._session.set('TOKEN','');
       router.go('/');
@@ -35,6 +36,10 @@ customAxios.interceptors.response.use(
   }
 );
 customAxios.interceptors.request.use(function (config) {
+  if(!Vue._session.exists()){
+    Vue._session.start();
+  }
+  config.headers.common['SESSION'] = Vue._session.id().replace('sess:','');
   if ((Vue._session.get('TOKEN') || '').length == 16 && (config.headers.common['TOKEN'] || '').length == 0) {
     config.headers.common['TOKEN'] = Vue._session.get('TOKEN');
     config.headers.common['USER'] = Vue._session.get('USER');
