@@ -251,7 +251,7 @@
               aria-expanded="false"
             >
               <span class="m-accordion__item-icon">
-                <i class="fa flaticon-placeholder"></i>
+                <i class="fa flaticon-alert-2"></i>
               </span>
               <span class="m-accordion__item-title">ASSISTANCE DATA</span>
               <span class="m-accordion__item-mode"></span>
@@ -441,7 +441,7 @@
               aria-expanded="false"
             >
               <span class="m-accordion__item-icon">
-                <i class="fa flaticon-alert-2"></i>
+                <i class="fa flaticon-placeholder"></i>
               </span>
               <span class="m-accordion__item-title">ADDRESS</span>
               <span class="m-accordion__item-mode"></span>
