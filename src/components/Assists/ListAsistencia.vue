@@ -1,5 +1,5 @@
 <style>
-.fa-status .fa{
+.fa-status .fa {
   font-size: 1.4rem;
 }
 </style>
@@ -17,14 +17,14 @@
           class="col-md-4 m-form__group-sub"
           name="code"
           watermark="Code"
-          icon="flaticon-interface-5"
+          icon="la flaticon-interface-5"
           v-on:input="setDataFilter"
         ></input-from-table>
         <input-from-table
           class="col-md-4 m-form__group-sub"
           name="passager"
           watermark="Passenger"
-          icon="flaticon-avatar"
+          icon="la flaticon-avatar"
           v-on:input="setDataFilter"
         ></input-from-table>
       </div>
@@ -36,6 +36,14 @@
           :options="clients"
           v-on:input="setDataFilter"
         ></multi-selects>
+        <select-from-table
+          class="col-md-4 m-form__group-sub"
+          name="billExists"
+          watermark="billExists"
+          icon="fa fa-money-bill"
+          :options="billsOption"
+          v-on:input="setDataFilter"
+        ></select-from-table>
         <!-- <div class="col m--align-right">
             <button class="btn btn-brand" @click="getAssistance(0)">Search</button>
         </div>-->
@@ -112,15 +120,22 @@
         </td>
         <td class="text-center fa-status">
           <span>
-            <i  :class="infoStatus(assist.statusAssist).ico" 
-                v-tooltip:top="infoStatus(assist.statusAssist).label"></i>
+            <i
+              :class="infoStatus(assist.statusAssist).ico"
+              v-tooltip:top="infoStatus(assist.statusAssist).label"
+            ></i>
           </span>
         </td>
         <td class="text-center fa-status">
           <span>
-            <a @click.prevent="addAssist(assist)"
-            class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
-              <i class="fa" :class="[open.indexOf(assist.codeAssist)>-1?'fa-location-arrow':'fa-pencil-alt']" ></i>
+            <a
+              @click.prevent="addAssist(assist)"
+              class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+            >
+              <i
+                class="fa"
+                :class="[open.indexOf(assist.codeAssist)>-1?'fa-location-arrow':'fa-pencil-alt']"
+              ></i>
             </a>
           </span>
         </td>
@@ -139,6 +154,7 @@
 <script>
 import dateRangeBt from "../Tables/filters/dateRangeBt.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
+import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import pagination from "../pagination/pagination.vue";
 import Flag from "../Element/Flag.vue";
 import TableBasic from "../Tables/TableBasic.vue";
@@ -147,16 +163,18 @@ export default {
   components: {
     TableBasic,
     inputFromTable,
+    selectFromTable,
     dateRangeBt,
     pagination,
     Flag,
     MultiSelects
   },
-  props:["open-asist"],
+  props: ["open-asist"],
   data: function() {
     return {
       filters: {
         code: "",
+        billExists: "",
         arrPrefix: [],
         passager: "",
         date: {
@@ -171,8 +189,13 @@ export default {
         size: 0
       },
       clients: [],
-      open:[],
-      showLoader:false
+      billsOption: [
+        { id: "", name: "All Assistance" },
+        { id: "Y", name: "Assistance with audited invoices." },
+        { id: "N", name: "Assistance without audited invoices." }
+      ],
+      open: [],
+      showLoader: false
     };
   },
   methods: {
@@ -182,19 +205,20 @@ export default {
           ? JSON.parse(this.$session.get("USERDATA")).prefix
           : this.filters.arrPrefix;
       pg = Number.isInteger(pg) ? pg : this.footerTable.start;
-      this.showLoader=true;
+      this.showLoader = true;
       this.axios
         .post("getAssistance", {
           start: pg,
           limit: this.footerTable.limit,
           prefix: arrPrefix,
+          billExists: this.filters.billExists,
           code: this.filters.code.trim(),
           passenger: this.filters.passager.trim(),
           endDate: this.filters.date.endDate,
           startDate: this.filters.date.startDate
         })
         .then(response => {
-          this.showLoader=false;
+          this.showLoader = false;
           this.results = response.data.results;
           this.footerTable = {
             start: response.data.start,
@@ -223,27 +247,27 @@ export default {
       this.footerTable[campo] = value;
       this.getAssistance();
     },
-    addAssist:function(assist){
-      this.$emit('addAssist',assist);
+    addAssist: function(assist) {
+      this.$emit("addAssist", assist);
     },
-    infoStatus:function(status){
-      let label={
-        1:'Opening',
-        2:'Validation',
-        3:'In progress',
-        4:'Monitoring',
-        5:'Closed',
+    infoStatus: function(status) {
+      let label = {
+        1: "Opening",
+        2: "Validation",
+        3: "In progress",
+        4: "Monitoring",
+        5: "Closed"
       };
-      let ico={
-        1:'fa fa-unlock',
-        2:'fa fa-check-square-o',
-        3:'fa fa-history',
-        4:'fa fa-eye',
-        5:'fa fa-lock',
+      let ico = {
+        1: "fa fa-unlock",
+        2: "fa fa-check-square-o",
+        3: "fa fa-history",
+        4: "fa fa-eye",
+        5: "fa fa-lock"
       };
       return {
-        label:label[status],
-        ico:ico[status],
+        label: label[status],
+        ico: ico[status]
       };
     }
   },
@@ -251,9 +275,11 @@ export default {
     this.getAssistance();
     this.getClients();
   },
-  watch:{
-    openAsist:function(newVal){
-      this.open=(newVal||[]).map(function(value){ return value.codeAssist; });
+  watch: {
+    openAsist: function(newVal) {
+      this.open = (newVal || []).map(function(value) {
+        return value.codeAssist;
+      });
     }
   }
 };

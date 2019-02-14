@@ -27,7 +27,6 @@ customAxios.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log(error.response);
     if (error.response.status == 401 && router.currentRoute.fullPath!=='/') {
       Vue._session.set('TOKEN','');
       router.go('/');

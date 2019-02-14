@@ -12,7 +12,7 @@
         >
         <span class="m-input-icon__icon m-input-icon__icon--left">
           <span>
-            <i :class="'la '+ico"></i>
+            <i :class="[ico]"></i>
           </span>
         </span>
       </div>
