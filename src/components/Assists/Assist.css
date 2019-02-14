@@ -4,6 +4,7 @@
 }
 .tabs-left.nav-tabs {
   border-bottom: 0;
+  min-width: fit-content;
 }
 .tabs-left.nav-tabs > li {
   float: none;
@@ -45,11 +46,13 @@
 }
 .tabs-left {
   display: inline-block;
-  min-width: 100px;
 }
 .tab-pane .m-loader.m-loader--div::after{
   left: -15px;
 }
 .tab-content {
   width: 100%;
+}
+.content-tabs-left .nav-link{
+  min-width: max-content;
 }

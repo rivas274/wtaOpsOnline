@@ -2,24 +2,24 @@
 <template>
   <div class="content-tabs-left">
     <ul class="nav nav-tabs tabs-left">
-      <li :class="{active:tabShow=='General'}">
+      <li :class="{active:tabShow=='General'}" v-tooltip:top="'General'">
         <a
           class="nav-link"
           :class="{'m--font-success':tabShow=='General'}"
           @click.prevent="showTab('General')"
         >
           <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-          General
+          <span class="m--hidden-mobile">General</span>
         </a>
       </li>
-      <li :class="{active:tabShow=='Bills'}">
+      <li :class="{active:tabShow=='Bills'}" v-tooltip:top="'Bills'">
         <a
           class="nav-link"
           :class="{'m--font-success':tabShow=='Bills'}"
           @click.prevent="showTab('Bills')"
         >
           <i class="fa fa-money-bill" aria-hidden="true"></i>
-          Bills
+          <span class="m--hidden-mobile">Bills</span>
         </a>
       </li>
     </ul>
