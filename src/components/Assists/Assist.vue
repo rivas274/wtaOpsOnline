@@ -24,8 +24,8 @@
       </li>
     </ul>
     <div class="tab-content container">
-      <div class="tab-pane" :class="{active:tabShow=='General'}">General
-        <pre>{{ $data }}</pre>
+      <div class="tab-pane" :class="{active:tabShow=='General'}">
+        <AssistDetail :id-assist="assistBase.idAsist" ></AssistDetail>
       </div>
       <div class="tab-pane" :class="{active:tabShow=='Bills'}">
         <list-bill :id-assist="assistBase.idAsist"></list-bill>
@@ -35,8 +35,9 @@
 </template>
 <script>
 import ListBill from "../Bill/ListBill.vue";
+import AssistDetail from "./AssistDetail.vue";
 export default {
-  components: { ListBill },
+  components: { ListBill, AssistDetail },
   props: ["assist"],
   data() {
     return {
