@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-12">
+  <div class="col-lg-12" :show-loader="showLoader">
     <!--begin::Portlet-->
     <div class="m-portlet m-portlet--full-height">
       <div class="m-portlet__body">
@@ -43,25 +43,30 @@
                           <div class="m-widget16">
                             <div class="row">
                               <div class="col-md-12">
+                                <div class="m-widget16__head">
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__amount m--align-center">ASSISTANCE DATA</span>
+                                  </div>
+                                </div>
                                 <div class="m-widget16__body">
                                   <!--begin::widget item-->
                                   <div class="m-widget16__item">
                                     <span class="m-widget16__date">Travel Source</span>
-                                    <span
-                                      class="m-widget16__price m--align-right m--font-brand"
-                                    >{{results.voucher.source}}</span>
+                                    <span class="m-widget16__price m--align-right m--font-brand">
+                                      <Flag :iso="results.voucher.source"></Flag>
+                                    </span>
                                   </div>
                                   <!--end::widget item-->
                                   <!--begin::widget item-->
                                   <div class="m-widget16__item">
                                     <span class="m-widget16__date">Destination</span>
-                                    <span
-                                      class="m-widget16__price m--align-right m--font-danger"
-                                    >{{results.voucher.destination}}</span>
+                                    <span class="m-widget16__price m--align-right m--font-danger">
+                                      <Flag :iso="results.voucher.destination"></Flag>
+                                    </span>
                                   </div>
                                   <!--end::widget item-->
                                   <!--begin::widget item-->
-                                  <div class="m-widget16__item">
+                                  <div class="m-widget16__item" v-if="results.voucher.namePlan">
                                     <span class="m-widget16__date">Plan</span>
                                     <span
                                       class="m-widget16__price m--align-right m--font-brand"
@@ -71,7 +76,7 @@
                                   <div class="m-widget16__item">
                                     <span class="m-widget16__date">From</span>
                                     <span
-                                      class="m-widget16__price m--align-right m--font-brand"
+                                      class="m-widget16__price m--align-right m--font-danger"
                                     >{{results.voucher.startDate}}</span>
                                   </div>
                                   <!--end::widget item-->
@@ -79,8 +84,15 @@
                                   <div class="m-widget16__item">
                                     <span class="m-widget16__date">To</span>
                                     <span
-                                      class="m-widget16__price m--align-right m--font-danger"
+                                      class="m-widget16__price m--align-right m--font-brand"
                                     >{{results.voucher.endDate}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Purchase Date</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-danger"
+                                    >{{results.voucher.purchaseDate}}</span>
                                   </div>
                                 </div>
                               </div>
@@ -96,19 +108,17 @@
                             <div class="row">
                               <div class="col-md-12">
                                 <div class="m-widget16__head">
-                                <div class="m-widget16__item">
-                                  <span class="m-widget16__amount m--align-center">
-                                    ASSISTANCE DATA
-                                  </span>
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__amount m--align-center">BENEFICIARIES</span>
+                                  </div>
                                 </div>
-                              </div>
                                 <div class="m-widget16__body">
                                   <!--begin::widget item-->
                                   <div class="m-widget16__item">
                                     <span class="m-widget16__date">First Name</span>
                                     <span
                                       class="m-widget16__price m--align-right m--font-brand"
-                                    >{{results.contacto.fisrtName}}</span>
+                                    >{{results.passenger.fisrtName}}</span>
                                   </div>
                                   <!--end::widget item-->
                                   <!--begin::widget item-->
@@ -116,42 +126,36 @@
                                     <span class="m-widget16__date">Last Name</span>
                                     <span
                                       class="m-widget16__price m--align-right m--font-danger"
-                                    >{{results.contacto.lastName}}</span>
+                                    >{{results.passenger.lastName}}</span>
                                   </div>
                                   <!--end::widget item-->
                                   <!--begin::widget item-->
-                                  <div class="m-widget16__item">
+                                  <div class="m-widget16__item" v-if="results.passenger.email">
                                     <span class="m-widget16__date">Email</span>
                                     <span
                                       class="m-widget16__price m--align-right m--font-brand"
-                                    >{{results.contacto.email}}</span>
+                                    >{{results.passenger.email}}</span>
                                   </div>
                                   <!--begin::widget item-->
-                                  <div class="m-widget16__item">
+                                  <div class="m-widget16__item" v-if="results.passenger.phone">
                                     <span class="m-widget16__date">Phone</span>
                                     <span
-                                      class="m-widget16__price m--align-right m--font-brand"
-                                    >{{results.contacto.phone}}</span>
+                                      class="m-widget16__price m--align-right m--font-danger"
+                                    >{{results.passenger.phone}}</span>
                                   </div>
                                   <!--end::widget item-->
                                   <!--end::widget item-->
-                                  <div class="m-widget16__item">
+                                  <div class="m-widget16__item" v-if="results.passenger.passport">
                                     <span class="m-widget16__date">Passport No.</span>
                                     <span
-                                      class="m-widget16__price m--align-right m--font-danger"
-                                    >{{results.contacto.passport}}</span>
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.passenger.passport}}</span>
                                   </div>
                                   <div class="m-widget16__item">
                                     <span class="m-widget16__date">Date of Birth</span>
                                     <span
                                       class="m-widget16__price m--align-right m--font-danger"
-                                    >{{results.contacto.birthDate}}</span>
-                                  </div>
-                                  <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Genre</span>
-                                    <span
-                                      class="m-widget16__price m--align-right m--font-danger"
-                                    >{{results.contacto.genre}}</span>
+                                    >{{results.passenger.birthDate}}</span>
                                   </div>
                                 </div>
                               </div>
@@ -166,45 +170,61 @@
                           <div class="m-widget16">
                             <div class="row">
                               <div class="col-md-12">
+                                <div class="m-widget16__head">
+                                  <div class="m-widget16__item">
+                                    <span
+                                      class="m-widget16__amount m--align-center"
+                                    >OTHER INFORMATION</span>
+                                  </div>
+                                </div>
                                 <div class="m-widget16__body">
                                   <!--begin::widget item-->
                                   <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Travel Source</span>
-                                    <span
-                                      class="m-widget16__price m--align-right m--font-brand"
-                                    >{{results.voucher.source}}</span>
+                                    <span class="m-widget16__date">Observations</span>
                                   </div>
                                   <!--end::widget item-->
                                   <!--begin::widget item-->
                                   <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Destination</span>
+                                    <span>{{results.contactObservation}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <div
+                                    class="m-widget16__item"
+                                    v-if="results.voucher.contacto.name || results.voucher.contacto.email || results.voucher.contacto.phone"
+                                  >
+                                    <span
+                                      class="m-widget16__amount m--align-center"
+                                    >Contact Emergency</span>
+                                  </div>
+                                  <!--begin::widget item-->
+                                  <div
+                                    class="m-widget16__item"
+                                    v-if="results.voucher.contacto.name"
+                                  >
+                                    <span class="m-widget16__date">Name</span>
                                     <span
                                       class="m-widget16__price m--align-right m--font-danger"
-                                    >{{results.voucher.destination}}</span>
+                                    >{{results.voucher.contacto.name}}</span>
                                   </div>
-                                  <!--end::widget item-->
-                                  <!--begin::widget item-->
-                                  <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Plan</span>
+                                  <div
+                                    class="m-widget16__item"
+                                    v-if="results.voucher.contacto.email"
+                                  >
+                                    <span class="m-widget16__date">Email</span>
                                     <span
                                       class="m-widget16__price m--align-right m--font-brand"
-                                    >{{results.voucher.namePlan}}</span>
+                                    >{{results.voucher.contacto.email}}</span>
                                   </div>
-                                  <!--begin::widget item-->
-                                  <div class="m-widget16__item">
-                                    <span class="m-widget16__date">From</span>
-                                    <span
-                                      class="m-widget16__price m--align-right m--font-brand"
-                                    >{{results.voucher.startDate}}</span>
-                                  </div>
-                                  <!--end::widget item-->
-                                  <!--end::widget item-->
-                                  <div class="m-widget16__item">
-                                    <span class="m-widget16__date">To</span>
+                                  <div
+                                    class="m-widget16__item"
+                                    v-if="results.voucher.contacto.phone"
+                                  >
+                                    <span class="m-widget16__date">Phone</span>
                                     <span
                                       class="m-widget16__price m--align-right m--font-danger"
-                                    >{{results.voucher.endDate}}</span>
+                                    >{{results.voucher.contacto.phone}}</span>
                                   </div>
+                                  <!--end::widget item-->
                                 </div>
                               </div>
                             </div>
@@ -247,89 +267,160 @@
                   <div class="m-portlet__body m-portlet__body--no-padding">
                     <div class="row m-row--no-padding m-row--col-separator-xl">
                       <div class="col-xl-4">
-                        <!--begin:: Widgets/Daily Sales-->
-                        <div class="m-widget14">
-                          <div class="m-widget14__header m--margin-bottom-30">
-                            <h3 class="m-widget14__title">Daily Sales</h3>
-                            <span class="m-widget14__desc">Check out each collumn for more details</span>
-                          </div>
-                          <div class="m-widget14__chart" style="height:120px;">
-                            <canvas id="m_chart_daily_sales"></canvas>
+                        <!--start widget14 -->
+                        <div class="m-portlet__body">
+                          <div class="m-widget16">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="m-widget16__head">
+                                  <div class="m-widget16__item">
+                                    <span
+                                      class="m-widget16__amount m--align-center"
+                                    >ASSISTANCE CONCTACT</span>
+                                  </div>
+                                </div>
+                                <div class="m-widget16__body">
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">First Name</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.contacto.fisrtName}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Last Name</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-danger"
+                                    >{{results.contacto.lastName}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Email</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.contacto.email}}</span>
+                                  </div>
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Phone</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-danger"
+                                    >{{results.contacto.phone}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--end::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Passport No.</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.contacto.passport}}</span>
+                                  </div>
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Date of Birth</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-danger"
+                                    >{{results.contacto.birthDate}}</span>
+                                  </div>
+                                  <div class="m-widget16__item" v-if="results.contacto.genre">
+                                    <span class="m-widget16__date">Genre</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.contacto.genre}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <!--end:: Widgets/Daily Sales-->
+                        <!--end widget14 -->
                       </div>
                       <div class="col-xl-4">
-                        <!--begin:: Widgets/Profit Share-->
-                        <div class="m-widget14">
-                          <div class="m-widget14__header">
-                            <h3 class="m-widget14__title">Profit Share</h3>
-                            <span class="m-widget14__desc">Profit Share between customers</span>
-                          </div>
-                          <div class="row align-items-center">
-                            <div class="col">
-                              <div
-                                id="m_chart_profit_share"
-                                class="m-widget14__chart"
-                                style="height: 160px"
-                              >
-                                <div class="m-widget14__stat">45</div>
-                              </div>
-                            </div>
-                            <div class="col">
-                              <div class="m-widget14__legends">
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-accent"></span>
-                                  <span class="m-widget14__legend-text">37% Sport Tickets</span>
+                        <!--start widget14 -->
+                        <div class="m-portlet__body">
+                          <div class="m-widget16">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="m-widget16__head">
+                                  <div class="m-widget16__item">
+                                    <span
+                                      class="m-widget16__amount m--align-center"
+                                    >INFORMATION ASSISTANCE</span>
+                                  </div>
                                 </div>
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-warning"></span>
-                                  <span class="m-widget14__legend-text">47% Business Events</span>
-                                </div>
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-brand"></span>
-                                  <span class="m-widget14__legend-text">19% Others</span>
+                                <div class="m-widget16__body">
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Source</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.origenAssist}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Relation</span>
+                                    <span class="m-widget16__price m--align-right m--font-danger"></span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Case Type</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.caseType}}</span>
+                                  </div>
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Symptoms</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-danger"
+                                    >{{results.symptom}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--end::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Type of Coordination</span>
+                                    <span class="m-widget16__price m--align-right m--font-brand"></span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <!--end:: Widgets/Profit Share-->
+                        <!--end widget14 -->
                       </div>
                       <div class="col-xl-4">
-                        <!--begin:: Widgets/Revenue Change-->
-                        <div class="m-widget14">
-                          <div class="m-widget14__header">
-                            <h3 class="m-widget14__title">Revenue Change</h3>
-                            <span class="m-widget14__desc">Revenue change breakdown by cities</span>
-                          </div>
-                          <div class="row align-items-center">
-                            <div class="col">
-                              <div
-                                id="m_chart_revenue_change"
-                                class="m-widget14__chart1"
-                                style="height: 180px"
-                              ></div>
-                            </div>
-                            <div class="col">
-                              <div class="m-widget14__legends">
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-accent"></span>
-                                  <span class="m-widget14__legend-text">+10% New York</span>
+                        <!--start widget14 -->
+                        <div class="m-portlet__body">
+                          <div class="m-widget16">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="m-widget16__head">
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__amount m--align-center">DESCRIPTION</span>
+                                  </div>
                                 </div>
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-warning"></span>
-                                  <span class="m-widget14__legend-text">-7% London</span>
-                                </div>
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-brand"></span>
-                                  <span class="m-widget14__legend-text">+20% California</span>
+                                <div class="m-widget16__body">
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span
+                                      class="m-widget16__date m--align-center"
+                                      v-if="!results.contactObservation"
+                                    >N/A</span>
+                                    <span
+                                      class="m-widget16__date m--align-center"
+                                      v-if="results.contactObservation"
+                                    >{{results.contactObservation}}</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <!--end:: Widgets/Revenue Change-->
+                        <!--end widget14 -->
                       </div>
                     </div>
                   </div>
@@ -366,80 +457,118 @@
                   <div class="m-portlet__body m-portlet__body--no-padding">
                     <div class="row m-row--no-padding m-row--col-separator-xl">
                       <div class="col-xl-4">
-                        <!--begin:: Widgets/Daily Sales-->
-                        <!--end:: Widgets/Daily Sales-->
-                      </div>
-                      <div class="col-xl-4">
-                        <!--begin:: Widgets/Profit Share-->
-                        <div class="m-widget14">
-                          <div class="m-widget14__header">
-                            <h3 class="m-widget14__title">Profit Share</h3>
-                            <span class="m-widget14__desc">Profit Share between customers</span>
-                          </div>
-                          <div class="row align-items-center">
-                            <div class="col">
-                              <div
-                                id="m_chart_profit_share"
-                                class="m-widget14__chart"
-                                style="height: 160px"
-                              >
-                                <div class="m-widget14__stat">45</div>
-                              </div>
-                            </div>
-                            <div class="col">
-                              <div class="m-widget14__legends">
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-accent"></span>
-                                  <span class="m-widget14__legend-text">37% Sport Tickets</span>
-                                </div>
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-warning"></span>
-                                  <span class="m-widget14__legend-text">47% Business Events</span>
-                                </div>
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-brand"></span>
-                                  <span class="m-widget14__legend-text">19% Others</span>
+                        <!--start widget14 -->
+                        <div class="m-portlet__body">
+                          <div class="m-widget16">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="m-widget16__body">
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item" v-if="results.location.isoCountry">
+                                    <span class="m-widget16__date">Country</span>
+                                    <span class="m-widget16__price m--align-right m--font-brand">
+                                      <Flag :iso="results.location.isoCountry"></Flag>
+                                    </span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item" v-if="results.location.isoState">
+                                    <span class="m-widget16__date">States</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-danger"
+                                    >{{results.location.isoState}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item" v-if="results.location.isoCity">
+                                    <span class="m-widget16__date">City</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.location.isoCity}}</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <!--end:: Widgets/Profit Share-->
+                        <!--end widget14 -->
                       </div>
                       <div class="col-xl-4">
-                        <!--begin:: Widgets/Revenue Change-->
-                        <div class="m-widget14">
-                          <div class="m-widget14__header">
-                            <h3 class="m-widget14__title">Revenue Change</h3>
-                            <span class="m-widget14__desc">Revenue change breakdown by cities</span>
-                          </div>
-                          <div class="row align-items-center">
-                            <div class="col">
-                              <div
-                                id="m_chart_revenue_change"
-                                class="m-widget14__chart1"
-                                style="height: 180px"
-                              ></div>
-                            </div>
-                            <div class="col">
-                              <div class="m-widget14__legends">
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-accent"></span>
-                                  <span class="m-widget14__legend-text">+10% New York</span>
-                                </div>
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-warning"></span>
-                                  <span class="m-widget14__legend-text">-7% London</span>
-                                </div>
-                                <div class="m-widget14__legend">
-                                  <span class="m-widget14__legend-bullet m--bg-brand"></span>
-                                  <span class="m-widget14__legend-text">+20% California</span>
+                        <!--start widget14 -->
+                        <div class="m-portlet__body">
+                          <div class="m-widget16">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="m-widget16__body">
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item" v-if="results.location.address">
+                                    <span class="m-widget16__date">Address</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.location.address}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--begin::widget item-->
+                                  <div
+                                    class="m-widget16__item"
+                                    v-if="results.location.optionalAddress"
+                                  >
+                                    <span class="m-widget16__date">Optional Address</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-danger"
+                                    >{{results.location.optionalAddress}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item" v-if="results.location.zipCode">
+                                    <span class="m-widget16__date">Zip Code</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.location.zipCode}}</span>
+                                  </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <!--end:: Widgets/Revenue Change-->
+                        <!--end widget14 -->
+                      </div>
+                      <div class="col-xl-4">
+                        <!--start widget14 -->
+                        <div class="m-portlet__body">
+                          <div class="m-widget16">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="m-widget16__body">
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item" v-if="results.location.namePlace">
+                                    <span class="m-widget16__date">Name/Place</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.location.namePlace}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item" v-if="results.location.room">
+                                    <span class="m-widget16__date">Room</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-danger"
+                                    >{{results.location.room}}</span>
+                                  </div>
+                                  <!--end::widget item-->
+                                  <!--begin::widget item-->
+                                  <div class="m-widget16__item">
+                                    <span class="m-widget16__date">Phone</span>
+                                    <span
+                                      class="m-widget16__price m--align-right m--font-brand"
+                                    >{{results.contacto.phone}}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!--end widget14 -->
                       </div>
                     </div>
                   </div>
@@ -456,21 +585,28 @@
   </div>
 </template>
 <script>
+import Flag from "../Element/Flag.vue";
 export default {
+  components: {
+    Flag
+  },
   props: ["id-assist"],
   data: function() {
     return {
       assist: this.idAssist,
-      results: []
+      results: [],
+      showLoader: false
     };
   },
   methods: {
     getAssistanceDetail: function() {
+      this.showLoader = true;
       this.axios
         .post("getAssistanceDetail", {
           idAssist: this.idAssist
         })
         .then(response => {
+          this.showLoader = false;
           this.results = response.data.results;
           console.log(this.results);
         });
