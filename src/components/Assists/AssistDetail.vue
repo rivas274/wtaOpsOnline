@@ -1,5 +1,6 @@
+<style src="../Element/custom-m-loader.css"></style>
 <template>
-  <div class="col-lg-12" :show-loader="showLoader">
+  <div class="col-lg-12" :class="{'m-loader m-loader--metal m-loader--div':showLoader}">
     <!--begin::Portlet-->
     <div class="m-portlet m-portlet--full-height">
       <div class="m-portlet__body">
@@ -608,7 +609,6 @@ export default {
         .then(response => {
           this.showLoader = false;
           this.results = response.data.results;
-          console.log(this.results);
         });
     }
   },
