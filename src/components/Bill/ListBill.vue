@@ -1,6 +1,10 @@
-<style>
+<style scoped>
 .options-btn{
   display: inline-flex;
+}
+iframe{
+  height: 360px;
+  width: 100%;
 }
 </style>
 
@@ -101,9 +105,9 @@
           </td>
         </tr>
         <tr :key="bill.idFile"></tr>
-        <tr :key="bill.idFile" v-show="checkVisibility(bill)">
-          <td class="text-center fa-status" colspan="10">
-            <span>{{bill}}</span>
+        <tr :key="bill.idFile" v-if="checkVisibility(bill)">
+          <td class="text-center" colspan="10">
+            <iframe :src="streaming(bill)"></iframe>
           </td>
         </tr>
       </template>  
@@ -211,6 +215,9 @@ export default {
     },
     download({fileName}){
       return this.axios.defaults.baseURL.split('/app/')[0]+"/download/"+fileName;
+    },
+    streaming({fileName}){
+      return this.axios.defaults.baseURL.split('/app/')[0]+"/streaming/"+fileName;
     },
   },
   mounted() {

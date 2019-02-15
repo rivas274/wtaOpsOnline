@@ -39,8 +39,6 @@
         <select-from-table
           class="col-md-4 m-form__group-sub"
           name="billExists"
-          watermark="billExists"
-          icon="fa fa-money-bill"
           :options="billsOption"
           v-on:input="setDataFilter"
         ></select-from-table>
@@ -190,9 +188,21 @@ export default {
       },
       clients: [],
       billsOption: [
-        { id: "", name: "All Assistance" },
-        { id: "Y", name: "Assistance with audited invoices." },
-        { id: "N", name: "Assistance without audited invoices." }
+        {
+          id: "",
+          name: "All Assistance",
+          icon: "fa fa-money-bill"
+        },
+        {
+          id: "Y",
+          name: "Assistance with audited invoices.",
+          icon: "fa fa-money-bill"
+        },
+        {
+          id: "N",
+          name: "Assistance without audited invoices.",
+          icon: "fa fa-money-bill"
+        }
       ],
       open: [],
       showLoader: false

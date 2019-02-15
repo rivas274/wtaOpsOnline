@@ -23,7 +23,7 @@ export default {
   props: ['watermark','name','icon','class'],
   data: function() {
     return {
-      ico: (this.icon||'la-search'),
+      ico: (this.icon||'la la-search'),
       value: "",
       bindingclass:this.class
     };
