@@ -28,8 +28,9 @@
           v-on:input="setDataFilter"
         ></input-from-table>
       </div>
-      <div class="form-group m-form__group row" v-if="clients.length>1">
+      <div class="form-group m-form__group row">
         <multi-selects
+          v-if="clients.length>1"
           class="col-md-4 m-form__group-sub"
           name="arrPrefix"
           watermark="Search Clients"
