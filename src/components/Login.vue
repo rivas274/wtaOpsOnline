@@ -33,7 +33,7 @@
                   name="user"
                   autocomplete="off"
                   v-model.lazy="inputsData.user"
-                  v-validate="'required|min:4|max:12|'"
+                  v-validate="'required|min:4|max:20|'"
                 >
                 <FormError :attribute_name="'user'" :errors_form="errors"></FormError>
               </div>
@@ -44,7 +44,7 @@
                   placeholder="Password"
                   name="password"
                   v-model.lazy="inputsData.password"
-                  v-validate="'required|min:4|max:12|'"
+                  v-validate="'required|min:4|max:20|'"
                 >
                 <FormError :attribute_name="'password'" :errors_form="errors"></FormError>
               </div>
