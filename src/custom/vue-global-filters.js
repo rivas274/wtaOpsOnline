@@ -1,13 +1,13 @@
 export default {
     install(Vue) {
         Vue.filter('ucwords',  str => {
-            return str.toLowerCase().replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
+            return (typeof forma === 'string')?str.toLowerCase().replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,
                 function (s) {
                     return s.toUpperCase();
-                });
+                }):str;
         });
         Vue.filter("lower", str => {
-            return str.toLowerCase();
+            return (typeof forma === 'string')? str.toLowerCase(): str;
         });
         Vue.filter("currency", (amount,currency) => {
             let formatter=new Intl.NumberFormat('es', {

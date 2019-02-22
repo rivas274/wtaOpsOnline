@@ -67,13 +67,11 @@ import customImg from "../Element/custom-img.vue";
 export default {
   components:{customImg},
   data: function () {
-    let user=JSON.parse(this.$session.get("USERDATA"));
-    user['spin']=false;
-    return user;
-  },
-  computed:{
-    fullName:function(){
-      return this.firstName+' '+this.lastName;
+    return {
+      fullName:this.$session.get("firstName")+' '+this.$session.get("lastName"),
+      imgUser:this.$session.get("imgUser"),
+      email:this.$session.get("email"),
+      spin:false
     }
   },
   methods:{

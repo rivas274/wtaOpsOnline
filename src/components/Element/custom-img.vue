@@ -26,7 +26,7 @@ export default {
     data:function () {
         return{
             image: this.src,
-            bindingclass: this.class,
+            bindingclass: (this.class||null),
         }
     },
     computed:{

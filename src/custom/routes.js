@@ -1,4 +1,5 @@
-import Login from '../components/Login.vue';
+import Login from '../components/Login/Login.vue';
+import MyAcount from '../components/Login/MyAcount.vue';
 import http404 from '../components/http404.vue';
 import MainAsistencia from '../components/Assists/MainAsistencia.vue';
 export default [
@@ -14,6 +15,11 @@ export default [
     meta: {
       isPublic: true
     }
+  },
+  {
+    name: 'MyAcount',
+    path: '/MyAcount',
+    component: MyAcount,
   },
   {
     path: "**",

@@ -1,7 +1,7 @@
 var STORAGE = null;
 var VueSession = {
-    key: 'vue-session-key',
-    flash_key: 'vue-session-flash-key',
+    key: 'wtaSess',
+    flash_key: 'wtaflash',
     setAll: function(all){
         STORAGE.setItem(VueSession.key,JSON.stringify(all));
     }

@@ -213,7 +213,7 @@ export default {
     getAssistance: function(pg) {
       let arrPrefix =
         this.filters.arrPrefix.length == 0
-          ? JSON.parse(this.$session.get("USERDATA")).prefix
+          ? this.$session.get("prefix")
           : this.filters.arrPrefix;
       pg = Number.isInteger(pg) ? pg : this.footerTable.start;
       this.showLoader = true;
@@ -241,7 +241,7 @@ export default {
     getClients: function() {
       this.axios
         .post("getClient", {
-          prefix: JSON.parse(this.$session.get("USERDATA")).prefix
+          prefix: this.$session.get("prefix")
         })
         .then(response => {
           let data = response.data.results;

@@ -49,6 +49,12 @@
             <div class="m-portlet__body">
               <slot name="body"></slot>
             </div>
+            <div class="m-portlet__foot" v-if="$slots.footer">
+              <slot name="footer"></slot>
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit" v-if="$slots['footer-fit']">
+              <slot name="footer-fit"></slot>
+            </div>
           </div>
         </div>
       </div>

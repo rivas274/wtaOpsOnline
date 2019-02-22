@@ -13,7 +13,17 @@ Vue.use(VueRouter);
 Vue.use(globalDirectives);
 Vue.use(globalFilters);
 Vue.use(VeeValidate);
-Vue.use(VueSession, { persist: true });
+ 
+VeeValidate.Validator.extend('verify_password', {
+  getMessage: field => `The password must contain at least: 1 uppercase letter, 1 lowercase letter, 1 number, and one special character (E.g. , . _ & ? etc)`,
+  validate: value => {
+      var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
+      return strongRegex.test(value);
+  }
+});
+Vue.use(VueSession, {
+  persist: true
+});
 const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
   baseURL: 'https://wtaops.com/app/apiWtaOnline/',
@@ -41,7 +51,7 @@ customAxios.interceptors.request.use(function (config) {
   config.headers.common['SESSION'] = Vue._session.id().replace('sess:','');
   if ((Vue._session.get('TOKEN') || '').length == 16 && (config.headers.common['TOKEN'] || '').length == 0) {
     config.headers.common['TOKEN'] = Vue._session.get('TOKEN');
-    config.headers.common['USER'] = Vue._session.get('USER');
+    config.headers.common['USER'] = Vue._session.get("user");
   }
   return config;
 }, function (err) {
@@ -57,7 +67,11 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     if (Vue._session.exists() && (Vue._session.get('TOKEN') || '').length == 16) {
-      next();
+      if (Vue._session.get('changePassword')==1 && to.name!='MyAcount') {
+        next('MyAcount');
+      } else {
+        next();
+      }
     } else {
       next('/');
     }

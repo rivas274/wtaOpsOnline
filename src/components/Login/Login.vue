@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 .m-form__group.has-danger .form-control-feedback {
   font-size: 1.1rem !important;
 }
@@ -33,9 +33,9 @@
                   name="user"
                   autocomplete="off"
                   v-model.lazy="inputsData.user"
-                  v-validate="'required|min:4|max:20|'"
+                  v-validate="'required|min:4|max:40|'"
                 >
-                <FormError :attribute_name="'user'" :errors_form="errors"></FormError>
+                <form-error :attribute_name="'user'" :errors_form="errors"></form-error>
               </div>
               <div class="form-group m-form__group" :class="{'has-danger': errors.has('password')}">
                 <input
@@ -44,9 +44,9 @@
                   placeholder="Password"
                   name="password"
                   v-model.lazy="inputsData.password"
-                  v-validate="'required|min:4|max:20|'"
+                  v-validate="'required|min:4|max:40|'"
                 >
-                <FormError :attribute_name="'password'" :errors_form="errors"></FormError>
+                <form-error :attribute_name="'password'" :errors_form="errors"></form-error>
               </div>
               <div class="m-login__form-action">
                 <button
@@ -70,8 +70,8 @@
   </div>
 </template>
 <script>
-import customImg from "./Element/custom-img.vue";
-import FormError from "./FormError";
+import customImg from "../Element/custom-img";
+import FormError from "../FormError";
 export default {
   name: "Login",
   components: {
@@ -79,9 +79,13 @@ export default {
     customImg
   },
   data: function() {
+    let user='';
+    if(this.$session.get("user")){
+      user=this.$session.get("user");
+    }
     return {
       inputsData: {
-        user:this.$session.get("USER"),
+        user:user,
         password:''
       },
       resp: {
@@ -101,11 +105,10 @@ export default {
               this.disableForm = false;
               if (response.data.STATUS == "OK") {
                 this.$session.set("TOKEN", response.data.TOKEN);
-                this.$session.set("USER", response.data.RESPONSE.user);
-                this.$session.set(
-                  "USERDATA",
-                  JSON.stringify(response.data.RESPONSE)
-                );
+                let user=response.data.RESPONSE;
+                for (var prop in user) {
+                    this.$session.set(prop,user[prop]);
+                }
                 this.$router.push("dasboard");
               }
             });
