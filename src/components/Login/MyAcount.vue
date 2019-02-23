@@ -110,6 +110,8 @@ export default {
                     this.redirect--;
                     if(this.redirect<1){
                       this.$router.push('/dasboard');
+                      clearInterval(this.interval);
+                      this.interval=this.interval=null;
                     }
                 }.bind(this), 1000);
               }else{
