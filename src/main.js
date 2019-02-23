@@ -3,7 +3,7 @@ import App from './App.vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import VeeValidate from 'vee-validate';
+import VeeValidate from './custom/vue-vee-custom';
 import VueSession from './custom/vue-session-custom';
 import routes from './custom/routes';
 import globalFilters from'./custom/vue-global-filters';
@@ -13,14 +13,7 @@ Vue.use(VueRouter);
 Vue.use(globalDirectives);
 Vue.use(globalFilters);
 Vue.use(VeeValidate);
- 
-VeeValidate.Validator.extend('verify_password', {
-  getMessage: field => `The password must contain at least: 1 uppercase letter, 1 lowercase letter, 1 number, and one special character (E.g. , . _ & ? etc)`,
-  validate: value => {
-      var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-      return strongRegex.test(value);
-  }
-});
+
 Vue.use(VueSession, {
   persist: true
 });

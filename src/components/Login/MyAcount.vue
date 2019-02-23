@@ -4,45 +4,56 @@
       <template slot="title">My acount</template>
       <template slot="header">My acount</template>
       <template slot="body">
-        <div class="form-group m-form__group">
-          <label for="OldPassword" :class="{'has-danger': errors.has('OldPassword')}">Old Password</label>
+        <div class="form-group m-form__group" :class="{'has-danger': errors.has('oldPass')}">
+          <label for="oldPass">Old Password</label>
           <input
             class="form-control m-input"
             type="password"
-            id="OldPassword"
-            placeholder="OldPassword"
-            name="OldPassword"
-            v-model.lazy="inputsData.email"
+            id="oldPass"
+            placeholder="Old Password"
+            name="oldPass"
+            autocomplete="off"
+            v-model="inputsData.oldPass"
             v-validate="'required|min:4|max:40'"
           >
-          <form-error :attribute_name="'OldPassword'" :errors_form="errors"></form-error>
+          <form-error :attribute_name="'oldPass'" :errors_form="errors"></form-error>
         </div>
-        <div class="form-group m-form__group" :class="{'has-danger': errors.has('newPassword')}">
-          <label for="newPassword">New Password</label>
+        <div class="form-group m-form__group" :class="{'has-danger': errors.has('newPass')}">
+          <label for="newPass">New Password</label>
           <input
             class="form-control m-input"
             type="password"
-            id="newPassword"
+            id="newPass"
             placeholder="New Password"
-            name="newPassword"
-            v-validate="'required|min:4|max:40|verify_password'"
-            v-model.lazy="inputsData.newPass"
-            ref="newPassword"
+            name="newPass"
+            autocomplete="off"
+            v-validate="'required|min:6|max:40|verify_password'"
+            v-model="inputsData.newPass"
+            ref="newPass"
           >
-          <form-error :attribute_name="'newPassword'" :errors_form="errors"></form-error>
+          <form-error :attribute_name="'newPass'" :errors_form="errors"></form-error>
         </div>
-        <div class="form-group m-form__group" :class="{'has-danger': errors.has('confirmPassword')}">
-          <label for="confirmPassword">Confirm new Password</label>
+        <div class="form-group m-form__group" :class="{'has-danger': errors.has('confNewPass')}">
+          <label for="confNewPass">Confirm new Password</label>
           <input
             class="form-control m-input"
             type="password"
-            id="confirmPassword"
+            id="confNewPass"
             placeholder="confirm new Password"
-            name="confirmPassword"
+            name="confNewPass"
+            autocomplete="off"
             data-vv-as="password"
-            v-validate="'confirmed:newPassword'"
+            v-validate="'confirmed:newPass'"
           >
-          <form-error :attribute_name="'confirmPassword'" :errors_form="errors"></form-error>
+          <form-error :attribute_name="'confNewPass'" :errors_form="errors"></form-error>
+        </div>
+        <div v-if="resp.STATUS == 'ERROR'" class="alert-danger alert alert-dismissible" role="alert">
+          <button type="button" class="close" @click="resp.STATUS=''"></button>
+          <span v-for="(error,key) in resp.ERROR" :key="key">{{ error }}</span>
+        </div>
+        <div v-if="resp.STATUS == 'OK'" class="alert-success alert alert-dismissible" role="alert">
+          <button type="button" class="close" @click="resp.STATUS=''"></button>
+          <span>{{ resp.MESSAGE }} / redirect {{ redirect }} seg</span>
         </div>
       </template>
       <template slot="footer-fit">
@@ -78,8 +89,10 @@ export default {
       resp: {
         STATUS: ""
       },
-      disableForm: false
-    };
+      disableForm: false,
+      redirect:0,
+      interval:null
+    }
   },
   methods: {
     chagePassword: function() {
@@ -92,6 +105,13 @@ export default {
               this.disableForm = false;
               if (response.data.STATUS == "OK") {
                 this.$session.set("changePassword", 0);
+                this.redirect=15;
+                this.interval = setInterval(function(){
+                    this.redirect--;
+                    if(this.redirect<1){
+                      this.$router.push('/dasboard');
+                    }
+                }.bind(this), 1000);
               }else{
                 this.resp=response.data;
               }
@@ -102,4 +122,14 @@ export default {
     }
   }
 };
+/* this.$validator.extend('email_exists', {
+  getMessage: field => `The email is already in the system.`,
+  validate: value => {
+      return this.$http.get('api/users/email/'+value).then(response => {
+          return {
+              valid: response.data.valid // Your api could return a response containing a 'valid property'
+          }
+      }).catch(error=> { return { error: response.error.val } });
+  }
+}); */
 </script>

@@ -24,7 +24,7 @@ export default {
     computed:{
         nameCountry:function () {
             var self=this;
-            return (countries.filter(function(value, key) {
+            return (countries.filter(function(value) {
                 return value.code==self.iso3;
             })[0]||{name:'_unknown'});
         }

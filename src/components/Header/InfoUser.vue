@@ -24,11 +24,11 @@
                 <custom-img :src="'/app/admin/img_user/'+imgUser" default="/app/img/avatar.jpg"></custom-img>
               </div>
               <div class="m-card-user__details">
-                <span class="m-card-user__name m--font-weight-500">{{ fullName | ucwords }}</span>
-                <a
+                  <span class="m-card-user__name m--font-weight-500">{{ fullName | ucwords }}</span>
+                <span
                   href
                   class="m-card-user__email m--font-weight-300 m-link"
-                >{{ email | lower }}</a>
+                >{{ email | lower }}</span>
               </div>
             </div>
           </div>
@@ -51,9 +51,12 @@
                 <li class="m-nav__separator m-nav__separator--fit"></li>
                 <li class="m-nav__item">
                   <a @click.prevent="logOut"
-                    class="btn m-btn--pill btn-outline-primary m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
+                    class="btn m-btn--pill btn-outline-primary pull-right m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
                     :class="{'m-login__btn--primary m-loader m-loader--right': spin}"
                   >Logout</a>
+                  <router-link :to="{ path: '/MyAcount'}" replace class="btn m-btn--pill btn-outline-success m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+                    Acount
+                  </router-link>
                 </li>
               </ul>
             </div>
