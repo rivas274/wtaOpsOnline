@@ -12,7 +12,7 @@
           <span class="m--hidden-mobile">General</span>
         </a>
       </li>
-      <li :class="{active:tabShow=='Bills'}" v-tooltip:top="'Bills'">
+      <li v-if="permission.bills" :class="{active:tabShow=='Bills'}" v-tooltip:top="'Bills'">
         <a
           class="nav-link"
           :class="{'m--font-success':tabShow=='Bills'}"
@@ -27,7 +27,7 @@
       <div class="tab-pane" :class="{active:tabShow=='General'}">
         <AssistDetail :id-assist="assistBase.idAsist" ></AssistDetail>
       </div>
-      <div class="tab-pane" :class="{active:tabShow=='Bills'}">
+      <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='Bills'}">
         <list-bill :id-assist="assistBase.idAsist"></list-bill>
       </div>
     </div>
@@ -42,7 +42,10 @@ export default {
   data() {
     return {
       assistBase: this.assist,
-      tabShow: "General"
+      tabShow: "General",
+      permission:{
+        bills:this.middleware('bills','read')
+      }
     };
   },
   methods: {

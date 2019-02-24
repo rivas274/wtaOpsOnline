@@ -28,12 +28,11 @@
           v-on:input="setDataFilter"
         ></input-from-table>
       </div>
-      <div class="form-group m-form__group row">
+      <div class="form-group m-form__group row" v-if="permission.bills">
         <multi-selects
           v-if="clients.length>1"
           class="col-md-4 m-form__group-sub"
           name="arrPrefix"
-          watermark="Search Clients"
           :options="clients"
           v-on:input="setDataFilter"
         ></multi-selects>
@@ -206,7 +205,10 @@ export default {
         }
       ],
       open: [],
-      showLoader: false
+      showLoader: false,
+      permission:{
+        bills:this.middleware('bills','read')
+      }
     };
   },
   methods: {

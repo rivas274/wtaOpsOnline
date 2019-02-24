@@ -15,7 +15,7 @@ img[alt]:after {
     <img v-show="imgUrlAlt"
         @error="imgUrlAlt"
         :src="srcFlag" 
-        :class="[bindingclass]"
+        :class="bindingclass"
         v-tooltip="title"
         :style="{ maxHeight: cssActivePx(height), maxWidth: cssActivePx(width)}"
         alt>

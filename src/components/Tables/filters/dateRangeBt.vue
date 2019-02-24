@@ -6,7 +6,6 @@
         :name="name"
         class="form-control m-input"
         :placeholder="watermark"
-        v-model="value"
         readonly
       >
       <span class="m-input-icon__icon m-input-icon__icon--left">
@@ -32,8 +31,10 @@ export default {
           buttonClasses: "m-btn btn",
           applyClass: "btn-primary",
           cancelClass: "btn-secondary",
+          autoUpdateInput: false,
           locale: {
-            format: "YYYY-MM-DD"
+            format: "YYYY-MM-DD",
+            cancelLabel: 'Clear'
           }
         },
         function(a, t) {
@@ -45,7 +46,9 @@ export default {
             startDate: a.format("YYYY-MM-DD")
           });
         }
-      );
+      ).on('cancel.daterangepicker', function(ev, picker) {
+        $(this).val('');
+      });
   }
 };
 </script>

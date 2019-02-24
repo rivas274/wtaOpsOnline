@@ -6,7 +6,6 @@ var VueSession = {
         STORAGE.setItem(VueSession.key,JSON.stringify(all));
     }
 }
-
 VueSession.install = function(Vue, options) {
     if(options && 'persist' in options && options.persist) STORAGE = window.localStorage;
     else STORAGE = window.sessionStorage;
