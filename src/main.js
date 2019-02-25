@@ -6,7 +6,7 @@ import VueAxios from 'vue-axios';
 import VeeValidate from './custom/vue-vee-custom';
 import VueSession from './custom/vue-session-custom';
 import routes from './custom/routes';
-import midelware from './custom/midelware';
+import middleware from './custom/middleware';
 import permission from './custom/permission.json';
 import globalFilters from'./custom/vue-global-filters';
 import globalDirectives from'./custom/vue-global-directives';
@@ -18,7 +18,7 @@ Vue.use(VeeValidate);
 Vue.use(VueSession, {
   persist: true
 });
-Vue.use(midelware,permission);
+Vue.use(middleware,permission);
 const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
   baseURL: 'https://wtaops.com/app/apiWtaOnline/',

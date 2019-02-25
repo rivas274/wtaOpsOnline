@@ -5,7 +5,11 @@ var Middleware = {
             console.log("permission no register",action);
             return false;
         }
-        return option?permission[action]:permission[action][option];
+        if (!option) {
+            console.log("Option no register",option);
+            return false;
+        }
+        return permission[action][option];
     }
 }
 Middleware.install = function (Vue, options) {
