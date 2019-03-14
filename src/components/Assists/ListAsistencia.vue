@@ -19,6 +19,7 @@
           watermark="Code"
           icon="la flaticon-interface-5"
           v-on:input="setDataFilter"
+          ref="code"
         ></input-from-table>
         <input-from-table
           class="col-md-4 m-form__group-sub"
@@ -26,6 +27,7 @@
           watermark="Passenger"
           icon="la flaticon-avatar"
           v-on:input="setDataFilter"
+          ref="passager"
         ></input-from-table>
       </div>
       <div class="form-group m-form__group row" v-if="permission.bills">
@@ -45,6 +47,9 @@
         <!-- <div class="col m--align-right">
             <button class="btn btn-brand" @click="getAssistance(0)">Search</button>
         </div>-->
+      </div>
+      <div class="form-group m-form__group row">
+        <button @click="clear">clear</button>
       </div>
     </template>
     <template slot="thead">
@@ -282,6 +287,12 @@ export default {
         label: label[status],
         ico: ico[status]
       };
+    },
+    clear: function(){
+        this.$refs.passager.value='';
+        this.$refs.code.value='';
+        this.setDataFilter('code','');
+        this.setDataFilter('passager','');
     }
   },
   mounted() {
