@@ -23,7 +23,7 @@ export default {
     return {
       value: this.selected,
       bindingclass: this.class
-    };
+    }
   },
   mounted() {
     $(this.$el)
