@@ -12,6 +12,7 @@
           name="date"
           watermark="Select date range"
           v-on:input="setDataFilter"
+          :value="filters.date"
         ></date-range-bt>
         <input-from-table
           class="col-md-4 m-form__group-sub"
@@ -19,6 +20,7 @@
           watermark="Code"
           icon="la flaticon-interface-5"
           v-on:input="setDataFilter"
+          :value="filters.code"
         ></input-from-table>
         <input-from-table
           class="col-md-4 m-form__group-sub"
@@ -26,6 +28,7 @@
           watermark="Passenger"
           icon="la flaticon-avatar"
           v-on:input="setDataFilter"
+          :value="filters.passager"
         ></input-from-table>
       </div>
       <div class="form-group m-form__group row" v-if="permission.bills">
@@ -34,17 +37,20 @@
           class="col-md-4 m-form__group-sub"
           name="arrPrefix"
           :options="clients"
+          :selected="filters.arrPrefix"
           v-on:input="setDataFilter"
         ></multi-selects>
         <select-from-table
           class="col-md-4 m-form__group-sub"
           name="billExists"
           :options="billsOption"
+          :selected="filters.billExists"
           v-on:input="setDataFilter"
         ></select-from-table>
-        <!-- <div class="col m--align-right">
-            <button class="btn btn-brand" @click="getAssistance(0)">Search</button>
-        </div>-->
+        <div class="col m--align-right">
+          <!-- <button class="btn btn-brand" @click="getAssistance(0)">Search</button> -->
+          <button class="btn btn-info" @click="clear">Clear</button>
+        </div>
       </div>
     </template>
     <template slot="thead">
@@ -282,6 +288,19 @@ export default {
         label: label[status],
         ico: ico[status]
       };
+    },
+    clear: function(){
+        this.filters={
+            code: "",
+            billExists: "",
+            arrPrefix: [],
+            passager: "",
+            date: {
+              endDate: "",
+              startDate: ""
+            }
+          };
+        this.getAssistance(0);
     }
   },
   mounted() {

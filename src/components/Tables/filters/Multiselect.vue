@@ -16,7 +16,7 @@
 <script>
 import Moultiselect from "vue-multiselect";
 export default {
-  props: ["watermark", "options", "values", "name","class"],
+  props: ["watermark", "options", "selected", "name","class"],
   components: {
     Moultiselect
   },
@@ -39,9 +39,12 @@ export default {
   watch: {
     options: function(newVal) {
       this.option = newVal;
-    }
+    },
+    selected: function(newVal) {
+      this.value=this.option.filter(element => newVal.includes(element.code));
+    },
   }
-};
+}
 </script>
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>

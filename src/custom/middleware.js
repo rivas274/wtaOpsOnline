@@ -2,11 +2,9 @@ var permission = null;
 var Middleware = {
     permission: function (action, option) {
         if (!action) {
-            console.log("permission no register",action);
             return false;
         }
         if (!option) {
-            console.log("Option no register",option);
             return false;
         }
         return permission[action][option];

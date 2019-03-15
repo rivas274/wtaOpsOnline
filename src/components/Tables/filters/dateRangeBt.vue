@@ -18,7 +18,7 @@
 </template>
 <script>
 export default {
-  props: ["watermark", "name",'class'],
+  props: ["watermark", "name",'class','value'],
   data(){
     return {bindingclass:this.class}
   },
@@ -49,6 +49,13 @@ export default {
       ).on('cancel.daterangepicker', function(ev, picker) {
         $(this).val('');
       });
+  },
+  watch: {
+    value: function(newVal) {
+      $(this.$el)
+        .find(".form-control")
+        .val(newVal.startDate + (newVal.startDate?" / ":'') + newVal.endDate);
+    },
   }
 };
 </script>

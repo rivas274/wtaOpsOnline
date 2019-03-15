@@ -7,7 +7,7 @@
           :placeholder="watermark"
           :id="'Search'+name"
           :name="name"
-          v-model="value" 
+          v-model="valInput" 
           @change="input" 
         >
         <span class="m-input-icon__icon m-input-icon__icon--left">
@@ -20,18 +20,23 @@
 </template>
 <script>
 export default {
-  props: ['watermark','name','icon','class'],
+  props: ['watermark','name','icon','class','value'],
   data: function() {
     return {
       ico: (this.icon||'la la-search'),
-      value: "",
+      valInput: this.value,
       bindingclass:this.class
     };
   },
   methods: {
     input: function() {
-      this.$emit("input", this.name, this.value);
+      this.$emit("input", this.name, this.valInput);
     }
+  },
+  watch: {
+    value: function(newVal) {
+      this.valInput=newVal;
+    },
   }
-};
+}
 </script>
