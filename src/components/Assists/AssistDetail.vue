@@ -198,7 +198,9 @@
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Relation</span>
-                    <span class="m-widget16__price m--align-right m--font-danger"></span>
+                    <span class="m-widget16__price m--align-right m--font-danger">
+                      {{results.contacto.relation}}
+                    </span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Case Type</span>
