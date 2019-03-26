@@ -1,8 +1,8 @@
 <style scoped>
-.options-btn{
+.options-btn {
   display: inline-flex;
 }
-iframe{
+iframe {
   height: 360px;
   width: 100%;
 }
@@ -17,6 +17,7 @@ iframe{
           name="date"
           watermark="Select date range"
           v-on:input="setDataFilter"
+          :value="filters.date"
         ></date-range-bt>
         <input-from-table
           class="col-md-4 m-form__group-sub"
@@ -24,7 +25,11 @@ iframe{
           watermark="Reference / Description"
           icon="flaticon-interface-5"
           v-on:input="setDataFilter"
+          :value="filters.code"
         ></input-from-table>
+        <div class="col m--align-right">
+          <button class="btn btn-info" @click="clear">Clear</button>
+        </div>
       </div>
     </template>
     <template slot="thead">
@@ -77,7 +82,9 @@ iframe{
             <span>{{bill.provider.providerName||'N/A'}}</span>
           </td>
           <td>
-            <span v-tooltip="'Currency '+bill.currency">{{ bill.originalAmount | currency(bill.currency) }}</span>
+            <span
+              v-tooltip="'Currency '+bill.currency"
+            >{{ bill.originalAmount | currency(bill.currency) }}</span>
           </td>
           <td>
             <span>{{ bill.exchangeRate }}</span>
@@ -89,16 +96,24 @@ iframe{
             <span v-tooltip="'Currency USD'">{{ bill.coveredAmount | currency("USD") }}</span>
           </td>
           <td class="text-center">
-            <span class="m-badge m-badge--wide" :class="[billStatusColor(bill.billStatus)]">{{ bill.billStatusDesc }}</span>
+            <span
+              class="m-badge m-badge--wide"
+              :class="[billStatusColor(bill.billStatus)]"
+            >{{ bill.billStatusDesc }}</span>
           </td>
           <td class="text-center fa-status">
             <span class="options-btn">
-              <a @click="togleBill(bill)"
-              class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
+              <a
+                @click="togleBill(bill)"
+                class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+              >
                 <i class="fa" :class="[checkVisibility(bill)?'fa-eye-slash':'fa-eye']"></i>
               </a>
-              <a :href="download(bill)" target="_blank"
-                class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill">
+              <a
+                :href="download(bill)"
+                target="_blank"
+                class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+              >
                 <i class="fa fa-cloud-download-alt"></i>
               </a>
             </span>
@@ -110,7 +125,7 @@ iframe{
             <iframe :src="streaming(bill)"></iframe>
           </td>
         </tr>
-      </template>  
+      </template>
     </template>
     <template slot="footer">
       <pagination
@@ -132,12 +147,12 @@ export default {
     TableBasic,
     inputFromTable,
     dateRangeBt,
-    pagination,
+    pagination
   },
-  props:["id-assist"],
+  props: ["id-assist"],
   data: function() {
     return {
-      assist:this.idAssist,
+      assist: this.idAssist,
       filters: {
         code: "",
         date: {
@@ -151,25 +166,25 @@ export default {
         limit: 15,
         size: 0
       },
-      showLoader:false,
-      view:[]
+      showLoader: false,
+      view: []
     };
   },
   methods: {
     getBill: function(pg) {
       pg = Number.isInteger(pg) ? pg : this.footerTable.start;
-      this.showLoader=true;
+      this.showLoader = true;
       this.axios
         .post("getBill", {
           start: pg,
           limit: this.footerTable.limit,
           code: this.filters.code.trim(),
-          idAssist:this.assist,
+          idAssist: this.assist,
           endDate: this.filters.date.endDate,
           startDate: this.filters.date.startDate
         })
         .then(response => {
-          this.showLoader=false;
+          this.showLoader = false;
           this.results = response.data.results;
           this.footerTable = {
             start: response.data.start,
@@ -186,42 +201,58 @@ export default {
       this.footerTable[campo] = value;
       this.getBill();
     },
-    billStatusColor(status){
-      let colors={
-        1:'m-badge--accent',
-        2:'m-badge--success',
-        3:'m-badge--danger',
-        4:'m-badge--warning',
-        5:'m-badge--focus',
+    billStatusColor(status) {
+      let colors = {
+        1: "m-badge--accent",
+        2: "m-badge--success",
+        3: "m-badge--danger",
+        4: "m-badge--warning",
+        5: "m-badge--focus"
       };
       return colors[status];
     },
-    togleBill: function({idFile}) {
+    togleBill: function({ idFile }) {
       let tab = this.view.filter(function(v) {
-        return v== idFile;
+        return v == idFile;
       });
       if (tab.length == 0) {
         this.view.push(idFile);
-      }else{
+      } else {
         this.view = this.view.filter(function(v) {
           return v != idFile;
         });
       }
     },
-    checkVisibility({idFile}){
-      return this.view.filter(function(v) {
-        return v== idFile;
-      }).length!=0;
+    checkVisibility({ idFile }) {
+      return (
+        this.view.filter(function(v) {
+          return v == idFile;
+        }).length != 0
+      );
     },
-    download({fileName}){
-      return this.axios.defaults.baseURL.split('/app/')[0]+"/download/"+fileName;
+    download({ fileName }) {
+      return (
+        this.axios.defaults.baseURL.split("/app/")[0] + "/download/" + fileName
+      );
     },
-    streaming({fileName}){
-      return this.axios.defaults.baseURL.split('/app/')[0]+"/streaming/"+fileName;
+    streaming({ fileName }) {
+      return (
+        this.axios.defaults.baseURL.split("/app/")[0] + "/streaming/" + fileName
+      );
     },
+    clear: function() {
+      this.filters = {
+        code: "",
+        date: {
+          endDate: "",
+          startDate: ""
+        }
+      };
+      this.getBill(0);
+    }
   },
   mounted() {
     this.getBill();
-  },
+  }
 };
 </script>

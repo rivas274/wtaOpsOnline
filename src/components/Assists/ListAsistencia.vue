@@ -31,22 +31,24 @@
           :value="filters.passager"
         ></input-from-table>
       </div>
-      <div class="form-group m-form__group row" v-if="permission.bills">
-        <multi-selects
-          v-if="clients.length>1"
-          class="col-md-4 m-form__group-sub"
-          name="arrPrefix"
-          :options="clients"
-          :selected="filters.arrPrefix"
-          v-on:input="setDataFilter"
-        ></multi-selects>
-        <select-from-table
-          class="col-md-4 m-form__group-sub"
-          name="billExists"
-          :options="billsOption"
-          :selected="filters.billExists"
-          v-on:input="setDataFilter"
-        ></select-from-table>
+      <div class="form-group m-form__group row">
+        <template v-if="permission.bills">
+          <multi-selects
+            v-if="clients.length>1"
+            class="col-md-4 m-form__group-sub"
+            name="arrPrefix"
+            :options="clients"
+            :selected="filters.arrPrefix"
+            v-on:input="setDataFilter"
+          ></multi-selects>
+          <select-from-table
+            class="col-md-4 m-form__group-sub"
+            name="billExists"
+            :options="billsOption"
+            :selected="filters.billExists"
+            v-on:input="setDataFilter"
+          ></select-from-table>
+        </template>
         <div class="col m--align-right">
           <!-- <button class="btn btn-brand" @click="getAssistance(0)">Search</button> -->
           <button class="btn btn-info" @click="clear">Clear</button>
@@ -105,7 +107,7 @@
           <span v-html="assist.fisrtName+' '+assist.lastName"></span>
         </td>
         <td>
-          <span>{{assist.symptom}}</span>
+          <span>{{assist.symptomDetaill}}</span>
         </td>
         <td>
           <span>{{assist.descCaseType}}</span>

@@ -3,13 +3,13 @@
   <div class="col-lg-12" :class="{'m-loader m-loader--metal m-loader--div':showLoader}">
     <div class="m-portlet m-portlet--full-height">
       <div class="m-portlet__body">
-        <div  class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg"
-              :id="'m_accordion_'+idAssist"
-              role="tablist">
+        <div
+          class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg"
+          :id="'m_accordion_'+idAssist"
+          role="tablist"
+        >
           <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok">
-            <template slot="title">
-              GENERAL INFORMATION
-            </template>
+            <template slot="title">GENERAL INFORMATION</template>
             <template slot="body">
               <AssistAccordionDetaill>
                 <template slot="title">Travel Source</template>
@@ -100,32 +100,21 @@
                     class="m-widget16__item"
                     v-if="results.voucher.contacto.name || results.voucher.contacto.email || results.voucher.contacto.phone"
                   >
-                    <span
-                      class="m-widget16__amount m--align-center"
-                    >Contact Emergency</span>
+                    <span class="m-widget16__amount m--align-center">Contact Emergency</span>
                   </div>
-                  <div
-                    class="m-widget16__item"
-                    v-if="results.voucher.contacto.name"
-                  >
+                  <div class="m-widget16__item" v-if="results.voucher.contacto.name">
                     <span class="m-widget16__date">Name</span>
                     <span
                       class="m-widget16__price m--align-right m--font-danger"
                     >{{results.voucher.contacto.name}}</span>
                   </div>
-                  <div
-                    class="m-widget16__item"
-                    v-if="results.voucher.contacto.email"
-                  >
+                  <div class="m-widget16__item" v-if="results.voucher.contacto.email">
                     <span class="m-widget16__date">Email</span>
                     <span
                       class="m-widget16__price m--align-right m--font-brand"
                     >{{results.voucher.contacto.email}}</span>
                   </div>
-                  <div
-                    class="m-widget16__item"
-                    v-if="results.voucher.contacto.phone"
-                  >
+                  <div class="m-widget16__item" v-if="results.voucher.contacto.phone">
                     <span class="m-widget16__date">Phone</span>
                     <span
                       class="m-widget16__price m--align-right m--font-danger"
@@ -136,9 +125,7 @@
             </template>
           </AssistAccordion>
           <AssistAccordion :id="'_assistance_'+idAssist" ico="fa flaticon-alert-2">
-            <template slot="title">
-              ASSISTANCE DATA
-            </template>
+            <template slot="title">ASSISTANCE DATA</template>
             <template slot="body">
               <AssistAccordionDetaill>
                 <template slot="title">ASSISTANCE CONCTACT</template>
@@ -179,11 +166,11 @@
                       class="m-widget16__price m--align-right m--font-danger"
                     >{{results.contacto.birthDate}}</span>
                   </div>
-                  <div class="m-widget16__item" v-if="results.contacto.genre">
+                  <div class="m-widget16__item">
                     <span class="m-widget16__date">Genre</span>
                     <span
                       class="m-widget16__price m--align-right m--font-brand"
-                    >{{results.contacto.genre}}</span>
+                    >{{results.contacto.genre | genreDetaill}}</span>
                   </div>
                 </template>
               </AssistAccordionDetaill>
@@ -198,25 +185,27 @@
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Relation</span>
-                    <span class="m-widget16__price m--align-right m--font-danger">
-                      {{results.contacto.relation}}
-                    </span>
+                    <span
+                      class="m-widget16__price m--align-right m--font-danger"
+                    >{{results.contacto.relation}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Case Type</span>
                     <span
                       class="m-widget16__price m--align-right m--font-brand"
-                    >{{results.caseType}}</span>
+                    >{{results.caseType.description}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Symptoms</span>
                     <span
                       class="m-widget16__price m--align-right m--font-danger"
-                    >{{results.symptom}}</span>
+                    >{{results.symptom.description}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Type of Coordination</span>
-                    <span class="m-widget16__price m--align-right m--font-brand"></span>
+                    <span
+                      class="m-widget16__price m--align-right m--font-brand"
+                    >{{results.coordination.description}}</span>
                   </div>
                 </template>
               </AssistAccordionDetaill>
@@ -238,30 +227,28 @@
             </template>
           </AssistAccordion>
           <AssistAccordion :id="'_address_'+idAssist" ico="fa flaticon-placeholder">
-            <template slot="title">
-              ADDRESS
-            </template>
+            <template slot="title">ADDRESS</template>
             <template slot="body">
               <AssistAccordionDetaill>
                 <template slot="title">Country</template>
                 <template slot="body">
-                  <div class="m-widget16__item" v-if="results.location.isoCountry">
+                  <div class="m-widget16__item" v-if="results.location.country.iso">
                     <span class="m-widget16__date">Country</span>
                     <span class="m-widget16__price m--align-right m--font-brand">
-                      <Flag :iso="results.location.isoCountry"></Flag>
+                      <Flag :iso="results.location.country.iso"></Flag>
                     </span>
                   </div>
-                  <div class="m-widget16__item" v-if="results.location.isoState">
+                  <div class="m-widget16__item" v-if="results.location.state.description">
                     <span class="m-widget16__date">States</span>
                     <span
                       class="m-widget16__price m--align-right m--font-danger"
-                    >{{results.location.isoState}}</span>
+                    >{{results.location.state.description}}</span>
                   </div>
-                  <div class="m-widget16__item" v-if="results.location.isoCity">
+                  <div class="m-widget16__item" v-if="results.location.city.description">
                     <span class="m-widget16__date">City</span>
                     <span
                       class="m-widget16__price m--align-right m--font-brand"
-                    >{{results.location.isoCity}}</span>
+                    >{{results.location.city.description}}</span>
                   </div>
                 </template>
               </AssistAccordionDetaill>
@@ -274,10 +261,7 @@
                       class="m-widget16__price m--align-right m--font-brand"
                     >{{results.location.address}}</span>
                   </div>
-                  <div
-                    class="m-widget16__item"
-                    v-if="results.location.optionalAddress"
-                  >
+                  <div class="m-widget16__item" v-if="results.location.optionalAddress">
                     <span class="m-widget16__date">Optional Address</span>
                     <span
                       class="m-widget16__price m--align-right m--font-danger"

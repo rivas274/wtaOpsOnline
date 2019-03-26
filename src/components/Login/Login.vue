@@ -8,7 +8,6 @@
     <div
       class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2"
       id="m_login"
-      style="background-image: url(assets/img/login/login.jpg);"
     >
       <div class="m-grid__item m-grid__item--fluid m-login__wrapper">
         <div class="m-login__container">
@@ -72,11 +71,16 @@
 <script>
 import customImg from "../Element/custom-img";
 import FormError from "../FormError";
+import '../../custom/particles.js';
+import particlesCustom from '../../custom/particlesjs-config.json';
 export default {
   name: "Login",
   components: {
     FormError,
     customImg
+  },
+  mounted(){
+    window.particlesJS('m_login', particlesCustom);
   },
   data: function() {
     let user='';
