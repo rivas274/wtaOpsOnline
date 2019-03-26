@@ -10,7 +10,9 @@ import middleware from './custom/middleware';
 import permission from './custom/permission.json';
 import globalFilters from'./custom/vue-global-filters';
 import globalDirectives from'./custom/vue-global-directives';
+import VueParticles from 'vue-particles';
 
+Vue.use(VueParticles)
 Vue.use(VueRouter);
 Vue.use(globalDirectives);
 Vue.use(globalFilters);
