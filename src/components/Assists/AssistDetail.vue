@@ -1,4 +1,16 @@
 <style src="../Element/custom-m-loader.css"></style>
+<style scoped>
+.m-widget16__price {
+  word-break: break-word;
+}
+.m-widget16__item:nth-child(odd) {
+    color: #f4516c !important;
+}
+.m-widget16__item:nth-child(even) {
+    color: #716aca !important;
+}
+</style>
+
 <template>
   <div class="col-lg-12" :class="{'m-loader m-loader--metal m-loader--div':showLoader}">
     <div class="m-portlet m-portlet--full-height">
@@ -16,32 +28,32 @@
                 <template slot="body">
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Destination</span>
-                    <span class="m-widget16__price m--align-right m--font-danger">
+                    <span class="m-widget16__price m--align-right">
                       <Flag :iso="results.voucher.destination"></Flag>
                     </span>
                   </div>
                   <div class="m-widget16__item" v-if="results.voucher.namePlan">
                     <span class="m-widget16__date">Plan</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.voucher.namePlan}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">From</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.voucher.startDate}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">To</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.voucher.endDate}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Purchase Date</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.voucher.purchaseDate}}</span>
                   </div>
                 </template>
@@ -52,37 +64,39 @@
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">First Name</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
-                    >{{results.passenger.fisrtName}}</span>
+                      class="m-widget16__price m--align-right"
+                      v-html="results.passenger.fisrtName"
+                    ></span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Last Name</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
-                    >{{results.passenger.lastName}}</span>
+                      class="m-widget16__price m--align-right"
+                      v-html="results.passenger.lastName"
+                    ></span>
                   </div>
                   <div class="m-widget16__item" v-if="results.passenger.email">
                     <span class="m-widget16__date">Email</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.passenger.email}}</span>
                   </div>
                   <div class="m-widget16__item" v-if="results.passenger.phone">
                     <span class="m-widget16__date">Phone</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.passenger.phone}}</span>
                   </div>
                   <div class="m-widget16__item" v-if="results.passenger.passport">
                     <span class="m-widget16__date">Passport No.</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.passenger.passport}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Date of Birth</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.passenger.birthDate}}</span>
                   </div>
                 </template>
@@ -105,19 +119,19 @@
                   <div class="m-widget16__item" v-if="results.voucher.contacto.name">
                     <span class="m-widget16__date">Name</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.voucher.contacto.name}}</span>
                   </div>
                   <div class="m-widget16__item" v-if="results.voucher.contacto.email">
                     <span class="m-widget16__date">Email</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.voucher.contacto.email}}</span>
                   </div>
                   <div class="m-widget16__item" v-if="results.voucher.contacto.phone">
                     <span class="m-widget16__date">Phone</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.voucher.contacto.phone}}</span>
                   </div>
                 </template>
@@ -133,43 +147,45 @@
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">First Name</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
-                    >{{results.contacto.fisrtName}}</span>
+                      class="m-widget16__price m--align-right"
+                      v-html="results.contacto.fisrtName"
+                    ></span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Last Name</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
-                    >{{results.contacto.lastName}}</span>
+                      class="m-widget16__price m--align-right"
+                      v-html="results.contacto.lastName"
+                    ></span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Email</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.contacto.email}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Phone</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.contacto.phone}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Passport No.</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.contacto.passport}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Date of Birth</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.contacto.birthDate}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Genre</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.contacto.genre | genreDetaill}}</span>
                   </div>
                 </template>
@@ -180,31 +196,31 @@
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Source</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.origenAssist}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Relation</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.contacto.relation}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Case Type</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.caseType.description}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Symptoms</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.symptom.description}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Type of Coordination</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.coordination.description}}</span>
                   </div>
                 </template>
@@ -215,12 +231,12 @@
                   <div class="m-widget16__item">
                     <span
                       class="m-widget16__date m--align-center"
-                      v-if="!results.contactObservation"
+                      v-if="!results.contacto.observations"
                     >N/A</span>
                     <span
                       class="m-widget16__date m--align-center"
-                      v-if="results.contactObservation"
-                    >{{results.contactObservation}}</span>
+                      v-if="results.contacto.observations"
+                    >{{results.contacto.observations}}</span>
                   </div>
                 </template>
               </AssistAccordionDetaill>
@@ -234,20 +250,20 @@
                 <template slot="body">
                   <div class="m-widget16__item" v-if="results.location.country.iso">
                     <span class="m-widget16__date">Country</span>
-                    <span class="m-widget16__price m--align-right m--font-brand">
+                    <span class="m-widget16__price m--align-right">
                       <Flag :iso="results.location.country.iso"></Flag>
                     </span>
                   </div>
                   <div class="m-widget16__item" v-if="results.location.state.description">
                     <span class="m-widget16__date">States</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.location.state.description}}</span>
                   </div>
                   <div class="m-widget16__item" v-if="results.location.city.description">
                     <span class="m-widget16__date">City</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.location.city.description}}</span>
                   </div>
                 </template>
@@ -258,19 +274,20 @@
                   <div class="m-widget16__item" v-if="results.location.address">
                     <span class="m-widget16__date">Address</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
-                    >{{results.location.address}}</span>
+                      class="m-widget16__price m--align-right"
+                      v-html="results.location.address"
+                    ></span>
                   </div>
                   <div class="m-widget16__item" v-if="results.location.optionalAddress">
                     <span class="m-widget16__date">Optional Address</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.location.optionalAddress}}</span>
                   </div>
-                  <div class="m-widget16__item" v-if="results.location.zipCode">
+                  <div class="m-widget16__item" v-if="results.location.zipCode>0">
                     <span class="m-widget16__date">Zip Code</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.location.zipCode}}</span>
                   </div>
                 </template>
@@ -281,20 +298,41 @@
                   <div class="m-widget16__item" v-if="results.location.namePlace">
                     <span class="m-widget16__date">Name/Place</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
+                      class="m-widget16__price m--align-right"
                     >{{results.location.namePlace}}</span>
                   </div>
                   <div class="m-widget16__item" v-if="results.location.room">
                     <span class="m-widget16__date">Room</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-danger"
+                      class="m-widget16__price m--align-right"
                     >{{results.location.room}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Phone</span>
                     <span
-                      class="m-widget16__price m--align-right m--font-brand"
-                    >{{results.contacto.phone}}</span>
+                      class="m-widget16__price m--align-right"
+                    >{{results.location.phone}}</span>
+                  </div>
+                  <div class="m-widget16__item">
+                    <span class="m-widget16__date">Coordinates</span>
+                    <span class="m-widget16__price m--align-right">
+                      <a
+                        :href="'https://www.google.com/maps/@'+results.location.coordinates.lat+','+results.location.coordinates.lng+',16z'"
+                        target="_blank"
+                      ><i class="la la-map-marker"></i>Show Map</a>
+                    </span>
+                  </div>
+                  <div class="m-widget16__item">
+                    <span class="m-widget16__date">Latitud</span>
+                    <span class="m-widget16__price m--align-right">
+                      {{results.location.coordinates.lat|toFixed(7)}}
+                    </span>
+                  </div>
+                  <div class="m-widget16__item">
+                    <span class="m-widget16__date">Longitud</span>
+                    <span class="m-widget16__price m--align-right">
+                      {{results.location.coordinates.lng|toFixed(7)}}
+                    </span>
                   </div>
                 </template>
               </AssistAccordionDetaill>
