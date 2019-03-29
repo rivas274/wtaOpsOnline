@@ -27,9 +27,15 @@
                 <template slot="title">Travel Source</template>
                 <template slot="body">
                   <div class="m-widget16__item">
+                    <span class="m-widget16__date">Source</span>
+                    <span class="m-widget16__price m--align-right">
+                      <Flag :iso="results.voucher.source"></Flag>
+                    </span>
+                  </div>
+                  <div class="m-widget16__item">
                     <span class="m-widget16__date">Destination</span>
                     <span class="m-widget16__price m--align-right">
-                      <Flag :iso="results.voucher.destination"></Flag>
+                      {{results.voucher.destination}}
                     </span>
                   </div>
                   <div class="m-widget16__item" v-if="results.voucher.namePlan">

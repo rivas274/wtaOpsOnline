@@ -25,7 +25,6 @@ const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
   baseURL: 'https://wtaops.com/app/apiWtaOnline/',
   headers: {
-    DEBUG: false,
     'Content-Type': 'multipart/form-data'
   }
 });
