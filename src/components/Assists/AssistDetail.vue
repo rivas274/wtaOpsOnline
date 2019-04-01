@@ -4,10 +4,10 @@
   word-break: break-word;
 }
 .m-widget16__item:nth-child(odd) {
-    color: #f4516c !important;
+    color: #716aca !important;
 }
 .m-widget16__item:nth-child(even) {
-    color: #716aca !important;
+    color: #34bfa3 !important;
 }
 </style>
 
@@ -55,6 +55,12 @@
                     <span
                       class="m-widget16__price m--align-right"
                     >{{results.voucher.endDate}}</span>
+                  </div>
+                  <div class="m-widget16__item">
+                    <span class="m-widget16__date">Days</span>
+                    <span
+                      class="m-widget16__price m--align-right"
+                    >{{results.voucher.days}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Purchase Date</span>
@@ -105,6 +111,12 @@
                       class="m-widget16__price m--align-right"
                     >{{results.passenger.birthDate}}</span>
                   </div>
+                  <div class="m-widget16__item">
+                    <span class="m-widget16__date">Age</span>
+                    <span
+                      class="m-widget16__price m--align-right"
+                    >{{results.passenger.age}}</span>
+                  </div>
                 </template>
               </AssistAccordionDetaill>
               <AssistAccordionDetaill>
@@ -112,33 +124,50 @@
                 <template slot="body">
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Observations</span>
+                    <span class="m-widget16__price m--align-right" v-if="!results.voucher.comments.comments">N/A</span>
+                  </div>
+                  <div class="m-widget16__item" v-if="results.voucher.comments.comments">
+                    <span class="m-widget16__price" v-html="results.voucher.comments.comments"></span>
                   </div>
                   <div class="m-widget16__item">
-                    <span>{{results.contactObservation}}</span>
+                    <span class="m-widget16__date">Medical comments</span>
+                    <span class="m-widget16__price m--align-right" v-if="!results.voucher.comments.medical">N/A</span>
+                  </div>
+                  <div class="m-widget16__item" v-if="results.voucher.comments.medical">
+                    <span class="m-widget16__price" v-html="results.voucher.comments.medical"></span>
                   </div>
                   <div
                     class="m-widget16__item"
-                    v-if="results.voucher.contacto.name || results.voucher.contacto.email || results.voucher.contacto.phone"
+                    v-if="results.voucher.contact.name || results.voucher.contact.email || results.voucher.contact.phone"
                   >
                     <span class="m-widget16__amount m--align-center">Contact Emergency</span>
                   </div>
-                  <div class="m-widget16__item" v-if="results.voucher.contacto.name">
+                  <div class="m-widget16__item" v-if="results.voucher.contact.name">
                     <span class="m-widget16__date">Name</span>
                     <span
                       class="m-widget16__price m--align-right"
-                    >{{results.voucher.contacto.name}}</span>
+                    >{{results.voucher.contact.name}}</span>
                   </div>
-                  <div class="m-widget16__item" v-if="results.voucher.contacto.email">
+                  <div class="m-widget16__item" v-if="results.voucher.contact.email">
                     <span class="m-widget16__date">Email</span>
                     <span
                       class="m-widget16__price m--align-right"
-                    >{{results.voucher.contacto.email}}</span>
+                    >{{results.voucher.contact.email}}</span>
                   </div>
-                  <div class="m-widget16__item" v-if="results.voucher.contacto.phone">
+                  <div class="m-widget16__item" v-if="results.voucher.contact.phone">
                     <span class="m-widget16__date">Phone</span>
                     <span
                       class="m-widget16__price m--align-right"
-                    >{{results.voucher.contacto.phone}}</span>
+                    >{{results.voucher.contact.phone}}</span>
+                  </div>
+                  <div class="m-widget16__item">
+                    <span class="m-widget16__date">Conditioned</span>
+                    <span class="m-widget16__price m--align-right">
+                      <a
+                        :href="baseUrlApi()+'conditioned/'+results.codeAssist"
+                        target="_blank"
+                      ><i class="fa fa-file-pdf fa-lg"></i> Show</a>
+                    </span>
                   </div>
                 </template>
               </AssistAccordionDetaill>
@@ -154,45 +183,51 @@
                     <span class="m-widget16__date">First Name</span>
                     <span
                       class="m-widget16__price m--align-right"
-                      v-html="results.contacto.fisrtName"
+                      v-html="results.contact.fisrtName"
                     ></span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Last Name</span>
                     <span
                       class="m-widget16__price m--align-right"
-                      v-html="results.contacto.lastName"
+                      v-html="results.contact.lastName"
                     ></span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Email</span>
                     <span
                       class="m-widget16__price m--align-right"
-                    >{{results.contacto.email}}</span>
+                    >{{results.contact.email}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Phone</span>
                     <span
                       class="m-widget16__price m--align-right"
-                    >{{results.contacto.phone}}</span>
+                    >{{results.contact.phone}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Passport No.</span>
                     <span
                       class="m-widget16__price m--align-right"
-                    >{{results.contacto.passport}}</span>
+                    >{{results.contact.passport}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Date of Birth</span>
                     <span
                       class="m-widget16__price m--align-right"
-                    >{{results.contacto.birthDate}}</span>
+                    >{{results.contact.birthDate}}</span>
+                  </div>
+                  <div class="m-widget16__item">
+                    <span class="m-widget16__date">Age</span>
+                    <span
+                      class="m-widget16__price m--align-right"
+                    >{{results.contact.age}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Genre</span>
                     <span
                       class="m-widget16__price m--align-right"
-                    >{{results.contacto.genre | genreDetaill}}</span>
+                    >{{results.contact.genre | genreDetaill}}</span>
                   </div>
                 </template>
               </AssistAccordionDetaill>
@@ -209,7 +244,7 @@
                     <span class="m-widget16__date">Relation</span>
                     <span
                       class="m-widget16__price m--align-right"
-                    >{{results.contacto.relation}}</span>
+                    >{{results.contact.relation}}</span>
                   </div>
                   <div class="m-widget16__item">
                     <span class="m-widget16__date">Case Type</span>
@@ -237,12 +272,35 @@
                   <div class="m-widget16__item">
                     <span
                       class="m-widget16__date m--align-center"
-                      v-if="!results.contacto.observations"
-                    >N/A</span>
+                      v-if="results.contact.observations"
+                      v-html="results.contact.observations"
+                    ></span>
                     <span
                       class="m-widget16__date m--align-center"
-                      v-if="results.contacto.observations"
-                    >{{results.contacto.observations}}</span>
+                      v-else
+                    >N/A</span>
+                  </div>
+                </template>
+              </AssistAccordionDetaill>
+              <AssistAccordionDetaill v-if="Object.keys(results.caseTypeField).length>0">
+                <template slot="title">CASE TYPE FIELDS</template>
+                <template slot="body">
+                  <div class="m-widget16__item" v-for="(field,key) in results.caseTypeField" :key="key">
+                    <span class="m-widget16__date">{{ field.name }}</span>
+                    <span
+                      class="m-widget16__price m--align-right"
+                    >{{ field.value }}</span>
+                  </div>
+                </template>
+              </AssistAccordionDetaill>
+              <AssistAccordionDetaill v-if="Object.keys(results.insuranceField).length>0">
+                <template slot="title">INSURANCE FIELDS</template>
+                <template slot="body">
+                  <div class="m-widget16__item" v-for="(field,key) in results.insuranceField" :key="key">
+                    <span class="m-widget16__date">{{ field.name }}</span>
+                    <span
+                      class="m-widget16__price m--align-right"
+                    >{{ field.value }}</span>
                   </div>
                 </template>
               </AssistAccordionDetaill>

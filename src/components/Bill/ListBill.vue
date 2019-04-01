@@ -13,14 +13,14 @@ iframe {
     <template slot="filters">
       <div class="form-group m-form__group row">
         <date-range-bt
-          class="col-md-4 m-form__group-sub"
+          class-prop="col-md-4 m-form__group-sub"
           name="date"
           watermark="Select date range"
           v-on:input="setDataFilter"
           :value="filters.date"
         ></date-range-bt>
         <input-from-table
-          class="col-md-4 m-form__group-sub"
+          class-prop="col-md-4 m-form__group-sub"
           name="code"
           watermark="Reference / Description"
           icon="flaticon-interface-5"
@@ -231,14 +231,10 @@ export default {
       );
     },
     download({ fileName }) {
-      return (
-        this.axios.defaults.baseURL.split("/app/")[0] + "/download/" + fileName
-      );
+      return this.baseUrlApi() + "download/" + fileName;
     },
     streaming({ fileName }) {
-      return (
-        this.axios.defaults.baseURL.split("/app/")[0] + "/streaming/" + fileName
-      );
+      return this.baseUrlApi() + "streaming/" + fileName;
     },
     clear: function() {
       this.filters = {

@@ -1,8 +1,7 @@
 <template>
-  <div :class="[bindingclass]">
+  <div :class="[classProp]">
     <select
       class="form-control m-bootstrap-select m_selectpicker" data-live-search="true"
-      :placeholder="watermark"
       :id="'Search'+name"
       :name="name"
       v-model="value"
@@ -18,11 +17,10 @@
 </template>
 <script>
 export default {
-  props: ["name", "class", "options", "selected"],
+  props: ["name", "classProp", "options", "selected"],
   data: function() {
     return {
-      value: this.selected,
-      bindingclass: this.class
+      value: this.selected
     }
   },
   mounted() {

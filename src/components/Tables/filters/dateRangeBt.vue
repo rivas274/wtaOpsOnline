@@ -1,5 +1,5 @@
 <template>
-  <div :class="[bindingclass]">
+  <div :class="[classProp]">
     <div class="m-input-icon m-input-icon--left date-bt-vue" :id="'Search'+name">
       <input
         type="text"
@@ -18,10 +18,7 @@
 </template>
 <script>
 export default {
-  props: ["watermark", "name",'class','value'],
-  data(){
-    return {bindingclass:this.class}
-  },
+  props: ["watermark", "name", "classProp", "value"],
   mounted() {
     let _self = this;
     $(_self.$el)
@@ -34,7 +31,7 @@ export default {
           autoUpdateInput: false,
           locale: {
             format: "YYYY-MM-DD",
-            cancelLabel: 'Clear'
+            cancelLabel: "Clear"
           }
         },
         function(a, t) {
@@ -46,16 +43,19 @@ export default {
             startDate: a.format("YYYY-MM-DD")
           });
         }
-      ).on('cancel.daterangepicker', function(ev, picker) {
-        $(this).val('');
+      )
+      .on("cancel.daterangepicker", function(ev) {
+        $(this).val("");
       });
   },
   watch: {
     value: function(newVal) {
       $(this.$el)
         .find(".form-control")
-        .val(newVal.startDate + (newVal.startDate?" / ":'') + newVal.endDate);
-    },
+        .val(
+          newVal.startDate + (newVal.startDate ? " / " : "") + newVal.endDate
+        );
+    }
   }
 };
 </script>

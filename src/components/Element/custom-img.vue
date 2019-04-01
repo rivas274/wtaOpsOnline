@@ -14,24 +14,18 @@ img[alt]:after {
 <template>
     <img v-show="imgUrlAlt"
         @error="imgUrlAlt"
-        :src="srcFlag" 
-        :class="bindingclass"
+        :src="image" 
+        :class="[classProp]"
         v-tooltip="title"
         :style="{ maxHeight: cssActivePx(height), maxWidth: cssActivePx(width)}"
         alt>
 </template>
 <script>
 export default {
-    props:["src","default","height","width","class","title"],
+    props:["src","default","height","width","classProp","title"],
     data:function () {
         return{
             image: this.src,
-            bindingclass: (this.class||null),
-        }
-    },
-    computed:{
-        srcFlag:function() {
-            return this.axios.defaults.baseURL.split('/app/')[0]+'/'+this.image;
         }
     },
     methods:{

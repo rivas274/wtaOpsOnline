@@ -8,7 +8,7 @@
     <template slot="filters">
       <div class="form-group m-form__group row">
         <date-range-bt
-          class="col-md-4 m-form__group-sub"
+          class-prop="col-md-4 m-form__group-sub"
           name="date"
           watermark="Select date range"
           v-on:input="setDataFilter"
@@ -35,19 +35,20 @@
         <template v-if="permission.bills">
           <multi-selects
             v-if="clients.length>1"
-            class="col-md-4 m-form__group-sub"
+            class-prop="col-md-4 m-form__group-sub"
             name="arrPrefix"
             :options="clients"
             :selected="filters.arrPrefix"
             v-on:input="setDataFilter"
           ></multi-selects>
+          <!-- Deshabilitado por pedido del usuario
           <select-from-table
-            class="col-md-4 m-form__group-sub"
+            class-prop="col-md-4 m-form__group-sub"
             name="billExists"
             :options="billsOption"
             :selected="filters.billExists"
             v-on:input="setDataFilter"
-          ></select-from-table>
+          ></select-from-table>-->
         </template>
         <div class="col m--align-right">
           <!-- <button class="btn btn-brand" @click="getAssistance(0)">Search</button> -->
@@ -173,10 +174,14 @@ export default {
   },
   props: ["open-asist"],
   data: function() {
+    var permission={
+        bills:this.middleware('bills','read')
+    };
     return {
+      permission:permission,
       filters: {
         code: "",
-        billExists: "",
+        billExists: permission.bills?"Y":"",
         arrPrefix: [],
         passager: "",
         date: {
@@ -210,9 +215,6 @@ export default {
       ],
       open: [],
       showLoader: false,
-      permission:{
-        bills:this.middleware('bills','read')
-      }
     };
   },
   methods: {

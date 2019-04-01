@@ -36,7 +36,7 @@
               <custom-img
                 height="80"
                 width="280"
-                default="/app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png"
+                :src="baseUrlApi()+'app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png'"
               ></custom-img>
             </div>
             <div class="m-login__signin">

@@ -18,7 +18,7 @@ export default {
         return{
             flag: this.iso.toString().toLowerCase()+".svg",
             iso3: this.iso.toString().toUpperCase(),
-            path:'/app/images/flags_iso/svg/'
+            path: this.baseUrlApi()+'app/images/flags_iso/svg/'
         }
     },
     computed:{

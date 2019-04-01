@@ -53,6 +53,16 @@ customAxios.interceptors.request.use(function (config) {
 }, function (err) {
   return Promise.reject(err);
 });
+Vue.mixin({
+  methods:{
+    baseUrlApi:function() {
+      return 'https://' + this.axios.defaults.baseURL.replace('http://', '')
+        .replace('https://', '')
+        .replace('www.', '')
+        .split(/[/?#]/)[0]+'/';
+    }
+  }
+})
 Vue.use(VueAxios, customAxios);
 router.beforeEach((to, from, next) => {
   //console.log('Vue.$canSee',Vue.$canSee([18]));
