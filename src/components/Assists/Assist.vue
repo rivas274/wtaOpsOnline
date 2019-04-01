@@ -9,7 +9,7 @@
           @click.prevent="showTab('General')"
         >
           <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-          <span class="m--hidden-mobile">General</span>
+          <span>General</span>
         </a>
       </li>
       <li v-if="permission.bills" :class="{active:tabShow=='Bills'}" v-tooltip:top="'Bills'">
@@ -19,7 +19,7 @@
           @click.prevent="showTab('Bills')"
         >
           <i class="fa fa-money-bill" aria-hidden="true"></i>
-          <span class="m--hidden-mobile">Bills</span>
+          <span>Bills</span>
         </a>
       </li>
     </ul>

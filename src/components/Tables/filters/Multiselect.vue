@@ -48,7 +48,7 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style>
 .multiselect {
-  z-index: 99;
+  z-index: 98;
 }
 .multiselect__tags {
   min-height: 35px;

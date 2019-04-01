@@ -40,7 +40,7 @@ iframe {
         <th>
           <span>Reference</span>
         </th>
-        <th style="width: 90px;">
+        <th style="min-width: 90px;">
           <span>Bill Date</span>
         </th>
         <th>
@@ -87,7 +87,7 @@ iframe {
             >{{ bill.originalAmount | currency(bill.currency) }}</span>
           </td>
           <td>
-            <span>{{ bill.exchangeRate }}</span>
+            <span>{{  parseFloat(bill.exchangeRate) }}</span>
           </td>
           <td>
             <span v-tooltip="'Currency USD'">{{ bill.usdAmount | currency("USD") }}</span>

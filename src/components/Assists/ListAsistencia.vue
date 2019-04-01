@@ -2,6 +2,15 @@
 .fa-status .fa {
   font-size: 1.4rem;
 }
+.openAssist:hover{
+  background-color: #716aca;
+  color: #fff;
+}
+.openAssist{
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: .75rem;
+}
 </style>
 <template>
   <TableBasic :show-loader="showLoader">
@@ -58,7 +67,7 @@
     </template>
     <template slot="thead">
       <tr>
-        <th style="width: 85px;">
+        <th style="min-width: 90px;">
           <span>Nro Case</span>
         </th>
         <th>
@@ -76,10 +85,10 @@
         <th>
           <span>Type of Case</span>
         </th>
-        <th style="width: 90px;">
+        <th style="min-width: 90px;">
           <span>Date Event</span>
         </th>
-        <th style="width: 90px;">
+        <th style="min-width: 90px;">
           <span>Opening Date</span>
         </th>
         <th>
@@ -96,7 +105,7 @@
     <template slot="tbody">
       <tr v-for="assist in results" :key="assist.codeAssist">
         <td>
-          <span>{{assist.codeAssist}}</span>
+          <span class="openAssist" @click.prevent="addAssist(assist)">{{assist.codeAssist}}</span>
         </td>
         <td>
           <span>{{assist.clientName}}</span>
