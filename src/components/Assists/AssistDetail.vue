@@ -13,15 +13,19 @@ iframe {
   height: 360px;
   width: 100%;
 }
-</style>
-<style>
-.btn-popover .popover-content{
-  display: none;
-}
 .options-btn {
   display: inline-flex;
 }
+</style>
+<style>
+[data-toggle="popover"] .popover-content{
+  display: none;
+}
+.popover{
+  z-index: 98;
+}
 .popover-body{
+  overflow-y: auto;
   max-height: 400px;
 }
 </style>
@@ -46,7 +50,7 @@ iframe {
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Source</span>
                   <span class="m-widget16__price m--align-right">
-                    <!-- <Flag :iso="assistances.voucher.source"></Flag> -->
+                    <Flag :iso="assistances.voucher.source"></Flag>
                   </span>
                 </div>
                 <div class="m-widget16__item">
@@ -158,31 +162,35 @@ iframe {
                   <span class="m-widget16__price m--align-right">{{assistances.voucher.contact.phone}}</span>
                 </div>
                 <div class="m-widget16__item">
-                  <button type="button" 
-                          class="btn btn-secondary btn-popover" 
-                          data-container="body" 
-                          :title="benefit.SOURCE"
-                          data-placement="left">
-                        Benefit <i class="flaticon-suitcase"></i>
-                    <div style="display:none" class="popover-content">
-                      <table align="center" class="table table-striped table-bordered">
-                        <thead>
-                          <tr>
-                            <th><strong>Name</strong></th>
-                            <th><strong>Value</strong></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <template v-for="benf in benefit.BENEFIT">
-                            <tr :key="benf.id" v-if="benf.name">
-                              <td v-html="benf.name"></td>
-                              <td v-html="benf.valor||'N/A'"></td>
+                  <span class="m-widget16__date">Benefit</span>
+                  <span class="m-widget16__price m--align-right">
+                    {{benefit.SOURCE}}
+                    <button type="button" 
+                            class="btn m-btn m-btn--icon m-btn--icon-only m-btn--pill"
+                            data-toggle="popover"
+                            :title="benefit.SOURCE"
+                            data-placement="left">
+                      <i class="flaticon-suitcase"></i>
+                      <div style="display:none" class="popover-content">
+                        <table align="center" class="table table-striped table-bordered">
+                          <thead>
+                            <tr>
+                              <th><strong>Name</strong></th>
+                              <th><strong>Value</strong></th>
                             </tr>
-                          </template>
-                        </tbody>
-                      </table>
-                    </div>
-                  </button>
+                          </thead>
+                          <tbody>
+                            <template v-for="benf in benefit.BENEFIT">
+                              <tr :key="benf.id" v-if="benf.name">
+                                <td v-html="benf.name"></td>
+                                <td v-html="benf.valor||'N/A'"></td>
+                              </tr>
+                            </template>
+                          </tbody>
+                        </table>
+                      </div>
+                    </button>
+                  </span> 
                 </div>
               </template>
             </AssistAccordionDetaill>
@@ -435,14 +443,17 @@ export default {
       })
       .then(response => {
         this.benefit=response.data.RESPONSE;
+        $(this.$el).find('[data-toggle="popover"]').popover({
+          html: true,
+          trigger:'focus',
+          title:function(){
+            return $(this).attr('title');
+          },
+          content:function(){
+            return $(this).find('.popover-content').html();
+          }
+        })
       });
-    var $popover=$(this.$el).find('.btn-popover');
-      $popover.delay(500).popover({
-        html: true,
-        content:function(){
-          return $popover.find('.popover-content').html();
-        }
-      })
     this.getAssistanceDetail();
   }
 };
