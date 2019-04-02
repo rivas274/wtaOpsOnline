@@ -14,6 +14,17 @@ iframe {
   width: 100%;
 }
 </style>
+<style>
+.btn-popover .popover-content{
+  display: none;
+}
+.options-btn {
+  display: inline-flex;
+}
+.popover-body{
+  max-height: 400px;
+}
+</style>
 
 <template>
   <div
@@ -35,7 +46,7 @@ iframe {
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Source</span>
                   <span class="m-widget16__price m--align-right">
-                    <Flag :iso="assistances.voucher.source"></Flag>
+                    <!-- <Flag :iso="assistances.voucher.source"></Flag> -->
                   </span>
                 </div>
                 <div class="m-widget16__item">
@@ -146,6 +157,33 @@ iframe {
                   <span class="m-widget16__date">Phone</span>
                   <span class="m-widget16__price m--align-right">{{assistances.voucher.contact.phone}}</span>
                 </div>
+                <div class="m-widget16__item">
+                  <button type="button" 
+                          class="btn btn-secondary btn-popover" 
+                          data-container="body" 
+                          :title="benefit.SOURCE"
+                          data-placement="left">
+                        Benefit <i class="flaticon-suitcase"></i>
+                    <div style="display:none" class="popover-content">
+                      <table align="center" class="table table-striped table-bordered">
+                        <thead>
+                          <tr>
+                            <th><strong>Name</strong></th>
+                            <th><strong>Value</strong></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <template v-for="benf in benefit.BENEFIT">
+                            <tr :key="benf.id" v-if="benf.name">
+                              <td v-html="benf.name"></td>
+                              <td v-html="benf.valor||'N/A'"></td>
+                            </tr>
+                          </template>
+                        </tbody>
+                      </table>
+                    </div>
+                  </button>
+                </div>
               </template>
             </AssistAccordionDetaill>
           </template>
@@ -156,7 +194,7 @@ iframe {
             <iframe :src="baseUrlApi()+'GeneralConditions/file/'+assistances.codeAssist"></iframe>
           </template>
         </AssistAccordion>
-        <AssistAccordion :id="'_assistance_'+idAssist" ico="fa flaticon-alert-2">
+        <AssistAccordion :id="'_assistance_'+idAssist" ico="fa flaticon-computer">
           <template slot="title">ASSISTANCE DATA</template>
           <template slot="body">
             <AssistAccordionDetaill>
@@ -372,7 +410,8 @@ export default {
     return {
       assist: this.idAssist,
       assistances: [],
-      showLoader: false
+      showLoader: false,
+      benefit:[]
     };
   },
   methods: {
@@ -386,15 +425,25 @@ export default {
           this.showLoader = false;
           this.assistances = response.data.RESPONSE;
         });
+      
     }
   },
   mounted() {
+    this.axios
+      .post("GetBenefitToCase", {
+        idAssist: this.idAssist
+      })
+      .then(response => {
+        this.benefit=response.data.RESPONSE;
+      });
+    var $popover=$(this.$el).find('.btn-popover');
+      $popover.delay(500).popover({
+        html: true,
+        content:function(){
+          return $popover.find('.popover-content').html();
+        }
+      })
     this.getAssistanceDetail();
   }
 };
 </script>
-<style>
-.options-btn {
-  display: inline-flex;
-}
-</style>

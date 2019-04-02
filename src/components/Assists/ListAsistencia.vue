@@ -261,7 +261,7 @@ export default {
           prefix: this.$session.get("prefix")
         })
         .then(response => {
-          let data = response.data.RESULTS;
+          let data = response.data.RESPONSE.RESULTS;
           this.clients = data.map(function(value) {
             return { name: value.clientName, code: value.prefix };
           });

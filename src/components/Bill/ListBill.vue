@@ -119,8 +119,8 @@ iframe {
             </span>
           </td>
         </tr>
-        <tr :key="bill.idFile"></tr>
-        <tr :key="bill.idFile" v-if="checkVisibility(bill)">
+        <tr :key="bill.idFile+'Iframe'"></tr>
+        <tr :key="bill.idFile+'IframeShow'" v-if="checkVisibility(bill)">
           <td class="text-center" colspan="10">
             <iframe :src="streaming(bill)"></iframe>
           </td>
