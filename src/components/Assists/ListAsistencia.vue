@@ -247,7 +247,7 @@ export default {
         })
         .then(response => {
           this.showLoader = false;
-          this.results = response.data.results;
+          this.results = response.data.RESPONSE.RESULTS;
           this.footerTable = {
             start: response.data.start,
             limit: response.data.limit,
@@ -261,7 +261,7 @@ export default {
           prefix: this.$session.get("prefix")
         })
         .then(response => {
-          let data = response.data.results;
+          let data = response.data.RESULTS;
           this.clients = data.map(function(value) {
             return { name: value.clientName, code: value.prefix };
           });

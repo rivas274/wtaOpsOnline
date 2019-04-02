@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "core-js": "^2.6.5",
     "mixins": "0.0.1",
     "qs": "^6.6.0",
     "vee-validate": "^2.1.6",

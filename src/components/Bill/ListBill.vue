@@ -185,7 +185,7 @@ export default {
         })
         .then(response => {
           this.showLoader = false;
-          this.results = response.data.results;
+          this.results = response.data.RESPONSE.RESULTS;
           this.footerTable = {
             start: response.data.start,
             limit: response.data.limit,

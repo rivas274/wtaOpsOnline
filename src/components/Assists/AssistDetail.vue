@@ -35,34 +35,34 @@ iframe {
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Source</span>
                   <span class="m-widget16__price m--align-right">
-                    <Flag :iso="results.voucher.source"></Flag>
+                    <Flag :iso="assistances.voucher.source"></Flag>
                   </span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Destination</span>
                   <span
                     class="m-widget16__price m--align-right"
-                  >{{results.voucher.destination||"N/A"}}</span>
+                  >{{assistances.voucher.destination||"N/A"}}</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.voucher.namePlan">
+                <div class="m-widget16__item" v-if="assistances.voucher.namePlan">
                   <span class="m-widget16__date">Plan</span>
-                  <span class="m-widget16__price m--align-right">{{results.voucher.namePlan}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.voucher.namePlan}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">From</span>
-                  <span class="m-widget16__price m--align-right">{{results.voucher.startDate}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.voucher.startDate}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">To</span>
-                  <span class="m-widget16__price m--align-right">{{results.voucher.endDate}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.voucher.endDate}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Days</span>
-                  <span class="m-widget16__price m--align-right">{{results.voucher.days}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.voucher.days}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Purchase Date</span>
-                  <span class="m-widget16__price m--align-right">{{results.voucher.purchaseDate}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.voucher.purchaseDate}}</span>
                 </div>
               </template>
             </AssistAccordionDetaill>
@@ -73,35 +73,35 @@ iframe {
                   <span class="m-widget16__date">First Name</span>
                   <span
                     class="m-widget16__price m--align-right"
-                    v-html="results.passenger.fisrtName"
+                    v-html="assistances.passenger.fisrtName"
                   ></span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Last Name</span>
                   <span
                     class="m-widget16__price m--align-right"
-                    v-html="results.passenger.lastName"
+                    v-html="assistances.passenger.lastName"
                   ></span>
                 </div>
-                <div class="m-widget16__item" v-if="results.passenger.email">
+                <div class="m-widget16__item" v-if="assistances.passenger.email">
                   <span class="m-widget16__date">Email</span>
-                  <span class="m-widget16__price m--align-right">{{results.passenger.email}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.passenger.email}}</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.passenger.phone">
+                <div class="m-widget16__item" v-if="assistances.passenger.phone">
                   <span class="m-widget16__date">Phone</span>
-                  <span class="m-widget16__price m--align-right">{{results.passenger.phone}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.passenger.phone}}</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.passenger.passport">
+                <div class="m-widget16__item" v-if="assistances.passenger.passport">
                   <span class="m-widget16__date">Passport No.</span>
-                  <span class="m-widget16__price m--align-right">{{results.passenger.passport}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.passenger.passport}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Date of Birth</span>
-                  <span class="m-widget16__price m--align-right">{{results.passenger.birthDate}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.passenger.birthDate}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Age</span>
-                  <span class="m-widget16__price m--align-right">{{results.passenger.age}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.passenger.age}}</span>
                 </div>
               </template>
             </AssistAccordionDetaill>
@@ -112,39 +112,39 @@ iframe {
                   <span class="m-widget16__date">Observations</span>
                   <span
                     class="m-widget16__price m--align-right"
-                    v-if="!results.voucher.comments.comments"
+                    v-if="!assistances.voucher.comments.comments"
                   >N/A</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.voucher.comments.comments">
-                  <span class="m-widget16__price" v-html="results.voucher.comments.comments"></span>
+                <div class="m-widget16__item" v-if="assistances.voucher.comments.comments">
+                  <span class="m-widget16__price" v-html="assistances.voucher.comments.comments"></span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Medical comments</span>
                   <span
                     class="m-widget16__price m--align-right"
-                    v-if="!results.voucher.comments.medical"
+                    v-if="!assistances.voucher.comments.medical"
                   >N/A</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.voucher.comments.medical">
-                  <span class="m-widget16__price" v-html="results.voucher.comments.medical"></span>
+                <div class="m-widget16__item" v-if="assistances.voucher.comments.medical">
+                  <span class="m-widget16__price" v-html="assistances.voucher.comments.medical"></span>
                 </div>
                 <div
                   class="m-widget16__item"
-                  v-if="results.voucher.contact.name || results.voucher.contact.email || results.voucher.contact.phone"
+                  v-if="assistances.voucher.contact.name || assistances.voucher.contact.email || assistances.voucher.contact.phone"
                 >
                   <span class="m-widget16__amount m--align-center">Contact Emergency</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.voucher.contact.name">
+                <div class="m-widget16__item" v-if="assistances.voucher.contact.name">
                   <span class="m-widget16__date">Name</span>
-                  <span class="m-widget16__price m--align-right">{{results.voucher.contact.name}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.voucher.contact.name}}</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.voucher.contact.email">
+                <div class="m-widget16__item" v-if="assistances.voucher.contact.email">
                   <span class="m-widget16__date">Email</span>
-                  <span class="m-widget16__price m--align-right">{{results.voucher.contact.email}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.voucher.contact.email}}</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.voucher.contact.phone">
+                <div class="m-widget16__item" v-if="assistances.voucher.contact.phone">
                   <span class="m-widget16__date">Phone</span>
-                  <span class="m-widget16__price m--align-right">{{results.voucher.contact.phone}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.voucher.contact.phone}}</span>
                 </div>
               </template>
             </AssistAccordionDetaill>
@@ -153,7 +153,7 @@ iframe {
         <AssistAccordion :id="'_general_conditions_'+idAssist" ico="fa flaticon-file">
           <template slot="title">GENERAL CONDITIONS</template>
           <template slot="body">
-            <iframe :src="baseUrlApi()+'GeneralConditions/file/'+results.codeAssist"></iframe>
+            <iframe :src="baseUrlApi()+'GeneralConditions/file/'+assistances.codeAssist"></iframe>
           </template>
         </AssistAccordion>
         <AssistAccordion :id="'_assistance_'+idAssist" ico="fa flaticon-alert-2">
@@ -164,37 +164,37 @@ iframe {
               <template slot="body">
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">First Name</span>
-                  <span class="m-widget16__price m--align-right" v-html="results.contact.fisrtName"></span>
+                  <span class="m-widget16__price m--align-right" v-html="assistances.contact.fisrtName"></span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Last Name</span>
-                  <span class="m-widget16__price m--align-right" v-html="results.contact.lastName"></span>
+                  <span class="m-widget16__price m--align-right" v-html="assistances.contact.lastName"></span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Email</span>
-                  <span class="m-widget16__price m--align-right">{{results.contact.email}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.contact.email}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Phone</span>
-                  <span class="m-widget16__price m--align-right">{{results.contact.phone}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.contact.phone}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Passport No.</span>
-                  <span class="m-widget16__price m--align-right">{{results.contact.passport}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.contact.passport}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Date of Birth</span>
-                  <span class="m-widget16__price m--align-right">{{results.contact.birthDate}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.contact.birthDate}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Age</span>
-                  <span class="m-widget16__price m--align-right">{{results.contact.age}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.contact.age}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Genre</span>
                   <span
                     class="m-widget16__price m--align-right"
-                  >{{results.contact.genre | genreDetaill}}</span>
+                  >{{assistances.contact.genre | genreDetaill}}</span>
                 </div>
               </template>
             </AssistAccordionDetaill>
@@ -203,25 +203,25 @@ iframe {
               <template slot="body">
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Source</span>
-                  <span class="m-widget16__price m--align-right">{{results.origenAssist}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.origenAssist}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Relation</span>
-                  <span class="m-widget16__price m--align-right">{{results.contact.relation}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.contact.relation}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Case Type</span>
-                  <span class="m-widget16__price m--align-right">{{results.caseType.description}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.caseType.description}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Symptoms</span>
-                  <span class="m-widget16__price m--align-right">{{results.symptom.description}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.symptom.description}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Type of Coordination</span>
                   <span
                     class="m-widget16__price m--align-right"
-                  >{{results.coordination.description}}</span>
+                  >{{assistances.coordination.description}}</span>
                 </div>
               </template>
             </AssistAccordionDetaill>
@@ -231,19 +231,19 @@ iframe {
                 <div class="m-widget16__item">
                   <span
                     class="m-widget16__date m--align-center"
-                    v-if="results.contact.observations"
-                    v-html="results.contact.observations"
+                    v-if="assistances.contact.observations"
+                    v-html="assistances.contact.observations"
                   ></span>
                   <span class="m-widget16__date m--align-center" v-else>N/A</span>
                 </div>
               </template>
             </AssistAccordionDetaill>
-            <AssistAccordionDetaill v-if="Object.keys(results.caseTypeField).length>0">
+            <AssistAccordionDetaill v-if="Object.keys(assistances.caseTypeField).length>0">
               <template slot="title">CASE TYPE FIELDS</template>
               <template slot="body">
                 <div
                   class="m-widget16__item"
-                  v-for="(field,key) in results.caseTypeField"
+                  v-for="(field,key) in assistances.caseTypeField"
                   :key="key"
                 >
                   <span class="m-widget16__date">{{ field.name }}</span>
@@ -251,12 +251,12 @@ iframe {
                 </div>
               </template>
             </AssistAccordionDetaill>
-            <AssistAccordionDetaill v-if="Object.keys(results.insuranceField).length>0">
+            <AssistAccordionDetaill v-if="Object.keys(assistances.insuranceField).length>0">
               <template slot="title">INSURANCE FIELDS</template>
               <template slot="body">
                 <div
                   class="m-widget16__item"
-                  v-for="(field,key) in results.insuranceField"
+                  v-for="(field,key) in assistances.insuranceField"
                   :key="key"
                 >
                   <span class="m-widget16__date">{{ field.name }}</span>
@@ -272,50 +272,50 @@ iframe {
             <AssistAccordionDetaill>
               <template slot="title">Country</template>
               <template slot="body">
-                <div class="m-widget16__item" v-if="results.location.country.iso">
+                <div class="m-widget16__item" v-if="assistances.location.country.iso">
                   <span class="m-widget16__date">Country</span>
                   <span class="m-widget16__price m--align-right">
-                    <Flag :iso="results.location.country.iso"></Flag>
+                    <Flag :iso="assistances.location.country.iso"></Flag>
                   </span>
                 </div>
-                <div class="m-widget16__item" v-if="results.location.state.description">
+                <div class="m-widget16__item" v-if="assistances.location.state.description">
                   <span class="m-widget16__date">States</span>
                   <span
                     class="m-widget16__price m--align-right"
-                  >{{results.location.state.description}}</span>
+                  >{{assistances.location.state.description}}</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.location.city.description">
+                <div class="m-widget16__item" v-if="assistances.location.city.description">
                   <span class="m-widget16__date">City</span>
                   <span
                     class="m-widget16__price m--align-right"
-                  >{{results.location.city.description}}</span>
+                  >{{assistances.location.city.description}}</span>
                 </div>
               </template>
             </AssistAccordionDetaill>
             <AssistAccordionDetaill>
               <template slot="title">Address</template>
               <template slot="body">
-                <div class="m-widget16__item" v-if="results.location.address">
+                <div class="m-widget16__item" v-if="assistances.location.address">
                   <span class="m-widget16__date">Address</span>
-                  <span class="m-widget16__price m--align-right" v-html="results.location.address"></span>
+                  <span class="m-widget16__price m--align-right" v-html="assistances.location.address"></span>
                 </div>
-                <div class="m-widget16__item" v-if="results.location.optionalAddress">
+                <div class="m-widget16__item" v-if="assistances.location.optionalAddress">
                   <span class="m-widget16__date">Optional Address</span>
                   <span
                     class="m-widget16__price m--align-right"
-                  >{{results.location.optionalAddress}}</span>
+                  >{{assistances.location.optionalAddress}}</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.location.zipCode>0">
+                <div class="m-widget16__item" v-if="assistances.location.zipCode>0">
                   <span class="m-widget16__date">Zip Code</span>
-                  <span class="m-widget16__price m--align-right">{{results.location.zipCode}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.location.zipCode}}</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.location.namePlace">
+                <div class="m-widget16__item" v-if="assistances.location.namePlace">
                   <span class="m-widget16__date">Name/Place</span>
-                  <span class="m-widget16__price m--align-right">{{results.location.namePlace}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.location.namePlace}}</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.location.room">
+                <div class="m-widget16__item" v-if="assistances.location.room">
                   <span class="m-widget16__date">Room</span>
-                  <span class="m-widget16__price m--align-right">{{results.location.room}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.location.room}}</span>
                 </div>
               </template>
             </AssistAccordionDetaill>
@@ -324,30 +324,30 @@ iframe {
               <template slot="body">
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Phone</span>
-                  <span class="m-widget16__price m--align-right">{{results.location.phone}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.location.phone}}</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.location.coordinates.lat">
+                <div class="m-widget16__item" v-if="assistances.location.coordinates.lat">
                   <span class="m-widget16__date">Coordinates</span>
                   <span class="m-widget16__price m--align-right">
                     <a
-                      :href="'https://www.google.com/maps/@'+results.location.coordinates.lat+','+results.location.coordinates.lng+',16z'"
+                      :href="'https://www.google.com/maps/@'+assistances.location.coordinates.lat+','+assistances.location.coordinates.lng+',16z'"
                       target="_blank"
                     >
                       <i class="la la-map-marker"></i>Show Map
                     </a>
                   </span>
                 </div>
-                <div class="m-widget16__item" v-if="results.location.coordinates.lat">
+                <div class="m-widget16__item" v-if="assistances.location.coordinates.lat">
                   <span class="m-widget16__date">Latitud</span>
                   <span
                     class="m-widget16__price m--align-right"
-                  >{{results.location.coordinates.lat|toFixed(7)}}</span>
+                  >{{assistances.location.coordinates.lat|toFixed(7)}}</span>
                 </div>
-                <div class="m-widget16__item" v-if="results.location.coordinates.lng">
+                <div class="m-widget16__item" v-if="assistances.location.coordinates.lng">
                   <span class="m-widget16__date">Longitud</span>
                   <span
                     class="m-widget16__price m--align-right"
-                  >{{results.location.coordinates.lng|toFixed(7)}}</span>
+                  >{{assistances.location.coordinates.lng|toFixed(7)}}</span>
                 </div>
               </template>
             </AssistAccordionDetaill>
@@ -371,7 +371,7 @@ export default {
   data: function() {
     return {
       assist: this.idAssist,
-      results: [],
+      assistances: [],
       showLoader: false
     };
   },
@@ -384,7 +384,7 @@ export default {
         })
         .then(response => {
           this.showLoader = false;
-          this.results = response.data.results;
+          this.assistances = response.data.RESPONSE;
         });
     }
   },
