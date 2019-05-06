@@ -64,9 +64,6 @@
           <button class="btn btn-info" @click="clear">Clear</button>
         </div>
       </div>
-      <div class="form-group m-form__group row">
-        <button @click="clear">clear</button>
-      </div>
     </template>
     <template slot="thead">
       <tr>
