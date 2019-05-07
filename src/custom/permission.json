@@ -3,5 +3,10 @@
     "read":[37],
     "write":[37],
     "delete":[37]
+  },
+  "notes":{
+    "read":[37],
+    "write":[37],
+    "delete":[37]
   }
 }

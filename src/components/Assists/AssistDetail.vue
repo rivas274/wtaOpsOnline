@@ -18,13 +18,13 @@ iframe {
 }
 </style>
 <style>
-[data-toggle="popover"] .popover-content{
+[data-toggle="popover"] .popover-content {
   display: none;
 }
-.popover{
+.popover {
   z-index: 98;
 }
-.popover-body{
+.popover-body {
   overflow-y: auto;
   max-height: 400px;
 }
@@ -77,7 +77,9 @@ iframe {
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Purchase Date</span>
-                  <span class="m-widget16__price m--align-right">{{assistances.voucher.purchaseDate}}</span>
+                  <span
+                    class="m-widget16__price m--align-right"
+                  >{{assistances.voucher.purchaseDate}}</span>
                 </div>
               </template>
             </AssistAccordionDetaill>
@@ -151,32 +153,44 @@ iframe {
                 </div>
                 <div class="m-widget16__item" v-if="assistances.voucher.contact.name">
                   <span class="m-widget16__date">Name</span>
-                  <span class="m-widget16__price m--align-right">{{assistances.voucher.contact.name}}</span>
+                  <span
+                    class="m-widget16__price m--align-right"
+                  >{{assistances.voucher.contact.name}}</span>
                 </div>
                 <div class="m-widget16__item" v-if="assistances.voucher.contact.email">
                   <span class="m-widget16__date">Email</span>
-                  <span class="m-widget16__price m--align-right">{{assistances.voucher.contact.email}}</span>
+                  <span
+                    class="m-widget16__price m--align-right"
+                  >{{assistances.voucher.contact.email}}</span>
                 </div>
                 <div class="m-widget16__item" v-if="assistances.voucher.contact.phone">
                   <span class="m-widget16__date">Phone</span>
-                  <span class="m-widget16__price m--align-right">{{assistances.voucher.contact.phone}}</span>
+                  <span
+                    class="m-widget16__price m--align-right"
+                  >{{assistances.voucher.contact.phone}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Benefit</span>
                   <span class="m-widget16__price m--align-right">
                     {{benefit.SOURCE}}
-                    <button type="button" 
-                            class="btn m-btn m-btn--icon m-btn--icon-only m-btn--pill"
-                            data-toggle="popover"
-                            :title="benefit.SOURCE"
-                            data-placement="left">
+                    <button
+                      type="button"
+                      class="btn m-btn m-btn--icon m-btn--icon-only m-btn--pill"
+                      data-toggle="popover"
+                      :title="benefit.SOURCE"
+                      data-placement="left"
+                    >
                       <i class="flaticon-suitcase"></i>
                       <div style="display:none" class="popover-content">
                         <table align="center" class="table table-striped table-bordered">
                           <thead>
                             <tr>
-                              <th><strong>Name</strong></th>
-                              <th><strong>Value</strong></th>
+                              <th>
+                                <strong>Name</strong>
+                              </th>
+                              <th>
+                                <strong>Value</strong>
+                              </th>
                             </tr>
                           </thead>
                           <tbody>
@@ -190,7 +204,7 @@ iframe {
                         </table>
                       </div>
                     </button>
-                  </span> 
+                  </span>
                 </div>
               </template>
             </AssistAccordionDetaill>
@@ -210,11 +224,17 @@ iframe {
               <template slot="body">
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">First Name</span>
-                  <span class="m-widget16__price m--align-right" v-html="assistances.contact.fisrtName"></span>
+                  <span
+                    class="m-widget16__price m--align-right"
+                    v-html="assistances.contact.fisrtName"
+                  ></span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Last Name</span>
-                  <span class="m-widget16__price m--align-right" v-html="assistances.contact.lastName"></span>
+                  <span
+                    class="m-widget16__price m--align-right"
+                    v-html="assistances.contact.lastName"
+                  ></span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Email</span>
@@ -257,7 +277,9 @@ iframe {
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Case Type</span>
-                  <span class="m-widget16__price m--align-right">{{assistances.caseType.description}}</span>
+                  <span
+                    class="m-widget16__price m--align-right"
+                  >{{assistances.caseType.description}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Symptoms</span>
@@ -343,7 +365,10 @@ iframe {
               <template slot="body">
                 <div class="m-widget16__item" v-if="assistances.location.address">
                   <span class="m-widget16__date">Address</span>
-                  <span class="m-widget16__price m--align-right" v-html="assistances.location.address"></span>
+                  <span
+                    class="m-widget16__price m--align-right"
+                    v-html="assistances.location.address"
+                  ></span>
                 </div>
                 <div class="m-widget16__item" v-if="assistances.location.optionalAddress">
                   <span class="m-widget16__date">Optional Address</span>
@@ -419,7 +444,7 @@ export default {
       assist: this.idAssist,
       assistances: [],
       showLoader: false,
-      benefit:[]
+      benefit: []
     };
   },
   methods: {
@@ -433,7 +458,6 @@ export default {
           this.showLoader = false;
           this.assistances = response.data.RESPONSE;
         });
-      
     }
   },
   mounted() {
@@ -442,17 +466,21 @@ export default {
         idAssist: this.idAssist
       })
       .then(response => {
-        this.benefit=response.data.RESPONSE;
-        $(this.$el).find('[data-toggle="popover"]').popover({
-          html: true,
-          trigger:'focus',
-          title:function(){
-            return $(this).attr('title');
-          },
-          content:function(){
-            return $(this).find('.popover-content').html();
-          }
-        })
+        this.benefit = response.data.RESPONSE;
+        $(this.$el)
+          .find('[data-toggle="popover"]')
+          .popover({
+            html: true,
+            trigger: "focus",
+            title: function() {
+              return $(this).attr("title");
+            },
+            content: function() {
+              return $(this)
+                .find(".popover-content")
+                .html();
+            }
+          });
       });
     this.getAssistanceDetail();
   }

@@ -21,23 +21,36 @@
           <i class="fa fa-money-bill" aria-hidden="true"></i>
           <span>Bills</span>
         </a>
+      <li v-if="permission.bills" :class="{active:tabShow=='Note'}" v-tooltip:top="'Note'">
+        <a
+          class="nav-link"
+          :class="{'m--font-success':tabShow=='Note'}"
+          @click.prevent="showTab('Note')"
+        >
+          <i class="fa fa-sticky-note" aria-hidden="true"></i>
+          <span>Note</span>
+        </a>
       </li>
     </ul>
     <div class="tab-content container">
       <div class="tab-pane" :class="{active:tabShow=='General'}">
-        <AssistDetail :id-assist="assistBase.idAsist" ></AssistDetail>
+        <AssistDetail :id-assist="assistBase.idAssist" ></AssistDetail>
       </div>
       <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='Bills'}">
-        <list-bill :id-assist="assistBase.idAsist"></list-bill>
+        <list-bill :id-assist="assistBase.idAssist"></list-bill>
+      </div>
+      <div class="tab-pane" :class="{active:tabShow=='Note'}">
+        <list-note :id-assist="assistBase.idAssist"></list-note>
       </div>
     </div>
   </div>
 </template>
 <script>
 import ListBill from "../Bill/ListBill.vue";
+import ListNote from "../Note/ListNote.vue";
 import AssistDetail from "./AssistDetail.vue";
 export default {
-  components: { ListBill, AssistDetail },
+  components: { ListBill, AssistDetail, ListNote },
   props: ["assist"],
   data() {
     return {
