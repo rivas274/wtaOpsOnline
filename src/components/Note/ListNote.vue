@@ -21,8 +21,9 @@ iframe {
   color: #36a3f7;
 }
 </style>
+<style src="../Element/custom-m-loader.css"></style>
 <template>
-  <section>
+  <section :class="{'m-loader m-loader--metal m-loader--div':showLoader}">
     <div class="form-group m-form__group row">
       <date-range-bt
         class-prop="col-md-4 m-form__group-sub"
@@ -122,7 +123,7 @@ export default {
     };
   },
   methods: {
-    getNote: function(pg) {
+    getNote: function() {
       this.showLoader = true;
       this.axios
         .post("getNote", {

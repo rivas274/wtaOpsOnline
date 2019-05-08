@@ -32,10 +32,24 @@
           <span>Note</span>
         </a>
       </li>
+      <li
+        v-if="permission.bills"
+        :class="{active:tabShow=='Providers'}"
+        v-tooltip:top="'Providers'"
+      >
+        <a
+          class="nav-link"
+          :class="{'m--font-success':tabShow=='Providers'}"
+          @click.prevent="showTab('Providers')"
+        >
+          <i class="fa fa-ambulance" aria-hidden="true"></i>
+          <span>Providers</span>
+        </a>
+      </li>
     </ul>
     <div class="tab-content container">
       <div class="tab-pane" :class="{active:tabShow=='General'}">
-        <AssistDetail :id-assist="assistBase.idAsist" ></AssistDetail>
+        <AssistDetail :id-assist="assistBase.idAsist"></AssistDetail>
       </div>
       <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='Bills'}">
         <list-bill :id-assist="assistBase.idAsist"></list-bill>
@@ -43,22 +57,26 @@
       <div class="tab-pane" :class="{active:tabShow=='Note'}">
         <list-note :id-assist="assistBase.idAsist"></list-note>
       </div>
+      <div class="tab-pane" :class="{active:tabShow=='Providers'}">
+        <Providers :id-assist="assistBase.idAsist"></Providers>
+      </div>
     </div>
   </div>
 </template>
 <script>
 import ListBill from "../Bill/ListBill.vue";
+import Providers from "../Provider/ListProviders.vue";
 import ListNote from "../Note/ListNote.vue";
 import AssistDetail from "./AssistDetail.vue";
 export default {
-  components: { ListBill, AssistDetail, ListNote },
+  components: { Providers, ListBill, AssistDetail, ListNote },
   props: ["assist"],
   data() {
     return {
       assistBase: this.assist,
       tabShow: "General",
-      permission:{
-        bills:this.middleware('bills','read')
+      permission: {
+        bills: this.middleware("bills", "read")
       }
     };
   },

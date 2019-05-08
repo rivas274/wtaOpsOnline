@@ -249,9 +249,9 @@ export default {
           this.showLoader = false;
           this.results = response.data.RESPONSE.RESULTS;
           this.footerTable = {
-            start: response.data.start,
-            limit: response.data.limit,
-            size: response.data.size
+            start: response.data.RESPONSE.start,
+            limit: response.data.RESPONSE.limit,
+            size: response.data.RESPONSE.size
           };
         });
     },

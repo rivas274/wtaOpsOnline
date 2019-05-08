@@ -29,7 +29,6 @@ iframe {
   max-height: 400px;
 }
 </style>
-
 <template>
   <div
     class="m-portlet m-portlet--full-height"
@@ -47,7 +46,7 @@ iframe {
             <AssistAccordionDetaill>
               <template slot="title">Travel Source</template>
               <template slot="body">
-                <div class="m-widget16__item">
+                <div class="m-widget16__item" v-if="assistances.voucher.source">
                   <span class="m-widget16__date">Source</span>
                   <span class="m-widget16__price m--align-right">
                     <Flag :iso="assistances.voucher.source"></Flag>
