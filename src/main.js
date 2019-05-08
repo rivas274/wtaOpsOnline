@@ -89,7 +89,7 @@ router.beforeEach((to, from, next) => {
 Vue.config.productionTip = false;
 new Vue({
     mounted: function () {
-        setInterval(() => {
+        setInterval(() =>{
             if (router.currentRoute.fullPath !== '/') {
                 let lastCheck = moment(Vue._session.get('lastCheck')),
                     check = Vue._session.get('checkTimeOut'),

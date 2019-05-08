@@ -21,6 +21,7 @@
           <i class="fa fa-money-bill" aria-hidden="true"></i>
           <span>Bills</span>
         </a>
+      </li>
       <li v-if="permission.bills" :class="{active:tabShow=='Note'}" v-tooltip:top="'Note'">
         <a
           class="nav-link"
@@ -34,13 +35,13 @@
     </ul>
     <div class="tab-content container">
       <div class="tab-pane" :class="{active:tabShow=='General'}">
-        <AssistDetail :id-assist="assistBase.idAssist" ></AssistDetail>
+        <AssistDetail :id-assist="assistBase.idAsist" ></AssistDetail>
       </div>
       <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='Bills'}">
-        <list-bill :id-assist="assistBase.idAssist"></list-bill>
+        <list-bill :id-assist="assistBase.idAsist"></list-bill>
       </div>
       <div class="tab-pane" :class="{active:tabShow=='Note'}">
-        <list-note :id-assist="assistBase.idAssist"></list-note>
+        <list-note :id-assist="assistBase.idAsist"></list-note>
       </div>
     </div>
   </div>
