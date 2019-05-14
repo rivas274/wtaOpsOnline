@@ -22,6 +22,9 @@ iframe {
           <span>Phone</span>
         </th>
         <th>
+          <span>Priority</span>
+        </th>
+        <th>
           <span>Country</span>
         </th>
         <th>
@@ -50,6 +53,9 @@ iframe {
           <td>
             <span>{{provider.locality.phone||'N/A'}}</span>
           </td>
+          <td class="text-center">
+            <priority-number>{{provider.locality.priority||0}}</priority-number>
+          </td>
           <td>
             <Flag :iso="provider.locality.location.country.iso"></Flag>
           </td>
@@ -57,10 +63,15 @@ iframe {
             <span>{{provider.locality.location.state.description||'N/A'}}</span>
           </td>
           <td class="text-center">
-            <i
-              class="fa fa-info-circle fa-2x"
-              :class="[provider.provider.publicNote?'text-info':'text-dark']"
-            ></i>
+            <pop-over v-if="provider.provider.publicNote" title="Public Note">
+              <template slot="button">
+                <i class="fa fa-info-circle fa-2x text-info" v-tooltip:top="'Public Note'"></i>
+              </template>
+              <template slot="content">
+                <div v-html="provider.provider.publicNote"></div>
+              </template>
+            </pop-over>
+            <i v-else class="fa fa-info-circle fa-2x text-dark"></i>
           </td>
           <td class="text-center">
             <i
@@ -83,7 +94,7 @@ iframe {
         </tr>
         <tr :key="provider.id+'wrap'"></tr>
         <tr :key="provider.id+'payment'" v-show="checkVisibility(provider)">
-          <td class="text-center" colspan="8">
+          <td class="text-center" colspan="9">
             <pre class="text-left">{{provider.providerAssist}}</pre>
           </td>
         </tr>
@@ -103,11 +114,15 @@ iframe {
 import pagination from "../pagination/pagination.vue";
 import TableBasic from "../Tables/TableBasic.vue";
 import Flag from "../Element/Flag.vue";
+import popOver from "../Element/pop-over.vue";
+import priorityNumber from "../Element/priority-number.vue";
 export default {
   components: {
     TableBasic,
     pagination,
-    Flag
+    Flag,
+    popOver,
+    priorityNumber
   },
   props: ["id-assist"],
   data: function() {
