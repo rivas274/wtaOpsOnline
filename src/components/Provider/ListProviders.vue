@@ -82,20 +82,65 @@ iframe {
             <i v-else class="fa fa-arrow-alt-circle-right text-info fa-2x" v-tooltip:top="'Yes'"></i>
           </td>
           <td>
-            <a v-if="provider.providerAssist.paymentType" @click="togleProvider(provider)">
+            <button
+              class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+              v-if="provider.providerAssist.paymentType"
+              v-tooltip:top="provider.providerAssist.paymentType.description"
+              @click="togleProvider(provider)"
+            >
               <i
                 class="fa fa-2x"
                 :class="[paymentIcon(provider.providerAssist.paymentType.prefix)]"
-                v-tooltip:top="provider.providerAssist.paymentType.description"
               ></i>
-            </a>
+            </button>
             <i v-else class="fa fa-ban text-danger fa-2x" v-tooltip:top="'No'"></i>
           </td>
         </tr>
         <tr :key="provider.id+'wrap'"></tr>
         <tr :key="provider.id+'payment'" v-show="checkVisibility(provider)">
           <td class="text-center" colspan="9">
-            <pre class="text-left">{{provider.providerAssist}}</pre>
+            <table class="table" v-if="provider.providerAssist.paymentType">
+              <thead>
+                <tr>
+                  <th>
+                    <span>Payment Form</span>
+                  </th>
+                  <th>
+                    <span>language</span>
+                  </th>
+                  <th>
+                    <span>Documents</span>
+                  </th>
+                  <th>
+                    <span>Reserve Price</span>
+                  </th>
+                  <th>
+                    <span>Booking Text</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span>{{provider.providerAssist.paymentType.description}}</span>
+                  </td>
+                  <td>
+                    <span>{{provider.providerAssist.lang}}</span>
+                  </td>
+                  <td>
+                    <template v-for="(doc,index) in provider.providerAssist.document">
+                      <span v-if="doc!==''" :key="index">| {{doc}}</span>
+                    </template>
+                  </td>
+                  <td>
+                    <span>{{provider.providerAssist.reserved.price | currency(provider.providerAssist.reserved.currency||'USD') }}</span>
+                  </td>
+                  <td>
+                    <span>{{ provider.provider.bookingText }}</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </td>
         </tr>
       </template>

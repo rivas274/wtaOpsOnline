@@ -1,16 +1,15 @@
 <style>
 .priority-number {
-  border-radius: 0.45em;
-  width: min-content;
-  padding: 0.05em 0.45em;
-  font-size: 1.4em;
+  padding: 0.25em 0.47em !important;
+  font-size: 1.5em;
   font-weight: bold;
-  color: white;
-  margin: auto;
 }
 </style>
 <template>
-  <label class="priority-number" :class="[classProp?'btn-'+classProp:'btn-primary']">
+  <label
+    class="priority-number m-badge m-badge--wide"
+    :class="[classProp?'m-badge--'+classProp:'m-badge--primary']"
+  >
     <slot></slot>
   </label>
 </template>
