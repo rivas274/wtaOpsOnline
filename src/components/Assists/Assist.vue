@@ -22,7 +22,7 @@
           <span>Bills</span>
         </a>
       </li>
-      <li v-if="permission.bills" :class="{active:tabShow=='Note'}" v-tooltip:top="'Note'">
+      <li v-if="permission.notes" :class="{active:tabShow=='Note'}" v-tooltip:top="'Note'">
         <a
           class="nav-link"
           :class="{'m--font-success':tabShow=='Note'}"
@@ -33,7 +33,7 @@
         </a>
       </li>
       <li
-        v-if="permission.bills"
+        v-if="permission.provider"
         :class="{active:tabShow=='Providers'}"
         v-tooltip:top="'Providers'"
       >
@@ -49,16 +49,16 @@
     </ul>
     <div class="tab-content container">
       <div class="tab-pane" :class="{active:tabShow=='General'}">
-        <AssistDetail :id-assist="assistBase.idAsist"></AssistDetail>
+        <AssistDetail :id-assist="assistBase.idAssist"></AssistDetail>
       </div>
       <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='Bills'}">
-        <list-bill :id-assist="assistBase.idAsist"></list-bill>
+        <list-bill :id-assist="assistBase.idAssist"></list-bill>
       </div>
-      <div class="tab-pane" :class="{active:tabShow=='Note'}">
-        <list-note :id-assist="assistBase.idAsist"></list-note>
+      <div v-if="permission.notes" class="tab-pane" :class="{active:tabShow=='Note'}">
+        <list-note :id-assist="assistBase.idAssist"></list-note>
       </div>
-      <div class="tab-pane" :class="{active:tabShow=='Providers'}">
-        <Providers :id-assist="assistBase.idAsist"></Providers>
+      <div v-if="permission.provider" class="tab-pane" :class="{active:tabShow=='Providers'}">
+        <Providers :id-assist="assistBase.idAssist"></Providers>
       </div>
     </div>
   </div>
@@ -76,7 +76,9 @@ export default {
       assistBase: this.assist,
       tabShow: "General",
       permission: {
-        bills: this.middleware("bills", "read")
+        bills: this.middleware("bills", "read"),
+        notes: this.middleware("notes", "read"),
+        provider: this.middleware("provider", "read")
       }
     };
   },

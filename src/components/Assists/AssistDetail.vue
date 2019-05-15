@@ -168,7 +168,7 @@ iframe {
                     class="m-widget16__price m--align-right"
                   >{{assistances.voucher.contact.phone}}</span>
                 </div>
-                <div class="m-widget16__item">
+                <div class="m-widget16__item" v-if="benefit.SOURCE">
                   <span class="m-widget16__date">Benefit</span>
                   <span class="m-widget16__price m--align-right">
                     {{benefit.SOURCE}}

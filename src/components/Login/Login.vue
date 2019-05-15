@@ -131,6 +131,7 @@ export default {
               this.resp = response.data;
               this.disableForm = false;
               if (response.data.STATUS == "OK") {
+                this.$session.clear();
                 this.$session.set("TOKEN", response.data.TOKEN);
                 let user = response.data.RESPONSE;
                 for (var prop in user) {

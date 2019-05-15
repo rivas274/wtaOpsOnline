@@ -86,7 +86,7 @@ iframe {
               class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
               v-if="provider.providerAssist.paymentType"
               v-tooltip:top="provider.providerAssist.paymentType.description"
-              @click="togleProvider(provider)"
+              @click="togleProvider(provider.providerAssist)"
             >
               <i
                 class="fa fa-2x"
@@ -96,8 +96,8 @@ iframe {
             <i v-else class="fa fa-ban text-danger fa-2x" v-tooltip:top="'No'"></i>
           </td>
         </tr>
-        <tr :key="provider.id+'wrap'"></tr>
-        <tr :key="provider.id+'payment'" v-show="checkVisibility(provider)">
+        <tr :key="provider.providerAssist.id+'wrap'"></tr>
+        <tr :key="provider.providerAssist.id+'payment'" v-show="checkVisibility(provider.providerAssist)">
           <td class="text-center" colspan="9">
             <table class="table" v-if="provider.providerAssist.paymentType">
               <thead>
@@ -228,6 +228,7 @@ export default {
     checkVisibility({ id }) {
       return (
         this.view.filter(function(v) {
+          console.log('validate',v,id);
           return v == id;
         }).length != 0
       );

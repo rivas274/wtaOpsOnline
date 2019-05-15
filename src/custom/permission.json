@@ -3,5 +3,15 @@
     "read":[37],
     "write":[37],
     "delete":[37]
+  },
+  "provider":{
+    "read":[],
+    "write":[],
+    "delete":[]
+  },
+  "notes":{
+    "read":[],
+    "write":[],
+    "delete":[]
   }
 }
