@@ -267,6 +267,18 @@ iframe {
               <template slot="title">INFORMATION ASSISTANCE</template>
               <template slot="body">
                 <div class="m-widget16__item">
+                  <span class="m-widget16__date">Opening Date</span>
+                  <span
+                    class="m-widget16__price m--align-right"
+                  >{{assistances.registeredDate.date}}</span>
+                </div>
+                <div class="m-widget16__item">
+                  <span class="m-widget16__date">Date Event</span>
+                  <span
+                    class="m-widget16__price m--align-right"
+                  >{{assistances.reportedDate.date}} <small>({{assistances.reportedDate.hour}})</small></span>
+                </div>
+                <div class="m-widget16__item">
                   <span class="m-widget16__date">Source</span>
                   <span class="m-widget16__price m--align-right">{{assistances.origenAssist}}</span>
                 </div>

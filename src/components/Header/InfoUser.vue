@@ -6,6 +6,7 @@
     m-dropdown-toggle="click"
   >
     <a href="#" class="m-nav__link m-dropdown__toggle">
+      <h5 class="m-topbar__userpic">{{fullName}}&nbsp;</h5>
       <span class="m-topbar__userpic">
         <custom-img
           :src="baseUrlApi()+'app/admin/img_user/'+imgUser"

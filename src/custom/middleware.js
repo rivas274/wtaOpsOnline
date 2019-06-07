@@ -16,7 +16,6 @@ Middleware.install = function (Vue, options) {
         if (!Vue._session.exists() || !Array.isArray(userType)) {
             return false;
         }
-        console.log(Vue._session.get('permission'));
         return userType.includes(parseInt(Vue._session.get('idUserType')));
     }
     Vue.prototype.middleware = Vue.$middleware = function (action, option) {

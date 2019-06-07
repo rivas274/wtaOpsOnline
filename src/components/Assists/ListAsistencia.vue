@@ -88,7 +88,7 @@
         <th style="min-width: 90px;">
           <span>Date Event</span>
         </th>
-        <th style="min-width: 90px;">
+        <th style="min-width: 90px;" class="text-center">
           <span>Opening Date</span>
         </th>
         <th>
@@ -122,11 +122,13 @@
         <td>
           <span>{{assist.descCaseType}}</span>
         </td>
-        <td>
+        <td class="text-center">
           <span>{{assist.reportedDate.date}}</span>
+          <br>
+          <small>({{assist.reportedDate.hour}})</small>
         </td>
-        <td>
-          <span>{{assist.registeredDate.date}}</span>
+        <td class="text-center">
+          <span>{{assist.registeredDate.date}}</span> 
         </td>
         <td>
           <span>

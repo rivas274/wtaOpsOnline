@@ -228,7 +228,6 @@ export default {
     checkVisibility({ id }) {
       return (
         this.view.filter(function(v) {
-          console.log('validate',v,id);
           return v == id;
         }).length != 0
       );
