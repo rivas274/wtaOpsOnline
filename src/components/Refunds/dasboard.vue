@@ -6,15 +6,23 @@ textarea {
 textarea.v-center {
   padding: 30px 0 0 0;
 }
-.preview {
-  min-height: 400px;
+iframe.preview {
+  min-height: 350px;
   border: 0;
+}
+iframe.ima {
+  min-height: 350px;
+  width: 100%;
+}
+.preview-content-img {
+  min-height: 350px;
+  max-height: 667px;
+  overflow: auto;
 }
 </style>
 
 <template>
   <div class="m-content">
-    <sweetAlert :display="displayAlert"/>
     <div class="m-grid__item m-grid__item--fluid">
       <div class="row">
         <div class="col-lg-12">
@@ -128,7 +136,7 @@ textarea.v-center {
                                   <strong>Amount</strong>
                                   <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                     <input
-                                      type="number"
+                                      type="text"
                                       name="price"
                                       class="form-control m-input m-input--pill"
                                       placeholder="Indicate Price"
@@ -216,6 +224,17 @@ textarea.v-center {
                                     >
                                     <label class="custom-file-label" for="customFile">Choose file</label>
                                   </div>
+                                  <div class="progress" v-if="uploadPercentage>0">
+                                    <div
+                                      class="progress-bar progress-bar-striped progress-bar-animated"
+                                      role="progressbar"
+                                      aria-valuenow="75"
+                                      aria-valuemin="0"
+                                      aria-valuemax="100"
+                                      uploadPercentage
+                                      :style="{width: uploadPercentage+'%'}"
+                                    ></div>
+                                  </div>
                                   <form-error :attribute_name="'file'" :errors_form="errors"></form-error>
                                 </div>
                               </div>
@@ -234,15 +253,13 @@ textarea.v-center {
                               </div>
                             </form>
                             <iframe
-                              class="col-lg-6 preview h-100"
+                              class="col-lg-6 preview"
                               v-if="preview=='pdf'"
                               :src="previewSrc"
                             />
-                            <img
-                              class="col-lg-6 preview h-100"
-                              v-if="preview=='image'"
-                              :src="previewSrc"
-                            >
+                            <div class="col-lg-6 preview-content-img" v-if="preview=='image'">
+                              <img class="preview col-xs-12" :src="previewSrc">
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -259,7 +276,6 @@ textarea.v-center {
 </template>
 <script>
 import FormError from "../FormError";
-import sweetAlert from "../Element/sweetAlert";
 import customImg from "../Element/custom-img";
 import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import currency from "../Labels/currency.json";
@@ -268,7 +284,6 @@ import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 export default {
   components: {
     FormError,
-    sweetAlert,
     customImg,
     selectFromTable,
     dateSingleBt
@@ -285,7 +300,6 @@ export default {
         currency: "USD",
         price: "",
         description: "",
-        clientName: "",
         date: ""
       },
       file: null,
@@ -306,7 +320,6 @@ export default {
         })
         .then(response => {
           this.results = response.data.RESPONSE.RESULTS[0];
-          this.inputsData.clientName = this.results.clientName;
           this.inputsData.date = this.results.registeredDate.date;
         });
     },
@@ -337,8 +350,33 @@ export default {
               .then(response => {
                 this.disableForm = false;
                 if (response.data.STATUS == "OK") {
-                  this.displayAlert = true;
+                  Swal.fire({
+                    title: 'Refound Sended',
+                    text: 'Your refund has been successfully uploaded',
+                    type: 'success',
+                    showCancelButton: true,
+                    confirmButtonText: 'upload another refund ',
+                    cancelButtonText: 'No, keep it'
+                  }).then((result) => {
+                    console.log(result);
+                    if (result.value) {
+                        this.inputsData= {
+                            reference: "",
+                            price: "",
+                            description: "",
+                            date: ""
+                          };
+                      } else if (result.dismiss === Swal.DismissReason.cancel) {
+                        window.close();
+                        Swal.fire(
+                          'Close the Windows',
+                          'The process finished satisfactorily, please close the window',
+                          'error'
+                        )
+                      }
+                  })
                 }
+                this.uploadPercentage=0;
               });
           }
         });
