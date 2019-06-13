@@ -4,6 +4,7 @@
       <input
         type="text"
         :name="name"
+        :value="value"
         class="form-control m-input date-bt-vue"
         :placeholder="watermark"
         readonly

@@ -16,11 +16,26 @@ iframe.ima {
 }
 .preview-content-img {
   min-height: 350px;
-  max-height: 667px;
+  max-height: 775px;
   overflow: auto;
 }
+.form-control-feedback {
+  font-weight: 600;
+}
+.has-danger .form-control,
+.has-danger .form-control[readonly] {
+  border-color: #f4516c;
+}
 </style>
-
+<style>
+.m-nav .m-nav__item > .m-nav__link .m-nav__link-text {
+  color: #f8f9fc;
+  font-weight: 700;
+}
+.m-nav .m-nav__item > .m-nav__link .m-nav__link-icon {
+  color: #f8f9fc;
+}
+</style>
 <template>
   <div class="m-content">
     <div class="m-grid__item m-grid__item--fluid">
@@ -80,7 +95,7 @@ iframe.ima {
                                 >{{results.fisrtName+' '+results.lastName}}</span>
                               </a>
                             </li>
-                            <li class="m-nav__item">
+                            <li class="m-nav__item" v-if="results.registeredDate">
                               <a class="m-nav__link" v-tooltip:top="'Date of Case'">
                                 <i class="m-nav__link-icon flaticon-calendar-1"></i>
                                 <span class="m-nav__link-text">{{results.registeredDate.date}}</span>
@@ -113,32 +128,32 @@ iframe.ima {
                           <div class="row">
                             <form
                               class="m-form m-form--fit m-form--label-align-right"
-                              :class="[preview?'col-lg-6':'col-lg-12']"
+                              :class="[preview?(preview=='image'?'col-lg-7':'col-lg-6'):'col-lg-9 mx-auto']"
                               @submit.prevent="validRefunds"
                               enctype="multipart/form-data"
                               ref="form"
                             >
                               <div class="m-portlet__body">
                                 <div class="form-group m-form__group">
-                                  <strong>Fecha</strong>
+                                  <strong>Date</strong>
                                   <date-single-bt
-                                    class-prop="m-input m-input--pill"
+                                    class-prop="m-input"
                                     name="date"
-                                    watermark="date"
+                                    watermark="Date"
                                     v-on:input="setDataFilter"
                                     :value="inputsData.date"
                                   ></date-single-bt>
                                 </div>
                                 <div
                                   class="form-group m-form__group"
-                                  :class="{'has-danger': errors.has('price')}"
+                                  :class="{'price': errors.has('reference')}"
                                 >
                                   <strong>Amount</strong>
                                   <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                     <input
                                       type="text"
                                       name="price"
-                                      class="form-control m-input m-input--pill"
+                                      class="form-control m-input"
                                       placeholder="Indicate Price"
                                       v-validate="'required|min:1|max:10|decimal:2'"
                                       v-model.lazy="inputsData.price"
@@ -170,7 +185,7 @@ iframe.ima {
                                     <input
                                       type="text"
                                       name="reference"
-                                      class="form-control m-input m-input--pill"
+                                      class="form-control m-input"
                                       placeholder="Indicate Reference"
                                       v-validate="'required|min:2|max:40|'"
                                       v-model.lazy="inputsData.reference"
@@ -192,7 +207,7 @@ iframe.ima {
                                   <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                     <textarea
                                       name="Description"
-                                      class="form-control m-input m-input--pill"
+                                      class="form-control m-input"
                                       :class="{'v-center':inputsData.description.toString().split('').length==0}"
                                       placeholder="Description of Refund"
                                       v-validate="'required|min:2|max:255|'"
@@ -222,20 +237,39 @@ iframe.ima {
                                       ref="file"
                                       v-on:change="handleFileUpload"
                                     >
-                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                    <label class="custom-file-label" for="file">{{(typeof file =='object' &&'name' in file)?file.name:'Choose File'}}</label>
                                   </div>
                                   <div class="progress" v-if="uploadPercentage>0">
                                     <div
                                       class="progress-bar progress-bar-striped progress-bar-animated"
                                       role="progressbar"
-                                      aria-valuenow="75"
+                                      :aria-valuenow="uploadPercentage"
                                       aria-valuemin="0"
                                       aria-valuemax="100"
-                                      uploadPercentage
                                       :style="{width: uploadPercentage+'%'}"
                                     ></div>
                                   </div>
                                   <form-error :attribute_name="'file'" :errors_form="errors"></form-error>
+                                </div>
+                                <div
+                                  class="form-group m-form__group"
+                                  :class="{'has-danger': errors.has('recaptcha')}"
+                                >
+                                  <vue-recaptcha
+                                    sitekey="6LdusqgUAAAAAGMwxgcsvToNCGBiITd4w3GmpgmP"
+                                    ref="recaptcha"
+                                    @verify="onCaptchaVerified"
+                                    @expired="onCaptchaExpired"
+                                  ></vue-recaptcha>
+                                  <input
+                                    type="hidden"
+                                    name="recaptcha"
+                                    id="recaptcha"
+                                    v-validate="'recaptcha'"
+                                    ref="recaptcha"
+                                    v-model="captcha"
+                                  >
+                                  <form-error :attribute_name="'recaptcha'" :errors_form="errors"></form-error>
                                 </div>
                               </div>
                               <div
@@ -248,7 +282,7 @@ iframe.ima {
                                     :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
                                     type="submit"
                                     class="btn btn-primary"
-                                  >Submit</button>
+                                  >Send</button>
                                 </div>
                               </div>
                             </form>
@@ -257,7 +291,7 @@ iframe.ima {
                               v-if="preview=='pdf'"
                               :src="previewSrc"
                             />
-                            <div class="col-lg-6 preview-content-img" v-if="preview=='image'">
+                            <div class="col-lg-5 preview-content-img" v-if="preview=='image'">
                               <img class="preview col-xs-12" :src="previewSrc">
                             </div>
                           </div>
@@ -280,15 +314,16 @@ import customImg from "../Element/custom-img";
 import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import currency from "../Labels/currency.json";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
+import VueRecaptcha from "vue-recaptcha";
 
 export default {
   components: {
     FormError,
     customImg,
     selectFromTable,
-    dateSingleBt
+    dateSingleBt,
+    VueRecaptcha
   },
-
   data() {
     return {
       code: this.$route.params.code,
@@ -302,7 +337,8 @@ export default {
         description: "",
         date: ""
       },
-      file: null,
+      file: false,
+      captcha: false,
       previewSrc: null,
       displayAlert: false
     };
@@ -326,6 +362,9 @@ export default {
     validRefunds: function() {
       if (!this.disableForm) {
         this.$validator.validateAll().then(result => {
+          if (!this.captcha) {
+            return false;
+          }
           let formData = new FormData();
           formData.append("file", this.file);
           formData.append("reference", this.inputsData.reference);
@@ -334,6 +373,7 @@ export default {
           formData.append("client", this.inputsData.client);
           if (result) {
             this.disableForm = true;
+
             this.axios
               .post("addRefund", formData, {
                 headers: {
@@ -350,33 +390,37 @@ export default {
               .then(response => {
                 this.disableForm = false;
                 if (response.data.STATUS == "OK") {
+                  /* this.$refs.recaptcha.reset(); */
+                  this.captcha = false;
                   Swal.fire({
-                    title: 'Refound Sended',
-                    text: 'Your refund has been successfully uploaded',
-                    type: 'success',
+                    title: "Refound Sended",
+                    text: "Your refund has been successfully uploaded",
+                    type: "success",
                     showCancelButton: true,
-                    confirmButtonText: 'upload another refund ',
-                    cancelButtonText: 'No, keep it'
-                  }).then((result) => {
-                    console.log(result);
+                    confirmButtonText: "Upload nother refund ",
+                    cancelButtonText: "No"
+                  }).then(result => {
                     if (result.value) {
-                        this.inputsData= {
-                            reference: "",
-                            price: "",
-                            description: "",
-                            date: ""
-                          };
-                      } else if (result.dismiss === Swal.DismissReason.cancel) {
-                        window.close();
-                        Swal.fire(
-                          'Close the Windows',
-                          'The process finished satisfactorily, please close the window',
-                          'error'
-                        )
-                      }
-                  })
+                      this.inputsData = {
+                        reference: "",
+                        price: "",
+                        description: "",
+                        date: ""
+                      };
+                      this.captcha = false;
+                      this.file = false;
+                      this.$refs.file.value = false;
+                    } else if (result.dismiss === Swal.DismissReason.cancel) {
+                      window.close();
+                      Swal.fire(
+                        "Close the Windows",
+                        "The process finished satisfactorily, please close the window",
+                        "error"
+                      );
+                    }
+                  });
                 }
-                this.uploadPercentage=0;
+                this.uploadPercentage = 0;
               });
           }
         });
@@ -387,11 +431,17 @@ export default {
     },
     handleFileUpload: function(event) {
       this.file = event.target.files[0];
+    },
+    onCaptchaVerified: function(recaptchaToken) {
+      this.captcha = true;
+    },
+    onCaptchaExpired: function() {
+      this.captcha = false;
+      this.$refs.recaptcha.reset();
     }
   },
   computed: {
     currencyFromSelect: function() {
-      var self = this;
       return currency.reduce(function(m, e) {
         m.push({
           id: e.code,
@@ -426,12 +476,4 @@ export default {
   }
 };
 </script>
-<style>
-.m-nav .m-nav__item > .m-nav__link .m-nav__link-text {
-  color: #f8f9fc;
-  font-weight: 700;
-}
-.m-nav .m-nav__item > .m-nav__link .m-nav__link-icon {
-  color: #f8f9fc;
-}
-</style>
+
