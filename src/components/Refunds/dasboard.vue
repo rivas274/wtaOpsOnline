@@ -146,18 +146,18 @@ iframe.ima {
                                 </div>
                                 <div
                                   class="form-group m-form__group"
-                                  :class="{'price': errors.has('reference')}"
+                                  :class="{'has-danger': errors.has('amount')}"
                                 >
                                   <strong>Amount</strong>
                                   <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                     <input
                                       type="text"
-                                      name="price"
+                                      name="amount"
                                       class="form-control m-input"
-                                      placeholder="Indicate Price"
+                                      placeholder="Indicate amount"
                                       v-validate="'required|min:1|max:10|decimal:2'"
-                                      v-model.lazy="inputsData.price"
-                                      ref="price"
+                                      v-model.lazy="inputsData.amount"
+                                      ref="amount"
                                     >
                                     <span class="m-input-icon__icon m-input-icon__icon--left">
                                       <span>
@@ -165,7 +165,7 @@ iframe.ima {
                                       </span>
                                     </span>
                                   </div>
-                                  <form-error :attribute_name="'price'" :errors_form="errors"></form-error>
+                                  <form-error :attribute_name="'amount'" :errors_form="errors"></form-error>
                                 </div>
                                 <div class="form-group m-form__group">
                                   <strong>Currency</strong>
@@ -237,7 +237,10 @@ iframe.ima {
                                       ref="file"
                                       v-on:change="handleFileUpload"
                                     >
-                                    <label class="custom-file-label" for="file">{{(typeof file =='object' &&'name' in file)?file.name:'Choose File'}}</label>
+                                    <label
+                                      class="custom-file-label"
+                                      for="file"
+                                    >{{(typeof file =='object' &&'name' in file)?file.name:'Choose File'}}</label>
                                   </div>
                                   <div class="progress" v-if="uploadPercentage>0">
                                     <div
@@ -256,7 +259,7 @@ iframe.ima {
                                   :class="{'has-danger': errors.has('recaptcha')}"
                                 >
                                   <vue-recaptcha
-                                    sitekey="6LdusqgUAAAAAGMwxgcsvToNCGBiITd4w3GmpgmP"
+                                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                                     ref="recaptcha"
                                     @verify="onCaptchaVerified"
                                     @expired="onCaptchaExpired"
@@ -333,12 +336,12 @@ export default {
       inputsData: {
         reference: "",
         currency: "USD",
-        price: "",
+        amount: "",
         description: "",
         date: ""
       },
       file: false,
-      captcha: false,
+      captcha: "",
       previewSrc: null,
       displayAlert: false
     };
@@ -365,15 +368,15 @@ export default {
           if (!this.captcha) {
             return false;
           }
-          let formData = new FormData();
+          const formData = new FormData();
           formData.append("file", this.file);
+          formData.append("idAssist", this.results.idAssist);
+          formData.append("g-recaptcha", this.captcha);
           formData.append("reference", this.inputsData.reference);
           formData.append("currency", this.inputsData.currency);
-          formData.append("price", this.inputsData.price);
-          formData.append("client", this.inputsData.client);
+          formData.append("amount", this.inputsData.amount);
           if (result) {
             this.disableForm = true;
-
             this.axios
               .post("addRefund", formData, {
                 headers: {
@@ -391,7 +394,7 @@ export default {
                 this.disableForm = false;
                 if (response.data.STATUS == "OK") {
                   /* this.$refs.recaptcha.reset(); */
-                  this.captcha = false;
+                  this.captcha = "";
                   Swal.fire({
                     title: "Refound Sended",
                     text: "Your refund has been successfully uploaded",
@@ -403,7 +406,7 @@ export default {
                     if (result.value) {
                       this.inputsData = {
                         reference: "",
-                        price: "",
+                        amount: "",
                         description: "",
                         date: ""
                       };
@@ -419,6 +422,8 @@ export default {
                       );
                     }
                   });
+                }else{
+                  console.log(response.data)
                 }
                 this.uploadPercentage = 0;
               });
@@ -433,10 +438,10 @@ export default {
       this.file = event.target.files[0];
     },
     onCaptchaVerified: function(recaptchaToken) {
-      this.captcha = true;
+      this.captcha = recaptchaToken;
     },
     onCaptchaExpired: function() {
-      this.captcha = false;
+      this.captcha = "";
       this.$refs.recaptcha.reset();
     }
   },
