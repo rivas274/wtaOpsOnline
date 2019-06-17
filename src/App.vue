@@ -27,7 +27,7 @@ export default {
   },
   methods:{
     showMenu:function(){
-      return (this.$session.get('TOKEN')||'').length == 16 && this.$route.name !='http404'
+      return (this.$session.get('TOKEN')||'').length == 16 && this.$route.name !='http404' && this.$route.meta.isPublic!=true
     }  
   }
 };

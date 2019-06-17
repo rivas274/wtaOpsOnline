@@ -175,7 +175,7 @@ iframe {
                     <pop-over
                       class-prop="btn btn-secondary m-btn m-btn--icon m-btn--icon-only m-btn--pill"
                       :placement="left"
-                      :title="benefit.SOURCE"
+                      :title="benefit.SOURCE + ' |   ' + (assistances.voucher.namePlan || '')"
                     >
                       <template slot="button">
                         <i class="flaticon-suitcase"></i>
@@ -268,15 +268,14 @@ iframe {
               <template slot="body">
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Opening Date</span>
-                  <span
-                    class="m-widget16__price m--align-right"
-                  >{{assistances.registeredDate.date}}</span>
+                  <span class="m-widget16__price m--align-right">{{assistances.registeredDate.date}}</span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Date Event</span>
-                  <span
-                    class="m-widget16__price m--align-right"
-                  >{{assistances.reportedDate.date}} <small>({{assistances.reportedDate.hour}})</small></span>
+                  <span class="m-widget16__price m--align-right">
+                    {{assistances.reportedDate.date}}
+                    <small>({{assistances.reportedDate.hour}})</small>
+                  </span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Source</span>
