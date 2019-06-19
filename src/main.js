@@ -23,7 +23,7 @@ Vue.use(VueSession, {
 Vue.use(middleware, permission);
 const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
-    baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
+    baseURL: 'https://wtaops.com/app/apiWtaOnline/',
     headers: {
         'Content-Type': 'multipart/form-data'
     }
