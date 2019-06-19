@@ -375,6 +375,7 @@ export default {
           formData.append("reference", this.inputsData.reference);
           formData.append("currency", this.inputsData.currency);
           formData.append("amount", this.inputsData.amount);
+          formData.append("nameBen", this.results.fisrtName+' '+this.results.lastName);
           if (result) {
             this.disableForm = true;
             this.axios
