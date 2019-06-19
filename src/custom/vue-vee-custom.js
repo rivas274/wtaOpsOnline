@@ -10,7 +10,7 @@ VeeValidate.Validator.extend('verify_password', {
 VeeValidate.Validator.extend('recaptcha', {
     getMessage: () => `Please complete the captcha`,
     validate: value => {
-        return value.toString().toUpperCase()=='TRUE';
+        return value.toString().split('').length>0;
     }
 });
 

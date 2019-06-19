@@ -23,7 +23,7 @@ Vue.use(VueSession, {
 Vue.use(middleware, permission);
 const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
-    baseURL: 'https://wtaops.com/app/apiWtaOnline/',
+    baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
     headers: {
         'Content-Type': 'multipart/form-data'
     }
@@ -89,7 +89,7 @@ router.beforeEach((to, from, next) => {
 Vue.config.productionTip = false;
 new Vue({
     mounted: function () {
-        setInterval(() =>{
+        setInterval(() => {
             if (router.currentRoute.fullPath !== '/') {
                 let lastCheck = moment(Vue._session.get('lastCheck')),
                     check = Vue._session.get('checkTimeOut'),

@@ -41,14 +41,6 @@ export default [
     }
   },
   {
-    name: 'Refunds',
-    path: '/refunds/:code',
-    component: Refunds,
-    meta: {
-      isPublic: true
-    }
-  },
-  {
     path: "**",
     name: "http404",
     component: http404,
