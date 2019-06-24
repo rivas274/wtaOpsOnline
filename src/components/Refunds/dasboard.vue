@@ -374,7 +374,9 @@ export default {
           formData.append("g-recaptcha", this.captcha);
           formData.append("reference", this.inputsData.reference);
           formData.append("currency", this.inputsData.currency);
+          formData.append("date", this.inputsData.date);
           formData.append("amount", this.inputsData.amount);
+          formData.append("nameBen", this.results.fisrtName+' '+this.results.lastName);
           if (result) {
             this.disableForm = true;
             this.axios
@@ -394,23 +396,19 @@ export default {
                 this.disableForm = false;
                 if (response.data.STATUS == "OK") {
                   /* this.$refs.recaptcha.reset(); */
-                  this.captcha = "";
                   Swal.fire({
                     title: "Refound Sended",
                     text: "Your refund has been successfully uploaded",
                     type: "success",
                     showCancelButton: true,
-                    confirmButtonText: "Upload nother refund ",
+                    confirmButtonText: "Upload another refund ",
                     cancelButtonText: "No"
                   }).then(result => {
                     if (result.value) {
-                      this.inputsData = {
-                        reference: "",
-                        amount: "",
-                        description: "",
-                        date: ""
-                      };
-                      this.captcha = false;
+                      this.inputsData.reference='';
+                      this.inputsData.amount='';
+                      this.inputsData.description='';
+                      //this.captcha = '';
                       this.file = false;
                       this.$refs.file.value = false;
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
@@ -422,8 +420,12 @@ export default {
                       );
                     }
                   });
-                }else{
-                  console.log(response.data)
+                } else {
+                  Swal.error(
+                        "Error",
+                        response.data.MESSAGE,
+                        "error"
+                    );
                 }
                 this.uploadPercentage = 0;
               });
@@ -440,10 +442,10 @@ export default {
     onCaptchaVerified: function(recaptchaToken) {
       this.captcha = recaptchaToken;
     },
-    onCaptchaExpired: function() {
+    /* onCaptchaExpired: function() {
       this.captcha = "";
       this.$refs.recaptcha.reset();
-    }
+    } */
   },
   computed: {
     currencyFromSelect: function() {
@@ -481,4 +483,3 @@ export default {
   }
 };
 </script>
-

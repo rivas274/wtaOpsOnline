@@ -5,7 +5,7 @@
         <div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
           <span class="m-footer__copyright">
 						&copy;2012 - {{ new Date().getFullYear() }} 
-						<a href="#" class="m-link">
+						<a class="m-link">
 							ILS-D2PW
 						</a>, All rights reserved.
 					</span>
