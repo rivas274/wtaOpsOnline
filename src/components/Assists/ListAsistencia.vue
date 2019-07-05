@@ -2,14 +2,14 @@
 .fa-status .fa {
   font-size: 1.4rem;
 }
-.openAssist:hover{
+.openAssist:hover {
   background-color: #716aca;
   color: #fff;
 }
-.openAssist{
+.openAssist {
   cursor: pointer;
   padding: 2px 4px;
-  border-radius: .75rem;
+  border-radius: 0.75rem;
 }
 </style>
 <template>
@@ -62,6 +62,7 @@
         <div class="col m--align-right">
           <!-- <button class="btn btn-brand" @click="getAssistance(0)">Search</button> -->
           <button class="btn btn-info" @click="clear">Clear</button>
+          <button class="btn btn-primary" @click="dowload">Dowload</button>
         </div>
       </div>
     </template>
@@ -124,11 +125,11 @@
         </td>
         <td class="text-center">
           <span>{{assist.reportedDate.date}}</span>
-          <br>
+          <br />
           <small>({{assist.reportedDate.hour}})</small>
         </td>
         <td class="text-center">
-          <span>{{assist.registeredDate.date}}</span> 
+          <span>{{assist.registeredDate.date}}</span>
         </td>
         <td>
           <span>
@@ -137,21 +138,21 @@
           </span>
         </td>
         <td class="text-center fa-status">
-            <i
-              :class="infoStatus(assist.statusAssist).ico"
-              v-tooltip:top="infoStatus(assist.statusAssist).label"
-            ></i>
+          <i
+            :class="infoStatus(assist.statusAssist).ico"
+            v-tooltip:top="infoStatus(assist.statusAssist).label"
+          ></i>
         </td>
         <td class="text-center fa-status">
-            <a
-              @click.prevent="addAssist(assist)"
-              class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
-            >
-              <i
-                class="fa"
-                :class="[open.indexOf(assist.codeAssist)>-1?'fa-location-arrow':'fa-plus-circle']"
-              ></i>
-            </a>
+          <a
+            @click.prevent="addAssist(assist)"
+            class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+          >
+            <i
+              class="fa"
+              :class="[open.indexOf(assist.codeAssist)>-1?'fa-location-arrow':'fa-plus-circle']"
+            ></i>
+          </a>
         </td>
       </tr>
     </template>
@@ -185,14 +186,14 @@ export default {
   },
   props: ["open-asist"],
   data: function() {
-    var permission={
-        bills:this.middleware('bills','read')
+    var permission = {
+      bills: this.middleware("bills", "read")
     };
     return {
-      permission:permission,
+      permission: permission,
       filters: {
         code: "",
-        billExists: permission.bills?"Y":"",
+        /* billExists: permission.bills?"Y":"", */
         arrPrefix: [],
         passager: "",
         date: {
@@ -225,10 +226,41 @@ export default {
         }
       ],
       open: [],
-      showLoader: false,
+      showLoader: false
     };
   },
   methods: {
+    dowload: function() {
+      let arrPrefix =
+        this.filters.arrPrefix.length == 0
+          ? this.$session.get("prefix")
+          : this.filters.arrPrefix;
+      this.showLoader = true;
+      this.axios
+        .post(
+          "getAssistsXLS",
+          {
+            prefix: arrPrefix,
+            /* billExists: this.filters.billExists, */
+            code: this.filters.code.trim(),
+            passenger: this.filters.passager.trim(),
+            endDate: this.filters.date.endDate,
+            startDate: this.filters.date.startDate
+          },
+          {
+            responseType: "blob"
+          }
+        )
+        .then(response => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement("a");
+          link.href = url;
+          link.setAttribute("download", "file.xlsx");
+          document.body.appendChild(link);
+          link.click();
+          this.showLoader = false;
+        });
+    },
     getAssistance: function(pg) {
       let arrPrefix =
         this.filters.arrPrefix.length == 0
@@ -241,7 +273,7 @@ export default {
           start: pg,
           limit: this.footerTable.limit,
           prefix: arrPrefix,
-          billExists: this.filters.billExists,
+          /* billExists: this.filters.billExists, */
           code: this.filters.code.trim(),
           passenger: this.filters.passager.trim(),
           endDate: this.filters.date.endDate,
@@ -300,18 +332,18 @@ export default {
         ico: ico[status]
       };
     },
-    clear: function(){
-        this.filters={
-            code: "",
-            billExists: "",
-            arrPrefix: [],
-            passager: "",
-            date: {
-              endDate: "",
-              startDate: ""
-            }
-          };
-        this.getAssistance(0);
+    clear: function() {
+      this.filters = {
+        code: "",
+        /* billExists: "", */
+        arrPrefix: [],
+        passager: "",
+        date: {
+          endDate: "",
+          startDate: ""
+        }
+      };
+      this.getAssistance(0);
     }
   },
   mounted() {
