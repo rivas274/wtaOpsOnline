@@ -7,6 +7,9 @@ var Middleware = {
         if (!option) {
             return false;
         }
+        if (!(action in permission)) {
+            return false;
+        }
         return this.permission[action][option];
     }
 }
@@ -21,7 +24,10 @@ Middleware.install = function (Vue, options) {
     Vue.prototype.middleware = Vue.$middleware = function (action, option) {
         /*Obtenemos los permisos personalizados por usuario */
         let permission = Vue._session.get('permission');
-        if (Vue._session.get('permission')) {
+        if (permission) {
+            if (!(action in permission)) {
+                return false;
+            }
             return permission[action][option]?permission[action][option]=='Y':false;
         }
         return Vue.$canSee(Middleware.access(action,option));

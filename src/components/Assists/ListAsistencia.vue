@@ -15,7 +15,7 @@
 <template>
   <TableBasic :show-loader="showLoader">
     <template slot="filters">
-      <div class="form-group m-form__group row">
+      <div class="form-group m-form__group row" :class="{'has-danger':error}">
         <date-range-bt
           class-prop="col-md-4 m-form__group-sub"
           name="date"
@@ -24,7 +24,7 @@
           :value="filters.date"
         ></date-range-bt>
         <input-from-table
-          class="col-md-4 m-form__group-sub"
+          class-prop="col-md-4 m-form__group-sub"
           name="code"
           watermark="Code"
           icon="la flaticon-interface-5"
@@ -32,7 +32,7 @@
           :value="filters.code"
         ></input-from-table>
         <input-from-table
-          class="col-md-4 m-form__group-sub"
+          class-prop="col-md-4 m-form__group-sub"
           name="passager"
           watermark="Passenger"
           icon="la flaticon-avatar"
@@ -40,8 +40,8 @@
           :value="filters.passager"
         ></input-from-table>
       </div>
-      <div class="form-group m-form__group row">
-        <template v-if="permission.bills">
+      <div class="form-group m-form__group row" v-if="clients.length>1">
+        <template>
           <multi-selects
             v-if="clients.length>1"
             class-prop="col-md-4 m-form__group-sub"
@@ -52,6 +52,7 @@
           ></multi-selects>
           <!-- Deshabilitado por pedido del usuario
           <select-from-table
+            v-if="permission.bills"
             class-prop="col-md-4 m-form__group-sub"
             name="billExists"
             :options="billsOption"
@@ -59,10 +60,22 @@
             v-on:input="setDataFilter"
           ></select-from-table>-->
         </template>
-        <div class="col m--align-right">
+      </div>
+      <div class="row m--align-right">
+        <div v-if="error" class="col-md-9">
+          <div class="alert-danger alert alert-dismissible m--align-left">
+            <button type="button" class="close" @click="error=null"></button>
+            <span>{{ error }}</span>
+          </div>
+        </div>
+        <div class="col-md-3" :class="{'offset-md-9':error==null}">
           <!-- <button class="btn btn-brand" @click="getAssistance(0)">Search</button> -->
-          <button class="btn btn-info" @click="clear">Clear</button>
-          <button class="btn btn-primary" @click="dowload">Dowload</button>
+          <button
+            class="btn btn-primary ml-2 pull-right"
+            @click="dowload"
+            v-if="permission.RP002A"
+          >Dowload</button>
+          <button class="btn btn-info ml-2 pull-right" @click="clear">Clear</button>
         </div>
       </div>
     </template>
@@ -174,6 +187,7 @@ import pagination from "../pagination/pagination.vue";
 import Flag from "../Element/Flag.vue";
 import TableBasic from "../Tables/TableBasic.vue";
 import MultiSelects from "../Tables/filters/Multiselect.vue";
+import { filter } from "minimatch";
 export default {
   components: {
     TableBasic,
@@ -187,10 +201,12 @@ export default {
   props: ["open-asist"],
   data: function() {
     var permission = {
-      bills: this.middleware("bills", "read")
+      bills: this.middleware("bills", "read"),
+      RP002A: this.middleware("RP002A", "read")
     };
     return {
       permission: permission,
+      error: null,
       filters: {
         code: "",
         /* billExists: permission.bills?"Y":"", */
@@ -235,6 +251,25 @@ export default {
         this.filters.arrPrefix.length == 0
           ? this.$session.get("prefix")
           : this.filters.arrPrefix;
+      let requiered = {
+          code: this.filters.code.trim(),
+          passenger: this.filters.passager.trim(),
+          endDate: this.filters.date.endDate,
+          startDate: this.filters.date.startDate
+        },
+        valid = false;
+      for (var field in requiered) {
+        if (requiered[field] != "") {
+          valid = true;
+        }
+      }
+      if (!valid) {
+        this.error = "Select a filter to continue";
+        return false;
+      } else {
+        this.error = null;
+      }
+      requiered["prefix"] = arrPrefix;
       this.showLoader = true;
       this.axios
         .post(
@@ -255,9 +290,10 @@ export default {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");
           link.href = url;
-          link.setAttribute("download", "file.xlsx");
+          link.setAttribute("download", "RP002A.xlsx");
           document.body.appendChild(link);
           link.click();
+          this.error = null;
           this.showLoader = false;
         });
     },
@@ -268,6 +304,7 @@ export default {
           : this.filters.arrPrefix;
       pg = Number.isInteger(pg) ? pg : this.footerTable.start;
       this.showLoader = true;
+      this.error = null;
       this.axios
         .post("getAssistance", {
           start: pg,

@@ -1,3 +1,10 @@
+<style>
+.has-danger .form-control,
+.has-danger .form-control[readonly] {
+  border-color: #f4516c;
+}
+</style>
+
 <template>
   <div id="app" class="m-grid m-grid--hor m-grid--root m-page">
     <template  v-if="showMenu()">
