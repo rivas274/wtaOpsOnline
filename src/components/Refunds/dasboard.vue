@@ -22,10 +22,6 @@ iframe.ima {
 .form-control-feedback {
   font-weight: 600;
 }
-.has-danger .form-control,
-.has-danger .form-control[readonly] {
-  border-color: #f4516c;
-}
 </style>
 <style>
 .m-nav .m-nav__item > .m-nav__link .m-nav__link-text {
@@ -259,7 +255,7 @@ iframe.ima {
                                   :class="{'has-danger': errors.has('recaptcha')}"
                                 >
                                   <vue-recaptcha
-                                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                                    sitekey="6LdusqgUAAAAAGMwxgcsvToNCGBiITd4w3GmpgmP"
                                     ref="recaptcha"
                                     @verify="onCaptchaVerified"
                                     @expired="onCaptchaExpired"
@@ -397,7 +393,7 @@ export default {
                 if (response.data.STATUS == "OK") {
                   /* this.$refs.recaptcha.reset(); */
                   Swal.fire({
-                    title: "Refound Sended",
+                    title: "Refund document sent",
                     text: "Your refund has been successfully uploaded",
                     type: "success",
                     showCancelButton: true,
