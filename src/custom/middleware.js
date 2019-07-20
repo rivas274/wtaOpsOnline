@@ -7,9 +7,6 @@ var Middleware = {
         if (!option) {
             return false;
         }
-        if (!(action in permission)) {
-            return false;
-        }
         return this.permission[action][option];
     }
 }
