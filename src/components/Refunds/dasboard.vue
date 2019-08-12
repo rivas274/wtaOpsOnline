@@ -18,6 +18,7 @@ iframe.ima {
   min-height: 350px;
   max-height: 775px;
   overflow: auto;
+  margin-left: -15px;
 }
 .form-control-feedback {
   font-weight: 600;
@@ -417,6 +418,14 @@ export default {
                     }
                   });
                 } else {
+                  if(response.data.ERRORS){
+                    for (var prop in response.data.ERRORS) {
+                      this.errors.add({
+                        field: prop,
+                        msg: response.data.ERRORS[prop]
+                      });
+                    }
+                  }
                   Swal.error(
                         "Error",
                         response.data.MESSAGE,
@@ -454,7 +463,7 @@ export default {
       }, []);
     },
     preview: function() {
-      if (!this.file) {
+      if (!this.file||this.errors.has('file')) {
         return false;
       }
       var type = false;

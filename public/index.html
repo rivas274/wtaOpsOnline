@@ -23,6 +23,13 @@
       }
     });
   </script>
+  <script>
+    $(document).ready(function () {
+      if(navigator.userAgent.indexOf('MSIE')!==-1 || navigator.appVersion.indexOf('Trident/') > -1){
+        document.write('<center><div style="margin: 100px 20%; padding: 20px; border-radius: 3px; border: 2px solid grey; border-image: none; font-size: 14px; font-weight: 500; min-width: 700px; background-color: rgb(221, 221, 221);">Your browser is not compatible with Wtaops.info, please try to access with another browser.</div></center>');
+      }
+    });
+  </script>
 </head>
 
 <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default" style="font-family:roboto">
