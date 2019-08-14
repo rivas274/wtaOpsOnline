@@ -95,8 +95,13 @@
   </div>
 </template>
 <script>
+import Vue from 'vue';
+import VueParticles from 'vue-particles';
 import customImg from "../Element/custom-img";
 import FormError from "../FormError";
+
+Vue.use(VueParticles);
+
 export default {
   name: "Login",
   components: {
@@ -145,5 +150,5 @@ export default {
       }
     }
   }
-};
+}
 </script>

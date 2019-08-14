@@ -15,13 +15,24 @@ iframe.ima {
   width: 100%;
 }
 .preview-content-img {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
   min-height: 350px;
   max-height: 775px;
   overflow: auto;
-  margin-left: -15px;
 }
 .form-control-feedback {
   font-weight: 600;
+}
+.row {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+.preview {
+  max-height: 100%;
+  max-width: 100%;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
 }
 </style>
 <style>
@@ -45,7 +56,7 @@ iframe.ima {
                   <div class="m-invoice__container m-invoice__container--centered">
                     <div class="m-invoice__logo" style="padding-top: 0px; margin-top:40px;">
                       <a>
-                        <h1>REFUNDS</h1>
+                        <h1>{{ $t('general.refund') }}</h1>
                       </a>
                       <a>
                         <custom-img
@@ -67,44 +78,45 @@ iframe.ima {
                         >
                           <ul class="m-nav m-nav--inline">
                             <li class="m-nav__item">
-                              <a class="m-nav__link" v-tooltip:top="'Client'">
+                              <a class="m-nav__link" v-tooltip:top="$t('general.client')">
                                 <i class="m-nav__link-icon flaticon-suitcase"></i>
                                 <span class="m-nav__link-text">{{results.clientName}}</span>
                               </a>
                             </li>
                             <li class="m-nav__item">
-                              <a class="m-nav__link" v-tooltip:top="'Code Assist'">
+                              <a class="m-nav__link" v-tooltip:top="$t('assistance.code')">
                                 <i class="m-nav__link-icon flaticon-shapes"></i>
                                 <span class="m-nav__link-text">{{results.codeAssist}}</span>
                               </a>
                             </li>
                             <li class="m-nav__item" v-if="results.codeAssist!=results.codigo">
-                              <a class="m-nav__link" v-tooltip:top="'Voucher'">
+                              <a class="m-nav__link" v-tooltip:top="$t('general.voucher')">
                                 <i class="m-nav__link-icon flaticon-interface-5"></i>
                                 <span class="m-nav__link-text">{{results.codigo}}</span>
                               </a>
                             </li>
                             <li class="m-nav__item">
-                              <a class="m-nav__link" v-tooltip:top="'Name of Passenger'">
-                                <i class="m-nav__link-icon flaticon-profile"></i>
+                              <a class="m-nav__link" v-tooltip:top="$t('voucher.name')">
+                                <i class="m-nav__link-icon flaticon-avatar"></i>
                                 <span
                                   class="m-nav__link-text"
                                 >{{results.fisrtName+' '+results.lastName}}</span>
                               </a>
                             </li>
                             <li class="m-nav__item" v-if="results.registeredDate">
-                              <a class="m-nav__link" v-tooltip:top="'Date of Case'">
+                              <a class="m-nav__link" v-tooltip:top="$t('assistance.date.case')">
                                 <i class="m-nav__link-icon flaticon-calendar-1"></i>
                                 <span class="m-nav__link-text">{{results.registeredDate.date}}</span>
                               </a>
                             </li>
                             <li class="m-nav__item">
-                              <a class="m-nav__link" v-tooltip:top="'Birthdate'">
+                              <a class="m-nav__link" v-tooltip:top="$t('assistance.date.birth')">
                                 <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                                 <span class="m-nav__link-text">{{results.birthDate}}</span>
                               </a>
                             </li>
                           </ul>
+                          <locale-changer class-prop="pull-right"></locale-changer>
                         </div>
                       </div>
                     </div>
@@ -116,7 +128,7 @@ iframe.ima {
                               <span class="m-portlet__head-icon m--hide">
                                 <i class="la la-gear"></i>
                               </span>
-                              <h3 class="m-portlet__head-text">Information Refunds</h3>
+                              <h3 class="m-portlet__head-text">{{ $t('refund.information') }}</h3>
                             </div>
                           </div>
                         </div>
@@ -132,75 +144,115 @@ iframe.ima {
                             >
                               <div class="m-portlet__body">
                                 <div class="form-group m-form__group">
-                                  <strong>Date</strong>
-                                  <date-single-bt
-                                    class-prop="m-input"
-                                    name="date"
-                                    watermark="Date"
-                                    v-on:input="setDataFilter"
-                                    :value="inputsData.date"
-                                  ></date-single-bt>
-                                </div>
-                                <div
-                                  class="form-group m-form__group"
-                                  :class="{'has-danger': errors.has('amount')}"
-                                >
-                                  <strong>Amount</strong>
-                                  <div class="m-input-icon m-input-icon--left m-input-icon--right">
-                                    <input
-                                      type="text"
-                                      name="amount"
-                                      class="form-control m-input"
-                                      placeholder="Indicate amount"
-                                      v-validate="'required|min:1|max:10|decimal:2'"
-                                      v-model.lazy="inputsData.amount"
-                                      ref="amount"
-                                    >
-                                    <span class="m-input-icon__icon m-input-icon__icon--left">
-                                      <span>
-                                        <i class="la la-money"></i>
-                                      </span>
-                                    </span>
-                                  </div>
-                                  <form-error :attribute_name="'amount'" :errors_form="errors"></form-error>
-                                </div>
-                                <div class="form-group m-form__group">
-                                  <strong>Currency</strong>
+                                  <strong>{{ $t('document.type') }}</strong>
                                   <select-from-table
-                                    name="currency"
-                                    :options="currencyFromSelect"
-                                    :selected="inputsData.currency"
+                                    name="docType"
+                                    :options="documentsType"
+                                    :selected="inputsData.docType"
                                     v-on:input="setDataFilter"
                                   ></select-from-table>
                                 </div>
-                                <div
-                                  class="form-group m-form__group"
-                                  :class="{'has-danger': errors.has('reference')}"
-                                >
-                                  <strong>Reference</strong>
-                                  <div class="m-input-icon m-input-icon--left m-input-icon--right">
-                                    <input
-                                      type="text"
-                                      name="reference"
-                                      class="form-control m-input"
-                                      placeholder="Indicate Reference"
-                                      v-validate="'required|min:2|max:40|'"
-                                      v-model.lazy="inputsData.reference"
-                                      ref="reference"
-                                    >
-                                    <span class="m-input-icon__icon m-input-icon__icon--left">
-                                      <span>
-                                        <i class="la la-tag"></i>
-                                      </span>
-                                    </span>
+                                <div v-show="inputsData.docType=='26'">
+                                  <div class="form-group m-form__group">
+                                    <strong>{{ $t('refund.date.document') }}</strong>
+                                    <date-single-bt
+                                      class-prop="m-input"
+                                      name="date"
+                                      watermark="Date"
+                                      v-on:input="setDataFilter"
+                                      :value="inputsData.date"
+                                    ></date-single-bt>
                                   </div>
-                                  <form-error :attribute_name="'reference'" :errors_form="errors"></form-error>
+                                  <div
+                                    class="form-group m-form__group"
+                                    :class="{'has-danger': errors.has('amount')}"
+                                  >
+                                    <strong>{{ $t('document.amount') }}</strong>
+                                    <div
+                                      class="m-input-icon m-input-icon--left m-input-icon--right"
+                                    >
+                                      <input
+                                        type="text"
+                                        name="amount"
+                                        class="form-control m-input"
+                                        placeholder="Indicate amount"
+                                        v-validate="'required|min:1|max:10|decimal:2'"
+                                        v-model.lazy="inputsData.amount"
+                                        ref="amount"
+                                      />
+                                      <span class="m-input-icon__icon m-input-icon__icon--left">
+                                        <span>
+                                          <i class="la la-money"></i>
+                                        </span>
+                                      </span>
+                                    </div>
+                                    <form-error :attribute_name="'amount'" :errors_form="errors"></form-error>
+                                  </div>
+                                  <div class="form-group m-form__group">
+                                    <strong>{{ $t('document.currency') }}</strong>
+                                    <select-from-table
+                                      name="currency"
+                                      :options="currencyFromSelect"
+                                      :selected="inputsData.currency"
+                                      v-on:input="setDataFilter"
+                                    ></select-from-table>
+                                  </div>
+                                  <div
+                                    class="form-group m-form__group"
+                                    :class="{'has-danger': errors.has('nameBen')}"
+                                  >
+                                    <strong>{{ $t('refund.payee') }}</strong>
+                                    <div
+                                      class="m-input-icon m-input-icon--left m-input-icon--right"
+                                    >
+                                      <input
+                                        type="text"
+                                        name="nameBen"
+                                        class="form-control m-input"
+                                        placeholder="Indicate Name"
+                                        v-validate="'required|min:2|max:250|'"
+                                        v-model.lazy="inputsData.nameBen"
+                                        ref="nameBen"
+                                      />
+                                      <span class="m-input-icon__icon m-input-icon__icon--left">
+                                        <span>
+                                          <i class="la la-user"></i>
+                                        </span>
+                                      </span>
+                                    </div>
+                                    <form-error :attribute_name="'nameBen'" :errors_form="errors"></form-error>
+                                  </div>
+                                  <div
+                                    class="form-group m-form__group"
+                                    :class="{'has-danger': errors.has('reference')}"
+                                  >
+                                    <strong>{{ $t('refund.reference') }}</strong>
+                                    <div
+                                      class="m-input-icon m-input-icon--left m-input-icon--right"
+                                    >
+                                      <input
+                                        type="text"
+                                        name="reference"
+                                        class="form-control m-input"
+                                        placeholder="Indicate Reference"
+                                        v-validate="'required|min:2|max:40|'"
+                                        v-model.lazy="inputsData.reference"
+                                        ref="reference"
+                                      />
+                                      <span class="m-input-icon__icon m-input-icon__icon--left">
+                                        <span>
+                                          <i class="la la-tag"></i>
+                                        </span>
+                                      </span>
+                                    </div>
+                                    <form-error :attribute_name="'reference'" :errors_form="errors"></form-error>
+                                  </div>
                                 </div>
                                 <div
                                   class="form-group m-form__group"
                                   :class="{'has-danger': errors.has('Description')}"
                                 >
-                                  <strong>Description</strong>
+                                  <strong>{{ $t('document.description') }}</strong>
                                   <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                     <textarea
                                       name="Description"
@@ -217,13 +269,13 @@ iframe.ima {
                                       </span>
                                     </span>
                                   </div>
-                                  <form-error :attribute_name="'reference'" :errors_form="errors"></form-error>
+                                  <form-error :attribute_name="'Description'" :errors_form="errors"></form-error>
                                 </div>
                                 <div
                                   class="form-group m-form__group"
                                   :class="{'has-danger': errors.has('file')}"
                                 >
-                                  <strong>File Document</strong>
+                                  <strong>{{ $t('document.file') }}</strong>
                                   <div class="custom-file">
                                     <input
                                       type="file"
@@ -233,7 +285,7 @@ iframe.ima {
                                       v-validate="'required|ext:jpeg,jpg,pdf,png,gif,bmp'"
                                       ref="file"
                                       v-on:change="handleFileUpload"
-                                    >
+                                    />
                                     <label
                                       class="custom-file-label"
                                       for="file"
@@ -256,10 +308,11 @@ iframe.ima {
                                   :class="{'has-danger': errors.has('recaptcha')}"
                                 >
                                   <vue-recaptcha
-                                    sitekey="6LdusqgUAAAAAGMwxgcsvToNCGBiITd4w3GmpgmP"
+                                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                                     ref="recaptcha"
                                     @verify="onCaptchaVerified"
                                     @expired="onCaptchaExpired"
+                                    :loadRecaptchaScript="true"
                                   ></vue-recaptcha>
                                   <input
                                     type="hidden"
@@ -268,7 +321,7 @@ iframe.ima {
                                     v-validate="'recaptcha'"
                                     ref="recaptcha"
                                     v-model="captcha"
-                                  >
+                                  />
                                   <form-error :attribute_name="'recaptcha'" :errors_form="errors"></form-error>
                                 </div>
                               </div>
@@ -282,7 +335,7 @@ iframe.ima {
                                     :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
                                     type="submit"
                                     class="btn btn-primary"
-                                  >Send</button>
+                                  >{{ $t('general.send') }}</button>
                                 </div>
                               </div>
                             </form>
@@ -292,7 +345,7 @@ iframe.ima {
                               :src="previewSrc"
                             />
                             <div class="col-lg-5 preview-content-img" v-if="preview=='image'">
-                              <img class="preview col-xs-12" :src="previewSrc">
+                              <img class="preview col-xs-12" :src="previewSrc" />
                             </div>
                           </div>
                         </div>
@@ -313,6 +366,7 @@ import FormError from "../FormError";
 import customImg from "../Element/custom-img";
 import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import currency from "../Labels/currency.json";
+import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import VueRecaptcha from "vue-recaptcha";
 
@@ -322,7 +376,8 @@ export default {
     customImg,
     selectFromTable,
     dateSingleBt,
-    VueRecaptcha
+    VueRecaptcha,
+    localeChanger
   },
   data() {
     return {
@@ -335,8 +390,11 @@ export default {
         currency: "USD",
         amount: "",
         description: "",
-        date: ""
+        date: "",
+        nameBen: "",
+        docType: 26
       },
+      documentsType: [],
       file: false,
       captcha: "",
       previewSrc: null,
@@ -344,9 +402,15 @@ export default {
     };
   },
   mounted() {
+    this.getDocumentsType();
     this.getAssistance();
   },
   methods: {
+    getDocumentsType: function() {
+      this.axios.get("getDocumentsType").then(response => {
+        this.documentsType = response.data.RESPONSE.RESULTS;
+      });
+    },
     getAssistance: function() {
       this.axios
         .get("getAssistancePublic", {
@@ -355,8 +419,12 @@ export default {
           }
         })
         .then(response => {
+          if(response.data.RESPONSE.RESULTS===null){
+            this.$router.push({ name: 'login' });
+          }
           this.results = response.data.RESPONSE.RESULTS[0];
           this.inputsData.date = this.results.registeredDate.date;
+          this.inputsData.nameBen = this.results.fisrtName + " " + this.results.lastName;
         });
     },
     validRefunds: function() {
@@ -373,7 +441,7 @@ export default {
           formData.append("currency", this.inputsData.currency);
           formData.append("date", this.inputsData.date);
           formData.append("amount", this.inputsData.amount);
-          formData.append("nameBen", this.results.fisrtName+' '+this.results.lastName);
+          formData.append("nameBen", this.inputsData.nameBen);
           if (result) {
             this.disableForm = true;
             this.axios
@@ -394,31 +462,31 @@ export default {
                 if (response.data.STATUS == "OK") {
                   /* this.$refs.recaptcha.reset(); */
                   Swal.fire({
-                    title: "Refund document sent",
-                    text: "Your refund has been successfully uploaded",
+                    title: this.$t('document.send'),
+                    text: this.$t('document.uploaded'),
                     type: "success",
                     showCancelButton: true,
-                    confirmButtonText: "Upload another refund ",
-                    cancelButtonText: "No"
+                    confirmButtonText: this.$t('document.uploadAnother'),
+                    cancelButtonText: this.$t('general.no')
                   }).then(result => {
                     if (result.value) {
-                      this.inputsData.reference='';
-                      this.inputsData.amount='';
-                      this.inputsData.description='';
+                      this.inputsData.reference = "";
+                      this.inputsData.amount = "";
+                      this.inputsData.description = "";
                       //this.captcha = '';
                       this.file = false;
                       this.$refs.file.value = false;
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
                       window.close();
                       Swal.fire(
-                        "Close the Windows",
-                        "The process finished satisfactorily, please close the window",
+                        this.$t('windows.close'),
+                        this.$t('windows.pleaseClose'),
                         "error"
                       );
                     }
                   });
                 } else {
-                  if(response.data.ERRORS){
+                  if (response.data.ERRORS) {
                     for (var prop in response.data.ERRORS) {
                       this.errors.add({
                         field: prop,
@@ -426,11 +494,7 @@ export default {
                       });
                     }
                   }
-                  Swal.error(
-                        "Error",
-                        response.data.MESSAGE,
-                        "error"
-                    );
+                  Swal.error("Error", response.data.MESSAGE, "error");
                 }
                 this.uploadPercentage = 0;
               });
@@ -447,10 +511,11 @@ export default {
     onCaptchaVerified: function(recaptchaToken) {
       this.captcha = recaptchaToken;
     },
-    /* onCaptchaExpired: function() {
+    onCaptchaExpired: function() {
+      return false;
       this.captcha = "";
       this.$refs.recaptcha.reset();
-    } */
+    }
   },
   computed: {
     currencyFromSelect: function() {
@@ -463,7 +528,7 @@ export default {
       }, []);
     },
     preview: function() {
-      if (!this.file||this.errors.has('file')) {
+      if (!this.file || this.errors.has("file")) {
         return false;
       }
       var type = false;

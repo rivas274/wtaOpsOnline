@@ -3,30 +3,28 @@ import App from './App.vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
-import VeeValidate from './custom/vue-vee-custom';
 import VueSession from './custom/vue-session-custom';
 import routes from './custom/routes';
 import middleware from './custom/middleware';
 import permission from './custom/permission.json';
 import globalFilters from './custom/vue-global-filters';
 import globalDirectives from './custom/vue-global-directives';
-import VueParticles from 'vue-particles';
+import i18n from "./custom/i18n";
+import './custom/vue-vee-custom';
 
-Vue.use(VueParticles)
+
 Vue.use(VueRouter);
 Vue.use(globalDirectives);
 Vue.use(globalFilters);
-Vue.use(VeeValidate);
+
 Vue.use(VueSession, {
     persist: true
 });
 Vue.use(middleware, permission);
+
 const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
-    baseURL: 'https://wtaops.com/app/apiWtaOnline/',
-    headers: {
-        'Content-Type': 'multipart/form-data'
-    }
+    baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
 });
 customAxios.interceptors.response.use(
     function (response) {
@@ -47,6 +45,9 @@ customAxios.interceptors.request.use(function (config) {
         Vue._session.start();
     }
     config.headers.common['SESSION'] = Vue._session.id().replace('sess:', '');
+    if (i18n._vm.$root.$root.locale) {
+        config.headers.common['lang'] = i18n._vm.$root.$root.locale;
+    }
     if ((Vue._session.get('TOKEN') || '').length == 16 && (config.headers.common['TOKEN'] || '').length == 0) {
         config.headers.common['TOKEN'] = Vue._session.get('TOKEN');
         config.headers.common['USER'] = Vue._session.get("user");
@@ -67,7 +68,7 @@ Vue.mixin({
 })
 Vue.use(VueAxios, customAxios);
 router.beforeEach((to, from, next) => {
-    //console.log('Vue.$canSee',Vue.$canSee([18]));
+    i18n._vm.$root.$root.locale = (to.params.lang || 'eng');
     if (to.meta.isPublic) {
         if (to.name == "Login" && (Vue._session.get('TOKEN') || '').length == 16) {
             next('/dasboard');
@@ -109,5 +110,6 @@ new Vue({
         });
     },
     render: h => h(App),
-    router
+    router,
+    i18n,
 }).$mount('#app')

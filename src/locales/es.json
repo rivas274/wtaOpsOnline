@@ -1,0 +1,41 @@
+{
+  "refund": {
+    "information": "Información de reembolso",
+    "payee": "Beneficiario del reembolso (Nombre)",
+    "reference": "Reembolso Referencia",
+    "date": {
+      "document": "Fecha de Reembolso"
+    }
+  },
+  "document": {
+    "type": "Tipo de Documento",
+    "amount": "Cantidad",
+    "currency": "Moneda",
+    "description": "Descripción",
+    "file": "Documento",
+    "send": "Documento Enviado",
+    "uploaded":"Su documento ha sido cargado exitosamente",
+    "uploadAnother":"Subir otro documento"
+  },
+  "assistance": {
+    "code": "Código de asistencia",
+    "date": {
+      "case": "Fecha del caso",
+      "birth": "Fecha de nacimiento"
+    }
+  },
+  "voucher": {
+    "name": "Nombre del pasajero"
+  },
+  "general": {
+    "refund": "Reembolso",
+    "client": "Cliente",
+    "voucher": "Voucher",
+    "send": "Enviar",
+    "no":"No"
+  },
+  "windows":{
+    "close":"Cierre la ventana",
+    "pleaseClose":"El proceso finalizó satisfactoriamente, cierra la ventana"
+  }
+}

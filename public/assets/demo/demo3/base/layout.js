@@ -218,14 +218,6 @@ var mLayout = function() {
             initLeftAside();
             initLeftAsideMenu();            
             initLeftAsideToggle();
-
-            this.onLeftSidebarToggle(function(e) {
-              var datatables = $('.m-datatable');
-
-                $(datatables).each(function() {
-                    $(this).mDatatable('redraw');
-                });
-            });
         },
 
         getAsideMenu: function() {

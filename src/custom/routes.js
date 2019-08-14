@@ -1,9 +1,8 @@
-import Login from '../components/Login/Login.vue';
-import MyAcount from '../components/Login/MyAcount.vue';
-import http404 from '../components/http404.vue';
-import MainAsistencia from '../components/Assists/MainAsistencia.vue';
-import Refunds from '../components/Refunds/dasboard.vue';
-//import findAssist from '../components/Refunds/findAssist.vue';
+import Login from '../components/Login/Login';
+import MyAcount from '../components/Login/MyAcount';
+import http404 from '../components/http404';
+import MainAsistencia from '../components/Assists/MainAsistencia';
+import Refunds from '../components/Refunds/dasboard';
 
 export default [
   {
@@ -24,17 +23,13 @@ export default [
     path: '/MyAcount',
     component: MyAcount,
   },
-  /* {
-    name: 'Refunds',
-    path: '/refunds',
-    component: findAssist,
-    meta: {
-      isPublic: true
-    }
-  }, */
+  {
+    path: '/refunds/:code',
+    redirect: '/eng/refunds/:code',
+  },
   {
     name: 'Refunds',
-    path: '/refunds/:code',
+    path: '/:lang/refunds/:code',
     component: Refunds,
     meta: {
       isPublic: true

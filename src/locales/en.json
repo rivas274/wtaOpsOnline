@@ -1,0 +1,44 @@
+{
+  "refund": {
+    "information": "Information Refunds",
+    "payee": "Payee of refund (Name)",
+    "reference": "Reference Refund",
+    "date": {
+      "document": "Refund Date"
+    }
+  },
+  "document": {
+    "type": "Document Type",
+    "amount": "Amount",
+    "currency": "Currency",
+    "description": "Description",
+    "file": "File Document",
+    "send": "Sent Document",
+    "uploaded":"Your document has been successfully uploaded",
+    "uploadAnother":"Upload Another Document"
+  },
+  "assistance": {
+    "code": "Assistance Code",
+    "date": {
+      "case": "Date of Case",
+      "birth": "Birthdate"
+    }
+  },
+  "voucher": {
+    "name": "Name of Passenger"
+  },
+  "general": {
+    "refund": "Refund",
+    "client": "Client",
+    "voucher": "Voucher",
+    "send": "Send",
+    "no":"No"
+  },
+  "windows":{
+    "close":"Close the Windows",
+    "pleaseClose":"The process finished satisfactorily, please close the window"
+  },
+  "validation":{
+    "recaptcha":"Please complete the captcha"
+  }
+}

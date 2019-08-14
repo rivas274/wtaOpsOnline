@@ -1,7 +1,8 @@
 <template>
   <div :class="[classProp]">
     <select
-      class="form-control m-bootstrap-select m_selectpicker" data-live-search="true"
+      class="form-control m-bootstrap-select m_selectpicker" 
+      data-live-search="true"
       :id="'Search'+name"
       :name="name"
       v-model="value"
@@ -16,11 +17,12 @@
   </div>
 </template>
 <script>
+import { setTimeout } from 'timers';
 export default {
   props: ["name", "classProp", "options", "selected"],
   data: function() {
     return {
-      value: this.selected
+      value: this.selected,
     }
   },
   mounted() {
@@ -37,6 +39,11 @@ export default {
     selected: function(newVal) {
       this.value = newVal;
       $(this.$el).find(".m_selectpicker").val(newVal).trigger('change')
+    },
+    options: function(newVal){
+      setTimeout(function(){
+        $(this.$el).find(".m_selectpicker").selectpicker('refresh');
+      }.bind(this),500)
     }
   }
 }
