@@ -308,7 +308,7 @@ iframe.ima {
                                   :class="{'has-danger': errors.has('recaptcha')}"
                                 >
                                   <vue-recaptcha
-                                    sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                                    sitekey="6LdusqgUAAAAAGMwxgcsvToNCGBiITd4w3GmpgmP"
                                     ref="recaptcha"
                                     @verify="onCaptchaVerified"
                                     @expired="onCaptchaExpired"

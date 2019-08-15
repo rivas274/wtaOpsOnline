@@ -24,7 +24,7 @@ Vue.use(middleware, permission);
 
 const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
-    baseURL: 'https://wtaops.com/app/apiWtaOnline/',
+    baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
 });
 customAxios.interceptors.response.use(
     function (response) {

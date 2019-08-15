@@ -25,7 +25,7 @@ export default [
   },
   {
     path: '/refunds/:code',
-    redirect: '/eng/refunds/:code',
+    redirect: '/en/refunds/:code',
   },
   {
     name: 'Refunds',
