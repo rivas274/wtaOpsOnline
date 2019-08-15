@@ -60,8 +60,7 @@ export default {
   methods:{
     setLang:function(){
       this.$root.$i18n.locale=this.selected;
-      this.$validator.localize('pt');
-      this.$validator.locale = 'pt';
+      this.$validator.localize(this.selected);
       this.$router.replace({
         params: {
           lang: this.$root.$i18n.locale

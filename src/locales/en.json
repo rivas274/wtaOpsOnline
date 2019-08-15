@@ -37,8 +37,5 @@
   "windows":{
     "close":"Close the Windows",
     "pleaseClose":"The process finished satisfactorily, please close the window"
-  },
-  "validation":{
-    "recaptcha":"Please complete the captcha"
   }
 }

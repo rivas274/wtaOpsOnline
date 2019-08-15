@@ -152,7 +152,7 @@ iframe.ima {
                                     v-on:input="setDataFilter"
                                   ></select-from-table>
                                 </div>
-                                <div v-show="inputsData.docType=='26'">
+                                <div v-if="inputsData.docType=='26'">
                                   <div class="form-group m-form__group">
                                     <strong>{{ $t('refund.date.document') }}</strong>
                                     <date-single-bt
@@ -419,12 +419,13 @@ export default {
           }
         })
         .then(response => {
-          if(response.data.RESPONSE.RESULTS===null){
-            this.$router.push({ name: 'login' });
+          if (response.data.RESPONSE.RESULTS === null) {
+            this.$router.push({ name: "login" });
           }
           this.results = response.data.RESPONSE.RESULTS[0];
           this.inputsData.date = this.results.registeredDate.date;
-          this.inputsData.nameBen = this.results.fisrtName + " " + this.results.lastName;
+          this.inputsData.nameBen =
+            this.results.fisrtName + " " + this.results.lastName;
         });
     },
     validRefunds: function() {
@@ -438,10 +439,12 @@ export default {
           formData.append("idAssist", this.results.idAssist);
           formData.append("g-recaptcha", this.captcha);
           formData.append("reference", this.inputsData.reference);
+          formData.append("description", this.inputsData.description);
           formData.append("currency", this.inputsData.currency);
           formData.append("date", this.inputsData.date);
           formData.append("amount", this.inputsData.amount);
           formData.append("nameBen", this.inputsData.nameBen);
+          formData.append("docType", this.inputsData.docType);
           if (result) {
             this.disableForm = true;
             this.axios
@@ -462,12 +465,12 @@ export default {
                 if (response.data.STATUS == "OK") {
                   /* this.$refs.recaptcha.reset(); */
                   Swal.fire({
-                    title: this.$t('document.send'),
-                    text: this.$t('document.uploaded'),
+                    title: this.$t("document.send"),
+                    text: this.$t("document.uploaded"),
                     type: "success",
                     showCancelButton: true,
-                    confirmButtonText: this.$t('document.uploadAnother'),
-                    cancelButtonText: this.$t('general.no')
+                    confirmButtonText: this.$t("document.uploadAnother"),
+                    cancelButtonText: this.$t("general.no")
                   }).then(result => {
                     if (result.value) {
                       this.inputsData.reference = "";
@@ -479,8 +482,8 @@ export default {
                     } else if (result.dismiss === Swal.DismissReason.cancel) {
                       window.close();
                       Swal.fire(
-                        this.$t('windows.close'),
-                        this.$t('windows.pleaseClose'),
+                        this.$t("windows.close"),
+                        this.$t("windows.pleaseClose"),
                         "error"
                       );
                     }
