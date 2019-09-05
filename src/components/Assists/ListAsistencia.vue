@@ -73,7 +73,7 @@
           <button
             class="btn btn-primary ml-2 pull-right"
             @click="dowload"
-            v-if="permission.RP002A"
+            v-if="permission.RP002A||permission.RP002AB39"
           >Dowload</button>
           <button class="btn btn-info ml-2 pull-right" @click="clear">Clear</button>
         </div>
@@ -202,7 +202,8 @@ export default {
   data: function() {
     var permission = {
       bills: this.middleware("bills", "read"),
-      RP002A: this.middleware("RP002A", "read")
+      RP002A: this.middleware("RP002A", "read"),
+      RP002AB39: this.middleware("RP002A-B39", "read"),
     };
     return {
       permission: permission,
@@ -273,7 +274,7 @@ export default {
       this.showLoader = true;
       this.axios
         .post(
-          "getAssistsXLS",
+          this.permission.RP002AB39?"getAssistsNotReservationXLS":"getAssistsXLS",
           {
             prefix: arrPrefix,
             /* billExists: this.filters.billExists, */
@@ -290,7 +291,7 @@ export default {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement("a");
           link.href = url;
-          link.setAttribute("download", "RP002A.xlsx");
+          link.setAttribute("download", this.permission.RP002AB39?"RP002A-B39.xlsx":"RP002A.xlsx");
           document.body.appendChild(link);
           link.click();
           this.error = null;

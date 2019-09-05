@@ -18,5 +18,10 @@
     "read":[],
     "write":[],
     "delete":[]
+  },
+  "RP002A-B39":{
+    "read":[],
+    "write":[],
+    "delete":[]
   }
 }
