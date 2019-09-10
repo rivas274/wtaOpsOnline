@@ -357,7 +357,7 @@ export default {
         3: "In progress",
         4: "Monitoring",
         5: "Closed",
-        6: "Closed",
+        6: "Proveedor Asignado",
       };
       let ico = {
         1: "fa fa-unlock",
