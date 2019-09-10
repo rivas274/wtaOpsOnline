@@ -1,13 +1,10 @@
-
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php56” package as the default “PHP” programming language.
-<IfModule mime_module>
-  AddType application/x-httpd-ea-php56 .php .php5 .phtml
-</IfModule>
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteCond %{HTTPS} off
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+  
   RewriteRule ^$ http://23.111.163.26:5000/ [P,L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
