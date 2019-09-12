@@ -10,7 +10,7 @@ export default {
             return (typeof str === 'string') ? str.toLowerCase() : str;
         });
         Vue.filter("firstLetter", str => {
-            return str.toString().split('')[0].toUpperCase();
+            return (str||'').toString().split('')[0].toUpperCase();
         });
         Vue.filter("genreDetaill", str => {
             var genreDetaill = {
