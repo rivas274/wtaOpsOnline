@@ -46,7 +46,7 @@ iframe {
             <AssistAccordionDetaill>
               <template slot="title">Travel Source</template>
               <template slot="body">
-                <div class="m-widget16__item" v-if="assistances.voucher.source">
+                <div class="m-widget16__item" v-if="assistances.voucher">
                   <span class="m-widget16__date">Source</span>
                   <span class="m-widget16__price m--align-right">
                     <Flag :iso="assistances.voucher.source"></Flag>
