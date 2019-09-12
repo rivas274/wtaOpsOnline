@@ -356,8 +356,9 @@ export default {
         2: "Validation",
         3: "In progress",
         4: "Monitoring",
-        5: "Closed",
+        5: "Closed for operations",
         6: "Proveedor Asignado",
+        20: "Finished",
       };
       let ico = {
         1: "fa fa-unlock",
@@ -366,6 +367,7 @@ export default {
         4: "fa fa-eye",
         5: "fa fa-lock",
         6: "fa fa-ambulance",
+        20: "fa fa-check",
       };
       return {
         label: label[status],
