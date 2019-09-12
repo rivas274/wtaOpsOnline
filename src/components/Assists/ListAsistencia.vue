@@ -362,7 +362,7 @@ export default {
       };
       let ico = {
         1: "fa fa-unlock",
-        2: "fa fa-check-square-o",
+        2: "fa fa-check-square",
         3: "fa fa-history",
         4: "fa fa-eye",
         5: "fa fa-lock",
