@@ -67,6 +67,7 @@ Vue.mixin({
     }
 })
 Vue.use(VueAxios, customAxios);
+console.log('bienvenido a wtaops.info');
 router.beforeEach((to, from, next) => {
     i18n._vm.$root.$root.locale = (to.params.lang || 'eng');
     if (to.meta.isPublic) {
