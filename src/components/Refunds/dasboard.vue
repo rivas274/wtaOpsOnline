@@ -43,6 +43,21 @@ iframe.ima {
 .m-nav .m-nav__item > .m-nav__link .m-nav__link-icon {
   color: #f8f9fc;
 }
+@media (min-width: 430px) {
+  .m-nav.m-nav--inline {
+    display: inline !important;
+  }
+}
+@media (max-width: 427px) {
+  .m-nav.m-nav--inline>.m-nav__item {
+    width: 50% !important;
+    padding: 0 0 0 12px !important;
+  }
+  .m-form__group{
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+  }
+}
 </style>
 <template>
   <div class="m-content">
@@ -58,7 +73,7 @@ iframe.ima {
                       <a>
                         <h1>{{ $t('general.refund') }}</h1>
                       </a>
-                      <a>
+                      <a class="m--hidden-mobile">
                         <custom-img
                           height="65"
                           :src="baseUrlApi()+'app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png'"
@@ -76,6 +91,7 @@ iframe.ima {
                           class="m-demo__preview"
                           style="padding: 5px;text-align: center; background: #36a3f7;"
                         >
+                          <locale-changer class-prop="pull-right"></locale-changer>
                           <ul class="m-nav m-nav--inline">
                             <li class="m-nav__item">
                               <a class="m-nav__link" v-tooltip:top="$t('general.client')">
@@ -116,7 +132,6 @@ iframe.ima {
                               </a>
                             </li>
                           </ul>
-                          <locale-changer class-prop="pull-right"></locale-changer>
                         </div>
                       </div>
                     </div>
