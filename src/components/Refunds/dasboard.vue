@@ -512,7 +512,11 @@ export default {
                       });
                     }
                   }
-                  Swal.error("Error", response.data.MESSAGE, "error");
+                  Swal.fire({
+                    title: "Error",
+                    text: response.data.MESSAGE,
+                    type: "error"
+                  });
                 }
                 this.uploadPercentage = 0;
               });
