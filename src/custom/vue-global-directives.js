@@ -5,7 +5,8 @@ export default {
                 $(el).attr('title', binding.value).tooltip({
                     title: binding.value,
                     placement: (binding.arg || 'top'),
-                    trigger: 'hover'
+                    trigger: 'hover',
+                    html:true
                 }).attr('data-original-title', binding.value);
             }
         })

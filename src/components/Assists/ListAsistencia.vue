@@ -152,8 +152,8 @@
         </td>
         <td class="text-center fa-status">
           <i
-            :class="infoStatus(assist.statusAssist).ico"
-            v-tooltip:top="infoStatus(assist.statusAssist).label"
+            :class="assist.statusAssist.icon"
+            v-tooltip:top="assist.statusAssist.label"
           ></i>
         </td>
         <td class="text-center fa-status">
@@ -187,7 +187,6 @@ import pagination from "../pagination/pagination.vue";
 import Flag from "../Element/Flag.vue";
 import TableBasic from "../Tables/TableBasic.vue";
 import MultiSelects from "../Tables/filters/Multiselect.vue";
-import { filter } from "minimatch";
 export default {
   components: {
     TableBasic,
@@ -349,30 +348,6 @@ export default {
     },
     addAssist: function(assist) {
       this.$emit("addAssist", assist);
-    },
-    infoStatus: function(status) {
-      let label = {
-        1: "Opening",
-        2: "Validation",
-        3: "In progress",
-        4: "Monitoring",
-        5: "Closed for operations",
-        6: "Proveedor Asignado",
-        20: "Finished",
-      };
-      let ico = {
-        1: "fa fa-unlock",
-        2: "fa fa-check-square",
-        3: "fa fa-history",
-        4: "fa fa-eye",
-        5: "fa fa-lock",
-        6: "fa fa-ambulance",
-        20: "fa fa-check",
-      };
-      return {
-        label: label[status],
-        ico: ico[status]
-      };
     },
     clear: function() {
       this.filters = {

@@ -35,6 +35,7 @@ iframe {
     :class="{'m-loader m-loader--metal m-loader--div':showLoader}"
   >
     <div class="m-portlet__body">
+      <progress-bar :id-assist='idAssist'></progress-bar>
       <div
         class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg"
         :id="'m_accordion_'+idAssist"
@@ -56,7 +57,7 @@ iframe {
                   <span class="m-widget16__date">Destination</span>
                   <span
                     class="m-widget16__price m--align-right"
-                  >{{assistances.voucher.destination||"N/A"}}</span>
+                  >{{assistances.voucher.destination || "N/A"}}</span>
                 </div>
                 <div class="m-widget16__item" v-if="assistances.voucher.namePlan">
                   <span class="m-widget16__date">Plan</span>
@@ -144,11 +145,11 @@ iframe {
                 <div class="m-widget16__item" v-if="assistances.voucher.comments.medical">
                   <span class="m-widget16__price" v-html="assistances.voucher.comments.medical"></span>
                 </div>
-                <div
-                  class="m-widget16__item"
-                  v-if="assistances.voucher.contact.name || assistances.voucher.contact.email || assistances.voucher.contact.phone"
-                >
-                  <span class="m-widget16__amount m--align-center">Contact Emergency</span>
+                <div  class="m-widget16__head"
+                      v-if="assistances.voucher.contact.name || assistances.voucher.contact.email || assistances.voucher.contact.phone">
+                  <div class="m-widget16__item">
+                    <span class="m-widget16__amount m--align-center">Contact Emergency</span>
+                  </div>
                 </div>
                 <div class="m-widget16__item" v-if="assistances.voucher.contact.name">
                   <span class="m-widget16__date">Name</span>
@@ -174,7 +175,7 @@ iframe {
                     {{benefit.SOURCE}}
                     <pop-over
                       class-prop="btn btn-secondary m-btn m-btn--icon m-btn--icon-only m-btn--pill"
-                      :placement="left"
+                      :placement="'left'"
                       :title="benefit.SOURCE + ' |   ' + (assistances.voucher.namePlan || '')"
                     >
                       <template slot="button">
@@ -267,8 +268,17 @@ iframe {
               <template slot="title">INFORMATION ASSISTANCE</template>
               <template slot="body">
                 <div class="m-widget16__item">
+                  <span class="m-widget16__date">Status</span>
+                  <span class="m-widget16__price m--align-right">
+                    {{assistances.statusAssist.label}}
+                  </span>
+                </div>
+                <div class="m-widget16__item">
                   <span class="m-widget16__date">Opening Date</span>
-                  <span class="m-widget16__price m--align-right">{{assistances.registeredDate.date}}</span>
+                  <span class="m-widget16__price m--align-right">
+                    {{assistances.registeredDate.date}}
+                    <small>({{assistances.registeredDate.hour}})</small>
+                  </span>
                 </div>
                 <div class="m-widget16__item">
                   <span class="m-widget16__date">Date Event</span>
@@ -443,12 +453,15 @@ import Flag from "../Element/Flag.vue";
 import AssistAccordion from "./AssistAccordion.vue";
 import AssistAccordionDetaill from "./AssistAccordionDetaill.vue";
 import popOver from "../Element/pop-over.vue";
+import progressBar from "./progressBar.vue";
+
 export default {
   components: {
     Flag,
     AssistAccordion,
     AssistAccordionDetaill,
-    popOver
+    popOver,
+    progressBar
   },
   props: ["id-assist"],
   data: function() {

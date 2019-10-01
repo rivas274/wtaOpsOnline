@@ -24,7 +24,7 @@ Vue.use(middleware, permission);
 
 const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
-    baseURL: 'https://wtaops.com/app/apiWtaOnline/',
+    baseURL: 'https://dev.wtaops.com/app/apiWtaOnline/',
 });
 customAxios.interceptors.response.use(
     function (response) {
@@ -69,7 +69,6 @@ Vue.mixin({
 Vue.use(VueAxios, customAxios);
 
 router.beforeEach((to, from, next) => {
-    console.log('bienvenido a wtaops.info');
     i18n._vm.$root.$root.locale = (to.params.lang || 'eng');
     if (to.meta.isPublic) {
         if (to.name == "Login" && (Vue._session.get('TOKEN') || '').length == 16) {
