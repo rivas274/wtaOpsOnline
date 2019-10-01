@@ -2,17 +2,17 @@
 .step {
   padding: 0;
   margin: 0;
+  flex-wrap: wrap;
   display: inline-flex;
   align-items: center;
 }
 .step li {
   display: flex;
-  position: relative;
   align-items: center;
 }
 .progress-bar {
   width: 3rem;
-  height: 0.3rem;
+  height: 0.2rem;
 }
 .step li figure {
   margin: 0;
@@ -24,6 +24,21 @@
 }
 .progress-container{
   margin-top: -15px;
+}
+
+.progress-success {
+  background-color: #34bfa3 !important;
+  border: 0.2rem solid #34bfa3;
+  color: #fff !important;
+}
+.step li:first-child .progress-bar {
+  border: 0.2rem solid red !important;
+}
+.progress-success-o {
+  border: 0.2rem solid #34bfa3;
+}
+.progress-metal-o {
+    border: 0.2rem solid #c4c5d6;
 }
 </style>
 <template>
@@ -60,14 +75,14 @@ export default {
   computed: {
     statusShow:function(){
       let color={
-        'old':'m--bg-fill-success',
-        'current':'m--bg-fill-success',
-        'new':'m--bg-fill-metal',
+        'old':'progress-success-o',
+        'current':'progress-success',
+        'new':'progress-metal-o',
       };
       return this.status.map(function(value) {
         let label=[value.label];
         if(value.date!==null){
-          label.push(value.date.date);
+          label.push(value.date.user.user+'@'+value.date.date);
         }
         return {
           label:label.join('</br>'),
