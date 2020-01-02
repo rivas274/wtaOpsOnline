@@ -442,6 +442,7 @@ iframe.ima {
                                                                         :errors_form="errors"
                                                                     ></form-error>
                                                                 </div>
+                                                                <pre>{{env}}</pre>
                                                             </div>
                                                             <div
                                                                 class="m-portlet__foot m-portlet__foot--fit"
@@ -483,7 +484,7 @@ iframe.ima {
                 </div>
             </div>
         </div>
-        <pre>{{env}}</pre>
+        
     </div>
 </template>
 <script>
