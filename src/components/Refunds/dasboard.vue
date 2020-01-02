@@ -504,7 +504,7 @@ export default {
     },
     data() {
         return {
-            siteKey:(process.env.VUE_APP_RE_CAPCHA_PUBLIC||""),
+            siteKey:(process.env.VUE_APP_RE_CAPCHA_PUBLIC||"6LdusqgUAAAAAGMwxgcsvToNCGBiITd4w3GmpgmP"),
             code: this.$route.params.code,
             results: {},
             uploadPercentage: 0,
@@ -526,6 +526,7 @@ export default {
         };
     },
     mounted() {
+        alert(JSON.stringify(process.env))
         this.getDocumentsType();
         this.getAssistance();
     },
