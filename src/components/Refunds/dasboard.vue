@@ -419,6 +419,7 @@ iframe.ima {
                                                                     ></form-error>
                                                                 </div>
                                                                 <div
+                                                                    v-show="!disableForm||captcha.length==0"
                                                                     class="form-group m-form__group"
                                                                     :class="{'has-danger': errors.has('recaptcha')}"
                                                                 >
