@@ -25,7 +25,7 @@ Vue.use(middleware, permission);
 
 const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
-    baseURL: process.env.VUE_APP_URL+'/app/apiWtaOnline/',
+    baseURL: process.env.VUE_APP_URL + '/app/apiWtaOnline/',
 });
 
 customAxios.interceptors.response.use(
@@ -90,7 +90,9 @@ router.beforeEach((to, from, next) => {
         }
     }
 });
+
 Vue.config.productionTip = false;
+
 new Vue({
     mounted: function () {
         setInterval(() => {

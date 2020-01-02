@@ -420,30 +420,32 @@ iframe.ima {
                                                                         :errors_form="errors"
                                                                     ></form-error>
                                                                 </div>
-                                                                <div
-                                                                    v-show="!disableForm || (disableForm && captcha.length>0)"
-                                                                    class="form-group m-form__group"
-                                                                    :class="{'has-danger': errors.has('recaptcha')}"
-                                                                >
-                                                                    <vue-recaptcha
-                                                                        :sitekey="siteKey"
-                                                                        ref="recaptcha"
-                                                                        v-on:verify="onCaptchaVerified"
-                                                                        v-on:expired="onCaptchaExpired"
-                                                                        :loadRecaptchaScript="true"
-                                                                    ></vue-recaptcha>
-                                                                    <input
-                                                                        type="hidden"
-                                                                        name="recaptcha"
-                                                                        id="recaptcha"
-                                                                        v-validate="'recaptcha'"
-                                                                        v-model="captcha"
-                                                                    />
-                                                                    <form-error
-                                                                        :attribute_name="'recaptcha'"
-                                                                        :errors_form="errors"
-                                                                    ></form-error>
-                                                                </div>
+                                                                <transition :duration="1500" name="fade" mode="in-out">
+                                                                    <div
+                                                                        v-show="disableForm?false:(captcha.length==0)"
+                                                                        class="form-group m-form__group"
+                                                                        :class="{'has-danger': errors.has('recaptcha')}"
+                                                                    >
+                                                                        <vue-recaptcha
+                                                                            :sitekey="siteKey"
+                                                                            ref="recaptcha"
+                                                                            v-on:verify="onCaptchaVerified"
+                                                                            v-on:expired="onCaptchaExpired"
+                                                                            :loadRecaptchaScript="true"
+                                                                        ></vue-recaptcha>
+                                                                        <input
+                                                                            type="hidden"
+                                                                            name="recaptcha"
+                                                                            id="recaptcha"
+                                                                            v-validate="'recaptcha'"
+                                                                            v-model="captcha"
+                                                                        />
+                                                                        <form-error
+                                                                            :attribute_name="'recaptcha'"
+                                                                            :errors_form="errors"
+                                                                        ></form-error>
+                                                                    </div>
+                                                                </transition>
                                                             </div>
                                                             <div
                                                                 class="m-portlet__foot m-portlet__foot--fit"
