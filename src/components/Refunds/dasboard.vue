@@ -507,7 +507,7 @@ export default {
     data() {
         return {
             env:process.env,
-            siteKey:(process.env.VUE_APP_RE_CAPCHA_PUBLIC||"6LdusqgUAAAAAGMwxgcsvToNCGBiITd4w3GmpgmP"),
+            siteKey:(process.env.VUE_APP_RE_CAPCHA_PUBLIC),
             code: this.$route.params.code,
             results: {},
             uploadPercentage: 0,
