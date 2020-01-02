@@ -227,7 +227,9 @@ iframe.ima {
                                                                         v-on:input="setDataFilter"
                                                                     ></select-from-table>
                                                                 </div>
-                                                                <div v-if="inputsData.docType=='26'">
+                                                                <div
+                                                                    v-if="inputsData.docType=='26'"
+                                                                >
                                                                     <div
                                                                         class="form-group m-form__group"
                                                                     >
@@ -419,7 +421,7 @@ iframe.ima {
                                                                     ></form-error>
                                                                 </div>
                                                                 <div
-                                                                    v-show="!disableForm||captcha.length==0"
+                                                                    v-show="!disableForm || (disableForm && captcha.length==0)"
                                                                     class="form-group m-form__group"
                                                                     :class="{'has-danger': errors.has('recaptcha')}"
                                                                 >
@@ -483,7 +485,6 @@ iframe.ima {
                 </div>
             </div>
         </div>
-        
     </div>
 </template>
 <script>
@@ -505,8 +506,8 @@ export default {
     },
     data() {
         return {
-            env:process.env,
-            siteKey:(process.env.VUE_APP_RE_CAPCHA_PUBLIC),
+            env: process.env,
+            siteKey: process.env.VUE_APP_RE_CAPCHA_PUBLIC,
             code: this.$route.params.code,
             results: {},
             uploadPercentage: 0,
