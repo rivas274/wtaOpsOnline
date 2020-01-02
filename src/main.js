@@ -20,12 +20,14 @@ Vue.use(globalFilters);
 Vue.use(VueSession, {
     persist: true
 });
+
 Vue.use(middleware, permission);
 
 const router = new VueRouter({ mode: 'history', routes: routes });
 const customAxios = axios.create({
-    baseURL: 'https://wtaops.com/app/apiWtaOnline/',
+    baseURL: process.env.VUE_APP_URL+'/app/apiWtaOnline/',
 });
+
 customAxios.interceptors.response.use(
     function (response) {
         Vue._session.set('lastCheck', moment().format('YYYY-MM-DD hh:mm A'));
