@@ -434,7 +434,6 @@ iframe.ima {
                                                                         name="recaptcha"
                                                                         id="recaptcha"
                                                                         v-validate="'recaptcha'"
-                                                                        ref="recaptcha"
                                                                         v-model="captcha"
                                                                     />
                                                                     <form-error
