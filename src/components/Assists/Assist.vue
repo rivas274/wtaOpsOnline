@@ -46,6 +46,20 @@
           <span>Providers</span>
         </a>
       </li>
+      <li
+       v-if="permission.time_line"
+        :class="{active:tabShow=='time_line'}"
+        v-tooltip:top="'time_line'"
+      >
+        <a
+          class="nav-link"
+          :class="{'m--font-success':tabShow=='time_line'}"
+          @click.prevent="showTab('time_line')"
+        >
+          <i class="fa fa-clock" aria-hidden="true"></i>
+          <span>Time_line</span>
+        </a>
+      </li>
     </ul>
     <div class="tab-content container">
       <div class="tab-pane" :class="{active:tabShow=='General'}">
@@ -60,6 +74,9 @@
       <div v-if="permission.provider" class="tab-pane" :class="{active:tabShow=='Providers'}">
         <Providers :id-assist="assistBase.idAssist"></Providers>
       </div>
+      <div v-if="permission.time_line" class="tab-pane" :class="{active:tabShow=='time_line'}">
+        <TimeLine :id-assist="assistBase.idAssist"></TimeLine>
+      </div>
     </div>
   </div>
 </template>
@@ -67,9 +84,10 @@
 import ListBill from "../Bill/ListBill.vue";
 import Providers from "../Provider/ListProviders.vue";
 import ListNote from "../Note/ListNote.vue";
+import TimeLine from "../timeline/TimeLine.vue";
 import AssistDetail from "./AssistDetail.vue";
 export default {
-  components: { Providers, ListBill, AssistDetail, ListNote },
+  components: { Providers, ListBill, AssistDetail, ListNote, TimeLine },
   props: ["assist"],
   data() {
     return {
@@ -78,7 +96,8 @@ export default {
       permission: {
         bills: this.middleware("bills", "read"),
         notes: this.middleware("notes", "read"),
-        provider: this.middleware("provider", "read")
+        provider: this.middleware("provider", "read"),
+        time_line: this.middleware("time_line", "read"),
       }
     };
   },
