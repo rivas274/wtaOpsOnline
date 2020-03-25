@@ -64,6 +64,11 @@ export default {
       tabShow: "List"
     };
   },
+  mounted() {
+     if(!this.middleware("assist", "read")){
+       this.$router.push("http404");
+     }
+  },
   methods: {
     addAssist: function(assist) {
       let tab = this.assistances.filter(function(v) {

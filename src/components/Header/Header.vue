@@ -11,7 +11,7 @@
         <div class="m-stack__item m-brand m-brand--skin-dark">
           <div class="m-stack m-stack--ver m-stack--general">
             <div class="m-stack__item m-stack__item--middle m-stack__item--center m-brand__logo">
-              <router-link :to="{ path: '/dasboard'}" replace class="m-brand__logo-wrapper">
+              <router-link :to="{ path: '/'}" replace class="m-brand__logo-wrapper">
                 <img alt src="assets/img/logos/logo_empresa.png">
               </router-link>
             </div>

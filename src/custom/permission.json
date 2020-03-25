@@ -1,13 +1,18 @@
 {
+  "provider":{
+    "read":[14],
+    "write":[14],
+    "delete":[14]
+  },
+  "assist":{
+    "read":[18,37],
+    "write":[18,37],
+    "delete":[18,37]
+  },
   "bills":{
     "read":[37],
     "write":[37],
     "delete":[37]
-  },
-  "provider":{
-    "read":[],
-    "write":[],
-    "delete":[]
   },
   "notes":{
     "read":[],

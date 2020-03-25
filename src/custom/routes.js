@@ -3,12 +3,18 @@ import MyAcount from '../components/Login/MyAcount';
 import http404 from '../components/http404';
 import MainAsistencia from '../components/Assists/MainAsistencia';
 import Refunds from '../components/Refunds/dasboard';
+import RePricing from '../components/RePricing/dasboard';
 
 export default [
   {
     name: 'dasboard',
     path: '/dasboard',
     component: MainAsistencia,
+  },
+  {
+    name: 'RePricing',
+    path: '/re-pricing',
+    component: RePricing,
   },
   {
     name: 'Login',

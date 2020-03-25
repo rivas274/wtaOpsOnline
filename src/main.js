@@ -74,7 +74,11 @@ router.beforeEach((to, from, next) => {
     i18n._vm.$root.$root.locale = (to.params.lang || 'eng');
     if (to.meta.isPublic) {
         if (to.name == "Login" && (Vue._session.get('TOKEN') || '').length == 16) {
-            next('/dasboard');
+            if (Vue.$middleware("provider", "read")) {
+                next("/re-pricing");
+            } else {
+                next("/dasboard");
+            }
         } else {
             next();
         }

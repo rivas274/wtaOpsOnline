@@ -142,7 +142,11 @@ export default {
                 for (var prop in user) {
                   this.$session.set(prop, user[prop]);
                 }
-                this.$router.push("dasboard");
+                if(this.middleware("provider", "read")){
+                  this.$router.push("re-pricing");
+                }else{
+                  this.$router.push("dasboard");
+                }
               }
             });
           }
