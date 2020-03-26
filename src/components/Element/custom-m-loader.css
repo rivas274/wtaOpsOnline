@@ -1,18 +1,18 @@
 .m-loader.m-loader--div::after {
-    position: absolute;
-    background: #282a3a1f;
-    top: -20px;
-    bottom: -30px;
-    left: -30px;
-    right: -30px;
-    z-index: 98;
-    content: "";
+  position: absolute;
+  background: #282a3a1f;
+  top: -20px;
+  bottom: -30px;
+  left: -30px;
+  right: -30px;
+  z-index: 98;
+  content: "";
 }
 .m-loader.m-loader--div:before {
-    width: 8rem;
-    height: 8rem;
-    margin-top: -4rem;
-    margin-left: -4rem;
-    border-top-width: 7px;
-    border-right-width: 7px;
+  width: 8rem;
+  height: 8rem;
+  margin-top: -4rem;
+  margin-left: -4rem;
+  border-top-width: 7px;
+  border-right-width: 7px;
 }

@@ -420,7 +420,11 @@ iframe.ima {
                                                                         :errors_form="errors"
                                                                     ></form-error>
                                                                 </div>
-                                                                <transition :duration="1500" name="fade" mode="in-out">
+                                                                <transition
+                                                                    :duration="1500"
+                                                                    name="fade"
+                                                                    mode="in-out"
+                                                                >
                                                                     <div
                                                                         v-show="disableForm?false:(captcha.length==0)"
                                                                         class="form-group m-form__group"

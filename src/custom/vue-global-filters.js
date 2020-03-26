@@ -10,7 +10,7 @@ export default {
             return (typeof str === 'string') ? str.toLowerCase() : str;
         });
         Vue.filter("firstLetter", str => {
-            return (str||' ').toString().split('')[0].toUpperCase();
+            return (str || ' ').toString().split('')[0].toUpperCase();
         });
         Vue.filter("genreDetaill", str => {
             var genreDetaill = {
@@ -22,7 +22,7 @@ export default {
             return genreDetaill[str] || genreDetaill['I'];
         });
         Vue.filter("currency", (amount, currency) => {
-            currency = currency instanceof String && currency.length==3 ? currency : 'USD';
+            currency = currency instanceof String && currency.length == 3 ? currency : 'USD';
             let formatter = new Intl.NumberFormat('es', {
                 style: 'currency',
                 currency: (currency || 'USD'),
@@ -33,7 +33,7 @@ export default {
         });
         Vue.filter("toFixed", (amount, decimal) => {
             amount = parseFloat(amount);
-            return (typeof decimal === 'number')?parseFloat(amount.toFixed(decimal)):amount;
+            return (typeof decimal === 'number') ? parseFloat(amount.toFixed(decimal)) : amount;
         });
     }
 }

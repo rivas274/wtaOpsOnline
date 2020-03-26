@@ -25,9 +25,9 @@ Middleware.install = function (Vue, options) {
             if (!(action in permission)) {
                 return false;
             }
-            return permission[action][option]?permission[action][option]=='Y':false;
+            return permission[action][option] ? permission[action][option] == 'Y' : false;
         }
-        return Vue.$canSee(Middleware.access(action,option));
+        return Vue.$canSee(Middleware.access(action, option));
     }
 }
 export default Middleware;

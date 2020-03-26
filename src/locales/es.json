@@ -14,8 +14,8 @@
     "description": "Descripción",
     "file": "Documento",
     "send": "Documento Enviado",
-    "uploaded":"Su documento ha sido cargado exitosamente",
-    "uploadAnother":"Subir otro documento"
+    "uploaded": "Su documento ha sido cargado exitosamente",
+    "uploadAnother": "Subir otro documento"
   },
   "assistance": {
     "code": "Código de asistencia",
@@ -32,10 +32,10 @@
     "client": "Cliente",
     "voucher": "Voucher",
     "send": "Enviar",
-    "no":"No"
+    "no": "No"
   },
-  "windows":{
-    "close":"Cierre la ventana",
-    "pleaseClose":"El proceso finalizó satisfactoriamente, cierra la ventana"
+  "windows": {
+    "close": "Cierre la ventana",
+    "pleaseClose": "El proceso finalizó satisfactoriamente, cierra la ventana"
   }
 }

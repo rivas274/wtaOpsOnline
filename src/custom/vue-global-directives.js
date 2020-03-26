@@ -6,7 +6,7 @@ export default {
                     title: binding.value,
                     placement: (binding.arg || 'top'),
                     trigger: 'hover',
-                    html:true
+                    html: true
                 }).attr('data-original-title', binding.value);
             }
         })

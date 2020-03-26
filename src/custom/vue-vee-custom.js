@@ -8,11 +8,11 @@ VeeValidate.Validator.extend('verify_password', {
         var strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])((?=.*[!@#$%^&*])(?=.{8,}))?");
         return strongRegex.test(value);
     }
-  });
-  VeeValidate.Validator.extend('recaptcha', {
+});
+VeeValidate.Validator.extend('recaptcha', {
     getMessage: () => `Please complete the captcha`,
     validate: value => {
-        return value.toString().split('').length>0;
+        return value.toString().split('').length > 0;
     }
-  });
+});
 export default VeeValidate;

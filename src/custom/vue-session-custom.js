@@ -2,19 +2,19 @@ var STORAGE = null;
 var VueSession = {
     key: 'wtaSess',
     flash_key: 'wtaflash',
-    setAll: function(all){
-        STORAGE.setItem(VueSession.key,JSON.stringify(all));
+    setAll: function (all) {
+        STORAGE.setItem(VueSession.key, JSON.stringify(all));
     }
 }
-VueSession.install = function(Vue, options) {
-    if(options && 'persist' in options && options.persist) STORAGE = window.localStorage;
+VueSession.install = function (Vue, options) {
+    if (options && 'persist' in options && options.persist) STORAGE = window.localStorage;
     else STORAGE = window.sessionStorage;
-    let session    = {
+    let session = {
         flash: {
-            parent: function(){
+            parent: function () {
                 return Vue.prototype.$session;
             },
-            get: function(key){
+            get: function (key) {
                 var all = this.parent().getAll();
                 var all_flash = all[VueSession.flash_key] || {};
 
@@ -24,7 +24,7 @@ VueSession.install = function(Vue, options) {
 
                 return flash_value;
             },
-            set: function(key, value){
+            set: function (key, value) {
                 var all = this.parent().getAll();
                 var all_flash = all[VueSession.flash_key] || {};
 
@@ -33,7 +33,7 @@ VueSession.install = function(Vue, options) {
 
                 VueSession.setAll(all);
             },
-            remove: function(key){
+            remove: function (key) {
                 var all = this.parent().getAll();
                 var all_flash = all[VueSession.flash_key] || {};
 
@@ -43,15 +43,15 @@ VueSession.install = function(Vue, options) {
                 VueSession.setAll(all);
             }
         },
-        getAll: function(){
+        getAll: function () {
             var all = JSON.parse(STORAGE.getItem(VueSession.key));
             return all || {};
         },
-        set: function(key,value){
-            if(key == 'session-id') return false;
+        set: function (key, value) {
+            if (key == 'session-id') return false;
             var all = this.getAll();
 
-            if(!('session-id' in all)){
+            if (!('session-id' in all)) {
                 this.start();
                 all = this.getAll();
             }
@@ -60,44 +60,44 @@ VueSession.install = function(Vue, options) {
 
             VueSession.setAll(all);
         },
-        get: function(key){
+        get: function (key) {
             var all = this.getAll();
             return all[key];
         },
-        start: function(){
+        start: function () {
             var all = this.getAll();
-            all['session-id'] = 'sess:'+Date.now();
+            all['session-id'] = 'sess:' + Date.now();
 
             VueSession.setAll(all);
         },
-        renew: function(sessionId){
+        renew: function (sessionId) {
             var all = this.getAll();
             all['session-id'] = 'sess:' + sessionId;
             VueSession.setAll(all);
         },
-        exists: function(){
+        exists: function () {
             var all = this.getAll();
             return 'session-id' in all;
         },
-        has: function(key){
+        has: function (key) {
             var all = this.getAll();
             return key in all;
         },
-        remove: function(key){
+        remove: function (key) {
             var all = this.getAll();
             delete all[key];
 
             VueSession.setAll(all);
         },
-        clear: function(){
+        clear: function () {
             var all = this.getAll();
 
-            VueSession.setAll({'session-id': all['session-id']});
+            VueSession.setAll({ 'session-id': all['session-id'] });
         },
-        destroy: function(){
+        destroy: function () {
             VueSession.setAll({});
         },
-        id: function(){
+        id: function () {
             return this.get('session-id');
         }
     }

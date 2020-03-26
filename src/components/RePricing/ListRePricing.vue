@@ -76,7 +76,7 @@
                     <span>id</span>
                 </th>
                 <th>
-                    <span >Voucher</span>
+                    <span>Voucher</span>
                 </th>
                 <th>
                     <span>Case Number</span>
@@ -92,7 +92,7 @@
                 </th>
                 <th>
                     <span>Repricing Provider</span>
-                </th> -->
+                </th>-->
                 <th>
                     <span>Status</span>
                 </th>
@@ -119,7 +119,10 @@
                     <span>{{docType[rePricing.invoice.docType]||"N/A"}}</span>
                 </td>
                 <td>
-                    <span class="m-badge m-badge--wide" :class="[' m-badge--'+rePricing.status.color]">{{rePricing.status.label}}</span>
+                    <span
+                        class="m-badge m-badge--wide"
+                        :class="[' m-badge--'+rePricing.status.color]"
+                    >{{rePricing.status.label}}</span>
                 </td>
                 <td class="text-center fa-status">
                     <a

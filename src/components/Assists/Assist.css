@@ -1,28 +1,33 @@
-
-@media screen and (min-width:769px){
+@media screen and (min-width: 769px) {
   .tabs-left.nav-tabs > li > a:focus,
   .tabs-left.nav-tabs > li > a:hover {
     border-radius: 4px 0 0 4px;
   }
+
   .tabs-left.nav-tabs {
     border-bottom: 0;
     min-width: fit-content;
   }
+
   .tabs-left.nav-tabs > li {
     float: none;
   }
+
   .tabs-left.nav-tabs > li > a {
     margin-right: 0;
     margin-bottom: 3px;
   }
+
   .tabs-left.nav-tabs {
     border-right: 1px solid #ddd;
   }
+
   .tabs-left.nav-tabs > li > a {
     display: block;
     cursor: pointer;
     margin-right: -1px;
   }
+
   .tabs-left.nav-tabs > li > a:focus,
   .tabs-left.nav-tabs > li > a:hover,
   .tabs-left.nav-tabs > li.active > a,
@@ -33,22 +38,27 @@
     border-left: 4px solid #34bfa3;
     margin-left: -3px;
   }
+
   .content-tabs-left {
     display: inline-flex;
     width: 100%;
   }
+
   .tabs-left {
     display: inline-block;
   }
-  .content-tabs-left .nav-link{
+
+  .content-tabs-left .nav-link {
     min-width: max-content;
   }
 }
-@media screen and (max-width:768px){
-  .tabs-left.nav-tabs > li{
+
+@media screen and (max-width: 768px) {
+  .tabs-left.nav-tabs > li {
     margin-left: 1px;
     margin-bottom: -1px;
   }
+
   .tabs-left.nav-tabs > li > a:focus,
   .tabs-left.nav-tabs > li > a:hover,
   .tabs-left.nav-tabs > li.active > a,
@@ -58,12 +68,15 @@
     border-color: #34bfa3 #34bfa3 white #34bfa3;
   }
 }
-.tabs-left.nav-tabs > li{
+
+.tabs-left.nav-tabs > li {
   cursor: pointer;
 }
-.tab-pane .m-loader.m-loader--div::after{
+
+.tab-pane .m-loader.m-loader--div::after {
   left: -15px;
 }
+
 .tab-content {
   width: 100%;
 }
