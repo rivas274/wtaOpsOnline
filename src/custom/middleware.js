@@ -22,10 +22,9 @@ Middleware.install = function (Vue, options) {
         /*Obtenemos los permisos personalizados por usuario */
         let permission = Vue._session.get('permission');
         if (permission) {
-            if (!(action in permission)) {
-                return false;
+            if (action in permission) {
+                return permission[action][option] ? permission[action][option] == 'Y' : false;
             }
-            return permission[action][option] ? permission[action][option] == 'Y' : false;
         }
         return Vue.$canSee(Middleware.access(action, option));
     }

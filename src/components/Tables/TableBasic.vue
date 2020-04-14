@@ -3,6 +3,9 @@
 .table > thead > tr > th {
     vertical-align: middle;
 }
+.table-responsive {
+    padding: 1px;
+}
 </style>
 <style src="../Element/custom-m-loader.css"></style>
 <template>

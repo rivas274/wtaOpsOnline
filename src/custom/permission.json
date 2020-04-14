@@ -1,5 +1,5 @@
 {
-  "provider": {
+  "repricing": {
     "read": [14],
     "write": [14],
     "delete": [14]

@@ -87,12 +87,6 @@
                 <th>
                     <span>Classification</span>
                 </th>
-                <!-- <th>
-                    <span>Invoice Provider</span>
-                </th>
-                <th>
-                    <span>Repricing Provider</span>
-                </th>-->
                 <th>
                     <span>Status</span>
                 </th>
@@ -119,10 +113,10 @@
                     <span>{{docType[rePricing.invoice.docType]||"N/A"}}</span>
                 </td>
                 <td>
-                    <span
+                    <b
                         class="m-badge m-badge--wide"
                         :class="[' m-badge--'+rePricing.status.color]"
-                    >{{rePricing.status.label}}</span>
+                    >{{rePricing.status.label}}</b>
                 </td>
                 <td class="text-center fa-status">
                     <a
@@ -215,7 +209,8 @@ export default {
                     passenger: this.filters.passager.trim(),
                     docType: this.filters.docType,
                     endDate: this.filters.date.endDate,
-                    startDate: this.filters.date.startDate
+                    startDate: this.filters.date.startDate,
+                    idProvider: this.$session.get("provider").id
                 })
                 .then(response => {
                     this.showLoader = false;

@@ -17,7 +17,7 @@
                         <span class="m-menu__link-text">Assistance</span>
                     </router-link>
                 </li>
-                <li class="m-menu__item m-menu__item--active" aria-haspopup="true" v-if="provider">
+                <li class="m-menu__item m-menu__item--active" aria-haspopup="true" v-if="repricing">
                     <router-link :to="{ path: '/re-pricing'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
                         <i class="m-menu__link-icon flaticon-open-box"></i>
@@ -56,7 +56,7 @@ export default {
     name: "Menu",
     data() {
         return {
-            provider: this.middleware("provider", "read"),
+            repricing: this.middleware("repricing", "read"),
             assist: this.middleware("assist", "read")
         };
     }

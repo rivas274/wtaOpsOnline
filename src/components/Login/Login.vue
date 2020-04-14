@@ -154,11 +154,7 @@ export default {
                                     for (var prop in user) {
                                         this.$session.set(prop, user[prop]);
                                     }
-                                    if (this.middleware("provider", "read")) {
-                                        this.$router.push("re-pricing");
-                                    } else {
-                                        this.$router.push("dasboard");
-                                    }
+                                    this.$router.go("/");
                                 }
                             });
                     }
