@@ -1,5 +1,5 @@
 <template>
-    <div class="col-xl-4">
+    <div :class="[classProp||'col-md-4']">
         <div class="m-portlet__body">
             <div class="m-widget16">
                 <div class="row">
@@ -23,5 +23,7 @@
     </div>
 </template>
 <script>
-export default {};
+export default {
+    props: ["classProp"],
+};
 </script>

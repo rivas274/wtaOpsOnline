@@ -13,16 +13,70 @@
                 </a>
             </li>
         </ul>
-        <div class="tab-content container">
+        <div class="tab-content container-fluid">
             <div class="tab-pane" :class="{active:tabShow=='General'}">
-                <pre>{{ $data }}</pre>
+                <div
+                    class="m-portlet m-portlet--full-height"
+                    :class="{'m-loader m-loader--metal m-loader--div':showLoader}"
+                >
+                    <div class="m-portlet__body m-portlet__body--no-padding">
+                        <div class="row m-row--no-padding m-row--col-separator-xl">
+                            <AssistAccordionDetaill class-prop="col-md-6">
+                                <template slot="title">Travel Source</template>
+                                <template slot="body">
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">From</span>
+                                        <span class="m-widget16__price m--align-right">From</span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">To</span>
+                                        <span class="m-widget16__price m--align-right">To</span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">Days</span>
+                                        <span class="m-widget16__price m--align-right">Days</span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">Purchase Date</span>
+                                        <span class="m-widget16__price m--align-right">Purchase Date</span>
+                                    </div>
+                                </template>
+                            </AssistAccordionDetaill>
+                            <AssistAccordionDetaill class-prop="col-md-6">
+                                <template slot="title">Travel Source</template>
+                                <template slot="body">
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">From</span>
+                                        <span class="m-widget16__price m--align-right">From</span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">To</span>
+                                        <span class="m-widget16__price m--align-right">To</span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">Days</span>
+                                        <span class="m-widget16__price m--align-right">Days</span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">Purchase Date</span>
+                                        <span class="m-widget16__price m--align-right">Purchase Date</span>
+                                    </div>
+                                </template>
+                            </AssistAccordionDetaill>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import AssistAccordionDetaill from "../Assists/AssistAccordionDetaill.vue";
 export default {
     props: ["re-pricing"],
+    components: {
+        AssistAccordionDetaill
+    },
     data() {
         return {
             rePricingBase: this.rePricing,

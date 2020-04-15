@@ -159,13 +159,12 @@ export default {
     },
     props: ["open-asist"],
     data: function() {
-        var permission = {
-            bills: this.middleware("bills", "read"),
-            RP002A: this.middleware("RP002A", "read"),
-            RP002AB39: this.middleware("RP002A-B39", "read")
-        };
         return {
-            permission: permission,
+            permission: {
+                bills: this.middleware("bills", "read"),
+                RP002A: this.middleware("RP002A", "read"),
+                RP002AB39: this.middleware("RP002A-B39", "read")
+            },
             error: null,
             documentsType: [],
             filters: {

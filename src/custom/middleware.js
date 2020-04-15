@@ -7,7 +7,7 @@ var Middleware = {
         if (!option) {
             return false;
         }
-        return this.permission[action][option];
+        return action in this.permission ? this.permission[action][option] : false;
     }
 }
 Middleware.install = function (Vue, options) {

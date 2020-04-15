@@ -61,7 +61,7 @@
                 </a>
             </li>
         </ul>
-        <div class="tab-content container">
+        <div class="tab-content container-fluid">
             <div class="tab-pane" :class="{active:tabShow=='General'}">
                 <AssistDetail :id-assist="assistBase.idAssist"></AssistDetail>
             </div>

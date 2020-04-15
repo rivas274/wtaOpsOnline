@@ -64,7 +64,7 @@ iframe.ima {
         <div class="m-grid__item m-grid__item--fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="m-portlet__body m-portlet__body--no-padding">
+                    <div class="m-portlet__body">
                         <div class="m-invoice-2">
                             <div class="m-invoice__wrapper">
                                 <div class="m-invoice__head">
