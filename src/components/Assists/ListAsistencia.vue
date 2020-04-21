@@ -62,13 +62,13 @@
                 </template>
             </div>
             <div class="row m--align-right">
-                <div v-if="error" class="col-md-9">
+                <div v-if="error" class="col-lg-9">
                     <div class="alert-danger alert alert-dismissible m--align-left">
                         <button type="button" class="close" @click="error=null"></button>
                         <span>{{ error }}</span>
                     </div>
                 </div>
-                <div class="col-md-3" :class="{'offset-md-9':error==null}">
+                <div class="col-lg-3" :class="{'offset-lg-9':error==null}">
                     <!-- <button class="btn btn-brand" @click="getAssistance(0)">Search</button> -->
                     <button
                         class="btn btn-primary ml-2 pull-right"

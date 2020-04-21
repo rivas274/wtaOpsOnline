@@ -30,7 +30,7 @@ const customAxios = axios.create({
 
 customAxios.interceptors.response.use(
     function (response) {
-        Vue._session.set('lastCheck', moment().format('YYYY-MM-DD hh:mm A'));
+        Vue._session.set('lastCheck', window.moment().format('YYYY-MM-DD hh:mm A'));
         Vue._session.set('checkTimeOut', false);
         return response;
     },
@@ -101,13 +101,13 @@ new Vue({
     mounted: function () {
         setInterval(() => {
             if (router.currentRoute.fullPath !== '/') {
-                let lastCheck = moment(Vue._session.get('lastCheck')),
+                let lastCheck = window.moment(Vue._session.get('lastCheck')),
                     check = Vue._session.get('checkTimeOut'),
-                    duration = moment.duration(moment().diff(lastCheck)).asMinutes();
+                    duration = window.moment.duration(window.moment().diff(lastCheck)).asMinutes();
                 if (duration >= 10) {
                     this.axios.post("timeOut", { 'reset': check }).then(response => {
                         if (response.data.STATUS == "OK") {
-                            Vue._session.set('lastCheck', moment().format('YYYY-MM-DD hh:mm A'));
+                            Vue._session.set('lastCheck', window.moment().format('YYYY-MM-DD hh:mm A'));
                             Vue._session.set('checkTimeOut', false);
                         }
                     });

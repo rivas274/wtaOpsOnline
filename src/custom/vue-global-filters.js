@@ -32,8 +32,7 @@ export default {
             return formatter.format(amount);
         });
         Vue.filter("toFixed", (amount, decimal) => {
-            amount = parseFloat(amount);
-            return (typeof decimal === 'number') ? parseFloat(amount.toFixed(decimal)) : amount;
+            return (typeof decimal === 'number') ? parseFloat(amount).toFixed(decimal) : amount;
         });
     }
 }

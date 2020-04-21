@@ -22,7 +22,7 @@ export default {
     props: ["watermark", "name", "classProp", "value"],
     mounted() {
         let _self = this;
-        $(_self.$el)
+        window.$(_self.$el)
             .find(".date-bt-vue")
             .datetimepicker({
                 format: "yyyy-mm-dd",
@@ -34,12 +34,12 @@ export default {
                 pickerPosition: "bottom-left"
             })
             .change(function() {
-                _self.$emit("input", _self.name, $(this).val());
+                _self.$emit("input", _self.name, window.$(this).val());
             });
     },
     watch: {
         value: function(newVal) {
-            $(this.$el).val(newVal);
+            window.$(this.$el).val(newVal);
         }
     }
 };

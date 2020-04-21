@@ -22,7 +22,7 @@ export default {
     props: ["watermark", "name", "classProp", "value"],
     mounted() {
         let _self = this;
-        $(_self.$el)
+        window.$(_self.$el)
             .find(".date-bt-vue")
             .daterangepicker(
                 {
@@ -36,7 +36,7 @@ export default {
                     }
                 },
                 function(a, t) {
-                    $(_self.$el)
+                    window.$(_self.$el)
                         .find(".form-control")
                         .val(
                             a.format("YYYY-MM-DD") +
@@ -50,12 +50,12 @@ export default {
                 }
             )
             .on("cancel.daterangepicker", function(ev) {
-                $(this).val("");
+                window.$(this).val("");
             });
     },
     watch: {
         value: function(newVal) {
-            $(this.$el)
+            window.$(this.$el)
                 .find(".form-control")
                 .val(
                     newVal.startDate +

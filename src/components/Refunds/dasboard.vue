@@ -598,7 +598,7 @@ export default {
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
                                     /* this.$refs.recaptcha.reset(); */
-                                    Swal.fire({
+                                    window.Swal.fire({
                                         title: this.$t("document.send"),
                                         text: this.$t("document.uploaded"),
                                         type: "success",
@@ -617,10 +617,10 @@ export default {
                                             this.$refs.file.value = null;
                                         } else if (
                                             result.dismiss ===
-                                            Swal.DismissReason.cancel
+                                            window.Swal.DismissReason.cancel
                                         ) {
                                             window.close();
-                                            Swal.fire(
+                                            window.Swal.fire(
                                                 this.$t("windows.close"),
                                                 this.$t("windows.pleaseClose"),
                                                 "error"
@@ -636,7 +636,7 @@ export default {
                                             });
                                         }
                                     }
-                                    Swal.fire({
+                                    window.Swal.fire({
                                         title: "Error",
                                         text: response.data.MESSAGE,
                                         type: "error"

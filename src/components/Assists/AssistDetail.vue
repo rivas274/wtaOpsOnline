@@ -1,18 +1,6 @@
 <style src="../Element/custom-m-loader.css"></style>
+<style scoped src="../Assists/Assist.css"></style>
 <style scoped>
-.m-widget16__price {
-    word-break: break-word;
-}
-.m-widget16__item:nth-child(odd) {
-    color: #716aca !important;
-}
-.m-widget16__item:nth-child(even) {
-    color: #34bfa3 !important;
-}
-iframe {
-    height: 360px;
-    width: 100%;
-}
 .options-btn {
     display: inline-flex;
 }
@@ -259,7 +247,7 @@ iframe {
                 <AssistAccordion :id="'_general_conditions_'+idAssist" ico="fa flaticon-file">
                     <template slot="title">GENERAL CONDITIONS</template>
                     <template slot="body">
-                        <iframe
+                        <iframe class="preview"
                             :src="baseUrlApi()+'GeneralConditions/file/'+assistances.codeAssist"
                         ></iframe>
                     </template>
@@ -589,16 +577,16 @@ export default {
             })
             .then(response => {
                 this.benefit = response.data.RESPONSE;
-                $(this.$el)
+                window.$(this.$el)
                     .find('[data-toggle="popover"]')
                     .popover({
                         html: true,
                         trigger: "focus",
                         title: function() {
-                            return $(this).attr("title");
+                            return window.$(this).attr("title");
                         },
                         content: function() {
-                            return $(this)
+                            return window.$(this)
                                 .find(".popover-content")
                                 .html();
                         }

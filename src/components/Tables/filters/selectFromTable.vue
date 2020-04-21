@@ -27,7 +27,7 @@ export default {
         };
     },
     mounted() {
-        $(this.$el)
+        window.$(this.$el)
             .find(".m_selectpicker")
             .selectpicker();
     },
@@ -39,7 +39,7 @@ export default {
     watch: {
         selected: function(newVal) {
             this.value = newVal;
-            $(this.$el)
+            window.$(this.$el)
                 .find(".m_selectpicker")
                 .val(newVal)
                 .trigger("change");
@@ -47,7 +47,7 @@ export default {
         options: function(newVal) {
             setTimeout(
                 function() {
-                    $(this.$el)
+                    window.$(this.$el)
                         .find(".m_selectpicker")
                         .selectpicker("refresh");
                 }.bind(this),

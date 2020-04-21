@@ -33,7 +33,7 @@
 export default {
     props: ["data-style", "class-prop"],
     mounted() {
-        $(this.$el)
+        window.$(this.$el)
             .find(".m_selectpicker")
             .selectpicker();
     },

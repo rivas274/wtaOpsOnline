@@ -80,3 +80,17 @@
 .tab-content {
   width: 100%;
 }
+.m-widget16__price {
+  word-break: break-word;
+}
+.m-widget16__item:nth-child(odd) {
+  color: #716aca !important;
+}
+.m-widget16__item:nth-child(even) {
+  color: #34bfa3 !important;
+}
+.preview {
+  min-height: 360px;
+  min-width: 100%;
+  border: 1px #5b5e68 solid;
+}

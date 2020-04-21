@@ -24,13 +24,13 @@ a.toggle-popover {
 export default {
     props: ["title", "placement", "classProp"],
     mounted() {
-        $(this.$el).popover({
+        window.$(this.$el).popover({
             html: true,
             title: function() {
-                return $(this).attr("title");
+                return window.$(this).attr("title");
             },
             content: function() {
-                return $(this)
+                return window.$(this)
                     .find(".popover-content")
                     .html();
             }
