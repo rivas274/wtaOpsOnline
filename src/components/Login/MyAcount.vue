@@ -127,12 +127,12 @@ export default {
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
                                     this.$session.set("changePassword", 0);
-                                    this.redirect = 15;
+                                    this.redirect = 10;
                                     this.interval = setInterval(
                                         function() {
                                             this.redirect--;
                                             if (this.redirect < 1) {
-                                                this.$router.push("/dasboard");
+                                                this.$router.go("/");
                                                 clearInterval(this.interval);
                                                 this.interval = this.interval = null;
                                             }
