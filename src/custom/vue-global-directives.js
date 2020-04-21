@@ -2,7 +2,7 @@ export default {
     install(Vue) {
         Vue.directive('tooltip', function (el, binding) {
             if (binding.value) {
-                $(el).attr('title', binding.value).tooltip({
+                window.$(el).attr('title', binding.value).tooltip({
                     title: binding.value,
                     placement: (binding.arg || 'top'),
                     trigger: 'hover',
