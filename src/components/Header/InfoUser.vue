@@ -6,7 +6,10 @@
         m-dropdown-toggle="click"
     >
         <a href="#" class="m-nav__link m-dropdown__toggle">
-            <h5 class="m-topbar__userpic">{{fullName}}&nbsp;</h5>
+            <h5 class="m-topbar__userpic pr-3">
+                <div>{{fullName}}</div>
+                <small v-if="detaillUser">{{detaillUser}}</small>
+            </h5>
             <span class="m-topbar__userpic">
                 <custom-img
                     :src="baseUrlApi()+'app/admin/img_user/'+imgUser"
@@ -32,10 +35,10 @@
                             <span
                                 class="m-card-user__name m--font-weight-500"
                             >{{ fullName | ucwords }}</span>
-                            <span
-                                href
-                                class="m-card-user__email m--font-weight-300 m-link"
-                            >{{ email | lower }}</span>
+                            <small v-if="detaillUser" class="m-card-user__email m--font-weight-600 m-link">
+                                {{ detaillUser }}
+                            </small>
+                            <span class="m-card-user__email m--font-weight-300 m-link">{{ email | lower }}</span>
                         </div>
                     </div>
                 </div>
@@ -82,6 +85,23 @@ export default {
             this.spin = true;
             this.$session.set("TOKEN", "");
             this.$router.go("/");
+        }
+    },
+    computed: {
+        detaillUser: function() {
+            var detaill = this.$session.getAll();
+            switch (true) {
+                case "provider" in detaill:
+                    detaill = detaill.provider.name;
+                    break;
+                case "company" in detaill:
+                    detaill = detaill.company.name;
+                    break;
+                case "client" in detaill:
+                    detaill = detaill.client.name;
+                    break;
+            }
+            return typeof detaill=="string"?detaill:'';
         }
     }
 };

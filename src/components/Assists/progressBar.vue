@@ -1,4 +1,4 @@
-<style>
+<style scoped>
 .step {
     padding: 0;
     margin: 0;

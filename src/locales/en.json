@@ -32,7 +32,8 @@
     "client": "Client",
     "voucher": "Voucher",
     "send": "Send",
-    "no": "No"
+    "no": "No",
+    "date": "Date"
   },
   "windows": {
     "close": "Close the Windows",

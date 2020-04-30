@@ -1,7 +1,7 @@
 <template>
     <span
         v-show="errors_form.has(attribute_name)"
-        class="form-control-feedback"
+        class="form-control-feedback font-weight-bold"
     >{{ errors_form.first(attribute_name) }}</span>
 </template>
 <script>

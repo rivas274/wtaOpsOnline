@@ -1,7 +1,4 @@
 <style scoped>
-.m-form__group.has-danger .form-control-feedback {
-    font-size: 1.1rem !important;
-}
 #particles-js,
 .absolute {
     position: absolute !important;

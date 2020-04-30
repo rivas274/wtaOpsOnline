@@ -50,6 +50,10 @@ customAxios.interceptors.request.use(function (config) {
     if (i18n._vm.$root.$root.locale) {
         config.headers.common['lang'] = i18n._vm.$root.$root.locale;
     }
+    
+    if (config.baseURL.indexOf(['dev'])>-1) {
+        config.headers.common['DEBUG'] = true;
+    }
     if ((Vue._session.get('TOKEN') || '').length == 16 && (config.headers.common['TOKEN'] || '').length == 0) {
         config.headers.common['TOKEN'] = Vue._session.get('TOKEN');
         config.headers.common['USER'] = Vue._session.get("user");

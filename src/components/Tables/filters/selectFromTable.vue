@@ -3,6 +3,7 @@
         <select
             class="form-control m-bootstrap-select m_selectpicker"
             data-live-search="true"
+            data-style="form-control"
             :id="'Search'+name"
             :name="name"
             v-model="value"
@@ -44,7 +45,7 @@ export default {
                 .val(newVal)
                 .trigger("change");
         },
-        options: function(newVal) {
+        options: function() {
             setTimeout(
                 function() {
                     window.$(this.$el)

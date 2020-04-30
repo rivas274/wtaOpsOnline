@@ -6,36 +6,23 @@ textarea {
 textarea.v-center {
     padding: 30px 0 0 0;
 }
-iframe.preview {
+
+.preview-container img,
+.preview-container iframe {
     min-height: 350px;
     border: 0;
+    overflow-x: none;
 }
-iframe.ima {
-    min-height: 350px;
-    width: 100%;
+.has-danger .custom-file-label,
+.has-danger + .custom-file-label {
+    border-color: #dc3545;
 }
-.preview-content-img {
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-    min-height: 350px;
-    max-height: 775px;
-    overflow: auto;
+.has-danger .custom-file-label::after,
+.has-danger + .custom-file-label::after {
+    color: #f8f9fa;
+    background-color: #dc3545;
+    height: 2.6rem;
 }
-.form-control-feedback {
-    font-weight: 600;
-}
-.row {
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-}
-.preview {
-    max-height: 100%;
-    max-width: 100%;
-    padding-right: 0 !important;
-    padding-left: 0 !important;
-}
-</style>
-<style>
 .m-nav .m-nav__item > .m-nav__link .m-nav__link-text {
     color: #f8f9fc;
     font-weight: 700;
@@ -62,14 +49,14 @@ iframe.ima {
 <template>
     <div class="m-content">
         <div class="m-grid__item m-grid__item--fluid">
-            <div class="row">
-                <div class="col-lg-12">
+            <div class="row mx-0">
+                <div class="col-xl-10 mx-auto">
                     <div class="m-portlet__body">
                         <div class="m-invoice-2">
                             <div class="m-invoice__wrapper">
                                 <div class="m-invoice__head">
                                     <div
-                                        class="m-invoice__container m-invoice__container--centered"
+                                        class="m-invoice__container m-invoice__container--centered p-0"
                                     >
                                         <div
                                             class="m-invoice__logo"
@@ -191,30 +178,33 @@ iframe.ima {
                                         </div>
                                         <div class="m-invoice__items" style="padding:2rem 0 3rem;">
                                             <div class="m-portlet m-portlet--tab">
-                                                <div class="m-portlet__head">
-                                                    <div class="m-portlet__head-caption">
-                                                        <div class="m-portlet__head-title">
-                                                            <span
-                                                                class="m-portlet__head-icon m--hide"
-                                                            >
-                                                                <i class="la la-gear"></i>
-                                                            </span>
-                                                            <h3
-                                                                class="m-portlet__head-text"
-                                                            >{{ $t('refund.information') }}</h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!--begin::Form-->
                                                 <div>
-                                                    <div class="row">
+                                                    <div class="row mx-0">
                                                         <form
                                                             class="m-form m-form--fit m-form--label-align-right"
-                                                            :class="[preview?(preview=='image'?'col-lg-7':'col-lg-6'):'col-lg-9 mx-auto']"
+                                                            :class="[preview?'col-md-6':'col-md-12 mx-auto']"
                                                             @submit.prevent="validRefunds"
                                                             enctype="multipart/form-data"
                                                             ref="form"
                                                         >
+                                                            <div class="m-portlet__head">
+                                                                <div
+                                                                    class="m-portlet__head-caption"
+                                                                >
+                                                                    <div
+                                                                        class="m-portlet__head-title"
+                                                                    >
+                                                                        <span
+                                                                            class="m-portlet__head-icon m--hide"
+                                                                        >
+                                                                            <i class="la la-gear"></i>
+                                                                        </span>
+                                                                        <h3
+                                                                            class="m-portlet__head-text"
+                                                                        >{{ $t('refund.information') }}</h3>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <div class="m-portlet__body">
                                                                 <div
                                                                     class="form-group m-form__group"
@@ -361,7 +351,6 @@ iframe.ima {
                                                                         <textarea
                                                                             name="Description"
                                                                             class="form-control m-input"
-                                                                            :class="{'v-center':inputsData.description.toString().split('').length==0}"
                                                                             :placeholder="$t('document.description')"
                                                                             v-validate="'required|min:2|max:255|'"
                                                                             v-model="inputsData.description"
@@ -393,6 +382,7 @@ iframe.ima {
                                                                             name="file"
                                                                             class="custom-file-input"
                                                                             id="file"
+                                                                            accept="application/pdf, image/gif, image/jpg, image/jpeg, image/png"
                                                                             v-validate="'required|ext:jpeg,jpg,pdf,png,gif,bmp'"
                                                                             ref="file"
                                                                             v-on:change="handleFileUpload"
@@ -465,17 +455,18 @@ iframe.ima {
                                                                 </div>
                                                             </div>
                                                         </form>
-                                                        <iframe
-                                                            class="col-lg-6 preview"
-                                                            v-if="preview=='pdf'"
-                                                            :src="previewSrc"
-                                                        />
                                                         <div
-                                                            class="col-lg-5 preview-content-img"
-                                                            v-if="preview=='image'"
+                                                            :class="preview?'d-flex':'d-none'"
+                                                            class="col-md-6 rounded bg-dark preview-container p-0"
                                                         >
+                                                            <iframe
+                                                                v-if="preview=='pdf'"
+                                                                class="rounded h-100 w-100"
+                                                                :src="previewSrc"
+                                                            ></iframe>
                                                             <img
-                                                                class="preview col-xs-12"
+                                                                v-if="preview=='image'"
+                                                                class="m-2 my-auto rounded w-100 h-auto"
                                                                 :src="previewSrc"
                                                             />
                                                         </div>
@@ -512,7 +503,6 @@ export default {
     },
     data() {
         return {
-            env: process.env,
             siteKey: process.env.VUE_APP_RE_CAPCHA_PUBLIC,
             code: this.$route.params.code,
             results: {},
@@ -674,6 +664,7 @@ export default {
         },
         preview: function() {
             if (!this.file || this.errors.has("file")) {
+                this.previewSrc = false;
                 return false;
             }
             var type = false;
@@ -692,6 +683,8 @@ export default {
                     }
                 }.bind(this);
                 reader.readAsDataURL(this.file);
+            }else{
+                this.previewSrc = false;
             }
             return type;
         }

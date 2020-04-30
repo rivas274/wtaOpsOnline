@@ -1,4 +1,7 @@
 <style scoped>
+.fa-status .fa {
+    font-size: 1.4rem;
+}
 .options-btn {
     display: inline-flex;
 }
@@ -7,7 +10,6 @@ iframe {
     width: 100%;
 }
 </style>
-
 <template>
     <TableBasic :show-loader="showLoader">
         <template slot="filters">
@@ -40,14 +42,17 @@ iframe {
                 <th>
                     <span>Reference</span>
                 </th>
+                <th>
+                    <span>Category</span>
+                </th>
                 <th style="min-width: 90px;">
                     <span>Bill Date</span>
                 </th>
                 <th>
-                    <span>Classification</span>
+                    <span>Case</span>
                 </th>
                 <th>
-                    <span>Provider</span>
+                    <span>Voucher</span>
                 </th>
                 <th>
                     <span>Original Amount</span>
@@ -59,9 +64,6 @@ iframe {
                     <span>Amount USD</span>
                 </th>
                 <th>
-                    <span>Covered Amount</span>
-                </th>
-                <th>
                     <span>Bill Status</span>
                 </th>
                 <th>
@@ -70,56 +72,65 @@ iframe {
             </tr>
         </template>
         <template slot="tbody">
-            <template v-for="bill in results">
-                <tr :key="bill.idFile">
+            <template v-for="invoice in results">
+                <tr :key="invoice.idFile">
                     <td>
-                        <span>{{bill.idFile}}</span>
+                        <span>{{invoice.idFile}}</span>
                     </td>
                     <td>
-                        <span>{{bill.reference||'N/A'}}</span>
+                        <span v-html="invoice.reference||'N/A'"></span>
                     </td>
                     <td>
-                        <span>{{bill.billDate||'N/A'}}</span>
+                        <span v-html="invoice.category||'N/A'"></span>
                     </td>
                     <td>
-                        <span>{{bill.category||'N/A'}}</span>
+                        <span>{{invoice.billDate||'N/A'}}</span>
                     </td>
                     <td>
-                        <span>{{bill.provider.providerName||'N/A'}}</span>
+                        <span>{{invoice.assist.codigo||'N/A'}}</span>
+                    </td>
+                    <td>
+                        <span>{{invoice.assist.voucher||'N/A'}}</span>
                     </td>
                     <td>
                         <span
-                            v-tooltip="'Currency '+bill.currency"
-                        >{{ bill.originalAmount | currency(bill.currency) }}</span>
+                            v-tooltip="'Currency '+invoice.currency"
+                        >{{ invoice.originalAmount | currency(invoice.currency) }}</span>
                     </td>
                     <td>
-                        <span>{{ parseFloat(bill.exchangeRate) }}</span>
+                        <span>{{ invoice.exchangeRate | toFixed(4) }}</span>
                     </td>
                     <td>
-                        <span v-tooltip="'Currency USD'">{{ bill.usdAmount | currency("USD") }}</span>
-                    </td>
-                    <td>
-                        <span v-tooltip="'Currency USD'">{{ bill.coveredAmount | currency("USD") }}</span>
+                        <span v-tooltip="'Currency USD'">{{ invoice.usdAmount | currency("USD") }}</span>
                     </td>
                     <td class="text-center">
                         <span
                             class="m-badge m-badge--wide"
-                            :class="[billStatusColor(bill.billStatus)]"
-                        >{{ bill.billStatusDesc }}</span>
+                            :class="[billStatusColor(invoice.billStatus)]"
+                        >{{ invoice.billStatusDesc }}</span>
                     </td>
                     <td class="text-center fa-status">
                         <span class="options-btn">
                             <a
-                                @click="togleBill(bill)"
+                                @click.prevent="addinvoice(invoice)"
                                 class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
                             >
                                 <i
                                     class="fa"
-                                    :class="[checkVisibility(bill)?'fa-eye-slash':'fa-eye']"
+                                    :class="[open.indexOf(invoice.idFile)>-1?'fa-location-arrow':'fa-plus-circle']"
                                 ></i>
                             </a>
                             <a
-                                :href="download(bill)"
+                                @click="togleBill(invoice)"
+                                class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                            >
+                                <i
+                                    class="fa"
+                                    :class="[checkVisibility(invoice)?'fa-eye-slash':'fa-eye']"
+                                ></i>
+                            </a>
+                            <a
+                                :href="download(invoice)"
                                 target="_blank"
                                 class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
                             >
@@ -128,10 +139,10 @@ iframe {
                         </span>
                     </td>
                 </tr>
-                <tr :key="bill.idFile+'Iframe'"></tr>
-                <tr :key="bill.idFile+'IframeShow'" v-if="checkVisibility(bill)">
-                    <td class="text-center" colspan="10">
-                        <iframe :src="streaming(bill)"></iframe>
+                <tr :key="invoice.idFile+'Iframe'"></tr>
+                <tr :key="invoice.idFile+'IframeShow'">
+                    <td class="text-center" colspan="11" v-if="checkVisibility(invoice)">
+                        <iframe :src="streaming(invoice)"></iframe>
                     </td>
                 </tr>
             </template>
@@ -149,19 +160,26 @@ iframe {
 <script>
 import dateRangeBt from "../Tables/filters/dateRangeBt.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
+import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import pagination from "../pagination/pagination.vue";
+import Flag from "../Element/Flag.vue";
 import TableBasic from "../Tables/TableBasic.vue";
 export default {
     components: {
         TableBasic,
         inputFromTable,
+        selectFromTable,
         dateRangeBt,
-        pagination
+        pagination,
+        Flag
     },
-    props: ["id-assist"],
+    props: ["open-invoice"],
     data: function() {
         return {
-            assist: this.idAssist,
+            error: null,
+            documentsType: [],
+            open: [],
+            showLoader: false,
             filters: {
                 code: "",
                 date: {
@@ -175,12 +193,20 @@ export default {
                 limit: 15,
                 size: 0
             },
-            showLoader: false,
             view: []
         };
     },
     methods: {
-        getBill: function(pg) {
+        getDocumentsType: function() {
+            this.axios
+                .get("getDocumentsType?docType[]=4&docType[]=5&docType[]=8")
+                .then(response => {
+                    this.documentsType = [
+                        { id: "", name: "Select Category" }
+                    ].concat(response.data.RESPONSE.RESULTS);
+                });
+        },
+        getinvoice: function(pg) {
             pg = Number.isInteger(pg) ? pg : this.footerTable.start;
             this.showLoader = true;
             this.axios
@@ -188,27 +214,30 @@ export default {
                     start: pg,
                     limit: this.footerTable.limit,
                     code: this.filters.code.trim(),
-                    idAssist: this.assist,
                     endDate: this.filters.date.endDate,
                     startDate: this.filters.date.startDate
                 })
                 .then(response => {
                     this.showLoader = false;
                     this.results = response.data.RESPONSE.RESULTS;
+
                     this.footerTable = {
-                        start: response.data.start,
-                        limit: response.data.limit,
-                        size: response.data.size
+                        start: response.data.RESPONSE.start,
+                        limit: response.data.RESPONSE.limit,
+                        size: response.data.RESPONSE.size
                     };
                 });
         },
         setDataFilter: function(campo, value) {
             this.filters[campo] = value;
-            this.getBill(0);
+            this.getinvoice(0);
         },
         setDataPaginate: function(campo, value) {
             this.footerTable[campo] = value;
-            this.getBill();
+            this.getinvoice();
+        },
+        addinvoice: function(invoice) {
+            this.$emit("addInvoice", invoice);
         },
         billStatusColor(status) {
             let colors = {
@@ -253,11 +282,28 @@ export default {
                     startDate: ""
                 }
             };
-            this.getBill(0);
+            this.getinvoice(0);
         }
     },
     mounted() {
-        this.getBill();
+        this.getinvoice();
+        this.getDocumentsType();
+    },
+    computed: {
+        docType: function() {
+            return this.documentsType.reduce(function(m, e) {
+                m[e.idFile] = e.name;
+                return m;
+            }, {});
+        }
+    },
+    watch: {
+        openInvoice: function(newVal) {
+            window.console.log(newVal);
+            this.open = (newVal || []).map(function(value) {
+                return value.idFile;
+            });
+        }
     }
 };
 </script>

@@ -10,18 +10,40 @@
             m-menu-dropdown-timeout="500"
         >
             <ul class="m-menu__nav m-menu__nav--dropdown-submenu-arrow">
-                <li class="m-menu__item m-menu__item--active" aria-haspopup="true" v-if="assist">
+                <li
+                    class="m-menu__item"
+                    :class="[subIsActive('/dasboard')?'m-menu__item--active':'']"
+                    aria-haspopup="true"
+                    v-if="assist"
+                >
                     <router-link :to="{ path: '/dasboard'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
                         <i class="m-menu__link-icon flaticon-squares-3"></i>
                         <span class="m-menu__link-text">Assistance</span>
                     </router-link>
                 </li>
-                <li class="m-menu__item m-menu__item--active" aria-haspopup="true" v-if="repricing">
+                <li
+                    class="m-menu__item"
+                    :class="[subIsActive('/re-pricing')?'m-menu__item--active':'']"
+                    aria-haspopup="true"
+                    v-if="repricing"
+                >
                     <router-link :to="{ path: '/re-pricing'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
                         <i class="m-menu__link-icon flaticon-open-box"></i>
                         <span class="m-menu__link-text">RePricing</span>
+                    </router-link>
+                </li>
+                <li
+                    class="m-menu__item"
+                    :class="[subIsActive('/invoice')?'m-menu__item--active':'']"
+                    aria-haspopup="true"
+                    v-if="invoice"
+                >
+                    <router-link :to="{ path: '/invoice'}" replace class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-coins"></i>
+                        <span class="m-menu__link-text">Invoice</span>
                     </router-link>
                 </li>
                 <!-- <li
@@ -57,8 +79,17 @@ export default {
     data() {
         return {
             repricing: this.middleware("repricing", "read"),
-            assist: this.middleware("assist", "read")
+            assist: this.middleware("assist", "read"),
+            invoice: this.middleware("invoiceProvider", "read")
         };
+    },
+    methods: {
+        subIsActive(input) {
+            const paths = Array.isArray(input) ? input : [input];
+            return paths.some(path => {
+                return this.$route.path.indexOf(path) === 0;
+            });
+        }
     }
 };
 </script>

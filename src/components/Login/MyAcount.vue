@@ -126,15 +126,15 @@ export default {
                                 this.resp = response.data;
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
-                                    this.$session.set("changePassword", 0);
+                                    this.$session.set("changePassword", "0");
                                     this.redirect = 10;
                                     this.interval = setInterval(
                                         function() {
                                             this.redirect--;
                                             if (this.redirect < 1) {
-                                                this.$router.go("/");
                                                 clearInterval(this.interval);
                                                 this.interval = this.interval = null;
+                                                this.$router.replace("/");
                                             }
                                         }.bind(this),
                                         1000

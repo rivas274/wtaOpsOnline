@@ -4,6 +4,7 @@ import http404 from '../components/http404';
 import MainAsistencia from '../components/Assists/MainAsistencia';
 import Refunds from '../components/Refunds/dasboard';
 import RePricing from '../components/RePricing/dasboard';
+import Invoice from '../components/invoice/dasboard';
 
 export default [
     {
@@ -15,6 +16,11 @@ export default [
         name: 'RePricing',
         path: '/re-pricing',
         component: RePricing,
+    },
+    {
+        name: 'Invoice',
+        path: '/invoice',
+        component: Invoice,
     },
     {
         name: 'Login',

@@ -32,7 +32,8 @@
     "client": "Cliente",
     "voucher": "Voucher",
     "send": "Enviar",
-    "no": "No"
+    "no": "No",
+    "date": "Fecha"
   },
   "windows": {
     "close": "Cierre la ventana",

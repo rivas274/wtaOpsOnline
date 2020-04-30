@@ -161,12 +161,6 @@ export default {
             rePricingBase: this.rePricing,
             rePricingDetaill: {},
             tabShow: "General",
-            permission: {
-                bills: this.middleware("bills", "read"),
-                notes: this.middleware("notes", "read"),
-                provider: this.middleware("provider", "read"),
-                time_line: this.middleware("time_line", "read")
-            }
         };
     },
     mounted() {
