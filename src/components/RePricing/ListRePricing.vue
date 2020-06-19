@@ -32,16 +32,14 @@
                     v-on:input="setDataFilter"
                     :value="filters.codeVoucher"
                 ></input-from-table>
-                <input-from-table
+                <!--<input-from-table
                     class-prop="col-md-4 m-form__group-sub"
                     name="passager"
                     watermark="Passenger"
                     icon="la flaticon-avatar"
                     v-on:input="setDataFilter"
                     :value="filters.passager"
-                ></input-from-table>
-            </div>
-            <div class="form-group m-form__group row" :class="{'has-danger':error}">
+                ></input-from-table>-->
                 <date-range-bt
                     class-prop="col-md-4 m-form__group-sub"
                     name="date"
@@ -49,6 +47,8 @@
                     v-on:input="setDataFilter"
                     :value="filters.date"
                 ></date-range-bt>
+            </div>
+            <div class="form-group m-form__group row" :class="{'has-danger':error}">
                 <select-from-table
                     name="docType"
                     class-prop="col-md-4 m-form__group-sub"
@@ -82,10 +82,13 @@
                     <span>Case Number</span>
                 </th>
                 <th>
-                    <span>Passenger</span>
+                    <span>Patient Name</span>
                 </th>
                 <th>
                     <span>Classification</span>
+                </th>
+                <th>
+                    <span>Invoice Provider</span>
                 </th>
                 <th>
                     <span>Status</span>
@@ -111,6 +114,9 @@
                 </td>
                 <td>
                     <span>{{docType[rePricing.invoice.docType]||"N/A"}}</span>
+                </td>
+                <td>
+                    <span>{{ rePricing.InvoiceProvider.providerName }}</span>
                 </td>
                 <td>
                     <b
