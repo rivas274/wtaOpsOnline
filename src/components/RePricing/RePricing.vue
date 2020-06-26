@@ -190,6 +190,7 @@
                             <form class="m-form col-md-12 add-files"
                                 @submit.prevent="validRefunds"
                                 enctype="multipart/form-data"
+                                method="POST"
                                 ref="form">
 
                                 <div class="form-group" :class="{'has-danger': errors.has('fileEob')}">
@@ -204,7 +205,7 @@
                                                 accept="application/pdf"
                                                 v-validate="'required|ext:pdf'"
                                                 ref="fileEob"
-                                                v-on:change="handleFileUploadEOB"
+                                                v-on:change="handleFileUploadEOB()"
                                             />
                                             <label
                                                 class="custom-file-label"
@@ -242,7 +243,7 @@
                                                 accept="application/pdf"
                                                 v-validate="'required|ext:pdf'"
                                                 ref="fileFee"
-                                                v-on:change="handleFileUploadFee"
+                                                v-on:change="handleFileUploadFee()"
                                             />
                                             <label
                                                 class="custom-file-label"
@@ -435,12 +436,22 @@ export default {
                     this.rePricingDetaill = response.data.RESPONSE;
                 });
         },
+        handleFileUploadEOB: function() {
+            this.fileEOB = this.$refs.fileEob.files[0];
+
+            window.console.log(this.fileEOB);
+        },
+        handleFileUploadFee: function() {
+            this.fileFEE = this.$refs.fileFee.files[0];
+
+            window.console.log(this.fileFEE);
+        },
         validRefunds: function() {
             if (!this.disableForm) {
                 
                 this.$validator.validateAll().then(result => {
                     window.console.log("validateAll", result);
-                    const formData = new FormData();
+                    let formData = new FormData();
                     formData.append("fileEob", this.fileEOB);
                     formData.append("fileFee", this.fileFEE);
                     formData.append("saving_amount", this.inputsData.saving_amount);
@@ -452,22 +463,23 @@ export default {
                     formData.append("user", this.$session.get("user"));
                     formData.append("repricingId", this.rePricingBase.id);
 
+                    const config = {
+                        headers: {
+                            'content-type': 'multipart/form-data'
+                        },
+                        onUploadProgress: function(progressEvent) {
+                            this.uploadPercentage = parseInt(
+                                Math.round(
+                                    (progressEvent.loaded * 100) /
+                                        progressEvent.total
+                                )
+                            );
+                        }.bind(this)
+                    }
+
                     if (result) {
                         this.disableForm = true;
-                        this.axios
-                            .post("addFilesRepricing", formData, {
-                                headers: {
-                                    "Content-Type": "multipart/form-data"
-                                },
-                                onUploadProgress: function(progressEvent) {
-                                    this.uploadPercentage = parseInt(
-                                        Math.round(
-                                            (progressEvent.loaded * 100) /
-                                                progressEvent.total
-                                        )
-                                    );
-                                }.bind(this)
-                            })
+                        this.axios.post("addFilesRepricing", formData, config)
                             .then(response => {
                                 window.console.log("addFilesRepricing", response);
                                 this.disableForm = false;
@@ -479,11 +491,11 @@ export default {
                                     this.inputsData.fee_amount = "";
                                     this.fileEOB = '';
                                     this.fileFEE = '';
-                                    this.$refs.fileEOB.value = null;
-                                    this.$refs.fileFEE.value = null;
+                                    this.$refs.fileEob.value = null;
+                                    this.$refs.fileFee.value = null;
                                     this.$emit("addFilesRepricing", response.data.RESPONSE);
                                     window.Swal.fire({
-                                        title: this.$t("document.send"),
+                                        title: "Send",
                                         text: this.$t("document.uploaded"),
                                         type: "success",
                                         showCancelButton: true,
@@ -508,15 +520,6 @@ export default {
                     }
                 });
             }
-        },
-        setDataFilter: function(campo, value) {
-            this.inputsData[campo] = value;
-        },
-        handleFileUploadEOB: function(event) {
-            this.fileEOB = event.target.files[0];
-        },
-        handleFileUploadFee: function(event) {
-            this.fileFEE = event.target.files[0];
         }
     },
     computed: {

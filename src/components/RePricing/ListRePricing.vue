@@ -104,10 +104,10 @@
                     <span>{{ rePricing.id }}</span>
                 </td>
                 <td>
-                    <span>{{ rePricing.assist.codigo }}</span>
+                    <span>{{ rePricing.voucher.codigo }}</span>
                 </td>
                 <td>
-                    <span>{{ rePricing.voucher.codigo }}</span>
+                    <span>{{ rePricing.assist.codigo }}</span>
                 </td>
                 <td>
                     <span v-html="rePricing.passenger.fisrtName+' '+rePricing.passenger.lastName"></span>
