@@ -5,9 +5,9 @@ import MainAsistencia from '../components/Assists/MainAsistencia';
 import Refunds from '../components/Refunds/dasboard';
 import RePricing from '../components/RePricing/dasboard';
 import Invoice from '../components/invoice/dasboard';
+import AssistanceBills from '../components/AssistanceBills/dasboard';
 
-export default [
-    {
+export default [{
         name: 'dasboard',
         path: '/dasboard',
         component: MainAsistencia,
@@ -43,6 +43,18 @@ export default [
         name: 'Refunds',
         path: '/:lang/refunds/:code',
         component: Refunds,
+        meta: {
+            isPublic: true
+        }
+    },
+    {
+        path: '/AssistanceBills/:code/:providerId',
+        redirect: '/en/AssistanceBills/:code/:providerId',
+    },
+    {
+        name: 'AssistanceBills',
+        path: '/:lang/AssistanceBills/:code/:providerId',
+        component: AssistanceBills,
         meta: {
             isPublic: true
         }

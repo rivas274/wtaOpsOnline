@@ -1,42 +1,51 @@
 {
-  "refund": {
-    "information": "Información de reembolso",
-    "payee": "Beneficiario del reembolso (Nombre)",
-    "reference": "Reembolso Referencia",
-    "date": {
-      "document": "Fecha de Reembolso"
+    "refund": {
+        "information": "Información de reembolso",
+        "payee": "Beneficiario del reembolso (Nombre)",
+        "reference": "Reembolso Referencia",
+        "date": {
+            "document": "Fecha de Reembolso"
+        }
+    },
+    "document": {
+        "type": "Tipo de Documento",
+        "amount": "Cantidad",
+        "currency": "Moneda",
+        "description": "Descripción",
+        "file": "Documento",
+        "send": "Documento Enviado",
+        "uploaded": "Su documento ha sido cargado exitosamente",
+        "uploadAnother": "Subir otro documento"
+    },
+    "assistance": {
+        "code": "Código de asistencia",
+        "date": {
+            "case": "Fecha del caso",
+            "birth": "Fecha de nacimiento"
+        }
+    },
+    "voucher": {
+        "name": "Nombre del pasajero"
+    },
+    "general": {
+        "refund": "Reembolso",
+        "client": "Cliente",
+        "voucher": "Voucher",
+        "send": "Enviar",
+        "no": "No",
+        "date": "Fecha",
+        "upload_assistance_bills": "Subir Facturas de Asistencia"
+    },
+    "AssistanceBills": {
+        "information": "Informacion de la Factura",
+        "providerName": "Nombre del Proveedor",
+        "reference": "Referencia",
+        "date": {
+            "document": "Fecha"
+        }
+    },
+    "windows": {
+        "close": "Cierre la ventana",
+        "pleaseClose": "El proceso finalizó satisfactoriamente, cierra la ventana"
     }
-  },
-  "document": {
-    "type": "Tipo de Documento",
-    "amount": "Cantidad",
-    "currency": "Moneda",
-    "description": "Descripción",
-    "file": "Documento",
-    "send": "Documento Enviado",
-    "uploaded": "Su documento ha sido cargado exitosamente",
-    "uploadAnother": "Subir otro documento"
-  },
-  "assistance": {
-    "code": "Código de asistencia",
-    "date": {
-      "case": "Fecha del caso",
-      "birth": "Fecha de nacimiento"
-    }
-  },
-  "voucher": {
-    "name": "Nombre del pasajero"
-  },
-  "general": {
-    "refund": "Reembolso",
-    "client": "Cliente",
-    "voucher": "Voucher",
-    "send": "Enviar",
-    "no": "No",
-    "date": "Fecha"
-  },
-  "windows": {
-    "close": "Cierre la ventana",
-    "pleaseClose": "El proceso finalizó satisfactoriamente, cierra la ventana"
-  }
 }
