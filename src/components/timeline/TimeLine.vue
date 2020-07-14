@@ -27,12 +27,17 @@
                                     :class="date.class"
                                 ></div>
                                 <div class="m-timeline-1__item-arrow"></div>
-                                <div class="m-timeline-1__item-time">{{date.user.name}} ({{date.user.user}}) @ <small>{{date.date}}</small></div>
+                                <div class="m-timeline-1__item-time">
+                                    <template v-if="date.user">
+                                        {{date.user.name}} ({{date.user.user}}) @ 
+                                    </template>
+                                    <small>{{date.date}}</small>
+                                </div>
                                 <div class="m-timeline-1__item-content m--margin-top-40">
                                     <div class="m-timeline-1__item-title">
                                         <strong>{{date.title}}</strong>
                                     </div>
-                                    <div v-if="date.detaill" class="m-timeline-1__item-body">
+                                    <div v-if="date.detaill && !date.provider_info" class="m-timeline-1__item-body">
                                         <div
                                             class="m-timeline-1__item-body m--margin-top-15"
                                             v-html="date.detaill"
