@@ -91,7 +91,7 @@
                         <div class="m-login__account">
                             <span
                                 class="m-login__account-msg"
-                            >All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © 2019 Ils. All rights reserved. Powered by ILS-D2PW Solutions</span>
+                            >All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © {{ new Date().getFullYear() }} Ils. All rights reserved. Powered by ILS-D2PW Solutions</span>
                         </div>
                     </div>
                 </div>
