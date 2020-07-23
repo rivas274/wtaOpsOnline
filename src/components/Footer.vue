@@ -7,7 +7,7 @@
                 >
                     <span class="m-footer__copyright">
                         &copy;2012 - {{ new Date().getFullYear() }}
-                        <a class="m-link">ILS-D2PW</a>, All rights reserved.
+                        <a class="m-link"> ilstechnik.com</a>, All rights reserved.
                     </span>
                 </div>
                 <div
