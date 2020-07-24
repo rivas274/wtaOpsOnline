@@ -6,7 +6,7 @@
                     class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last"
                 >
                     <span class="m-footer__copyright">
-                        &copy;2012 - {{ new Date().getFullYear() }}
+                        &copy; {{ new Date().getFullYear() }}
                         <a class="m-link"> ilstechnik.com</a>, All rights reserved.
                     </span>
                 </div>
