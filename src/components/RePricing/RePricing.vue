@@ -245,7 +245,7 @@
                                         <iframe
                                             class="preview"
                                             v-if="this.rePricingDetaill.rePricing.amounts.EOB && !previewEOB"
-                                            :src="baseUrlApi()+'app/Documents_Re_Pricing/'+this.$session.get('user')+'/'+this.rePricingBase.id+'/'+this.rePricingDetaill.rePricing.amounts.EOB"
+                                            :src="baseUrlApi()+'app/Documents_Re_Pricing/'+this.rePricingBase.id+'/'+this.rePricingDetaill.rePricing.amounts.EOB"
                                         ></iframe>
                                         <h1 v-if="!previewEOB && !this.rePricingDetaill.rePricing.amounts.EOB" class="m-auto d-none d-md-block">Vista Previa</h1>
                                         <iframe class="rounded h-100 w-100" v-if="previewEOB" :src="previewEOB" />
@@ -304,7 +304,7 @@
                                         <iframe
                                             class="preview"
                                             v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && !previewFee"
-                                            :src="baseUrlApi()+'app/Documents_Re_Pricing/'+this.$session.get('user')+'/'+this.rePricingBase.id+'/'+this.rePricingDetaill.rePricing.amounts.invoice_fee"
+                                            :src="baseUrlApi()+'app/Documents_Re_Pricing/'+this.rePricingBase.id+'/'+this.rePricingDetaill.rePricing.amounts.invoice_fee"
                                         ></iframe>
                                         <h1 v-if="!previewFee && !this.rePricingDetaill.rePricing.amounts.invoice_fee" class="m-auto d-none d-md-block">Vista Previa</h1>
                                         <iframe class="rounded h-100 w-100" v-if="previewFee" :src="previewFee" />
