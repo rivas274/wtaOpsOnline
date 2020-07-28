@@ -196,7 +196,23 @@
                                 <div class="form-group" :class="{'has-danger': errors.has('fileEob')}">
                                     <div class="col-md-6 eob-fee">
                                         <strong>EOB</strong>
-                                        <div class="custom-file">
+                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.amounts.EOB && !fileEOB">
+                                            <input
+                                                type="file"
+                                                name="fileEob"
+                                                class="custom-file-input"
+                                                id="fileEob"
+                                                accept="application/pdf"
+                                                v-validate="'ext:pdf'"
+                                                ref="fileEob"
+                                                v-on:change="handleFileUploadEOB()"
+                                            />
+                                            <label
+                                                class="custom-file-label"
+                                                for="fileEob"
+                                            >{{ this.rePricingDetaill.rePricing.amounts.EOB }}</label>
+                                        </div>
+                                        <div class="custom-file" v-else>
                                             <input
                                                 type="file"
                                                 name="fileEob"
@@ -226,7 +242,12 @@
                                     </div>
 
                                     <div class="col-md-6 bg-secondary d-flex preview-container p-0">
-                                        <h1 v-if="!previewEOB" class="m-auto d-none d-md-block">Vista Previa</h1>
+                                        <iframe
+                                            class="preview"
+                                            v-if="this.rePricingDetaill.rePricing.amounts.EOB && !previewEOB"
+                                            :src="baseUrlApi()+'app/Documents_Re_Pricing/'+this.$session.get('user')+'/'+this.rePricingBase.id+'/'+this.rePricingDetaill.rePricing.amounts.EOB"
+                                        ></iframe>
+                                        <h1 v-if="!previewEOB && !this.rePricingDetaill.rePricing.amounts.EOB" class="m-auto d-none d-md-block">Vista Previa</h1>
                                         <iframe class="rounded h-100 w-100" v-if="previewEOB" :src="previewEOB" />
                                     </div>
                                     
@@ -234,7 +255,23 @@
                                 <div class="form-group" :class="{'has-danger': errors.has('fileFee')}">
                                     <div class="col-md-6 eob-fee">
                                         <strong>Invoice FEE</strong>
-                                        <div class="custom-file">
+                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && !fileFEE">
+                                            <input
+                                                type="file"
+                                                name="fileFee"
+                                                class="custom-file-input"
+                                                id="fileFee"
+                                                accept="application/pdf"
+                                                v-validate="'ext:pdf'"
+                                                ref="fileFee"
+                                                v-on:change="handleFileUploadFee()"
+                                            />
+                                            <label
+                                                class="custom-file-label"
+                                                for="fileFee"
+                                            >{{ this.rePricingDetaill.rePricing.amounts.invoice_fee }}</label>
+                                        </div>
+                                        <div class="custom-file" v-else>
                                             <input
                                                 type="file"
                                                 name="fileFee"
@@ -264,9 +301,35 @@
                                     </div>
 
                                     <div class="col-md-6 bg-secondary d-flex preview-container p-0">
-                                        <h1 v-if="!previewFee" class="m-auto d-none d-md-block">Vista Previa</h1>
+                                        <iframe
+                                            class="preview"
+                                            v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && !previewFee"
+                                            :src="baseUrlApi()+'app/Documents_Re_Pricing/'+this.$session.get('user')+'/'+this.rePricingBase.id+'/'+this.rePricingDetaill.rePricing.amounts.invoice_fee"
+                                        ></iframe>
+                                        <h1 v-if="!previewFee && !this.rePricingDetaill.rePricing.amounts.invoice_fee" class="m-auto d-none d-md-block">Vista Previa</h1>
                                         <iframe class="rounded h-100 w-100" v-if="previewFee" :src="previewFee" />
                                     </div>
+                                </div>
+                                <div class="form-group" :class="{'has-danger': errors.has('original_amount')}">
+                                    <strong>Original Amount</strong>
+                                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
+                                        <input
+                                            type="text"
+                                            name="original_amount"
+                                            class="form-control m-input"
+                                            placeholder="Adjusted Amount"
+                                            v-validate="'required'"
+                                            v-model.lazy="inputsData.original_amount"
+                                            ref="original_amount"
+                                            disabled
+                                        />
+                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="la la-tag"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <form-error :attribute_name="'original_amount'" :errors_form="errors"></form-error>
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('saving_amount')}">
                                     <strong>Saving Amount US$</strong>
@@ -276,9 +339,10 @@
                                             name="saving_amount"
                                             class="form-control m-input"
                                             placeholder="Saving Amount"
-                                            v-validate="'required|min:2|max:40|'"
+                                            v-validate="'required'"
                                             v-model.lazy="inputsData.saving_amount"
                                             ref="saving_amount"
+                                            v-on:change="calculateAdjustedAmount(), CalculateFeeAmount()"
                                         />
                                         <span class="m-input-icon__icon m-input-icon__icon--left">
                                             <span>
@@ -296,9 +360,10 @@
                                             name="adjusted_amount"
                                             class="form-control m-input"
                                             placeholder="Adjusted Amount"
-                                            v-validate="'required|min:2|max:40|'"
+                                            v-validate="'required'"
                                             v-model.lazy="inputsData.adjusted_amount"
                                             ref="adjusted_amount"
+                                            readonly
                                         />
                                         <span class="m-input-icon__icon m-input-icon__icon--left">
                                             <span>
@@ -309,16 +374,17 @@
                                     <form-error :attribute_name="'adjusted_amount'" :errors_form="errors"></form-error>
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('saving')}">
-                                    <strong>%Saving</strong>
+                                    <strong>% Fee</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
                                             type="text"
                                             name="saving"
                                             class="form-control m-input"
-                                            placeholder="%saving"
-                                            v-validate="'required|min:2|max:40|'"
+                                            placeholder="% Fee"
+                                            v-validate="'required'"
                                             v-model.lazy="inputsData.saving"
                                             ref="saving"
+                                            v-on:change="CalculateFeeAmount()"
                                         />
                                         <span class="m-input-icon__icon m-input-icon__icon--left">
                                             <span>
@@ -336,7 +402,7 @@
                                             name="fee_amount"
                                             class="form-control m-input"
                                             placeholder="Fee Amount"
-                                            v-validate="'required|min:2|max:40|'"
+                                            v-validate="'required'"
                                             v-model.lazy="inputsData.fee_amount"
                                             ref="fee_amount"
                                         />
@@ -348,14 +414,14 @@
                                     </div>
                                     <form-error :attribute_name="'fee_amount'" :errors_form="errors"></form-error>
                                 </div>
-                                <div class="form-group" :class="{'has-danger': errors.has('Description')}">
+                                <div class="form-group">
                                     <strong>Description</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <textarea
                                             name="description"
                                             class="form-control m-input"
                                             :placeholder="$t('document.description')"
-                                            v-validate="'required|min:2|max:255|'"
+                                            v-validate="'min:2|max:255|'"
                                             v-model="inputsData.description"
                                             ref="description"
                                         ></textarea>
@@ -365,7 +431,6 @@
                                             </span>
                                         </span>
                                     </div>
-                                    <form-error :attribute_name="'description'" :errors_form="errors"></form-error>
                                 </div>
                                 <button
                                     :disabled="disableForm"
@@ -408,18 +473,20 @@ export default {
                 saving_amount: "",
                 adjusted_amount: "",
                 saving: "",
-                fee_amount: ""
+                fee_amount: "",
+                original_amount: ""
             },
             uploadPercentage: 0,
             disableForm: false,
-            fileEOB: '',
-            fileFEE: '',
+            fileEOB: "",
+            fileFEE: "",
             previewSrc: null,
             displayAlert: false
         };
     },
     mounted() {
         this.getAssistanceDetail();
+        this.CalculateFeeAmount();
     },
     methods: {
         showTab(tab) {
@@ -434,17 +501,25 @@ export default {
                 .then(response => {
                     this.showLoader = false;
                     this.rePricingDetaill = response.data.RESPONSE;
+                    this.inputsData.original_amount = this.rePricingDetaill.invoice.monto;
+                    this.inputsData.saving = this.rePricingDetaill.feeAmount.percentage_fee_amount || "";
+                    this.inputsData.description = this.rePricingDetaill.rePricing.amounts.description || "";
+                    this.inputsData.saving_amount = this.rePricingDetaill.rePricing.amounts.saving_amount || "";
+                    this.inputsData.adjusted_amount = this.rePricingDetaill.rePricing.amounts.adjusted_amount || "";
+                    this.inputsData.fee_amount = this.rePricingDetaill.rePricing.amounts.fee_amount || "";
                 });
         },
         handleFileUploadEOB: function() {
             this.fileEOB = this.$refs.fileEob.files[0];
-
-            window.console.log(this.fileEOB);
         },
         handleFileUploadFee: function() {
             this.fileFEE = this.$refs.fileFee.files[0];
-
-            window.console.log(this.fileFEE);
+        },
+        calculateAdjustedAmount: function() {
+            this.inputsData.adjusted_amount =  this.rePricingDetaill.invoice.monto - this.inputsData.saving_amount;
+        },
+        CalculateFeeAmount: function() {
+            this.inputsData.fee_amount = this.inputsData.saving_amount * this.inputsData.saving;
         },
         validRefunds: function() {
             if (!this.disableForm) {
@@ -462,6 +537,9 @@ export default {
                     formData.append("userID", this.$session.get("idUser"));
                     formData.append("user", this.$session.get("user"));
                     formData.append("repricingId", this.rePricingBase.id);
+                    formData.append("originalAmount", this.rePricingDetaill.invoice.monto);
+                    formData.append("nameEob", this.rePricingDetaill.rePricing.amounts.EOB);
+                    formData.append("nameFee", this.rePricingDetaill.rePricing.amounts.invoice_fee);
 
                     const config = {
                         headers: {
@@ -481,7 +559,7 @@ export default {
                         this.disableForm = true;
                         this.axios.post("addFilesRepricing", formData, config)
                             .then(response => {
-                                window.console.log("addFilesRepricing", response);
+                                window.console.log(response);
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
                                     this.inputsData.description = "";
