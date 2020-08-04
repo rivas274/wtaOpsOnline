@@ -193,121 +193,61 @@
                                 method="POST"
                                 ref="form">
 
-                                <div class="form-group" :class="{'has-danger': errors.has('fileEob')}">
-                                    <div class="col-md-6 eob-fee">
-                                        <strong>EOB</strong>
-                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.amounts.EOB && !fileEOB">
-                                            <input
-                                                type="file"
-                                                name="fileEob"
-                                                class="custom-file-input"
-                                                id="fileEob"
-                                                accept="application/pdf"
-                                                v-validate="'ext:pdf'"
-                                                ref="fileEob"
-                                                v-on:change="handleFileUploadEOB()"
-                                            />
-                                            <label
-                                                class="custom-file-label"
-                                                for="fileEob"
-                                            >{{ this.rePricingDetaill.rePricing.amounts.EOB }}</label>
-                                        </div>
-                                        <div class="custom-file" v-else>
-                                            <input
-                                                type="file"
-                                                name="fileEob"
-                                                class="custom-file-input"
-                                                id="fileEob"
-                                                accept="application/pdf"
-                                                v-validate="'required|ext:pdf'"
-                                                ref="fileEob"
-                                                v-on:change="handleFileUploadEOB()"
-                                            />
-                                            <label
-                                                class="custom-file-label"
-                                                for="fileEob"
-                                            >{{(typeof fileEOB =='object' && 'name' in fileEOB)?fileEOB.name:'Choose File'}}</label>
-                                        </div>
-                                        <div class="progress" v-if="uploadPercentage>0">
-                                            <div
-                                                class="progress-bar progress-bar-striped progress-bar-animated"
-                                                role="progressbar"
-                                                :aria-valuenow="uploadPercentage"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                :style="{width: uploadPercentage+'%'}"
-                                            ></div>
-                                        </div>
-                                        <form-error :attribute_name="'fileEob'" :errors_form="errors"></form-error>
+                                <div class="form-group">
+                                    <strong>Patient Name</strong>
+                                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
+                                        <input
+                                            type="text"
+                                            class="form-control m-input"
+                                            placeholder="Patient Name"
+                                            v-validate="'required'"
+                                            v-model.lazy="inputsData.patient"
+                                            ref="patient_name"
+                                            disabled
+                                        />
+                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="la la-tag"></i>
+                                            </span>
+                                        </span>
                                     </div>
-
-                                    <div class="col-md-6 bg-secondary d-flex preview-container p-0">
-                                        <iframe
-                                            class="preview"
-                                            v-if="this.rePricingDetaill.rePricing.amounts.EOB && !previewEOB"
-                                            :src="baseUrlApi()+'app/Documents_Re_Pricing/'+this.rePricingBase.id+'/'+this.rePricingDetaill.rePricing.amounts.EOB"
-                                        ></iframe>
-                                        <h1 v-if="!previewEOB && !this.rePricingDetaill.rePricing.amounts.EOB" class="m-auto d-none d-md-block">Vista Previa</h1>
-                                        <iframe class="rounded h-100 w-100" v-if="previewEOB" :src="previewEOB" />
-                                    </div>
-                                    
                                 </div>
-                                <div class="form-group" :class="{'has-danger': errors.has('fileFee')}">
-                                    <div class="col-md-6 eob-fee">
-                                        <strong>Invoice FEE</strong>
-                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && !fileFEE">
-                                            <input
-                                                type="file"
-                                                name="fileFee"
-                                                class="custom-file-input"
-                                                id="fileFee"
-                                                accept="application/pdf"
-                                                v-validate="'ext:pdf'"
-                                                ref="fileFee"
-                                                v-on:change="handleFileUploadFee()"
-                                            />
-                                            <label
-                                                class="custom-file-label"
-                                                for="fileFee"
-                                            >{{ this.rePricingDetaill.rePricing.amounts.invoice_fee }}</label>
-                                        </div>
-                                        <div class="custom-file" v-else>
-                                            <input
-                                                type="file"
-                                                name="fileFee"
-                                                class="custom-file-input"
-                                                id="fileFee"
-                                                accept="application/pdf"
-                                                v-validate="'required|ext:pdf'"
-                                                ref="fileFee"
-                                                v-on:change="handleFileUploadFee()"
-                                            />
-                                            <label
-                                                class="custom-file-label"
-                                                for="fileFee"
-                                            >{{(typeof fileFEE =='object' && 'name' in fileFEE)?fileFEE.name:'Choose File'}}</label>
-                                        </div>
-                                        <div class="progress" v-if="uploadPercentage>0">
-                                            <div
-                                                class="progress-bar progress-bar-striped progress-bar-animated"
-                                                role="progressbar"
-                                                :aria-valuenow="uploadPercentage"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                :style="{width: uploadPercentage+'%'}"
-                                            ></div>
-                                        </div>
-                                        <form-error :attribute_name="'fileFee'" :errors_form="errors"></form-error>
+                                <div class="form-group">
+                                    <strong>Birth Date</strong>
+                                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
+                                        <input
+                                            type="text"
+                                            class="form-control m-input"
+                                            placeholder="Birth Date"
+                                            v-validate="'required'"
+                                            v-model.lazy="inputsData.birth_date"
+                                            ref="birth_date"
+                                            disabled
+                                        />
+                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="la la-calendar-check-o"></i>
+                                            </span>
+                                        </span>
                                     </div>
-
-                                    <div class="col-md-6 bg-secondary d-flex preview-container p-0">
-                                        <iframe
-                                            class="preview"
-                                            v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && !previewFee"
-                                            :src="baseUrlApi()+'app/Documents_Re_Pricing/'+this.rePricingBase.id+'/'+this.rePricingDetaill.rePricing.amounts.invoice_fee"
-                                        ></iframe>
-                                        <h1 v-if="!previewFee && !this.rePricingDetaill.rePricing.amounts.invoice_fee" class="m-auto d-none d-md-block">Vista Previa</h1>
-                                        <iframe class="rounded h-100 w-100" v-if="previewFee" :src="previewFee" />
+                                </div>
+                                <div class="form-group">
+                                    <strong>Case Number</strong>
+                                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
+                                        <input
+                                            type="text"
+                                            class="form-control m-input"
+                                            placeholder="Case Number"
+                                            v-validate="'required'"
+                                            v-model.lazy="inputsData.case_number"
+                                            ref="case_number"
+                                            disabled
+                                        />
+                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="fa fa-life-ring"></i>
+                                            </span>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('original_amount')}">
@@ -325,7 +265,7 @@
                                         />
                                         <span class="m-input-icon__icon m-input-icon__icon--left">
                                             <span>
-                                                <i class="la la-tag"></i>
+                                                <i class="la la-money"></i>
                                             </span>
                                         </span>
                                     </div>
@@ -346,7 +286,7 @@
                                         />
                                         <span class="m-input-icon__icon m-input-icon__icon--left">
                                             <span>
-                                                <i class="la la-tag"></i>
+                                                <i class="la la-money"></i>
                                             </span>
                                         </span>
                                     </div>
@@ -367,7 +307,7 @@
                                         />
                                         <span class="m-input-icon__icon m-input-icon__icon--left">
                                             <span>
-                                                <i class="la la-tag"></i>
+                                                <i class="la la-money"></i>
                                             </span>
                                         </span>
                                     </div>
@@ -408,7 +348,7 @@
                                         />
                                         <span class="m-input-icon__icon m-input-icon__icon--left">
                                             <span>
-                                                <i class="la la-tag"></i>
+                                                <i class="la la-money"></i>
                                             </span>
                                         </span>
                                     </div>
@@ -430,6 +370,172 @@
                                                 <i class="la la-pencil-square-o"></i>
                                             </span>
                                         </span>
+                                    </div>
+                                </div>
+                                <div class="form-group" :class="{'has-danger': errors.has('date')}">
+                                    <strong>{{ $t('general.date') }}</strong>
+                                    <date-single-bt
+                                        class-prop="m-input"
+                                        name="date"
+                                        watermark="Date"
+                                        v-validate="'required'"
+                                        v-on:input="setDataFilter"
+                                        :value="inputsData.date"
+                                    ></date-single-bt>
+                                    <form-error :attribute_name="'date'" :errors_form="errors"></form-error>
+                                </div>
+                                <div class="form-group" v-if="this.rePricingDetaill.rePricing.amounts.EOB && this.nameEob">
+                                    <strong>EOB ID</strong>
+                                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
+                                        <input
+                                            type="text"
+                                            class="form-control m-input"
+                                            placeholder="EOB ID"
+                                            v-validate="'required'"
+                                            v-model.lazy="this.rePricingDetaill.rePricing.amounts.EOB"
+                                            ref="EOB_ID"
+                                            disabled
+                                        />
+                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="la la-tag"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group" :class="{'has-danger': errors.has('fileEob')}">
+                                    <div class="col-md-6 eob-fee">
+                                        <strong>EOB</strong>
+                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.amounts.EOB && this.nameEob && !fileEOB">
+                                            <input
+                                                type="file"
+                                                name="fileEob"
+                                                class="custom-file-input"
+                                                id="fileEob"
+                                                accept="application/pdf"
+                                                v-validate="'ext:pdf'"
+                                                ref="fileEob"
+                                                v-on:change="handleFileUploadEOB()"
+                                            />
+                                            <label
+                                                class="custom-file-label"
+                                                for="fileEob"
+                                            >{{ this.nameEob }}</label>
+                                        </div>
+                                        <div class="custom-file" v-else>
+                                            <input
+                                                type="file"
+                                                name="fileEob"
+                                                class="custom-file-input"
+                                                id="fileEob"
+                                                accept="application/pdf"
+                                                v-validate="'required|ext:pdf'"
+                                                ref="fileEob"
+                                                v-on:change="handleFileUploadEOB()"
+                                            />
+                                            <label
+                                                class="custom-file-label"
+                                                for="fileEob"
+                                            >{{(typeof fileEOB =='object' && 'name' in fileEOB)?fileEOB.name:'Choose File'}}</label>
+                                        </div>
+                                        <div class="progress" v-if="uploadPercentage>0">
+                                            <div
+                                                class="progress-bar progress-bar-striped progress-bar-animated"
+                                                role="progressbar"
+                                                :aria-valuenow="uploadPercentage"
+                                                aria-valuemin="0"
+                                                aria-valuemax="100"
+                                                :style="{width: uploadPercentage+'%'}"
+                                            ></div>
+                                        </div>
+                                        <form-error :attribute_name="'fileEob'" :errors_form="errors"></form-error>
+                                    </div>
+
+                                    <div class="col-md-6 bg-secondary d-flex preview-container p-0">
+                                        <iframe
+                                            class="preview"
+                                            v-if="this.rePricingDetaill.rePricing.amounts.EOB && this.nameEob && !previewEOB"
+                                            :src="baseUrlApi()+'streaming/'+this.rePricingDetaill.rePricing.amounts.EOB"
+                                        ></iframe>
+                                        <h1 v-if="!previewEOB && !this.rePricingDetaill.rePricing.amounts.EOB && !this.nameEob" class="m-auto d-none d-md-block">Vista Previa</h1>
+                                        <iframe class="rounded h-100 w-100" v-if="previewEOB" :src="previewEOB" />
+                                    </div>
+                                </div>
+                                <div class="form-group" v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && this.nameFee">
+                                    <strong>FEE ID</strong>
+                                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
+                                        <input
+                                            type="text"
+                                            class="form-control m-input"
+                                            placeholder="FEE ID"
+                                            v-validate="'required'"
+                                            v-model.lazy="this.rePricingDetaill.rePricing.amounts.invoice_fee"
+                                            ref="FEE_ID"
+                                            disabled
+                                        />
+                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="la la-tag"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group" :class="{'has-danger': errors.has('fileFee')}">
+                                    <div class="col-md-6 eob-fee">
+                                        <strong>Invoice FEE</strong>
+                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && this.nameFee && !fileFEE">
+                                            <input
+                                                type="file"
+                                                name="fileFee"
+                                                class="custom-file-input"
+                                                id="fileFee"
+                                                accept="application/pdf"
+                                                v-validate="'ext:pdf'"
+                                                ref="fileFee"
+                                                v-on:change="handleFileUploadFee()"
+                                            />
+                                            <label
+                                                class="custom-file-label"
+                                                for="fileFee"
+                                            >{{ this.nameFee }}</label>
+                                        </div>
+                                        <div class="custom-file" v-else>
+                                            <input
+                                                type="file"
+                                                name="fileFee"
+                                                class="custom-file-input"
+                                                id="fileFee"
+                                                accept="application/pdf"
+                                                v-validate="'required|ext:pdf'"
+                                                ref="fileFee"
+                                                v-on:change="handleFileUploadFee()"
+                                            />
+                                            <label
+                                                class="custom-file-label"
+                                                for="fileFee"
+                                            >{{(typeof fileFEE =='object' && 'name' in fileFEE)?fileFEE.name:'Choose File'}}</label>
+                                        </div>
+                                        <div class="progress" v-if="uploadPercentage>0">
+                                            <div
+                                                class="progress-bar progress-bar-striped progress-bar-animated"
+                                                role="progressbar"
+                                                :aria-valuenow="uploadPercentage"
+                                                aria-valuemin="0"
+                                                aria-valuemax="100"
+                                                :style="{width: uploadPercentage+'%'}"
+                                            ></div>
+                                        </div>
+                                        <form-error :attribute_name="'fileFee'" :errors_form="errors"></form-error>
+                                    </div>
+
+                                    <div class="col-md-6 bg-secondary d-flex preview-container p-0">
+                                        <iframe
+                                            class="preview"
+                                            v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && this.nameFee && !previewFee"
+                                            :src="baseUrlApi()+'streaming/'+this.rePricingDetaill.rePricing.amounts.invoice_fee"
+                                        ></iframe>
+                                        <h1 v-if="!previewFee && !this.rePricingDetaill.rePricing.amounts.invoice_fee && !this.nameFee" class="m-auto d-none d-md-block">Vista Previa</h1>
+                                        <iframe class="rounded h-100 w-100" v-if="previewFee" :src="previewFee" />
                                     </div>
                                 </div>
                                 <button
@@ -474,14 +580,25 @@ export default {
                 adjusted_amount: "",
                 saving: "",
                 fee_amount: "",
-                original_amount: ""
+                original_amount: "",
+                patient: "",
+                birth_date: "",
+                case_number: "",
+                date: "",
             },
             uploadPercentage: 0,
             disableForm: false,
             fileEOB: "",
             fileFEE: "",
             previewSrc: null,
-            displayAlert: false
+            displayAlert: false,
+            adjusted_amount_original: "",
+            fee_amount_original: "",
+            feeID: "",
+            EobID: "",
+            fileNames: {},
+            nameFee: "",
+            nameEob: ""
         };
     },
     mounted() {
@@ -507,7 +624,38 @@ export default {
                     this.inputsData.saving_amount = this.rePricingDetaill.rePricing.amounts.saving_amount || "";
                     this.inputsData.adjusted_amount = this.rePricingDetaill.rePricing.amounts.adjusted_amount || "";
                     this.inputsData.fee_amount = this.rePricingDetaill.rePricing.amounts.fee_amount || "";
+                    this.inputsData.patient = this.rePricingDetaill.rePricing.contact.fisrtName+" "+this.rePricingDetaill.rePricing.contact.lastName || "";
+                    this.inputsData.birth_date = this.rePricingDetaill.rePricing.contact.birthDate || "";
+                    this.inputsData.case_number = this.rePricingDetaill.rePricing.assist.code || "";
+                    this.feeID = this.rePricingDetaill.rePricing.amounts.invoice_fee;
+                    this.EobID = this.rePricingDetaill.rePricing.amounts.EOB;
+
+                    this.getFileNames();
                 });
+        },
+        getFileNames: function(){
+            this.axios
+                .post("fileNames", {
+                    feeID: this.feeID,
+                    EobID: this.EobID
+                })
+                .then(response => {
+                    this.fileNames = response.data.RESPONSE;
+
+                    if (this.fileNames !== 'ERROR') {
+                        this.fileNames.forEach(element => {
+                            if (element.category == '47') {
+                                this.nameFee = element.FileName;
+                            }
+                            if (element.category == '20') {
+                                this.nameEob = element.FileName;
+                            }
+                        });
+                    }
+                });
+        },
+        setDataFilter: function(campo, value) {
+            this.inputsData[campo] = value;
         },
         handleFileUploadEOB: function() {
             this.fileEOB = this.$refs.fileEob.files[0];
@@ -517,9 +665,11 @@ export default {
         },
         calculateAdjustedAmount: function() {
             this.inputsData.adjusted_amount =  this.rePricingDetaill.invoice.monto - this.inputsData.saving_amount;
+            this.adjusted_amount_original =  this.rePricingDetaill.invoice.monto - this.inputsData.saving_amount;
         },
         CalculateFeeAmount: function() {
             this.inputsData.fee_amount = this.inputsData.saving_amount * this.inputsData.saving;
+            this.fee_amount_original = this.inputsData.saving_amount * this.inputsData.saving;
         },
         validRefunds: function() {
             if (!this.disableForm) {
@@ -540,6 +690,13 @@ export default {
                     formData.append("originalAmount", this.rePricingDetaill.invoice.monto);
                     formData.append("nameEob", this.rePricingDetaill.rePricing.amounts.EOB);
                     formData.append("nameFee", this.rePricingDetaill.rePricing.amounts.invoice_fee);
+                    formData.append("assistanceId", this.rePricingDetaill.rePricing.assist.id);
+                    formData.append("assistanceCode", this.rePricingDetaill.rePricing.assist.code);
+                    formData.append("providerRepricingId", this.rePricingDetaill.rePricing.providerRepricing);
+                    formData.append("adjusted_amount_original", this.adjusted_amount_original || this.inputsData.adjusted_amount);
+                    formData.append("fee_amount_original", this.fee_amount_original || this.inputsData.fee_amount);
+                    formData.append("saving_original", (this.inputsData.saving != this.rePricingDetaill.feeAmount.percentage_fee_amount) ? this.rePricingDetaill.feeAmount.percentage_fee_amount : this.inputsData.saving);
+                    formData.append("date", this.inputsData.date);
 
                     const config = {
                         headers: {
