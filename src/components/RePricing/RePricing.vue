@@ -646,6 +646,7 @@ export default {
                         this.fileNames.forEach(element => {
                             if (element.category == '47') {
                                 this.nameFee = element.FileName;
+                                this.inputsData.date = element.dateInvoice;
                             }
                             if (element.category == '20') {
                                 this.nameEob = element.FileName;
