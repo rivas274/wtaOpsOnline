@@ -515,7 +515,8 @@ export default {
             file: false,
             captcha: "",
             previewSrc: null,
-            displayAlert: false
+            displayAlert: false,
+            assistanceID: ""
         };
     },
     mounted() {
@@ -544,6 +545,7 @@ export default {
                     this.inputsData.date = this.results.registeredDate.date;
                     this.inputsData.nameBen =
                         this.results.fisrtName + " " + this.results.lastName;
+                    this.assistanceID = this.results.idAssist;
                 });
         },
         providerName: function(){
@@ -565,7 +567,7 @@ export default {
                     }
                     const formData = new FormData();
                     formData.append("file", this.file);
-                    formData.append("idAssist", this.results.idAssist);
+                    formData.append("idAssist", this.assistanceID);
                     formData.append("g-recaptcha", this.captcha);
                     formData.append("reference", this.inputsData.reference);
                     formData.append("description", this.inputsData.description);
@@ -593,7 +595,6 @@ export default {
                                 }.bind(this)
                             })
                             .then(response => {
-                                window.console.log(response);
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
                                     //this.$refs.recaptcha.reset();
