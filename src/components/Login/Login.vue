@@ -135,12 +135,14 @@ export default {
             if (!this.disableForm) {
                 this.$validator.validateAll().then(result => {
                     if (result) {
+                        this.$session.renew();
                         this.disableForm = true;
                         this.axios
                             .post("Login", this.inputsData)
                             .then(response => {
                                 this.resp = response.data;
                                 this.disableForm = false;
+                                
                                 if (response.data.STATUS == "OK") {
                                     this.$session.clear();
                                     this.$session.set(
