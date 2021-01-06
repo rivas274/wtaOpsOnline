@@ -34,7 +34,10 @@
         "send": "Send",
         "no": "No",
         "date": "Date",
-        "upload_assistance_bills": "Upload Assistance Bills"
+        "upload_assistance_bills": "Upload Assistance Bills",
+        "case_number": "Case Number",
+        "patient_name": "Patient Name",
+        "sent_repricing": "Sent to Repricing"
     },
     "AssistanceBills": {
         "information": "Bill Information",

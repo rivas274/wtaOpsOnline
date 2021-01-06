@@ -78,19 +78,19 @@
                                         >{{ rePricingDetaill.rePricing.client }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Assist Code</span>
+                                        <span class="m-widget16__date">{{ $t('general.case_number') }}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.rePricing.assist.code }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Voucher</span>
+                                        <span class="m-widget16__date">{{ $t('general.voucher') }}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.rePricing.assist.voucher }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Name</span>
+                                        <span class="m-widget16__date">{{ $t('general.patient_name') }}</span>
                                         <span class="m-widget16__price m--align-right">
                                             {{ rePricingDetaill.rePricing.contact.fisrtName }}
                                             {{ rePricingDetaill.rePricing.contact.lastName }}
@@ -115,6 +115,25 @@
                                             <small>({{ rePricingDetaill.rePricing.user.user }})</small>
                                         </span>
                                     </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">TPA Name</span>
+                                        <span class="m-widget16__price m--align-right">
+                                            {{ this.insuranceName }}
+                                        </span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">{{ $t('assistance.date.case') }}</span>
+                                        <span class="m-widget16__price m--align-right">
+                                            {{ rePricingDetaill.assistance.reported_date }}
+                                            <small>({{ rePricingDetaill.assistance.reported_hour }})</small>
+                                        </span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">{{ $t('general.sent_repricing') }}</span>
+                                        <span class="m-widget16__price m--align-right">
+                                            {{ rePricingDetaill.createdDate.date }}
+                                        </span>
+                                    </div>
                                 </template>
                             </AssistAccordionDetaill>
                             <AssistAccordionDetaill class-prop="col-md-6">
@@ -127,7 +146,7 @@
                                         >{{ rePricingDetaill.invoice.category }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Referencia</span>
+                                        <span class="m-widget16__date">{{ $t('AssistanceBills.reference') }}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.ref }}</span>
@@ -145,7 +164,7 @@
                                         >{{ rePricingDetaill.invoice.description }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Monto</span>
+                                        <span class="m-widget16__date">{{ $t('document.amount') }}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.monto | currency(rePricingDetaill.invoice.currency)}}</span>
@@ -157,7 +176,7 @@
                                         >{{ rePricingDetaill.invoice.exchangeRate | toFixed(5) }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Monto USD</span>
+                                        <span class="m-widget16__date">{{ $t('document.amount') }} USD</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.montoUsd | currency("USD")}}</span>
@@ -405,7 +424,7 @@
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('fileEob')}">
                                     <div class="col-md-6 eob-fee">
-                                        <strong>EOB</strong>
+                                        <strong>Add EOB</strong> <input type="checkbox" id="check_eob" :value="1" v-model="checkedEob" @change="requiredFile($event.target)" class="m-input" />
                                         <div class="custom-file" v-if="this.rePricingDetaill.rePricing.amounts.EOB && this.nameEob && !fileEOB">
                                             <input
                                                 type="file"
@@ -429,7 +448,7 @@
                                                 class="custom-file-input"
                                                 id="fileEob"
                                                 accept="application/pdf"
-                                                v-validate="'required|ext:pdf'"
+                                                v-validate="this.requiredEOB+'|ext:pdf'"
                                                 ref="fileEob"
                                                 v-on:change="handleFileUploadEOB()"
                                             />
@@ -482,7 +501,7 @@
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('fileFee')}">
                                     <div class="col-md-6 eob-fee">
-                                        <strong>Invoice FEE</strong>
+                                        <strong>Add Invoice FEE</strong> <input type="checkbox" id="check_fee" :value="2" v-model="checkedFee" @change="requiredFile($event.target)" class="m-input" />
                                         <div class="custom-file" v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && this.nameFee && !fileFEE">
                                             <input
                                                 type="file"
@@ -506,7 +525,7 @@
                                                 class="custom-file-input"
                                                 id="fileFee"
                                                 accept="application/pdf"
-                                                v-validate="'required|ext:pdf'"
+                                                v-validate="this.requiredFee+'|ext:pdf'"
                                                 ref="fileFee"
                                                 v-on:change="handleFileUploadFee()"
                                             />
@@ -597,8 +616,15 @@ export default {
             feeID: "",
             EobID: "",
             fileNames: {},
+            insurance: {},
             nameFee: "",
-            nameEob: ""
+            nameEob: "",
+            prefix: "",
+            insuranceName: "",
+            requiredEOB: "",
+            requiredFee: "",
+            checkedFee: "",
+            checkedEob: ""
         };
     },
     mounted() {
@@ -617,6 +643,7 @@ export default {
                 })
                 .then(response => {
                     this.showLoader = false;
+                    //window.console.log(response.data.RESPONSE);
                     this.rePricingDetaill = response.data.RESPONSE;
                     this.inputsData.original_amount = this.rePricingDetaill.invoice.monto;
                     this.inputsData.saving = this.rePricingDetaill.feeAmount.percentage_fee_amount || "";
@@ -629,8 +656,10 @@ export default {
                     this.inputsData.case_number = this.rePricingDetaill.rePricing.assist.code || "";
                     this.feeID = this.rePricingDetaill.rePricing.amounts.invoice_fee;
                     this.EobID = this.rePricingDetaill.rePricing.amounts.EOB;
+                    this.prefix = this.rePricingDetaill.assistance.prefix;
 
                     this.getFileNames();
+                    this.insuranceCompany();
                 });
         },
         getFileNames: function(){
@@ -652,6 +681,14 @@ export default {
                                 this.nameEob = element.FileName;
                             }
                         });
+
+                        if (this.nameEob) {
+                            this.checkedEob = 'checked';
+                        }
+
+                        if (this.nameFee) {
+                            this.checkedFee = 'checked';
+                        }
                     }
                 });
         },
@@ -669,7 +706,7 @@ export default {
             this.adjusted_amount_original =  this.rePricingDetaill.invoice.monto - this.inputsData.saving_amount;
         },
         CalculateFeeAmount: function() {
-            this.inputsData.fee_amount = this.inputsData.saving_amount * this.inputsData.saving;
+            this.inputsData.fee_amount = (this.inputsData.saving_amount * this.inputsData.saving) / 100;
             this.fee_amount_original = this.inputsData.saving_amount * this.inputsData.saving;
         },
         validRefunds: function() {
@@ -755,6 +792,33 @@ export default {
                             });
                     }
                 });
+            }
+        },
+        insuranceCompany: function(){
+            this.axios
+                .post("getInsuranceCompany", {
+                    prefix: this.prefix
+                })
+                .then(response => {
+                    this.insurance = response.data.RESPONSE;
+
+                    if (this.insurance !== 'ERROR') {
+                        this.insuranceName = this.insurance[0].insurance
+                    }
+                });
+        },
+        requiredFile: function(event){
+            
+            if (event.checked && event.value == 1) {
+                this.requiredEOB = "required";
+            } else if (!event.checked && event.value == 1) {
+                this.requiredEOB = "";
+            }
+
+            if (event.checked && event.value == 2) {
+                this.requiredFee = "required";
+            } else if (!event.checked && event.value == 2) {
+                this.requiredFee = "";
             }
         }
     },

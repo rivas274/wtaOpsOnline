@@ -34,7 +34,10 @@
         "send": "Enviar",
         "no": "No",
         "date": "Fecha",
-        "upload_assistance_bills": "Subir Facturas de Asistencia"
+        "upload_assistance_bills": "Subir Facturas de Asistencia",
+        "case_number": "Número de Caso",
+        "patient_name": "Nombre del Paciente",
+        "sent_repricing": "Enviado a Repricing"
     },
     "AssistanceBills": {
         "information": "Informacion de la Factura",
