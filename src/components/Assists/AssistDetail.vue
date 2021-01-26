@@ -317,7 +317,7 @@
                                     <span class="m-widget16__date">Status</span>
                                     <span
                                         class="m-widget16__price m--align-right"
-                                    >{{assistances.statusAssist.label}}</span>
+                                    >{{assistances.statusAssist.label || 'Not Found'}}</span>
                                 </div>
                                 <div class="m-widget16__item">
                                     <span class="m-widget16__date">Opening Date</span>

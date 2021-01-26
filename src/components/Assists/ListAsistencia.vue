@@ -154,7 +154,7 @@
                     </span>
                 </td>
                 <td class="text-center fa-status">
-                    <i :class="assist.statusAssist.icon" v-tooltip:top="assist.statusAssist.label"></i>
+                    <i :class="assist.statusAssist.icon" v-tooltip:top="assist.statusAssist.label || 'Not Found'"></i>
                 </td>
                 <td class="text-center fa-status">
                     <a

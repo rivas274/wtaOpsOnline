@@ -35,7 +35,7 @@
                                 </div>
                                 <div class="m-timeline-1__item-content m--margin-top-40">
                                     <div class="m-timeline-1__item-title">
-                                        <strong>{{date.title}}</strong>
+                                        <strong>{{date.title || 'Not Found'}}</strong>
                                     </div>
                                     <div v-if="date.detaill && !date.provider_info" class="m-timeline-1__item-body">
                                         <div
