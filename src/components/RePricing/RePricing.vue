@@ -60,7 +60,7 @@
                     <div class="m-portlet__body m-portlet__body--no-padding">
                         <div class="row m-row--no-padding m-row--col-separator-xl">
                             <AssistAccordionDetaill class-prop="col-md-6">
-                                <template slot="title">Re pricing</template>
+                                <template slot="title">Claims Management</template>
                                 <template slot="body">
                                     <div class="m-widget16__item">
                                         <span class="m-widget16__date">Status</span>
@@ -97,7 +97,7 @@
                                         </span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Birth Date</span>
+                                        <span class="m-widget16__date">Birth Date (YYYY-MM-DD)</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.rePricing.contact.birthDate }}</span>
@@ -118,7 +118,7 @@
                                     <div class="m-widget16__item">
                                         <span class="m-widget16__date">TPA Name</span>
                                         <span class="m-widget16__price m--align-right">
-                                            {{ this.insuranceName }}
+                                            {{ this.companyName }}
                                         </span>
                                     </div>
                                     <div class="m-widget16__item">
@@ -137,7 +137,7 @@
                                 </template>
                             </AssistAccordionDetaill>
                             <AssistAccordionDetaill class-prop="col-md-6">
-                                <template slot="title">Invoice</template>
+                                <template slot="title">Claim Information</template>
                                 <template slot="body">
                                     <div class="m-widget16__item">
                                         <span class="m-widget16__date">Category</span>
@@ -164,7 +164,7 @@
                                         >{{ rePricingDetaill.invoice.description }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">{{ $t('document.amount') }}</span>
+                                        <span class="m-widget16__date">Claim Amount</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.monto | currency(rePricingDetaill.invoice.currency)}}</span>
@@ -176,7 +176,7 @@
                                         >{{ rePricingDetaill.invoice.exchangeRate | toFixed(5) }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">{{ $t('document.amount') }} USD</span>
+                                        <span class="m-widget16__date">Claim Amount USD</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.montoUsd | currency("USD")}}</span>
@@ -232,7 +232,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <strong>Birth Date</strong>
+                                    <strong>Birth Date (YYYY-MM-DD)</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
                                             type="text"
@@ -269,6 +269,25 @@
                                         </span>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <strong>Invoice Number</strong>
+                                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
+                                        <input
+                                            type="text"
+                                            class="form-control m-input"
+                                            placeholder="Invoice Number"
+                                            v-validate="'required'"
+                                            v-model.lazy="inputsData.invoice_id"
+                                            ref="invoice_id"
+                                            disabled
+                                        />
+                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="fa fa-life-ring"></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('original_amount')}">
                                     <strong>Original Amount</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
@@ -291,7 +310,7 @@
                                     <form-error :attribute_name="'original_amount'" :errors_form="errors"></form-error>
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('saving_amount')}">
-                                    <strong>Saving Amount US$</strong>
+                                    <strong>Saving Amount</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
                                             type="text"
@@ -373,6 +392,25 @@
                                     </div>
                                     <form-error :attribute_name="'fee_amount'" :errors_form="errors"></form-error>
                                 </div>
+                                <div class="form-group" :class="{'has-danger': errors.has('icn')}">
+                                    <strong>ICN</strong>
+                                    <div class="m-input-icon__icon m-input-icon__icon--left">
+                                        <input
+                                            type="text"
+                                            name="icn"
+                                            class="form-control m-input"
+                                            placeholder="ICN"
+                                            v-model.lazy="inputsData.icn"
+                                            ref="icn"
+                                        />
+                                        <!--<span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="la la-money"></i>
+                                            </span>
+                                        </span>-->
+                                    </div>
+                                    <form-error :attribute_name="'fee_amount'" :errors_form="errors"></form-error>
+                                </div>
                                 <div class="form-group">
                                     <strong>Description</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
@@ -424,7 +462,7 @@
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('fileEob')}">
                                     <div class="col-md-6 eob-fee">
-                                        <strong>Add EOB</strong> <input type="checkbox" id="check_eob" :value="1" v-model="checkedEob" @change="requiredFile($event.target)" class="m-input" />
+                                        <strong>Add Repriced EOB</strong> <input type="checkbox" id="check_eob" :value="1" v-model="checkedEob" @change="requiredFile($event.target)" class="m-input" />
                                         <div class="custom-file" v-if="this.rePricingDetaill.rePricing.amounts.EOB && this.nameEob && !fileEOB">
                                             <input
                                                 type="file"
@@ -604,6 +642,8 @@ export default {
                 birth_date: "",
                 case_number: "",
                 date: "",
+                invoice_id: "",
+                icn: ""
             },
             uploadPercentage: 0,
             disableForm: false,
@@ -616,11 +656,11 @@ export default {
             feeID: "",
             EobID: "",
             fileNames: {},
-            insurance: {},
+            company: {},
             nameFee: "",
             nameEob: "",
             prefix: "",
-            insuranceName: "",
+            companyName: "",
             requiredEOB: "",
             requiredFee: "",
             checkedFee: "",
@@ -645,7 +685,7 @@ export default {
                     this.showLoader = false;
                     //window.console.log(response.data.RESPONSE);
                     this.rePricingDetaill = response.data.RESPONSE;
-                    this.inputsData.original_amount = this.rePricingDetaill.invoice.monto;
+                    this.inputsData.original_amount = this.rePricingDetaill.invoice.monto+' '+ this.rePricingDetaill.invoice.currency;
                     this.inputsData.saving = this.rePricingDetaill.feeAmount.percentage_fee_amount || "";
                     this.inputsData.description = this.rePricingDetaill.rePricing.amounts.description || "";
                     this.inputsData.saving_amount = this.rePricingDetaill.rePricing.amounts.saving_amount || "";
@@ -657,9 +697,10 @@ export default {
                     this.feeID = this.rePricingDetaill.rePricing.amounts.invoice_fee;
                     this.EobID = this.rePricingDetaill.rePricing.amounts.EOB;
                     this.prefix = this.rePricingDetaill.assistance.prefix;
+                    this.inputsData.invoice_id = this.rePricingDetaill.invoice.id;
 
                     this.getFileNames();
-                    this.insuranceCompany();
+                    this.companyData();
                 });
         },
         getFileNames: function(){
@@ -702,12 +743,12 @@ export default {
             this.fileFEE = this.$refs.fileFee.files[0];
         },
         calculateAdjustedAmount: function() {
-            this.inputsData.adjusted_amount =  this.rePricingDetaill.invoice.monto - this.inputsData.saving_amount;
-            this.adjusted_amount_original =  this.rePricingDetaill.invoice.monto - this.inputsData.saving_amount;
+            this.inputsData.adjusted_amount =  (this.rePricingDetaill.invoice.monto - this.inputsData.saving_amount).toPrecision(4);
+            this.adjusted_amount_original =  (this.rePricingDetaill.invoice.monto - this.inputsData.saving_amount).toPrecision(4);
         },
         CalculateFeeAmount: function() {
-            this.inputsData.fee_amount = (this.inputsData.saving_amount * this.inputsData.saving) / 100;
-            this.fee_amount_original = this.inputsData.saving_amount * this.inputsData.saving;
+            this.inputsData.fee_amount = ((this.inputsData.saving_amount * this.inputsData.saving) / 100).toPrecision(4);
+            this.fee_amount_original = ((this.inputsData.saving_amount * this.inputsData.saving) / 100).toPrecision(4);
         },
         validRefunds: function() {
             if (!this.disableForm) {
@@ -794,16 +835,16 @@ export default {
                 });
             }
         },
-        insuranceCompany: function(){
+        companyData: function(){
             this.axios
-                .post("getInsuranceCompany", {
+                .post("getCompanyData", {
                     prefix: this.prefix
                 })
                 .then(response => {
-                    this.insurance = response.data.RESPONSE;
+                    this.company = response.data.RESPONSE;
 
-                    if (this.insurance !== 'ERROR') {
-                        this.insuranceName = this.insurance[0].insurance
+                    if (this.company !== 'ERROR') {
+                        this.companyName = this.company[0].company
                     }
                 });
         },

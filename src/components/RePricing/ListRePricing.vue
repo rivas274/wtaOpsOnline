@@ -19,7 +19,7 @@
                 <input-from-table
                     class-prop="col-md-4 m-form__group-sub"
                     name="codeAssist"
-                    watermark="Code Assist"
+                    watermark="Case Number"
                     icon="la flaticon-interface-5"
                     v-on:input="setDataFilter"
                     :value="filters.codeAssist"
@@ -27,19 +27,11 @@
                 <input-from-table
                     class-prop="col-md-4 m-form__group-sub"
                     name="codeVoucher"
-                    watermark="Code Voucher"
+                    watermark="Voucher Number"
                     icon="la flaticon-interface-5"
                     v-on:input="setDataFilter"
                     :value="filters.codeVoucher"
                 ></input-from-table>
-                <!--<input-from-table
-                    class-prop="col-md-4 m-form__group-sub"
-                    name="passager"
-                    watermark="Passenger"
-                    icon="la flaticon-avatar"
-                    v-on:input="setDataFilter"
-                    :value="filters.passager"
-                ></input-from-table>-->
                 <date-range-bt
                     class-prop="col-md-4 m-form__group-sub"
                     name="date"
@@ -55,6 +47,40 @@
                     watermark="Category"
                     :options="documentsType"
                     :selected="filters.docType"
+                    v-on:input="setDataFilter"
+                ></select-from-table>
+                <input-from-table
+                    class-prop="col-md-4 m-form__group-sub"
+                    name="passager"
+                    watermark="Patient Name"
+                    icon="la flaticon-avatar"
+                    v-on:input="setDataFilter"
+                    :value="filters.passager"
+                ></input-from-table>
+                <input-from-table
+                    class-prop="col-md-4 m-form__group-sub"
+                    name="provider"
+                    watermark="Invoice Provider"
+                    icon="la flaticon-avatar"
+                    v-on:input="setDataFilter"
+                    :value="filters.provider"
+                ></input-from-table>
+            </div>
+            <div class="form-group m-form__group row" :class="{'has-danger':error}">
+                <input-from-table
+                    class-prop="col-md-4 m-form__group-sub"
+                    name="amount"
+                    watermark="Amount"
+                    icon="la flaticon-coins"
+                    v-on:input="setDataFilter"
+                    :value="filters.amount"
+                ></input-from-table>
+                <select-from-table
+                    name="status"
+                    class-prop="col-md-4 m-form__group-sub"
+                    watermark="Status"
+                    :options="arrStatus"
+                    :selected="filters.status"
                     v-on:input="setDataFilter"
                 ></select-from-table>
             </div>
@@ -73,9 +99,6 @@
         <template slot="thead">
             <tr>
                 <th>
-                    <span>id</span>
-                </th>
-                <th>
                     <span>Voucher</span>
                 </th>
                 <th>
@@ -83,6 +106,12 @@
                 </th>
                 <th>
                     <span>Patient Name</span>
+                </th>
+                <th>
+                    <span>Repricing Date</span>
+                </th>
+                <th>
+                    <span>Invoice amount</span>
                 </th>
                 <th>
                     <span>Classification</span>
@@ -101,37 +130,40 @@
         <template slot="tbody">
             <tr v-for="rePricing in results" :key="rePricing.id">
                 <td>
-                    <span>{{ rePricing.id }}</span>
+                    <span>{{ rePricing[0].assist.codigo }}</span>
                 </td>
                 <td>
-                    <span>{{ rePricing.voucher.codigo }}</span>
+                    <span>{{ rePricing[0].assist.codigo }}</span>
                 </td>
                 <td>
-                    <span>{{ rePricing.assist.codigo }}</span>
+                    <span v-html="rePricing[0].passenger.fisrtName+' '+rePricing[0].passenger.lastName"></span>
                 </td>
                 <td>
-                    <span v-html="rePricing.passenger.fisrtName+' '+rePricing.passenger.lastName"></span>
+                    <span>{{ rePricing[0].repricingDate }}</span>
                 </td>
                 <td>
-                    <span>{{docType[rePricing.invoice.docType]||"N/A"}}</span>
+                    <span>{{ (rePricing[0].invoice.amount) ? rePricing[0].invoice.amount+' '+rePricing[0].invoice.currency : '' }}</span>
                 </td>
                 <td>
-                    <span>{{ rePricing.InvoiceProvider.providerName }}</span>
+                    <span>{{ docType[rePricing[0].invoice.docType]||"N/A" }}</span>
+                </td>
+                <td>
+                    <span>{{ rePricing[0].InvoiceProvider.providerName }}</span>
                 </td>
                 <td>
                     <b
                         class="m-badge m-badge--wide"
-                        :class="[' m-badge--'+rePricing.status.color]"
-                    >{{rePricing.status.label}}</b>
+                        :class="[' m-badge--'+rePricing[0].status.color]"
+                    >{{rePricing[0].status.label}}</b>
                 </td>
                 <td class="text-center fa-status">
                     <a
-                        @click.prevent="addRePricing(rePricing)"
+                        @click.prevent="addRePricing(rePricing[0])"
                         class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
                     >
                         <i
                             class="fa"
-                            :class="[open.indexOf(rePricing.id)>-1?'fa-location-arrow':'fa-plus-circle']"
+                            :class="[open.indexOf(rePricing[0].id)>-1?'fa-location-arrow':'fa-plus-circle']"
                         ></i>
                     </a>
                 </td>
@@ -173,6 +205,16 @@ export default {
             },
             error: null,
             documentsType: [],
+            arrStatus: [
+                        { id: "", name: "Select Category" },
+                        { id: 1, name: 'No Repricing Provider' },
+                        { id: 2, name: 'Selected Repricing' },
+                        { id: 3, name: 'Provider Under Repicing' },
+                        { id: 4, name: 'Repricing in Processr' },
+                        { id: 5, name: 'Repricing Updated' },
+                        { id: 6, name: 'Repricing Billed' },
+                        { id: 7, name: 'Repricing Finished' }
+                    ],
             filters: {
                 docType: "",
                 code: "",
@@ -180,7 +222,10 @@ export default {
                 date: {
                     endDate: "",
                     startDate: ""
-                }
+                },
+                status: "",
+                provider: "",
+                amount: ""
             },
             results: [],
             footerTable: {
@@ -210,16 +255,21 @@ export default {
                 .post("getRepricing", {
                     start: pg,
                     limit: this.footerTable.limit,
-                    code: this.filters.code.trim(),
-                    passenger: this.filters.passager.trim(),
+                    code: (this.filters.code) ? this.filters.code.trim() : '',
+                    passenger: (this.filters.passager) ? this.filters.passager.trim() : '',
                     docType: this.filters.docType,
                     endDate: this.filters.date.endDate,
                     startDate: this.filters.date.startDate,
-                    idProvider: this.$session.get("provider").id
+                    idProvider: this.$session.get("provider").id,
+                    status: this.filters.status,
+                    providerInvoice: (this.filters.provider) ? this.filters.provider.trim() : '',
+                    amount: (this.filters.amount) ? this.filters.amount.trim() : '',
                 })
                 .then(response => {
                     this.showLoader = false;
+                    window.console.log(response.data.RESPONSE.RESULTS);
                     this.results = response.data.RESPONSE.RESULTS;
+
                     this.footerTable = {
                         start: response.data.RESPONSE.start,
                         limit: response.data.RESPONSE.limit,
@@ -249,11 +299,12 @@ export default {
                 }
             };
             this.getRepricing(0);
-        }
+        },
     },
     mounted() {
         this.getRepricing();
         this.getDocumentsType();
+        //this.statusRepricing();
     },
     computed: {
         docType: function() {
