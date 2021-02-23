@@ -206,7 +206,7 @@ export default {
             error: null,
             documentsType: [],
             arrStatus: [
-                        { id: "", name: "Select Category" },
+                        { id: "", name: "Select Status" },
                         { id: 1, name: 'No Repricing Provider' },
                         { id: 2, name: 'Selected Repricing' },
                         { id: 3, name: 'Provider Under Repicing' },
