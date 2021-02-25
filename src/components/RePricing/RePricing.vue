@@ -5,7 +5,7 @@
     min-height: 75px;
     resize: none;
 }
-.add-files .col-md-6 {
+.col-md-6 {
     display: inline-block !important;
 }
 .preview-container iframe {
@@ -47,7 +47,27 @@
                     @click.prevent="showTab('upload-documents')"
                 >
                     <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                    <span>Upload Documents</span>
+                    <span>Complete Repricing</span>
+                </a>
+            </li>
+            <li v-tooltip:top="'Upload Repriced EOB'">
+                <a
+                    class="nav-link"
+                    :class="{'m--font-success':tabShow=='upload-repriced-EOB'}"
+                    @click.prevent="showTab('upload-repriced-EOB')"
+                >
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <span>Upload Repriced EOB</span>
+                </a>
+            </li>
+            <li v-tooltip:top="'Upload Invoice FEE'">
+                <a
+                    class="nav-link"
+                    :class="{'m--font-success':tabShow=='upload-invoice-FEE'}"
+                    @click.prevent="showTab('upload-invoice-FEE')"
+                >
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    <span>Upload Invoice FEE</span>
                 </a>
             </li>
         </ul>
@@ -207,8 +227,7 @@
                     <div>
                         <div class="row mx-0">
                             <form class="m-form col-md-12 add-files"
-                                @submit.prevent="validRefunds"
-                                enctype="multipart/form-data"
+                                @submit.prevent="validRepricing"
                                 method="POST"
                                 ref="form">
 
@@ -400,6 +419,7 @@
                                             name="icn"
                                             class="form-control m-input"
                                             placeholder="ICN"
+                                            v-validate="'required'"
                                             v-model.lazy="inputsData.icn"
                                             ref="icn"
                                         />
@@ -429,19 +449,26 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group" :class="{'has-danger': errors.has('date')}">
-                                    <strong>{{ $t('general.date') }}</strong>
-                                    <date-single-bt
-                                        class-prop="m-input"
-                                        name="date"
-                                        watermark="Date"
-                                        v-validate="'required'"
-                                        v-on:input="setDataFilter"
-                                        :value="inputsData.date"
-                                    ></date-single-bt>
-                                    <form-error :attribute_name="'date'" :errors_form="errors"></form-error>
-                                </div>
-                                <div class="form-group" v-if="this.rePricingDetaill.rePricing.amounts.EOB && this.nameEob">
+                                <button
+                                    :disabled="disableForm"
+                                    :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
+                                    type="submit"
+                                    class="btn btn-primary col-md-12 mt-3"
+                                >Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="tab-pane" :class="{active:tabShow=='upload-repriced-EOB'}">
+                <template>
+                    <div>
+                        <div class="row mx-0">
+                            <form class="m-form col-md-12 add-repriced-eob"
+                                @submit.prevent="validRepricedEOB"
+                                enctype="multipart/form-data"
+                                method="POST">
+                                <div class="form-group" v-if="this.rePricingDetaill.rePricing.files.EOB && this.nameEob">
                                     <strong>EOB ID</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
@@ -449,7 +476,7 @@
                                             class="form-control m-input"
                                             placeholder="EOB ID"
                                             v-validate="'required'"
-                                            v-model.lazy="this.rePricingDetaill.rePricing.amounts.EOB"
+                                            v-model.lazy="this.rePricingDetaill.rePricing.files.EOB"
                                             ref="EOB_ID"
                                             disabled
                                         />
@@ -462,8 +489,8 @@
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('fileEob')}">
                                     <div class="col-md-6 eob-fee">
-                                        <strong>Add Repriced EOB</strong> <input type="checkbox" id="check_eob" :value="1" v-model="checkedEob" @change="requiredFile($event.target)" class="m-input" />
-                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.amounts.EOB && this.nameEob && !fileEOB">
+                                        <strong>Add Repriced EOB</strong>
+                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.files.EOB && this.nameEob && !this.fileEOB">
                                             <input
                                                 type="file"
                                                 name="fileEob"
@@ -511,14 +538,35 @@
                                     <div class="col-md-6 bg-secondary d-flex preview-container p-0">
                                         <iframe
                                             class="preview"
-                                            v-if="this.rePricingDetaill.rePricing.amounts.EOB && this.nameEob && !previewEOB"
-                                            :src="baseUrlApi()+'streaming/'+this.rePricingDetaill.rePricing.amounts.EOB"
+                                            v-if="this.rePricingDetaill.rePricing.files.EOB && this.nameEob && !previewEOB"
+                                            :src="baseUrlApi()+'streaming/'+this.rePricingDetaill.rePricing.files.EOB"
                                         ></iframe>
-                                        <h1 v-if="!previewEOB && !this.rePricingDetaill.rePricing.amounts.EOB && !this.nameEob" class="m-auto d-none d-md-block">Vista Previa</h1>
+                                        <h1 v-if="!previewEOB && !this.nameEob" class="m-auto d-none d-md-block">Preview</h1>
                                         <iframe class="rounded h-100 w-100" v-if="previewEOB" :src="previewEOB" />
                                     </div>
                                 </div>
-                                <div class="form-group" v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && this.nameFee">
+                                <button
+                                    :disabled="disableForm"
+                                    :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
+                                    type="submit"
+                                    class="btn btn-primary col-md-12 mt-3"
+                                >Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <div class="tab-pane" :class="{active:tabShow=='upload-invoice-FEE'}">
+                <template>
+                    <div>
+                        <div class="row mx-0">
+                            <form class="m-form col-md-12 add-invoice-fee"
+                                @submit.prevent="validInvoiceFEE"
+                                enctype="multipart/form-data"
+                                method="POST"
+                                ref="form">
+                                
+                                <div class="form-group" v-if="this.rePricingDetaill.rePricing.files.invoice_fee && this.nameFee">
                                     <strong>FEE ID</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
@@ -526,7 +574,7 @@
                                             class="form-control m-input"
                                             placeholder="FEE ID"
                                             v-validate="'required'"
-                                            v-model.lazy="this.rePricingDetaill.rePricing.amounts.invoice_fee"
+                                            v-model.lazy="this.rePricingDetaill.rePricing.files.invoice_fee"
                                             ref="FEE_ID"
                                             disabled
                                         />
@@ -539,8 +587,8 @@
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('fileFee')}">
                                     <div class="col-md-6 eob-fee">
-                                        <strong>Add Invoice FEE</strong> <input type="checkbox" id="check_fee" :value="2" v-model="checkedFee" @change="requiredFile($event.target)" class="m-input" />
-                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && this.nameFee && !fileFEE">
+                                        <strong>Add Invoice FEE</strong>
+                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.files.invoice_fee && this.nameFee && !fileFEE">
                                             <input
                                                 type="file"
                                                 name="fileFee"
@@ -588,10 +636,10 @@
                                     <div class="col-md-6 bg-secondary d-flex preview-container p-0">
                                         <iframe
                                             class="preview"
-                                            v-if="this.rePricingDetaill.rePricing.amounts.invoice_fee && this.nameFee && !previewFee"
-                                            :src="baseUrlApi()+'streaming/'+this.rePricingDetaill.rePricing.amounts.invoice_fee"
+                                            v-if="this.rePricingDetaill.rePricing.files.invoice_fee && this.nameFee && !previewFee"
+                                            :src="baseUrlApi()+'streaming/'+this.rePricingDetaill.rePricing.files.invoice_fee"
                                         ></iframe>
-                                        <h1 v-if="!previewFee && !this.rePricingDetaill.rePricing.amounts.invoice_fee && !this.nameFee" class="m-auto d-none d-md-block">Vista Previa</h1>
+                                        <h1 v-if="!previewFee && !this.nameFee" class="m-auto d-none d-md-block">Preview</h1>
                                         <iframe class="rounded h-100 w-100" v-if="previewFee" :src="previewFee" />
                                     </div>
                                 </div>
@@ -662,9 +710,7 @@ export default {
             prefix: "",
             companyName: "",
             requiredEOB: "",
-            requiredFee: "",
-            checkedFee: "",
-            checkedEob: ""
+            requiredFee: ""
         };
     },
     mounted() {
@@ -694,10 +740,11 @@ export default {
                     this.inputsData.patient = this.rePricingDetaill.rePricing.contact.fisrtName+" "+this.rePricingDetaill.rePricing.contact.lastName || "";
                     this.inputsData.birth_date = this.rePricingDetaill.rePricing.contact.birthDate || "";
                     this.inputsData.case_number = this.rePricingDetaill.rePricing.assist.code || "";
-                    this.feeID = this.rePricingDetaill.rePricing.amounts.invoice_fee;
-                    this.EobID = this.rePricingDetaill.rePricing.amounts.EOB;
+                    this.feeID = this.rePricingDetaill.rePricing.files.invoice_fee;
+                    this.EobID = this.rePricingDetaill.rePricing.files.EOB;
                     this.prefix = this.rePricingDetaill.assistance.prefix;
                     this.inputsData.invoice_id = this.rePricingDetaill.invoice.id;
+                    this.inputsData.icn = this.rePricingDetaill.rePricing.icn;
 
                     this.getFileNames();
                     this.companyData();
@@ -722,14 +769,6 @@ export default {
                                 this.nameEob = element.FileName;
                             }
                         });
-
-                        if (this.nameEob) {
-                            this.checkedEob = 'checked';
-                        }
-
-                        if (this.nameFee) {
-                            this.checkedFee = 'checked';
-                        }
                     }
                 });
         },
@@ -750,14 +789,12 @@ export default {
             this.inputsData.fee_amount = ((this.inputsData.saving_amount * this.inputsData.saving) / 100).toPrecision(4);
             this.fee_amount_original = ((this.inputsData.saving_amount * this.inputsData.saving) / 100).toPrecision(4);
         },
-        validRefunds: function() {
+        validRepricing: function() {
             if (!this.disableForm) {
                 
                 this.$validator.validateAll().then(result => {
                     window.console.log("validateAll", result);
                     let formData = new FormData();
-                    formData.append("fileEob", this.fileEOB);
-                    formData.append("fileFee", this.fileFEE);
                     formData.append("saving_amount", this.inputsData.saving_amount);
                     formData.append("adjusted_amount", this.inputsData.adjusted_amount);
                     formData.append("saving", this.inputsData.saving);
@@ -767,17 +804,15 @@ export default {
                     formData.append("user", this.$session.get("user"));
                     formData.append("repricingId", this.rePricingBase.id);
                     formData.append("originalAmount", this.rePricingDetaill.invoice.monto);
-                    formData.append("nameEob", this.rePricingDetaill.rePricing.amounts.EOB);
-                    formData.append("nameFee", this.rePricingDetaill.rePricing.amounts.invoice_fee);
                     formData.append("assistanceId", this.rePricingDetaill.rePricing.assist.id);
                     formData.append("assistanceCode", this.rePricingDetaill.rePricing.assist.code);
                     formData.append("providerRepricingId", this.rePricingDetaill.rePricing.providerRepricing);
                     formData.append("adjusted_amount_original", this.adjusted_amount_original || this.inputsData.adjusted_amount);
                     formData.append("fee_amount_original", this.fee_amount_original || this.inputsData.fee_amount);
                     formData.append("saving_original", (this.inputsData.saving != this.rePricingDetaill.feeAmount.percentage_fee_amount) ? this.rePricingDetaill.feeAmount.percentage_fee_amount : this.inputsData.saving);
-                    formData.append("date", this.inputsData.date);
+                    formData.append("icn", this.inputsData.icn );
 
-                    const config = {
+                    /*const config = {
                         headers: {
                             'content-type': 'multipart/form-data'
                         },
@@ -789,11 +824,11 @@ export default {
                                 )
                             );
                         }.bind(this)
-                    }
+                    }*/
 
                     if (result) {
                         this.disableForm = true;
-                        this.axios.post("addFilesRepricing", formData, config)
+                        this.axios.post("completeRepricing", formData)
                             .then(response => {
                                 window.console.log(response);
                                 this.disableForm = false;
@@ -803,14 +838,10 @@ export default {
                                     this.inputsData.adjusted_amount = "";
                                     this.inputsData.saving = "";
                                     this.inputsData.fee_amount = "";
-                                    this.fileEOB = '';
-                                    this.fileFEE = '';
-                                    this.$refs.fileEob.value = null;
-                                    this.$refs.fileFee.value = null;
-                                    this.$emit("addFilesRepricing", response.data.RESPONSE);
+                                    this.$emit("completeRepricing", response.data.RESPONSE);
                                     window.Swal.fire({
                                         title: "Send",
-                                        text: this.$t("document.uploaded"),
+                                        text: 'Success',
                                         type: "success",
                                         showCancelButton: true,
                                         confirmButtonText: "Ok"
@@ -829,10 +860,128 @@ export default {
                                         type: "error"
                                     });
                                 }
-                                this.uploadPercentage = 0;
+                                //this.uploadPercentage = 0;
                             });
                     }
                 });
+            }
+        },
+        validRepricedEOB: function() {
+            if (!this.disableForm) {
+                
+                let formData = new FormData();
+                formData.append("fileEob", this.fileEOB);
+                formData.append("userID", this.$session.get("idUser"));
+                formData.append("user", this.$session.get("user"));
+                formData.append("repricingId", this.rePricingBase.id);
+                formData.append("nameEob", this.nameEob);
+                formData.append("assistanceId", this.rePricingDetaill.rePricing.assist.id);
+                formData.append("assistanceCode", this.rePricingDetaill.rePricing.assist.code);
+                formData.append("providerRepricingId", this.rePricingDetaill.rePricing.providerRepricing);
+
+                const config = {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    },
+                    onUploadProgress: function(progressEvent) {
+                        this.uploadPercentage = parseInt(
+                            Math.round(
+                                (progressEvent.loaded * 100) /
+                                    progressEvent.total
+                            )
+                        );
+                    }.bind(this)
+                }
+
+                this.disableForm = true;
+                this.axios.post("addFilesRepricing", formData, config)
+                    .then(response => {
+                        this.disableForm = false;
+                        if (response.data.STATUS == "OK") {
+                            this.$emit("addFilesRepricing", response.data.RESPONSE);
+                            window.Swal.fire({
+                                title: "Send",
+                                text: this.$t("document.uploaded"),
+                                type: "success",
+                                showCancelButton: true,
+                                confirmButtonText: "Ok"
+                            });
+                        } else {
+                            if (response.data.ERRORS) {
+                                for (var prop in response.data.ERRORS) {
+                                    this.errors.add({
+                                        field: prop,
+                                        msg: response.data.ERRORS[prop]
+                                    });
+                                }
+                            }
+                            window.Swal.fire({
+                                title: response.data.MESSAGE||"Error Form",
+                                type: "error"
+                            });
+                        }
+                        this.uploadPercentage = 0;
+                    });
+            }
+        },
+        validInvoiceFEE: function() {
+            if (!this.disableForm) {
+                
+                let formData = new FormData();
+                formData.append("fileFee", this.fileFEE);
+                formData.append("userID", this.$session.get("idUser"));
+                formData.append("user", this.$session.get("user"));
+                formData.append("repricingId", this.rePricingBase.id);
+                formData.append("nameFee", this.nameFee);
+                formData.append("assistanceId", this.rePricingDetaill.rePricing.assist.id);
+                formData.append("assistanceCode", this.rePricingDetaill.rePricing.assist.code);
+                formData.append("date", this.inputsData.date);
+                formData.append("providerRepricingId", this.rePricingDetaill.rePricing.providerRepricing);
+
+                const config = {
+                    headers: {
+                        'content-type': 'multipart/form-data'
+                    },
+                    onUploadProgress: function(progressEvent) {
+                        this.uploadPercentage = parseInt(
+                            Math.round(
+                                (progressEvent.loaded * 100) /
+                                    progressEvent.total
+                            )
+                        );
+                    }.bind(this)
+                }
+
+                this.disableForm = true;
+                this.axios.post("addFilesRepricing", formData, config)
+                    .then(response => {
+                        window.console.log(response);
+                        this.disableForm = false;
+                        if (response.data.STATUS == "OK") {
+                            this.$emit("addFilesRepricing", response.data.RESPONSE);
+                            window.Swal.fire({
+                                title: "Send",
+                                text: this.$t("document.uploaded"),
+                                type: "success",
+                                showCancelButton: true,
+                                confirmButtonText: "Ok"
+                            });
+                        } else {
+                            if (response.data.ERRORS) {
+                                for (var prop in response.data.ERRORS) {
+                                    this.errors.add({
+                                        field: prop,
+                                        msg: response.data.ERRORS[prop]
+                                    });
+                                }
+                            }
+                            window.Swal.fire({
+                                title: response.data.MESSAGE||"Error Form",
+                                type: "error"
+                            });
+                        }
+                        this.uploadPercentage = 0;
+                    });
             }
         },
         companyData: function(){
