@@ -33,7 +33,7 @@
                     <div class="m-login__container">
                         <div class="m-login__logo">
                             <custom-img
-                                height="80"
+                                height="140"
                                 width="280"
                                 :src="baseUrlApi()+'app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png'"
                             ></custom-img>
