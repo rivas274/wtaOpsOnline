@@ -201,6 +201,36 @@
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.montoUsd | currency("USD")}}</span>
                                     </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">Deductible</span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                        >{{ this.deducible }}</span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">Amount Not Covered</span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                        >{{ this.noCovered }}</span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">Amount To Cover</span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                        >{{ this.covered_amount }}</span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">Benefit/Amount available</span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                        >{{ this.availablebenf }}</span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">Benefit/Amount to be paid</span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                        >{{ this.amounttopay }}</span>
+                                    </div>
                                 </template>
                             </AssistAccordionDetaill>
                             <AssistAccordionDetaill class-prop="col-md-12">
@@ -705,12 +735,19 @@ export default {
             EobID: "",
             fileNames: {},
             company: {},
+            dataAmount: {},
             nameFee: "",
             nameEob: "",
             prefix: "",
             companyName: "",
             requiredEOB: "",
-            requiredFee: ""
+            requiredFee: "",
+            assistanceID: "",
+            amounttopay: "",
+            deducible: "",
+            availablebenf: "",
+            covered_amount: "",
+            noCovered: ""
         };
     },
     mounted() {
@@ -745,9 +782,12 @@ export default {
                     this.prefix = this.rePricingDetaill.assistance.prefix;
                     this.inputsData.invoice_id = this.rePricingDetaill.invoice.id;
                     this.inputsData.icn = this.rePricingDetaill.rePricing.icn;
+                    this.assistanceID = this.rePricingDetaill.rePricing.assist.id
+                    this.noCovered = this.rePricingDetaill.invoice.not_covered;
 
                     this.getFileNames();
                     this.companyData();
+                    this.billAmounts();
                 });
         },
         getFileNames: function(){
@@ -994,6 +1034,23 @@ export default {
 
                     if (this.company !== 'ERROR') {
                         this.companyName = this.company[0].company
+                    }
+                });
+        },
+        billAmounts: function() {
+            this.axios
+                .post("getBillAmounts", {
+                    fileID: this.inputsData.invoice_id
+                })
+                .then(response => {
+                    this.dataAmount = response.data.RESPONSE;
+                    window.console.log(this.dataAmount);
+
+                    if (this.dataAmount !== 'ERROR') {
+                        this.amounttopay = this.dataAmount.amounttopay;
+                        this.deducible = this.dataAmount.deducible;
+                        this.availablebenf = this.dataAmount.availablebenf;
+                        this.covered_amount = this.dataAmount.covered_amount;
                     }
                 });
         },
