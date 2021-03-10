@@ -172,7 +172,7 @@
                                         >{{ rePricingDetaill.invoice.ref }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Date</span>
+                                        <span class="m-widget16__date">Date (YYYY-MM-DD)</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.date }}</span>
