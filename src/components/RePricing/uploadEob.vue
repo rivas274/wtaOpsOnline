@@ -97,7 +97,12 @@ export default {
     data() {
         return {
             fileEOB: "",
+            nameEob: "",
+            EobID: this.rePricingDetaill.rePricing.files.EOB,
         }
+    },
+    mounted() {
+        this.getFileNames();
     },
     methods: {
         validRepricedEOB: function() {
@@ -160,6 +165,27 @@ export default {
         },
         handleFileUploadEOB: function() {
             this.fileEOB = this.$refs.fileEob.files[0];
+        },
+        getFileNames: function(){
+            this.axios
+                .post("fileNames", {
+                    EobID: this.EobID
+                })
+                .then(response => {
+                    this.fileNames = response.data.RESPONSE;
+
+                    if (this.fileNames !== 'ERROR') {
+                        this.fileNames.forEach(element => {
+                            if (element.category == '47') {
+                                this.nameFee = element.FileName;
+                                this.inputsData.date = element.dateInvoice;
+                            }
+                            if (element.category == '20') {
+                                this.nameEob = element.FileName;
+                            }
+                        });
+                    }
+                });
         }
     },
     computed: {
