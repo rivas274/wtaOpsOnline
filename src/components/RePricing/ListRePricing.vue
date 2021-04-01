@@ -213,7 +213,8 @@ export default {
                         { id: 4, name: 'Repricing in Processr' },
                         { id: 5, name: 'Repricing Updated' },
                         { id: 6, name: 'Repricing Billed' },
-                        { id: 7, name: 'Repricing Finished' }
+                        { id: 7, name: 'Repricing Finished' },
+                        { id: 8, name: 'Repricing with EOB' }
                     ],
             filters: {
                 docType: "",

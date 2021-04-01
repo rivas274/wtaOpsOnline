@@ -492,97 +492,17 @@
             </div>
             <div class="tab-pane" :class="{active:tabShow=='upload-repriced-EOB'}">
                 <template>
-                    <div>
-                        <div class="row mx-0">
-                            <form class="m-form col-md-12 add-repriced-eob"
-                                @submit.prevent="validRepricedEOB"
-                                enctype="multipart/form-data"
-                                method="POST">
-                                <div class="form-group" v-if="this.rePricingDetaill.rePricing.files.EOB && this.nameEob">
-                                    <strong>EOB ID</strong>
-                                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
-                                        <input
-                                            type="text"
-                                            class="form-control m-input"
-                                            placeholder="EOB ID"
-                                            v-validate="'required'"
-                                            v-model.lazy="this.rePricingDetaill.rePricing.files.EOB"
-                                            ref="EOB_ID"
-                                            disabled
-                                        />
-                                        <span class="m-input-icon__icon m-input-icon__icon--left">
-                                            <span>
-                                                <i class="la la-tag"></i>
-                                            </span>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="form-group" :class="{'has-danger': errors.has('fileEob')}">
-                                    <div class="col-md-6 eob-fee">
-                                        <strong>Add Repriced EOB</strong>
-                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.files.EOB && this.nameEob && !this.fileEOB">
-                                            <input
-                                                type="file"
-                                                name="fileEob"
-                                                class="custom-file-input"
-                                                id="fileEob"
-                                                accept="application/pdf"
-                                                v-validate="'ext:pdf'"
-                                                ref="fileEob"
-                                                v-on:change="handleFileUploadEOB()"
-                                            />
-                                            <label
-                                                class="custom-file-label"
-                                                for="fileEob"
-                                            >{{ this.nameEob }}</label>
-                                        </div>
-                                        <div class="custom-file" v-else>
-                                            <input
-                                                type="file"
-                                                name="fileEob"
-                                                class="custom-file-input"
-                                                id="fileEob"
-                                                accept="application/pdf"
-                                                v-validate="this.requiredEOB+'|ext:pdf'"
-                                                ref="fileEob"
-                                                v-on:change="handleFileUploadEOB()"
-                                            />
-                                            <label
-                                                class="custom-file-label"
-                                                for="fileEob"
-                                            >{{(typeof fileEOB =='object' && 'name' in fileEOB)?fileEOB.name:'Choose File'}}</label>
-                                        </div>
-                                        <div class="progress" v-if="uploadPercentage>0">
-                                            <div
-                                                class="progress-bar progress-bar-striped progress-bar-animated"
-                                                role="progressbar"
-                                                :aria-valuenow="uploadPercentage"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                :style="{width: uploadPercentage+'%'}"
-                                            ></div>
-                                        </div>
-                                        <form-error :attribute_name="'fileEob'" :errors_form="errors"></form-error>
-                                    </div>
-
-                                    <div class="col-md-6 bg-secondary d-flex preview-container p-0">
-                                        <iframe
-                                            class="preview"
-                                            v-if="this.rePricingDetaill.rePricing.files.EOB && this.nameEob && !previewEOB"
-                                            :src="baseUrlApi()+'streaming/'+this.rePricingDetaill.rePricing.files.EOB"
-                                        ></iframe>
-                                        <h1 v-if="!previewEOB && !this.nameEob" class="m-auto d-none d-md-block">Preview</h1>
-                                        <iframe class="rounded h-100 w-100" v-if="previewEOB" :src="previewEOB" />
-                                    </div>
-                                </div>
-                                <button
-                                    :disabled="disableForm"
-                                    :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
-                                    type="submit"
-                                    class="btn btn-primary col-md-12 mt-3"
-                                >Send</button>
-                            </form>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <strong>Add Form EOB</strong> <input type="radio" id="form_eob" class="m-input" value="1" v-model="showOption" />
                         </div>
+                        <div class="form-group col-md-6">
+                            <strong>Add Repriced EOB</strong> <input type="radio" id="repriced_eob" class="m-input" value="2" v-model="showOption" />
+                        </div>
+
+                        <formEob v-if="this.showOption == 1" v-bind:rePricingId="rePricingBase.id"></formEob>
+                        
+                        <uploadEob v-if="this.showOption == 2" v-bind:rePricingDetaill="rePricingDetaill"></uploadEob>
                     </div>
                 </template>
             </div>
@@ -694,6 +614,8 @@ import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import AssistAccordionDetaill from "../Assists/AssistAccordionDetaill.vue";
+import formEob from "./formEob.vue";
+import uploadEob from "./uploadEob.vue";
 export default {
     props: ["re-pricing"],
     components: {
@@ -702,7 +624,9 @@ export default {
         selectFromTable,
         dateSingleBt,
         localeChanger,
-        AssistAccordionDetaill
+        AssistAccordionDetaill,
+        formEob,
+        uploadEob
     },
     data() {
         return {
@@ -747,7 +671,8 @@ export default {
             deducible: "",
             availablebenf: "",
             covered_amount: "",
-            noCovered: ""
+            noCovered: "",
+            showOption: ""
         };
     },
     mounted() {
@@ -814,9 +739,6 @@ export default {
         },
         setDataFilter: function(campo, value) {
             this.inputsData[campo] = value;
-        },
-        handleFileUploadEOB: function() {
-            this.fileEOB = this.$refs.fileEob.files[0];
         },
         handleFileUploadFee: function() {
             this.fileFEE = this.$refs.fileFee.files[0];
@@ -904,64 +826,6 @@ export default {
                             });
                     }
                 });
-            }
-        },
-        validRepricedEOB: function() {
-            if (!this.disableForm) {
-                
-                let formData = new FormData();
-                formData.append("fileEob", this.fileEOB);
-                formData.append("userID", this.$session.get("idUser"));
-                formData.append("user", this.$session.get("user"));
-                formData.append("repricingId", this.rePricingBase.id);
-                formData.append("nameEob", this.nameEob);
-                formData.append("assistanceId", this.rePricingDetaill.rePricing.assist.id);
-                formData.append("assistanceCode", this.rePricingDetaill.rePricing.assist.code);
-                formData.append("providerRepricingId", this.rePricingDetaill.rePricing.providerRepricing);
-
-                const config = {
-                    headers: {
-                        'content-type': 'multipart/form-data'
-                    },
-                    onUploadProgress: function(progressEvent) {
-                        this.uploadPercentage = parseInt(
-                            Math.round(
-                                (progressEvent.loaded * 100) /
-                                    progressEvent.total
-                            )
-                        );
-                    }.bind(this)
-                }
-
-                this.disableForm = true;
-                this.axios.post("addFilesRepricing", formData, config)
-                    .then(response => {
-                        this.disableForm = false;
-                        if (response.data.STATUS == "OK") {
-                            this.$emit("addFilesRepricing", response.data.RESPONSE);
-                            window.Swal.fire({
-                                title: "Send",
-                                text: this.$t("document.uploaded"),
-                                type: "success",
-                                showCancelButton: true,
-                                confirmButtonText: "Ok"
-                            });
-                        } else {
-                            if (response.data.ERRORS) {
-                                for (var prop in response.data.ERRORS) {
-                                    this.errors.add({
-                                        field: prop,
-                                        msg: response.data.ERRORS[prop]
-                                    });
-                                }
-                            }
-                            window.Swal.fire({
-                                title: response.data.MESSAGE||"Error Form",
-                                type: "error"
-                            });
-                        }
-                        this.uploadPercentage = 0;
-                    });
             }
         },
         validInvoiceFEE: function() {
@@ -1070,12 +934,6 @@ export default {
         }
     },
     computed: {
-        previewEOB: function() {
-            if (!this.fileEOB || this.errors.has("fileEob")) {
-                return false;
-            }
-            return URL.createObjectURL(this.fileEOB);
-        },
         previewFee: function() {
             if (!this.fileFEE || this.errors.has("fileFee")) {
                 return false;
