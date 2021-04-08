@@ -98,6 +98,7 @@ export default {
         return {
             fileEOB: "",
             nameEob: "",
+            fileNames: {},
             EobID: this.rePricingDetaill.rePricing.files.EOB,
         }
     },
@@ -207,6 +208,7 @@ export default {
     min-height: 350px !important;
     border: 0;
     overflow-x: none;
+    width: 100% !important;
 }
 .eob-fee {
     padding-left: 0px;
