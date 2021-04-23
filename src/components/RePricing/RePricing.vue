@@ -795,11 +795,6 @@ export default {
                                 window.console.log(response);
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
-                                    this.inputsData.description = "";
-                                    this.inputsData.saving_amount = "";
-                                    this.inputsData.adjusted_amount = "";
-                                    this.inputsData.saving = "";
-                                    this.inputsData.fee_amount = "";
                                     this.$emit("completeRepricing", response.data.RESPONSE);
                                     window.Swal.fire({
                                         title: "Send",

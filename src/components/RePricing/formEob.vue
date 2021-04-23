@@ -81,8 +81,6 @@
             </div>
 
             <form class="m-form col-md-12 add-form-eob"
-                @submit.prevent="validFormEOB"
-                method="POST"
                 ref="form">
                 <div class="row">
                     <div class="form-group col-md-4">
@@ -155,7 +153,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <button type="submit" class="btn btn-success">Add Item</button>
+                        <button :disabled="disableForm" type="button" class="btn btn-success" @click="validFormEOB">Add Item</button>
                     </div>
                 </div>
             </form>
@@ -313,7 +311,6 @@ export default {
         },
         validFormEOB: function() {
             if (!this.disableForm) {
-                window.console.log(this.inputsData.dos);
                 this.$validator.validateAll().then(result => {
                     let formData = new FormData();
                     formData.append("dos", this.inputsData.dos);
@@ -334,22 +331,8 @@ export default {
                         this.axios.post("addFormEOB", formData)
                             .then(response => {
                                 this.disableForm = false;
-                                window.console.log(response);
                                 if (response.data.STATUS == "OK") {
-                                    this.inputsData.dos = '';
-                                    this.inputsData.procedureCode = '';
-                                    this.inputsData.quantity = '';
-                                    this.inputsData.billedAmount = '';
-                                    this.inputsData.allowableAmount = '';
-                                    this.inputsData.nonCoveredAmount = '';
-                                    this.inputsData.patientDeductible = '';
-                                    this.inputsData.amountPaid = '';
-                                    this.inputsData.patientResponsibility = '';
-                                    this.inputsData.code = '';
-
                                     this.viewPayments();
-
-                                    /*this.$emit("addFormEOB", response.data.RESPONSE);*/
                                 } else {
                                     if (response.data.ERRORS) {
                                         for (var prop in response.data.ERRORS) {
