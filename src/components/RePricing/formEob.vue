@@ -81,8 +81,6 @@
             </div>
 
             <form class="m-form col-md-12 add-form-eob"
-                @submit.prevent="validFormEOB"
-                method="POST"
                 ref="form">
                 <div class="row">
                     <div class="form-group col-md-4">
@@ -155,7 +153,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <button type="submit" class="btn btn-success">Add Item</button>
+                        <button :disabled="disableForm" type="button" class="btn btn-success" @click="validFormEOB">Add Item</button>
                     </div>
                 </div>
             </form>
@@ -177,8 +175,8 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr v-for="eobs in arrEOB" v-bind:key="eobs.repricing_id">
+                    <tbody v-if="this.arrEOB">
+                        <tr v-for="eobs in arrEOB.results" :key="eobs.eob_id">
                             <td>{{ eobs.DOS }}</td>
                             <td>{{ eobs.procedure_code }}</td>
                             <td>{{ eobs.quantity }}</td>
@@ -189,16 +187,16 @@
                             <td>{{ eobs.amount_paid }}</td>
                             <td>{{ eobs.patient_responsibility }}</td>
                             <td>{{ codes[eobs.code].name }}</td>
-                            <td><button type="button" class="btn btn-danger" @click="deleteEOB()">Delete</button></td>
+                            <td><button type="button" class="btn btn-danger" @click="deleteAmount(eobs.eob_id)">Delete</button></td>
                         </tr>
                         <tr>
                             <td colspan="3" class="text-right"><strong>Totals</strong></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ arrEOB.totals.totalBilledAmount }}</td>
+                            <td>{{ arrEOB.totals.totalAllowableAmount }}</td>
+                            <td>{{ arrEOB.totals.totalNonCoveredAmount }}</td>
+                            <td>{{ arrEOB.totals.totalPatientDeductible }}</td>
+                            <td>{{ arrEOB.totals.totalAmountPaid }}</td>
+                            <td>{{ arrEOB.totals.totalPatientResponsibility }}</td>
                             <td colspan="2"></td>
                         </tr>
                     </tbody>
@@ -209,7 +207,7 @@
                     :disabled="disableForm"
                     :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
                     type="button"
-                    @click="addItem()"
+                    @click="generateDocument()"
                     class="btn btn-primary col-md-12 mt-3"
                 >Send</button>
             </div>
@@ -315,7 +313,6 @@ export default {
         },
         validFormEOB: function() {
             if (!this.disableForm) {
-                window.console.log(this.inputsData.dos);
                 this.$validator.validateAll().then(result => {
                     let formData = new FormData();
                     formData.append("dos", this.inputsData.dos);
@@ -334,29 +331,9 @@ export default {
                     if (result) {
                         this.axios.post("addFormEOB", formData)
                             .then(response => {
-                                window.console.log(response);
+                                this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
-                                    this.inputsData.dos = '';
-                                    this.inputsData.procedureCode = '';
-                                    this.inputsData.quantity = '';
-                                    this.inputsData.billedAmount = '';
-                                    this.inputsData.allowableAmount = '';
-                                    this.inputsData.nonCoveredAmount = '';
-                                    this.inputsData.patientDeductible = '';
-                                    this.inputsData.amountPaid = '';
-                                    this.inputsData.patientResponsibility = '';
-                                    this.inputsData.code = '';
-
                                     this.viewPayments();
-
-                                    /*this.$emit("addFormEOB", response.data.RESPONSE);
-                                    window.Swal.fire({
-                                        title: "Send",
-                                        text: 'Success',
-                                        type: "success",
-                                        showCancelButton: true,
-                                        confirmButtonText: "Ok"
-                                    });*/
                                 } else {
                                     if (response.data.ERRORS) {
                                         for (var prop in response.data.ERRORS) {
@@ -379,7 +356,31 @@ export default {
         setDataFilter: function(campo, value) {
             this.inputsData[campo] = value;
         },
-        addItem: function(){},
+        generateDocument: function(){
+            this.axios
+                .post("generateDocumentEOB", {
+                    rePricingId: this.rePricingId,
+                    userID: this.$session.get("idUser")
+                }).then(response => {
+                    if (response.data.STATUS == 'OK') {
+                        window.Swal.fire({
+                            title: "Upload",
+                            text: response.data.MESSAGE,
+                            type: "success",
+                            showCancelButton: true,
+                            confirmButtonText: "Ok"
+                        });
+                    } else if (response.data.STATUS == 'ERROR') {
+                        window.Swal.fire({
+                            title: "Upload",
+                            text: response.data.MESSAGE,
+                            type: "danger",
+                            showCancelButton: true,
+                            confirmButtonText: "Ok"
+                        });
+                    }
+                });
+        },
         viewPayments: function(){
             this.axios
                 .post("repricingEOB", {
@@ -391,30 +392,18 @@ export default {
                     }
                 });
         },
-        deleteEOB: function(){
+        deleteAmount: function(idEOB) {
             this.axios
-                .post("deleteEOB", {
-                    idEob: this.idEob
+                .post("deleteAmountEOB", {
+                    eob_id: idEOB
                 })
                 .then(response => {
                     if (response.data.STATUS == 'OK') {
-                        this.arrEOB = response.data.RESPONSE.RESULTS;
-                        window.console.log(this.arrEOB);
+                        this.viewPayments();
                     }
                 });
-        }
-    }/*,
-    computed: {
-        totals: function(){
-            for (let index = 0; index < this.arrEOB.length; index++) {
-                this.amountBilled += parseFloat(this.arrEOB.billed_amount);
-            }
-
-            arrAmounts.push(this.amountBilled);
-            window.console.log(arrAmounts);
-            return arrAmounts;
-        }
-    }*/
+        },
+    }
 }
 </script>
 
