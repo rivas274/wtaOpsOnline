@@ -1,9 +1,5 @@
 <template>
     <div class="col-md-12">
-        <form class="m-form col-md-12 add-form-eob"
-        @submit.prevent="validFormEOB"
-        method="POST"
-        ref="form">
             <div class="form-group text-center">
                 <strong>Clain Information</strong>
             </div>
@@ -84,84 +80,139 @@
                 </div>
             </div>
 
-            <div class="form-group"></div>
+            <form class="m-form col-md-12 add-form-eob"
+                @submit.prevent="validFormEOB"
+                method="POST"
+                ref="form">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <strong>DOS</strong>
+                        <date-single-bt
+                            class-prop="m-input"
+                            name="dos"
+                            :value="inputsData.dos"
+                            v-on:input="setDataFilter"
+                        ></date-single-bt>
+                        <!--<form-error :attribute_name="'dos'" :errors_form="errors"></form-error>-->
+                    </div>
+                    <div class="form-group col-md-4" :class="{'has-danger': errors.has('procedure_code')}">
+                        <strong>Procedure Code</strong>
+                        <input type="text" name="procedure_code" v-validate="'required'" v-model="inputsData.procedureCode" class="form-control m-input" />
+                        <form-error :attribute_name="'procedure_code'" :errors_form="errors"></form-error>
+                    </div>
+                    <div class="form-group col-md-4" :class="{'has-danger': errors.has('quantity')}">
+                        <strong>Quantity</strong>
+                        <input type="text" name="quantity" v-validate="'required'" v-model="inputsData.quantity" class="form-control m-input" />
+                        <form-error :attribute_name="'quantity'" :errors_form="errors"></form-error>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4" :class="{'has-danger': errors.has('billed_amount')}">
+                        <strong>Billed Amount</strong>
+                        <input type="text" name="billed_amount" v-validate="'required'" v-model="inputsData.billedAmount" class="form-control m-input" />
+                        <form-error :attribute_name="'billed_amount'" :errors_form="errors"></form-error>
+                    </div>
+                    <div class="form-group col-md-4" :class="{'has-danger': errors.has('allowable_amount')}">
+                        <strong>U&C Allowable Amount</strong>
+                        <input type="text" name="allowable_amount" v-validate="'required'" v-model="inputsData.allowableAmount" class="form-control m-input" />
+                        <form-error :attribute_name="'allowable_amount'" :errors_form="errors"></form-error>
+                    </div>
+                    <div class="form-group col-md-4" :class="{'has-danger': errors.has('nonCovered_mount')}">
+                        <strong>Non-Covered Amount</strong>
+                        <input type="text" name="nonCovered_mount" v-validate="'required'" v-model="inputsData.nonCoveredAmount" class="form-control m-input" />
+                        <form-error :attribute_name="'nonCovered_mount'" :errors_form="errors"></form-error>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4" :class="{'has-danger': errors.has('patient_deductible')}">
+                        <strong>Patient Deductible</strong>
+                        <input type="text" name="patient_deductible" v-validate="'required'" v-model="inputsData.patientDeductible" class="form-control m-input" />
+                        <form-error :attribute_name="'patient_deductible'" :errors_form="errors"></form-error>
+                    </div>
+                    <div class="form-group col-md-4" :class="{'has-danger': errors.has('amount_paid')}">
+                        <strong>Amount Paid</strong>
+                        <input type="text" name="amount_paid" v-validate="'required'" v-model="inputsData.amountPaid" class="form-control m-input" />
+                        <form-error :attribute_name="'amount_paid'" :errors_form="errors"></form-error>
+                    </div>
+                    <div class="form-group col-md-4" :class="{'has-danger': errors.has('patient_responsibility')}">
+                        <strong>Patient Responsibility</strong>
+                        <input type="text" name="patient_responsibility" v-validate="'required'" v-model="inputsData.patientResponsibility" class="form-control m-input" />
+                        <form-error :attribute_name="'patient_responsibility'" :errors_form="errors"></form-error>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4" :class="{'has-danger': errors.has('code')}">
+                        <strong>Code</strong>
+                        <select-from-table
+                            name="code"
+                            :options="codes"
+                            :selected="inputsData.code|| ''"
+                            v-on:input="setDataFilter"
+                        ></select-from-table>
+                        <!--<input type="text" name="code" v-validate="'required'" v-model="inputsData.code" class="form-control m-input" />-->
+                        <form-error :attribute_name="'code'" :errors_form="errors"></form-error>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <button type="submit" class="btn btn-success">Add Item</button>
+                    </div>
+                </div>
+            </form>
 
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <strong>DOS</strong>
-                    <date-single-bt
-                        class-prop="m-input"
-                        name="dos"
-                        :value="inputsData.dos"
-                        v-on:input="setDataFilter"
-                    ></date-single-bt>
-                    <!--<form-error :attribute_name="'dos'" :errors_form="errors"></form-error>-->
-                </div>
-                <div class="form-group col-md-4" :class="{'has-danger': errors.has('procedure_code')}">
-                    <strong>Procedure Code</strong>
-                    <input type="text" name="procedure_code" v-validate="'required'" v-model="inputsData.procedureCode" class="form-control m-input" />
-                    <form-error :attribute_name="'procedure_code'" :errors_form="errors"></form-error>
-                </div>
-                <div class="form-group col-md-4" :class="{'has-danger': errors.has('quantity')}">
-                    <strong>Quantity</strong>
-                    <input type="text" name="quantity" v-validate="'required'" v-model="inputsData.quantity" class="form-control m-input" />
-                    <form-error :attribute_name="'quantity'" :errors_form="errors"></form-error>
-                </div>
+            <div>
+                <table align="center" class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>DOS</th>
+                            <th>Procedure Code</th>
+                            <th>Quantity</th>
+                            <th>Billed Amount</th>
+                            <th>U&C Allowable Amount</th>
+                            <th>Non-Covered Amount</th>
+                            <th>Patient Deductible</th>
+                            <th>Amount Paid</th>
+                            <th>Patient Responsibility</th>
+                            <th>Code</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="eobs in arrEOB" v-bind:key="eobs.repricing_id">
+                            <td>{{ eobs.DOS }}</td>
+                            <td>{{ eobs.procedure_code }}</td>
+                            <td>{{ eobs.quantity }}</td>
+                            <td>{{ eobs.billed_amount }}</td>
+                            <td>{{ eobs.allowable_amount }}</td>
+                            <td>{{ eobs.non_covered_amount }}</td>
+                            <td>{{ eobs.patient_deductible }}</td>
+                            <td>{{ eobs.amount_paid }}</td>
+                            <td>{{ eobs.patient_responsibility }}</td>
+                            <td>{{ codes[eobs.code].name }}</td>
+                            <td><button type="button" class="btn btn-danger" @click="deleteEOB()">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right"><strong>Totals</strong></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="row">
-                <div class="form-group col-md-4" :class="{'has-danger': errors.has('billed_amount')}">
-                    <strong>Billed Amount</strong>
-                    <input type="text" name="billed_amount" v-validate="'required'" v-model="inputsData.billedAmount" class="form-control m-input" />
-                    <form-error :attribute_name="'billed_amount'" :errors_form="errors"></form-error>
-                </div>
-                <div class="form-group col-md-4" :class="{'has-danger': errors.has('allowable_amount')}">
-                    <strong>U&C Allowable Amount</strong>
-                    <input type="text" name="allowable_amount" v-validate="'required'" v-model="inputsData.allowableAmount" class="form-control m-input" />
-                    <form-error :attribute_name="'allowable_amount'" :errors_form="errors"></form-error>
-                </div>
-                <div class="form-group col-md-4" :class="{'has-danger': errors.has('nonCovered_mount')}">
-                    <strong>Non-Covered Amount</strong>
-                    <input type="text" name="nonCovered_mount" v-validate="'required'" v-model="inputsData.nonCoveredAmount" class="form-control m-input" />
-                    <form-error :attribute_name="'nonCovered_mount'" :errors_form="errors"></form-error>
-                </div>
+            <div>
+                <button
+                    :disabled="disableForm"
+                    :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
+                    type="button"
+                    @click="addItem()"
+                    class="btn btn-primary col-md-12 mt-3"
+                >Send</button>
             </div>
-            <div class="row">
-                <div class="form-group col-md-4" :class="{'has-danger': errors.has('patient_deductible')}">
-                    <strong>Patient Deductible</strong>
-                    <input type="text" name="patient_deductible" v-validate="'required'" v-model="inputsData.patientDeductible" class="form-control m-input" />
-                    <form-error :attribute_name="'patient_deductible'" :errors_form="errors"></form-error>
-                </div>
-                <div class="form-group col-md-4" :class="{'has-danger': errors.has('amount_paid')}">
-                    <strong>Amount Paid</strong>
-                    <input type="text" name="amount_paid" v-validate="'required'" v-model="inputsData.amountPaid" class="form-control m-input" />
-                    <form-error :attribute_name="'amount_paid'" :errors_form="errors"></form-error>
-                </div>
-                <div class="form-group col-md-4" :class="{'has-danger': errors.has('patient_responsibility')}">
-                    <strong>Patient Responsibility</strong>
-                    <input type="text" name="patient_responsibility" v-validate="'required'" v-model="inputsData.patientResponsibility" class="form-control m-input" />
-                    <form-error :attribute_name="'patient_responsibility'" :errors_form="errors"></form-error>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-4" :class="{'has-danger': errors.has('code')}">
-                    <strong>Code</strong>
-                    <select-from-table
-                        name="code"
-                        :options="codes"
-                        :selected="inputsData.code|| ''"
-                        v-on:input="setDataFilter"
-                    ></select-from-table>
-                    <!--<input type="text" name="code" v-validate="'required'" v-model="inputsData.code" class="form-control m-input" />-->
-                    <form-error :attribute_name="'code'" :errors_form="errors"></form-error>
-                </div>
-            </div>
-            <button
-                :disabled="disableForm"
-                :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
-                type="submit"
-                class="btn btn-primary col-md-12 mt-3"
-            >Send</button>
-        </form>
     </div>
 </template>
 
@@ -224,7 +275,10 @@ export default {
                 { id: '9', name: 'AW - 9' },
                 { id: '10', name: 'AW - 10' },
                 { id: '11', name: 'AW - 11' }
-            ]
+            ],
+            arrEOB: [],
+            idEob: "",
+            amountBilled: ""
         }
     },
     mounted() {
@@ -254,6 +308,8 @@ export default {
                         this.inputsData.providerAddress = this.dataEOB.billto;
                         this.inputsData.providerTaxID = this.dataEOB.tax_id;
                         this.inputsData.providerNPI = this.dataEOB.NPI;
+
+                        this.viewPayments();
                     }
                 });
         },
@@ -276,10 +332,8 @@ export default {
                     formData.append("userID", this.$session.get("idUser"));
 
                     if (result) {
-                        this.disableForm = true;
                         this.axios.post("addFormEOB", formData)
                             .then(response => {
-                                this.disableForm = false;
                                 window.console.log(response);
                                 if (response.data.STATUS == "OK") {
                                     this.inputsData.dos = '';
@@ -293,14 +347,16 @@ export default {
                                     this.inputsData.patientResponsibility = '';
                                     this.inputsData.code = '';
 
-                                    this.$emit("addFormEOB", response.data.RESPONSE);
+                                    this.viewPayments();
+
+                                    /*this.$emit("addFormEOB", response.data.RESPONSE);
                                     window.Swal.fire({
                                         title: "Send",
                                         text: 'Success',
                                         type: "success",
                                         showCancelButton: true,
                                         confirmButtonText: "Ok"
-                                    });
+                                    });*/
                                 } else {
                                     if (response.data.ERRORS) {
                                         for (var prop in response.data.ERRORS) {
@@ -323,7 +379,42 @@ export default {
         setDataFilter: function(campo, value) {
             this.inputsData[campo] = value;
         },
-    }
+        addItem: function(){},
+        viewPayments: function(){
+            this.axios
+                .post("repricingEOB", {
+                    rePricingId: this.rePricingId
+                })
+                .then(response => {
+                    if (response.data.STATUS == 'OK') {
+                        this.arrEOB = response.data.RESPONSE.RESULTS;
+                    }
+                });
+        },
+        deleteEOB: function(){
+            this.axios
+                .post("deleteEOB", {
+                    idEob: this.idEob
+                })
+                .then(response => {
+                    if (response.data.STATUS == 'OK') {
+                        this.arrEOB = response.data.RESPONSE.RESULTS;
+                        window.console.log(this.arrEOB);
+                    }
+                });
+        }
+    }/*,
+    computed: {
+        totals: function(){
+            for (let index = 0; index < this.arrEOB.length; index++) {
+                this.amountBilled += parseFloat(this.arrEOB.billed_amount);
+            }
+
+            arrAmounts.push(this.amountBilled);
+            window.console.log(arrAmounts);
+            return arrAmounts;
+        }
+    }*/
 }
 </script>
 

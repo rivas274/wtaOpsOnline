@@ -535,7 +535,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group" :class="{'has-danger': errors.has('fileFee')}">
+                                <div class="form-group">
                                     <div class="col-md-6 eob-fee">
                                         <strong>Add Invoice FEE</strong>
                                         <div class="custom-file" v-if="this.rePricingDetaill.rePricing.files.invoice_fee && this.nameFee && !fileFEE">
@@ -591,6 +591,24 @@
                                         ></iframe>
                                         <h1 v-if="!previewFee && !this.nameFee" class="m-auto d-none d-md-block">Preview</h1>
                                         <iframe class="rounded h-100 w-100" v-if="previewFee" :src="previewFee" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Description</strong>
+                                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
+                                        <textarea
+                                            name="description"
+                                            class="form-control m-input"
+                                            :placeholder="$t('document.description')"
+                                            v-validate="'min:2|max:255|'"
+                                            v-model="descriptionFee"
+                                            ref="description"
+                                        ></textarea>
+                                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                                            <span>
+                                                <i class="la la-pencil-square-o"></i>
+                                            </span>
+                                        </span>
                                     </div>
                                 </div>
                                 <button
@@ -672,7 +690,8 @@ export default {
             availablebenf: "",
             covered_amount: "",
             noCovered: "",
-            showOption: ""
+            showOption: "",
+            descriptionFee: ""
         };
     },
     mounted() {
@@ -709,6 +728,7 @@ export default {
                     this.inputsData.icn = this.rePricingDetaill.rePricing.icn;
                     this.assistanceID = this.rePricingDetaill.rePricing.assist.id
                     this.noCovered = this.rePricingDetaill.invoice.not_covered;
+                    this.descriptionFee = this.rePricingDetaill.rePricing.files.description_fee;
 
                     this.getFileNames();
                     this.companyData();
@@ -841,6 +861,8 @@ export default {
                 formData.append("assistanceCode", this.rePricingDetaill.rePricing.assist.code);
                 formData.append("date", this.inputsData.date);
                 formData.append("providerRepricingId", this.rePricingDetaill.rePricing.providerRepricing);
+                formData.append("description", this.descriptionFee);
+                formData.append("patient", this.inputsData.patient);
 
                 const config = {
                     headers: {

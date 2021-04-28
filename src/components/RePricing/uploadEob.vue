@@ -98,7 +98,9 @@ export default {
         return {
             fileEOB: "",
             nameEob: "",
+            fileNames: {},
             EobID: this.rePricingDetaill.rePricing.files.EOB,
+            reference: ''
         }
     },
     mounted() {
@@ -112,11 +114,13 @@ export default {
                 formData.append("fileEob", this.fileEOB);
                 formData.append("userID", this.$session.get("idUser"));
                 formData.append("user", this.$session.get("user"));
-                formData.append("repricingId", this.rePricingBase.id);
+                formData.append("repricingId", this.rePricingDetaill.rePricing.id);
                 formData.append("nameEob", this.nameEob);
                 formData.append("assistanceId", this.rePricingDetaill.rePricing.assist.id);
                 formData.append("assistanceCode", this.rePricingDetaill.rePricing.assist.code);
                 formData.append("providerRepricingId", this.rePricingDetaill.rePricing.providerRepricing);
+                formData.append("reference", this.rePricingDetaill.invoice.ref);
+                formData.append("provider_name", this.rePricingDetaill.providerAssist.name);
 
                 const config = {
                     headers: {
@@ -207,6 +211,7 @@ export default {
     min-height: 350px !important;
     border: 0;
     overflow-x: none;
+    width: 100% !important;
 }
 .eob-fee {
     padding-left: 0px;
