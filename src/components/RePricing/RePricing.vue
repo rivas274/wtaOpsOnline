@@ -921,7 +921,8 @@ export default {
         billAmounts: function() {
             this.axios
                 .post("getBillAmounts", {
-                    fileID: this.inputsData.invoice_id
+                    fileID: this.inputsData.invoice_id,
+                    asistanceID = this.assistanceID
                 })
                 .then(response => {
                     this.dataAmount = response.data.RESPONSE;
