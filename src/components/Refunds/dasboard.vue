@@ -85,6 +85,7 @@ textarea.v-center {
                                                 <div
                                                     class="m-demo__preview"
                                                     style="padding: 5px;text-align: center; background: #36a3f7;"
+                                                    v-if="procesar_reembolso == 1"
                                                 >
                                                     <locale-changer class-prop="pull-right"></locale-changer>
                                                     <ul class="m-nav m-nav--inline">
@@ -173,6 +174,13 @@ textarea.v-center {
                                                             </a>
                                                         </li>
                                                     </ul>
+                                                </div>
+                                                <div v-else>
+                                                    <center>
+                                                        <div>
+                                                            Client do not process refunds
+                                                        </div>
+                                                    </center>
                                                 </div>
                                             </div>
                                         </div>
