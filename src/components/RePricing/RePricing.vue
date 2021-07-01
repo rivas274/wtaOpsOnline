@@ -922,12 +922,10 @@ export default {
             this.axios
                 .post("getBillAmounts", {
                     fileID: this.inputsData.invoice_id,
-                    asistanceID = this.assistanceID
+                    asistanceID: this.assistanceID
                 })
                 .then(response => {
                     this.dataAmount = response.data.RESPONSE;
-                    window.console.log(this.dataAmount);
-
                     if (this.dataAmount !== 'ERROR') {
                         this.amounttopay = this.dataAmount.amounttopay;
                         this.deducible = this.dataAmount.deducible;
