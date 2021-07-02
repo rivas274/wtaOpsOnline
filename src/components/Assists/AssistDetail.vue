@@ -262,14 +262,14 @@ iframe{
                             <template slot="title">{{ $t('assistance.contact') | upper }}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">{{$t('assistance.firstName')}}</span>
+                                    <span class="m-widget16__date">{{$t('general.firstName')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                         v-html="assistances.contact.fisrtName"
                                     ></span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">{{$t('assistance.firstName')}}</span>
+                                    <span class="m-widget16__date">{{$t('general.lastName')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                         v-html="assistances.contact.lastName"
