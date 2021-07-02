@@ -157,6 +157,11 @@
         "selected": "Seleccionado",
         "sentRepricing": "Enviado a Repricing",
         "withoutResults": "Sin Resultados",
+        "genre":{
+            "male": "Hombre",
+            "female": "Femenino",
+            "indefined": "Indefinido"
+        },
         "copyrightLogin": "Todos los usuarios de nuestros servicios en línea están sujetos a la Declaración de Privacidad y aceptan las Condiciones de Servicio. Por favor, © {year} ILS. Todos los derechos reservados. Desarrollado por ilstechnik.com"
     },
     "provider":{

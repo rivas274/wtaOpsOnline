@@ -157,6 +157,11 @@
         "selected": "Selected",
         "sentRepricing": "Send to Repricing",
         "withoutResults": "Without Results",
+        "genre":{
+            "male": "Male",
+            "female": "Female",
+            "indefined": "Indefined"
+        },
         "copyrightLogin":"All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © {year} Ils. All rights reserved. Powered by ilstechnik.com"
     },
     "provider":{

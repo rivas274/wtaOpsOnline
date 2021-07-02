@@ -309,7 +309,7 @@ iframe{
                                     <span class="m-widget16__date">{{$t('general.gender')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
-                                    >{{assistances.contact.genre | genreDetaill}}</span>
+                                    >{{assistances.contact.genre | genreDetaill | t}}</span>
                                 </div>
                             </template>
                         </AssistAccordionDetaill>

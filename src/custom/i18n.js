@@ -4,8 +4,10 @@ import VeeValidate from 'vee-validate';
 import validationMessagesEn from 'vee-validate/dist/locale/en';
 import validationMessagesEs from 'vee-validate/dist/locale/es';
 import validationMessagesPt from 'vee-validate/dist/locale/pt_BR';
+import VueI18nFilter from 'vue-i18n-filter';
 
 Vue.use(VueI18n);
+Vue.use(VueI18nFilter)
 
 Vue.use(VeeValidate, {
     i18nRootKey: 'validations',

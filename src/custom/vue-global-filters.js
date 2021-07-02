@@ -17,10 +17,10 @@ export default {
         });
         Vue.filter("genreDetaill", str => {
             var genreDetaill = {
-                'M': 'Male',
-                'F': 'Female',
-                'I': 'Indefined',
-            }
+                'F': 'general.genre.male',
+                'M': 'general.genre.female',
+                'I': 'general.genre.indefined',
+            };
             str = (typeof str === 'string') ? str.toUpperCase() : str;
             return genreDetaill[str] || genreDetaill['I'];
         });
