@@ -423,7 +423,7 @@ iframe{
                                     class="m-widget16__item"
                                     v-if="assistances.location.country.iso"
                                 >
-                                    <span class="m-widget16__date">Country</span>
+                                    <span class="m-widget16__date">{{$t('general.country')}}</span>
                                     <span class="m-widget16__price m--align-right">
                                         <Flag :iso="assistances.location.country.iso"></Flag>
                                     </span>

@@ -178,7 +178,7 @@
         "coveredAmount": "Covered Amount",
         "classification": "Classification",
         "originalAmount": "Original Amount",
-        "referenceDescription": "reference/Description",
+        "referenceDescription": "Referencia/Descripción",
         "date": {
             "document": "Date"
         }

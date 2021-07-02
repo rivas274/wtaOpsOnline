@@ -27,7 +27,7 @@
                     <template v-if="!$slots.tbody">
                         <tr>
                             <td :colspan="$slots.thead[0].children.length" class="text-center">
-                                <strong class="text-danger">No records found</strong>
+                                <h1 class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide">{{$t('general.noRecordsFound')}}</h1>
                             </td>
                         </tr>
                     </template>
