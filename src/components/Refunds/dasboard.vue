@@ -10,7 +10,7 @@ textarea.v-center {
 .preview-container img,
 .preview-container iframe {
     min-height: 350px;
-    border: 0;
+    border: 0px !important;
     overflow-x: none;
 }
 .has-danger .custom-file-label,
@@ -22,6 +22,12 @@ textarea.v-center {
     color: #f8f9fa;
     background-color: #dc3545;
     height: 2.6rem;
+}
+.custom-file-es.custom-file-label::after{
+    content: "Elegir" !important;
+}
+.custom-file-pt.custom-file-label::after{
+    content: "escolha" !important;
 }
 .m-nav .m-nav__item > .m-nav__link .m-nav__link-text {
     color: #f8f9fc;
@@ -63,7 +69,7 @@ textarea.v-center {
                                             style="padding-top: 0px; margin-top:40px;"
                                         >
                                             <a>
-                                                <h1>{{ $t('general.refund') }}</h1>
+                                                <h1>{{ $t('refund.refund') }}</h1>
                                             </a>
                                             <a class="m--hidden-mobile">
                                                 <custom-img
@@ -85,9 +91,8 @@ textarea.v-center {
                                                 <div
                                                     class="m-demo__preview"
                                                     style="padding: 5px;text-align: center; background: #36a3f7;"
-                                                    v-if="procesar_reembolso == 1"
                                                 >
-                                                    <locale-changer class-prop="pull-right"></locale-changer>
+                                                    <locale-changer class="pull-right"></locale-changer>
                                                     <ul class="m-nav m-nav--inline">
                                                         <li class="m-nav__item">
                                                             <a
@@ -121,7 +126,7 @@ textarea.v-center {
                                                         >
                                                             <a
                                                                 class="m-nav__link"
-                                                                v-tooltip:top="$t('general.voucher')"
+                                                                v-tooltip:top="$t('voucher.voucher')"
                                                             >
                                                                 <i
                                                                     class="m-nav__link-icon flaticon-interface-5"
@@ -175,16 +180,9 @@ textarea.v-center {
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <div v-else>
-                                                    <center>
-                                                        <div>
-                                                            Client do not process refunds
-                                                        </div>
-                                                    </center>
-                                                </div>
                                             </div>
                                         </div>
-                                        <div class="m-invoice__items" style="padding:2rem 0 3rem;">
+                                        <div class="m-invoice__items" style="padding:2rem 0 3rem;" v-if="results.processRefund=='Y'">
                                             <div class="m-portlet m-portlet--tab">
                                                 <div>
                                                     <div class="row mx-0">
@@ -233,7 +231,7 @@ textarea.v-center {
                                                                     >
                                                                         <strong>{{ $t('refund.date.document') }}</strong>
                                                                         <date-single-bt
-                                                                            class-prop="m-input"
+                                                                            class="m-input"
                                                                             name="date"
                                                                             watermark="Date"
                                                                             v-on:input="setDataFilter"
@@ -397,8 +395,9 @@ textarea.v-center {
                                                                         />
                                                                         <label
                                                                             class="custom-file-label"
+                                                                            :class="['custom-file-'+$root.$i18n.locale]"
                                                                             for="file"
-                                                                        >{{(typeof file =='object' &&'name' in file)?file.name:'Choose File'}}</label>
+                                                                        >{{(typeof file =='object' &&'name' in file)?file.name:$t('document.choose')}}</label>
                                                                     </div>
                                                                     <div
                                                                         class="progress"
@@ -480,6 +479,13 @@ textarea.v-center {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div v-else>
+                                            <div class="m-portlet m-portlet--tab text-center" style="padding:3rem;">
+                                                <h1>
+                                                    {{$t('refund.clientNotProcessRefunds')}}
+                                                </h1>
                                             </div>
                                         </div>
                                     </div>

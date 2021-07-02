@@ -8,11 +8,11 @@
             <span class="m-error_number">
                 <h1>404</h1>
             </span>
-            <h3 class="m-error_desc">Page not found</h3>
+            <h3 class="m-error_desc">{{$t('errorPage.notFound')}}</h3>
             <p class="m-error_desc">
-                We can not find the page you're looking for.
+                {{$t('errorPage.notFoundDetaill')}}
                 <br />
-                <router-link :to="{ path: '/'}" replace>Return home</router-link>or try the search bar below.
+                <router-link :to="{ path: '/'}" replace>{{$t('errorPage.returnHome')}}</router-link>
             </p>
         </div>
     </div>

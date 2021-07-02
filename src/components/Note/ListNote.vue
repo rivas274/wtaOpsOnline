@@ -5,6 +5,7 @@
 iframe {
     height: 360px;
     width: 100%;
+    border: 0px !important;
 }
 .m-messenger__message-text {
     font-weight: 400;
@@ -26,22 +27,22 @@ iframe {
     <section :class="{'m-loader m-loader--metal m-loader--div':showLoader}">
         <div class="form-group m-form__group row">
             <date-range-bt
-                class-prop="col-md-4 m-form__group-sub"
+                class="col-md-4 m-form__group-sub"
                 name="date"
-                watermark="Select date range"
+                :watermark="$t('general.selectDateRange')"
                 v-on:input="setDataFilter"
                 :value="filters.date"
             ></date-range-bt>
             <input-from-table
-                class-prop="col-md-4 m-form__group-sub"
+                class="col-md-4 m-form__group-sub"
                 name="search"
-                watermark="Search"
+                :watermark="$t('general.search')"
                 icon="flaticon-interface-5"
                 v-on:input="setDataFilter"
                 :value="filters.search"
             ></input-from-table>
             <div class="col m--align-right">
-                <button class="btn btn-info" @click="clear">Clear</button>
+                <button class="btn btn-info" @click="clear">{{$t('general.clear')}}</button>
             </div>
         </div>
         <div
@@ -65,7 +66,7 @@ iframe {
                             <div class="m-messenger__message-arrow"></div>
                             <div class="m-messenger__message-content">
                                 <div class="m-messenger__message-username">
-                                    <b>{{note.user.user}}@{{note.createdDate.date}} {{note.createdDate.hour}} | {{note.eventDetaill.description||'N/A'}}</b>
+                                    <b>{{note.user.user}}@{{note.createdDate.date}} {{note.createdDate.hour}} | {{note.eventDetaill.description||$t('general.notLoaded')}}</b>
                                 </div>
                                 <div class="m-messenger__message-text" v-html="note.description"></div>
                             </div>
@@ -83,10 +84,10 @@ iframe {
             </div>
         </div>
         <div class="text-center" v-else>
-            <strong
-                class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm"
+            <h1
+                class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide"
                 @click="clear"
-            >No records found</strong>
+            >{{$t('general.noRecordsFound')}}</h1>
         </div>
     </section>
 </template>

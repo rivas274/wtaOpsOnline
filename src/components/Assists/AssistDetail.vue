@@ -16,6 +16,9 @@
     overflow-y: auto;
     max-height: 400px;
 }
+iframe{
+    border: 0px !important;
+}
 </style>
 <template>
     <div
@@ -30,49 +33,49 @@
                 role="tablist"
             >
                 <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok">
-                    <template slot="title">VOUCHER DATA</template>
+                    <template slot="title">{{ $t('voucher.voucher') | upper}}</template>
                     <template slot="body">
                         <AssistAccordionDetaill>
-                            <template slot="title">Travel Source</template>
+                            <template slot="title">{{$t('voucher.travelSource')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item" v-if="assistances.voucher">
-                                    <span class="m-widget16__date">Source</span>
+                                    <span class="m-widget16__date">{{$t('voucher.source')}}</span>
                                     <span class="m-widget16__price m--align-right">
                                         <Flag :iso="assistances.voucher.source"></Flag>
                                     </span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Destination</span>
+                                    <span class="m-widget16__date">{{$t('voucher.destination')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
-                                    >{{assistances.voucher.destination || "N/A"}}</span>
+                                    >{{assistances.voucher.destination || $t('general.notLoaded')}}</span>
                                 </div>
                                 <div class="m-widget16__item" v-if="assistances.voucher.namePlan">
-                                    <span class="m-widget16__date">Plan</span>
+                                    <span class="m-widget16__date">{{$t('voucher.plan')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.voucher.namePlan}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">From</span>
+                                    <span class="m-widget16__date">{{$t('general.from')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.voucher.startDate}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">To</span>
+                                    <span class="m-widget16__date">{{$t('general.to')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.voucher.endDate}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Days</span>
+                                    <span class="m-widget16__date">{{$t('general.days')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.voucher.days}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Purchase Date</span>
+                                    <span class="m-widget16__date">{{$t('voucher.date.purchase')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.voucher.purchaseDate}}</span>
@@ -80,48 +83,48 @@
                             </template>
                         </AssistAccordionDetaill>
                         <AssistAccordionDetaill>
-                            <template slot="title">BENEFICIARIES</template>
+                            <template slot="title">{{$t('voucher.passenger')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">First Name</span>
+                                    <span class="m-widget16__date">{{$t('general.firstName')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                         v-html="assistances.passenger.fisrtName"
                                     ></span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Last Name</span>
+                                    <span class="m-widget16__date">{{$t('general.lastName')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                         v-html="assistances.passenger.lastName"
                                     ></span>
                                 </div>
                                 <div class="m-widget16__item" v-if="assistances.passenger.email">
-                                    <span class="m-widget16__date">Email</span>
+                                    <span class="m-widget16__date">{{$t('general.email')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.passenger.email}}</span>
                                 </div>
                                 <div class="m-widget16__item" v-if="assistances.passenger.phone">
-                                    <span class="m-widget16__date">Phone</span>
+                                    <span class="m-widget16__date">{{$t('general.phone')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.passenger.phone}}</span>
                                 </div>
                                 <div class="m-widget16__item" v-if="assistances.passenger.passport">
-                                    <span class="m-widget16__date">Passport No.</span>
+                                    <span class="m-widget16__date">{{$t('general.passport')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.passenger.passport}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Date of Birth</span>
+                                    <span class="m-widget16__date">{{$t('general.dateOfBirth')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.passenger.birthDate}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Age</span>
+                                    <span class="m-widget16__date">{{$t('general.age')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.passenger.age}}</span>
@@ -129,14 +132,14 @@
                             </template>
                         </AssistAccordionDetaill>
                         <AssistAccordionDetaill>
-                            <template slot="title">OTHER INFORMATION</template>
+                            <template slot="title">{{$t('general.additionalInformation')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Observations</span>
+                                    <span class="m-widget16__date">{{$t('general.observations')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                         v-if="!assistances.voucher.comments.comments"
-                                    >N/A</span>
+                                    >{{$t('general.notLoaded')}}</span>
                                 </div>
                                 <div
                                     class="m-widget16__item"
@@ -148,11 +151,11 @@
                                     ></span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Medical comments</span>
+                                    <span class="m-widget16__date">{{$t('voucher.medicalComments')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                         v-if="!assistances.voucher.comments.medical"
-                                    >N/A</span>
+                                    >{{$t('general.notLoaded')}}</span>
                                 </div>
                                 <div
                                     class="m-widget16__item"
@@ -170,14 +173,14 @@
                                     <div class="m-widget16__item">
                                         <span
                                             class="m-widget16__amount m--align-center"
-                                        >Contact Emergency</span>
+                                        >{{$t('voucher.emergencyContact')|upper}}</span>
                                     </div>
                                 </div>
                                 <div
                                     class="m-widget16__item"
                                     v-if="assistances.voucher.contact.name"
                                 >
-                                    <span class="m-widget16__date">Name</span>
+                                    <span class="m-widget16__date">{{$t('general.name')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.voucher.contact.name}}</span>
@@ -186,7 +189,7 @@
                                     class="m-widget16__item"
                                     v-if="assistances.voucher.contact.email"
                                 >
-                                    <span class="m-widget16__date">Email</span>
+                                    <span class="m-widget16__date">{{$t('general.email')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.voucher.contact.email}}</span>
@@ -195,17 +198,17 @@
                                     class="m-widget16__item"
                                     v-if="assistances.voucher.contact.phone"
                                 >
-                                    <span class="m-widget16__date">Phone</span>
+                                    <span class="m-widget16__date">{{$t('general.phone')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.voucher.contact.phone}}</span>
                                 </div>
                                 <div class="m-widget16__item" v-if="benefit.SOURCE">
-                                    <span class="m-widget16__date">Benefit</span>
+                                    <span class="m-widget16__date">{{$t('voucher.benefit')}}</span>
                                     <span class="m-widget16__price m--align-right">
                                         {{benefit.SOURCE}}
                                         <pop-over
-                                            class-prop="btn btn-secondary m-btn m-btn--icon m-btn--icon-only m-btn--pill"
+                                            class="btn btn-secondary m-btn m-btn--icon m-btn--icon-only m-btn--pill"
                                             :placement="'left'"
                                             :title="benefit.SOURCE + ' |   ' + (assistances.voucher.namePlan || '')"
                                         >
@@ -220,10 +223,10 @@
                                                     <thead>
                                                         <tr>
                                                             <th>
-                                                                <strong>Name</strong>
+                                                                <strong>{{$t('general.description')}}</strong>
                                                             </th>
                                                             <th>
-                                                                <strong>Value</strong>
+                                                                <strong>{{$t('general.value')}}</strong>
                                                             </th>
                                                         </tr>
                                                     </thead>
@@ -231,7 +234,7 @@
                                                         <template v-for="benf in benefit.BENEFIT">
                                                             <tr :key="benf.id" v-if="benf.name">
                                                                 <td v-html="benf.name"></td>
-                                                                <td v-html="benf.valor||'N/A'"></td>
+                                                                <td v-html="benf.valor||$('general.notApplicable')"></td>
                                                             </tr>
                                                         </template>
                                                     </tbody>
@@ -245,7 +248,7 @@
                     </template>
                 </AssistAccordion>
                 <AssistAccordion :id="'_general_conditions_'+idAssist" ico="fa flaticon-file">
-                    <template slot="title">GENERAL CONDITIONS</template>
+                    <template slot="title">{{ $t('assistance.generalConditions') | upper }}</template>
                     <template slot="body">
                         <iframe class="preview"
                             :src="baseUrlApi()+'GeneralConditions/file/'+assistances.codeAssist"
@@ -253,57 +256,57 @@
                     </template>
                 </AssistAccordion>
                 <AssistAccordion :id="'_assistance_'+idAssist" ico="fa flaticon-computer">
-                    <template slot="title">ASSISTANCE DATA</template>
+                    <template slot="title">{{ $t('assistance.assistance') | upper }}</template>
                     <template slot="body">
                         <AssistAccordionDetaill>
-                            <template slot="title">ASSISTANCE CONCTACT</template>
+                            <template slot="title">{{ $t('assistance.contact') | upper }}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">First Name</span>
+                                    <span class="m-widget16__date">{{$t('assistance.firstName')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                         v-html="assistances.contact.fisrtName"
                                     ></span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Last Name</span>
+                                    <span class="m-widget16__date">{{$t('assistance.firstName')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                         v-html="assistances.contact.lastName"
                                     ></span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Email</span>
+                                    <span class="m-widget16__date">{{$t('general.email')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.contact.email}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Phone</span>
+                                    <span class="m-widget16__date">{{$t('general.phone')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.contact.phone}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Passport No.</span>
+                                    <span class="m-widget16__date">{{$t('general.passport')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.contact.passport}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Date of Birth</span>
+                                    <span class="m-widget16__date">{{$t('general.dateOfBirth')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.contact.birthDate}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Age</span>
+                                    <span class="m-widget16__date">{{$t('general.age')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.contact.age}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Genre</span>
+                                    <span class="m-widget16__date">{{$t('general.gender')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.contact.genre | genreDetaill}}</span>
@@ -311,54 +314,54 @@
                             </template>
                         </AssistAccordionDetaill>
                         <AssistAccordionDetaill>
-                            <template slot="title">INFORMATION ASSISTANCE</template>
+                            <template slot="title">{{ $t('assistance.information') | upper }}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Status</span>
+                                    <span class="m-widget16__date">{{$t('general.status')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
-                                    >{{assistances.statusAssist.label || 'Not Found'}}</span>
+                                    >{{assistances.statusAssist.label || $t('general.notLoaded')}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Opening Date</span>
+                                    <span class="m-widget16__date">{{$t('assistance.date.opening')}}</span>
                                     <span class="m-widget16__price m--align-right">
                                         {{assistances.registeredDate.date}}
-                                        <small>({{assistances.registeredDate.hour}})</small>
+                                        <small><b>({{assistances.registeredDate.hour}})</b></small>
                                     </span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Date Event</span>
+                                    <span class="m-widget16__date">{{$t('assistance.date.event')}}</span>
                                     <span class="m-widget16__price m--align-right">
                                         {{assistances.reportedDate.date}}
-                                        <small>({{assistances.reportedDate.hour}})</small>
+                                        <small><b>({{assistances.reportedDate.hour}})</b></small>
                                     </span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Source</span>
+                                    <span class="m-widget16__date">{{$t('voucher.source')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.origenAssist}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Relation</span>
+                                    <span class="m-widget16__date">{{$t('assistance.relation')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.contact.relation}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Case Type</span>
+                                    <span class="m-widget16__date">{{$t('assistance.type')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.caseType.description}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Symptoms</span>
+                                    <span class="m-widget16__date">{{$t('assistance.symptom')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.symptom.description}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Type of Coordination</span>
+                                    <span class="m-widget16__date">{{$t('assistance.typeCoordination')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.coordination.description}}</span>
@@ -366,7 +369,7 @@
                             </template>
                         </AssistAccordionDetaill>
                         <AssistAccordionDetaill>
-                            <template slot="title">DESCRIPTION</template>
+                            <template slot="title">{{$t('general.description')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
                                     <span
@@ -374,14 +377,14 @@
                                         v-if="assistances.contact.observations"
                                         v-html="assistances.contact.observations"
                                     ></span>
-                                    <span class="m-widget16__date m--align-center" v-else>N/A</span>
+                                    <span class="m-widget16__date m--align-center" v-else>{{$t('general.notLoaded')}}</span>
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
                         <AssistAccordionDetaill
                             v-if="Object.keys(assistances.caseTypeField).length>0"
                         >
-                            <template slot="title">CASE TYPE FIELDS</template>
+                            <template slot="title">{{$t('assistance.caseTypeFields')}}</template>
                             <template slot="body">
                                 <div
                                     class="m-widget16__item"
@@ -396,7 +399,7 @@
                         <AssistAccordionDetaill
                             v-if="Object.keys(assistances.insuranceField).length>0"
                         >
-                            <template slot="title">INSURANCE FIELDS</template>
+                            <template slot="title">{{$t('assistance.insuranceFields')}}</template>
                             <template slot="body">
                                 <div
                                     class="m-widget16__item"
@@ -411,10 +414,10 @@
                     </template>
                 </AssistAccordion>
                 <AssistAccordion :id="'_address_'+idAssist" ico="fa flaticon-placeholder">
-                    <template slot="title">ADDRESS</template>
+                    <template slot="title">{{$t('general.address')|upper}}</template>
                     <template slot="body">
                         <AssistAccordionDetaill>
-                            <template slot="title">Country</template>
+                            <template slot="title">{{$t('general.country')|upper}}</template>
                             <template slot="body">
                                 <div
                                     class="m-widget16__item"
@@ -429,7 +432,7 @@
                                     class="m-widget16__item"
                                     v-if="assistances.location.state.description"
                                 >
-                                    <span class="m-widget16__date">States</span>
+                                    <span class="m-widget16__date">{{$t('general.state')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.location.state.description}}</span>
@@ -438,7 +441,7 @@
                                     class="m-widget16__item"
                                     v-if="assistances.location.city.description"
                                 >
-                                    <span class="m-widget16__date">City</span>
+                                    <span class="m-widget16__date">{{$t('general.city')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.location.city.description}}</span>
@@ -446,10 +449,10 @@
                             </template>
                         </AssistAccordionDetaill>
                         <AssistAccordionDetaill>
-                            <template slot="title">Address</template>
+                            <template slot="title">{{$t('general.address')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item" v-if="assistances.location.address">
-                                    <span class="m-widget16__date">Address</span>
+                                    <span class="m-widget16__date">{{$t('general.address')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                         v-html="assistances.location.address"
@@ -459,25 +462,25 @@
                                     class="m-widget16__item"
                                     v-if="assistances.location.optionalAddress"
                                 >
-                                    <span class="m-widget16__date">Optional Address</span>
+                                    <span class="m-widget16__date">{{$t('general.optionalAddress')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.location.optionalAddress}}</span>
                                 </div>
                                 <div class="m-widget16__item" v-if="assistances.location.zipCode>0">
-                                    <span class="m-widget16__date">Zip Code</span>
+                                    <span class="m-widget16__date">{{$t('general.zipCode')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.location.zipCode}}</span>
                                 </div>
                                 <div class="m-widget16__item" v-if="assistances.location.namePlace">
-                                    <span class="m-widget16__date">Name/Place</span>
+                                    <span class="m-widget16__date">{{$t('assistance.namePlace')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.location.namePlace}}</span>
                                 </div>
                                 <div class="m-widget16__item" v-if="assistances.location.room">
-                                    <span class="m-widget16__date">Room</span>
+                                    <span class="m-widget16__date">{{$t('assistance.room')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.location.room}}</span>
@@ -485,10 +488,10 @@
                             </template>
                         </AssistAccordionDetaill>
                         <AssistAccordionDetaill>
-                            <template slot="title">Contact</template>
+                            <template slot="title">{{$t('general.contact')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">Phone</span>
+                                    <span class="m-widget16__date">{{$t('general.phone')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.location.phone}}</span>
@@ -497,13 +500,13 @@
                                     class="m-widget16__item"
                                     v-if="assistances.location.coordinates.lat"
                                 >
-                                    <span class="m-widget16__date">Coordinates</span>
+                                    <span class="m-widget16__date">{{$t('assistance.coordinates')}}</span>
                                     <span class="m-widget16__price m--align-right">
                                         <a
                                             :href="'https://www.google.com/maps/@'+assistances.location.coordinates.lat+','+assistances.location.coordinates.lng+',16z'"
                                             target="_blank"
                                         >
-                                            <i class="la la-map-marker"></i>Show Map
+                                            <i class="la la-map-marker"></i>{{$t('assistance.showMap')}}
                                         </a>
                                     </span>
                                 </div>
@@ -511,7 +514,7 @@
                                     class="m-widget16__item"
                                     v-if="assistances.location.coordinates.lat"
                                 >
-                                    <span class="m-widget16__date">Latitud</span>
+                                    <span class="m-widget16__date">{{$t('assistance.latitud')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.location.coordinates.lat|toFixed(7)}}</span>
@@ -520,7 +523,7 @@
                                     class="m-widget16__item"
                                     v-if="assistances.location.coordinates.lng"
                                 >
-                                    <span class="m-widget16__date">Longitud</span>
+                                    <span class="m-widget16__date">{{$t('assistance.longitud')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.location.coordinates.lng|toFixed(7)}}</span>

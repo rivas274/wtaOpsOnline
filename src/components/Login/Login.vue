@@ -55,7 +55,7 @@
                                     <input
                                         class="form-control m-input"
                                         type="text"
-                                        placeholder="User"
+                                        :placeholder="$t('general.user')"
                                         name="user"
                                         autocomplete="off"
                                         v-model.lazy="inputsData.user"
@@ -70,7 +70,7 @@
                                     <input
                                         class="form-control m-input m-login__form-input--last"
                                         type="password"
-                                        placeholder="Password"
+                                        :placeholder="$t('general.password')"
                                         name="password"
                                         v-model.lazy="inputsData.password"
                                         v-validate="'required|min:4|max:40|'"
@@ -84,14 +84,14 @@
                                         class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn"
                                         :disabled="disableForm"
                                         :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
-                                    >Sign In</button>
+                                    >{{$t('general.login')}}</button>
                                 </div>
                             </form>
                         </div>
                         <div class="m-login__account">
                             <span
                                 class="m-login__account-msg"
-                            >All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © {{ new Date().getFullYear() }} Ils. All rights reserved. Powered by ilstechnik.com</span>
+                            >{{$t('general.copyrightLogin',{'year':new Date().getFullYear()})}}</span>
                         </div>
                     </div>
                 </div>

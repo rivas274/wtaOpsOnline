@@ -5,6 +5,7 @@
 iframe {
     height: 360px;
     width: 100%;
+    border: 0px !important;
 }
 </style>
 
@@ -13,61 +14,59 @@ iframe {
         <template slot="thead">
             <tr>
                 <th>
-                    <span>ID</span>
+                    {{$t('general.name')}}
                 </th>
                 <th>
-                    <span>Email</span>
+                   {{$t('general.email')}}
                 </th>
                 <th>
-                    <span>Phone</span>
+                   {{$t('general.phone')}}
                 </th>
                 <th>
-                    <span>Priority</span>
+                   {{$t('provider.priority')}}
                 </th>
                 <th>
-                    <span>Country</span>
+                   {{$t('general.country')}}
                 </th>
                 <th>
-                    <span>State</span>
+                    {{$t('general.state')}}
                 </th>
                 <th>
-                    <span>Note</span>
+                   {{$t('assistance.notes')}}
                 </th>
                 <th>
-                    <span>Authorization</span>
+                   {{$t('provider.authorization')}}
                 </th>
                 <th>
-                    <span>Asign</span>
+                    {{$t('provider.asign')}}
                 </th>
             </tr>
         </template>
         <template slot="tbody">
             <template v-for="provider in results">
                 <tr :key="provider.id">
-                    <td>
-                        <span>{{provider.locality.name}}</span>
+                    <td v-html="provider.locality.name">
                     </td>
                     <td>
-                        <span>{{provider.provider.email||'N/A'}}</span>
+                        <span>{{provider.provider.email||$t('general.notLoaded')}}</span>
                     </td>
                     <td>
-                        <span>{{provider.locality.phone||'N/A'}}</span>
+                        <span>{{provider.locality.phone||$t('general.notLoaded')}}</span>
                     </td>
-                    <td class="text-center">
+                    <td>
                         <priority-number>{{provider.locality.priority||0}}</priority-number>
                     </td>
                     <td>
                         <Flag :iso="provider.locality.location.country.iso"></Flag>
                     </td>
-                    <td>
-                        <span>{{provider.locality.location.state.description||'N/A'}}</span>
+                    <td v-html="provider.locality.location.state.description||$t('general.notLoaded')">
                     </td>
-                    <td class="text-center">
-                        <pop-over v-if="provider.provider.publicNote" title="Public Note">
+                    <td>
+                        <pop-over v-if="provider.provider.publicNote" :title="$t('provider.publicNote')">
                             <template slot="button">
                                 <i
                                     class="fa fa-info-circle fa-2x text-info"
-                                    v-tooltip:top="'Public Note'"
+                                    v-tooltip:top="$t('provider.publicNote')"
                                 ></i>
                             </template>
                             <template slot="content">
@@ -76,7 +75,7 @@ iframe {
                         </pop-over>
                         <i v-else class="fa fa-info-circle fa-2x text-dark"></i>
                     </td>
-                    <td class="text-center">
+                    <td>
                         <i
                             v-if="provider.locality.autorization=='1'"
                             class="fa fa-ban text-danger fa-2x"
@@ -85,7 +84,7 @@ iframe {
                         <i
                             v-else
                             class="fa fa-arrow-alt-circle-right text-info fa-2x"
-                            v-tooltip:top="'Yes'"
+                            v-tooltip:top="$t('general.yes')"
                         ></i>
                     </td>
                     <td>
@@ -113,19 +112,19 @@ iframe {
                             <thead>
                                 <tr>
                                     <th>
-                                        <span>Payment Form</span>
+                                        {{$t('provider.paymentType')}}
                                     </th>
                                     <th>
-                                        <span>language</span>
+                                        {{$t('general.language')}}
                                     </th>
                                     <th>
-                                        <span>Documents</span>
+                                        {{$t('document.file')}}
                                     </th>
                                     <th>
-                                        <span>Reserve Price</span>
+                                        {{$t('provider.reserveAmount')}}
                                     </th>
                                     <th>
-                                        <span>Booking Text</span>
+                                        {{$t('provider.bookingText')}}
                                     </th>
                                 </tr>
                             </thead>

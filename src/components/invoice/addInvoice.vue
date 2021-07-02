@@ -3,9 +3,12 @@ textarea {
     min-height: 75px;
     resize: none;
 }
+.d-flex{
+    display: flex !important;
+}
 .preview-container iframe {
     min-height: 350px;
-    border: 0;
+    border: 0px !important;
     overflow-x: none;
 }
 .has-danger .custom-file-label,
@@ -17,6 +20,12 @@ textarea {
     color: #f8f9fa;
     background-color: #dc3545;
     height: 2.6rem;
+}
+.custom-file-es.custom-file-label::after{
+    content: "Elegir" !important;
+}
+.custom-file-pt.custom-file-label::after{
+    content: "escolha" !important;
 }
 </style>
 <template>
@@ -42,7 +51,7 @@ textarea {
                 <div class="form-group" :class="{'has-danger': errors.has('date')}">
                     <strong>{{ $t('general.date') }}</strong>
                     <date-single-bt
-                        class-prop="m-input"
+                        class="m-input"
                         name="date"
                         watermark="Date"
                         v-validate="'required'"
@@ -154,8 +163,9 @@ textarea {
                         />
                         <label
                             class="custom-file-label"
+                            :class="['custom-file-'+$root.$i18n.locale]"
                             for="file"
-                        >{{(typeof file =='object' &&'name' in file)?file.name:'Choose File'}}</label>
+                        >{{(typeof file =='object' &&'name' in file)?file.name:$t('document.choose')}}</label>
                     </div>
                     <div class="progress" v-if="uploadPercentage>0">
                         <div
@@ -177,7 +187,7 @@ textarea {
                 >{{ $t('general.send') }}</button>
             </form>
             <div class="col-md-6 bg-secondary d-flex preview-container p-0">
-                <h1 v-if="!preview" class="m-auto d-none d-md-block">Vista Previa</h1>
+                <h1 v-if="!preview" class="m-auto d-none d-md-block">{{$t('general.preview')}}</h1>
                 <iframe class="rounded h-100 w-100" v-if="preview" :src="preview" />
             </div>
         </div>

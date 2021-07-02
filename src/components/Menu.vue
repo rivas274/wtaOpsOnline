@@ -19,7 +19,7 @@
                     <router-link :to="{ path: '/dasboard'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
                         <i class="m-menu__link-icon flaticon-squares-3"></i>
-                        <span class="m-menu__link-text">Assistance</span>
+                        <span class="m-menu__link-text">{{$t('menu.assistance')}}</span>
                     </router-link>
                 </li>
                 <li
@@ -31,7 +31,7 @@
                     <router-link :to="{ path: '/re-pricing'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
                         <i class="m-menu__link-icon flaticon-open-box"></i>
-                        <span class="m-menu__link-text">RePricing</span>
+                        <span class="m-menu__link-text">{{$t('menu.rePricing')}}</span>
                     </router-link>
                 </li>
                 <li
@@ -43,32 +43,9 @@
                     <router-link :to="{ path: '/invoice'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
                         <i class="m-menu__link-icon flaticon-coins"></i>
-                        <span class="m-menu__link-text">Invoice</span>
+                        <span class="m-menu__link-text">{{$t('menu.invoice')}}</span>
                     </router-link>
                 </li>
-                <!-- <li
-            class="m-menu__item m-menu__item--submenu"
-            aria-haspopup="true"
-            m-menu-submenu-toggle="hover"
-          >
-            <a href="javascript:;" class="m-menu__link m-menu__toggle">
-              <span class="m-menu__item-here"></span>
-              <i class="m-menu__link-icon flaticon-open-box"></i>
-              <span class="m-menu__link-text">Layouts</span>
-              <i class="m-menu__ver-arrow la la-angle-right"></i>
-            </a>
-            <div class="m-menu__submenu">
-              <span class="m-menu__arrow"></span>
-              <ul class="m-menu__subnav">
-                <li class="m-menu__item m-menu__item--parent" aria-haspopup="true">
-                  <span class="m-menu__link">
-                    <span class="m-menu__item-here"></span>
-                    <span class="m-menu__link-text">Layouts</span>
-                  </span>
-                </li>
-              </ul>
-            </div>
-                </li>-->
             </ul>
         </div>
     </div>

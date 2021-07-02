@@ -75,7 +75,7 @@ Vue.mixin({
 Vue.use(VueAxios, customAxios);
 
 router.beforeEach((to, from, next) => {
-    i18n._vm.$root.$root.locale = (to.params.lang || 'eng');
+    i18n._vm.$root.$root.locale = (to.params.lang || (Vue._session.get('lang')||'en'));
     if (to.meta.isPublic) {
         if (to.name == "Login" && (Vue._session.get('TOKEN') || '').length == 16) {
             if (Vue.$middleware("repricing", "read")) {

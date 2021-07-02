@@ -2,40 +2,40 @@
 <template>
     <div class="content-tabs-left">
         <ul class="nav nav-tabs tabs-left">
-            <li :class="{active:tabShow=='General'}" v-tooltip:top="'General'">
+            <li :class="{active:tabShow=='General'}" v-tooltip:top="$t('general.general')">
                 <a
                     class="nav-link"
                     :class="{'m--font-success':tabShow=='General'}"
                     @click.prevent="showTab('General')"
                 >
                     <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                    <span>General</span>
+                    <span>{{$t('general.general')}}</span>
                 </a>
             </li>
-            <li v-if="permission.bills" :class="{active:tabShow=='Bills'}" v-tooltip:top="'Bills'">
+            <li v-if="permission.bills" :class="{active:tabShow=='Bills'}" v-tooltip:top="$t('menu.invoice')">
                 <a
                     class="nav-link"
                     :class="{'m--font-success':tabShow=='Bills'}"
                     @click.prevent="showTab('Bills')"
                 >
                     <i class="fa fa-money-bill" aria-hidden="true"></i>
-                    <span>Bills</span>
+                    <span>{{$t('menu.invoice')}}</span>
                 </a>
             </li>
-            <li v-if="permission.notes" :class="{active:tabShow=='Note'}" v-tooltip:top="'Note'">
+            <li v-if="permission.notes" :class="{active:tabShow=='Note'}" v-tooltip:top="$t('assistance.notes')">
                 <a
                     class="nav-link"
                     :class="{'m--font-success':tabShow=='Note'}"
                     @click.prevent="showTab('Note')"
                 >
                     <i class="fa fa-sticky-note" aria-hidden="true"></i>
-                    <span>Note</span>
+                    <span>{{$t('assistance.notes')}}</span>
                 </a>
             </li>
             <li
                 v-if="permission.provider"
                 :class="{active:tabShow=='Providers'}"
-                v-tooltip:top="'Providers'"
+                v-tooltip:top="$t('provider.provider')"
             >
                 <a
                     class="nav-link"
@@ -43,13 +43,13 @@
                     @click.prevent="showTab('Providers')"
                 >
                     <i class="fa fa-ambulance" aria-hidden="true"></i>
-                    <span>Providers</span>
+                    <span>{{$t('provider.provider')}}</span>
                 </a>
             </li>
             <li
                 v-if="permission.time_line"
                 :class="{active:tabShow=='time_line'}"
-                v-tooltip:top="'time_line'"
+                v-tooltip:top="$t('assistance.timeLine')"
             >
                 <a
                     class="nav-link"
@@ -57,7 +57,7 @@
                     @click.prevent="showTab('time_line')"
                 >
                     <i class="fa fa-clock" aria-hidden="true"></i>
-                    <span>Time_line</span>
+                    <span>{{$t('assistance.timeLine')}}</span>
                 </a>
             </li>
         </ul>

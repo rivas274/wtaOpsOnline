@@ -9,6 +9,9 @@ export default {
         Vue.filter("lower", str => {
             return (typeof str === 'string') ? str.toLowerCase() : str;
         });
+        Vue.filter("upper", str => {
+            return (typeof str === 'string') ? str.toUpperCase() : str;
+        });
         Vue.filter("firstLetter", str => {
             return (str || ' ').toString().split('')[0].toUpperCase();
         });

@@ -12,26 +12,28 @@
 }
 </style>
 <template>
-    <div class="locale-changer" :class="[classProp||'']">
+    <div class="locale-changer">
         <select
             v-model="selected"
             class="form-control m-bootstrap-select m_selectpicker"
-            :data-style="dataStyle||'btn-light'"
+            :data-style="dataStyle || 'btn-light'"
             @change="setLang"
         >
             <option
-                v-for="(lang, i) in langs"
+                v-for="(lang, i) in langsToShow"
                 :key="`Lang${i}`"
                 :data-content="`<img src='${path}${lang.flag}.svg'><span>${lang.desc}</span>`"
                 :value="lang.lang"
-            >{{ lang.lang }}</option>
+            >
+                {{ lang.lang }}
+            </option>
         </select>
     </div>
 </template>
 
 <script>
 export default {
-    props: ["data-style", "class-prop"],
+    props: ["data-style", "active-langs"],
     mounted() {
         window.$(this.$el)
             .find(".m_selectpicker")
@@ -61,14 +63,25 @@ export default {
         };
     },
     methods: {
-        setLang: function() {
+        setLang: function () {
             this.$root.$i18n.locale = this.selected;
             this.$validator.localize(this.selected);
+            this.$session.set('lang',this.selected)
             this.$router.replace({
                 params: {
                     lang: this.$root.$i18n.locale
                 }
             });
+        }
+    },
+    computed: {
+        langsToShow: function () {
+            if (!Array.isArray(this.activeLangs)) {
+                return this.langs;
+            }
+            return this.langs.filter(item => {
+                return this.activeLangs.includes(item.lang)
+            })
         }
     }
 };

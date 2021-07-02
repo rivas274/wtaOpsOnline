@@ -1,48 +1,184 @@
 {
+    "menu": {
+        "assistance":"Assistance",
+        "rePricing":"Re-Pricing",
+        "invoice":"Invoice"
+    },
+    "rePricing":{
+        "staus":{
+            "noProvider":"No repricing provider",
+            "selected":"Repricing selected",
+            "providerIn":"Repricing Provider in Repricing",
+            "inProcess":"Repricing in process",
+            "updated":"Repricing updated",
+            "invoiced":"Repricing Invoiced",
+            "completed":"Repricing Completed",
+            "withEOB":"Repricing with EOB"
+        }
+    },
+    "invoice":{
+        "addInvoice":"Add Invoice",
+        "invoiceAmount":"Invoice Amount",
+        "invoiceProvider":"Invoice Provider",
+        "date":{
+            "bill":"Bill Date"
+        }
+    },
+    "acount": {
+        "myAcount": "My Acount",
+        "oldPassword":"Password",
+        "newPassword":"New Password",
+        "confirmNewPassword":"Confirm New Password"
+    },
     "refund": {
+        "refund": "Refund",
         "information": "Information Refunds",
         "payee": "Payee of refund (Name)",
         "reference": "Reference Refund",
         "date": {
             "document": "Refund Date"
-        }
+        },
+        "clientNotProcessRefunds":"Client do not process refunds"
+    },
+    "company": {
+        "company": "Company"
     },
     "document": {
+        "category": "Category",
         "type": "Document Type",
         "amount": "Amount",
         "currency": "Currency",
         "description": "Description",
         "file": "File Document",
+        "choose": "Choose File",
         "send": "Sent Document",
         "uploaded": "Your document has been successfully uploaded",
         "uploadAnother": "Upload Another Document"
     },
     "assistance": {
+        "clients": "Clients",
+        "assistance":"Assistance",
+        "notes":"Notes",
+        "timeLine":"Time Line",
+        "relation":"Relation",
+        "contact":"Contact",
+        "caseNumber": "Case Number",
         "code": "Assistance Code",
+        "symptom": "Symptom",
+        "typeCoordination": "Type of Coordination",
+        "type": "Case type",
+        "patientName": "Patient Name",
         "date": {
+            "opening": "Opening Date",
+            "event": "Event Date",
             "case": "Date of Case",
             "birth": "Birthdate"
-        }
+        },
+        "uploadBills": "Upload assistance Invoices",
+        "generalConditions": "General Conditions",
+        "information": "information",
+        "caseTypeFields,": "Case Type Fields",
+        "insuranceFields": "Insurance Fields",
+        "namePlace": "Name/Place",
+        "room": "Room",
+        "coordinates": "coordinates",
+        "showMap": "Show Map",
+        "latitud": "Latitud",
+        "longitud": "Longitud"
     },
     "voucher": {
-        "name": "Name of Passenger"
+        "voucher": "Voucher",
+        "name": "Name of Passenger",
+        "date": {
+            "purchase": "purchase Date"
+        },
+        "travelSource": "Travel Source",
+        "source": "Source",
+        "destination": "destination",
+        "plan": "Plan",
+        "passenger":"Passenger",
+        "benefit":"Benefit",
+        "medicalComments":"Medical Comments",
+        "emergencyContact":"Emergency Contact"
     },
     "general": {
-        "refund": "Refund",
+        "preview":"Preview",
+        "search":"Search",
+        "language":"Language",
+        "save":"Save",
+        "general":"General",
+        "contact": "Contact",
+        "name": "name",
+        "value": "value",
+        "address":"address",
+        "optionalAddress":"Optional Address",
+        "notApplicable": "Not Applicable",
+        "notLoaded": "Not Loaded",
+        "noRecordsFound": "No Records Found",
+        "description": "Description",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phone": "Phone",
+        "passport": "Passport",
+        "gender": "gender",
+        "dateOfBirth": "Date Of Birth",
+        "dowload": "dowload",
+        "age": "age",
+        "zipCode": "Zip Code",
+        "additionalInformation": "Additional Information",
+        "observations": "Observations",
+        "clear": "Clear",
+        "country": "Country",
+        "state": "State",
+        "city": "City",
+        "list": "List",
+        "status": "Status",
+        "options": "Options",
+        "apply": "Apply",
+        "cancel": "Cancel",
+        "from": "From",
+        "to": "To",
+        "days": "Days",
+        "custom": "Custom",
+        "selectDateRange": "Select Date Range",
+        "login": "login",
+        "password": "Password",
+        "user": "User",
+        "logout":"Logout",
+        "acount":"Acount",
         "client": "Client",
-        "voucher": "Voucher",
         "send": "Send",
         "no": "No",
+        "yes":"Yes",
         "date": "Date",
-        "upload_assistance_bills": "Upload Assistance Bills",
-        "case_number": "Case Number",
-        "patient_name": "Patient Name",
-        "sent_repricing": "Sent to Repricing"
+        "pressEnterSelect": "Press Enter to Select",
+        "deselectLabel": "Press Enter to remove",
+        "selected": "Selected",
+        "sentRepricing": "Send to Repricing",
+        "withoutResults": "Without Results",
+        "copyrightLogin":"All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © {year} Ils. All rights reserved. Powered by ilstechnik.com"
     },
-    "AssistanceBills": {
+    "provider":{
+        "provider":"Provider",
+        "paymentType":"Payment Type",
+        "priority":"Priority",
+        "publicNote":"Public Note",
+        "asign":"Asign",
+        "bookingText":"Booking Text",
+        "reserveAmount":"Reserve Amount",
+        "authorization":"Authorization"
+    },
+    "assistanceBills": {
         "information": "Bill Information",
         "providerName": "Provider Name",
         "reference": "Reference",
+        "exchangeRate": "Exchange Rate",
+        "amountUSD": "Amount USD",
+        "coveredAmount": "Covered Amount",
+        "classification": "Classification",
+        "originalAmount": "Original Amount",
+        "referenceDescription": "reference/Description",
         "date": {
             "document": "Date"
         }
@@ -50,5 +186,35 @@
     "windows": {
         "close": "Close the Windows",
         "pleaseClose": "The process finished satisfactorily, please close the window"
+    },
+    "errorPage":{
+        "notFound":"Page not found",
+        "notFoundDetaill":"We can not find the page you're looking for.",
+        "returnHome":"Return home"
+    },
+    "datePicker": {
+        "daysOfWeek": {
+            "su":"Su",
+            "mo":"Mo",
+            "tu":"Tu",
+            "we":"We",
+            "th":"Th",
+            "fr":"Fr",
+            "sa":"Sa"
+        },
+        "monthNames": {
+            "january":"January",
+            "february":"February",
+            "march":"March",
+            "april":"April",
+            "may":"May",
+            "june":"June",
+            "july":"July",
+            "august":"August",
+            "september":"September",
+            "october":"October",
+            "november":"November",
+            "december":"December"
+        }
     }
 }

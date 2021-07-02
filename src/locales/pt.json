@@ -14,6 +14,7 @@
         "currency": "Moeda",
         "description": "Descrição",
         "file": "Documento",
+        "choose": "Escolher Ficheiro",
         "send": "Documento Enviado",
         "uploaded": "Seu documento foi enviado com sucesso",
         "uploadAnother": "Upload de outro documento"
@@ -38,9 +39,9 @@
         "upload_assistance_bills": "Enviar Contas de Assistência",
         "case_number": "Número do caso",
         "patient_name": "Nome do Paciente",
-        "sent_repricing": "Enviado para Rericing"
+        "sentRepricing": "Enviado para Rericing"
     },
-    "AssistanceBills": {
+    "assistanceBills": {
         "information": "Informações da fatura",
         "providerName": "Nome do provedor",
         "reference": "Referência",

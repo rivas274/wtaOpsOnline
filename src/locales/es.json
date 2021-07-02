@@ -1,48 +1,184 @@
 {
+    "menu": {
+        "assistance": "Asistencia",
+        "rePricing": "RePricing",
+        "invoice": "Factura"
+    },
+    "rePricing":{
+        "staus":{
+            "noProvider":"Sin proveedor de repricing",
+            "selected":"Repricing seleccionado",
+            "providerIn":"Proveedor de repricing en Repricing",
+            "inProcess":"Repricing en proceso",
+            "updated":"Repricing actualizado",
+            "invoiced":"Repricing facturado",
+            "completed":"Repricing completado",
+            "withEOB":"Repricing con EOB"
+        }
+    },
+    "invoice":{
+        "addInvoice":"Agregar Factura",
+        "invoiceAmount":"Monto de la factura",
+        "invoiceProvider":"Proveedor de la facturas",
+        "date":{
+            "bill":"fecha de la factura"
+        }
+    },
+    "acount": {
+        "myAcount": "Mi Cuenta",
+        "oldPassword":"Contraseña actual",
+        "newPassword":"Nueva Contraseña",
+        "confirmNewPassword":"Confirmar nueva contraseña"
+    },
     "refund": {
+        "refund": "Reembolso",
         "information": "Información de reembolso",
         "payee": "Beneficiario del reembolso (Nombre)",
         "reference": "Reembolso Referencia",
         "date": {
             "document": "Fecha de Reembolso"
-        }
+        },
+        "clientNotProcessRefunds": "El cliente no procesa reembolsos"
+    },
+    "company": {
+        "company": "Compañia"
     },
     "document": {
+        "category": "Categoria",
         "type": "Tipo de Documento",
-        "amount": "Cantidad",
+        "amount": "Monto",
         "currency": "Moneda",
         "description": "Descripción",
         "file": "Documento",
+        "choose": "Elegir archivo",
         "send": "Documento Enviado",
         "uploaded": "Su documento ha sido cargado exitosamente",
         "uploadAnother": "Subir otro documento"
     },
     "assistance": {
-        "code": "Código de asistencia",
+        "clients": "Clientes",
+        "assistance":"Asistencia",
+        "notes":"Notas",
+        "timeLine":"Linea de tiempo",
+        "relation":"Relación",
+        "contact":"Contacto de la Asistencia",
+        "caseNumber": "Número de Caso",
+        "code": "Código de Asistencia",
+        "symptom": "Síntoma",
+        "typeCoordination": "Tipo de coordinación",
+        "type": "Tipo de Caso",
+        "patientName": "Nombre del Paciente",
         "date": {
+            "opening": "Fecha de apertura",
+            "event": "Fecha Evento",
             "case": "Fecha del caso",
             "birth": "Fecha de nacimiento"
-        }
+        },
+        "uploadBills": "Subir Facturas de Asistencia",
+        "generalConditions": "Condicionado General",
+        "information": "Información",
+        "caseTypeFields,": "Campos del tipo de caso",
+        "insuranceFields": "Campos del seguro",
+        "namePlace": "Nombre/Lugar",
+        "room": "Habitación",
+        "coordinates": "Coordenadas",
+        "showMap": "Coordenadas",
+        "latitud": "Latitud",
+        "longitud": "Longitud"
     },
     "voucher": {
-        "name": "Nombre del pasajero"
+        "voucher": "Voucher",
+        "name": "Nombre del pasajero",
+        "date": {
+            "purchase": "Fecha de compra"
+        },
+        "travelSource": "Origen del viajes",
+        "source": "Origen",
+        "destination": "Destino",
+        "plan": "Plan",
+        "passenger":"Pasajero",
+        "benefit":"Beneficios",
+        "medicalComments":"Comentarios médicos",
+        "emergencyContact":"Contacto de emergencia"
     },
     "general": {
-        "refund": "Reembolso",
+        "preview":"Vista Previa",
+        "search":"Buscar",
+        "language":"Lenguaje",
+        "save":"Guardar",
+        "general":"General",
+        "contact": "Contacto",
+        "name": "Nombre",
+        "value": "Valor",
+        "address":"Dirección",
+        "optionalAddress":"Dirección opcional",
+        "notApplicable": "No aplica",
+        "notLoaded": "Sin cargar",
+        "noRecordsFound": "No se encontraron registros",
+        "description": "Descripcion",
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "email": "Email",
+        "phone": "Teléfono",
+        "passport": "Pasaporte",
+        "gender": "Género",
+        "dateOfBirth": "Fecha de nacimiento",
+        "dowload": "descargar",
+        "age": "Edad",
+        "zipCode": "código postal",
+        "additionalInformation": "Información Adicional",
+        "observations": "Observaciones",
+        "clear": "Limpiar",
+        "country": "País",
+        "state": "Estado",
+        "city": "Ciudad",
+        "list": "Listado",
+        "status": "Estatus",
+        "options": "Opciones",
+        "apply": "Aplicar",
+        "cancel": "Cancelar",
+        "from": "Desde",
+        "to": "hasta",
+        "days": "Días",
+        "custom": "Personalizado",
+        "selectDateRange": "Seleccionar fechas",
+        "login": "login",
+        "password": "Clave",
+        "user": "Usuario",
+        "logout": "Cierre de sesión",
+        "acount": "Cuenta",
         "client": "Cliente",
-        "voucher": "Voucher",
         "send": "Enviar",
         "no": "No",
+        "yes":"Si",
         "date": "Fecha",
-        "upload_assistance_bills": "Subir Facturas de Asistencia",
-        "case_number": "Número de Caso",
-        "patient_name": "Nombre del Paciente",
-        "sent_repricing": "Enviado a Repricing"
+        "pressEnterSelect": "Pulse Enter para seleccionar",
+        "deselectLabel": "Pulse Enter para remover",
+        "selected": "Seleccionado",
+        "sentRepricing": "Enviado a Repricing",
+        "withoutResults": "Sin Resultados",
+        "copyrightLogin": "Todos los usuarios de nuestros servicios en línea están sujetos a la Declaración de Privacidad y aceptan las Condiciones de Servicio. Por favor, © {year} ILS. Todos los derechos reservados. Desarrollado por ilstechnik.com"
     },
-    "AssistanceBills": {
+    "provider":{
+        "provider":"Proveedor",
+        "paymentType":"Tipo de pago",
+        "priority":"Prioridad",
+        "publicNote":"Notas Públicas",
+        "asign":"Asignar",
+        "bookingText":"Texto de Reserva",
+        "reserveAmount":"Monto de reserva",
+        "authorization":"Autorización"
+    },
+    "assistanceBills": {
         "information": "Informacion de la Factura",
         "providerName": "Nombre del Proveedor",
         "reference": "Referencia",
+        "exchangeRate": "Tasa de cambio",
+        "amountUSD": "Monto USD",
+        "coveredAmount": "Monto Cubierto",
+        "classification": "Clasificación",
+        "originalAmount": "Monto Original",
+        "referenceDescription": "Reference/Description",
         "date": {
             "document": "Fecha"
         }
@@ -50,5 +186,35 @@
     "windows": {
         "close": "Cierre la ventana",
         "pleaseClose": "El proceso finalizó satisfactoriamente, cierra la ventana"
+    },
+    "errorPage": {
+        "notFound": "Página no encontrada",
+        "notFoundDetaill": "No podemos encontrar la página que busca.",
+        "returnHome": "Volver al inicio"
+    },
+    "datePicker": {
+        "daysOfWeek": {
+            "su": "Do",
+            "mo": "Lu",
+            "tu": "Ma",
+            "we": "Mi",
+            "th": "Ju",
+            "fr": "Vi",
+            "sa": "Sa"
+        },
+        "monthNames": {
+            "january": "Enero",
+            "february": "Febrero",
+            "march": "Marzo",
+            "april": "Abril",
+            "may": "Mayo",
+            "june": "Junio",
+            "july": "Julio",
+            "august": "Agosto",
+            "september": "Septiembre",
+            "october": "Octubre",
+            "november": "Noviembre",
+            "december": "Diciembre"
+        }
     }
 }

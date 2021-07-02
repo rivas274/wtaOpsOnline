@@ -10,7 +10,7 @@
 }
 .preview-container iframe {
     min-height: 350px !important;
-    border: 0;
+    border: 0px !important;
     overflow-x: none;
 }
 .has-danger .custom-file-label,
@@ -22,6 +22,12 @@
     color: #f8f9fa;
     background-color: #dc3545;
     height: 2.6rem;
+}
+.custom-file-es.custom-file-label::after{
+    content: "Elegir" !important;
+}
+.custom-file-pt.custom-file-label::after{
+    content: "escolha" !important;
 }
 .eob-fee {
     padding-left: 0px;
@@ -79,7 +85,7 @@
                 >
                     <div class="m-portlet__body m-portlet__body--no-padding">
                         <div class="row m-row--no-padding m-row--col-separator-xl">
-                            <AssistAccordionDetaill class-prop="col-md-6">
+                            <AssistAccordionDetaill class="col-md-6">
                                 <template slot="title">Claims Management</template>
                                 <template slot="body">
                                     <div class="m-widget16__item">
@@ -98,19 +104,19 @@
                                         >{{ rePricingDetaill.rePricing.client }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">{{ $t('general.case_number') }}</span>
+                                        <span class="m-widget16__date">{{ $t('assistance.caseNumber') }}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.rePricing.assist.code }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">{{ $t('general.voucher') }}</span>
+                                        <span class="m-widget16__date">{{ $t('voucher.voucher') }}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.rePricing.assist.voucher }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">{{ $t('general.patient_name') }}</span>
+                                        <span class="m-widget16__date">{{ $t('assistance.patientName') }}</span>
                                         <span class="m-widget16__price m--align-right">
                                             {{ rePricingDetaill.rePricing.contact.fisrtName }}
                                             {{ rePricingDetaill.rePricing.contact.lastName }}
@@ -149,14 +155,14 @@
                                         </span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">{{ $t('general.sent_repricing') }}</span>
+                                        <span class="m-widget16__date">{{ $t('general.sentRepricing') }}</span>
                                         <span class="m-widget16__price m--align-right">
                                             {{ rePricingDetaill.createdDate.date }}
                                         </span>
                                     </div>
                                 </template>
                             </AssistAccordionDetaill>
-                            <AssistAccordionDetaill class-prop="col-md-6">
+                            <AssistAccordionDetaill class="col-md-6">
                                 <template slot="title">Claim Information</template>
                                 <template slot="body">
                                     <div class="m-widget16__item">
@@ -166,7 +172,7 @@
                                         >{{ rePricingDetaill.invoice.category }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">{{ $t('AssistanceBills.reference') }}</span>
+                                        <span class="m-widget16__date">{{ $t('assistanceBills.reference') }}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.ref }}</span>
@@ -233,7 +239,7 @@
                                     </div>
                                 </template>
                             </AssistAccordionDetaill>
-                            <AssistAccordionDetaill class-prop="col-md-12">
+                            <AssistAccordionDetaill class="col-md-12">
                                 <template slot="title">Invoice File</template>
                                 <template slot="body">
                                     <iframe
@@ -551,6 +557,7 @@
                                             />
                                             <label
                                                 class="custom-file-label"
+                                                :class="['custom-file-'+$root.$i18n.locale]"
                                                 for="fileFee"
                                             >{{ this.nameFee }}</label>
                                         </div>
@@ -567,8 +574,9 @@
                                             />
                                             <label
                                                 class="custom-file-label"
+                                                :class="['custom-file-'+$root.$i18n.locale]"
                                                 for="fileFee"
-                                            >{{(typeof fileFEE =='object' && 'name' in fileFEE)?fileFEE.name:'Choose File'}}</label>
+                                            >{{(typeof fileFEE =='object' && 'name' in fileFEE)?fileFEE.name:$t('document.choose')}}</label>
                                         </div>
                                         <div class="progress" v-if="uploadPercentage>0">
                                             <div

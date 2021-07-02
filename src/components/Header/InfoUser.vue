@@ -13,7 +13,7 @@
             <span class="m-topbar__userpic">
                 <custom-img
                     :src="baseUrlApi()+'app/admin/img_user/'+imgUser"
-                    :default="baseUrlApi()+'/app/img/avatar.jpg'"
+                    default="assets/img/login/account.svg"
                 ></custom-img>
             </span>
         </a>
@@ -28,7 +28,7 @@
                         <div class="m-card-user__pic">
                             <custom-img
                                 :src="baseUrlApi()+'app/admin/img_user/'+imgUser"
-                                :default="baseUrlApi()+'app/img/avatar.jpg'"
+                                default="assets/img/login/account.svg"
                             ></custom-img>
                         </div>
                         <div class="m-card-user__details">
@@ -51,12 +51,12 @@
                                     @click.prevent="logOut"
                                     class="btn m-btn--pill btn-outline-primary pull-right m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
                                     :class="{'m-login__btn--primary m-loader m-loader--right': spin}"
-                                >Logout</a>
+                                >{{$t('general.logout')}}</a>
                                 <router-link
                                     :to="{ path: '/MyAcount'}"
                                     replace
                                     class="btn m-btn--pill btn-outline-success m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
-                                >Acount</router-link>
+                                >{{$t('general.acount')}}</router-link>
                             </li>
                         </ul>
                     </div>

@@ -8,6 +8,7 @@
 iframe {
     height: 360px;
     width: 100%;
+    border: 0px !important;
 }
 </style>
 <template>
@@ -15,14 +16,14 @@ iframe {
         <template slot="filters">
             <div class="form-group m-form__group row">
                 <date-range-bt
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="date"
                     watermark="Select date range"
                     v-on:input="setDataFilter"
                     :value="filters.date"
                 ></date-range-bt>
                 <input-from-table
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="code"
                     watermark="Reference / Description"
                     icon="flaticon-interface-5"
@@ -78,19 +79,19 @@ iframe {
                         <span>{{invoice.idFile}}</span>
                     </td>
                     <td>
-                        <span v-html="invoice.reference||'N/A'"></span>
+                        <span v-html="invoice.reference||$t('general.notLoaded')"></span>
                     </td>
                     <td>
-                        <span v-html="invoice.category||'N/A'"></span>
+                        <span v-html="invoice.category||$t('general.notLoaded')"></span>
                     </td>
                     <td>
-                        <span>{{invoice.billDate||'N/A'}}</span>
+                        <span>{{invoice.billDate||$t('general.notLoaded')}}</span>
                     </td>
                     <td>
-                        <span>{{invoice.assist.codigo||'N/A'}}</span>
+                        <span>{{invoice.assist.codigo||$t('general.notLoaded')}}</span>
                     </td>
                     <td>
-                        <span>{{invoice.assist.voucher||'N/A'}}</span>
+                        <span>{{invoice.assist.voucher||$t('general.notLoaded')}}</span>
                     </td>
                     <td>
                         <span

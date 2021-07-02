@@ -3,20 +3,20 @@
         class="m-form m-form--fit m-form--label-align-right m-form--state"
         @submit.prevent="chagePassword"
     >
-        <content-m :navigation="[{title:'My acount'}]">
-            <template slot="title">My acount</template>
-            <template slot="header">My acount</template>
+        <content-m :navigation="[{title:$t('acount.myAcount')}]">
+            <template slot="title">{{$t('acount.myAcount')}}</template>
+            <template slot="header">{{$t('acount.myAcount')}}</template>
             <template slot="body">
                 <div
                     class="form-group m-form__group"
                     :class="{'has-danger': errors.has('oldPass')}"
                 >
-                    <label for="oldPass">Old Password</label>
+                    <label for="oldPass">{{$t('acount.oldPassword')}}</label>
                     <input
                         class="form-control m-input"
                         type="password"
                         id="oldPass"
-                        placeholder="Old Password"
+                        :placeholder="$t('acount.oldPassword')"
                         name="oldPass"
                         autocomplete="off"
                         v-model="inputsData.oldPass"
@@ -28,12 +28,12 @@
                     class="form-group m-form__group"
                     :class="{'has-danger': errors.has('newPass')}"
                 >
-                    <label for="newPass">New Password</label>
+                    <label for="newPass">{{$t('acount.newPassword')}}</label>
                     <input
                         class="form-control m-input"
                         type="password"
                         id="newPass"
-                        placeholder="New Password"
+                        :placeholder="$t('acount.newPassword')"
                         name="newPass"
                         autocomplete="off"
                         v-validate="'required|min:6|max:40|verify_password'"
@@ -46,12 +46,12 @@
                     class="form-group m-form__group"
                     :class="{'has-danger': errors.has('confNewPass')}"
                 >
-                    <label for="confNewPass">Confirm new Password</label>
+                    <label for="confNewPass">{{$t('acount.confirmNewPassword')}}</label>
                     <input
                         class="form-control m-input"
                         type="password"
                         id="confNewPass"
-                        placeholder="confirm new Password"
+                        :placeholder="$t('acount.confirmNewPassword')"
                         name="confNewPass"
                         autocomplete="off"
                         data-vv-as="password"
@@ -85,7 +85,7 @@
                         class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn"
                         :disabled="disableForm"
                         :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
-                    >Save</button>
+                    >{{$t('general.save')}}</button>
                 </div>
             </template>
         </content-m>

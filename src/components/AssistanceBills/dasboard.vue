@@ -10,7 +10,7 @@ textarea.v-center {
 .preview-container img,
 .preview-container iframe {
     min-height: 350px;
-    border: 0;
+    border: 0px !important;
     overflow-x: none;
 }
 .has-danger .custom-file-label,
@@ -22,6 +22,12 @@ textarea.v-center {
     color: #f8f9fa;
     background-color: #dc3545;
     height: 2.6rem;
+}
+.custom-file-es.custom-file-label::after{
+    content: "Elegir" !important;
+}
+.custom-file-pt.custom-file-label::after{
+    content: "escolha" !important;
 }
 .m-nav .m-nav__item > .m-nav__link .m-nav__link-text {
     color: #f8f9fc;
@@ -63,7 +69,7 @@ textarea.v-center {
                                             style="padding-top: 0px; margin-top:40px;"
                                         >
                                             <a>
-                                                <h1>{{ $t('general.upload_assistance_bills') }}</h1>
+                                                <h1>{{ $t('assistance.uploadBills') }}</h1>
                                             </a>
                                             <a class="m--hidden-mobile">
                                                 <custom-img
@@ -85,7 +91,7 @@ textarea.v-center {
                                                     class="m-demo__preview"
                                                     style="padding: 5px;text-align: center; background: #36a3f7;"
                                                 >
-                                                    <locale-changer class-prop="pull-right"></locale-changer>
+                                                    <locale-changer class="pull-right"></locale-changer>
                                                     <ul class="m-nav m-nav--inline">
                                                         <li class="m-nav__item">
                                                             <a
@@ -119,7 +125,7 @@ textarea.v-center {
                                                         >
                                                             <a
                                                                 class="m-nav__link"
-                                                                v-tooltip:top="$t('general.voucher')"
+                                                                v-tooltip:top="$t('voucher.voucher')"
                                                             >
                                                                 <i
                                                                     class="m-nav__link-icon flaticon-interface-5"
@@ -200,7 +206,7 @@ textarea.v-center {
                                                                         </span>
                                                                         <h3
                                                                             class="m-portlet__head-text"
-                                                                        >{{ $t('AssistanceBills.information') }}</h3>
+                                                                        >{{ $t('assistanceBills.information') }}</h3>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -218,9 +224,9 @@ textarea.v-center {
                                                                 </div>
                                                                     <div
                                                                         class="form-group m-form__group" >
-                                                                        <strong>{{ $t('AssistanceBills.date.document') }}</strong>
+                                                                        <strong>{{ $t('assistanceBills.date.document') }}</strong>
                                                                         <date-single-bt
-                                                                            class-prop="m-input"
+                                                                            class="m-input"
                                                                             name="date"
                                                                             watermark="Date"
                                                                             v-on:input="setDataFilter"
@@ -273,7 +279,7 @@ textarea.v-center {
                                                                         class="form-group m-form__group"
                                                                         :class="{'has-danger': errors.has('provider')}"
                                                                     >
-                                                                        <strong>{{ $t('AssistanceBills.providerName') }}</strong>
+                                                                        <strong>{{ $t('assistanceBills.providerName') }}</strong>
                                                                         <div
                                                                             class="m-input-icon m-input-icon--left m-input-icon--right"
                                                                         >
@@ -281,7 +287,7 @@ textarea.v-center {
                                                                                 type="text"
                                                                                 name="provider"
                                                                                 class="form-control m-input"
-                                                                                :placeholder="$t('AssistanceBills.providerName')"
+                                                                                :placeholder="$t('assistanceBills.providerName')"
                                                                                 v-validate="'required|min:2|max:250|'"
                                                                                 v-model.lazy="inputsData.provider"
                                                                                 ref="provider"
@@ -305,7 +311,7 @@ textarea.v-center {
                                                                         class="form-group m-form__group"
                                                                         :class="{'has-danger': errors.has('reference')}"
                                                                     >
-                                                                        <strong>{{ $t('AssistanceBills.reference') }}</strong>
+                                                                        <strong>{{ $t('assistanceBills.reference') }}</strong>
                                                                         <div
                                                                             class="m-input-icon m-input-icon--left m-input-icon--right"
                                                                         >
@@ -313,7 +319,7 @@ textarea.v-center {
                                                                                 type="text"
                                                                                 name="reference"
                                                                                 class="form-control m-input"
-                                                                                :placeholder="$t('AssistanceBills.reference')"
+                                                                                :placeholder="$t('assistanceBills.reference')"
                                                                                 v-validate="'required|min:2|max:40|'"
                                                                                 v-model.lazy="inputsData.reference"
                                                                                 ref="reference"
@@ -383,8 +389,9 @@ textarea.v-center {
                                                                         />
                                                                         <label
                                                                             class="custom-file-label"
+                                                                            :class="['custom-file-'+$root.$i18n.locale]"
                                                                             for="file"
-                                                                        >{{(typeof file =='object' &&'name' in file)?file.name:'Choose File'}}</label>
+                                                                        >{{(typeof file =='object' &&'name' in file)?file.name:$t('document.choose')}}</label>
                                                                     </div>
                                                                     <div
                                                                         class="progress"

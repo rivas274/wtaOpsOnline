@@ -39,6 +39,7 @@
                         />
                         <label
                             class="custom-file-label"
+                            :class="['custom-file-'+$root.$i18n.locale]"
                             for="fileEob"
                         >{{ this.nameEob }}</label>
                     </div>
@@ -55,8 +56,9 @@
                         />
                         <label
                             class="custom-file-label"
+                            :class="['custom-file-'+$root.$i18n.locale]"
                             for="fileEob"
-                        >{{(typeof fileEOB =='object' && 'name' in fileEOB)?fileEOB.name:'Choose File'}}</label>
+                        >{{(typeof fileEOB =='object' && 'name' in fileEOB)?fileEOB.name:$t('document.choose')}}</label>
                     </div>
                     <div class="progress" v-if="uploadPercentage>0">
                         <div
@@ -209,7 +211,7 @@ export default {
 }
 .preview-container iframe {
     min-height: 350px !important;
-    border: 0;
+    border: 0px !important;
     overflow-x: none;
     width: 100% !important;
 }

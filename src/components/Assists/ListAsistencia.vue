@@ -17,24 +17,24 @@
         <template slot="filters">
             <div class="form-group m-form__group row" :class="{'has-danger':error}">
                 <date-range-bt
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="date"
-                    watermark="Select date range"
+                    :watermark="$t('general.selectDateRange')"
                     v-on:input="setDataFilter"
                     :value="filters.date"
                 ></date-range-bt>
                 <input-from-table
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="code"
-                    watermark="Code"
+                    :watermark="$t('assistance.caseNumber')"
                     icon="la flaticon-interface-5"
                     v-on:input="setDataFilter"
                     :value="filters.code"
                 ></input-from-table>
                 <input-from-table
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="passager"
-                    watermark="Passenger"
+                    :watermark="$t('voucher.name')"
                     icon="la flaticon-avatar"
                     v-on:input="setDataFilter"
                     :value="filters.passager"
@@ -44,21 +44,13 @@
                 <template>
                     <multi-selects
                         v-if="clients.length>1"
-                        class-prop="col-md-4 m-form__group-sub"
+                        class="col-md-4 m-form__group-sub"
                         name="arrPrefix"
                         :options="clients"
+                        :watermark="$t('assistance.clients')"
                         :selected="filters.arrPrefix"
                         v-on:input="setDataFilter"
                     ></multi-selects>
-                    <!-- Deshabilitado por pedido del usuario
-          <select-from-table
-            v-if="permission.bills"
-            class-prop="col-md-4 m-form__group-sub"
-            name="billExists"
-            :options="billsOption"
-            :selected="filters.billExists"
-            v-on:input="setDataFilter"
-                    ></select-from-table>-->
                 </template>
             </div>
             <div class="row m--align-right">
@@ -74,45 +66,45 @@
                         class="btn btn-primary ml-2 pull-right"
                         @click="dowload"
                         v-if="permission.RP002A||permission.RP002AB39"
-                    >Dowload</button>
-                    <button class="btn btn-info ml-2 pull-right" @click="clear">Clear</button>
+                    >{{$t('general.dowload')}}</button>
+                    <button class="btn btn-info ml-2 pull-right" @click="clear">{{$t('general.clear')}}</button>
                 </div>
             </div>
         </template>
         <template slot="thead">
             <tr>
                 <th style="min-width: 90px;">
-                    <span>Nro Case</span>
+                    {{$t('assistance.caseNumber')}}
                 </th>
                 <th>
-                    <span>Company</span>
+                    {{$t('company.company')}}
                 </th>
                 <th>
-                    <span>Voucher</span>
+                    {{$t('voucher.voucher')}}
                 </th>
                 <th>
-                    <span>Passengers</span>
+                    {{$t('assistance.patientName')}}
                 </th>
                 <th>
-                    <span>Symptom</span>
+                    {{$t('assistance.symptom')}}
                 </th>
                 <th>
-                    <span>Type of Case</span>
+                    {{$t('assistance.type')}}
                 </th>
                 <th style="min-width: 90px;">
-                    <span>Date Event</span>
+                    {{$t('assistance.date.event')}}
                 </th>
                 <th style="min-width: 90px;" class="text-center">
-                    <span>Opening Date</span>
+                    {{$t('assistance.date.opening')}}
                 </th>
                 <th>
-                    <span>Country</span>
+                    {{$t('general.country')}}
                 </th>
                 <th>
-                    <span>Status</span>
+                    {{$t('general.status')}}
                 </th>
                 <th>
-                    <span>Options</span>
+                    {{$t('general.options')}}
                 </th>
             </tr>
         </template>
@@ -125,33 +117,28 @@
                     >{{assist.codeAssist}}</span>
                 </td>
                 <td>
-                    <span>{{assist.clientName}}</span>
+                    {{assist.clientName}}
                 </td>
                 <td>
-                    <span>{{assist.codigo}}</span>
+                    {{assist.codigo}}
+                </td>
+                <td v-html="assist.fisrtName+' '+assist.lastName">
                 </td>
                 <td>
-                    <span v-html="assist.fisrtName+' '+assist.lastName"></span>
+                    {{assist.symptomDetaill}}
                 </td>
                 <td>
-                    <span>{{assist.symptomDetaill}}</span>
-                </td>
-                <td>
-                    <span>{{assist.descCaseType}}</span>
+                    {{assist.descCaseType}}
                 </td>
                 <td class="text-center">
-                    <span>{{assist.reportedDate.date}}</span>
-                    <br />
-                    <small>({{assist.reportedDate.hour}})</small>
+                    <div>{{assist.reportedDate.date}}</div>
+                    <small><b>({{assist.reportedDate.hour}})</b></small>
                 </td>
                 <td class="text-center">
-                    <span>{{assist.registeredDate.date}}</span>
+                    {{assist.registeredDate.date}}
                 </td>
                 <td>
-                    <span>
-                        <Flag :iso="assist.isoCountry"></Flag>
-                        <!--<span class="m-badge m-badge--info m-badge--wide">Info</span>-->
-                    </span>
+                    <Flag :iso="assist.isoCountry"></Flag>
                 </td>
                 <td class="text-center fa-status">
                     <i :class="assist.statusAssist.icon" v-tooltip:top="assist.statusAssist.label || 'Not Found'"></i>

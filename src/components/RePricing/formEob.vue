@@ -86,7 +86,7 @@
                     <div class="form-group col-md-4">
                         <strong>DOS</strong>
                         <date-single-bt
-                            class-prop="m-input"
+                            class="m-input"
                             name="dos"
                             :value="inputsData.dos"
                             v-on:input="setDataFilter"

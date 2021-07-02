@@ -1,7 +1,7 @@
 <style scoped src="../Assists/MainAsistencia.css"></style>
 <template>
-    <content-m :navigation="[{title:'Re Pricing'}]">
-        <template slot="title">Re Pricing</template>
+    <content-m :navigation="[{title:$t('menu.rePricing')}]">
+        <template slot="title">{{$t('menu.rePricing')}}</template>
         <template slot="body">
             <ul class="nav nav-tabs m-tabs-line m-tabs-line--success m-tabs-line--2x">
                 <li class="nav-item m-tabs__item">
@@ -11,7 +11,7 @@
                         @click.prevent="showTab('List')"
                     >
                         <i class="fa fa-life-ring" aria-hidden="true"></i>
-                        List
+                        {{$t('general.list')}}
                     </a>
                 </li>
                 <li class="nav-item m-tabs__item" v-for="rePri in rePricing" :key="rePri.id">

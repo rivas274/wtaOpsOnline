@@ -5,6 +5,7 @@
 iframe {
     height: 360px;
     width: 100%;
+    border: 0px !important;
 }
 </style>
 
@@ -13,59 +14,59 @@ iframe {
         <template slot="filters">
             <div class="form-group m-form__group row">
                 <date-range-bt
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="date"
-                    watermark="Select date range"
+                    :watermark="$t('general.selectDateRange')"
                     v-on:input="setDataFilter"
                     :value="filters.date"
                 ></date-range-bt>
                 <input-from-table
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="code"
-                    watermark="Reference / Description"
+                    :watermark="$t('assistanceBills.referenceDescription')"
                     icon="flaticon-interface-5"
                     v-on:input="setDataFilter"
                     :value="filters.code"
                 ></input-from-table>
                 <div class="col m--align-right">
-                    <button class="btn btn-info" @click="clear">Clear</button>
+                    <button class="btn btn-info" @click="clear">{{$t('general.clear')}}</button>
                 </div>
             </div>
         </template>
         <template slot="thead">
             <tr>
                 <th>
-                    <span>ID</span>
+                    ID
                 </th>
                 <th>
-                    <span>Reference</span>
+                    {{$t('assistanceBills.reference')}}
                 </th>
                 <th style="min-width: 90px;">
-                    <span>Bill Date</span>
+                    {{$t('assistanceBills.date.document')}}
                 </th>
                 <th>
-                    <span>Classification</span>
+                    {{$t('assistanceBills.classification')}}
                 </th>
                 <th>
-                    <span>Provider</span>
+                    {{$t('provider.provider')}}
                 </th>
                 <th>
-                    <span>Original Amount</span>
+                    {{$t('assistanceBills.originalAmount')}}
                 </th>
                 <th>
-                    <span>Exchange Rate</span>
+                    {{$t('assistanceBills.exchangeRate')}}
                 </th>
                 <th>
-                    <span>Amount USD</span>
+                    {{$t('assistanceBills.amountUSD')}}
                 </th>
                 <th>
-                    <span>Covered Amount</span>
+                    {{$t('assistanceBills.coveredAmount')}}
                 </th>
                 <th>
-                    <span>Bill Status</span>
+                    {{$t('general.status')}}
                 </th>
                 <th>
-                    <span>Options</span>
+                    {{$t('general.options')}}
                 </th>
             </tr>
         </template>
@@ -76,16 +77,16 @@ iframe {
                         <span>{{bill.idFile}}</span>
                     </td>
                     <td>
-                        <span>{{bill.reference||'N/A'}}</span>
+                        <span>{{bill.reference||$t('general.notLoaded')}}</span>
                     </td>
                     <td>
-                        <span>{{bill.billDate||'N/A'}}</span>
+                        <span>{{bill.billDate||$t('general.notLoaded')}}</span>
                     </td>
                     <td>
-                        <span>{{bill.category||'N/A'}}</span>
+                        <span>{{bill.category||$t('general.notLoaded')}}</span>
                     </td>
                     <td>
-                        <span>{{bill.provider.providerName||'N/A'}}</span>
+                        <span>{{bill.provider.providerName||$t('general.notLoaded')}}</span>
                     </td>
                     <td>
                         <span

@@ -17,25 +17,25 @@
         <template slot="filters">
             <div class="form-group m-form__group row" :class="{'has-danger':error}">
                 <input-from-table
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="codeAssist"
-                    watermark="Case Number"
+                    :watermark="$t('assistance.caseNumber')"
                     icon="la flaticon-interface-5"
                     v-on:input="setDataFilter"
                     :value="filters.codeAssist"
                 ></input-from-table>
                 <input-from-table
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="codeVoucher"
-                    watermark="Voucher Number"
+                    :watermark="$t('voucher.voucher')"
                     icon="la flaticon-interface-5"
                     v-on:input="setDataFilter"
                     :value="filters.codeVoucher"
                 ></input-from-table>
                 <date-range-bt
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="date"
-                    watermark="Select date range"
+                    :watermark="$t('general.selectDateRange')"
                     v-on:input="setDataFilter"
                     :value="filters.date"
                 ></date-range-bt>
@@ -43,24 +43,24 @@
             <div class="form-group m-form__group row" :class="{'has-danger':error}">
                 <select-from-table
                     name="docType"
-                    class-prop="col-md-4 m-form__group-sub"
-                    watermark="Category"
+                    class="col-md-4 m-form__group-sub"
+                    :watermark="$t('document.category')"
                     :options="documentsType"
                     :selected="filters.docType"
                     v-on:input="setDataFilter"
                 ></select-from-table>
                 <input-from-table
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="passager"
-                    watermark="Patient Name"
+                    :watermark="$t('voucher.name')"
                     icon="la flaticon-avatar"
                     v-on:input="setDataFilter"
                     :value="filters.passager"
                 ></input-from-table>
                 <input-from-table
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="provider"
-                    watermark="Invoice Provider"
+                    :watermark="$t('invoice.invoiceProvider')"
                     icon="la flaticon-avatar"
                     v-on:input="setDataFilter"
                     :value="filters.provider"
@@ -68,17 +68,17 @@
             </div>
             <div class="form-group m-form__group row" :class="{'has-danger':error}">
                 <input-from-table
-                    class-prop="col-md-4 m-form__group-sub"
+                    class="col-md-4 m-form__group-sub"
                     name="amount"
-                    watermark="Amount"
+                    :watermark="$t('document.amount')"
                     icon="la flaticon-coins"
                     v-on:input="setDataFilter"
                     :value="filters.amount"
                 ></input-from-table>
                 <select-from-table
                     name="status"
-                    class-prop="col-md-4 m-form__group-sub"
-                    watermark="Status"
+                    class="col-md-4 m-form__group-sub"
+                    :watermark="$t('general.status')"
                     :options="arrStatus"
                     :selected="filters.status"
                     v-on:input="setDataFilter"
@@ -99,31 +99,31 @@
         <template slot="thead">
             <tr>
                 <th>
-                    <span>Voucher</span>
+                   {{$t('voucher.voucher')}}
                 </th>
                 <th>
-                    <span>Case Number</span>
+                    {{$t('assistance.caseNumber')}}
                 </th>
                 <th>
-                    <span>Patient Name</span>
+                    {{$t('voucher.name')}}
                 </th>
                 <th>
-                    <span>Repricing Date</span>
+                    {{$t('general.date')}}
                 </th>
                 <th>
-                    <span>Invoice amount</span>
+                    {{$t('invoice.invoiceAmount')}}
                 </th>
                 <th>
-                    <span>Classification</span>
+                    {{$t('assistanceBills.classification')}}
                 </th>
                 <th>
-                    <span>Invoice Provider</span>
+                    {{$t('invoice.invoiceProvider')}}
                 </th>
                 <th>
-                    <span>Status</span>
+                    {{$t('general.status')}}
                 </th>
                 <th style="width: 50px;">
-                    <span>Edit</span>
+                    {{$t('general.options')}}
                 </th>
             </tr>
         </template>
@@ -145,7 +145,7 @@
                     <span>{{ (rePricing[0].invoice.amount) ? rePricing[0].invoice.amount+' '+rePricing[0].invoice.currency : '' }}</span>
                 </td>
                 <td>
-                    <span>{{ docType[rePricing[0].invoice.docType]||"N/A" }}</span>
+                    <span>{{ docType[rePricing[0].invoice.docType]||$t('general.notLoaded') }}</span>
                 </td>
                 <td>
                     <span>{{ rePricing[0].InvoiceProvider.providerName }}</span>
@@ -206,16 +206,16 @@ export default {
             error: null,
             documentsType: [],
             arrStatus: [
-                        { id: "", name: "Select Status" },
-                        { id: 1, name: 'No Repricing Provider' },
-                        { id: 2, name: 'Selected Repricing' },
-                        { id: 3, name: 'Provider Under Repicing' },
-                        { id: 4, name: 'Repricing in Processr' },
-                        { id: 5, name: 'Repricing Updated' },
-                        { id: 6, name: 'Repricing Billed' },
-                        { id: 7, name: 'Repricing Finished' },
-                        { id: 8, name: 'Repricing with EOB' }
-                    ],
+                { id: "", name: this.$t('general.status') },
+                { id: 1, name: this.$t('rePricing.staus.noProvider')},
+                { id: 2, name: this.$t('rePricing.staus.selected')},
+                { id: 3, name: this.$t('rePricing.staus.providerIn')},
+                { id: 4, name: this.$t('rePricing.staus.inProcess')},
+                { id: 5, name: this.$t('rePricing.staus.updated')},
+                { id: 6, name: this.$t('rePricing.staus.invoiced')},
+                { id: 7, name: this.$t('rePricing.staus.completed')},
+                { id: 8, name: this.$t('rePricing.staus.withEOB')}
+            ],
             filters: {
                 docType: "",
                 code: "",
@@ -244,7 +244,7 @@ export default {
                 .get("getDocumentsType?docType[]=4&docType[]=5")
                 .then(response => {
                     this.documentsType = [
-                        { id: "", name: "Select Category" }
+                        { id: "", name: this.$t('document.category') }
                     ].concat(response.data.RESPONSE.RESULTS);
                 });
         },
