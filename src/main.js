@@ -9,6 +9,7 @@ import middleware from './custom/middleware';
 import permission from './custom/permission.json';
 import globalFilters from './custom/vue-global-filters';
 import globalDirectives from './custom/vue-global-directives';
+import VeeValidate from 'vee-validate';
 import i18n from "./custom/i18n";
 import './custom/vue-vee-custom';
 
@@ -76,6 +77,7 @@ Vue.use(VueAxios, customAxios);
 
 router.beforeEach((to, from, next) => {
     i18n._vm.$root.$root.locale = (to.params.lang || (Vue._session.get('lang')||'en'));
+    VeeValidate.Validator.locale = i18n._vm.$root.$root.locale;
     if (to.meta.isPublic) {
         if (to.name == "Login" && (Vue._session.get('TOKEN') || '').length == 16) {
             if (Vue.$middleware("repricing", "read")) {

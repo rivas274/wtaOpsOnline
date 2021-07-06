@@ -1,49 +1,16 @@
 <style scoped src="../Assists/Assist.css"></style>
 <style src="../Element/custom-m-loader.css"></style>
-<style scoped>
-.add-files textarea {
-    min-height: 75px;
-    resize: none;
-}
-.col-md-6 {
-    display: inline-block !important;
-}
-.preview-container iframe {
-    min-height: 350px !important;
-    border: 0px !important;
-    overflow-x: none;
-}
-.has-danger .custom-file-label,
-.has-danger + .custom-file-label {
-    border-color: #dc3545;
-}
-.has-danger .custom-file-label::after,
-.has-danger + .custom-file-label::after {
-    color: #f8f9fa;
-    background-color: #dc3545;
-    height: 2.6rem;
-}
-.custom-file-es.custom-file-label::after{
-    content: "Elegir" !important;
-}
-.custom-file-pt.custom-file-label::after{
-    content: "escolha" !important;
-}
-.eob-fee {
-    padding-left: 0px;
-}
-</style>
 <template>
     <div class="content-tabs-left">
         <ul class="nav nav-tabs tabs-left">
-            <li :class="{active:tabShow=='General'}" v-tooltip:top="'General'">
+            <li :class="{active:tabShow=='General'}" v-tooltip:top="$t('general.general')">
                 <a
                     class="nav-link"
                     :class="{'m--font-success':tabShow=='General'}"
                     @click.prevent="showTab('General')"
                 >
                     <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                    <span>General</span>
+                    <span>{{$t('general.general')}}</span>
                 </a>
             </li>
             <li v-tooltip:top="'Upload Documents'">
@@ -53,7 +20,7 @@
                     @click.prevent="showTab('upload-documents')"
                 >
                     <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                    <span>Complete Repricing</span>
+                    <span>{{$t('rePricing.completeRePricing')}}</span>
                 </a>
             </li>
             <li v-tooltip:top="'Upload Repriced EOB'">
@@ -63,7 +30,7 @@
                     @click.prevent="showTab('upload-repriced-EOB')"
                 >
                     <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                    <span>Upload Repriced EOB</span>
+                    <span>{{$t('rePricing.uploadRepricedEOB')}}</span>
                 </a>
             </li>
             <li v-tooltip:top="'Upload Invoice FEE'">
@@ -73,7 +40,7 @@
                     @click.prevent="showTab('upload-invoice-FEE')"
                 >
                     <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                    <span>Upload Invoice FEE</span>
+                    <span>{{$t('rePricing.uploadInvoiceFee')}}</span>
                 </a>
             </li>
         </ul>
@@ -86,10 +53,10 @@
                     <div class="m-portlet__body m-portlet__body--no-padding">
                         <div class="row m-row--no-padding m-row--col-separator-xl">
                             <AssistAccordionDetaill class="col-md-6">
-                                <template slot="title">Claims Management</template>
+                                <template slot="title">{{$t('rePricing.claimsManagement')|upper}}</template>
                                 <template slot="body">
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Status</span>
+                                        <span class="m-widget16__date">{{$t('general.status')}}</span>
                                         <span class="m-widget16__price m--align-right">
                                             <span
                                                 class="m-badge m-badge--wide"
@@ -98,7 +65,7 @@
                                         </span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Client</span>
+                                        <span class="m-widget16__date">{{$t('general.client')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.rePricing.client }}</span>
@@ -123,26 +90,26 @@
                                         </span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Birth Date (YYYY-MM-DD)</span>
+                                        <span class="m-widget16__date">{{ $t('assistance.date.birth') }}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.rePricing.contact.birthDate }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Age</span>
+                                        <span class="m-widget16__date">{{ $t('general.age') }}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.rePricing.contact.age }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">User</span>
+                                        <span class="m-widget16__date">{{ $t('general.user') }}</span>
                                         <span class="m-widget16__price m--align-right">
                                             {{ rePricingDetaill.rePricing.user.fullName }}
                                             <small>({{ rePricingDetaill.rePricing.user.user }})</small>
                                         </span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">TPA Name</span>
+                                        <span class="m-widget16__date">TPA</span>
                                         <span class="m-widget16__price m--align-right">
                                             {{ this.companyName }}
                                         </span>
@@ -163,10 +130,10 @@
                                 </template>
                             </AssistAccordionDetaill>
                             <AssistAccordionDetaill class="col-md-6">
-                                <template slot="title">Claim Information</template>
+                                <template slot="title">{{$t('rePricing.claimInformation')|upper}}</template>
                                 <template slot="body">
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Category</span>
+                                        <span class="m-widget16__date">{{$t('document.category')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.category }}</span>
@@ -178,61 +145,61 @@
                                         >{{ rePricingDetaill.invoice.ref }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Date (YYYY-MM-DD)</span>
+                                        <span class="m-widget16__date">{{$t('general.date')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.date }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Description</span>
+                                        <span class="m-widget16__date">{{$t('general.description')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.description }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Claim Amount</span>
+                                        <span class="m-widget16__date">{{$t('rePricing.claimAmount')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.monto | currency(rePricingDetaill.invoice.currency)}}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Exchange Rate</span>
+                                        <span class="m-widget16__date">{{$t('assistanceBills.exchangeRate')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.exchangeRate | toFixed(5) }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Claim Amount USD</span>
+                                        <span class="m-widget16__date">{{$t('rePricing.claimAmount')}} USD</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ rePricingDetaill.invoice.montoUsd | currency("USD")}}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Deductible</span>
+                                        <span class="m-widget16__date">{{$t('invoice.deductible')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ this.deducible }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Amount Not Covered</span>
+                                        <span class="m-widget16__date">{{$t('invoice.amountNotCovered')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ this.noCovered }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Amount To Cover</span>
+                                        <span class="m-widget16__date">{{$t('invoice.amountToCovere')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ this.covered_amount }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Benefit/Amount available</span>
+                                        <span class="m-widget16__date">{{$t('invoice.benefitAmountAvailable')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ this.availablebenf }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">Benefit/Amount to be paid</span>
+                                        <span class="m-widget16__date">{{$t('invoice.benefitAmountPaid')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ this.amounttopay }}</span>
@@ -240,7 +207,7 @@
                                 </template>
                             </AssistAccordionDetaill>
                             <AssistAccordionDetaill class="col-md-12">
-                                <template slot="title">Invoice File</template>
+                                <template slot="title">{{$t('invoice.invoiceFile')|upper}}</template>
                                 <template slot="body">
                                     <iframe
                                         class="preview"
@@ -268,12 +235,12 @@
                                 ref="form">
 
                                 <div class="form-group">
-                                    <strong>Patient Name</strong>
+                                    <strong>{{$t('assistance.patientName')}}</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
                                             type="text"
                                             class="form-control m-input"
-                                            placeholder="Patient Name"
+                                            :placeholder="$t('assistance.patientName')"
                                             v-validate="'required'"
                                             v-model.lazy="inputsData.patient"
                                             ref="patient_name"
@@ -287,12 +254,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <strong>Birth Date (YYYY-MM-DD)</strong>
+                                    <strong>{{$t('assistance.date.birth')}}</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
                                             type="text"
                                             class="form-control m-input"
-                                            placeholder="Birth Date"
+                                            :placeholder="$t('assistance.date.birth')"
                                             v-validate="'required'"
                                             v-model.lazy="inputsData.birth_date"
                                             ref="birth_date"
@@ -306,12 +273,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <strong>Case Number</strong>
+                                    <strong>{{$t('assistance.caseNumber')}}</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
                                             type="text"
                                             class="form-control m-input"
-                                            placeholder="Case Number"
+                                            :placeholder="$t('assistance.caseNumber')"
                                             v-validate="'required'"
                                             v-model.lazy="inputsData.case_number"
                                             ref="case_number"
@@ -325,12 +292,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <strong>Invoice Number</strong>
+                                    <strong>{{$t('invoice.invoiceNumber')}}</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
                                             type="text"
                                             class="form-control m-input"
-                                            placeholder="Invoice Number"
+                                            :placeholder="$t('invoice.invoiceNumber')"
                                             v-validate="'required'"
                                             v-model.lazy="inputsData.invoice_id"
                                             ref="invoice_id"
@@ -344,13 +311,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('original_amount')}">
-                                    <strong>Original Amount</strong>
+                                    <strong>{{$t('assistanceBills.originalAmount')}}</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
                                             type="text"
                                             name="original_amount"
                                             class="form-control m-input"
-                                            placeholder="Adjusted Amount"
+                                            :placeholder="$t('assistanceBills.originalAmount')"
                                             v-validate="'required'"
                                             v-model.lazy="inputsData.original_amount"
                                             ref="original_amount"
@@ -365,13 +332,13 @@
                                     <form-error :attribute_name="'original_amount'" :errors_form="errors"></form-error>
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('saving_amount')}">
-                                    <strong>Saving Amount</strong>
+                                    <strong>{{$t('invoice.savingAmount')}}</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
                                             type="text"
                                             name="saving_amount"
                                             class="form-control m-input"
-                                            placeholder="Saving Amount"
+                                            :placeholder="$t('invoice.savingAmount')"
                                             v-validate="'required'"
                                             v-model.lazy="inputsData.saving_amount"
                                             ref="saving_amount"
@@ -386,13 +353,13 @@
                                     <form-error :attribute_name="'saving_amount'" :errors_form="errors"></form-error>
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('adjusted_amount')}">
-                                    <strong>Adjusted Amount US$</strong>
+                                    <strong>{{$t('invoice.adjustedAmount')}} USD</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
                                             type="text"
                                             name="adjusted_amount"
                                             class="form-control m-input"
-                                            placeholder="Adjusted Amount"
+                                            :placeholder="$t('invoice.adjustedAmount')+' USD'"
                                             v-validate="'required'"
                                             v-model.lazy="inputsData.adjusted_amount"
                                             ref="adjusted_amount"
@@ -428,7 +395,7 @@
                                     <form-error :attribute_name="'saving'" :errors_form="errors"></form-error>
                                 </div>
                                 <div class="form-group" :class="{'has-danger': errors.has('fee_amount')}">
-                                    <strong>Fee Amount US$</strong>
+                                    <strong>{{$t('invoice.feeAmount')}} USD</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <input
                                             type="text"
@@ -468,7 +435,7 @@
                                     <form-error :attribute_name="'fee_amount'" :errors_form="errors"></form-error>
                                 </div>
                                 <div class="form-group">
-                                    <strong>Description</strong>
+                                    <strong>{{$t('document.description')}}</strong>
                                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                                         <textarea
                                             name="description"
@@ -490,145 +457,136 @@
                                     :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
                                     type="submit"
                                     class="btn btn-primary col-md-12 mt-3"
-                                >Send</button>
+                                >{{$t('general.send')}}</button>
                             </form>
                         </div>
                     </div>
                 </template>
             </div>
             <div class="tab-pane" :class="{active:tabShow=='upload-repriced-EOB'}">
-                <template>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <strong>Add Form EOB</strong> <input type="radio" id="form_eob" class="m-input" value="1" v-model="showOption" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <strong>Add Repriced EOB</strong> <input type="radio" id="repriced_eob" class="m-input" value="2" v-model="showOption" />
-                        </div>
-
-                        <formEob v-if="this.showOption == 1" v-bind:rePricingId="rePricingBase.id"></formEob>
-                        
-                        <uploadEob v-if="this.showOption == 2" v-bind:rePricingDetaill="rePricingDetaill"></uploadEob>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <strong>{{$t('rePricing.addFormEOB')}}</strong> <input type="radio" id="form_eob" class="m-input" value="1" v-model="showOption" />
                     </div>
-                </template>
+                    <div class="form-group col-md-6">
+                        <strong>{{$t('rePricing.addRepricedEOB')}}</strong> <input type="radio" id="repriced_eob" class="m-input" value="2" v-model="showOption" />
+                    </div>
+                    <formEob v-show="this.showOption == 1" v-bind:rePricingId="rePricingBase.id"></formEob>
+                    <uploadEob v-show="this.showOption == 2" v-bind:rePricingDetaill="rePricingDetaill"></uploadEob>
+                </div>
             </div>
             <div class="tab-pane" :class="{active:tabShow=='upload-invoice-FEE'}">
-                <template>
-                    <div>
-                        <div class="row mx-0">
-                            <form class="m-form col-md-12 add-invoice-fee"
-                                @submit.prevent="validInvoiceFEE"
-                                enctype="multipart/form-data"
-                                method="POST"
-                                ref="form">
-                                
-                                <div class="form-group" v-if="this.rePricingDetaill.rePricing.files.invoice_fee && this.nameFee">
-                                    <strong>FEE ID</strong>
-                                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
-                                        <input
-                                            type="text"
-                                            class="form-control m-input"
-                                            placeholder="FEE ID"
-                                            v-validate="'required'"
-                                            v-model.lazy="this.rePricingDetaill.rePricing.files.invoice_fee"
-                                            ref="FEE_ID"
-                                            disabled
-                                        />
-                                        <span class="m-input-icon__icon m-input-icon__icon--left">
-                                            <span>
-                                                <i class="la la-tag"></i>
-                                            </span>
+                <form class="m-form col-md-12 add-invoice-fee"
+                    @submit.prevent="validInvoiceFEE"
+                    enctype="multipart/form-data"
+                    method="POST"
+                    ref="form">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" v-if="this.rePricingDetaill.rePricing.files.invoice_fee && this.nameFee">
+                                <strong>FEE ID</strong>
+                                <div class="m-input-icon m-input-icon--left m-input-icon--right">
+                                    <input
+                                        type="text"
+                                        class="form-control m-input"
+                                        placeholder="FEE ID"
+                                        v-validate="'required'"
+                                        v-model.lazy="this.rePricingDetaill.rePricing.files.invoice_fee"
+                                        ref="FEE_ID"
+                                        disabled
+                                    />
+                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                                        <span>
+                                            <i class="la la-tag"></i>
                                         </span>
-                                    </div>
+                                    </span>
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-6 eob-fee">
-                                        <strong>Add Invoice FEE</strong>
-                                        <div class="custom-file" v-if="this.rePricingDetaill.rePricing.files.invoice_fee && this.nameFee && !fileFEE">
-                                            <input
-                                                type="file"
-                                                name="fileFee"
-                                                class="custom-file-input"
-                                                id="fileFee"
-                                                accept="application/pdf"
-                                                v-validate="'ext:pdf'"
-                                                ref="fileFee"
-                                                v-on:change="handleFileUploadFee()"
-                                            />
-                                            <label
-                                                class="custom-file-label"
-                                                :class="['custom-file-'+$root.$i18n.locale]"
-                                                for="fileFee"
-                                            >{{ this.nameFee }}</label>
-                                        </div>
-                                        <div class="custom-file" v-else>
-                                            <input
-                                                type="file"
-                                                name="fileFee"
-                                                class="custom-file-input"
-                                                id="fileFee"
-                                                accept="application/pdf"
-                                                v-validate="this.requiredFee+'|ext:pdf'"
-                                                ref="fileFee"
-                                                v-on:change="handleFileUploadFee()"
-                                            />
-                                            <label
-                                                class="custom-file-label"
-                                                :class="['custom-file-'+$root.$i18n.locale]"
-                                                for="fileFee"
-                                            >{{(typeof fileFEE =='object' && 'name' in fileFEE)?fileFEE.name:$t('document.choose')}}</label>
-                                        </div>
-                                        <div class="progress" v-if="uploadPercentage>0">
-                                            <div
-                                                class="progress-bar progress-bar-striped progress-bar-animated"
-                                                role="progressbar"
-                                                :aria-valuenow="uploadPercentage"
-                                                aria-valuemin="0"
-                                                aria-valuemax="100"
-                                                :style="{width: uploadPercentage+'%'}"
-                                            ></div>
-                                        </div>
-                                        <form-error :attribute_name="'fileFee'" :errors_form="errors"></form-error>
-                                    </div>
-
-                                    <div class="col-md-6 bg-secondary d-flex preview-container p-0">
-                                        <iframe
-                                            class="preview"
-                                            v-if="this.rePricingDetaill.rePricing.files.invoice_fee && this.nameFee && !previewFee"
-                                            :src="baseUrlApi()+'streaming/'+this.rePricingDetaill.rePricing.files.invoice_fee"
-                                        ></iframe>
-                                        <h1 v-if="!previewFee && !this.nameFee" class="m-auto d-none d-md-block">Preview</h1>
-                                        <iframe class="rounded h-100 w-100" v-if="previewFee" :src="previewFee" />
-                                    </div>
+                            </div>
+                            <div class="form-group eob-fee">
+                                <strong>{{$t('rePricing.addInvoiceFee')}}</strong>
+                                <div class="custom-file" v-if="this.rePricingDetaill.rePricing.files.invoice_fee && this.nameFee && !fileFEE">
+                                    <input
+                                        type="file"
+                                        name="fileFee"
+                                        class="custom-file-input"
+                                        id="fileFee"
+                                        accept="application/pdf"
+                                        v-validate="'ext:pdf'"
+                                        ref="fileFee"
+                                        v-on:change="handleFileUploadFee()"
+                                    />
+                                    <label
+                                        class="custom-file-label"
+                                        :class="['custom-file-'+$root.$i18n.locale]"
+                                        for="fileFee"
+                                    >{{ this.nameFee }}</label>
                                 </div>
-                                <div class="form-group">
-                                    <strong>Description</strong>
-                                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
-                                        <textarea
-                                            name="description"
-                                            class="form-control m-input"
-                                            :placeholder="$t('document.description')"
-                                            v-validate="'min:2|max:255|'"
-                                            v-model="descriptionFee"
-                                            ref="description"
-                                        ></textarea>
-                                        <span class="m-input-icon__icon m-input-icon__icon--left">
-                                            <span>
-                                                <i class="la la-pencil-square-o"></i>
-                                            </span>
+                                <div class="custom-file" v-else>
+                                    <input
+                                        type="file"
+                                        name="fileFee"
+                                        class="custom-file-input"
+                                        id="fileFee"
+                                        accept="application/pdf"
+                                        v-validate="this.requiredFee+'|ext:pdf'"
+                                        ref="fileFee"
+                                        v-on:change="handleFileUploadFee()"
+                                    />
+                                    <label
+                                        class="custom-file-label"
+                                        :class="['custom-file-'+$root.$i18n.locale]"
+                                        for="fileFee"
+                                    >{{(typeof fileFEE =='object' && 'name' in fileFEE)?fileFEE.name:$t('document.choose')}}</label>
+                                </div>
+                                <div class="progress" v-if="uploadPercentage>0">
+                                    <div
+                                        class="progress-bar progress-bar-striped progress-bar-animated"
+                                        role="progressbar"
+                                        :aria-valuenow="uploadPercentage"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                        :style="{width: uploadPercentage+'%'}"
+                                    ></div>
+                                </div>
+                                <form-error :attribute_name="'fileFee'" :errors_form="errors"></form-error>
+                            </div>
+                            <div class="form-group">
+                                <strong>{{$t('document.description')}}</strong>
+                                <div class="m-input-icon m-input-icon--left m-input-icon--right">
+                                    <textarea
+                                        name="description"
+                                        class="form-control m-input"
+                                        :placeholder="$t('document.description')"
+                                        v-validate="'min:2|max:255|'"
+                                        v-model="descriptionFee"
+                                        ref="description"
+                                    ></textarea>
+                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                                        <span>
+                                            <i class="la la-pencil-square-o"></i>
                                         </span>
-                                    </div>
+                                    </span>
                                 </div>
-                                <button
-                                    :disabled="disableForm"
-                                    :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
-                                    type="submit"
-                                    class="btn btn-primary col-md-12 mt-3"
-                                >Send</button>
-                            </form>
+                            </div>
+                            
+                            <button
+                                :disabled="disableForm"
+                                :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
+                                type="submit"
+                                class="btn btn-primary col-md-12 mt-3"
+                            >{{$t('document.send')}}</button>
+                        </div>
+                        <div class="col-md-6 bg-secondary d-flex preview-container p-0">
+                            <iframe
+                                class="preview"
+                                v-if="this.rePricingDetaill.rePricing.files.invoice_fee && this.nameFee && !previewFee"
+                                :src="baseUrlApi()+'streaming/'+this.rePricingDetaill.rePricing.files.invoice_fee"
+                            ></iframe>
+                            <h1 v-if="!previewFee && !this.nameFee" class="m-auto d-none d-md-block">Preview</h1>
+                            <iframe class="rounded h-100 w-100" v-if="previewFee" :src="previewFee" />
                         </div>
                     </div>
-                </template>
+                </form>
             </div>
         </div>
     </div>
@@ -698,7 +656,7 @@ export default {
             availablebenf: "",
             covered_amount: "",
             noCovered: "",
-            showOption: "",
+            showOption: 1,
             descriptionFee: ""
         };
     },
@@ -825,11 +783,11 @@ export default {
                                 if (response.data.STATUS == "OK") {
                                     this.$emit("completeRepricing", response.data.RESPONSE);
                                     window.Swal.fire({
-                                        title: "Send",
+                                        title: this.$t("general.sent"),
                                         text: 'Success',
                                         type: "success",
                                         showCancelButton: true,
-                                        confirmButtonText: "Ok"
+                                        confirmButtonText: this.$t("general.ok"),
                                     });
                                 } else {
                                     if (response.data.ERRORS) {
@@ -889,11 +847,11 @@ export default {
                         if (response.data.STATUS == "OK") {
                             this.$emit("addFilesRepricing", response.data.RESPONSE);
                             window.Swal.fire({
-                                title: "Send",
+                                title: this.$t("general.sent"),
                                 text: this.$t("document.uploaded"),
                                 type: "success",
                                 showCancelButton: true,
-                                confirmButtonText: "Ok"
+                                confirmButtonText: this.$t("general.ok"),
                             });
                         } else {
                             if (response.data.ERRORS) {

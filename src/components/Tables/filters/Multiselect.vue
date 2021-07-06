@@ -1,5 +1,5 @@
 <template>
-    <div :class="[classProp]">
+    <div>
         <Moultiselect
             v-model="value"
             :options="option"
@@ -19,7 +19,7 @@
 <script>
 import Moultiselect from "vue-multiselect";
 export default {
-    props: ["watermark", "options", "selected", "name", "classProp"],
+    props: ["watermark", "options", "selected", "name"],
     components: {
         Moultiselect
     },

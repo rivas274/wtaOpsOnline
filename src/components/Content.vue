@@ -1,11 +1,4 @@
-<style>
-.m-subheader .m-subheader__title {
-    display: inline-block;
-}
-.m-subheader .m-subheader__title.m-subheader__title--separator {
-    border-right: 1px solid #e2e5ec;
-}
-</style>
+<style src="./custom.css"></style>
 <template>
     <div>
         <div class="m-subheader">

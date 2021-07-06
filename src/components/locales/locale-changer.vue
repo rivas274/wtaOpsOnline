@@ -66,11 +66,22 @@ export default {
         setLang: function () {
             this.$root.$i18n.locale = this.selected;
             this.$validator.localize(this.selected);
-            this.$session.set('lang',this.selected)
+            this.$session.set('lang',this.selected);
+            this.setLangApi(this.selected);
             this.$router.replace({
                 params: {
                     lang: this.$root.$i18n.locale
                 }
+            });
+        },
+        setLangApi: function (lang) {
+            this.axios
+            .post("setLang", {
+                lang: lang,
+                user: this.$session.get("user")
+            })
+            .then(response => {
+                Window.console.log(response)
             });
         }
     },

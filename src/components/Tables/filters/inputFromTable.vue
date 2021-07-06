@@ -1,5 +1,5 @@
 <template>
-    <div :class="[classProp]">
+    <div>
         <div class="m-input-icon m-input-icon--left">
             <input
                 type="text"
@@ -20,7 +20,7 @@
 </template>
 <script>
 export default {
-    props: ["watermark", "name", "icon", "classProp", "value"],
+    props: ["watermark", "name", "icon", "value"],
     data: function() {
         return {
             ico: this.icon || "la la-search",

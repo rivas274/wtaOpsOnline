@@ -92,7 +92,7 @@
                     </div>
                 </div>
                 <div class="col-md-3" :class="{'offset-md-9':error==null}">
-                    <button class="btn btn-info ml-2 pull-right" @click="clear">Clear</button>
+                    <button class="btn btn-info ml-2 pull-right" @click="clear">{{$t('general.clear')}}</button>
                 </div>
             </div>
         </template>

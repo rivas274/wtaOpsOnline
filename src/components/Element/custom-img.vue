@@ -16,7 +16,6 @@ img[alt]:after {
         v-show="imgUrlAlt"
         @error="imgUrlAlt"
         :src="image"
-        :class="[classProp]"
         v-tooltip="title"
         :style="{ maxHeight: cssActivePx(height), maxWidth: cssActivePx(width)}"
         alt
@@ -24,7 +23,7 @@ img[alt]:after {
 </template>
 <script>
 export default {
-    props: ["src", "default", "height", "width", "classProp", "title"],
+    props: ["src", "default", "height", "width","title"],
     data: function() {
         return {
             image: this.src

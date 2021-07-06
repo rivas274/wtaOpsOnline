@@ -1,33 +1,3 @@
-<style scoped>
-textarea {
-    min-height: 75px;
-    resize: none;
-}
-.d-flex{
-    display: flex !important;
-}
-.preview-container iframe {
-    min-height: 350px;
-    border: 0px !important;
-    overflow-x: none;
-}
-.has-danger .custom-file-label,
-.has-danger + .custom-file-label {
-    border-color: #dc3545;
-}
-.has-danger .custom-file-label::after,
-.has-danger + .custom-file-label::after {
-    color: #f8f9fa;
-    background-color: #dc3545;
-    height: 2.6rem;
-}
-.custom-file-es.custom-file-label::after{
-    content: "Elegir" !important;
-}
-.custom-file-pt.custom-file-label::after{
-    content: "escolha" !important;
-}
-</style>
 <template>
     <div>
         <div class="row mx-0">
@@ -42,6 +12,8 @@ textarea {
                     <select-from-table
                         name="docType"
                         v-validate="'required'"
+                        :data-vv-as="$t('document.type')"
+                        :watermark="$t('document.type')"
                         :options="documentsType"
                         :selected="inputsData.docType"
                         v-on:input="setDataFilter"
@@ -53,7 +25,8 @@ textarea {
                     <date-single-bt
                         class="m-input"
                         name="date"
-                        watermark="Date"
+                        :watermark="$t('general.date')"
+                        :data-vv-as="$t('general.date')"
                         v-validate="'required'"
                         v-on:input="setDataFilter"
                         :value="inputsData.date"
@@ -68,6 +41,7 @@ textarea {
                             name="case"
                             class="form-control m-input"
                             :placeholder="$t('assistance.code')"
+                            :data-vv-as="$t('assistance.code')"
                             v-validate="'required'"
                             v-model.lazy="inputsData.case"
                             ref="case"
@@ -88,6 +62,7 @@ textarea {
                             name="amount"
                             class="form-control m-input"
                             :placeholder="$t('document.amount')"
+                            :data-vv-as="$t('document.amount')"
                             v-validate="'required|min:1|max:10|decimal:2'"
                             v-model.lazy="inputsData.amount"
                             ref="amount"
@@ -105,6 +80,8 @@ textarea {
                     <select-from-table
                         name="currency"
                         :options="currencyFromSelect"
+                        :watermark="$t('document.currency')"
+                        :data-vv-as="$t('document.currency')"
                         :selected="inputsData.currency"
                         v-on:input="setDataFilter"
                     ></select-from-table>
@@ -117,6 +94,7 @@ textarea {
                             name="reference"
                             class="form-control m-input"
                             :placeholder="$t('refund.reference')"
+                            :data-vv-as="$t('refund.reference')"
                             v-validate="'required|min:2|max:40|'"
                             v-model.lazy="inputsData.reference"
                             ref="reference"
@@ -136,6 +114,7 @@ textarea {
                             name="Description"
                             class="form-control m-input"
                             :placeholder="$t('document.description')"
+                            :data-vv-as="$t('document.description')"
                             v-validate="'required|min:2|max:255|'"
                             v-model="inputsData.description"
                             ref="Description"
@@ -148,7 +127,7 @@ textarea {
                     </div>
                     <form-error :attribute_name="'Description'" :errors_form="errors"></form-error>
                 </div>
-                <div class="form-group" :class="{'has-danger': errors.has('file')}">
+                <div class="form-group" :class="{'has-danger': errors.has('file')}" >
                     <strong>{{ $t('document.file') }}</strong>
                     <div class="custom-file">
                         <input
@@ -158,6 +137,7 @@ textarea {
                             id="file"
                             accept="application/pdf"
                             v-validate="'required|ext:pdf'"
+                            :data-vv-as="$t('document.file')"
                             ref="file"
                             v-on:change="handleFileUpload"
                         />
@@ -187,8 +167,8 @@ textarea {
                 >{{ $t('general.send') }}</button>
             </form>
             <div class="col-md-6 bg-secondary d-flex preview-container p-0">
-                <h1 v-if="!preview" class="m-auto d-none d-md-block">{{$t('general.preview')}}</h1>
-                <iframe class="rounded h-100 w-100" v-if="preview" :src="preview" />
+                <iframe v-if="preview" class="rounded h-100 w-100" :src="preview" />
+                <h1 v-else class="m-auto d-none d-md-block">{{$t('general.preview')}}</h1>
             </div>
         </div>
     </div>
@@ -290,7 +270,7 @@ export default {
                                         text: this.$t("document.uploaded"),
                                         type: "success",
                                         showCancelButton: true,
-                                        confirmButtonText: "Ok"
+                                        confirmButtonText: this.$t("general.ok"),
                                     });
                                 } else {
                                     if (response.data.ERRORS) {
@@ -337,7 +317,7 @@ export default {
             }, []);
         },
         preview: function() {
-            if (!this.file || this.errors.has("file")) {
+            if (!this.file) {
                 return false;
             }
             return URL.createObjectURL(this.file);

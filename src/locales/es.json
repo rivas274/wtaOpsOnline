@@ -5,6 +5,23 @@
         "invoice": "Factura"
     },
     "rePricing":{
+        "completeRePricing":"Completar RePricing",
+        "addInvoiceFee":"Agregar Factura Fee",
+        "addFormEOB":"Añadir formulario EOB",
+        "addRepricedEOB":"Añadir Repriced EOB",
+        "uploadRepricedEOB":"Cargar Repriced EOB",
+        "uploadInvoiceFee":"Cargar Fee de la factura",
+        "claimsManagement":"Gestión de siniestros",
+        "claimInformation":"Información del siniestro",
+        "policyName":"Nombre de la póliza",
+        "patientAccountNumber":"Número de cuenta del paciente",
+        "date":{
+            "claim":"Fecha de la reclamación",
+            "claimReceived":"Fecha de recepción del reclamo",
+            "service":"Fecha de servicio",
+            "EOB":"Fecha de EOB"
+        },
+        "claimAmount":"Monto de reclamación",
         "staus":{
             "noProvider":"Sin proveedor de repricing",
             "selected":"Repricing seleccionado",
@@ -18,8 +35,25 @@
     },
     "invoice":{
         "addInvoice":"Agregar Factura",
+        "invoiceNumber":"Número de factura",
+        "invoiceFile":"Archivo de la factura",
         "invoiceAmount":"Monto de la factura",
         "invoiceProvider":"Proveedor de la facturas",
+        "deductible":"Deducible",
+        "passengerResponsibility":"Responsabilidad del pasajero",
+        "patientDeductible":"Deducible Paciente",
+        "quantity":"Cantidad",
+        "feeAmount":"Monto del Fee",
+        "allowableAmount":"Cantidad permitida",
+        "amountNotCovered":"Monto no Cubierto",
+        "coveredAmount":"Monto Cubierto",
+        "billedAmount":"Monto Facturado",
+        "amountToCovere":"Monto a Cubrir",
+        "savingAmount":"Cantidad de Ahorro",
+        "adjustedAmount":"Cantidad Ajustada",
+        "benefitAmountAvailable":"Beneficio/Monto disponible",
+        "benefitAmountPaid":"Beneficio/Monto a pagar",
+        "amountPaid":"Monto a pagar",
         "date":{
             "bill":"fecha de la factura"
         }
@@ -56,6 +90,7 @@
         "uploadAnother": "Subir otro documento"
     },
     "assistance": {
+        "procedureCode":"Código de procedimiento",
         "clients": "Clientes",
         "assistance":"Asistencia",
         "notes":"Notas",
@@ -68,6 +103,7 @@
         "typeCoordination": "Tipo de coordinación",
         "type": "Tipo de Caso",
         "patientName": "Nombre del Paciente",
+        "patientInformation": "Informacion del Paciente",
         "date": {
             "opening": "Fecha de apertura",
             "event": "Fecha Evento",
@@ -102,7 +138,12 @@
         "emergencyContact":"Contacto de emergencia"
     },
     "general": {
+        "total":"Total",
+        "add":"Agregar",
+        "delete":"Eliminar",
+        "code":"Código",
         "preview":"Vista Previa",
+        "ok":"Aceptar",
         "search":"Buscar",
         "language":"Lenguaje",
         "save":"Guardar",
@@ -149,12 +190,14 @@
         "acount": "Cuenta",
         "client": "Cliente",
         "send": "Enviar",
+        "sent": "Enviado",
         "no": "No",
         "yes":"Si",
         "date": "Fecha",
         "pressEnterSelect": "Pulse Enter para seleccionar",
         "deselectLabel": "Pulse Enter para remover",
         "selected": "Seleccionado",
+        "selectCode": "Seleccione un codigo",
         "sentRepricing": "Enviado a Repricing",
         "withoutResults": "Sin Resultados",
         "genre":{
@@ -172,7 +215,8 @@
         "asign":"Asignar",
         "bookingText":"Texto de Reserva",
         "reserveAmount":"Monto de reserva",
-        "authorization":"Autorización"
+        "authorization":"Autorización",
+        "taxId":"Número de Identificación Tributaria"
     },
     "assistanceBills": {
         "information": "Informacion de la Factura",
@@ -181,6 +225,7 @@
         "exchangeRate": "Tasa de cambio",
         "amountUSD": "Monto USD",
         "coveredAmount": "Monto Cubierto",
+        "notCoveredAmount": "Monto sin cubertura",
         "classification": "Clasificación",
         "originalAmount": "Monto Original",
         "referenceDescription": "Reference/Description",

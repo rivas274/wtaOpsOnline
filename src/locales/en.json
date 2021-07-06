@@ -5,6 +5,23 @@
         "invoice":"Invoice"
     },
     "rePricing":{
+        "completeRePricing":"Complete RePricing",
+        "addInvoiceFee":"Add Invoice Fee",
+        "addFormEOB":"Add Form EOB",
+        "addRepricedEOB":"Add Repriced EOB",
+        "uploadRepricedEOB":"Upload Repriced EOB",
+        "uploadInvoiceFee":"Upload InvoiceFee",
+        "claimsManagement":"Claims Management",
+        "claimInformation":"Claim Information",
+        "policyName":"Policy Name",
+        "patientAccountNumber":"Patient Account Number",
+        "date":{
+            "claim":"Date Of Claim",
+            "claimReceived":"Date of Claim Received",
+            "service":"Date of Service",
+            "EOB":"Date Of EOB"
+        },
+        "claimAmount":"Claim Amount",
         "staus":{
             "noProvider":"No repricing provider",
             "selected":"Repricing selected",
@@ -18,8 +35,25 @@
     },
     "invoice":{
         "addInvoice":"Add Invoice",
+        "invoiceNumber":"Invoice Number",
+        "invoiceFile":"Invoice File",
         "invoiceAmount":"Invoice Amount",
         "invoiceProvider":"Invoice Provider",
+        "deductible":"Deductible",
+        "passengerResponsibility":"Passenger Responsibility",
+        "patientDeductible":"Patient Deductible",
+        "quantity":"Quantity",
+        "feeAmount":"Fee Amount",
+        "allowableAmount":"Allowable Amount",
+        "amountNotCovered":"Amount Not Covered",
+        "coveredAmount":"Covered Amount",
+        "billedAmount":"Billed Amount",
+        "amountToCovere":"Amount To Covere",
+        "savingAmount":"Saving Amount",
+        "adjustedAmount":"Adjusted Amount",
+        "benefitAmountAvailable":"Benefit/Amount Available",
+        "benefitAmountPaid":"Benefit/Amount Paid",
+        "amountPaid":"Amount Paid",
         "date":{
             "bill":"Bill Date"
         }
@@ -56,6 +90,7 @@
         "uploadAnother": "Upload Another Document"
     },
     "assistance": {
+        "procedureCode":"Procedure Code",
         "clients": "Clients",
         "assistance":"Assistance",
         "notes":"Notes",
@@ -68,6 +103,7 @@
         "typeCoordination": "Type of Coordination",
         "type": "Case type",
         "patientName": "Patient Name",
+        "patientInformation": "Patient Information",
         "date": {
             "opening": "Opening Date",
             "event": "Event Date",
@@ -102,15 +138,20 @@
         "emergencyContact":"Emergency Contact"
     },
     "general": {
+        "total":"Total",
+        "add":"Add",
+        "delete":"Delete",
+        "code":"Code",
         "preview":"Preview",
+        "ok":"Ok",
         "search":"Search",
         "language":"Language",
         "save":"Save",
         "general":"General",
         "contact": "Contact",
-        "name": "name",
-        "value": "value",
-        "address":"address",
+        "name": "Name",
+        "value": "Value",
+        "address":"Address",
         "optionalAddress":"Optional Address",
         "notApplicable": "Not Applicable",
         "notLoaded": "Not Loaded",
@@ -121,10 +162,10 @@
         "email": "Email",
         "phone": "Phone",
         "passport": "Passport",
-        "gender": "gender",
+        "gender": "Gender",
         "dateOfBirth": "Date Of Birth",
-        "dowload": "dowload",
-        "age": "age",
+        "dowload": "Dowload",
+        "age": "Age",
         "zipCode": "Zip Code",
         "additionalInformation": "Additional Information",
         "observations": "Observations",
@@ -149,12 +190,14 @@
         "acount":"Acount",
         "client": "Client",
         "send": "Send",
+        "sent": "sent",
         "no": "No",
         "yes":"Yes",
         "date": "Date",
         "pressEnterSelect": "Press Enter to Select",
         "deselectLabel": "Press Enter to remove",
         "selected": "Selected",
+        "selectCode": "Select Code",
         "sentRepricing": "Send to Repricing",
         "withoutResults": "Without Results",
         "genre":{
@@ -172,7 +215,8 @@
         "asign":"Asign",
         "bookingText":"Booking Text",
         "reserveAmount":"Reserve Amount",
-        "authorization":"Authorization"
+        "authorization":"Authorization",
+        "taxId":"Tax Id"
     },
     "assistanceBills": {
         "information": "Bill Information",
@@ -181,6 +225,7 @@
         "exchangeRate": "Exchange Rate",
         "amountUSD": "Amount USD",
         "coveredAmount": "Covered Amount",
+        "notCoveredAmount": "Not Covered Amount",
         "classification": "Classification",
         "originalAmount": "Original Amount",
         "referenceDescription": "Referencia/Descripción",

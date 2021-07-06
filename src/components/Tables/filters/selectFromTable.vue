@@ -1,5 +1,5 @@
 <template>
-    <div :class="[classProp]">
+    <div>
         <select
             class="form-control m-bootstrap-select m_selectpicker"
             data-live-search="true"
@@ -21,7 +21,7 @@
 <script>
 import { setTimeout } from "timers";
 export default {
-    props: ["name", "classProp", "options", "selected"],
+    props: ["name", "options", "selected","v-validate"],
     data: function() {
         return {
             value: this.selected

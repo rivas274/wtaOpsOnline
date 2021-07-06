@@ -1,25 +1,23 @@
 <template>
-    <div :class="[classProp]">
-        <div class="m-input-icon m-input-icon--left date-bt-vue" :id="'Search'+name">
-            <input
-                type="text"
-                :name="name"
-                class="form-control m-input"
-                :placeholder="watermark"
-                readonly
-            />
-            <span class="m-input-icon__icon m-input-icon__icon--left">
-                <span>
-                    <i class="la la-calendar-check-o"></i>
-                </span>
+    <div class="m-input-icon m-input-icon--left date-bt-vue" :id="'Search'+name">
+        <input
+            type="text"
+            :name="name"
+            class="form-control m-input"
+            :placeholder="watermark"
+            readonly
+        />
+        <span class="m-input-icon__icon m-input-icon__icon--left">
+            <span>
+                <i class="la la-calendar-check-o"></i>
             </span>
-        </div>
+        </span>
     </div>
 </template>
 
 <script>
 export default {
-    props: ["watermark", "name", "classProp", "value"],
+    props: ["watermark", "name", "value"],
     mounted() {
         let _self = this;
         window.$(_self.$el)
@@ -32,7 +30,7 @@ export default {
                     autoUpdateInput: false,
                     locale: {
                         format: "YYYY-MM-DD",
-                        cancelLabel: "Clear"
+                        cancelLabel: this.$t('general.clear')
                     }
                 },
                 function(a, t) {

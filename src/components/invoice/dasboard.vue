@@ -1,4 +1,3 @@
-<style scoped src="../Assists/MainAsistencia.css"></style>
 <template>
     <content-m :navigation="[{title:$t('menu.invoice')}]">
         <template slot="title">{{$t('menu.invoice')}}</template>

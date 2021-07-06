@@ -8,14 +8,14 @@
 <template>
     <label
         class="priority-number m-badge m-badge--wide"
-        :class="[classProp?'m-badge--'+classProp:'m-badge--primary']"
+        :class="[color?'m-badge--'+color:'m-badge--primary']"
     >
         <slot></slot>
     </label>
 </template>
 <script>
 export default {
-    props: ["classProp"]
+    props: ["color"]
 };
 </script>
 

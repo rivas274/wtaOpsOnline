@@ -7,7 +7,7 @@ import validationMessagesPt from 'vee-validate/dist/locale/pt_BR';
 import VueI18nFilter from 'vue-i18n-filter';
 
 Vue.use(VueI18n);
-Vue.use(VueI18nFilter)
+Vue.use(VueI18nFilter);
 
 Vue.use(VeeValidate, {
     i18nRootKey: 'validations',

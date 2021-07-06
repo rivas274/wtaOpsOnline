@@ -1,30 +1,31 @@
 <template>
-    <div class="col-md-12">
-        <form class="m-form col-md-12 add-repriced-eob"
-            @submit.prevent="validRepricedEOB"
-            enctype="multipart/form-data"
-            method="POST">
-            <div class="form-group" v-if="rePricingDetaill.rePricing.files.EOB && this.nameEob">
-                <strong>EOB ID</strong>
-                <div class="m-input-icon m-input-icon--left m-input-icon--right">
-                    <input
-                        type="text"
-                        class="form-control m-input"
-                        placeholder="EOB ID"
-                        v-validate="'required'"
-                        v-model.lazy="rePricingDetaill.rePricing.files.EOB"
-                        ref="EOB_ID"
-                        disabled
-                    />
-                    <span class="m-input-icon__icon m-input-icon__icon--left">
-                        <span>
-                            <i class="la la-tag"></i>
+    <form class="m-form col-md-12 add-repriced-eob"
+        @submit.prevent="validRepricedEOB"
+        enctype="multipart/form-data"
+        method="POST">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group" v-if="rePricingDetaill.rePricing.files.EOB && this.nameEob">
+                    <strong>EOB ID</strong>
+                    <div class="m-input-icon m-input-icon--left m-input-icon--right">
+                        <input
+                            type="text"
+                            class="form-control m-input"
+                            placeholder="EOB ID"
+                            v-validate="'required'"
+                            v-model.lazy="rePricingDetaill.rePricing.files.EOB"
+                            ref="EOB_ID"
+                            disabled
+                        />
+                        <span class="m-input-icon__icon m-input-icon__icon--left">
+                            <span>
+                                <i class="la la-tag"></i>
+                            </span>
                         </span>
-                    </span>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group" :class="{'has-danger': errors.has('fileEob')}">
-                <div class="col-md-6 eob-fee">
+                <div class="form-group" :class="{'has-danger': errors.has('fileEob')}">
+                
                     <strong>Repriced EOB</strong>
                     <div class="custom-file" v-if="rePricingDetaill.rePricing.files.EOB && this.nameEob && !this.fileEOB">
                         <input
@@ -72,25 +73,24 @@
                     </div>
                     <form-error :attribute_name="'fileEob'" :errors_form="errors"></form-error>
                 </div>
-
-                <div class="col-md-6 bg-secondary d-flex preview-container p-0">
-                    <iframe
-                        class="preview"
-                        v-if="rePricingDetaill.rePricing.files.EOB && this.nameEob && !previewEOB"
-                        :src="baseUrlApi()+'streaming/'+rePricingDetaill.rePricing.files.EOB"
-                    ></iframe>
-                    <h1 v-if="!previewEOB && !this.nameEob" class="m-auto d-none d-md-block">Preview</h1>
-                    <iframe class="rounded h-100 w-100" v-if="previewEOB" :src="previewEOB" />
-                </div>
+                <button
+                    :disabled="disableForm"
+                    :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
+                    type="submit"
+                    class="btn btn-primary col-md-12 mt-3"
+                >{{$t('general.send')}}</button>
             </div>
-            <button
-                :disabled="disableForm"
-                :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
-                type="submit"
-                class="btn btn-primary col-md-12 mt-3"
-            >Send</button>
-        </form>
-    </div>
+            <div class="col-md-6 bg-secondary d-flex preview-container p-0">
+                <iframe
+                    class="preview"
+                    v-if="rePricingDetaill.rePricing.files.EOB && this.nameEob && !previewEOB"
+                    :src="baseUrlApi()+'streaming/'+rePricingDetaill.rePricing.files.EOB"
+                ></iframe>
+                <h1 v-if="!previewEOB && !this.nameEob" class="m-auto d-none d-md-block">Preview</h1>
+                <iframe class="preview rounded h-100 w-100" v-if="previewEOB" :src="previewEOB" />
+            </div>
+        </div>
+    </form>
 </template>
 
 <script>
@@ -145,11 +145,11 @@ export default {
                         if (response.data.STATUS == "OK") {
                             this.$emit("addFilesRepricing", response.data.RESPONSE);
                             window.Swal.fire({
-                                title: "Send",
+                                title: this.$t("general.sent"),
                                 text: this.$t("document.uploaded"),
                                 type: "success",
                                 showCancelButton: true,
-                                confirmButtonText: "Ok"
+                                confirmButtonText: this.$t("general.ok"),
                             });
                         } else {
                             if (response.data.ERRORS) {
@@ -204,18 +204,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.col-md-6 {
-    display: inline-block !important;
-}
-.preview-container iframe {
-    min-height: 350px !important;
-    border: 0px !important;
-    overflow-x: none;
-    width: 100% !important;
-}
-.eob-fee {
-    padding-left: 0px;
-}
-</style>

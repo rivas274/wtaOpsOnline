@@ -9,7 +9,6 @@ a.toggle-popover {
         data-trigger="focus"
         tabindex="-1"
         :data-placement="placement"
-        :class="[classProp]"
         class="toggle-popover"
         :title="title"
     >
@@ -22,7 +21,7 @@ a.toggle-popover {
 
 <script>
 export default {
-    props: ["title", "placement", "classProp"],
+    props: ["title", "placement"],
     mounted() {
         window.$(this.$el).popover({
             html: true,

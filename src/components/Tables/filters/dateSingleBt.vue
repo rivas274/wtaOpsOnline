@@ -1,5 +1,5 @@
 <template>
-    <div :class="[classProp]">
+    <div>
         <div class="m-input-icon m-input-icon--left" :id="'Search'+name">
             <input
                 type="text"
@@ -19,7 +19,7 @@
 </template>
 <script>
 export default {
-    props: ["watermark", "name", "classProp", "value"],
+    props: ["watermark", "name", "value"],
     mounted() {
         let _self = this;
         window.$(_self.$el)
