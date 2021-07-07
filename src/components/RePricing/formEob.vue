@@ -138,7 +138,7 @@
                 />
             </div>
             <div class="form-group col-md-4">
-                <strong>{{ $t("general.address") | upper }}</strong>
+                <strong>{{ $t("general.address") }}</strong>
                 <textarea
                     class="form-control m-input"
                     v-model="inputsData.providerAddress"
@@ -410,7 +410,7 @@
                 @click="generateDocument()"
                 class="btn btn-primary col-md-12 mt-3"
             >
-                Send
+                {{$t('general.send')}}
             </button>
         </div>
     </div>
