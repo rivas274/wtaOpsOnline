@@ -13,7 +13,7 @@
                     <span>{{$t('general.general')}}</span>
                 </a>
             </li>
-            <li v-tooltip:top="'Upload Documents'">
+            <li v-tooltip:top="$t('rePricing.completeRePricing')">
                 <a
                     class="nav-link"
                     :class="{'m--font-success':tabShow=='upload-documents'}"
@@ -23,7 +23,7 @@
                     <span>{{$t('rePricing.completeRePricing')}}</span>
                 </a>
             </li>
-            <li v-tooltip:top="'Upload Repriced EOB'">
+            <li v-tooltip:top="$t('rePricing.uploadRepricedEOB')">
                 <a
                     class="nav-link"
                     :class="{'m--font-success':tabShow=='upload-repriced-EOB'}"
@@ -33,7 +33,7 @@
                     <span>{{$t('rePricing.uploadRepricedEOB')}}</span>
                 </a>
             </li>
-            <li v-tooltip:top="'Upload Invoice FEE'">
+            <li v-tooltip:top="$t('rePricing.uploadInvoiceFee')">
                 <a
                     class="nav-link"
                     :class="{'m--font-success':tabShow=='upload-invoice-FEE'}"
