@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="m-input-icon m-input-icon--left" :id="'Search'+name">
+        <div class="m-input-icon m-input-icon--left" :id="'Search' + name">
             <input
                 type="text"
                 :name="name"
@@ -33,12 +33,12 @@ export default {
                 forceParse: 0,
                 pickerPosition: "bottom-left"
             })
-            .change(function() {
+            .change(function () {
                 _self.$emit("input", _self.name, window.$(this).val());
             });
     },
     watch: {
-        value: function(newVal) {
+        value: function (newVal) {
             window.$(this.$el).val(newVal);
         }
     }

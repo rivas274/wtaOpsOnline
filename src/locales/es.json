@@ -78,7 +78,7 @@
         "company": "Compañia"
     },
     "document": {
-        "category": "Categoria",
+        "category": "Categoría",
         "type": "Tipo de Documento",
         "amount": "Monto",
         "currency": "Moneda",
@@ -156,7 +156,7 @@
         "notApplicable": "No aplica",
         "notLoaded": "Sin cargar",
         "noRecordsFound": "No se encontraron registros",
-        "description": "Descripcion",
+        "description": "Descripción",
         "firstName": "Nombre",
         "lastName": "Apellido",
         "email": "Email",
@@ -228,7 +228,7 @@
         "notCoveredAmount": "Monto sin cubertura",
         "classification": "Clasificación",
         "originalAmount": "Monto Original",
-        "referenceDescription": "Reference/Description",
+        "referenceDescription": "Referencia/Descripción",
         "date": {
             "document": "Fecha"
         }

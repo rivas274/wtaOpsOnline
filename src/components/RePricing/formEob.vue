@@ -547,6 +547,7 @@ export default {
                                     }
                                     window.Swal.fire({
                                         title: response.data.MESSAGE || "Error Form",
+                                        confirmButtonText: this.$t("general.ok"),
                                         type: "error"
                                     });
                                 }

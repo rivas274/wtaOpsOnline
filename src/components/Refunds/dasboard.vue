@@ -570,11 +570,12 @@ export default {
                                             window.Swal.DismissReason.cancel
                                         ) {
                                             window.close();
-                                            window.Swal.fire(
-                                                this.$t("windows.close"),
-                                                this.$t("windows.pleaseClose"),
-                                                "error"
-                                            );
+                                            window.Swal.fire({
+                                                title: this.$t("windows.close"),
+                                                text: this.$t("windows.pleaseClose"),
+                                                confirmButtonText: this.$t("general.ok"),
+                                                type: "error"
+                                            });
                                         }
                                     });
                                 } else {
@@ -589,6 +590,7 @@ export default {
                                     window.Swal.fire({
                                         title: "Error",
                                         text: response.data.MESSAGE,
+                                        confirmButtonText: this.$t("general.ok"),
                                         type: "error"
                                     });
                                 }

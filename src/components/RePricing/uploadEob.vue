@@ -102,7 +102,9 @@ export default {
             nameEob: "",
             fileNames: {},
             EobID: this.rePricingDetaill.rePricing.files.EOB,
-            reference: ''
+            reference: '',
+            disableForm:false,
+            uploadPercentage:0
         }
     },
     mounted() {
@@ -162,6 +164,7 @@ export default {
                             }
                             window.Swal.fire({
                                 title: response.data.MESSAGE||"Error Form",
+                                confirmButtonText: this.$t("general.ok"),
                                 type: "error"
                             });
                         }

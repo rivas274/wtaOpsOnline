@@ -784,7 +784,6 @@ export default {
                                     this.$emit("completeRepricing", response.data.RESPONSE);
                                     window.Swal.fire({
                                         title: this.$t("general.sent"),
-                                        text: 'Success',
                                         type: "success",
                                         showCancelButton: true,
                                         confirmButtonText: this.$t("general.ok"),
@@ -800,10 +799,11 @@ export default {
                                     }
                                     window.Swal.fire({
                                         title: response.data.MESSAGE||"Error Form",
+                                        confirmButtonText: this.$t("general.ok"),
                                         type: "error"
                                     });
                                 }
-                                //this.uploadPercentage = 0;
+                                this.uploadPercentage = 0;
                             });
                     }
                 });
@@ -864,6 +864,7 @@ export default {
                             }
                             window.Swal.fire({
                                 title: response.data.MESSAGE||"Error Form",
+                                confirmButtonText: this.$t("general.ok"),
                                 type: "error"
                             });
                         }

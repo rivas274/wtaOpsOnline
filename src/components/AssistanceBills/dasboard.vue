@@ -556,9 +556,7 @@ export default {
                                         text: this.$t("document.uploaded"),
                                         type: "success",
                                         showCancelButton: true,
-                                        confirmButtonText: this.$t(
-                                            "document.uploadAnother"
-                                        ),
+                                        confirmButtonText: this.$t("document.uploadAnother"),
                                         cancelButtonText: this.$t("general.no")
                                     }).then(result => {
                                         if (result.value) {
@@ -569,15 +567,15 @@ export default {
                                             this.file = false;
                                             this.$refs.file.value = null;
                                         } else if (
-                                            result.dismiss ===
-                                            window.Swal.DismissReason.cancel
+                                            result.dismiss === window.Swal.DismissReason.cancel
                                         ) {
                                             window.close();
-                                            window.Swal.fire(
-                                                this.$t("windows.close"),
-                                                this.$t("windows.pleaseClose"),
-                                                "error"
-                                            );
+                                            window.Swal.fire({
+                                                title: this.$t("windows.close"),
+                                                text: this.$t("windows.pleaseClose"),
+                                                confirmButtonText: this.$t("general.ok"),
+                                                type: "error"
+                                            });
                                         }
                                     });
                                 } else {
@@ -592,7 +590,8 @@ export default {
                                     window.Swal.fire({
                                         title: "Error",
                                         text: response.data.MESSAGE,
-                                        type: "error"
+                                        confirmButtonText: this.$t("general.ok"),
+                                        type: "error",
                                     });
                                 }
                                 this.uploadPercentage = 0;
