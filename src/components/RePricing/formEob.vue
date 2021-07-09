@@ -572,6 +572,7 @@ export default {
                             type: "success",
                             showCancelButton: true,
                             confirmButtonText: this.$t("general.ok"),
+                            cancelButtonText: this.$t("general.no")
                         });
                     } else if (response.data.STATUS == 'ERROR') {
                         window.Swal.fire({
@@ -580,6 +581,7 @@ export default {
                             type: "danger",
                             showCancelButton: true,
                             confirmButtonText: this.$t("general.ok"),
+                            cancelButtonText: this.$t("general.no")
                         });
                     }
                 });

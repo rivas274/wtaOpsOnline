@@ -553,9 +553,7 @@ export default {
                                         text: this.$t("document.uploaded"),
                                         type: "success",
                                         showCancelButton: true,
-                                        confirmButtonText: this.$t(
-                                            "document.uploadAnother"
-                                        ),
+                                        confirmButtonText: this.$t("document.uploadAnother"),
                                         cancelButtonText: this.$t("general.no")
                                     }).then(result => {
                                         if (result.value) {

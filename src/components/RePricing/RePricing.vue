@@ -787,6 +787,7 @@ export default {
                                         type: "success",
                                         showCancelButton: true,
                                         confirmButtonText: this.$t("general.ok"),
+                                        cancelButtonText: this.$t("general.no")
                                     });
                                 } else {
                                     if (response.data.ERRORS) {
@@ -852,6 +853,7 @@ export default {
                                 type: "success",
                                 showCancelButton: true,
                                 confirmButtonText: this.$t("general.ok"),
+                                cancelButtonText: this.$t("general.no")
                             });
                         } else {
                             if (response.data.ERRORS) {
