@@ -234,7 +234,7 @@ iframe{
                                                         <template v-for="benf in benefit.BENEFIT">
                                                             <tr :key="benf.id" v-if="benf.name">
                                                                 <td v-html="benf.name"></td>
-                                                                <td v-html="benf.valor||$('general.notApplicable')"></td>
+                                                                <td v-html="benf.valor||$t('general.notApplicable')"></td>
                                                             </tr>
                                                         </template>
                                                     </tbody>
