@@ -7,7 +7,9 @@
             <ul class="m-topbar__nav m-nav m-nav--inline">
                 <info-user></info-user>
             </ul>
+            
         </div>
+        
     </div>
 </template>
 <script>

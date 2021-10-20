@@ -100,6 +100,9 @@ export default {
                 case "client" in detaill:
                     detaill = detaill.client.name;
                     break;
+                case "master_client" in detaill:
+                    detaill = detaill.master_client.name;
+                    break;    
             }
             return typeof detaill=="string"?detaill:'';
         }
