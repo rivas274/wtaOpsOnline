@@ -1,37 +1,37 @@
 {
-  "repricing": {
-    "read": [14],
-    "write": [14],
-    "delete": [14]
-  },
-  "assist": {
-    "read": [18, 37, 43],
-    "write": [18, 37, 43],
-    "delete": [18, 37, 43]
-  },
-  "bills": {
-    "read": [37],
-    "write": [37],
-    "delete": [37]
-  },
-  "notes": {
-    "read": [],
-    "write": [],
-    "delete": []
-  },
-  "RP002A": {
-    "read": [],
-    "write": [],
-    "delete": []
-  },
-  "RP002A-B39": {
-    "read": [],
-    "write": [],
-    "delete": []
-  },
-  "time_line": {
-    "read": true,
-    "write": [],
-    "delete": []
-  }
+    "repricing": {
+        "read": [14],
+        "write": [14],
+        "delete": [14]
+    },
+    "assist": {
+        "read": [18, 37, 43],
+        "write": [18, 37, 43],
+        "delete": [18, 37, 43]
+    },
+    "bills": {
+        "read": [37],
+        "write": [37],
+        "delete": [37]
+    },
+    "notes": {
+        "read": [],
+        "write": [],
+        "delete": []
+    },
+    "RP002A": {
+        "read": [],
+        "write": [],
+        "delete": []
+    },
+    "RP002A-B39": {
+        "read": [],
+        "write": [],
+        "delete": []
+    },
+    "time_line": {
+        "read": true,
+        "write": [],
+        "delete": []
+    }
 }
