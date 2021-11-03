@@ -15,16 +15,16 @@
 <template>
     <TableBasic :show-loader="showLoader">
         <template slot="filters">
-            <div class="form-group m-form__group row" :class="{'has-danger':error}">
+            <div class="row" :class="{'has-danger':error}">
                 <date-range-bt
-                    class="col-md-4 m-form__group-sub"
+                    class="col-md-4 form-group"
                     name="date"
                     :watermark="$t('general.selectDateRange')"
                     v-on:input="setDataFilter"
                     :value="filters.date"
                 ></date-range-bt>
                 <input-from-table
-                    class="col-md-4 m-form__group-sub"
+                    class="col-md-4 form-group"
                     name="code"
                     :watermark="$t('assistance.caseNumber')"
                     icon="la flaticon-interface-5"
@@ -32,26 +32,37 @@
                     :value="filters.code"
                 ></input-from-table>
                 <input-from-table
-                    class="col-md-4 m-form__group-sub"
+                    class="col-md-4 form-group"
+                    name="codeVoucher"
+                    :watermark="$t('voucher.voucher')"
+                    icon="la flaticon-interface-5"
+                    v-on:input="setDataFilter"
+                    :value="filters.codeVoucher"
+                ></input-from-table>
+                <input-from-table
+                    class="col-md-4 form-group"
                     name="passager"
                     :watermark="$t('voucher.name')"
                     icon="la flaticon-avatar"
                     v-on:input="setDataFilter"
                     :value="filters.passager"
                 ></input-from-table>
-            </div>
-            <div class="form-group m-form__group row" v-if="clients.length>1">
-                <template>
-                    <multi-selects
-                        v-if="clients.length>1"
-                        class="col-md-4 m-form__group-sub"
-                        name="arrPrefix"
-                        :options="clients"
-                        :watermark="$t('assistance.clients')"
-                        :selected="filters.arrPrefix"
-                        v-on:input="setDataFilter"
-                    ></multi-selects>
-                </template>
+                <date-single-bt
+                    class="col-md-4 form-group"
+                    name="dob"
+                    :watermark="$t('general.dateOfBirth')"
+                    v-on:input="setDataFilter"
+                    :value="filters.dob"
+                ></date-single-bt>
+                <multi-selects
+                    v-if="clients.length>1"
+                    class="col-md-4 form-group"
+                    name="arrPrefix"
+                    :options="clients"
+                    :watermark="$t('assistance.clients')"
+                    :selected="filters.arrPrefix"
+                    v-on:input="setDataFilter"
+                ></multi-selects>
             </div>
             <div class="row m--align-right">
                 <div v-if="error" class="col-lg-9">
@@ -174,6 +185,7 @@ import pagination from "../pagination/pagination.vue";
 import Flag from "../Element/Flag.vue";
 import TableBasic from "../Tables/TableBasic.vue";
 import MultiSelects from "../Tables/filters/Multiselect.vue";
+import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 export default {
     components: {
         TableBasic,
@@ -182,7 +194,8 @@ export default {
         dateRangeBt,
         pagination,
         Flag,
-        MultiSelects
+        MultiSelects,
+        dateSingleBt
     },
     props: ["open-asist"],
     data: function() {
@@ -196,7 +209,8 @@ export default {
             error: null,
             filters: {
                 code: "",
-                /* billExists: permission.bills?"Y":"", */
+                codeVoucher:"",
+                dob:"",
                 arrPrefix: [],
                 passager: "",
                 date: {
@@ -240,7 +254,9 @@ export default {
                     : this.filters.arrPrefix;
             let requiered = {
                     code: this.filters.code.trim(),
+                    codeVoucher: this.filters.codeVoucher.trim(),
                     passenger: this.filters.passager.trim(),
+                    dob: this.filters.dob.trim(),
                     endDate: this.filters.date.endDate,
                     startDate: this.filters.date.startDate
                 },
@@ -265,9 +281,10 @@ export default {
                         : "getAssistsXLS",
                     {
                         prefix: arrPrefix,
-                        /* billExists: this.filters.billExists, */
                         code: this.filters.code.trim(),
+                        codeVoucher: this.filters.codeVoucher.trim(),
                         passenger: this.filters.passager.trim(),
+                        dob: this.filters.dob.trim(),
                         endDate: this.filters.date.endDate,
                         startDate: this.filters.date.startDate
                     },
@@ -306,8 +323,9 @@ export default {
                     start: pg,
                     limit: this.footerTable.limit,
                     prefix: arrPrefix,
-                    /* billExists: this.filters.billExists, */
                     code: this.filters.code.trim(),
+                    codeVoucher: this.filters.codeVoucher.trim(),
+                    dob: this.filters.dob.trim(),
                     passenger: this.filters.passager.trim(),
                     endDate: this.filters.date.endDate,
                     startDate: this.filters.date.startDate
