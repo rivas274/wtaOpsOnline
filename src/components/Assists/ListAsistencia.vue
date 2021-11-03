@@ -253,10 +253,10 @@ export default {
                     ? this.$session.get("prefix")
                     : this.filters.arrPrefix;
             let requiered = {
-                    code: this.filters.code.trim(),
-                    codeVoucher: this.filters.codeVoucher.trim(),
-                    passenger: this.filters.passager.trim(),
-                    dob: this.filters.dob.trim(),
+                    code: (this.filters.code||'').trim(),
+                    codeVoucher: (this.filters.codeVoucher||'').trim(),
+                    passenger: (this.filters.passager||'').trim(),
+                    dob: (this.filters.dob||'').trim(),
                     endDate: this.filters.date.endDate,
                     startDate: this.filters.date.startDate
                 },
@@ -281,10 +281,10 @@ export default {
                         : "getAssistsXLS",
                     {
                         prefix: arrPrefix,
-                        code: this.filters.code.trim(),
-                        codeVoucher: this.filters.codeVoucher.trim(),
-                        passenger: this.filters.passager.trim(),
-                        dob: this.filters.dob.trim(),
+                        code: (this.filters.code||'').trim(),
+                        codeVoucher: (this.filters.codeVoucher||'').trim(),
+                        passenger: (this.filters.passager||'').trim(),
+                        dob: (this.filters.dob||'').trim(),
                         endDate: this.filters.date.endDate,
                         startDate: this.filters.date.startDate
                     },
@@ -323,10 +323,10 @@ export default {
                     start: pg,
                     limit: this.footerTable.limit,
                     prefix: arrPrefix,
-                    code: this.filters.code.trim(),
-                    codeVoucher: this.filters.codeVoucher.trim(),
-                    dob: this.filters.dob.trim(),
-                    passenger: this.filters.passager.trim(),
+                    code: (this.filters.code||'').trim(),
+                    codeVoucher: (this.filters.codeVoucher||'').trim(),
+                    dob: (this.filters.dob||'').trim(),
+                    passenger: (this.filters.passager||'').trim(),
                     endDate: this.filters.date.endDate,
                     startDate: this.filters.date.startDate
                 })
