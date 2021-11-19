@@ -87,14 +87,14 @@
                     ></select-from-table>
                 </div>
                 <div class="form-group" :class="{'has-danger': errors.has('reference')}">
-                    <strong>{{ $t('refund.reference') }}</strong>
+                    <strong>{{ $t('reimbursement.reference') }}</strong>
                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                         <input
                             type="text"
                             name="reference"
                             class="form-control m-input"
-                            :placeholder="$t('refund.reference')"
-                            :data-vv-as="$t('refund.reference')"
+                            :placeholder="$t('reimbursement.reference')"
+                            :data-vv-as="$t('reimbursement.reference')"
                             v-validate="'required|min:2|max:40|'"
                             v-model.lazy="inputsData.reference"
                             ref="reference"

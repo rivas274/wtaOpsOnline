@@ -37,11 +37,15 @@ export default [{
     },
     {
         path: '/refunds/:code',
-        redirect: '/en/refunds/:code',
+        redirect: '/en/reimbursement/:code',
+    },
+    {
+        path: '/reimbursement/:code',
+        redirect: '/en/reimbursement/:code',
     },
     {
         name: 'Refunds',
-        path: '/:lang/refunds/:code',
+        path: '/:lang/reimbursement/:code',
         component: Refunds,
         meta: {
             isPublic: true

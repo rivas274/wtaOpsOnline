@@ -15,7 +15,7 @@
                                             style="padding-top: 0px; margin-top:40px;"
                                         >
                                             <a>
-                                                <h1>{{ $t('refund.refund') }}</h1>
+                                                <h1>{{ $t('reimbursement.reimbursement') }}</h1>
                                             </a>
                                             <a class="m--hidden-mobile">
                                                 <custom-img
@@ -153,7 +153,7 @@
                                                                         </span>
                                                                         <h3
                                                                             class="m-portlet__head-text"
-                                                                        >{{ $t('refund.information') }}</h3>
+                                                                        >{{ $t('reimbursement.information') }}</h3>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -175,7 +175,7 @@
                                                                     <div
                                                                         class="form-group m-form__group"
                                                                     >
-                                                                        <strong>{{ $t('refund.date.document') }}</strong>
+                                                                        <strong>{{ $t('reimbursement.date.document') }}</strong>
                                                                         <date-single-bt
                                                                             class="m-input"
                                                                             name="date"
@@ -231,7 +231,7 @@
                                                                         class="form-group m-form__group"
                                                                         :class="{'has-danger': errors.has('nameBen')}"
                                                                     >
-                                                                        <strong>{{ $t('refund.payee') }}</strong>
+                                                                        <strong>{{ $t('reimbursement.payee') }}</strong>
                                                                         <div
                                                                             class="m-input-icon m-input-icon--left m-input-icon--right"
                                                                         >
@@ -239,7 +239,7 @@
                                                                                 type="text"
                                                                                 name="nameBen"
                                                                                 class="form-control m-input"
-                                                                                :placeholder="$t('refund.payee')"
+                                                                                :placeholder="$t('reimbursement.payee')"
                                                                                 v-validate="'required|min:2|max:250|'"
                                                                                 v-model.lazy="inputsData.nameBen"
                                                                                 ref="nameBen"
@@ -263,7 +263,7 @@
                                                                         class="form-group m-form__group"
                                                                         :class="{'has-danger': errors.has('reference')}"
                                                                     >
-                                                                        <strong>{{ $t('refund.reference') }}</strong>
+                                                                        <strong>{{ $t('reimbursement.reference') }}</strong>
                                                                         <div
                                                                             class="m-input-icon m-input-icon--left m-input-icon--right"
                                                                         >
@@ -271,7 +271,7 @@
                                                                                 type="text"
                                                                                 name="reference"
                                                                                 class="form-control m-input"
-                                                                                :placeholder="$t('refund.reference')"
+                                                                                :placeholder="$t('reimbursement.reference')"
                                                                                 v-validate="'required|min:2|max:40|'"
                                                                                 v-model.lazy="inputsData.reference"
                                                                                 ref="reference"
@@ -430,7 +430,7 @@
                                         <div v-else>
                                             <div class="m-portlet m-portlet--tab text-center" style="padding:3rem;">
                                                 <h1>
-                                                    {{$t('refund.clientNotProcessRefunds')}}
+                                                    {{$t('reimbursement.clientNotProcessRefunds')}}
                                                 </h1>
                                             </div>
                                         </div>

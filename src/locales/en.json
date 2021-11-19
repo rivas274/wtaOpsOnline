@@ -64,15 +64,15 @@
         "newPassword":"New Password",
         "confirmNewPassword":"Confirm New Password"
     },
-    "refund": {
-        "refund": "Refund",
-        "information": "Information Refunds",
-        "payee": "Payee of refund (Name)",
-        "reference": "Reference Refund",
+    "reimbursement": {
+        "reimbursement": "Reimbursement",
+        "information": "Information Reimbursements",
+        "payee": "Payee of Reimbursement (Name)",
+        "reference": "Reference Reimbursement",
         "date": {
-            "document": "Refund Date"
+            "document": "Reimbursement Date"
         },
-        "clientNotProcessRefunds":"Client do not process refunds"
+        "clientNotProcessRefunds":"Client do not process reimbursement"
     },
     "company": {
         "company": "Company"
