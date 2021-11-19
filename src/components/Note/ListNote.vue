@@ -50,7 +50,7 @@ iframe {
             v-if="noteToShow.length>0"
         >
             <div class="m-messenger__messages m-scrollable m-scroller ps ps--active-y">
-                <div class="m-messenger__wrapper" v-for="note in noteToShow" :key="note.id">
+                <div class="m-messenger__wrapper" v-for="note in noteToShow" :key="type+note.id">
                     <div
                         class="m-messenger__message"
                         :class="[isUserNote(note)?'m-messenger__message--out':'m-messenger__message--in']"
@@ -96,7 +96,7 @@ import dateRangeBt from "../Tables/filters/dateRangeBt.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
 export default {
     components: { dateRangeBt, inputFromTable },
-    props: ["id-assist"],
+    props: ["id-assist","type"],
     data: function() {
         return {
             filters: {
@@ -128,7 +128,8 @@ export default {
             this.showLoader = true;
             this.axios
                 .post("getNote", {
-                    idAssist: this.assist
+                    idAssist: this.assist,
+                    type:this.type
                 })
                 .then(response => {
                     this.showLoader = false;
@@ -173,8 +174,8 @@ export default {
                     filters.search == ""
                         ? true
                         : new RegExp(filters.search.toLowerCase()).test(
-                              description
-                          );
+                            description
+                        );
                 let endDate =
                     filters.date.endDate == ""
                         ? true

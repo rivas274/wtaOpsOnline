@@ -35,7 +35,7 @@ iframe{
                 <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok">
                     <template slot="title">{{ $t('voucher.voucher') | upper}}</template>
                     <template slot="body">
-                        <AssistAccordionDetaill>
+                        <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('voucher.travelSource')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item" v-if="assistances.voucher">
@@ -82,7 +82,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill>
+                        <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('voucher.passenger')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
@@ -131,7 +131,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill>
+                        <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('general.additionalInformation')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
@@ -258,7 +258,7 @@ iframe{
                 <AssistAccordion :id="'_assistance_'+idAssist" ico="fa flaticon-computer">
                     <template slot="title">{{ $t('assistance.assistance') | upper }}</template>
                     <template slot="body">
-                        <AssistAccordionDetaill>
+                        <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{ $t('assistance.contact') | upper }}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
@@ -313,7 +313,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill>
+                        <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{ $t('assistance.information') | upper }}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
@@ -368,7 +368,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill>
+                        <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('general.description')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">
@@ -381,9 +381,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill
-                            v-if="Object.keys(assistances.caseTypeField).length>0"
-                        >
+                        <AssistAccordionDetaill class="col-md-4" v-if="Object.keys(assistances.caseTypeField).length>0">
                             <template slot="title">{{$t('assistance.caseTypeFields')}}</template>
                             <template slot="body">
                                 <div
@@ -396,9 +394,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill
-                            v-if="Object.keys(assistances.insuranceField).length>0"
-                        >
+                        <AssistAccordionDetaill class="col-md-4" v-if="Object.keys(assistances.insuranceField).length>0">
                             <template slot="title">{{$t('assistance.insuranceFields')}}</template>
                             <template slot="body">
                                 <div
@@ -416,7 +412,7 @@ iframe{
                 <AssistAccordion :id="'_address_'+idAssist" ico="fa flaticon-placeholder">
                     <template slot="title">{{$t('general.address')|upper}}</template>
                     <template slot="body">
-                        <AssistAccordionDetaill>
+                        <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('general.country')|upper}}</template>
                             <template slot="body">
                                 <div
@@ -448,7 +444,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill>
+                        <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('general.address')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item" v-if="assistances.location.address">
@@ -487,7 +483,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill>
+                        <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('general.contact')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">

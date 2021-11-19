@@ -1,5 +1,5 @@
 <template>
-    <div :class="[baseClass||'col-md-4']">
+    <div>
         <div class="m-portlet__body">
             <div class="m-widget16">
                 <div class="row">

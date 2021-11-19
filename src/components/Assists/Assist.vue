@@ -32,6 +32,16 @@
                     <span>{{$t('assistance.notes')}}</span>
                 </a>
             </li>
+            <li v-if="permission.medical_notes" :class="{active:tabShow=='medical_notes'}" v-tooltip:top="$t('assistance.medical_notes')">
+                <a
+                    class="nav-link"
+                    :class="{'m--font-success':tabShow=='medical_notes'}"
+                    @click.prevent="showTab('medical_notes')"
+                >
+                    <i class="fa fa-sticky-note" aria-hidden="true"></i>
+                    <span>{{$t('assistance.medical_notes')}}</span>
+                </a>
+            </li>
             <li
                 v-if="permission.provider"
                 :class="{active:tabShow=='Providers'}"
@@ -69,7 +79,10 @@
                 <list-bill :id-assist="assistBase.idAssist"></list-bill>
             </div>
             <div v-if="permission.notes" class="tab-pane" :class="{active:tabShow=='Note'}">
-                <list-note :id-assist="assistBase.idAssist"></list-note>
+                <list-note :id-assist="assistBase.idAssist" :type="'notes'"></list-note>
+            </div>
+            <div v-if="permission.medical_notes" class="tab-pane" :class="{active:tabShow=='medical_notes'}">
+                <list-note :id-assist="assistBase.idAssist" :type="'medical_notes'"></list-note>
             </div>
             <div v-if="permission.provider" class="tab-pane" :class="{active:tabShow=='Providers'}">
                 <Providers :id-assist="assistBase.idAssist"></Providers>
@@ -100,6 +113,7 @@ export default {
             permission: {
                 bills: this.middleware("bills", "read"),
                 notes: this.middleware("notes", "read"),
+                medical_notes: this.middleware("medical_notes", "read"),
                 provider: this.middleware("provider", "read"),
                 time_line: this.middleware("time_line", "read")
             }

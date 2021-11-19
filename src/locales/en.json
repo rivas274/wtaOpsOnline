@@ -94,6 +94,7 @@
         "clients": "Clients",
         "assistance":"Assistance",
         "notes":"Notes",
+        "medical_notes":"Medical Notes",
         "timeLine":"Time Line",
         "relation":"Relation",
         "contact":"Contact",
