@@ -64,8 +64,8 @@
         "newPassword":"Nueva Contraseña",
         "confirmNewPassword":"Confirmar nueva contraseña"
     },
-    "refund": {
-        "refund": "Reembolso",
+    "reimbursement": {
+        "reimbursement": "Reembolso",
         "information": "Información de reembolso",
         "payee": "Beneficiario del reembolso (Nombre)",
         "reference": "Reembolso Referencia",
