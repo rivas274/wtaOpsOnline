@@ -22,6 +22,16 @@
                     <span>{{$t('menu.invoice')}}</span>
                 </a>
             </li>
+            <li v-if="permission.files" :class="{active:tabShow=='files'}" v-tooltip:top="$t('menu.documents')">
+                <a
+                    class="nav-link"
+                    :class="{'m--font-success':tabShow=='files'}"
+                    @click.prevent="showTab('files')"
+                >
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                    <span>{{$t('menu.documents')}}</span>
+                </a>
+            </li>
             <li v-if="permission.notes" :class="{active:tabShow=='Note'}" v-tooltip:top="$t('assistance.notes')">
                 <a
                     class="nav-link"
@@ -78,6 +88,9 @@
             <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='Bills'}">
                 <list-bill :id-assist="assistBase.idAssist"></list-bill>
             </div>
+            <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='files'}">
+                <list-files :id-assist="assistBase.idAssist"></list-files>
+            </div>
             <div v-if="permission.notes" class="tab-pane" :class="{active:tabShow=='Note'}">
                 <list-note :id-assist="assistBase.idAssist" :type="'notes'"></list-note>
             </div>
@@ -98,13 +111,14 @@
     </div>
 </template>
 <script>
+import ListFiles from "../AssistanceFiles/ListFiles.vue";
 import ListBill from "../Bill/ListBill.vue";
 import Providers from "../Provider/ListProviders.vue";
 import ListNote from "../Note/ListNote.vue";
 import TimeLine from "../timeline/TimeLine.vue";
 import AssistDetail from "./AssistDetail.vue";
 export default {
-    components: { Providers, ListBill, AssistDetail, ListNote, TimeLine },
+    components: { Providers, ListBill, AssistDetail, ListNote, TimeLine, ListFiles },
     props: ["assist"],
     data() {
         return {
@@ -115,7 +129,8 @@ export default {
                 notes: this.middleware("notes", "read"),
                 medical_notes: this.middleware("medical_notes", "read"),
                 provider: this.middleware("provider", "read"),
-                time_line: this.middleware("time_line", "read")
+                time_line: this.middleware("time_line", "read"),
+                files: this.middleware("files", "read"),
             }
         };
     },

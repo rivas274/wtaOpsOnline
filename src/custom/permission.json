@@ -35,7 +35,12 @@
         "delete": []
     },
     "time_line": {
-        "read": true,
+        "read": [],
+        "write": [],
+        "delete": []
+    },
+    "files": {
+        "read": [],
         "write": [],
         "delete": []
     }

@@ -2,7 +2,8 @@
     "menu": {
         "assistance": "Asistencia",
         "rePricing": "RePricing",
-        "invoice": "Factura"
+        "invoice": "Factura",
+        "documents": "Documentos"
     },
     "rePricing":{
         "completeRePricing":"Completar RePricing",
