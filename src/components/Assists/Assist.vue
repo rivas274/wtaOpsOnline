@@ -22,11 +22,11 @@
                     <span>{{$t('menu.invoice')}}</span>
                 </a>
             </li>
-            <li v-if="permission.documnets" :class="{active:tabShow=='documnets'}" v-tooltip:top="$t('menu.documents')">
+            <li v-if="permission.documents" :class="{active:tabShow=='documents'}" v-tooltip:top="$t('menu.documents')">
                 <a
                     class="nav-link"
-                    :class="{'m--font-success':tabShow=='documnets'}"
-                    @click.prevent="showTab('documnets')"
+                    :class="{'m--font-success':tabShow=='documents'}"
+                    @click.prevent="showTab('documents')"
                 >
                     <i class="fa fa-folder" aria-hidden="true"></i>
                     <span>{{$t('menu.documents')}}</span>
@@ -88,7 +88,7 @@
             <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='Bills'}">
                 <list-bill :id-assist="assistBase.idAssist"></list-bill>
             </div>
-            <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='documnets'}">
+            <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='documents'}">
                 <list-files :id-assist="assistBase.idAssist"></list-files>
             </div>
             <div v-if="permission.notes" class="tab-pane" :class="{active:tabShow=='Note'}">
@@ -130,7 +130,7 @@ export default {
                 medical_notes: this.middleware("medical_notes", "read"),
                 provider: this.middleware("provider", "read"),
                 time_line: this.middleware("time_line", "read"),
-                documnets: this.middleware("documnets", "read"),
+                documents: this.middleware("documents", "read"),
             }
         };
     },
