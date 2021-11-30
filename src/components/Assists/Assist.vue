@@ -22,6 +22,16 @@
                     <span>{{$t('menu.invoice')}}</span>
                 </a>
             </li>
+            <li v-if="permission.reimbursement" :class="{active:tabShow=='reimbursement'}" v-tooltip:top="$t('reimbursement.reimbursement')">
+                <a
+                    class="nav-link"
+                    :class="{'m--font-success':tabShow=='reimbursement'}"
+                    @click.prevent="showTab('reimbursement')"
+                >
+                    <i class="fa fa-money-bill" aria-hidden="true"></i>
+                    <span>{{$t('reimbursement.reimbursement')}}</span>
+                </a>
+            </li>
             <li v-if="permission.documents" :class="{active:tabShow=='documents'}" v-tooltip:top="$t('menu.documents')">
                 <a
                     class="nav-link"
@@ -88,7 +98,10 @@
             <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='Bills'}">
                 <list-bill :id-assist="assistBase.idAssist"></list-bill>
             </div>
-            <div v-if="permission.bills" class="tab-pane" :class="{active:tabShow=='documents'}">
+            <div v-if="permission.reimbursement" class="tab-pane" :class="{active:tabShow=='reimbursement'}">
+                <list-reimbursement :id-assist="assistBase.idAssist"></list-reimbursement>
+            </div>
+            <div v-if="permission.documents" class="tab-pane" :class="{active:tabShow=='documents'}">
                 <list-files :id-assist="assistBase.idAssist"></list-files>
             </div>
             <div v-if="permission.notes" class="tab-pane" :class="{active:tabShow=='Note'}">
@@ -113,12 +126,13 @@
 <script>
 import ListFiles from "../AssistanceFiles/ListFiles.vue";
 import ListBill from "../Bill/ListBill.vue";
+import ListReimbursement from "../Reimbursement/ListReimbursement.vue";
 import Providers from "../Provider/ListProviders.vue";
 import ListNote from "../Note/ListNote.vue";
 import TimeLine from "../timeline/TimeLine.vue";
 import AssistDetail from "./AssistDetail.vue";
 export default {
-    components: { Providers, ListBill, AssistDetail, ListNote, TimeLine, ListFiles },
+    components: { Providers, ListBill, AssistDetail, ListNote, TimeLine, ListFiles,ListReimbursement },
     props: ["assist"],
     data() {
         return {
@@ -126,6 +140,7 @@ export default {
             tabShow: "General",
             permission: {
                 bills: this.middleware("bills", "read"),
+                reimbursement: this.middleware("reimbursement_documents", "read"),
                 notes: this.middleware("notes", "read"),
                 medical_notes: this.middleware("medical_notes", "read"),
                 provider: this.middleware("provider", "read"),

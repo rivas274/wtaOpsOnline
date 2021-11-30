@@ -43,5 +43,10 @@
         "read": [],
         "write": [],
         "delete": []
+    },
+    "reimbursement_documents": {
+        "read": [],
+        "write": [],
+        "delete": []
     }
 }
