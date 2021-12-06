@@ -3,7 +3,8 @@
         "assistance": "Asistencia",
         "rePricing": "RePricing",
         "invoice": "Factura",
-        "documents": "Documentos"
+        "documents": "Documentos",
+        "voucherCase": "Voucher Con Casos"
     },
     "rePricing":{
         "completeRePricing":"Completar RePricing",

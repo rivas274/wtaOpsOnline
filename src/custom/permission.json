@@ -48,5 +48,10 @@
         "read": [],
         "write": [],
         "delete": []
+    },
+    "voucher_case": {
+        "read": [],
+        "write": [],
+        "delete": []
     }
 }

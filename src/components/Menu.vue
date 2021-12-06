@@ -24,6 +24,18 @@
                 </li>
                 <li
                     class="m-menu__item"
+                    :class="[subIsActive('/voucher_case')?'m-menu__item--active':'']"
+                    aria-haspopup="true"
+                    v-if="assist"
+                >
+                    <router-link :to="{ path: '/voucher_case'}" replace class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <span class="m-menu__link-text">{{$t('menu.voucherCase')}}</span>
+                    </router-link>
+                </li>
+                <li
+                    class="m-menu__item"
                     :class="[subIsActive('/re-pricing')?'m-menu__item--active':'']"
                     aria-haspopup="true"
                     v-if="repricing"
@@ -56,6 +68,7 @@ export default {
     data() {
         return {
             repricing: this.middleware("repricing", "read"),
+            voucherCase: this.middleware("voucher_case", "read"),
             assist: this.middleware("assist", "read"),
             invoice: this.middleware("invoiceProvider", "read")
         };

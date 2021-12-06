@@ -3,7 +3,8 @@
         "assistance":"Assistance",
         "rePricing":"Re-Pricing",
         "invoice":"Invoice",
-        "documents": "Documents"
+        "documents": "Documents",
+        "voucherCase": "Voucher With Cases"
     },
     "rePricing":{
         "completeRePricing":"Complete RePricing",
