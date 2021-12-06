@@ -97,12 +97,15 @@
                     {{$t('assistance.patientName')}}
                 </th>
                 <th>
+                    {{$t('voucher.source')}}
+                </th>
+                <th>
                     {{$t('assistance.symptom')}}
                 </th>
                 <th>
                     {{$t('assistance.type')}}
                 </th>
-                <th style="min-width: 90px;">
+                <th style="min-width: 90px;"  class="text-center">
                     {{$t('assistance.date.event')}}
                 </th>
                 <th style="min-width: 90px;" class="text-center">
@@ -134,6 +137,9 @@
                     {{assist.codigo}}
                 </td>
                 <td v-html="assist.fisrtName+' '+assist.lastName">
+                </td>
+                <td>
+                    {{assist.origin}}
                 </td>
                 <td>
                     {{assist.symptomDetaill}}
