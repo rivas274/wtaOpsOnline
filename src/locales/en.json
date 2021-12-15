@@ -138,7 +138,8 @@
         "passenger":"Passenger",
         "benefit":"Benefit",
         "medicalComments":"Medical Comments",
-        "emergencyContact":"Emergency Contact"
+        "emergencyContact":"Emergency Contact",
+        "searchMultipleCommas":"You can search for multiple vouchers by separating them with commas (,) as a wildcard to separate the records."
     },
     "general": {
         "total":"Total",
@@ -208,7 +209,9 @@
             "female": "Female",
             "indefined": "Indefined"
         },
-        "copyrightLogin":"All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © {year} Ils. All rights reserved. Powered by ilstechnik.com"
+        "copyrightLogin":"All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © {year} Ils. All rights reserved. Powered by ilstechnik.com",
+        "records": "records",
+        "of": "of"
     },
     "provider":{
         "provider":"Provider",

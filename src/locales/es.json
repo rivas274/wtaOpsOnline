@@ -138,7 +138,8 @@
         "passenger":"Pasajero",
         "benefit":"Beneficios",
         "medicalComments":"Comentarios médicos",
-        "emergencyContact":"Contacto de emergencia"
+        "emergencyContact":"Contacto de emergencia",
+        "searchMultipleCommas":"Puede buscar varios voucher separandolos con comas (,) como comodin para separar los registros"
     },
     "general": {
         "total":"Total",
@@ -208,7 +209,9 @@
             "female": "Femenino",
             "indefined": "Indefinido"
         },
-        "copyrightLogin": "Todos los usuarios de nuestros servicios en línea están sujetos a la Declaración de Privacidad y aceptan las Condiciones de Servicio. Por favor, © {year} ILS. Todos los derechos reservados. Desarrollado por ilstechnik.com"
+        "copyrightLogin": "Todos los usuarios de nuestros servicios en línea están sujetos a la Declaración de Privacidad y aceptan las Condiciones de Servicio. Por favor, © {year} ILS. Todos los derechos reservados. Desarrollado por ilstechnik.com",
+        "records": "registros",
+        "of": "de"
     },
     "provider":{
         "provider":"Proveedor",

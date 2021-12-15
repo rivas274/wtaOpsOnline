@@ -1,5 +1,5 @@
 <template>
-    <content-m :navigation="[{title:'Assistance'}]">
+    <content-m :navigation="[{title:$t('menu.assistance')}]">
         <template slot="title">{{$t('menu.assistance')}}</template>
         <template slot="body">
             <ul class="nav nav-tabs m-tabs-line m-tabs-line--success m-tabs-line--2x">

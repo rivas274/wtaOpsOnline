@@ -32,7 +32,7 @@
                 </input-group>
                 <div class="col-lg-8">
                     <div class="alert-info alert m--align-left">
-                        Puede buscar varios voucher separandolos con comas (,) como comodin para separar los registros
+                        {{$t('voucher.searchMultipleCommas')}}
                     </div>
                 </div>
             </div>

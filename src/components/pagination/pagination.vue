@@ -66,8 +66,8 @@
                 </label>
                 &nbsp;&nbsp;
                 <b>{{ init+1 }}</b> -
-                <b>{{ max*currentPage }}</b> of
-                <b>{{ total }}</b> records
+                <b>{{ max*currentPage }}</b> {{$t('general.of')}}
+                <b>{{ total }}</b> {{$t('general.records')}}
             </div>
         </div>
     </div>
