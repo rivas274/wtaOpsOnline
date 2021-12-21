@@ -188,7 +188,7 @@ export default {
                             start: pg,
                             limit: this.footerTable.limit,
                             prefix: this.$session.get("prefix"),
-                            codeVoucher: (this.filters.codeVoucher||'').trim().split(','),
+                            codeVoucher: (this.filters.codeVoucher||'').replace(/\s+/g, '').split(','),
                         })
                         .then(response => {
                             this.showLoader = false;
