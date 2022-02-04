@@ -211,7 +211,8 @@
         },
         "copyrightLogin": "Todos los usuarios de nuestros servicios en línea están sujetos a la Declaración de Privacidad y aceptan las Condiciones de Servicio. Por favor, © {year} ILS. Todos los derechos reservados. Desarrollado por ilstechnik.com",
         "records": "registros",
-        "of": "de"
+        "of": "de",
+        "reports":"Reportes"
     },
     "provider":{
         "provider":"Proveedor",

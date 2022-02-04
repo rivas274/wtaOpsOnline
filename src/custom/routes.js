@@ -7,6 +7,7 @@ import Refunds from '../components/Refunds/dasboard';
 import RePricing from '../components/RePricing/dasboard';
 import Invoice from '../components/invoice/dasboard';
 import AssistanceBills from '../components/AssistanceBills/dasboard';
+import ReportsClient from '../components/ReportsClient/dasboard';
 
 export default [
     {
@@ -28,6 +29,11 @@ export default [
         name: 'Invoice',
         path: '/invoice',
         component: Invoice,
+    },
+    {
+        name: 'reports-client',
+        path: '/reports-client',
+        component: ReportsClient,
     },
     {
         name: 'Login',

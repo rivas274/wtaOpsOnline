@@ -211,7 +211,8 @@
         },
         "copyrightLogin":"All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © {year} Ils. All rights reserved. Powered by ilstechnik.com",
         "records": "records",
-        "of": "of"
+        "of": "of",
+        "reports":"Reports"
     },
     "provider":{
         "provider":"Provider",

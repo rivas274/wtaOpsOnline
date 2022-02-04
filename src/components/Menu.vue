@@ -58,6 +58,18 @@
                         <span class="m-menu__link-text">{{$t('menu.invoice')}}</span>
                     </router-link>
                 </li>
+                <li
+                    class="m-menu__item"
+                    :class="[subIsActive('/reports-client')?'m-menu__item--active':'']"
+                    aria-haspopup="true"
+                    v-if="reportsClient"
+                >
+                    <router-link :to="{ path: '/reports-client'}" replace class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-technology"></i>
+                        <span class="m-menu__link-text">{{$t('general.reports')}}</span>
+                    </router-link>
+                </li>
             </ul>
         </div>
     </div>
@@ -70,7 +82,8 @@ export default {
             repricing: this.middleware("repricing", "read"),
             voucherCase: this.middleware("voucher_case", "read"),
             assist: this.middleware("assist", "read"),
-            invoice: this.middleware("invoiceProvider", "read")
+            invoice: this.middleware("invoiceProvider", "read"),
+            reportsClient: this.middleware("guard_by_client", "read"),
         };
     },
     methods: {
