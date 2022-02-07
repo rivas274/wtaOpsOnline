@@ -79,8 +79,8 @@ export default {
             filters: {
                 idReport: null,
                 date: {
-                    startDate:null,
-                    endDate:null
+                    startDate:"",
+                    endDate:""
                 }
             }
         };
@@ -98,7 +98,10 @@ export default {
         clear: function () {
             this.filters = {
                 idReport: null,
-                date: {}
+                date: {  
+                    endDate: "",
+                    startDate: ""
+                }
             };
         },
         getDocumentsType: function () {
