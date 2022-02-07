@@ -215,7 +215,8 @@
         "of": "de",
         "reports":"Reportes",
         "startDate":"Fecha de inicio",
-        "endtDate":"Fecha de finalización"
+        "endtDate":"Fecha de finalización",
+        "pleaseSelect":"Por favor, seleccione"
     },
     "provider":{
         "provider":"Proveedor",

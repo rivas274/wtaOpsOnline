@@ -30,7 +30,9 @@ export default {
     mounted() {
         window.$(this.$el)
             .find(".m_selectpicker")
-            .selectpicker();
+            .selectpicker({
+                noneSelectedText :  this.$t('general.pleaseSelect')
+            });
     },
     methods: {
         input: function() {
