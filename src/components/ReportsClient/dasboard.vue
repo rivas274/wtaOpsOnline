@@ -98,10 +98,7 @@ export default {
         clear: function () {
             this.filters = {
                 idReport: null,
-                date: {
-                    startDate:null,
-                    endDate:null
-                }
+                date: {}
             };
         },
         getDocumentsType: function () {
@@ -138,7 +135,7 @@ export default {
                             const link = document.createElement("a");
                             link.href = url;
                             link.setAttribute(
-                                "download", "guardByClientXLS" + (this.filters.idReport) + ".xlsx"
+                                "download", "guard_By_Client_" + (this.filters.idReport) + ".xlsx"
                             );
                             document.body.appendChild(link);
                             link.click();
