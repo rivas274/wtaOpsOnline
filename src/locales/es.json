@@ -168,7 +168,7 @@
         "passport": "Pasaporte",
         "gender": "Género",
         "dateOfBirth": "Fecha de nacimiento",
-        "dowload": "descargar",
+        "dowload": "Descargar",
         "age": "Edad",
         "zipCode": "código postal",
         "additionalInformation": "Información Adicional",
@@ -186,7 +186,8 @@
         "to": "hasta",
         "days": "Días",
         "custom": "Personalizado",
-        "selectDateRange": "Seleccionar fechas",
+        "selectDateRange": "Seleccionar rango de fechas",
+        "dateRange": "Rango de fechas",
         "login": "login",
         "password": "Clave",
         "user": "Usuario",
@@ -212,7 +213,9 @@
         "copyrightLogin": "Todos los usuarios de nuestros servicios en línea están sujetos a la Declaración de Privacidad y aceptan las Condiciones de Servicio. Por favor, © {year} ILS. Todos los derechos reservados. Desarrollado por ilstechnik.com",
         "records": "registros",
         "of": "de",
-        "reports":"Reportes"
+        "reports":"Reportes",
+        "startDate":"Fecha de inicio",
+        "endtDate":"Fecha de finalización"
     },
     "provider":{
         "provider":"Proveedor",

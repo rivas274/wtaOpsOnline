@@ -187,6 +187,7 @@
         "days": "Days",
         "custom": "Custom",
         "selectDateRange": "Select Date Range",
+        "dateRange": "Date Range",
         "login": "login",
         "password": "Password",
         "user": "User",
@@ -212,7 +213,9 @@
         "copyrightLogin":"All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © {year} Ils. All rights reserved. Powered by ilstechnik.com",
         "records": "records",
         "of": "of",
-        "reports":"Reports"
+        "reports":"Reports",
+        "startDate":"Start Date",
+        "endtDate":"End Date"
     },
     "provider":{
         "provider":"Provider",
