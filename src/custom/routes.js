@@ -49,6 +49,10 @@ export default [
         component: MyAcount,
     },
     {
+        path: ':lang/refunds/:code',
+        redirect: '/:lang/reimbursement/:code',
+    },
+    {
         path: '/refunds/:code',
         redirect: '/en/reimbursement/:code',
     },
