@@ -21,7 +21,7 @@
 <script>
 import { setTimeout } from "timers";
 export default {
-    props: ["name", "options", "selected","v-validate"],
+    props: ["name", "options", "selected","v-validate","watermark"],
     data: function() {
         return {
             value: this.selected
@@ -31,7 +31,7 @@ export default {
         window.$(this.$el)
             .find(".m_selectpicker")
             .selectpicker({
-                noneSelectedText :  this.$t('general.pleaseSelect')
+                noneSelectedText : this.watermark || this.$t('general.pleaseSelect')
             });
     },
     methods: {
