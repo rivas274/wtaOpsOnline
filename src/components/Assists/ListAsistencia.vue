@@ -54,6 +54,14 @@
                     v-on:input="setDataFilter"
                     :value="filters.dob"
                 ></date-single-bt>
+                <select-from-table
+                    class="col-md-4 form-group"
+                    name="assistStatus"
+                    :watermark="$t('general.status')"
+                    :options="arrAssistStatus"
+                    :selected="filters.assistStatus"
+                    v-on:input="setDataFilter"
+                ></select-from-table>
                 <multi-selects
                     v-if="clients.length>1"
                     class="col-md-4 form-group"
@@ -216,7 +224,8 @@ export default {
             filters: {
                 code: "",
                 codeVoucher:"",
-                dob:"",
+                dob: "",
+                arrAssistStatus:"",
                 arrPrefix: [],
                 passager: "",
                 date: {
@@ -230,6 +239,7 @@ export default {
                 limit: 15,
                 size: 0
             },
+            statusAssist:[],
             clients: [],
             billsOption: [
                 {
@@ -253,6 +263,11 @@ export default {
         };
     },
     methods: {
+        getAssistStatus: function () {
+            this.axios.get("getAssistStatus").then(response => {
+                this.arrAssistStatus = response.data.RESPONSE.RESULTS;
+            });
+        },
         dowload: function() {
             let arrPrefix =
                 this.filters.arrPrefix.length == 0
@@ -289,6 +304,7 @@ export default {
                         prefix: arrPrefix,
                         code: (this.filters.code||'').trim(),
                         codeVoucher: (this.filters.codeVoucher||'').trim(),
+                        assistStatus: this.filters.assistStatus,
                         passenger: (this.filters.passager||'').trim(),
                         dob: (this.filters.dob||'').trim(),
                         endDate: this.filters.date.endDate,
@@ -332,6 +348,7 @@ export default {
                     code: (this.filters.code||'').trim(),
                     codeVoucher: (this.filters.codeVoucher||'').trim(),
                     dob: (this.filters.dob||'').trim(),
+                    assistStatus: this.filters.assistStatus,
                     passenger: (this.filters.passager||'').trim(),
                     endDate: this.filters.date.endDate,
                     startDate: this.filters.date.startDate
@@ -386,6 +403,7 @@ export default {
     mounted() {
         this.getAssistance();
         this.getClients();
+        this.getAssistStatus();
     },
     watch: {
         openAsist: function(newVal) {
