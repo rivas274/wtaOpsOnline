@@ -33,7 +33,7 @@ iframe{
                 role="tablist"
             >
                 <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok">
-                    <template slot="title">{{ $t('voucher.voucher') | upper}}</template>
+                    <template slot="title">{{ $t('voucher.voucher') | upper}} <small>({{assistances.voucher.code}})</small></template>
                     <template slot="body">
                         <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('voucher.travelSource')|upper}}</template>
@@ -256,7 +256,7 @@ iframe{
                     </template>
                 </AssistAccordion>
                 <AssistAccordion :id="'_assistance_'+idAssist" ico="fa flaticon-computer">
-                    <template slot="title">{{ $t('assistance.assistance') | upper }}</template>
+                    <template slot="title">{{ $t('assistance.assistance') | upper }} <small>({{assistances.codeAssist}})</small></template>
                     <template slot="body">
                         <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{ $t('assistance.contact') | upper }}</template>
@@ -368,19 +368,34 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill class="col-md-4">
-                            <template slot="title">{{$t('general.description')|upper}}</template>
-                            <template slot="body">
-                                <div class="m-widget16__item">
-                                    <span
-                                        class="m-widget16__date m--align-center"
-                                        v-if="assistances.contact.observations"
-                                        v-html="assistances.contact.observations"
-                                    ></span>
-                                    <span class="m-widget16__date m--align-center" v-else>{{$t('general.notLoaded')}}</span>
-                                </div>
-                            </template>
-                        </AssistAccordionDetaill>
+                        <div class="col-md-4">
+                            <AssistAccordionDetaill>
+                                <template slot="title">{{$t('general.description')|upper}}</template>
+                                <template slot="body">
+                                    <div class="m-widget16__item">
+                                        <span
+                                            class="m-widget16__date m--align-center"
+                                            v-if="assistances.contact.observations"
+                                            v-html="assistances.contact.observations"
+                                        ></span>
+                                        <span class="m-widget16__date m--align-center" v-else>{{$t('general.notLoaded')}}</span>
+                                    </div>
+                                </template>
+                            </AssistAccordionDetaill>
+                            <AssistAccordionDetaill>
+                                <template slot="title">{{$t('general.observations')|upper}}</template>
+                                <template slot="body">
+                                    <div class="m-widget16__item">
+                                        <span
+                                            class="m-widget16__date m--align-center"
+                                            v-if="assistances.remark"
+                                            v-html="assistances.remark"
+                                        ></span>
+                                        <span class="m-widget16__date m--align-center" v-else>{{$t('general.notLoaded')}}</span>
+                                    </div>
+                                </template>
+                            </AssistAccordionDetaill>
+                        </div>
                         <AssistAccordionDetaill class="col-md-4" v-if="Object.keys(assistances.caseTypeField).length>0">
                             <template slot="title">{{$t('assistance.caseTypeFields')}}</template>
                             <template slot="body">
