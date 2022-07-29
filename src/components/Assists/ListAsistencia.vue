@@ -84,7 +84,7 @@
                     <button
                         class="btn btn-primary ml-2 pull-right"
                         @click="dowload"
-                        v-if="permission.RP002A||permission.RP002AB39"
+                        v-if="permission.RP002A"
                     >{{$t('general.dowload')}}</button>
                     <button class="btn btn-info ml-2 pull-right" @click="clear">{{$t('general.clear')}}</button>
                 </div>
@@ -216,7 +216,6 @@ export default {
         var permission = {
             bills: this.middleware("bills", "read"),
             RP002A: this.middleware("RP002A", "read"),
-            RP002AB39: this.middleware("RP002A-B39", "read")
         };
         return {
             permission: permission,
@@ -279,9 +278,10 @@ export default {
                     passenger: (this.filters.passager||'').trim(),
                     dob: (this.filters.dob||'').trim(),
                     endDate: this.filters.date.endDate,
-                    startDate: this.filters.date.startDate
+                    startDate: this.filters.date.startDate,
                 },
-                valid = false;
+                valid = false,
+                type = this.$session.get("permission")['RP002A']['additional_data'];
             for (var field in requiered) {
                 if (requiered[field] != "") {
                     valid = true;
@@ -296,10 +296,7 @@ export default {
             requiered["prefix"] = arrPrefix;
             this.showLoader = true;
             this.axios
-                .post(
-                    this.permission.RP002AB39
-                        ? "getAssistsNotReservationXLS"
-                        : "getAssistsXLS",
+                .post("getAssistsCustomXLS",
                     {
                         prefix: arrPrefix,
                         code: (this.filters.code||'').trim(),
@@ -308,7 +305,8 @@ export default {
                         passenger: (this.filters.passager||'').trim(),
                         dob: (this.filters.dob||'').trim(),
                         endDate: this.filters.date.endDate,
-                        startDate: this.filters.date.startDate
+                        startDate: this.filters.date.startDate,
+                        type:type,
                     },
                     {
                         responseType: "blob"
@@ -322,9 +320,7 @@ export default {
                     link.href = url;
                     link.setAttribute(
                         "download",
-                        this.permission.RP002AB39
-                            ? "RP002A-B39.xlsx"
-                            : "RP002A.xlsx"
+                        type + '.xlsx'
                     );
                     document.body.appendChild(link);
                     link.click();
