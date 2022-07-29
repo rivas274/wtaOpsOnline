@@ -200,8 +200,6 @@ export default {
         return {
             permission: {
                 bills: this.middleware("bills", "read"),
-                RP002A: this.middleware("RP002A", "read"),
-                RP002AB39: this.middleware("RP002A-B39", "read")
             },
             error: null,
             documentsType: [],
