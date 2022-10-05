@@ -488,7 +488,8 @@ export default {
         this.getAssistance();
     },
     methods: {
-        getDocumentsType: function() {
+        getDocumentsType: function () {
+            this.documentsType = [];
             this.axios.get("getDocumentsTypeRefound", {
                 params: {
                     idAssist: this.results['idAssist'],
