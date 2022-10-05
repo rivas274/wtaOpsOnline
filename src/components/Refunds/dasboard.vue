@@ -475,7 +475,7 @@ export default {
                 description: "",
                 date: "",
                 nameBen: "",
-                docType: 26
+                docType: 0
             },
             documentsType: [],
             file: false,
@@ -491,12 +491,19 @@ export default {
         getDocumentsType: function() {
             this.axios.get("getDocumentsTypeRefound", {
                 params: {
-                    idAssist: this.results['idAssist']
+                    idAssist: this.results['idAssist'],
+                    timestamp:(new Date()).getTime(),//enviamos un parámetro dinámico para deshabilitar la cache de axios
                 }
             }).then(response => {
+                let self = this;
                 this.documentsType = response.data.RESPONSE.RESULTS.reduce(function (m, e) {
+                    
                     if (e['uploaded']) {
                         e['icon'] = 'fa fa-check text-success';
+                    } else {
+                        if (parseInt(self.inputsData.docType || 0) == 0) {
+                            self.inputsData.docType = e.id;
+                        }
                     }
                     m.push(e);
                     return m;
@@ -574,6 +581,8 @@ export default {
                                             //this.captcha = '';
                                             this.file = false;
                                             this.$refs.file.value = null;
+                                            this.inputsData.docType = null;
+                                            this.getDocumentsType();
                                         } else if (
                                             result.dismiss ===
                                             window.Swal.DismissReason.cancel
