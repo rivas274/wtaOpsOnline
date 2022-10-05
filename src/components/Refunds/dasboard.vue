@@ -485,13 +485,22 @@ export default {
         };
     },
     mounted() {
-        this.getDocumentsType();
         this.getAssistance();
     },
     methods: {
         getDocumentsType: function() {
-            this.axios.get("getDocumentsType").then(response => {
-                this.documentsType = response.data.RESPONSE.RESULTS;
+            this.axios.get("getDocumentsTypeRefound", {
+                params: {
+                    idAssist: this.results['idAssist']
+                }
+            }).then(response => {
+                this.documentsType = response.data.RESPONSE.RESULTS.reduce(function (m, e) {
+                    if (e['uploaded']) {
+                        e['icon'] = 'fa fa-check text-success';
+                    }
+                    m.push(e);
+                    return m;
+                }, []);
             });
         },
         getAssistance: function() {
@@ -509,6 +518,8 @@ export default {
                     this.inputsData.date = this.results.registeredDate.date;
                     this.inputsData.nameBen =
                         this.results.fisrtName + " " + this.results.lastName;
+
+                    this.getDocumentsType();
                 });
         },
         validRefunds: function() {
