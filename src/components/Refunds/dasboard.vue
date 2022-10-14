@@ -134,7 +134,7 @@
                                                     <div class="row mx-0">
                                                         <form
                                                             class="m-form m-form--fit m-form--label-align-right"
-                                                            :class="[preview?'col-md-6':'col-md-12 mx-auto']"
+                                                            :class="[typeFile?'col-md-6':'col-md-12 mx-auto']"
                                                             @submit.prevent="validRefunds"
                                                             enctype="multipart/form-data"
                                                             ref="form"
@@ -168,6 +168,22 @@
                                                                         :selected="inputsData.docType"
                                                                         v-on:input="setDataFilter"
                                                                     ></select-from-table>
+                                                                </div>
+                                                                <div class="form-group m-form__group" v-if="extraInfo">
+                                                                    <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show" role="alert">
+                                                                        <div class="m-alert__icon">
+                                                                            <i class="flaticon-exclamation-1"></i>
+                                                                        </div>
+                                                                        <div class="m-alert__text">
+                                                                            <strong>{{ $t('general.important') }}</strong>
+                                                                            {{ extraInfo.description }}
+                                                                        </div>
+                                                                        <div class="m-alert__actions text-info">
+                                                                            <a :href="extraInfo.file" download target="_blank">
+                                                                                <i class="fa fa-3x fa-cloud-download-alt"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                                 <div
                                                                     v-if="inputsData.docType=='26'"
@@ -409,17 +425,17 @@
                                                             </div>
                                                         </form>
                                                         <div
-                                                            :class="preview?'d-flex':'d-none'"
+                                                            :class="typeFile?'d-flex':'d-none'"
                                                             class="col-md-6 rounded bg-dark preview-container p-0"
                                                         >
                                                             <iframe
-                                                                v-if="preview=='pdf'"
+                                                                v-if="typeFile=='pdf'"
                                                                 class="rounded h-100 w-100"
                                                                 :src="previewSrc"
                                                             ></iframe>
                                                             <img
-                                                                v-if="preview=='image'"
-                                                                class="m-2 my-auto rounded w-100 h-auto"
+                                                                v-if="typeFile=='image'"
+                                                                class="m-0 my-auto rounded w-100 h-auto"
                                                                 :src="previewSrc"
                                                             />
                                                         </div>
@@ -463,7 +479,7 @@ export default {
     },
     data() {
         return {
-            siteKey: process.env.VUE_APP_RE_CAPCHA_PUBLIC,
+            siteKey: this.$env.VUE_APP_RE_CAPCHA_PUBLIC,
             code: this.$route.params.code,
             results: {},
             uploadPercentage: 0,
@@ -481,6 +497,7 @@ export default {
             file: false,
             captcha: "",
             previewSrc: null,
+            typeFile: false,
             displayAlert: false
         };
     },
@@ -624,6 +641,27 @@ export default {
         },
         handleFileUpload: function(event) {
             this.file = event.target.files[0];
+            this.previewSrc = false;
+            this.typeFile = false;
+            if (!this.file || this.errors.has("file")) {
+                return false;
+            }
+            this.typeFile = this.file.type.match("image.*") ? "image" : this.typeFile;
+            this.typeFile = this.file.type.match("[*]{0,}(pdf)") ? "pdf" : this.typeFile;
+            if (this.typeFile) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    switch (this.typeFile) {
+                        case "pdf":
+                            this.previewSrc = URL.createObjectURL(this.file);
+                            break;
+                        case "image":
+                            this.previewSrc = e.target.result;
+                            break;
+                    }
+                }.bind(this);
+                reader.readAsDataURL(this.file);
+            }
         },
         onCaptchaVerified: function(recaptchaToken) {
             this.captcha = recaptchaToken;
@@ -643,31 +681,21 @@ export default {
                 return m;
             }, []);
         },
-        preview: function() {
-            if (!this.file || this.errors.has("file")) {
-                this.previewSrc = false;
+        extraInfo: function () {
+            let docTypeSelected = this.documentsType.filter((v) => {
+                return v.id == this.inputsData.docType;
+            });
+            if (docTypeSelected.length == 0) {
                 return false;
             }
-            var type = false;
-            type = this.file.type.match("image.*") ? "image" : type;
-            type = this.file.type.match("[*]{0,}(pdf)") ? "pdf" : type;
-            if (type) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    switch (type) {
-                        case "pdf":
-                            this.previewSrc = URL.createObjectURL(this.file);
-                            break;
-                        case "image":
-                            this.previewSrc = e.target.result;
-                            break;
-                    }
-                }.bind(this);
-                reader.readAsDataURL(this.file);
-            }else{
-                this.previewSrc = false;
+            if ('insurance' in docTypeSelected[0]) {
+                return {
+                    description: docTypeSelected[0].insurance['description'][this.$root.$i18n.locale],
+                    file: docTypeSelected[0].insurance.file,
+                    name: docTypeSelected[0].name
+                }
             }
-            return type;
+            return false;
         }
     }
 };

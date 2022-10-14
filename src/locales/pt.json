@@ -42,7 +42,8 @@
         "case_number": "Número do caso",
         "patient_name": "Nome do Paciente",
         "sentRepricing": "Enviado para Rericing",
-        "pleaseSelect":"Seleccione por favor"
+        "pleaseSelect":"Seleccione por favor",
+        "important":"Importante!"
     },
     "assistanceBills": {
         "information": "Informações da fatura",

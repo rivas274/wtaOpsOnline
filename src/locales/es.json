@@ -216,7 +216,8 @@
         "reports":"Reportes",
         "startDate":"Fecha de inicio",
         "endtDate":"Fecha de finalización",
-        "pleaseSelect":"Por favor, seleccione"
+        "pleaseSelect":"Por favor, seleccione",
+        "important":"¡Importante!"
     },
     "provider":{
         "provider":"Proveedor",

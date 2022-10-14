@@ -133,7 +133,7 @@
                                                     <div class="row mx-0">
                                                         <form
                                                             class="m-form m-form--fit m-form--label-align-right"
-                                                            :class="[preview?'col-md-6':'col-md-12 mx-auto']"
+                                                            :class="[typeFile?'col-md-6':'col-md-12 mx-auto']"
                                                             @submit.prevent="validRefunds"
                                                             enctype="multipart/form-data"
                                                             ref="form"
@@ -285,7 +285,6 @@
                                                                             :errors_form="errors"
                                                                         ></form-error>
                                                                     </div>
-                                                                
                                                                 <div
                                                                     class="form-group m-form__group"
                                                                     :class="{'has-danger': errors.has('Description')}"
@@ -402,15 +401,15 @@
                                                             </div>
                                                         </form>
                                                         <div
-                                                            :class="preview?'d-flex':'d-none'"
+                                                            :class="typeFile?'d-flex':'d-none'"
                                                             class="col-md-6 rounded bg-dark preview-container p-0" >
                                                             <iframe
-                                                                v-if="preview=='pdf'"
+                                                                v-if="typeFile=='pdf'"
                                                                 class="rounded h-100 w-100"
                                                                 :src="previewSrc"
                                                             ></iframe>
                                                             <img
-                                                                v-if="preview=='image'"
+                                                                v-if="typeFile=='image'"
                                                                 class="m-2 my-auto rounded w-100 h-auto"
                                                                 :src="previewSrc"
                                                             />
@@ -448,7 +447,7 @@ export default {
     },
     data() {
         return {
-            siteKey: process.env.VUE_APP_RE_CAPCHA_PUBLIC,
+            siteKey: this.$env.VUE_APP_RE_CAPCHA_PUBLIC,
             code: this.$route.params.code,
             providerId: this.$route.params.providerId,
             results: {},
@@ -468,6 +467,7 @@ export default {
             file: false,
             captcha: "",
             previewSrc: null,
+            typeFile: false,
             displayAlert: false,
             assistanceID: ""
         };
@@ -605,6 +605,27 @@ export default {
         },
         handleFileUpload: function(event) {
             this.file = event.target.files[0];
+            this.previewSrc = false;
+            this.typeFile = false;
+            if (!this.file || this.errors.has("file")) {
+                return false;
+            }
+            this.typeFile = this.file.type.match("image.*") ? "image" : this.typeFile;
+            this.typeFile = this.file.type.match("[*]{0,}(pdf)") ? "pdf" : this.typeFile;
+            if (this.typeFile) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    switch (this.typeFile) {
+                        case "pdf":
+                            this.previewSrc = URL.createObjectURL(this.file);
+                            break;
+                        case "image":
+                            this.previewSrc = e.target.result;
+                            break;
+                    }
+                }.bind(this);
+                reader.readAsDataURL(this.file);
+            }
         },
         onCaptchaVerified: function(recaptchaToken) {
             this.captcha = recaptchaToken;
@@ -623,32 +644,6 @@ export default {
                 });
                 return m;
             }, []);
-        },
-        preview: function() {
-            if (!this.file || this.errors.has("file")) {
-                this.previewSrc = null;
-                return false;
-            }
-            var type = false;
-            type = this.file.type.match("image.*") ? "image" : type;
-            type = this.file.type.match("[*]{0,}(pdf)") ? "pdf" : type;
-            if (type) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    switch (type) {
-                        case "pdf":
-                            this.previewSrc = URL.createObjectURL(this.file);
-                            break;
-                        case "image":
-                            this.previewSrc = e.target.result;
-                            break;
-                    }
-                }.bind(this);
-                reader.readAsDataURL(this.file);
-            }else{
-                this.previewSrc = null;
-            }
-            return type;
         }
     }
 };

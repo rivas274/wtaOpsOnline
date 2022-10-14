@@ -13,7 +13,6 @@ import VeeValidate from 'vee-validate';
 import i18n from "./custom/i18n";
 import './custom/vue-vee-custom';
 
-
 Vue.use(VueRouter);
 Vue.use(globalDirectives);
 Vue.use(globalFilters);
@@ -102,7 +101,7 @@ router.beforeEach((to, from, next) => {
 });
 
 Vue.config.productionTip = false;
-
+Vue.prototype.$env = process.env;
 new Vue({
     mounted: function () {
         setInterval(() => {
