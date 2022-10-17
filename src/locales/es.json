@@ -278,5 +278,9 @@
             "november": "Noviembre",
             "december": "Diciembre"
         }
+    },
+    "refunds":{
+        "documentToProvide":"Documentos que debo proporcionar",
+        "documentToDownload":"Documentos que debo bajar"
     }
 }

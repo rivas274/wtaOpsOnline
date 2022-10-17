@@ -56,5 +56,9 @@
     "windows": {
         "close": "Feche as janelas",
         "pleaseClose": "O processo terminou satisfatoriamente, por favor feche a janela"
+    },
+    "refunds":{
+        "documentToProvide":"Documentos que devo fornecer",
+        "documentToDownload":"Documentos para descarregar"
     }
 }

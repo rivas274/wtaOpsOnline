@@ -35,8 +35,7 @@
                                                 data-code-js="false"
                                             >
                                                 <div
-                                                    class="m-demo__preview"
-                                                    style="padding: 5px;text-align: center; background: #36a3f7;"
+                                                    class="m-demo__preview bg-preview"
                                                 >
                                                     <locale-changer class="pull-right"></locale-changer>
                                                     <ul class="m-nav m-nav--inline">
@@ -128,7 +127,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="m-invoice__items" style="padding:2rem 0 3rem;" v-if="results.processRefund=='Y'">
+                                        <div class="m-invoice__items" v-if="results.processRefund=='Y'">
                                             <div class="m-portlet m-portlet--tab">
                                                 <div>
                                                     <div class="row mx-0">
@@ -162,12 +161,12 @@
                                                                     class="form-group m-form__group"
                                                                 >
                                                                     <strong>{{ $t('document.type') }}</strong>
-                                                                    <select-from-table
+                                                                    <select-group
                                                                         name="docType"
-                                                                        :options="documentsType"
+                                                                        :groups="documentsType"
                                                                         :selected="inputsData.docType"
                                                                         v-on:input="setDataFilter"
-                                                                    ></select-from-table>
+                                                                    ></select-group>
                                                                 </div>
                                                                 <div class="form-group m-form__group" v-if="extraInfo">
                                                                     <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show" role="alert">
@@ -236,12 +235,12 @@
                                                                         class="form-group m-form__group"
                                                                     >
                                                                         <strong>{{ $t('document.currency') }}</strong>
-                                                                        <select-from-table
+                                                                        <select-from
                                                                             name="currency"
                                                                             :options="currencyFromSelect"
                                                                             :selected="inputsData.currency"
                                                                             v-on:input="setDataFilter"
-                                                                        ></select-from-table>
+                                                                        ></select-from>
                                                                     </div>
                                                                     <div
                                                                         class="form-group m-form__group"
@@ -411,8 +410,7 @@
                                                                 </transition>
                                                             </div>
                                                             <div
-                                                                class="m-portlet__foot m-portlet__foot--fit"
-                                                                style="text-align: center;"
+                                                                class="m-portlet__foot m-portlet__foot--fit text-center"
                                                             >
                                                                 <div class="m-form__actions">
                                                                     <button
@@ -444,7 +442,7 @@
                                             </div>
                                         </div>
                                         <div v-else>
-                                            <div class="m-portlet m-portlet--tab text-center" style="padding:3rem;">
+                                            <div class="m-portlet m-portlet--tab text-center portlet-no-client">
                                                 <h1>
                                                     {{$t('reimbursement.clientNotProcessRefunds')}}
                                                 </h1>
@@ -463,7 +461,8 @@
 <script>
 import FormError from "../FormError";
 import customImg from "../Element/custom-img";
-import selectFromTable from "../Tables/filters/selectFromTable.vue";
+import selectFrom from "../Tables/filters/selectFromTable.vue";
+import selectGroup from "../Tables/filters/selectGroupFromTable.vue";
 import currency from "../Labels/currency.json";
 import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
@@ -472,7 +471,8 @@ export default {
     components: {
         FormError,
         customImg,
-        selectFromTable,
+        selectFrom,
+        selectGroup,
         dateSingleBt,
         VueRecaptcha,
         localeChanger
@@ -514,8 +514,8 @@ export default {
                 }
             }).then(response => {
                 let self = this;
-                this.documentsType = response.data.RESPONSE.RESULTS.reduce(function (m, e) {
-                    
+                this.documentsType = Object.values(response.data.RESPONSE.RESULTS.reduce(function (m, e) {
+                    let provideOrDownload = 'insurance' in e?'download':'provide';
                     if (e['uploaded']) {
                         e['icon'] = 'fa fa-check text-success';
                     } else {
@@ -523,9 +523,15 @@ export default {
                             self.inputsData.docType = e.id;
                         }
                     }
-                    m.push(e);
+                    if (!(provideOrDownload in m)) {
+                        m[provideOrDownload] = {
+                            name: self.$t("refunds."+(provideOrDownload=='download'?'documentToDownload':'documentToProvide')),
+                            options: []
+                        };
+                    }
+                    m[provideOrDownload].options.push(e);
                     return m;
-                }, []);
+                }, {}));
             });
         },
         getAssistance: function() {
@@ -700,3 +706,19 @@ export default {
     }
 };
 </script>
+<style scoped>
+.dropdown-header {
+    font-size: .999rem;
+}
+.m-invoice__items{
+    padding:2rem 0 3rem;
+}
+.portlet-no-client{
+    padding:3rem;
+}
+.bg-preview{
+    padding: 5px;
+    text-align: center; 
+    background: #36a3f7;
+}
+</style>
