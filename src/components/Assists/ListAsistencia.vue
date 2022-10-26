@@ -120,7 +120,10 @@
                     {{$t('assistance.date.opening')}}
                 </th>
                 <th>
-                    {{$t('general.country')}}
+                    {{$t('voucher.travelSource')}}
+                </th>
+                <th>
+                    {{$t('assistance.countryService')}}
                 </th>
                 <th>
                     {{$t('general.status')}}
@@ -161,6 +164,9 @@
                 </td>
                 <td class="text-center">
                     {{assist.registeredDate.date}}
+                </td>
+                <td>
+                    <Flag :iso="assist.isoCountrySource"></Flag>
                 </td>
                 <td>
                     <Flag :iso="assist.isoCountry"></Flag>

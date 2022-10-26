@@ -123,7 +123,8 @@
         "coordinates": "Coordenadas",
         "showMap": "Coordenadas",
         "latitud": "Latitud",
-        "longitud": "Longitud"
+        "longitud": "Longitud",
+        "countryService":"País del servicio"
     },
     "voucher": {
         "voucher": "Voucher",
@@ -131,7 +132,7 @@
         "date": {
             "purchase": "Fecha de compra"
         },
-        "travelSource": "Origen del viajes",
+        "travelSource": "Origen del viaje",
         "source": "Origen",
         "destination": "Destino",
         "plan": "Plan",

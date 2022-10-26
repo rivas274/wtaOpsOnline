@@ -39,7 +39,7 @@ iframe{
                             <template slot="title">{{$t('voucher.travelSource')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item" v-if="assistances.voucher">
-                                    <span class="m-widget16__date">{{$t('voucher.source')}}</span>
+                                    <span class="m-widget16__date">{{$t('voucher.travelSource')}}</span>
                                     <span class="m-widget16__price m--align-right">
                                         <Flag :iso="assistances.voucher.source"></Flag>
                                     </span>
@@ -434,7 +434,7 @@ iframe{
                                     class="m-widget16__item"
                                     v-if="assistances.location.country.iso"
                                 >
-                                    <span class="m-widget16__date">{{$t('general.country')}}</span>
+                                    <span class="m-widget16__date">{{$t('assistance.countryService')}}</span>
                                     <span class="m-widget16__price m--align-right">
                                         <Flag :iso="assistances.location.country.iso"></Flag>
                                     </span>
