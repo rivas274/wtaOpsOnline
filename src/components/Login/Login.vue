@@ -35,7 +35,7 @@
                             <custom-img
                                 height="140"
                                 width="280"
-                                :src="baseUrlApi()+'app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png'"
+                                :src="baseUrlApi()+'app/upload_files/logo_system/1logo_login603516f2190cc.png'"
                             ></custom-img>
                         </div>
                         <div class="m-login__signin">

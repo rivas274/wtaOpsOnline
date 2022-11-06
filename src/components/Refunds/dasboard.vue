@@ -20,7 +20,7 @@
                                             <a class="m--hidden-mobile">
                                                 <custom-img
                                                     height="65"
-                                                    :src="baseUrlApi()+'app/admin/pictures/thumbnail/1logo_empresa201712080920245063.png'"
+                                                    :src="baseUrlApi()+'app/upload_files/logo_system/1logo_login603516f2190cc.png'"
                                                 ></custom-img>
                                             </a>
                                         </div>
