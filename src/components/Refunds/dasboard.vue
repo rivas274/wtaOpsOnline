@@ -689,17 +689,19 @@ export default {
             }, []);
         },
         extraInfo: function () {
-            let docTypeSelected = this.documentsType.filter((v) => {
-                return v.id == this.inputsData.docType;
-            });
-            if (docTypeSelected.length == 0) {
-                return false;
+            let selected = {};
+            for (var groupsKey in this.documentsType) {
+                for (var itemKey in this.documentsType[groupsKey].options) { 
+                    if (this.documentsType[groupsKey].options[itemKey].id==this.inputsData.docType) {
+                        selected = this.documentsType[groupsKey].options[itemKey];
+                    }
+                }
             }
-            if ('insurance' in docTypeSelected[0]) {
+            if ('insurance' in selected) {
                 return {
-                    description: docTypeSelected[0].insurance['description'][this.$root.$i18n.locale],
-                    file: docTypeSelected[0].insurance.file,
-                    name: docTypeSelected[0].name
+                    description: selected.insurance['description'][this.$root.$i18n.locale],
+                    file: selected.insurance.file,
+                    name: selected.name
                 }
             }
             return false;
