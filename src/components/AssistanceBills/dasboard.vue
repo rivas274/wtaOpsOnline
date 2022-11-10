@@ -19,8 +19,9 @@
                                             </a>
                                             <a class="m--hidden-mobile">
                                                 <custom-img
+                                                    v-if="results.logo"
                                                     height="65"
-                                                    :src="baseUrlApi()+'app/upload_files/logo_system/1logo_login603516f2190cc.png'"
+                                                    :src="results.logo"
                                                 ></custom-img>
                                             </a>
                                         </div>
