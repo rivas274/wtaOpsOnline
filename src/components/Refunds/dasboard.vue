@@ -688,7 +688,7 @@ export default {
         },
         documentsTypeGroup: function () {
             let self = this;
-            return Object.values(response.data.RESPONSE.RESULTS.reduce(function (m, e) {
+            return Object.values(this.documentsType.reduce(function (m, e) {
                 let provideOrDownload = 'insurance' in e?'download':'provide';
                 if (e['uploaded']) {
                     e['icon'] = 'fa fa-check text-success';
