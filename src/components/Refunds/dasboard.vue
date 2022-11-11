@@ -164,7 +164,7 @@
                                                                     <strong>{{ $t('document.type') }}</strong>
                                                                     <select-group
                                                                         name="docType"
-                                                                        :groups="documentsType"
+                                                                        :groups="documentsTypeGroup"
                                                                         :selected="inputsData.docType"
                                                                         v-on:input="setDataFilter"
                                                                     ></select-group>
@@ -514,25 +514,7 @@ export default {
                     timestamp:(new Date()).getTime(),//enviamos un parámetro dinámico para deshabilitar la cache de axios
                 }
             }).then(response => {
-                let self = this;
-                this.documentsType = Object.values(response.data.RESPONSE.RESULTS.reduce(function (m, e) {
-                    let provideOrDownload = 'insurance' in e?'download':'provide';
-                    if (e['uploaded']) {
-                        e['icon'] = 'fa fa-check text-success';
-                    } else {
-                        if (parseInt(self.inputsData.docType || 0) == 0) {
-                            self.inputsData.docType = e.id;
-                        }
-                    }
-                    if (!(provideOrDownload in m)) {
-                        m[provideOrDownload] = {
-                            name: self.$t("refunds."+(provideOrDownload=='download'?'documentToDownload':'documentToProvide')),
-                            options: []
-                        };
-                    }
-                    m[provideOrDownload].options.push(e);
-                    return m;
-                }, {}));
+                this.documentsType = response.data.RESPONSE.RESULTS;
             });
         },
         getAssistance: function() {
@@ -703,6 +685,27 @@ export default {
                 }
             }
             return false;
+        },
+        documentsTypeGroup: function () {
+            let self = this;
+            return Object.values(response.data.RESPONSE.RESULTS.reduce(function (m, e) {
+                let provideOrDownload = 'insurance' in e?'download':'provide';
+                if (e['uploaded']) {
+                    e['icon'] = 'fa fa-check text-success';
+                } else {
+                    if (parseInt(self.inputsData.docType || 0) == 0) {
+                        self.inputsData.docType = e.id;
+                    }
+                }
+                if (!(provideOrDownload in m)) {
+                    m[provideOrDownload] = {
+                        name: self.$t("refunds."+(provideOrDownload=='download'?'documentToDownload':'documentToProvide')),
+                        options: []
+                    };
+                }
+                m[provideOrDownload].options.push(e);
+                return m;
+            }, {}));
         }
     }
 };
