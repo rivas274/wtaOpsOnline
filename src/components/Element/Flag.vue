@@ -17,8 +17,8 @@ export default {
     props: ["iso", "height", "width"],
     data: function() {
         return {
-            flag: this.iso.toString().toLowerCase() + ".svg",
-            iso3: this.iso.toString().toUpperCase(),
+            flag: (this.iso||'').toString().toLowerCase() + ".svg",
+            iso3: (this.iso||'').toString().toUpperCase(),
             path: this.baseUrlApi() + "app/images/flags_iso/svg/"
         };
     },

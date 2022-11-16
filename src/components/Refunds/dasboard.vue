@@ -687,9 +687,10 @@ export default {
             return false;
         },
         documentsTypeGroup: function () {
-            let self = this;
-            return Object.values(this.documentsType.reduce(function (m, e) {
-                let provideOrDownload = 'insurance' in e?'download':'provide';
+            let self = this,
+            arrReturn = [],
+            group = this.documentsType.reduce(function (m, e) {
+                let provideOrDownload = 'insurance' in e ? 'download' : 'provide';
                 if (e['uploaded']) {
                     e['icon'] = 'fa fa-check text-success';
                 } else {
@@ -699,13 +700,22 @@ export default {
                 }
                 if (!(provideOrDownload in m)) {
                     m[provideOrDownload] = {
-                        name: self.$t("refunds."+(provideOrDownload=='download'?'documentToDownload':'documentToProvide')),
+                        name: self.$t("refunds." + (provideOrDownload == 'download' ? 'documentToDownload' : 'documentToProvide')),
                         options: []
                     };
                 }
                 m[provideOrDownload].options.push(e);
                 return m;
-            }, {}));
+            }, {});
+
+
+            if('download' in group) {
+                arrReturn.push(group.download);
+            }
+            if('provide' in group) {
+                arrReturn.push(group.provide);
+            }
+            return arrReturn;
         }
     }
 };
