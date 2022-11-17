@@ -105,6 +105,7 @@
         "symptom": "Symptom",
         "typeCoordination": "Type of Coordination",
         "type": "Case type",
+        "typeAssistance": "Type assistance",
         "patientName": "Patient Name",
         "patientInformation": "Patient Information",
         "date": {

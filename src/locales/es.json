@@ -105,6 +105,7 @@
         "symptom": "Síntoma",
         "typeCoordination": "Tipo de coordinación",
         "type": "Tipo de Caso",
+        "typeAssistance": "Tipo de Asistencia",
         "patientName": "Nombre del Paciente",
         "patientInformation": "Informacion del Paciente",
         "date": {

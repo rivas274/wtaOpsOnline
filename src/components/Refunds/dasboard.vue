@@ -161,11 +161,33 @@
                                                                 <div
                                                                     class="form-group m-form__group"
                                                                 >
+                                                                    <strong>{{ $t('assistance.type') }}</strong>
+                                                                    <input-from-table
+                                                                        class="m-form__group-sub"
+                                                                        icon="flaticon-lifebuoy"
+                                                                        :value="results.descCaseType"
+                                                                        :readonly="true"
+                                                                    ></input-from-table>
+                                                                </div>
+                                                                <div
+                                                                    class="form-group m-form__group"
+                                                                >
+                                                                    <strong>{{ $t('assistance.typeAssistance') }}</strong>
+                                                                    <input-from-table
+                                                                        class="m-form__group-sub"
+                                                                        icon="flaticon-lifebuoy"
+                                                                        :value="results.descAssistanceType"
+                                                                        :readonly="true"
+                                                                    ></input-from-table>
+                                                                </div>
+                                                                <div
+                                                                    class="ffilorm-group m-form__group"
+                                                                >
                                                                     <strong>{{ $t('document.type') }}</strong>
                                                                     <select-group
                                                                         name="docType"
                                                                         :groups="documentsTypeGroup"
-                                                                        :selected="inputsData.docType"
+                                                                        :selected="results.docType"
                                                                         v-on:input="setDataFilter"
                                                                     ></select-group>
                                                                 </div>
@@ -464,6 +486,7 @@ import FormError from "../FormError";
 import customImg from "../Element/custom-img";
 import selectFrom from "../Tables/filters/selectFromTable.vue";
 import selectGroup from "../Tables/filters/selectGroupFromTable.vue";
+import inputFromTable from "../Tables/filters/inputFromTable.vue";
 import currency from "../Labels/currency.json";
 import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
@@ -474,6 +497,7 @@ export default {
         customImg,
         selectFrom,
         selectGroup,
+        inputFromTable,
         dateSingleBt,
         VueRecaptcha,
         localeChanger
@@ -708,12 +732,11 @@ export default {
                 return m;
             }, {});
 
-
-            if('download' in group) {
-                arrReturn.push(group.download);
-            }
             if('provide' in group) {
                 arrReturn.push(group.provide);
+            }
+            if('download' in group) {
+                arrReturn.push(group.download);
             }
             return arrReturn;
         }

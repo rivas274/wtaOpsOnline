@@ -9,6 +9,7 @@
                 :name="name"
                 v-model="valInput"
                 @change="input"
+                :readonly="readonly?'readonly':false"
             />
             <span class="m-input-icon__icon m-input-icon__icon--left">
                 <span>
@@ -20,7 +21,7 @@
 </template>
 <script>
 export default {
-    props: ["watermark", "name", "icon", "value"],
+    props: ["watermark", "name", "icon", "value","readonly"],
     data: function() {
         return {
             ico: this.icon || "la la-search",

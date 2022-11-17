@@ -23,6 +23,8 @@
     },
     "assistance": {
         "code": "Código de Assistência",
+        "type": "Tipo de caso",
+        "typeAssistance": "Tipo de Assistência",
         "date": {
             "case": "Data do caso",
             "birth": "Data de nascimento"
