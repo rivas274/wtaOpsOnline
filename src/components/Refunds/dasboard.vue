@@ -182,14 +182,21 @@
                                                                 </div>
                                                                 <div
                                                                     class="ffilorm-group m-form__group"
+                                                                    :class="{'has-danger': errors.has('docType')}"
                                                                 >
                                                                     <strong>{{ $t('document.type') }}</strong>
                                                                     <select-group
                                                                         name="docType"
+                                                                        v-validate="'required|min:1|max:10'"
+                                                                        :data-vv-as="$t('document.type')"
                                                                         :groups="documentsTypeGroup"
                                                                         :selected="inputsData.docType"
                                                                         v-on:input="setDataFilter"
                                                                     ></select-group>
+                                                                    <form-error
+                                                                        :attribute_name="'docType'"
+                                                                        :errors_form="errors"
+                                                                    ></form-error>
                                                                 </div>
                                                                 <div class="form-group m-form__group" v-if="extraInfo">
                                                                     <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show" role="alert">
@@ -212,15 +219,23 @@
                                                                 >
                                                                     <div
                                                                         class="form-group m-form__group"
+                                                                        :class="{'has-danger': errors.has('date')}"
                                                                     >
                                                                         <strong>{{ $t('reimbursement.date.document') }}</strong>
                                                                         <date-single-bt
                                                                             class="m-input"
                                                                             name="date"
                                                                             watermark="Date"
+                                                                            v-validate="'required'"
+                                                                            :data-vv-as="$t('eimbursement.date.document')"
                                                                             v-on:input="setDataFilter"
                                                                             :value="inputsData.date"
                                                                         ></date-single-bt>
+                                                                        
+                                                                        <form-error
+                                                                            :attribute_name="'date'"
+                                                                            :errors_form="errors"
+                                                                        ></form-error>
                                                                     </div>
                                                                     <div
                                                                         class="form-group m-form__group"
@@ -236,6 +251,7 @@
                                                                                 class="form-control m-input"
                                                                                 :placeholder="$t('document.amount')"
                                                                                 v-validate="'required|min:1|max:10|decimal:2'"
+                                                                                :data-vv-as="$t('document.amount')"
                                                                                 v-model.lazy="inputsData.amount"
                                                                                 ref="amount"
                                                                             />
@@ -279,6 +295,7 @@
                                                                                 class="form-control m-input"
                                                                                 :placeholder="$t('reimbursement.payee')"
                                                                                 v-validate="'required|min:2|max:250|'"
+                                                                                :data-vv-as="$t('reimbursement.payee')"
                                                                                 v-model.lazy="inputsData.nameBen"
                                                                                 ref="nameBen"
                                                                             />
@@ -311,6 +328,7 @@
                                                                                 class="form-control m-input"
                                                                                 :placeholder="$t('reimbursement.reference')"
                                                                                 v-validate="'required|min:2|max:40|'"
+                                                                                :data-vv-as="$t('reimbursement.reference')"
                                                                                 v-model.lazy="inputsData.reference"
                                                                                 ref="reference"
                                                                             />
@@ -343,6 +361,7 @@
                                                                             class="form-control m-input"
                                                                             :placeholder="$t('document.description')"
                                                                             v-validate="'required|min:2|max:255|'"
+                                                                            :data-vv-as="$t('document.description')"
                                                                             v-model="inputsData.description"
                                                                             ref="Description"
                                                                         ></textarea>
@@ -374,6 +393,7 @@
                                                                             id="file"
                                                                             accept="application/pdf, image/gif, image/jpg, image/jpeg, image/png"
                                                                             v-validate="'required|ext:jpeg,jpg,pdf,png,gif,bmp'"
+                                                                            :data-vv-as="$t('document.file')"
                                                                             ref="file"
                                                                             v-on:change="handleFileUpload"
                                                                         />
@@ -611,6 +631,8 @@ export default {
                                             this.inputsData.description = "";
                                             //this.captcha = '';
                                             this.file = false;
+                                            this.previewSrc = false;
+                                            this.typeFile = false;
                                             this.$refs.file.value = null;
                                             this.inputsData.docType = null;
                                             this.getDocumentsType();
@@ -718,7 +740,7 @@ export default {
                 if (e['uploaded']) {
                     e['icon'] = 'fa fa-check text-success';
                 } else {
-                    if (parseInt(self.inputsData.docType || 0) == 0) {
+                    if ((parseInt(self.inputsData.docType) || 0) == 0) {
                         self.inputsData.docType = e.id;
                     }
                 }
@@ -732,6 +754,9 @@ export default {
                 return m;
             }, {});
 
+           /*  if ((parseInt(self.inputsData.docType) || 0) == 0) {
+                self.inputsData.docType = this.documentsType[0].id;
+            } */
             if('provide' in group) {
                 arrReturn.push(group.provide);
             }
