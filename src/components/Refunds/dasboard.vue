@@ -187,7 +187,7 @@
                                                                     <select-group
                                                                         name="docType"
                                                                         :groups="documentsTypeGroup"
-                                                                        :selected="results.docType"
+                                                                        :selected="inputsData.docType"
                                                                         v-on:input="setDataFilter"
                                                                     ></select-group>
                                                                 </div>
@@ -516,7 +516,7 @@ export default {
                 description: "",
                 date: "",
                 nameBen: "",
-                docType: 0
+                docType: null
             },
             documentsType: [],
             file: false,
