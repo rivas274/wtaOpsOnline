@@ -198,21 +198,30 @@
                                                                         :errors_form="errors"
                                                                     ></form-error>
                                                                 </div>
-                                                                <div class="form-group m-form__group" v-if="extraInfo">
-                                                                    <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show" role="alert">
-                                                                        <div class="m-alert__icon">
-                                                                            <i class="flaticon-exclamation-1"></i>
+                                                                <div class="form-group m-form__group pt-2 pb-0" v-if="extraDescription">
+                                                                    <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-info alert-dismissible fade show m-0" role="alert">
+                                                                        <div class="m-alert__icon py-3 px-3">
+                                                                            <i class="fa fa-2x fa-info-circle"></i>
+                                                                            <span></span>
                                                                         </div>
-                                                                        <div class="m-alert__text">
-                                                                            <strong>{{ $t('general.important') }}</strong>
-                                                                            {{ extraInfo.description }}
-                                                                        </div>
-                                                                        <div class="m-alert__actions text-info">
-                                                                            <a :href="extraInfo.file" download target="_blank">
-                                                                                <i class="fa fa-3x fa-cloud-download-alt"></i>
-                                                                            </a>
+                                                                        <div class="m-alert__text py-3">
+                                                                            {{ extraDescription }}
                                                                         </div>
                                                                     </div>
+                                                                </div>
+                                                                <div class="form-group m-form__group pt-2 pb-0" v-if="extraInfo">
+                                                                    <a :href="extraInfo.file" download target="_blank">
+                                                                        <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
+                                                                            <div class="m-alert__icon py-3 px-3">
+                                                                                <i class="fa fa-2x fa-cloud-download-alt"></i>
+                                                                                <span></span>
+                                                                            </div>
+                                                                            <div class="m-alert__text py-3">
+                                                                                <strong>{{ $t('general.important') }}</strong>
+                                                                                {{ extraInfo.description }}
+                                                                            </div>
+                                                                        </div>
+                                                                    </a>
                                                                 </div>
                                                                 <div
                                                                     v-if="inputsData.docType=='26'"
@@ -731,6 +740,15 @@ export default {
                 }
             }
             return false;
+        },
+        extraDescription: function () {
+            let docTypeSelected = this.documentsType.filter((v) => {
+                return v.id == this.inputsData.docType;
+            });
+            if (docTypeSelected.length == 0) {
+                return false;
+            }
+            return docTypeSelected[0].description;
         },
         documentsTypeGroup: function () {
             let self = this,
