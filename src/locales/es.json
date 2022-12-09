@@ -82,6 +82,7 @@
     "document": {
         "category": "Categoría",
         "type": "Tipo de Documento",
+        "classification": "Clasificación de Documentos",
         "amount": "Monto",
         "currency": "Moneda",
         "description": "Descripción",

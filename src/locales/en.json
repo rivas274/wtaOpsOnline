@@ -82,6 +82,7 @@
     "document": {
         "category": "Category",
         "type": "Document Type",
+        "classification": "Clasificación de Documentos",
         "amount": "Amount",
         "currency": "Currency",
         "description": "Description",

@@ -40,22 +40,28 @@ export default {
         }
     },
     watch: {
-        selected: function(newVal) {
-            this.value = newVal;
-            window.$(this.$el)
-                .find(".m_selectpicker")
-                .val(newVal)
-                .trigger("change");
+        selected: {
+            handler(newVal) {
+                this.value = newVal;
+                window.$(this.$el)
+                    .find(".m_selectpicker")
+                    .val(newVal)
+                    .trigger("change");
+            },
+            deep: true
         },
-        options: function() {
-            setTimeout(
-                function() {
-                    window.$(this.$el)
-                        .find(".m_selectpicker")
-                        .selectpicker("refresh");
-                }.bind(this),
-                500
-            );
+        options: {
+            handler() {
+                setTimeout(
+                    function() {
+                        window.$(this.$el)
+                            .find(".m_selectpicker")
+                            .selectpicker("refresh");
+                    }.bind(this),
+                    500
+                );
+            },
+            deep: true
         }
     }
 };

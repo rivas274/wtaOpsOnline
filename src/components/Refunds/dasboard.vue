@@ -181,18 +181,37 @@
                                                                     ></input-from-table>
                                                                 </div>
                                                                 <div
+                                                                v-if="documentsTypeGroup.length>1"
+                                                                    class="ffilorm-group m-form__group"
+                                                                    :class="{'has-danger': errors.has('docTypeGroup')}"
+                                                                >
+                                                                    <strong>{{ $t('document.classification') }}</strong>
+                                                                    <select-from
+                                                                        name="docTypeGroup"
+                                                                        v-validate="'required'"
+                                                                        :data-vv-as="$t('document.classification')+' Group'"
+                                                                        :options="documentsTypeGroup"
+                                                                        :selected="inputsData.docTypeGroup"
+                                                                        v-on:input="setDataFilter"
+                                                                    ></select-from>
+                                                                    <form-error
+                                                                        :attribute_name="'docTypeGroup'"
+                                                                        :errors_form="errors"
+                                                                    ></form-error>
+                                                                </div>
+                                                                <div
                                                                     class="ffilorm-group m-form__group"
                                                                     :class="{'has-danger': errors.has('docType')}"
                                                                 >
                                                                     <strong>{{ $t('document.type') }}</strong>
-                                                                    <select-group
+                                                                    <select-from
                                                                         name="docType"
-                                                                        v-validate="'required|min:1|max:10'"
+                                                                        v-validate="'required'"
                                                                         :data-vv-as="$t('document.type')"
-                                                                        :groups="documentsTypeGroup"
+                                                                        :options="documentsTypeVisible"
                                                                         :selected="inputsData.docType"
                                                                         v-on:input="setDataFilter"
-                                                                    ></select-group>
+                                                                    ></select-from>
                                                                     <form-error
                                                                         :attribute_name="'docType'"
                                                                         :errors_form="errors"
@@ -514,7 +533,6 @@
 import FormError from "../FormError";
 import customImg from "../Element/custom-img";
 import selectFrom from "../Tables/filters/selectFromTable.vue";
-import selectGroup from "../Tables/filters/selectGroupFromTable.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
 import currency from "../Labels/currency.json";
 import localeChanger from "../locales/locale-changer.vue";
@@ -525,7 +543,6 @@ export default {
         FormError,
         customImg,
         selectFrom,
-        selectGroup,
         inputFromTable,
         dateSingleBt,
         VueRecaptcha,
@@ -545,7 +562,8 @@ export default {
                 description: "",
                 date: "",
                 nameBen: "",
-                docType: null
+                docTypeGroup: null,
+                docType: null,
             },
             documentsType: [],
             file: false,
@@ -644,6 +662,7 @@ export default {
                                             this.typeFile = false;
                                             this.$refs.file.value = null;
                                             this.inputsData.docType = null;
+                                            this.inputsData.docTypeGroup = null;
                                             this.getDocumentsType();
                                         } else if (
                                             result.dismiss ===
@@ -680,8 +699,11 @@ export default {
                 });
             }
         },
-        setDataFilter: function(campo, value) {
+        setDataFilter: function (campo, value) {
             this.inputsData[campo] = value;
+            if (campo == 'docTypeGroup') {
+                this.inputsData.docType = null;
+            }
         },
         handleFileUpload: function(event) {
             this.file = event.target.files[0];
@@ -727,7 +749,7 @@ export default {
         },
         extraInfo: function () {
             let docTypeSelected = this.documentsType.filter((v) => {
-                return v.id == this.inputsData.docType;
+                return v.id == this.inputsData.docType && this.inputsData.docTypeGroup == v['group'];
             });
             if (docTypeSelected.length == 0) {
                 return false;
@@ -743,7 +765,7 @@ export default {
         },
         extraDescription: function () {
             let docTypeSelected = this.documentsType.filter((v) => {
-                return v.id == this.inputsData.docType;
+                return v.id == this.inputsData.docType && this.inputsData.docTypeGroup == v['group'];
             });
             if (docTypeSelected.length == 0) {
                 return false;
@@ -755,26 +777,22 @@ export default {
             arrReturn = [],
             group = this.documentsType.reduce(function (m, e) {
                 let provideOrDownload = 'insurance' in e ? 'download' : 'provide';
-                if (e['uploaded']) {
-                    e['icon'] = 'fa fa-check text-success';
-                } else {
-                    if ((parseInt(self.inputsData.docType) || 0) == 0) {
+                if (!(provideOrDownload in m)) {
+                    m[provideOrDownload] = {
+                        id:provideOrDownload,
+                        name: self.$t("refunds." + (provideOrDownload == 'download' ? 'documentToDownload' : 'documentToProvide')),
+                    };
+                }
+                if (!e['uploaded']) {
+                    if (!self.inputsData.docTypeGroup) { 
+                        self.inputsData.docTypeGroup = provideOrDownload;
+                    }
+                    if ((parseInt(self.inputsData.docType) || 0) == 0 && self.inputsData.docTypeGroup == provideOrDownload) {
                         self.inputsData.docType = e.id;
                     }
                 }
-                if (!(provideOrDownload in m)) {
-                    m[provideOrDownload] = {
-                        name: self.$t("refunds." + (provideOrDownload == 'download' ? 'documentToDownload' : 'documentToProvide')),
-                        options: []
-                    };
-                }
-                m[provideOrDownload].options.push(e);
                 return m;
             }, {});
-
-           /*  if ((parseInt(self.inputsData.docType) || 0) == 0) {
-                self.inputsData.docType = this.documentsType[0].id;
-            } */
             if('provide' in group) {
                 arrReturn.push(group.provide);
             }
@@ -782,6 +800,19 @@ export default {
                 arrReturn.push(group.download);
             }
             return arrReturn;
+        },
+        documentsTypeVisible: function () {
+            let self = this;
+            return this.documentsType.reduce(function (m, e) {
+                e['group'] = 'insurance' in e ? 'download' : 'provide';
+                if (e['uploaded']) {
+                    e['icon'] = 'fa fa-check text-success';
+                }
+                if (self.inputsData.docTypeGroup == e['group'] || !self.inputsData.docTypeGroup) {
+                    m.push(e);
+                }
+                return m;
+            }, []);
         }
     }
 };
