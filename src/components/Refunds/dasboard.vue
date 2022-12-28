@@ -804,16 +804,8 @@ export default {
                     };
                 }
                 m[provideOrDownload]['total']=(m[provideOrDownload]['total']||0)+1; 
-                if (e['uploaded']) {
-                    m[provideOrDownload]['uploaded']=(m[provideOrDownload]['uploaded']||0)+1; 
-                }else {
-                    if (!self.inputsData.docTypeGroup) { 
-                        self.inputsData.docTypeGroup = provideOrDownload;
-                    }
-                    if ((parseInt(self.inputsData.docType) || 0) == 0 && self.inputsData.docTypeGroup == provideOrDownload) {
-                        self.inputsData.docType = e.id;
-                    }
-                }
+                m[provideOrDownload]['uploaded']=(m[provideOrDownload]['uploaded']||0)+(e['uploaded']?1:0); 
+
                 return m;
             }, {});
             if('provide' in group) {
