@@ -130,7 +130,39 @@
                                         </div>
                                         <div class="m-invoice__items" v-if="results.processRefund=='Y'">
                                             <div class="m-portlet m-portlet--tab">
-                                                <div>
+                                                <div v-if="documentsTypeGroup.length>1 && !inputsData.docTypeGroup">
+                                                    <div class="m-portlet__head">
+                                                        <div class="m-portlet__head-caption">
+                                                            <div class="m-portlet__head-title">
+                                                                <span class="m-portlet__head-icon m--hide">
+                                                                    <i class="la la-gear"></i>
+                                                                </span>
+                                                                <h3 class="m-portlet__head-text">
+                                                                    {{ $t('reimbursement.information') }}
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-portlet__body">
+                                                        <div class="row">
+                                                            <div class="col-md-6" v-for="group in documentsTypeGroup " :key="group.id">
+                                                                <div class="form-group">
+                                                                    <button  class="btn-block btn btn-lg btn-primary"
+                                                                            @click.prevent="setDataFilter('docTypeGroup',group.id)"
+                                                                            type="button">
+                                                                            {{ group.name }}
+                                                                        <span class="pull-right badge badge-secondary">
+                                                                            <span class="m-0 h5">
+                                                                                {{ group['total'] }}/{{ group['uploaded'] }}
+                                                                            </span>
+                                                                        </span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div v-else>
                                                     <div class="row mx-0">
                                                         <form
                                                             class="m-form m-form--fit m-form--label-align-right"
@@ -156,6 +188,13 @@
                                                                         >{{ $t('reimbursement.information') }}</h3>
                                                                     </div>
                                                                 </div>
+                                                                <div class="m-portlet__head-tools">
+                                                                    <button v-if="documentsTypeGroup.length>1" class="btn"
+                                                                            @click.prevent="inputsData.docTypeGroup = null"
+                                                                            type="button"
+                                                                        >{{ $t('general.back') }}
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                             <div class="m-portlet__body">
                                                                 <div
@@ -179,25 +218,6 @@
                                                                         :value="results.descAssistanceType"
                                                                         :readonly="true"
                                                                     ></input-from-table>
-                                                                </div>
-                                                                <div
-                                                                v-if="documentsTypeGroup.length>1"
-                                                                    class="ffilorm-group m-form__group"
-                                                                    :class="{'has-danger': errors.has('docTypeGroup')}"
-                                                                >
-                                                                    <strong>{{ $t('document.classification') }}</strong>
-                                                                    <select-from
-                                                                        name="docTypeGroup"
-                                                                        v-validate="'required'"
-                                                                        :data-vv-as="$t('document.classification')+' Group'"
-                                                                        :options="documentsTypeGroup"
-                                                                        :selected="inputsData.docTypeGroup"
-                                                                        v-on:input="setDataFilter"
-                                                                    ></select-from>
-                                                                    <form-error
-                                                                        :attribute_name="'docTypeGroup'"
-                                                                        :errors_form="errors"
-                                                                    ></form-error>
                                                                 </div>
                                                                 <div
                                                                     class="ffilorm-group m-form__group"
@@ -783,7 +803,10 @@ export default {
                         name: self.$t("refunds." + (provideOrDownload == 'download' ? 'documentToDownload' : 'documentToProvide')),
                     };
                 }
-                if (!e['uploaded']) {
+                m[provideOrDownload]['total']=(m[provideOrDownload]['total']||0)+1; 
+                if (e['uploaded']) {
+                    m[provideOrDownload]['uploaded']=(m[provideOrDownload]['uploaded']||0)+1; 
+                }else {
                     if (!self.inputsData.docTypeGroup) { 
                         self.inputsData.docTypeGroup = provideOrDownload;
                     }

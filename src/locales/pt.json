@@ -46,7 +46,8 @@
         "patient_name": "Nome do Paciente",
         "sentRepricing": "Enviado para Rericing",
         "pleaseSelect":"Seleccione por favor",
-        "important":"Importante!"
+        "important":"Importante!",
+        "back":"Voltar"
     },
     "assistanceBills": {
         "information": "Informações da fatura",

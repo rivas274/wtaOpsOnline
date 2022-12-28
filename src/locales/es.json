@@ -220,7 +220,8 @@
         "startDate":"Fecha de inicio",
         "endtDate":"Fecha de finalización",
         "pleaseSelect":"Por favor, seleccione",
-        "important":"¡Importante!"
+        "important":"¡Importante!",
+        "back":"Atrás"
     },
     "provider":{
         "provider":"Proveedor",

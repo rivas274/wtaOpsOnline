@@ -220,7 +220,8 @@
         "startDate":"Start Date",
         "endtDate":"End Date",
         "pleaseSelect":"Please Select",
-        "important":"Important!"
+        "important":"Important!",
+        "back":"Back"
     },
     "provider":{
         "provider":"Provider",
