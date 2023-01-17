@@ -590,7 +590,8 @@ export default {
             captcha: "",
             previewSrc: null,
             typeFile: false,
-            displayAlert: false
+            displayAlert: false,
+            idFiles:[],
         };
     },
     mounted() {
@@ -663,6 +664,7 @@ export default {
                             .then(response => {
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
+                                    this.idFiles.push(response.data.ID);
                                     /* this.$refs.recaptcha.reset(); */
                                     window.Swal.fire({
                                         title: this.$t("document.send"),
@@ -685,16 +687,21 @@ export default {
                                             this.inputsData.docTypeGroup = null;
                                             this.getDocumentsType();
                                         } else if (
-                                            result.dismiss ===
-                                            window.Swal.DismissReason.cancel
+                                            result.dismiss === window.Swal.DismissReason.cancel
                                         ) {
-                                            window.close();
+                                            this.axios
+                                                .post("addRefundNotified", {
+                                                    idFiles: this.idFiles
+                                                }).then(() => { 
+                                                    this.idFiles = [];
+                                                })
                                             window.Swal.fire({
                                                 title: this.$t("windows.close"),
                                                 text: this.$t("windows.pleaseClose"),
                                                 confirmButtonText: this.$t("general.ok"),
                                                 type: "error"
                                             });
+                                            window.close();
                                         }
                                     });
                                 } else {
