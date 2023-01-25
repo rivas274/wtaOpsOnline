@@ -645,6 +645,7 @@ export default {
                     formData.append("amount", this.inputsData.amount);
                     formData.append("nameBen", this.inputsData.nameBen);
                     formData.append("docType", this.inputsData.docType);
+                    formData.append("idFiles", this.idFiles);
                     if (result) {
                         this.disableForm = true;
                         this.axios
@@ -664,7 +665,11 @@ export default {
                             .then(response => {
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
-                                    this.idFiles.push(response.data.ID);
+                                    if (response.data['NOTIFIED']) {
+                                        this.idFiles = [];
+                                    } else {
+                                        this.idFiles.push(response.data.ID);
+                                    }
                                     /* this.$refs.recaptcha.reset(); */
                                     window.Swal.fire({
                                         title: this.$t("document.send"),
@@ -689,12 +694,14 @@ export default {
                                         } else if (
                                             result.dismiss === window.Swal.DismissReason.cancel
                                         ) {
-                                            this.axios
-                                                .post("addRefundNotified", {
-                                                    idFiles: this.idFiles
-                                                }).then(() => { 
-                                                    this.idFiles = [];
-                                                })
+                                            if (this.idFiles.length > 0) {
+                                                this.axios
+                                                    .post("addRefundNotified", {
+                                                        idFiles: this.idFiles
+                                                    }).then(() => { 
+                                                        this.idFiles = [];
+                                                    })
+                                            }
                                             window.Swal.fire({
                                                 title: this.$t("windows.close"),
                                                 text: this.$t("windows.pleaseClose"),
