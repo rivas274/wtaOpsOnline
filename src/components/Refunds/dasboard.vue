@@ -679,19 +679,18 @@ export default {
                                         confirmButtonText: this.$t("document.uploadAnother"),
                                         cancelButtonText: this.$t("general.no")
                                     }).then(result => {
-                                        if (result.value) {
-                                            this.inputsData.reference = "";
-                                            this.inputsData.amount = "";
-                                            this.inputsData.description = "";
-                                            //this.captcha = '';
-                                            this.file = false;
-                                            this.previewSrc = false;
-                                            this.typeFile = false;
-                                            this.$refs.file.value = null;
-                                            this.inputsData.docType = null;
-                                            this.inputsData.docTypeGroup = null;
-                                            this.getDocumentsType();
-                                        } else if (
+                                        this.inputsData.reference = "";
+                                        this.inputsData.amount = "";
+                                        this.inputsData.description = "";
+                                        //this.captcha = '';
+                                        this.file = false;
+                                        this.previewSrc = false;
+                                        this.typeFile = false;
+                                        this.$refs.file.value = null;
+                                        this.inputsData.docType = null;
+                                        this.inputsData.docTypeGroup = null;
+                                        this.getDocumentsType();
+                                        if (
                                             result.dismiss === window.Swal.DismissReason.cancel
                                         ) {
                                             if (this.idFiles.length > 0) {
