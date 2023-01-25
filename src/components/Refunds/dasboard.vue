@@ -706,8 +706,9 @@ export default {
                                                 text: this.$t("windows.pleaseClose"),
                                                 confirmButtonText: this.$t("general.ok"),
                                                 type: "error"
+                                            }).then(result => { 
+                                                window.close();
                                             });
-                                            window.close();
                                         }
                                     });
                                 } else {
