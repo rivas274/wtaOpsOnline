@@ -596,6 +596,23 @@ export default {
     },
     mounted() {
         this.getAssistance();
+        window.onbeforeunload = function (e) {
+            e = e || window.event;
+
+            if (this.idFiles.length > 0) {
+                this.axios
+                    .post("addRefundNotified", {
+                        idFiles: this.idFiles
+                    }).then(() => {
+                        this.idFiles = [];
+                    });
+                if (e) {
+                    e.returnValue = 'Sure?';
+                }
+                // Esta es para Safari
+                return 'Sure?';
+            }
+        }.bind(this);
     },
     methods: {
         getDocumentsType: function () {
@@ -706,7 +723,7 @@ export default {
                                                 text: this.$t("windows.pleaseClose"),
                                                 confirmButtonText: this.$t("general.ok"),
                                                 type: "error"
-                                            }).then(result => { 
+                                            }).then(() => { 
                                                 window.close();
                                             });
                                         }
