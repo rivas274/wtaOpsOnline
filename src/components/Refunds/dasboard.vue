@@ -595,17 +595,25 @@ export default {
         };
     },
     mounted() {
+        let self = this;
         this.getAssistance();
-        window.onbeforeunload = function () {
-            if (this.idFiles.length > 0) {
-                this.axios
+        window.onbeforeunload = function (e) {
+            e = e || window.event;
+
+            if (self.idFiles.length > 0) {
+                self.axios
                     .post("addRefundNotified", {
-                        idFiles: this.idFiles
+                        idFiles: self.idFiles
                     }).then(() => {
-                        this.idFiles = [];
+                        self.idFiles = [];
                     });
+                if (e) {
+                    e.returnValue = 'Sure?';
+                }
+                // Esta es para Safari
+                return 'Sure?';
             }
-        }.bind(this);
+        };
     },
     methods: {
         getDocumentsType: function () {
