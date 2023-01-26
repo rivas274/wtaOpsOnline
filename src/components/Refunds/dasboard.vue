@@ -596,9 +596,7 @@ export default {
     },
     mounted() {
         this.getAssistance();
-        window.onbeforeunload = function (e) {
-            e = e || window.event;
-
+        window.onbeforeunload = function () {
             if (this.idFiles.length > 0) {
                 this.axios
                     .post("addRefundNotified", {
@@ -606,11 +604,6 @@ export default {
                     }).then(() => {
                         this.idFiles = [];
                     });
-                if (e) {
-                    e.returnValue = 'Sure?';
-                }
-                // Esta es para Safari
-                return 'Sure?';
             }
         }.bind(this);
     },
