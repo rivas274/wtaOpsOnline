@@ -349,10 +349,10 @@ iframe{
                                     >{{assistances.contact.relation}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">{{$t('assistance.type')}}</span>
+                                    <span class="m-widget16__date">{{$t('assistance.typeAssistance')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
-                                    >{{assistances.caseType.description}}</span>
+                                    >{{assistances.assistanceType.description}}</span>
                                 </div>
                                 <div class="m-widget16__item">
                                     <span class="m-widget16__date">{{$t('assistance.symptom')}}</span>

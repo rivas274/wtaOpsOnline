@@ -111,7 +111,7 @@
                     {{$t('assistance.symptom')}}
                 </th>
                 <th>
-                    {{$t('assistance.type')}}
+                    {{$t('assistance.typeAssistance')}}
                 </th>
                 <th style="min-width: 90px;"  class="text-center">
                     {{$t('assistance.date.event')}}
@@ -156,7 +156,7 @@
                     {{assist.symptomDetaill}}
                 </td>
                 <td>
-                    {{assist.descCaseType}}
+                    {{assist.descAssistanceType}}
                 </td>
                 <td class="text-center">
                     <div>{{assist.reportedDate.date}}</div>

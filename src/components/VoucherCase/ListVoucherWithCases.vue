@@ -100,7 +100,7 @@
                     {{assist.symptomDetaill}}
                 </td>
                 <td>
-                    {{assist.descCaseType}}
+                    {{assist.descAssistanceType}}
                 </td>
                 <td class="text-center">
                     <div>{{assist.reportedDate.date}}</div>
