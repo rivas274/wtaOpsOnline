@@ -26,7 +26,7 @@
                     class="m-menu__item"
                     :class="[subIsActive('/voucher_case')?'m-menu__item--active':'']"
                     aria-haspopup="true"
-                    v-if="assist"
+                    v-if="voucherCase"
                 >
                     <router-link :to="{ path: '/voucher_case'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
