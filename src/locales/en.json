@@ -97,6 +97,7 @@
         "clients": "Clients",
         "assistance":"Assistance",
         "notes":"Notes",
+        "notes_provider":"Notes provider",
         "medical_notes":"Medical Notes",
         "timeLine":"Time Line",
         "relation":"Relation",

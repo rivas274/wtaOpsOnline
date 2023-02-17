@@ -95,10 +95,10 @@
                 <th style="min-width: 90px;">
                     {{$t('assistance.caseNumber')}}
                 </th>
-                <th>
+                <th v-if="!permission.hidden_client">
                     {{$t('company.company')}}
                 </th>
-                <th>
+                <th  v-if="!permission.hidden_client">
                     {{$t('voucher.voucher')}}
                 </th>
                 <th>
@@ -141,10 +141,10 @@
                         @click.prevent="addAssist(assist)"
                     >{{assist.codeAssist}}</span>
                 </td>
-                <td>
+                <td  v-if="!permission.hidden_client">
                     {{assist.clientName}}
                 </td>
-                <td>
+                <td  v-if="!permission.hidden_client">
                     {{assist.codigo}}
                 </td>
                 <td v-html="assist.fisrtName+' '+assist.lastName">
@@ -222,6 +222,7 @@ export default {
         var permission = {
             bills: this.middleware("bills", "read"),
             RP002A: this.middleware("RP002A", "read"),
+            hidden_client: this.middleware("hidden_client_in_assistance", "read"),
         };
         return {
             permission: permission,

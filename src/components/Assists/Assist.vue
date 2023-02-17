@@ -52,6 +52,16 @@
                     <span>{{$t('assistance.notes')}}</span>
                 </a>
             </li>
+            <li v-if="permission.notes_provider" :class="{active:tabShow=='Note'}" v-tooltip:top="$t('assistance.notes_provider')">
+                <a
+                    class="nav-link"
+                    :class="{'m--font-success':tabShow=='notes_provider'}"
+                    @click.prevent="showTab('notes_provider')"
+                >
+                    <i class="fa fa-sticky-note" aria-hidden="true"></i>
+                    <span>{{$t('assistance.notes_provider')}}</span>
+                </a>
+            </li>
             <li v-if="permission.medical_notes" :class="{active:tabShow=='medical_notes'}" v-tooltip:top="$t('assistance.medical_notes')">
                 <a
                     class="nav-link"
@@ -106,6 +116,9 @@
             </div>
             <div v-if="permission.notes" class="tab-pane" :class="{active:tabShow=='Note'}">
                 <list-note :id-assist="assistBase.idAssist" :type="'notes'"></list-note>
+            </div>
+            <div v-if="permission.notes_provider" class="tab-pane" :class="{active:tabShow=='notes_provider'}">
+                <list-note :id-assist="assistBase.idAssist" :type="'notes_provider'"></list-note>
             </div>
             <div v-if="permission.medical_notes" class="tab-pane" :class="{active:tabShow=='medical_notes'}">
                 <list-note :id-assist="assistBase.idAssist" :type="'medical_notes'"></list-note>

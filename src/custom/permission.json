@@ -18,6 +18,11 @@
         "read": [],
         "write": [],
         "delete": []
+    }, 
+    "notes_provider": {
+        "read": [52],
+        "write": [52],
+        "delete": [52]
     },
     "medical_notes": {
         "read": [],
@@ -35,9 +40,9 @@
         "delete": []
     },
     "documnets": {
-        "read": [],
-        "write": [],
-        "delete": []
+        "read": [52],
+        "write": [52],
+        "delete": [52]
     },
     "reimbursement_documents": {
         "read": [],
@@ -53,5 +58,15 @@
         "read": [],
         "write": [],
         "delete": []
+    }, 
+    "hidden_tab_assistance": {
+        "read": [52],
+        "write": [52],
+        "delete": [52]
+    },
+    "hidden_client_in_assistance": {
+        "read": [52],
+        "write": [52],
+        "delete": [52]
     }
 }
