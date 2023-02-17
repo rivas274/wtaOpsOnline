@@ -39,7 +39,7 @@
         "write": [],
         "delete": []
     },
-    "documnets": {
+    "documents": {
         "read": [52],
         "write": [52],
         "delete": [52]

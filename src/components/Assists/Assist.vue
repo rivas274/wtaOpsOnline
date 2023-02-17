@@ -156,6 +156,7 @@ export default {
                 reimbursement: this.middleware("reimbursement_documents", "read"),
                 notes: this.middleware("notes", "read"),
                 medical_notes: this.middleware("medical_notes", "read"),
+                notes_provider: this.middleware("notes_provider", "read"),
                 provider: this.middleware("provider", "read"),
                 time_line: this.middleware("time_line", "read"),
                 documents: this.middleware("documents", "read"),
