@@ -138,7 +138,8 @@ export default {
                 "info",
                 "warning",
                 "danger"
-            ]
+            ],
+            interval:null
         };
     },
     methods: {
@@ -228,6 +229,11 @@ export default {
     },
     mounted() {
         this.getNote();
-    }
+        this.interval = setInterval(this.getNote,0.5 * 60 * 1000);
+    },
+    beforeDestroy() {
+        clearInterval(this.interval);
+        this.interval = this.interval = null;
+    },
 };
 </script>
