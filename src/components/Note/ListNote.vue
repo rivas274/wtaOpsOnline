@@ -25,6 +25,24 @@ iframe {
 <style src="../Element/custom-m-loader.css"></style>
 <template>
     <section :class="{'m-loader m-loader--metal m-loader--div':showLoader}">
+        <form class="m-form m--align-right" role="form" v-if="canAdd" @submit.prevent="addNote">
+            <div class="form-group">
+                <textarea 
+                    name="description" 
+                    cols="30"
+                    rows="10"
+                    class="form-control m-input"
+                    :placeholder="$t('assistance.notes')"
+                    autocomplete="off"
+                    v-validate="'required|min:1|max:5000'"
+                    v-model="description"
+                    ref="description"
+                ></textarea>
+                <form-error :attribute_name="'description'" :errors_form="errors"></form-error>
+            </div>
+            <button type="submit" class="btn btn-primary pull-end">{{$t('general.save')}}</button>
+            <hr>
+        </form>
         <div class="form-group m-form__group row">
             <date-range-bt
                 class="col-md-4 m-form__group-sub"
@@ -96,7 +114,7 @@ import dateRangeBt from "../Tables/filters/dateRangeBt.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
 export default {
     components: { dateRangeBt, inputFromTable },
-    props: ["id-assist","type"],
+    props: ["id-assist","type","can-add"],
     data: function() {
         return {
             filters: {
@@ -106,7 +124,7 @@ export default {
                     startDate: ""
                 }
             },
-            assist: this.idAssist,
+            description:'',
             results: [],
             showLoader: false,
             usersColor: {},
@@ -128,7 +146,7 @@ export default {
             this.showLoader = true;
             this.axios
                 .post("getNote", {
-                    idAssist: this.assist,
+                    idAssist: this.idAssist,
                     type:this.type
                 })
                 .then(response => {
@@ -161,7 +179,27 @@ export default {
                     startDate: ""
                 }
             };
-        }
+        },
+        addNote: function() {
+            if (!this.disableForm) {
+                this.$validator.validateAll().then(result => {
+                    if (result) {
+                        this.disableForm = true;
+                        this.axios
+                            .post("addNote", {
+                                description:this.description,
+                                idAssist:this.idAssist,
+                                type:this.type,
+                            })
+                            .then(() => {
+                                this.disableForm = false;
+                                this.description = '';
+                                this.getNote();
+                            });
+                    }
+                });
+            }
+        },
     },
     computed: {
         noteToShow: function() {
