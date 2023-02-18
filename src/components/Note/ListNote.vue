@@ -156,6 +156,11 @@ export default {
                 });
         },
         isUserNote(note) {
+            if (this.canAdd) {
+                if (note.user) {
+                    return note.user.id == this.$session.get("idUser");
+                }
+            }
             return [6, 8].includes(parseInt(note.eventDetaill.id));
         },
         colorByUser(note) {
