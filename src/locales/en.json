@@ -100,6 +100,11 @@
         "addNote":"Add Note",
         "notes_provider":"Notes provider",
         "medical_notes":"Medical Notes",
+        "triage":"Triage",
+        "facial_scan":"Facial Scan",
+        "GOP":"GOP",
+        "Credit_Authorization":"Credit Card Authorization",
+        ""
         "timeLine":"Time Line",
         "relation":"Relation",
         "contact":"Contact",

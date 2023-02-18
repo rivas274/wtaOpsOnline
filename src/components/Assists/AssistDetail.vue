@@ -32,8 +32,8 @@ iframe{
                 :id="'m_accordion_'+idAssist"
                 role="tablist"
             >
-                <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok">
-                    <template slot="title">{{ $t('voucher.voucher') | upper}} <small>({{assistances.voucher.code}})</small></template>
+                <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok" v-if="!permission.hidden_tab_voucher">
+                    <template slot="title" >{{ $t('voucher.voucher') | upper}} <small>({{assistances.voucher.code}})</small></template>
                     <template slot="body">
                         <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('voucher.travelSource')|upper}}</template>
@@ -247,7 +247,7 @@ iframe{
                         </AssistAccordionDetaill>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_general_conditions_'+idAssist" ico="fa flaticon-file">
+                <AssistAccordion :id="'_general_conditions_'+idAssist" ico="fa flaticon-file" v-if="!permission.hidden_tab_voucher">
                     <template slot="title">{{ $t('assistance.generalConditions') | upper }}</template>
                     <template slot="body">
                         <iframe class="preview"
@@ -543,6 +543,44 @@ iframe{
                         </AssistAccordionDetaill>
                     </template>
                 </AssistAccordion>
+                <AssistAccordion :id="'_triage_'+idAssist" ico="fa flaticon-list" v-if="permission.hidden_tab_voucher">
+                    <template slot="title">
+                        {{$t('assistance.triage')|upper}}
+                        <span class="text-danger" v-if="assistances.triage!='F'">({{$t('general.notApplicable')}})</span>
+                    </template>
+                    <template slot="body" v-if="assistances.triage=='F'">
+                        <iframe class="preview"
+                                :src="baseUrlApi()+'provider-files/AUTORIZATION/'+assistances.codeAssist"
+                        ></iframe>
+                    </template>
+                </AssistAccordion>
+                <AssistAccordion :id="'_facial_'+idAssist" ico="fa flaticon-avatar" v-if="permission.hidden_tab_voucher">
+                    <template slot="title">
+                        {{$t('assistance.facial_scan')|upper}}
+                        <span class="text-danger" v-if="assistances.facialScan!='F'">({{$t('general.notApplicable')}})</span>
+                    </template>
+                    <template slot="body" v-if="assistances.facialScan=='F'">
+                        <iframe class="preview"
+                                :src="baseUrlApi()+'provider-files/FACIALSCAN/'+assistances.codeAssist"
+                        ></iframe>
+                    </template>
+                </AssistAccordion>
+                <AssistAccordion :id="'_gop_'+idAssist" ico="fa flaticon-interface-5" v-if="permission.hidden_tab_voucher">
+                    <template slot="title">{{$t('assistance.GOP')|upper}}</template>
+                    <template slot="body">
+                        <iframe class="preview"
+                                :src="baseUrlApi()+'provider-files/VOB/'+assistances.codeAssist"
+                        ></iframe>
+                    </template>
+                </AssistAccordion>
+                <AssistAccordion :id="'_credit_auth_'+idAssist" ico="fa flaticon-lock" v-if="permission.hidden_tab_voucher">
+                    <template slot="title">{{$t('assistance.Credit_Authorization')|upper}}</template>
+                    <template slot="body">   
+                        <iframe class="preview"
+                                :src="baseUrlApi()+'provider-files/AUTORIZATION/'+assistances.codeAssist"
+                        ></iframe>
+                    </template>
+                </AssistAccordion>
             </div>
         </div>
     </div>
@@ -568,7 +606,10 @@ export default {
             assist: this.idAssist,
             assistances: [],
             showLoader: false,
-            benefit: []
+            benefit: [],
+            permission: {
+                hidden_tab_voucher: this.middleware("hidden_tab_voucher", "read"),
+            }
         };
     },
     methods: {
