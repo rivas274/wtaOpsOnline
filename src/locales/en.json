@@ -81,6 +81,7 @@
     },
     "document": {
         "category": "Category",
+        "add": "Add document",
         "type": "Document Type",
         "classification": "Clasificación de Documentos",
         "amount": "Amount",

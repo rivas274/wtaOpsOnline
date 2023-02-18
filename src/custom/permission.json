@@ -78,5 +78,10 @@
         "read": [52],
         "write": [52],
         "delete": [52]
+    },
+    "add_invoice": {
+        "read": [52],
+        "write": [52],
+        "delete": [52]
     }
 }

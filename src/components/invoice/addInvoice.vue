@@ -33,7 +33,7 @@
                     ></date-single-bt>
                     <form-error :attribute_name="'date'" :errors_form="errors"></form-error>
                 </div>
-                <div class="form-group" :class="{'has-danger': errors.has('case')}">
+                <div class="form-group" :class="{'has-danger': errors.has('case')}" v-if="!idAssist">
                     <strong>{{ $t('assistance.code') }}</strong>
                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                         <input
@@ -188,6 +188,7 @@ export default {
         dateSingleBt,
         localeChanger
     },
+    props: ["id-assist"],
     data() {
         return {
             uploadPercentage: 0,
@@ -229,7 +230,11 @@ export default {
                     formData.append("currency", this.inputsData.currency);
                     formData.append("date", this.inputsData.date);
                     formData.append("amount", this.inputsData.amount);
-                    formData.append("case", this.inputsData.case);
+                    if (this.idAssist) {
+                        formData.append("idAssist", this.idAssist);
+                    } else {
+                        formData.append("case", this.inputsData.case);
+                    }
                     formData.append("docType", this.inputsData.docType);
                     formData.append(
                         "idProvider",

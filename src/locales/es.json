@@ -81,6 +81,7 @@
     },
     "document": {
         "category": "Categoría",
+        "add": "Agregar documentos",
         "type": "Tipo de Documento",
         "classification": "Clasificación de Documentos",
         "amount": "Monto",

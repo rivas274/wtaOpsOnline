@@ -42,6 +42,16 @@
                     <span>{{$t('menu.documents')}}</span>
                 </a>
             </li>
+            <li v-if="permission.add_invoice" :class="{active:tabShow=='add_invoice'}" v-tooltip:top="$t('menu.documents')">
+                <a
+                    class="nav-link"
+                    :class="{'m--font-success':tabShow=='add_invoice'}"
+                    @click.prevent="showTab('add_invoice')"
+                >
+                    <i class="fa fa-folder" aria-hidden="true"></i>
+                    <span>{{$t('document.add')}}</span>
+                </a>
+            </li>
             <li v-if="permission.notes" :class="{active:tabShow=='Note'}" v-tooltip:top="$t('assistance.notes')">
                 <a
                     class="nav-link"
@@ -114,6 +124,9 @@
             <div v-if="permission.documents" class="tab-pane" :class="{active:tabShow=='documents'}">
                 <list-files :id-assist="assistBase.idAssist"></list-files>
             </div>
+            <div v-if="permission.documents" class="tab-pane" :class="{active:tabShow=='add_invoice'}">
+                <add-invoice v-on:addInvoice="[]" :id-assist="assistBase.idAssist"></add-invoice>
+            </div>
             <div v-if="permission.notes" class="tab-pane" :class="{active:tabShow=='Note'}">
                 <list-note :id-assist="assistBase.idAssist" :type="'notes'"></list-note>
             </div>
@@ -144,8 +157,9 @@ import Providers from "../Provider/ListProviders.vue";
 import ListNote from "../Note/ListNote.vue";
 import TimeLine from "../timeline/TimeLine.vue";
 import AssistDetail from "./AssistDetail.vue";
+import addInvoice from "../invoice/addInvoice.vue";
 export default {
-    components: { Providers, ListBill, AssistDetail, ListNote, TimeLine, ListFiles,ListReimbursement },
+    components: { Providers, ListBill, AssistDetail, ListNote, TimeLine, ListFiles,ListReimbursement, addInvoice},
     props: ["assist"],
     data() {
         return {
@@ -160,6 +174,7 @@ export default {
                 provider: this.middleware("provider", "read"),
                 time_line: this.middleware("time_line", "read"),
                 documents: this.middleware("documents", "read"),
+                add_invoice: this.middleware("add_invoice", "read"),
             }
         };
     },
