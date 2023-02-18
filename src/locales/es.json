@@ -97,6 +97,7 @@
         "clients": "Clientes",
         "assistance":"Asistencia",
         "notes":"Notas",
+        "addNote":"Agregar Nota",
         "notes_provider":"Notas de proveedor",
         "medical_notes":"Notas Médicas",
         "timeLine":"Linea de tiempo",

@@ -30,9 +30,9 @@ iframe {
                 <textarea 
                     name="description" 
                     cols="30"
-                    rows="10"
+                    rows="3"
                     class="form-control m-input"
-                    :placeholder="$t('assistance.notes')"
+                    :placeholder="$t('assistance.addNote')"
                     autocomplete="off"
                     v-validate="'required|min:1|max:5000'"
                     v-model="description"
