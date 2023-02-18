@@ -4,11 +4,6 @@
         "write": [14],
         "delete": [14]
     },
-    "hidden_tab_voucher": {
-        "read": [52],
-        "write": [52],
-        "delete": [52]
-    },
     "assist": {
         "read": [18, 37, 43, 52],
         "write": [18, 37, 43, 52],
@@ -63,13 +58,23 @@
         "read": [],
         "write": [],
         "delete": []
-    }, 
+    },
+    "invoiceProvider": {
+        "read": [],
+        "write": [],
+        "delete": []
+    },
     "hidden_tab_assistance": {
         "read": [52],
         "write": [52],
         "delete": [52]
     },
     "hidden_client_in_assistance": {
+        "read": [52],
+        "write": [52],
+        "delete": [52]
+    },
+    "hidden_tab_voucher": {
         "read": [52],
         "write": [52],
         "delete": [52]
