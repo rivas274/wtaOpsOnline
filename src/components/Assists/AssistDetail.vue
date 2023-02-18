@@ -581,6 +581,14 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
+                <AssistAccordion :id="'_credit_auth_cc_'+idAssist" ico="fa flaticon-lock" v-if="permission.hidden_tab_voucher && assistances.paymentCC=='Y'">
+                    <template slot="title">{{$t('assistance.Credit_Authorization')+' CC'|upper}}</template>
+                    <template slot="body">   
+                        <iframe class="preview"
+                                :src="baseUrlApi()+'provider-files/CCAUTORIZATION/'+assistances.codeAssist"
+                        ></iframe>
+                    </template>
+                </AssistAccordion>
             </div>
         </div>
     </div>
