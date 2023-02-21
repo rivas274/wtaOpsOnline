@@ -62,7 +62,7 @@
                     <span>{{$t('assistance.notes')}}</span>
                 </a>
             </li>
-            <li v-if="permission.notes_provider" :class="{active:tabShow=='Note'}" v-tooltip:top="$t('assistance.notes_provider')">
+            <li v-if="permission.notes_provider" :class="{active:tabShow=='notes_provider'}" v-tooltip:top="$t('assistance.notes_provider')">
                 <a
                     class="nav-link"
                     :class="{'m--font-success':tabShow=='notes_provider'}"
