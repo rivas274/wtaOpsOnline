@@ -550,7 +550,7 @@ iframe{
                     </template>
                     <template slot="body" v-if="assistances.triage=='F'">
                         <iframe class="preview"
-                                :src="baseUrlApi()+'provider-files/AUTORIZATION/'+assistances.codeAssist"
+                                :src="baseUrlApi()+'provider-files/TRIAGE/'+assistances.codeAssist"
                         ></iframe>
                     </template>
                 </AssistAccordion>
