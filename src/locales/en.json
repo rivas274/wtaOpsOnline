@@ -229,7 +229,8 @@
         "endtDate":"End Date",
         "pleaseSelect":"Please Select",
         "important":"Important!",
-        "back":"Back"
+        "back":"Back",
+        "continue":"Continue"
     },
     "provider":{
         "provider":"Provider",

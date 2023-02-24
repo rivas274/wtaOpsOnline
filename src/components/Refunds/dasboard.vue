@@ -129,7 +129,11 @@
                                             </div>
                                         </div>
                                         <div class="m-invoice__items" v-if="results.processRefund=='Y'">
-                                            <form-refund class="m-portlet m-portlet--tab" 
+                                            <declaration-of-use class="m-portlet m-portlet--tab"
+                                                                :id-assist="results.idAssist" 
+                                                                v-if="results.refundAdm.declarationOfUse=='N'"
+                                                                :accepted.sync="results.refundAdm.declarationOfUse"></declaration-of-use>
+                                            <form-refund v-else class="m-portlet m-portlet--tab" 
                                                         :id-assist="results.idAssist"
                                                         :default-data="defaultData">
                                             </form-refund>
@@ -155,11 +159,13 @@
 import customImg from "../Element/custom-img";
 import localeChanger from "../locales/locale-changer.vue";
 import formRefund from "./formRefund.vue";
+import declarationOfUse from "./declarationOfUse.vue";
 export default {
     components: {
         customImg,
         localeChanger,
-        formRefund
+        formRefund,
+        declarationOfUse
     },
     data() {
         return {

@@ -421,7 +421,7 @@ export default {
         dateSingleBt,
         VueRecaptcha
     },
-    props:['idAssist','default-data','assistanceType'],
+    props:['idAssist','default-data'],
     data() {
         return {
             siteKey: this.$env.VUE_APP_RE_CAPCHA_PUBLIC,

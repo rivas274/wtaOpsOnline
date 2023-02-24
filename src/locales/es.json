@@ -229,7 +229,8 @@
         "endtDate":"Fecha de finalización",
         "pleaseSelect":"Por favor, seleccione",
         "important":"¡Importante!",
-        "back":"Atrás"
+        "back":"Atrás",
+        "continue":"Continuar"
     },
     "provider":{
         "provider":"Proveedor",

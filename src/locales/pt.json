@@ -47,7 +47,8 @@
         "sentRepricing": "Enviado para Rericing",
         "pleaseSelect":"Seleccione por favor",
         "important":"Importante!",
-        "back":"Voltar"
+        "back":"Voltar",
+        "continue":"Continuar"
     },
     "assistanceBills": {
         "information": "Informações da fatura",
