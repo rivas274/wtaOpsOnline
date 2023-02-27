@@ -517,6 +517,7 @@ export default {
                                 if (response.data.STATUS == "OK") {
                                     if (response.data['NOTIFIED']) {
                                         this.idFiles = [];
+                                        this.$emit('complete-documents');
                                     } else {
                                         this.idFiles.push(response.data.ID);
                                     }

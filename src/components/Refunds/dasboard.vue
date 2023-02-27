@@ -131,10 +131,52 @@
                                         <div class="m-invoice__items" v-if="results.processRefund=='Y'">
                                             <declaration-of-use class="m-portlet m-portlet--tab"
                                                                 :id-assist="results.idAssist" 
-                                                                v-if="results.refundAdm.declarationOfUse=='N'"
-                                                                :accepted.sync="results.refundAdm.declarationOfUse"></declaration-of-use>
-                                            <form-refund v-else class="m-portlet m-portlet--tab" 
+                                                                v-if="formShow=='declarationOfUse'"
+                                                                :accepted.sync="results.refundAdm.declarationOfUse">
+                                            </declaration-of-use>
+                                            <div v-show="formShow=='showStatus'">
+                                                <div class="m-portlet m-portlet--tab">
+                                                    <div class="m-portlet__head">
+                                                        <div class="m-portlet__head-caption">
+                                                            <div class="m-portlet__head-title">
+                                                                <span class="m-portlet__head-icon m--hide">
+                                                                    <i class="la la-gear"></i>
+                                                                </span>
+                                                                <h3 class="m-portlet__head-text">
+                                                                    {{ $t('reimbursement.information') }}
+                                                                </h3>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-portlet__body">
+                                                        <div class="text-center">
+                                                            <h1>
+                                                                {{ $t('reimbursement.caseNumber') }}
+                                                            </h1>
+                                                            <h2>
+                                                                {{ results.refundAdm.codigo }}
+                                                            </h2>
+                                                            <br>
+                                                            <h1>
+                                                                {{ $t('reimbursement.statusOfYour') }}
+                                                            </h1>
+                                                            <h2>
+                                                                {{ results.refundAdm.status.description.title }} <br>
+                                                            </h2>
+                                                        </div>
+                                                    </div>
+                                                    <div class="m-portlet__foot text-center">
+                                                        <div class="m-form__actions">
+                                                            <button @click="showStatus = false" class="btn btn-primary"
+                                                            >{{ $t('general.return') }}</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <form-refund v-show="formShow=='refund'"
+                                                        class="m-portlet m-portlet--tab"
                                                         :id-assist="results.idAssist"
+                                                        v-on:complete-documents="getAssistance"
                                                         :default-data="defaultData">
                                             </form-refund>
                                         </div>
@@ -170,6 +212,7 @@ export default {
     data() {
         return {
             code: this.$route.params.code,
+            showStatus:true,
             results: {},
         };
     },
@@ -201,6 +244,15 @@ export default {
                 caseType: this.results.descCaseType,
                 assistanceType: this.results.descAssistanceType
             };
+        },
+        formShow: function () {
+            if (this.results.refundAdm.declarationOfUse=='N') {
+                return 'declarationOfUse';
+            }
+            if (this.results.refundAdm.status.show && this.showStatus) {
+                return 'showStatus';
+            }
+            return 'refund';
         }
     }
 };

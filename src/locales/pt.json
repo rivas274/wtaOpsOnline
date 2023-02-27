@@ -7,7 +7,9 @@
         "date": {
             "document": "Data do reembolso"
         },
-        "clientNotProcessRefunds":"O cliente não processa o reembolso"
+        "clientNotProcessRefunds":"O cliente não processa o reembolso",
+        "caseNumber": "Número do caso de reembolso",
+        "statusOfYour": "Estado do seu reembolso"
     },
     "document": {
         "category": "Categoria",
@@ -48,7 +50,8 @@
         "pleaseSelect":"Seleccione por favor",
         "important":"Importante!",
         "back":"Voltar",
-        "continue":"Continuar"
+        "continue":"Continuar",
+        "return":"voltar"
     },
     "assistanceBills": {
         "information": "Informações da fatura",
