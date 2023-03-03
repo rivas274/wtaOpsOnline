@@ -138,6 +138,7 @@
                 <td>
                     <span
                         class="openAssist"
+                        :class="[assist['view'] == 'N' ?'m--font-bolder':'']"
                         @click.prevent="addAssist(assist)"
                     >{{assist.codeAssist}}</span>
                 </td>
@@ -386,7 +387,8 @@ export default {
             this.footerTable[campo] = value;
             this.getAssistance();
         },
-        addAssist: function(assist) {
+        addAssist: function (assist) {
+            assist['view'] = 'Y';
             this.$emit("addAssist", assist);
         },
         clear: function() {
