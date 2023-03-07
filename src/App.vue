@@ -27,12 +27,12 @@
 <script>
 import FooterCustom from "./components/Footer.vue";
 import HeaderCustom from "./components/Header/Header.vue";
-import menuCustom from "./components/Menu.vue";
+import MenuCustom from "./components/Menu.vue";
 export default {
     components: {
         FooterCustom,
         HeaderCustom,
-        Menu
+        MenuCustom
     },
     methods: {
         showMenu: function() {
