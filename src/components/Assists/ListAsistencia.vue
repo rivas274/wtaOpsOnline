@@ -191,7 +191,15 @@
                     <span v-if="login">Solicitud COMPLETADA </span>-->
                 </span>
                 <span v-else>
-                    
+                    <a
+                        @click.prevent="addAssist(assist)"
+                        class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                    >
+                        <i
+                            class="fa"
+                            :class="[open.indexOf(assist.codeAssist)>-1?'fa-location-arrow':'fa-plus-circle']"
+                        ></i>
+                    </a>
                 </span>
                 </td>
             </tr>
