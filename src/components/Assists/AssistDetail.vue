@@ -355,17 +355,18 @@ iframe{
                                     >{{assistances.assistanceType.description}}</span>
                                 </div>
                                 <div class="m-widget16__item">
-                                    <span class="m-widget16__date">{{$t('assistance.symptom')}}</span>
-                                    <span
-                                        class="m-widget16__price m--align-right"
-                                    >{{assistances.symptom.description}}</span>
-                                </div>
-                                <div class="m-widget16__item">
                                     <span class="m-widget16__date">{{$t('assistance.typeCoordination')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.coordination.description}}</span>
                                 </div>
+                                <div class="m-widget16__item">
+                                    <span class="m-widget16__date">{{$t('assistance.symptom')}}</span>
+                                    <span
+                                        class="m-widget16__price m--align-right"
+                                    >{{assistances.symptom.description}}</span>
+                                </div>
+                                
                             </template>
                         </AssistAccordionDetaill>
                         <div class="col-md-4">
@@ -409,7 +410,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill class="col-md-4" v-if="Object.keys(assistances.insuranceField).length>0">
+                        <AssistAccordionDetaill class="col-md-4" v-if="Object.keys(assistances.insuranceField).length>0 && permission.show_provider">
                             <template slot="title">{{$t('assistance.insuranceFields')}}</template>
                             <template slot="body">
                                 <div
@@ -440,7 +441,7 @@ iframe{
                                     </span>
                                 </div>
                                 <div
-                                    class="m-widget16__item"
+                                    class="m-widget16__item"    
                                     v-if="assistances.location.state.description"
                                 >
                                     <span class="m-widget16__date">{{$t('general.state')}}</span>
