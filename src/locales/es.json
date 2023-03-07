@@ -103,6 +103,7 @@
         "triage":"Triage",
         "facial_scan":"Escaneo facial",
         "GOP":"GOP",
+        "typeService": "Tipo de Servicio",
         "creditAuthorization":"Autorización de la tarjeta de crédito",
         "authorization":"Autorización",
         "medical_notes":"Notas Médicas",

@@ -113,6 +113,9 @@
                 <th>
                     {{$t('assistance.typeAssistance')}}
                 </th>
+                <th v-if="permission.show_provider">
+                    {{$t('assistance.typeService')}}
+                </th>
                 <th style="min-width: 90px;"  class="text-center">
                     {{$t('assistance.date.event')}}
                 </th>
@@ -159,6 +162,9 @@
                 <td>
                     {{assist.descAssistanceType}}
                 </td>
+                <td v-if="permission.show_provider">
+                    {{assist.speciality_location}}
+                </td>
                 <td class="text-center">
                     <div>{{assist.reportedDate.date}}</div>
                     <small><b>({{assist.reportedDate.hour}})</b></small>
@@ -176,15 +182,11 @@
                     <i :class="assist.statusAssist.icon" v-tooltip:top="assist.statusAssist.label || 'Not Found'"></i>
                 </td>
                 <td class="text-center fa-status">
-                    <a
-                        @click.prevent="addAssist(assist)"
-                        class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
-                    >
-                        <i
-                            class="fa"
-                            :class="[open.indexOf(assist.codeAssist)>-1?'fa-location-arrow':'fa-plus-circle']"
-                        ></i>
-                    </a>
+                    <span v-if="assist['view'] == 'N'">Solicitud ENVIADA</span>
+                    <span v-if="assist['view'] != 'N'">Solicitud ABIERTA </span>
+                 <!--   <span v-if="login">Solicitud en PROCESO </span>
+                    <span v-if="login">Solicitud ENVIADA</span>
+                    <span v-if="login">Solicitud COMPLETADA </span>-->
                 </td>
             </tr>
         </template>
@@ -224,6 +226,7 @@ export default {
             bills: this.middleware("bills", "read"),
             RP002A: this.middleware("RP002A", "read"),
             hidden_client: this.middleware("hidden_client_in_assistance", "read"),
+            show_provider: this.middleware("show_provider", "read")
         };
         return {
             permission: permission,
