@@ -182,11 +182,17 @@
                     <i :class="assist.statusAssist.icon" v-tooltip:top="assist.statusAssist.label || 'Not Found'"></i>
                 </td>
                 <td class="text-center fa-status">
+                    <span v-if="permission.show_provider">
+                    
                     <span v-if="assist['view'] == 'N'">Solicitud ENVIADA</span>
                     <span v-if="assist['view'] != 'N'">Solicitud ABIERTA </span>
                  <!--   <span v-if="login">Solicitud en PROCESO </span>
                     <span v-if="login">Solicitud ENVIADA</span>
                     <span v-if="login">Solicitud COMPLETADA </span>-->
+                </span>
+                <span v-else>
+                    
+                </span>
                 </td>
             </tr>
         </template>
