@@ -74,7 +74,9 @@
         "date": {
             "document": "Reimbursement Date"
         },
-        "clientNotProcessRefunds":"Client do not process reimbursement"
+        "clientNotProcessRefunds":"Client do not process reimbursement",
+        "caseNumber": "Reimbursement case number",
+        "statusOfYour": "Status of your Reimbursement"
     },
     "company": {
         "company": "Company"
@@ -229,7 +231,9 @@
         "endtDate":"End Date",
         "pleaseSelect":"Please Select",
         "important":"Important!",
-        "back":"Back"
+        "back":"Back",
+        "continue":"Continue",
+        "return":"Return"
     },
     "provider":{
         "provider":"Provider",

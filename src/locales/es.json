@@ -74,7 +74,9 @@
         "date": {
             "document": "Fecha de Reembolso"
         },
-        "clientNotProcessRefunds": "El cliente no procesa reembolsos"
+        "clientNotProcessRefunds": "El cliente no procesa reembolso",
+        "caseNumber": "Numero de caso de reembolso",
+        "statusOfYour": "Estatus de su reembolso"
     },
     "company": {
         "company": "Compañia"
@@ -229,7 +231,9 @@
         "endtDate":"Fecha de finalización",
         "pleaseSelect":"Por favor, seleccione",
         "important":"¡Importante!",
-        "back":"Atrás"
+        "back":"Atrás",
+        "continue":"Continuar",
+        "return":"Volver"
     },
     "provider":{
         "provider":"Proveedor",

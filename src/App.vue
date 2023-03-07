@@ -12,7 +12,7 @@
             <div
                 class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body"
             >
-                <Menu></Menu>
+                <menu-custom></menu-custom>
                 <div class="m-grid__item m-grid__item--fluid m-wrapper">
                     <router-view></router-view>
                 </div>
@@ -27,7 +27,7 @@
 <script>
 import FooterCustom from "./components/Footer.vue";
 import HeaderCustom from "./components/Header/Header.vue";
-import Menu from "./components/Menu.vue";
+import menuCustom from "./components/Menu.vue";
 export default {
     components: {
         FooterCustom,
