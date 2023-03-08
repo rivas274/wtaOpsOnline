@@ -178,9 +178,7 @@
                 <td>
                     <Flag :iso="assist.isoCountry"></Flag>
                 </td>
-                <td class="text-center fa-status">
-                    <i :class="assist.statusAssist.icon" v-tooltip:top="assist.statusAssist.label || 'Not Found'"></i>
-                </td>
+             
                 <td class="text-center fa-status">
                     <span v-if="permission.show_provider">
                     
@@ -200,6 +198,7 @@
                             :class="[open.indexOf(assist.codeAssist)>-1?'fa-location-arrow':'fa-plus-circle']"
                         ></i>
                     </a>
+                
                 </span>
                 </td>
             </tr>

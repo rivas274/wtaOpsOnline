@@ -32,6 +32,9 @@ iframe{
                 :id="'m_accordion_'+idAssist"
                 role="tablist"
             >
+            <button v-if="assistances.approved_status_user==2 && permission.show_provider" class="btn btn-info" style="float: right; position: relative; top: -50px" @click="finalizar">{{'Finalizar'}}</button>
+            <button v-if="assistances.approved_status_user==1 && permission.show_provider" class="btn btn-info" style="float: right; position: relative; top: -50px" @click="aprobar">{{'Aceptar caso'}}</button><br><br>
+          
                 <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok" v-if="!permission.hidden_tab_voucher">
                     <template slot="title" >{{ $t('voucher.voucher') | upper}} <small>({{assistances.voucher.code}})</small></template>
                     <template slot="body">
@@ -410,7 +413,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill class="col-md-4" v-if="Object.keys(assistances.insuranceField).length>0 && permission.show_provider">
+                        <AssistAccordionDetaill class="col-md-4" v-if="Object.keys(assistances.insuranceField).length>0 && !permission.show_provider"> 
                             <template slot="title">{{$t('assistance.insuranceFields')}}</template>
                             <template slot="body">
                                 <div
@@ -618,6 +621,7 @@ export default {
             benefit: [],
             permission: {
                 hidden_tab_voucher: this.middleware("hidden_tab_voucher", "read"),
+                show_provider: this.middleware("show_provider", "read")
             }
         };
     },
@@ -632,8 +636,31 @@ export default {
                     this.showLoader = false;
                     this.assistances = response.data.RESPONSE;
                 });
+        },
+        aprobar: function() {
+            this.showLoader = true;
+            this.axios
+                .post("apruebaProveedor", {
+                    idAssist: this.idAssist
+                })
+                .then(response => {
+                    this.showLoader = false;
+                    this.assistances = response.data.RESPONSE;
+                });
+        },
+        finalizar: function() {
+            this.showLoader = true;
+            this.axios
+                .post("finalizaProveedor", {
+                    idAssist: this.idAssist
+                })
+                .then(response => {
+                    this.showLoader = false;
+                    this.assistances = response.data.RESPONSE;
+                });
         }
     },
+
     mounted() {
         this.axios
             .post("GetBenefitToCase", {
