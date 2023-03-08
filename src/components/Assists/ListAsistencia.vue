@@ -181,14 +181,16 @@
              
                 <td class="text-center fa-status">
                     <span v-if="permission.show_provider">
-                    
-                    <span v-if="assist['view'] == 'N'">Solicitud ENVIADA</span>
-                    <span v-if="assist['view'] != 'N'">Solicitud ABIERTA </span>
-                 <!--   <span v-if="login">Solicitud en PROCESO </span>
-                    <span v-if="login">Solicitud ENVIADA</span>
-                    <span v-if="login">Solicitud COMPLETADA </span>-->
+                    <span v-if="assist['view'] == 'N' && assist.approved_status==1">Solicitud Enviada</span>
+                    <span v-if="assist['view'] != 'N' && assist.approved_status==1">Solicitud Abierta </span>
+                    <span v-if="assist.approved_status==2">Solicitud En Proceso </span>
+                    <span v-if="assist.approved_status==3">Solicitud Completada </span>
                 </span>
                 <span v-else>
+                    <i :class="assist.statusAssist.icon" v-tooltip:top="assist.statusAssist.label || 'Not Found'"></i>
+                </span>
+                </td>
+                <td class="text-center fa-status">
                     <a
                         @click.prevent="addAssist(assist)"
                         class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
@@ -198,8 +200,6 @@
                             :class="[open.indexOf(assist.codeAssist)>-1?'fa-location-arrow':'fa-plus-circle']"
                         ></i>
                     </a>
-                
-                </span>
                 </td>
             </tr>
         </template>

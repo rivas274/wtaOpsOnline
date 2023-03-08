@@ -264,6 +264,7 @@ iframe{
                         <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{ $t('assistance.contact') | upper }}</template>
                             <template slot="body">
+                                <input type="button" value="imprimir" class="btn btn-info">
                                 <div class="m-widget16__item">
                                     <span class="m-widget16__date">{{$t('general.firstName')}}</span>
                                     <span
@@ -434,6 +435,7 @@ iframe{
                         <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('general.country')|upper}}</template>
                             <template slot="body">
+                                <input type="button" value="imprimirs" class="btn btn-info" >
                                 <div
                                     class="m-widget16__item"
                                     v-if="assistances.location.country.iso"
@@ -472,6 +474,7 @@ iframe{
                                         class="m-widget16__price m--align-right"
                                         v-html="assistances.location.address"
                                     ></span>
+                                    
                                 </div>
                                 <div
                                     class="m-widget16__item"
@@ -551,8 +554,10 @@ iframe{
                     <template slot="title">
                         {{$t('assistance.triage')|upper}}
                         <span class="text-danger" v-if="assistances.triage!='F'">({{$t('general.notApplicable')}})</span>
+                        
                     </template>
                     <template slot="body" v-if="assistances.triage=='F'">
+                        <input type="button" value="imprimir" class="btn btn-info" style="float: left; left:95%; position: relative;">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/TRIAGE/'+assistances.codeAssist"
                         ></iframe>
@@ -564,6 +569,7 @@ iframe{
                         <span class="text-danger" v-if="assistances.facialScan!='F'">({{$t('general.notApplicable')}})</span>
                     </template>
                     <template slot="body" v-if="assistances.facialScan=='F'">
+                        <input type="button" value="imprimir" class="btn btn-info" style="float: left; left:95%; position: relative;">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/FACIALSCAN/'+assistances.codeAssist"
                         ></iframe>
@@ -572,6 +578,7 @@ iframe{
                 <AssistAccordion :id="'_gop_'+idAssist" ico="fa flaticon-interface-5" v-if="permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.GOP')|upper}}</template>
                     <template slot="body">
+                        <input type="button" value="imprimir" class="btn btn-info" style="float: left; left:95%; position: relative;">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/VOB/'+assistances.codeAssist"
                         ></iframe>
@@ -580,14 +587,17 @@ iframe{
                 <AssistAccordion :id="'_credit_auth_'+idAssist" ico="fa flaticon-lock" v-if="permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.authorization')|upper}}</template>
                     <template slot="body">   
-                        <iframe class="preview"
+                        <input type="button" value="este" class="btn btn-info" @click="prueba_print" style="float: left; left:95%; position: relative;">
+                        <iframe class="preview" name="printf" id="printf"
                                 :src="baseUrlApi()+'provider-files/AUTORIZATION/'+assistances.codeAssist"
                         ></iframe>
+                       
                     </template>
                 </AssistAccordion>
                 <AssistAccordion :id="'_credit_auth_cc_'+idAssist" ico="fa fa-credit-card" v-if="permission.hidden_tab_voucher && assistances.paymentCC=='Y'">
                     <template slot="title">{{$t('assistance.creditAuthorization')|upper}}</template>
-                    <template slot="body">   
+                    <template slot="body"> 
+                        <input type="button" value="imprimir" class="btn btn-info" style="float: left !important;">  
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/CCAUTORIZATION/'+assistances.codeAssist"
                         ></iframe>
@@ -598,6 +608,8 @@ iframe{
     </div>
 </template>
 <script>
+
+
 import Flag from "../Element/Flag.vue";
 import AssistAccordion from "./AssistAccordion.vue";
 import AssistAccordionDetaill from "./AssistAccordionDetaill.vue";
@@ -636,6 +648,41 @@ export default {
                     this.showLoader = false;
                     this.assistances = response.data.RESPONSE;
                 });
+        },
+        prueba_print: function() {
+            
+            //var divContents = document.getElementById("GFG").innerHTML;
+            var a = window.open('', '', 'height=500, width=500');
+            a.document.write('<html>');
+            a.document.write('<body > <h1>Div contents are <br>');
+            a.document.write('ee');
+            a.document.write('</body></html>');
+            a.document.close();
+            a.print();
+
+            /*
+            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+                mywindow.document.write('<html><head><title>prueba</title>');
+                mywindow.document.write('</head><body >');
+                mywindow.document.write('<h1>document.title </h1>');
+                //mywindow.document.write(document.getElementById(elem).innerHTML);
+                mywindow.document.write('</body></html>');
+
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10
+
+                mywindow.print();
+                mywindow.close();
+
+                return true;
+                */
+            //window.frames["printf"].focus();
+            // window.frames["printf"].print();
+
+          //  var newWin = window.frames["printf"];
+          //  newWin.document.write('<body onload="window.print()">dddd</body>');
+           // newWin.document.close();
         },
         aprobar: function() {
             this.showLoader = true;
