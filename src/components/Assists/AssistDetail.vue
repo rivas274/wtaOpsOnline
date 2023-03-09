@@ -28,12 +28,40 @@ iframe{
         <div class="m-portlet__body">
             <progress-bar :id-assist="idAssist"></progress-bar>
             <div
+            
                 class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg"
                 :id="'m_accordion_'+idAssist"
                 role="tablist"
             >
-            <button v-if="assistances.approved_status_user==2 && permission.show_provider" class="btn btn-info" style="float: right; position: relative; top: -50px" @click="finalizar">{{'Finalizar'}}</button>
-            <button v-if="assistances.approved_status_user==1 && permission.show_provider" class="btn btn-info" style="float: right; position: relative; top: -50px" @click="aprobar">{{'Aceptar caso'}}</button><br><br>
+
+                  <!-- Button trigger modal-->
+<button  v-if="assistances.approved_status_user==1 && permission.show_provider" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+    {{$t('assistance.rejectCase')}}
+</button>
+<!-- Modal-->
+<div class="modal fade" id="exampleModalLong" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{$t('assistance.rejectCase')}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                {{$t('assistance.reasonForCaseCancellation')}} <br>
+                <input type="email" class="form-control" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{{$t('general.cancel')}}</button>
+                <button type="button" class="btn btn-primary font-weight-bold" @click="rechazar">{{$t('assistance.rejectCase')}}</button>
+            </div>
+        </div>
+    </div>
+</div>                      
+
+            <button v-if="assistances.approved_status_user==2 && permission.show_provider" class="btn btn-info" style="float: right; position: relative; top: -50px" @click="finalizar">{{$t('assistance.Finish')}}</button>
+            <button v-if="assistances.approved_status_user==1 && permission.show_provider" class="btn btn-info" style="float: right; position: relative; top: -50px" @click="aprobar">{{$t('assistance.AcceptCase')}}</button><br><br>
           
                 <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok" v-if="!permission.hidden_tab_voucher">
                     <template slot="title" >{{ $t('voucher.voucher') | upper}} <small>({{assistances.voucher.code}})</small></template>
@@ -92,7 +120,7 @@ iframe{
                                     <span class="m-widget16__date">{{$t('general.firstName')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
-                                        v-html="assistances.passenger.fisrtName"
+                                        v-html="assistances.passenger.firstName"
                                     ></span>
                                 </div>
                                 <div class="m-widget16__item">
@@ -264,7 +292,6 @@ iframe{
                         <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{ $t('assistance.contact') | upper }}</template>
                             <template slot="body">
-                                <input type="button" value="imprimir" class="btn btn-info">
                                 <div class="m-widget16__item">
                                     <span class="m-widget16__date">{{$t('general.firstName')}}</span>
                                     <span
@@ -557,7 +584,7 @@ iframe{
                         
                     </template>
                     <template slot="body" v-if="assistances.triage=='F'">
-                        <input type="button" value="imprimir" class="btn btn-info" style="float: left; left:95%; position: relative;">
+                        <input type="button" value="TRIAGE download" class="btn btn-info" @click="donwload(assistances.codeAssist,'TRIAGE')" style="float: left; left:85%; position: relative;">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/TRIAGE/'+assistances.codeAssist"
                         ></iframe>
@@ -569,7 +596,7 @@ iframe{
                         <span class="text-danger" v-if="assistances.facialScan!='F'">({{$t('general.notApplicable')}})</span>
                     </template>
                     <template slot="body" v-if="assistances.facialScan=='F'">
-                        <input type="button" value="imprimir" class="btn btn-info" style="float: left; left:95%; position: relative;">
+                        <input type="button" value="FACIAL SCAN download" class="btn btn-info" @click="donwload(assistances.codeAssist,'FACIALSCAN')" style="float: left; left:85%; position: relative;">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/FACIALSCAN/'+assistances.codeAssist"
                         ></iframe>
@@ -578,7 +605,7 @@ iframe{
                 <AssistAccordion :id="'_gop_'+idAssist" ico="fa flaticon-interface-5" v-if="permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.GOP')|upper}}</template>
                     <template slot="body">
-                        <input type="button" value="imprimir" class="btn btn-info" style="float: left; left:95%; position: relative;">
+                        <input type="button" value="VOB download" class="btn btn-info" @click="donwload(assistances.codeAssist,'VOB')" style="float: left; left:85%; position: relative;">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/VOB/'+assistances.codeAssist"
                         ></iframe>
@@ -587,17 +614,17 @@ iframe{
                 <AssistAccordion :id="'_credit_auth_'+idAssist" ico="fa flaticon-lock" v-if="permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.authorization')|upper}}</template>
                     <template slot="body">   
-                        <input type="button" value="este" class="btn btn-info" @click="prueba_print" style="float: left; left:95%; position: relative;">
+                        <input type="button" value="AUTORIZATION download" class="btn btn-info" @click="donwload(assistances.codeAssist,'AUTORIZATION')" style="float: left; left:85%; position: relative;">
                         <iframe class="preview" name="printf" id="printf"
                                 :src="baseUrlApi()+'provider-files/AUTORIZATION/'+assistances.codeAssist"
                         ></iframe>
-                       
+                        
                     </template>
                 </AssistAccordion>
                 <AssistAccordion :id="'_credit_auth_cc_'+idAssist" ico="fa fa-credit-card" v-if="permission.hidden_tab_voucher && assistances.paymentCC=='Y'">
                     <template slot="title">{{$t('assistance.creditAuthorization')|upper}}</template>
                     <template slot="body"> 
-                        <input type="button" value="imprimir" class="btn btn-info" style="float: left !important;">  
+                        <input type="button" value="credit Authorization download" class="btn btn-info" @click="donwload(assistances.codeAssist,'CCAUTORIZATION')" style="float: left; left:85%; position: relative;">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/CCAUTORIZATION/'+assistances.codeAssist"
                         ></iframe>
@@ -614,6 +641,7 @@ import Flag from "../Element/Flag.vue";
 import AssistAccordion from "./AssistAccordion.vue";
 import AssistAccordionDetaill from "./AssistAccordionDetaill.vue";
 import popOver from "../Element/pop-over.vue";
+import modalCaseStatus from "../Element/modal.vue";
 import progressBar from "./progressBar.vue";
 
 export default {
@@ -622,6 +650,7 @@ export default {
         AssistAccordion,
         AssistAccordionDetaill,
         popOver,
+        modalCaseStatus,
         progressBar
     },
     props: ["id-assist"],
@@ -629,6 +658,7 @@ export default {
         return {
             assist: this.idAssist,
             assistances: [],
+            motivo:'',
             showLoader: false,
             benefit: [],
             permission: {
@@ -649,51 +679,16 @@ export default {
                     this.assistances = response.data.RESPONSE;
                 });
         },
-        prueba_print: function() {
-            
-            //var divContents = document.getElementById("GFG").innerHTML;
-            var a = window.open('', '', 'height=500, width=500');
-            a.document.write('<html>');
-            a.document.write('<body > <h1>Div contents are <br>');
-            a.document.write('ee');
-            a.document.write('</body></html>');
-            a.document.close();
-            a.print();
-
-            /*
-            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-                mywindow.document.write('<html><head><title>prueba</title>');
-                mywindow.document.write('</head><body >');
-                mywindow.document.write('<h1>document.title </h1>');
-                //mywindow.document.write(document.getElementById(elem).innerHTML);
-                mywindow.document.write('</body></html>');
-
-                mywindow.document.close(); // necessary for IE >= 10
-                mywindow.focus(); // necessary for IE >= 10
-
-                mywindow.print();
-                mywindow.close();
-
-                return true;
-                */
-            //window.frames["printf"].focus();
-            // window.frames["printf"].print();
-
-          //  var newWin = window.frames["printf"];
-          //  newWin.document.write('<body onload="window.print()">dddd</body>');
-           // newWin.document.close();
-        },
         aprobar: function() {
             this.showLoader = true;
             this.axios
                 .post("apruebaProveedor", {
                     idAssist: this.idAssist
                 })
-                .then(response => {
+                .then(() => {
                     this.showLoader = false;
-                    this.assistances = response.data.RESPONSE;
                 });
+
         },
         finalizar: function() {
             this.showLoader = true;
@@ -701,10 +696,48 @@ export default {
                 .post("finalizaProveedor", {
                     idAssist: this.idAssist
                 })
-                .then(response => {
+                .then(() => {
+                    this.showLoader = false;
+                });
+        },
+        rechazar: function() {
+            this.showLoader = true;
+            this.axios
+                .post("rechazadoProveedor", {
+                    idAssist: this.idAssist,
+                    motivo: this.motivo
+                })
+                .then(() => {
                     this.showLoader = false;
                     this.assistances = response.data.RESPONSE;
                 });
+        },
+        donwload: function (codigoAsssit,typeFile) {
+            let name =typeFile+'_'+codigoAsssit+'.pdf';
+            this.$validator.validateAll().then(result => {
+                if(result){
+                    this.showLoader = true;
+                    this.axios
+                        .post('downloadPDF',{
+                            url:this.baseUrlApi()+'provider-files/'+typeFile+'/'+codigoAsssit,
+                            name:name
+                        },{responseType: "blob"})
+                        .then(response => {
+                            window.console.log(response.headers)
+                            const url = window.URL.createObjectURL(
+                                new Blob([response.data])
+                            );
+                            const link = document.createElement("a");
+                            link.href = url;
+                            link.setAttribute(
+                                "download", name
+                            );
+                            document.body.appendChild(link);
+                            link.click();
+                            this.showLoader = false;
+                        });
+                }
+            });
         }
     },
 

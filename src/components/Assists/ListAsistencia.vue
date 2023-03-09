@@ -181,10 +181,11 @@
              
                 <td class="text-center fa-status">
                     <span v-if="permission.show_provider">
-                    <span v-if="assist['view'] == 'N' && assist.approved_status==1">Solicitud Enviada</span>
-                    <span v-if="assist['view'] != 'N' && assist.approved_status==1">Solicitud Abierta </span>
-                    <span v-if="assist.approved_status==2">Solicitud En Proceso </span>
-                    <span v-if="assist.approved_status==3">Solicitud Completada </span>
+                    <span v-if="assist['view'] == 'N' && assist.approved_status==1">{{$t('assistance.requestSent')}}</span>
+                    <span v-if="assist['view'] != 'N' && assist.approved_status==1">{{$t('assistance.openRequest')}}</span>
+                    <span v-if="assist.approved_status==2">{{$t('assistance.applicationProcess')}}</span>
+                    <span v-if="assist.approved_status==3">{{$t('assistance.applicationCompleted')}}</span>
+                    <span v-if="assist.approved_status==4">{{$t('assistance.requestRejected')}}</span>
                 </span>
                 <span v-else>
                     <i :class="assist.statusAssist.icon" v-tooltip:top="assist.statusAssist.label || 'Not Found'"></i>
