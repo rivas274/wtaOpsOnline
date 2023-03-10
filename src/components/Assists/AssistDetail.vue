@@ -35,34 +35,52 @@ iframe{
             >
 
                   <!-- Button trigger modal-->
-<button  v-if="assistances.approved_status_user==1 && permission.show_provider" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-    {{$t('assistance.rejectCase')}}
-</button>
-<!-- Modal-->
-<div class="modal fade" id="exampleModalLong" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{$t('assistance.rejectCase')}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i aria-hidden="true" class="ki ki-close"></i>
+                <button style="float: right; position: absolute;" v-if="assistances.approved_status_user==1 && permission.show_provider" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                    {{$t('assistance.rejectCase')}}
                 </button>
-            </div>
-            <div class="modal-body">
-                {{$t('assistance.reasonForCaseCancellation')}} <br>
-                <input type="email" class="form-control" />
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{{$t('general.cancel')}}</button>
-                <button type="button" class="btn btn-primary font-weight-bold" @click="rechazar">{{$t('assistance.rejectCase')}}</button>
-            </div>
-        </div>
-    </div>
-</div>                      
+                <!-- Modal-->
+                <div class="modal fade" id="exampleModalLong" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">{{$t('assistance.rejectCase')}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <i aria-hidden="true" class="ki ki-close"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{$t('assistance.reasonForCaseCancellation')}} <br>
+                                <input type="text" class="form-control" name="motivo" id="motivo" v-model="motivo" ref="motivo" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{{$t('general.cancel')}}</button>
+                                <button type="button" class="btn btn-primary font-weight-bold" data-dismiss="modal" @click="rechazar">{{$t('assistance.rejectCase')}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>                      
 
             <button v-if="assistances.approved_status_user==2 && permission.show_provider" class="btn btn-info" style="float: right; position: relative; top: -50px" @click="finalizar">{{$t('assistance.Finish')}}</button>
             <button v-if="assistances.approved_status_user==1 && permission.show_provider" class="btn btn-info" style="float: right; position: relative; top: -50px" @click="aprobar">{{$t('assistance.AcceptCase')}}</button><br><br>
-          
+
+                <div class="alert alert-success alert-dismissible fade show" v-if="notificationApprove" role="alert"  name="notificationApprove" id="notificationApprove"  ref="notificationApprove">
+                    <strong>{{$t('assistance.caseAccepted')}}.</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-success alert-dismissible fade show" v-if="notificationFinish" role="alert"  name="notificationFinish" id="notificationFinish"  ref="notificationFinish">
+                    <strong>{{$t('assistance.caseFinished')}}.</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="alert alert-success alert-dismissible fade show" v-if="notificationRejected" role="alert"  name="notificationRejected" id="notificationRejected"  ref="notificationRejected">
+                    <strong>{{$t('assistance.caseRejected')}}.</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok" v-if="!permission.hidden_tab_voucher">
                     <template slot="title" >{{ $t('voucher.voucher') | upper}} <small>({{assistances.voucher.code}})</small></template>
                     <template slot="body">
@@ -641,7 +659,6 @@ import Flag from "../Element/Flag.vue";
 import AssistAccordion from "./AssistAccordion.vue";
 import AssistAccordionDetaill from "./AssistAccordionDetaill.vue";
 import popOver from "../Element/pop-over.vue";
-import modalCaseStatus from "../Element/modal.vue";
 import progressBar from "./progressBar.vue";
 
 export default {
@@ -650,7 +667,6 @@ export default {
         AssistAccordion,
         AssistAccordionDetaill,
         popOver,
-        modalCaseStatus,
         progressBar
     },
     props: ["id-assist"],
@@ -659,6 +675,9 @@ export default {
             assist: this.idAssist,
             assistances: [],
             motivo:'',
+            notificationApprove: false,
+            notificationFinish: false,
+            notificationRejected: false,
             showLoader: false,
             benefit: [],
             permission: {
@@ -687,6 +706,8 @@ export default {
                 })
                 .then(() => {
                     this.showLoader = false;
+                    this.notificationApprove= true;
+                    this.assistances.approved_status_user=2;
                 });
 
         },
@@ -698,6 +719,8 @@ export default {
                 })
                 .then(() => {
                     this.showLoader = false;
+                    this.notificationFinish = true;
+                    this.assistances.approved_status_user=3;
                 });
         },
         rechazar: function() {
@@ -709,7 +732,8 @@ export default {
                 })
                 .then(() => {
                     this.showLoader = false;
-                    this.assistances = response.data.RESPONSE;
+                    this.notificationRejected = true,
+                    this.assistances.approved_status_user=4;
                 });
         },
         donwload: function (codigoAsssit,typeFile) {
