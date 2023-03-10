@@ -29,6 +29,11 @@
         "write": [],
         "delete": []
     },
+    "show_provider": {
+        "read": [52],
+        "write": [52],
+        "delete": [52]
+    },
     "RP002A": {
         "read": [],
         "write": [],
