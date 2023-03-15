@@ -157,7 +157,7 @@ import Providers from "../Provider/ListProviders.vue";
 import ListNote from "../Note/ListNote.vue";
 import TimeLine from "../timeline/TimeLine.vue";
 import AssistDetail from "./AssistDetail.vue";
-import addInvoice from "../invoice/addInvoice.vue";
+import addInvoice from "./addInvoiceProvider.vue";
 export default {
     components: { Providers, ListBill, AssistDetail, ListNote, TimeLine, ListFiles,ListReimbursement, addInvoice},
     props: ["assist"],

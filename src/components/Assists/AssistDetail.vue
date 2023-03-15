@@ -33,12 +33,7 @@ iframe{
                 :id="'m_accordion_'+idAssist"
                 role="tablist"
             >
-
-                  <!-- Button trigger modal-->
-                <button style="float: right; position: absolute;" v-if="assistances.approved_status_user==1 && permission.show_provider" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                    {{$t('assistance.rejectCase')}}
-                </button>
-                <!-- Modal-->
+        
                 <div class="modal fade" id="exampleModalLong" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -58,11 +53,20 @@ iframe{
                             </div>
                         </div>
                     </div>
-                </div>                      
+                </div> 
 
-            <button v-if="assistances.approved_status_user==2 && permission.show_provider" class="btn btn-info" style="float: right; position: relative; top: -50px" @click="finalizar">{{$t('assistance.Finish')}}</button>
-            <button v-if="assistances.approved_status_user==1 && permission.show_provider" class="btn btn-info" style="float: right; position: relative; top: -50px" @click="aprobar">{{$t('assistance.AcceptCase')}}</button><br><br>
 
+                <div style="float: right; position: relative; top: -50px;height: 10px; ">
+                  
+                        <button v-if="assistances.approved_status_user==2 && permission.show_provider" class="btn btn-info" style="margin-bottom: 4px;" @click="finalizar">{{$t('assistance.Finish')}}</button>
+                        <button v-if="assistances.approved_status_user==1 && permission.show_provider" class="btn btn-info" style="margin-bottom: 4px;"  @click="aprobar">{{$t('assistance.AcceptCase')}}</button>
+            
+                    <br>
+                        <button style="float: right; position: absolute;" v-if="assistances.approved_status_user==1 && permission.show_provider" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                        {{$t('assistance.rejectCase')}}
+                        </button>
+                </div><br><br>
+                
                 <div class="alert alert-success alert-dismissible fade show" v-if="notificationApprove" role="alert"  name="notificationApprove" id="notificationApprove"  ref="notificationApprove">
                     <strong>{{$t('assistance.caseAccepted')}}.</strong>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
