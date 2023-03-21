@@ -602,11 +602,15 @@ iframe{
                 <AssistAccordion :id="'_triage_'+idAssist" ico="fa flaticon-list" v-if="permission.hidden_tab_voucher">
                     <template slot="title">
                         {{$t('assistance.triage')|upper}}
-                        <span class="text-danger" v-if="assistances.triage!='F'">({{$t('general.notApplicable')}})</span>
+                        <span class="text-danger" v-if="assistances.triage!='F'">({{$t('general.notApplicable')}})</span>          
+                    </template>
+                    <template slot="title-left" v-if="assistances.triage=='F'">
+                        <a href="#" @click="donwload(assistances.codeAssist,'TRIAGE')">
+                            <i class="fa fa-lg fa-cloud-download-alt"></i>
+                        </a>
                         
                     </template>
                     <template slot="body" v-if="assistances.triage=='F'">
-                        <input type="button" value="TRIAGE download" class="btn btn-info" @click="donwload(assistances.codeAssist,'TRIAGE')" style="float: left; left:85%; position: relative;">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/TRIAGE/'+assistances.codeAssist"
                         ></iframe>
@@ -617,8 +621,14 @@ iframe{
                         {{$t('assistance.facial_scan')|upper}}
                         <span class="text-danger" v-if="assistances.facialScan!='F'">({{$t('general.notApplicable')}})</span>
                     </template>
+                    <template slot="title-left" v-if="assistances.facialScan=='F'">
+                        
+                        <a href="#"  @click="donwload(assistances.codeAssist,'FACIALSCAN')">
+                            <i class="fa fa-lg fa-cloud-download-alt"></i>
+                        </a>
+                       
+                    </template>
                     <template slot="body" v-if="assistances.facialScan=='F'">
-                        <input type="button" value="FACIAL SCAN download" class="btn btn-info" @click="donwload(assistances.codeAssist,'FACIALSCAN')" style="float: left; left:85%; position: relative;">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/FACIALSCAN/'+assistances.codeAssist"
                         ></iframe>
@@ -626,8 +636,13 @@ iframe{
                 </AssistAccordion>
                 <AssistAccordion :id="'_gop_'+idAssist" ico="fa flaticon-interface-5" v-if="permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.GOP')|upper}}</template>
+                    <template slot="title-left">
+                        <a href="#" @click="donwload(assistances.codeAssist,'VOB')">
+                            <i class="fa fa-lg fa-cloud-download-alt"></i>
+                        </a>
+                      
+                    </template>
                     <template slot="body">
-                        <input type="button" value="VOB download" class="btn btn-info" @click="donwload(assistances.codeAssist,'VOB')" style="float: left; left:85%; position: relative;">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/VOB/'+assistances.codeAssist"
                         ></iframe>
@@ -635,8 +650,13 @@ iframe{
                 </AssistAccordion>
                 <AssistAccordion :id="'_credit_auth_'+idAssist" ico="fa flaticon-lock" v-if="permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.authorization')|upper}}</template>
+                    <template slot="title-left">
+                        <a href="#" @click="donwload(assistances.codeAssist,'AUTORIZATION')">
+                            <i class="fa fa-lg fa-cloud-download-alt"></i>
+                        </a>
+                     
+                    </template>
                     <template slot="body">   
-                        <input type="button" value="AUTORIZATION download" class="btn btn-info" @click="donwload(assistances.codeAssist,'AUTORIZATION')" style="float: left; left:85%; position: relative;">
                         <iframe class="preview" name="printf" id="printf"
                                 :src="baseUrlApi()+'provider-files/AUTORIZATION/'+assistances.codeAssist"
                         ></iframe>
@@ -645,8 +665,13 @@ iframe{
                 </AssistAccordion>
                 <AssistAccordion :id="'_credit_auth_cc_'+idAssist" ico="fa fa-credit-card" v-if="permission.hidden_tab_voucher && assistances.paymentCC=='Y'">
                     <template slot="title">{{$t('assistance.creditAuthorization')|upper}}</template>
+                    <template slot="title-left">
+                        <a href="#" @click="donwload(assistances.codeAssist,'CCAUTORIZATION')">
+                            <i class="fa fa-lg fa-cloud-download-alt"></i>
+                        </a>
+                    
+                    </template>
                     <template slot="body"> 
-                        <input type="button" value="credit Authorization download" class="btn btn-info" @click="donwload(assistances.codeAssist,'CCAUTORIZATION')" style="float: left; left:85%; position: relative;">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/CCAUTORIZATION/'+assistances.codeAssist"
                         ></iframe>
