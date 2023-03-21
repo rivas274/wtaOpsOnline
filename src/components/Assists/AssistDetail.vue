@@ -318,7 +318,7 @@ iframe{
                                     <span class="m-widget16__date">{{$t('general.firstName')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
-                                        v-html="assistances.contact.fisrtName"
+                                        v-html="assistances.contact.firstName"
                                     ></span>
                                 </div>
                                 <div class="m-widget16__item">
@@ -484,7 +484,6 @@ iframe{
                         <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('general.country')|upper}}</template>
                             <template slot="body">
-                                <input type="button" value="imprimirs" class="btn btn-info" >
                                 <div
                                     class="m-widget16__item"
                                     v-if="assistances.location.country.iso"
