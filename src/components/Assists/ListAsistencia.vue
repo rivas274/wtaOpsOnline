@@ -385,6 +385,9 @@ export default {
                 });
         },
         getClients: function() {
+            if(this.permission.show_provider){
+                return 0;
+            }
             this.axios
                 .post("getClient", {
                     prefix: this.$session.get("prefix")
