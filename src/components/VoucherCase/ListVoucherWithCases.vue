@@ -91,7 +91,7 @@
                 <td>
                     {{assist.codigo}}
                 </td>
-                <td v-html="assist.fisrtName+' '+assist.lastName">
+                <td v-html="assist.firstName+' '+assist.lastName">
                 </td>
                 <td>
                     {{assist.origin}}

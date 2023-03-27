@@ -85,7 +85,7 @@
                                     <div class="m-widget16__item">
                                         <span class="m-widget16__date">{{ $t('assistance.patientName') }}</span>
                                         <span class="m-widget16__price m--align-right">
-                                            {{ rePricingDetaill.rePricing.contact.fisrtName }}
+                                            {{ rePricingDetaill.rePricing.contact.firstName }}
                                             {{ rePricingDetaill.rePricing.contact.lastName }}
                                         </span>
                                     </div>
@@ -684,7 +684,7 @@ export default {
                     this.inputsData.saving_amount = this.rePricingDetaill.rePricing.amounts.saving_amount || "";
                     this.inputsData.adjusted_amount = this.rePricingDetaill.rePricing.amounts.adjusted_amount || "";
                     this.inputsData.fee_amount = this.rePricingDetaill.rePricing.amounts.fee_amount || "";
-                    this.inputsData.patient = this.rePricingDetaill.rePricing.contact.fisrtName+" "+this.rePricingDetaill.rePricing.contact.lastName || "";
+                    this.inputsData.patient = this.rePricingDetaill.rePricing.contact.firstName+" "+this.rePricingDetaill.rePricing.contact.lastName || "";
                     this.inputsData.birth_date = this.rePricingDetaill.rePricing.contact.birthDate || "";
                     this.inputsData.case_number = this.rePricingDetaill.rePricing.assist.code || "";
                     this.feeID = this.rePricingDetaill.rePricing.files.invoice_fee;

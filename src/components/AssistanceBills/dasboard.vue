@@ -92,7 +92,7 @@
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
-                                                                >{{results.fisrtName+' '+results.lastName}}</span>
+                                                                >{{results.firstName+' '+results.lastName}}</span>
                                                             </a>
                                                         </li>
                                                         <li
@@ -498,7 +498,7 @@ export default {
                     this.results = response.data.RESPONSE.RESULTS[0];
                     this.inputsData.date = this.results.registeredDate.date;
                     this.inputsData.nameBen =
-                        this.results.fisrtName + " " + this.results.lastName;
+                        this.results.firstName + " " + this.results.lastName;
                     this.assistanceID = this.results.idAssist;
                 });
         },

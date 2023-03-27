@@ -27,7 +27,7 @@
                             <Flag :iso="assist.isoCountry" height="18"></Flag>
                             <strong>{{ assist.codeAssist }}</strong>
                             <small
-                                v-html="assist.fisrtName+' '+assist.lastName"
+                                v-html="assist.firstName+' '+assist.lastName"
                                 class="m--hidden-mobile"
                             ></small>
                             <small>{{ assist.codigo }}</small>

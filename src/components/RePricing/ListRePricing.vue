@@ -136,7 +136,7 @@
                     <span>{{ rePricing[0].assist.codigo }}</span>
                 </td>
                 <td>
-                    <span v-html="rePricing[0].passenger.fisrtName+' '+rePricing[0].passenger.lastName"></span>
+                    <span v-html="rePricing[0].passenger.firstName+' '+rePricing[0].passenger.lastName"></span>
                 </td>
                 <td>
                     <span>{{ rePricing[0].repricingDate }}</span>

@@ -92,7 +92,7 @@
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
-                                                                >{{results.fisrtName+' '+results.lastName}}</span>
+                                                                >{{results.firstName+' '+results.lastName}}</span>
                                                             </a>
                                                         </li>
                                                         <li
@@ -240,7 +240,7 @@ export default {
         defaultData: function () {
             return {
                 date: this.results.registeredDate.date,
-                nameBen: this.results.fisrtName + " " + this.results.lastName,
+                nameBen: this.results.firstName + " " + this.results.lastName,
                 caseType: this.results.descCaseType,
                 assistanceType: this.results.descAssistanceType
             };

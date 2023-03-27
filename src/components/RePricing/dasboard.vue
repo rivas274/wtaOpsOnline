@@ -22,7 +22,7 @@
                         >
                             <strong>{{ rePri.assist.codigo }}</strong>
                             <small
-                                v-html="rePri.passenger.fisrtName+' '+rePri.passenger.lastName"
+                                v-html="rePri.passenger.firstName+' '+rePri.passenger.lastName"
                                 class="m--hidden-mobile"
                             ></small>
                             <small>{{ rePri.voucher.codigo }}</small>
