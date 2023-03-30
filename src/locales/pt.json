@@ -1,7 +1,7 @@
 {
     "reimbursement": {
         "reimbursement": "Reembolso",
-        "information": "Informações de reembolso",
+        "information": "Informações de Reembolso",
         "payee": "Beneficiário do reembolso (nome)",
         "reference": "Reembolso de referência",
         "date": {

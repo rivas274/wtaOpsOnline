@@ -21,7 +21,6 @@
     </div>
 </template>
 <script>
-import { setTimeout } from "timers";
 export default {
     props: ["name", "groups", "selected","v-validate","watermark"],
     data: function() {
@@ -50,7 +49,7 @@ export default {
                 .trigger("change");
         },
         groups: function() {
-            setTimeout(
+            window.setTimeout(
                 function() {
                     window.$(this.$el)
                         .find(".m_selectpicker")

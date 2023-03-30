@@ -175,18 +175,14 @@
 </template>
 <script>
 import FormError from "../FormError";
-import customImg from "../Element/custom-img";
 import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import currency from "../Labels/currency.json";
-import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 export default {
     components: {
         FormError,
-        customImg,
         selectFromTable,
         dateSingleBt,
-        localeChanger
     },
     props: ["id-assist"],
     data() {

@@ -263,6 +263,7 @@ export default {
                 limit: 15,
                 size: 0
             },
+            arrAssistStatus:[],
             statusAssist:[],
             clients: [],
             billsOption: [

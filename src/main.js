@@ -102,6 +102,9 @@ router.beforeEach((to, from, next) => {
 
 Vue.config.productionTip = false;
 Vue.prototype.$env = process.env;
+Vue.filter('t', function (value) {
+    return i18n.t(value)
+})
 new Vue({
     mounted: function () {
         setInterval(() => {

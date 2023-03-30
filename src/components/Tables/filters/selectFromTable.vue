@@ -19,7 +19,6 @@
     </div>
 </template>
 <script>
-import { setTimeout } from "timers";
 export default {
     props: ["name", "options", "selected","v-validate","watermark"],
     data: function() {
@@ -52,7 +51,7 @@ export default {
         },
         options: {
             handler() {
-                setTimeout(
+                window.setTimeout(
                     function() {
                         window.$(this.$el)
                             .find(".m_selectpicker")
