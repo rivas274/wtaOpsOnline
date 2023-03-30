@@ -17,16 +17,6 @@
         >
             <vue-particles
                 color="#7b9dd6"
-                :particleOpacity="1"
-                :particlesNumber="80"
-                shapeType="circle"
-                :particleSize="5"
-                linesColor="#7b9dd6"
-                :linesWidth="2"
-                :lineLinked="true"
-                :lineOpacity="0.4"
-                :linesDistance="170"
-                :moveSpeed="2"
             ></vue-particles>
             <div class="absolute">
                 <div class="m-grid__item m-grid__item--fluid m-login__wrapper">
