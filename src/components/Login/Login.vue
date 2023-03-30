@@ -1,12 +1,11 @@
 <style scoped>
-#particles-js,
 .absolute {
     position: absolute !important;
     width: 100%;
     height: 100%;
 }
 .m-page {
-    background-color: #ffffff !important;
+    background-color: #FFFFFF !important;
 }
 </style>
 <template>
@@ -15,9 +14,7 @@
             class="m-grid__item m-grid__item--fluid m-grid m-grid--hor m-login m-login--signin m-login--2 m-login-2--skin-2"
             id="m_login"
         >
-            <vue-particles
-                color="#7b9dd6"
-            ></vue-particles>
+            <bubbles-effect></bubbles-effect>
             <div class="absolute">
                 <div class="m-grid__item m-grid__item--fluid m-login__wrapper">
                     <div class="m-login__container">
@@ -91,17 +88,16 @@
 </template>
 <script>
 import Vue from "vue";
-import VueParticles from "vue-particles";
 import customImg from "../Element/custom-img";
 import FormError from "../FormError";
-
-Vue.use(VueParticles);
+import vueCanvas from 'vue-canvas-effect';
+Vue.use(vueCanvas)
 
 export default {
     name: "Login",
     components: {
         FormError,
-        customImg
+        customImg,
     },
     mounted() {},
     data: function() {
