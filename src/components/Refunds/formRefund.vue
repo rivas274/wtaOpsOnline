@@ -135,7 +135,7 @@
                             </a>
                         </div>
                         <div
-                            v-if="inputsData.docType=='26'"
+                            v-if="[26,65].includes(parseInt(inputsData.docType))"
                         >
                             <div
                                 class="form-group m-form__group"
