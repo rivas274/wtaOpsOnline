@@ -246,7 +246,8 @@
         "important":"¡Importante!",
         "back":"Atrás",
         "continue":"Continuar",
-        "return":"Volver"
+        "return":"Volver",
+        "refresh":"Actualizar"
     },
     "provider":{
         "provider":"Proveedor",

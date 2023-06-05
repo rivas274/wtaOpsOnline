@@ -2,7 +2,7 @@
     <content-m :navigation="[{title:$t('menu.voucherCase')}]">
         <template slot="title">{{$t('menu.voucherCase')}}</template>
         <template slot="body">
-            <ul class="nav nav-tabs m-tabs-line m-tabs-line--success m-tabs-line--2x">
+            <ul class="nav nav-tabs m-tabs-line m-tabs-line--success m-tabs-line--2x mb-2">
                 <li class="nav-item m-tabs__item">
                     <a
                         class="nav-link m-tabs__link"
