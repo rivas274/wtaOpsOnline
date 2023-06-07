@@ -109,14 +109,14 @@
                                 :errors_form="errors"
                             ></form-error>
                         </div>
-                        <div class="form-group m-form__group pt-2 pb-0" v-if="extraDescription">
+                        <div class="form-group m-form__group pt-2 pb-0" v-if="docTypeSelected && docTypeSelected.description">
                             <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-info alert-dismissible fade show m-0" role="alert">
                                 <div class="m-alert__icon py-3 px-3">
                                     <i class="fa fa-2x fa-info-circle"></i>
                                     <span></span>
                                 </div>
                                 <div class="m-alert__text py-3">
-                                    {{ extraDescription }}
+                                    {{ docTypeSelected.description }}
                                 </div>
                             </div>
                         </div>
@@ -134,7 +134,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div v-if="showRefund">
+                        <div v-if="docTypeSelected && docTypeSelected.refund == 'Y'">
                             <div
                                 class="form-group m-form__group"
                                 :class="{'has-danger': errors.has('date')}"
@@ -646,24 +646,14 @@ export default {
             }
             return false;
         },
-        extraDescription: function () {
-            let docTypeSelected = this.documentsType.filter((v) => {
-                return v.id == this.inputsData.docType && this.inputsData.docTypeGroup == v['group'];
-            });
-            if (docTypeSelected.length == 0) {
-                return false;
-            }
-            return docTypeSelected[0].description;
-        },
-        showRefund: function () {
+        docTypeSelected: function () {
             let docTypeSelected = this.documentsType.filter((v) => {
                 return v.id == this.inputsData.docType;
             });
-            
             if (docTypeSelected.length == 0) {
                 return false;
             }
-            return docTypeSelected[0].refund=='Y';
+            return docTypeSelected[0];
         },
         documentsTypeGroup: function () {
             let self = this,
