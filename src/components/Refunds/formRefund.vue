@@ -134,9 +134,7 @@
                                 </div>
                             </a>
                         </div>
-                        <div
-                            v-if="[26,65].includes(parseInt(inputsData.docType))"
-                        >
+                        <div v-if="showRefund">
                             <div
                                 class="form-group m-form__group"
                                 :class="{'has-danger': errors.has('date')}"
@@ -656,6 +654,16 @@ export default {
                 return false;
             }
             return docTypeSelected[0].description;
+        },
+        showRefund: function () {
+            let docTypeSelected = this.documentsType.filter((v) => {
+                return v.id == this.inputsData.docType;
+            });
+            
+            if (docTypeSelected.length == 0) {
+                return false;
+            }
+            return docTypeSelected[0].refund=='Y';
         },
         documentsTypeGroup: function () {
             let self = this,
