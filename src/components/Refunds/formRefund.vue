@@ -120,8 +120,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group m-form__group pt-2 pb-0" v-if="extraInfo">
-                            <a :href="extraInfo.file" download target="_blank">
+                        <div class="form-group m-form__group pt-2 pb-0" v-if="extraCausal">
+                            <a :href="extraCausal.file" download target="_blank">
                                 <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
                                     <div class="m-alert__icon py-3 px-3">
                                         <i class="fa fa-2x fa-cloud-download-alt"></i>
@@ -129,7 +129,21 @@
                                     </div>
                                     <div class="m-alert__text py-3">
                                         <strong>{{ $t('general.important') }}</strong>
-                                        {{ extraInfo.description }}
+                                        {{ extraCausal.description }}
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="form-group m-form__group pt-2 pb-0" v-if="extraInsurance">
+                            <a :href="extraInsurance.file" download target="_blank">
+                                <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
+                                    <div class="m-alert__icon py-3 px-3">
+                                        <i class="fa fa-2x fa-cloud-download-alt"></i>
+                                        <span></span>
+                                    </div>
+                                    <div class="m-alert__text py-3">
+                                        <strong>{{ $t('general.important') }}</strong>
+                                        {{ extraInsurance.description }}
                                     </div>
                                 </div>
                             </a>
@@ -630,7 +644,7 @@ export default {
                 return m;
             }, []);
         },
-        extraInfo: function () {
+        extraInsurance: function () {
             let docTypeSelected = this.documentsType.filter((v) => {
                 return v.id == this.inputsData.docType && this.inputsData.docTypeGroup == v['group'];
             });
@@ -641,6 +655,22 @@ export default {
                 return {
                     description: docTypeSelected[0].insurance['description'][this.$root.$i18n.locale],
                     file: docTypeSelected[0].insurance.file,
+                    name: docTypeSelected[0].name
+                }
+            }
+            return false;
+        },
+        extraCausal: function () {
+            let docTypeSelected = this.documentsType.filter((v) => {
+                return v.id == this.inputsData.docType;
+            });
+            if (docTypeSelected.length == 0) {
+                return false;
+            }
+            if ('causal' in docTypeSelected[0]) {
+                return {
+                    description: docTypeSelected[0].causal['description'][this.$root.$i18n.locale],
+                    file: docTypeSelected[0].causal.file,
                     name: docTypeSelected[0].name
                 }
             }
