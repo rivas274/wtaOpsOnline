@@ -167,7 +167,11 @@
                                                     </div>
                                                     <div class="m-portlet__foot text-center">
                                                         <div class="m-form__actions">
-                                                            <button @click="showStatus = false" class="btn btn-primary"
+                                                            <a  class="btn btn-primary" 
+                                                                v-if="results.refundAdm.status.code=='C'"
+                                                                :href="results.refundAdm.payment_proof"
+                                                                target="_blank" >{{ $t('reimbursement.paymentProof') }}</a>
+                                                            <button @click="showStatus = false" v-else class="btn btn-primary"
                                                             >{{ $t('general.return') }}</button>
                                                         </div>
                                                     </div>

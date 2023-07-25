@@ -76,7 +76,8 @@
         },
         "clientNotProcessRefunds":"Client do not process reimbursement",
         "caseNumber": "Reimbursement case number",
-        "statusOfYour": "Status of your Reimbursement"
+        "statusOfYour": "Status of your Reimbursement",
+        "paymentProof": "Proof of payment"
     },
     "company": {
         "company": "Company"

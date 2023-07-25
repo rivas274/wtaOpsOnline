@@ -9,7 +9,8 @@
         },
         "clientNotProcessRefunds":"O cliente não processa o reembolso",
         "caseNumber": "Número do caso de reembolso",
-        "statusOfYour": "Estado do seu reembolso"
+        "statusOfYour": "Estado do seu reembolso",
+        "paymentProof": "Comprovante de pagamento"
     },
     "document": {
         "category": "Categoria",

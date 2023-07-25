@@ -76,7 +76,8 @@
         },
         "clientNotProcessRefunds": "El cliente no procesa reembolso",
         "caseNumber": "Numero de caso de reembolso",
-        "statusOfYour": "Estatus de su reembolso"
+        "statusOfYour": "Estatus de su reembolso",
+        "paymentProof": "Comprobante de pago"
     },
     "company": {
         "company": "Compañia"
