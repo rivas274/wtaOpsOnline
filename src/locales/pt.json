@@ -10,7 +10,9 @@
         "clientNotProcessRefunds":"O cliente não processa o reembolso",
         "caseNumber": "Número do caso de reembolso",
         "statusOfYour": "Estado do seu reembolso",
-        "paymentProof": "Comprovante de pagamento"
+        "paymentProof": "Comprovante de pagamento",
+        "methodPayment": "Método de pagamento",
+        "paymentInformationUploaded": "Informações de pagamento enviadas"
     },
     "document": {
         "category": "Categoria",

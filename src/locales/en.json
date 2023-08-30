@@ -77,7 +77,9 @@
         "clientNotProcessRefunds":"Client do not process reimbursement",
         "caseNumber": "Reimbursement case number",
         "statusOfYour": "Status of your Reimbursement",
-        "paymentProof": "Proof of payment"
+        "paymentProof": "Proof of payment",
+        "methodPayment": "Method of payment",
+        "paymentInformationUploaded": "Payment information uploaded"
     },
     "company": {
         "company": "Company"
@@ -195,7 +197,7 @@
         "passport": "Passport",
         "gender": "Gender",
         "dateOfBirth": "Date Of Birth",
-        "dowload": "Dowload",
+        "dowload": "Download",
         "age": "Age",
         "zipCode": "Zip Code",
         "additionalInformation": "Additional Information",
@@ -219,7 +221,7 @@
         "password": "Password",
         "user": "User",
         "logout":"Logout",
-        "acount":"Acount",
+        "account":"Account",
         "client": "Client",
         "send": "Send",
         "sent": "sent",
@@ -235,7 +237,7 @@
         "genre":{
             "male": "Male",
             "female": "Female",
-            "indefined": "Indefined"
+            "indefined": "Undefined"
         },
         "copyrightLogin":"All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © {year} Ils. All rights reserved. Powered by ilstechnik.com",
         "records": "records",
@@ -248,14 +250,15 @@
         "back":"Back",
         "continue":"Continue",
         "return":"Return",
-        "refresh":"Refresh"
+        "refresh":"Refresh",
+        "informationSentCorrectly":"Information sent correctly"
     },
     "provider":{
         "provider":"Provider",
         "paymentType":"Payment Type",
         "priority":"Priority",
         "publicNote":"Public Note",
-        "asign":"Asign",
+        "asign":"Assign",
         "bookingText":"Booking Text",
         "reserveAmount":"Reserve Amount",
         "authorization":"Authorization",

@@ -15,4 +15,13 @@ VeeValidate.Validator.extend('recaptcha', {
         return value.toString().split('').length > 0;
     }
 });
+VeeValidate.Validator.extend('alpha_numeric_space', {
+    getMessage: field => {
+        return `The ${field} may only contain alphabetic characters, numbers and spaces`;
+    },
+    validate: value => {
+        var strongRegex = new RegExp("^[a-zA-Z0-9ÑÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖßÙÚÛÜÝñàáâãäåçèéêëìíîïðòóôõöùúûüýÿ\s]+$");
+        return strongRegex.test(value);
+    }
+});
 export default VeeValidate;

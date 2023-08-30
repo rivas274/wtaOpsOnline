@@ -163,6 +163,10 @@
                                                             <h2>
                                                                 {{ results.refundAdm.status.description.title }} <br>
                                                             </h2>
+                                                            <h2 v-if="'method_payment' in results.refundAdm">
+                                                                <br>
+                                                                {{ $t('reimbursement.paymentInformationUploaded') }} <br>
+                                                            </h2>
                                                         </div>
                                                     </div>
                                                     <div class="m-portlet__foot text-center">
@@ -185,6 +189,11 @@
                                                         v-on:complete-documents="getAssistance"
                                                         :default-data="defaultData">
                                             </form-refund>
+                                            <payment-method v-if="formShow=='paymentMethod'"
+                                                        class="m-portlet m-portlet--tab"
+                                                        :id-assist="results.idAssist"
+                                                        :status.sync="results.refundAdm.method_payment.status.code">
+                                            </payment-method>
                                         </div>
                                         <div v-else>
                                             <div class="m-portlet m-portlet--tab text-center portlet-no-client">
@@ -208,12 +217,14 @@ import customImg from "../Element/custom-img";
 import localeChanger from "../locales/locale-changer.vue";
 import formRefund from "./formRefund.vue";
 import declarationOfUse from "./declarationOfUse.vue";
+import paymentMethod from "./paymentMethod.vue";
 export default {
     components: {
         customImg,
         localeChanger,
         formRefund,
-        declarationOfUse
+        declarationOfUse,
+        paymentMethod
     },
     data() {
         return {
@@ -252,7 +263,10 @@ export default {
             };
         },
         formShow: function () {
-            if (this.results.refundAdm.declarationOfUse=='N') {
+            if ('method_payment' in this.results.refundAdm && this.results.refundAdm.method_payment.status.code == 'P') {
+                return 'paymentMethod';
+            }
+            if (this.results.refundAdm.declarationOfUse == 'N') {
                 return 'declarationOfUse';
             }
             if (this.results.refundAdm.status.show && this.showStatus) {

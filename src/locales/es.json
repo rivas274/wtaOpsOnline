@@ -77,10 +77,12 @@
         "clientNotProcessRefunds": "El cliente no procesa reembolso",
         "caseNumber": "Numero de caso de reembolso",
         "statusOfYour": "Estatus de su reembolso",
-        "paymentProof": "Comprobante de pago"
+        "paymentProof": "Comprobante de pago",
+        "methodPayment": "Método de pago",
+        "paymentInformationUploaded":"Información de pago cargada"
     },
     "company": {
-        "company": "Compañia"
+        "company": "Compañía"
     },
     "document": {
         "category": "Categoría",
@@ -120,7 +122,7 @@
         "type": "Tipo de Caso",
         "typeAssistance": "Tipo de Asistencia",
         "patientName": "Nombre del Paciente",
-        "patientInformation": "Informacion del Paciente",
+        "patientInformation": "Información del Paciente",
         "requestSent": "Solicitud Enviada",
         "openRequest": "Solicitud Abierta",
         "applicationProcess": "Solicitud En Proceso",
@@ -166,7 +168,7 @@
         "benefit":"Beneficios",
         "medicalComments":"Comentarios médicos",
         "emergencyContact":"Contacto de emergencia",
-        "searchMultipleCommas":"Puede buscar varios voucher separandolos con comas (,) como comodin para separar los registros"
+        "searchMultipleCommas":"Puede buscar varios voucher separándoles con comas (,) como comodin para separar los registros"
     },
     "general": {
         "total":"Total",
@@ -219,7 +221,7 @@
         "password": "Clave",
         "user": "Usuario",
         "logout": "Cierre de sesión",
-        "acount": "Cuenta",
+        "account": "Cuenta",
         "client": "Cliente",
         "send": "Enviar",
         "sent": "Enviado",
@@ -229,7 +231,7 @@
         "pressEnterSelect": "Pulse Enter para seleccionar",
         "deselectLabel": "Pulse Enter para remover",
         "selected": "Seleccionado",
-        "selectCode": "Seleccione un codigo",
+        "selectCode": "Seleccione un código",
         "sentRepricing": "Enviado a Repricing",
         "withoutResults": "Sin Resultados",
         "genre":{
@@ -248,7 +250,8 @@
         "back":"Atrás",
         "continue":"Continuar",
         "return":"Volver",
-        "refresh":"Actualizar"
+        "refresh":"Actualizar",
+        "informationSentCorrectly":"Información Enviada Correctamente"
     },
     "provider":{
         "provider":"Proveedor",
@@ -262,7 +265,7 @@
         "taxId":"Número de Identificación Tributaria"
     },
     "assistanceBills": {
-        "information": "Informacion de la Factura",
+        "information": "Información de la Factura",
         "providerName": "Nombre del Proveedor",
         "reference": "Referencia",
         "exchangeRate": "Tasa de cambio",

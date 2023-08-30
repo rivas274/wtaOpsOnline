@@ -56,7 +56,7 @@
                                     :to="{ path: '/MyAcount'}"
                                     replace
                                     class="btn m-btn--pill btn-outline-success m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
-                                >{{$t('general.acount')}}</router-link>
+                                >{{$t('general.account')}}</router-link>
                             </li>
                         </ul>
                     </div>

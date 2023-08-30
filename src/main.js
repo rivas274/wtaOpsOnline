@@ -51,7 +51,7 @@ customAxios.interceptors.request.use(function (config) {
         config.headers.common['lang'] = i18n._vm.$root.$root.locale;
     }
     
-    if (config.baseURL.indexOf(['dev'])>-1) {
+    if (config.baseURL.indexOf(['net'])>-1) {
         config.headers.common['DEBUG'] = true;
     }
     if ((Vue._session.get('TOKEN') || '').length == 16 && (config.headers.common['TOKEN'] || '').length == 0) {
