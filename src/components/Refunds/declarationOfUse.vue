@@ -15,24 +15,43 @@
                 </div>
             </div>
         </div>
-        <div v-if="show == 'instruction'">
-            <div class="m-portlet__body pb-3">
-                <div class="row">
-                    <div class="col-md-12 declaration-of-use text-justify" v-html="instructionOfUse.description"></div>
+        <form @submit.prevent="saveEmail" v-if="show == 'instruction'">
+            <div>
+                <div class="m-portlet__body pb-3">
+                    <div class="row">
+                        <div class="col-md-12 declaration-of-use text-justify" v-html="instructionOfUse.description"></div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <div class="form-group m-form__group m-0" :class="{'has-danger': errors.has('email')}">
+                            <input-from-table
+                                class="m-form__group-sub"
+                                :watermark="$t('general.email')"
+                                v-validate="'required|min:4|email'"
+                                :data-vv-as="$t('general.email')"
+                                icon="flaticon-lifebuoy"
+                                name="email"
+                                v-on:input="setData"
+                                :value="email"
+                            ></input-from-table>
+                            <form-error
+                                :attribute_name="'email'"
+                                :errors_form="errors"
+                            ></form-error>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__foot text-center">
+                    <div class="m-form__actions">
+                        <button
+                                :disabled="disableForm"
+                                :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
+                                type="submit"
+                                class="btn btn-primary"
+                        >{{ $t('general.continue') }}</button>
+                    </div>
                 </div>
             </div>
-            <div class="m-portlet__foot text-center">
-                <div class="m-form__actions">
-                    <button
-                            :disabled="disableForm"
-                            :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
-                            type="submit"
-                            class="btn btn-primary"
-                            @click="$emit('update:accepted','Y')"
-                    >{{ $t('general.continue') }}</button>
-                </div>
-            </div>
-        </div>
+        </form>
         <form @submit.prevent="saveDeclaration" v-else-if="'description' in declarationOfUse">
             <div class="m-portlet__body pb-3">
                 <div class="row">
@@ -85,6 +104,7 @@ export default {
             instruction: {},
             disableForm: false,
             nameBenefit: '',
+            email:'',
             show:'declaration'
         };
     },
@@ -127,7 +147,35 @@ export default {
                                         }
                                     }
                                 }
-                                this.uploadPercentage = 0;
+                            });
+                    }
+                });
+            }
+        },
+        saveEmail: function () {
+            if (!this.disableForm) {
+                this.$validator.validateAll().then(result => {
+                    if (result) {
+                        this.disableForm = true;
+                        this.axios
+                            .post("saveEmailAssist", {
+                                idAssist:this.idAssist,
+                                email:this.email
+                            })
+                            .then(response => {
+                                this.disableForm = false;
+                                if (response.data.STATUS == "OK") {
+                                    this.$emit('update:accepted','Y')
+                                } else {
+                                    if (response.data.ERRORS) {
+                                        for (var prop in response.data.ERRORS) {
+                                            this.errors.add({
+                                                field: prop,
+                                                msg: response.data.ERRORS[prop]
+                                            });
+                                        }
+                                    }
+                                }
                             });
                     }
                 });
