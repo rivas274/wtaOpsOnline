@@ -5,6 +5,7 @@
         <locale-changer class="pull-right" :active-langs="['es','en']"></locale-changer>
         <div class="m-stack__item m-topbar__nav-wrapper">
             <ul class="m-topbar__nav m-nav m-nav--inline">
+                <notification v-if="middleware('notes_provider', 'read')"  ref="notificationComponent" class="notification"></notification>
                 <info-user></info-user>
             </ul>
             
@@ -15,12 +16,55 @@
 <script>
 import localeChanger from "../locales/locale-changer.vue";
 import InfoUser from "./InfoUser.vue";
+import Notification from "./notification.vue";
 export default {
-    components: { InfoUser, localeChanger}
+    components: { InfoUser, localeChanger, Notification},
+    methods: {
+        
+        agregarNotificacionDePrueba2() {
+          
+            this.axios
+                .post("getNotification", {
+                    idProvider: this.$session.get("provider").id
+                })
+                .then(response => {
+                    this.$refs.notificationComponent.clearNotifications();
+                    let data = response.data.RESPONSE.RESULTS;
+                    data.forEach(value => {
+                        const message = value.codigo_asistencia;
+                        const isRead = value.read;
+                        const time = value.created;
+                        console.log('mensaje', message)
+                        this.$refs.notificationComponent.addNotification(message, isRead, time,value.cant_sms  ,value);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error al obtener las notificaciones:", error);
+                });
+          //  const mensajePrueba = "mensaje2";
+           // const time = "20:20";
+          //  this.$refs.notificationComponent.addNotification(mensajePrueba,true, time);
+        },
+        
+    },
+    mounted() {
+        this.agregarNotificacionDePrueba2();
+         setInterval(
+             ()=> {
+                 this.agregarNotificacionDePrueba2();
+             },
+             1000*60*0.25
+         );
+    
+    },  
 };
 </script>
 <style>
 .m-topbar .locale-changer{
+    margin-top: 20px;
+}
+.notification{
+    height: 50% !important;
     margin-top: 20px;
 }
 </style>

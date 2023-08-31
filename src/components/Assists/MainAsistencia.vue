@@ -57,6 +57,8 @@ import contentM from "../Content.vue";
 import ListAsistencia from "./ListAsistencia.vue";
 import Assist from "./Assist.vue";
 import Flag from "../Element/Flag.vue";
+import { mapMutations } from "vuex"; // Importar las utilidades de Vuex
+import store from '@/store/store'; 
 export default {
     components: {
         contentM,
@@ -76,7 +78,8 @@ export default {
         }
     },
     methods: {
-        addAssist: function(assist) {
+        ...mapMutations(["addAssist", "removeAssist", "updateTabShow"]),
+        /*addAssist: function(assist) {
             let tab = this.assistances.filter(function(v) {
                 return v.codeAssist == assist.codeAssist;
             });
@@ -94,7 +97,7 @@ export default {
             this.assistances = this.assistances.filter(function(v) {
                 return v.codeAssist != codeAssist;
             });
-        },
+        },*/
         showTab(tab) {
             this.tabShow = tab;
         }

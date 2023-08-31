@@ -12,7 +12,7 @@ import globalDirectives from './custom/vue-global-directives';
 import VeeValidate from 'vee-validate';
 import i18n from "./custom/i18n";
 import './custom/vue-vee-custom';
-
+import store from './store/store';
 Vue.use(VueRouter);
 Vue.use(globalDirectives);
 Vue.use(globalFilters);
@@ -126,6 +126,7 @@ new Vue({
             Vue._session.set('checkTimeOut', true);
         });
     },
+    store,
     render: h => h(App),
     router,
     i18n,

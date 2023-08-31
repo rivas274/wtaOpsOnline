@@ -135,7 +135,7 @@
                     <list-note :id-assist="assistBase.idAssist" :type="'notes'"></list-note>
                 </div>
                 <div v-if="permission.notes_provider" class="tab-pane" :class="{active:tabShow=='notes_provider'}">
-                    <list-note :id-assist="assistBase.idAssist" can-add="Y" :type="'notes_provider'"></list-note>
+                    <list-note :id-assist="assistBase.idAssist" can-add="Y" v-if="tabShow=='notes_provider'" :type="'notes_provider'"></list-note>
                 </div>
                 <div v-if="permission.medical_notes" class="tab-pane" :class="{active:tabShow=='medical_notes'}">
                     <list-note :id-assist="assistBase.idAssist" :type="'medical_notes'"></list-note>
