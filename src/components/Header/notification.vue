@@ -100,8 +100,6 @@ export default {
         },
         // Llamar a la mutación para agregar una asistencia desde la notificación
         addAssistFromNotification(assist) {
-      
-            this.$store.commit('addAssist',assist);
             this.addAssist(assist);
         },
       

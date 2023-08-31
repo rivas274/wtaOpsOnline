@@ -7,7 +7,7 @@
                     <a
                         class="nav-link m-tabs__link"
                         :class="{active:tabShow=='List'}"
-                        @click.prevent="showTab('List')"
+                        @click.prevent="updateTabShow('List')"
                     >
                         <i class="fa fa-life-ring" aria-hidden="true"></i>
                         {{$t('general.list')}}
@@ -20,7 +20,7 @@
                 >
                     <span>
                         <a
-                            @click.prevent="showTab(assist.codeAssist)"
+                            @click.prevent="updateTabShow(assist.codeAssist)"
                             class="nav-link m-tabs__link"
                             :class="{active:tabShow==assist.codeAssist}"
                         >
@@ -78,29 +78,8 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(["addAssist", "removeAssist", "updateTabShow"]),
-        /*addAssist: function(assist) {
-            let tab = this.assistances.filter(function(v) {
-                return v.codeAssist == assist.codeAssist;
-            });
-            if (tab.length == 0) {
-                this.assistances.push(assist);
-                this.showTab(assist.codeAssist);
-            } else {
-                this.showTab(tab[0].codeAssist);
-            }
-        },
-        removeAssist: function({ codeAssist }) {
-            if (codeAssist == this.tabShow) {
-                this.showTab("List");
-            }
-            this.assistances = this.assistances.filter(function(v) {
-                return v.codeAssist != codeAssist;
-            });
-        },*/
-        showTab(tab) {
-            this.tabShow = tab;
-        }
+        ...mapMutations(["addAssist", "removeAssist", "updateTabShow", "updateTabShow"]),
+  
     }
 };
 </script>

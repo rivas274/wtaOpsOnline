@@ -21,7 +21,7 @@ export default {
     components: { InfoUser, localeChanger, Notification},
     methods: {
         
-        agregarNotificacionDePrueba2() {
+        addNotification() {
           
             this.axios
                 .post("getNotification", {
@@ -48,10 +48,10 @@ export default {
         
     },
     mounted() {
-        this.agregarNotificacionDePrueba2();
+        this.addNotification();
          setInterval(
              ()=> {
-                 this.agregarNotificacionDePrueba2();
+                 this.addNotification();
              },
              1000*60*0.25
          );

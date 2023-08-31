@@ -146,15 +146,6 @@ export default {
         getNote: function() {
             this.showLoader = true;
             this.axios
-                .post("viewNotification", {
-                    idAssist: this.idAssist,
-                    type:this.type
-                })
-                .then(response => {
-                    
-                    
-                });
-            this.axios
                 .post("getNote", {
                     idAssist: this.idAssist,
                     type:this.type
