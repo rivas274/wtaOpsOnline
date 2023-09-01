@@ -1,11 +1,12 @@
 <template>
     <div class="m-nav__item m-nav__item--accent m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width"
-          m-dropdown-toggle="click">
-        <a  class=" m-dropdown__toggle" id="m_topbar_notification_icon" >
-            <span class="m-nav__link-badge m-badge m-badge--dot m-badge--dot-small m-badge--danger" v-if="hasNotifications"></span>
+        m-dropdown-toggle="click">
+        <a class=" m-dropdown__toggle" id="m_topbar_notification_icon">
+            <span class="m-nav__link-badge m-badge m-badge--dot m-badge--dot-small m-badge--danger"
+                v-if="hasNotifications"></span>
             <span class="m-nav__link-icon">
-                <span class="m-nav__link-icon-wrapper" @click="toggleNotifications">
-                    <i class="flaticon-music-2" href="#" ></i>
+                <span class="m-nav__link-icon-wrapper">
+                    <i class="flaticon-music-2" href="#"></i>
                 </span>
             </span>
         </a>
@@ -14,10 +15,10 @@
             <div class="m-dropdown__inner">
                 <div class="m-dropdown__header m--align-center">
                     <span class="m-dropdown__header-title">
-                        {{ notifications.length }} {{$t('notification.messagge')}}
+                        {{ notifications.length }} {{ $t('notification.messagge') }}
                     </span>
                     <span class="m-dropdown__header-subtitle">
-                        {{$t('notification.userNotifications')}}
+                        {{ $t('notification.userNotifications') }}
                     </span>
                 </div>
                 <div class="m-dropdown__body">
@@ -26,7 +27,7 @@
                             <li class="nav-item m-tabs__item">
                                 <a class="nav-link m-tabs__link active" data-toggle="tab"
                                     href="#topbar_notifications_notifications" role="tab">
-                                    {{$t('notification.notifications')}}
+                                    {{ $t('notification.notifications') }}
                                 </a>
                             </li>
                         </ul>
@@ -35,17 +36,22 @@
                                 <div class="m-scrollable" data-scrollable="true" data-height="250" data-mobile-height="200">
                                     <div class="m-list-timeline m-list-timeline--skin-light">
                                         <div class="m-list-timeline__items">
-                                            <div v-if="showNotifications" class="notification-popup">
+                                            <div class="notification-popup">
                                                 <div class="m-list-timeline">
-                                                    <div v-for="(notification, index) in notifications" :key="index" class="m-list-timeline__item">
+                                                    <div v-for="(notification, index) in notifications" :key="index"
+                                                        class="m-list-timeline__item">
                                                         <span class="m-list-timeline__badge"></span>
                                                         <span class="m-list-timeline__text">
-                                                            {{ notification.message }} 
-                                                            <span  @click.prevent="addAssistFromNotification(notification.asist)" class="m-badge m-badge--wide" :class="{ 'm-badge--success': notification.countNoRead <= 0, 'm-badge--warning': notification.countNoRead > 0 }">
-                                                                {{ notification.countNoRead > 0 ? $t('notification.pending') : $t('notification.read') }} ({{ notification.countNoRead }})
+                                                            {{ notification.codigo_asistencia }}
+                                                            <span @click.prevent="addAssistFromNotification(notification)"
+                                                                class="m-badge m-badge--wide"
+                                                                :class="{ 'm-badge--success': notification.cant_sms <= 0, 'm-badge--warning': notification.cant_sms > 0 }">
+                                                                {{ notification.cant_sms > 0 ? $t('notification.pending')
+                                                                    : $t('notification.read') }} ({{ notification.cant_sms
+    }})
                                                             </span>
                                                         </span>
-                                                        <span class="m-list-timeline__time">{{ notification.time }}</span>
+                                                        <span class="m-list-timeline__time">{{ notification.created }}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -68,41 +74,44 @@ export default {
     name: 'Notification',
     data() {
         return {
-            showNotifications: true,
             notifications: [],
         };
     },
-    
+
     computed: {
         hasNotifications() {
             return this.notifications.length > 0;
         },
     },
+    mounted() {
+        this.getNotification();
+        setInterval(
+            () => {
+                this.getNotification();
+            },
+            1000 * 60 * 0.25
+        );
 
+    },
     methods: {
         ...mapMutations(["addAssist"]),
-        toggleNotifications() {
-           // this.showNotifications = !this.showNotifications;
-        },
-        clearNotifications() {
-            this.notifications = [];
-        },
-        addNotification(message, isRead, time, countNoRead, datassi) {
-           
-            const currentTime = new Date().toLocaleTimeString();
-            this.notifications.push({
-                message: message,
-                isRead: isRead,
-                time: time,
-                countNoRead: countNoRead,
-                asist: datassi,
-            });
+        getNotification() {
+            this.axios
+                .post("getNotification", {
+                    idProvider: this.$session.get("provider").id,
+                    timestamp:(new Date()).getTime(), //enviamos un parámetro dinámico para deshabilitar la cache de axios
+                })
+                .then(response => {
+                    this.notifications = response.data.RESPONSE.RESULTS;
+                })
+                .catch(error => {
+                    console.error("Error al obtener las notificaciones:", error);
+                });
         },
         // Llamar a la mutación para agregar una asistencia desde la notificación
-        addAssistFromNotification(assist) {
-            this.addAssist(assist);
+        addAssistFromNotification(notificacion) {
+            this.addAssist(notificacion);
         },
-      
     },
 };
 </script>

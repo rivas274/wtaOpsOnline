@@ -19,44 +19,6 @@ import InfoUser from "./InfoUser.vue";
 import Notification from "./notification.vue";
 export default {
     components: { InfoUser, localeChanger, Notification},
-    methods: {
-        
-        addNotification() {
-          
-            this.axios
-                .post("getNotification", {
-                    idProvider: this.$session.get("provider").id
-                })
-                .then(response => {
-                    this.$refs.notificationComponent.clearNotifications();
-                    let data = response.data.RESPONSE.RESULTS;
-                    data.forEach(value => {
-                        const message = value.codigo_asistencia;
-                        const isRead = value.read;
-                        const time = value.created;
-                   
-                        this.$refs.notificationComponent.addNotification(message, isRead, time,value.cant_sms  ,value);
-                    });
-                })
-                .catch(error => {
-                    console.error("Error al obtener las notificaciones:", error);
-                });
-          //  const mensajePrueba = "mensaje2";
-           // const time = "20:20";
-          //  this.$refs.notificationComponent.addNotification(mensajePrueba,true, time);
-        },
-        
-    },
-    mounted() {
-        this.addNotification();
-         setInterval(
-             ()=> {
-                 this.addNotification();
-             },
-             1000*60*0.25
-         );
-    
-    },  
 };
 </script>
 <style>
