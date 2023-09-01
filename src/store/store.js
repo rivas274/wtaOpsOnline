@@ -18,14 +18,18 @@ const store = new Vuex.Store({
       });
       if (tab.length == 0) {
           state.assistances.push(assist);
-          state.updateTabShow(assist.codeAssist);
+          console.log('codigo_Asistencia', assist.codeAssista)
+          state.tabShow = assist.codeAssist;
+          // state.updateTabShow(assist.codeAssist);
       } else {
-        state.updateTabShow(tab[0].codeAssist);
+        state.tabShow = tab[0].codeAssist;
+        //state.updateTabShow(tab[0].codeAssist);
       }
     },
     removeAssist(state, assist) {
-      if (assist.codeAssist == this.tabShow) {
-        this.updateTabShow("List");
+      if (assist.codeAssist == state.tabShow) {
+        state.tabShow = "List";
+       // this.updateTabShow("List");
     }
       state.assistances = state.assistances.filter(v => v.codeAssist !== assist.codeAssist);
     },

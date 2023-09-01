@@ -58,7 +58,7 @@ import ListAsistencia from "./ListAsistencia.vue";
 import Assist from "./Assist.vue";
 import Flag from "../Element/Flag.vue";
 import { mapMutations } from "vuex"; // Importar las utilidades de Vuex
-import store from '@/store/store'; 
+
 export default {
     components: {
         contentM,
@@ -66,11 +66,13 @@ export default {
         Assist,
         Flag
     },
-    data() {
-        return {
-            assistances: [],
-            tabShow: "List"
-        };
+    computed: {
+        assistances () {
+            return this.$store.state.assistances
+        },
+        tabShow () {
+            return this.$store.state.tabShow
+        }
     },
     mounted() {
         if (!this.middleware("assist", "read")) {
