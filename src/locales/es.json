@@ -316,5 +316,12 @@
     "refunds":{
         "documentToProvide":"Documentos que debo proporcionar",
         "documentToDownload":"Documentos que debo bajar"
+    },
+    "notification":{
+        "notifications":"Notificación",
+        "userNotifications":"Notificación de Usuario",
+        "messagge":"Mensajes",
+        "pending":"Pendiente",
+        "read":"Leido"
     }
 }
