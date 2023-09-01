@@ -80,7 +80,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(["addAssist", "removeAssist", "updateTabShow", "updateTabShow"]),
+        ...mapMutations(["addAssist", "removeAssist", "updateTabShow"]),
   
     }
 };
