@@ -34,7 +34,7 @@ export default {
                         const message = value.codigo_asistencia;
                         const isRead = value.read;
                         const time = value.created;
-                        console.log('mensaje', message)
+                   
                         this.$refs.notificationComponent.addNotification(message, isRead, time,value.cant_sms  ,value);
                     });
                 })
