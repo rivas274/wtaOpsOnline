@@ -49,14 +49,14 @@ iframe{
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{{$t('general.cancel')}}</button>
-                                <button type="button" class="btn btn-primary font-weight-bold" data-dismiss="modal" @click="rechazar">{{$t('assistance.rejectCase')}}</button>
+                                <button v-if="assistances.is_asigne==1" type="button" class="btn btn-primary font-weight-bold" data-dismiss="modal" @click="rechazar">{{$t('assistance.rejectCase')}}</button>
                             </div>
                         </div>
                     </div>
                 </div> 
 
 
-                <div style="float: right; position: relative; top: -50px;height: 10px; ">
+                <div v-if="assistances.is_asigne==1" style="float: right; position: relative; top: -50px;height: 10px; ">
                   
                         <button v-if="assistances.approved_status_user==2 && permission.show_provider" class="btn btn-info" style="margin-bottom: 4px;" @click="finalizar">{{$t('assistance.Finish')}}</button>
                         <button v-if="assistances.approved_status_user==1 && permission.show_provider" class="btn btn-info" style="margin-bottom: 4px;"  @click="aprobar">{{$t('assistance.AcceptCase')}}</button>
