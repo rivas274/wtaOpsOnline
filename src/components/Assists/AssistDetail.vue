@@ -56,9 +56,31 @@ iframe{
                 </div> 
 
 
+                <div class="modal fade" id="finish" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="finish">{{$t('assistance.caseFinished')}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <i aria-hidden="true" class="ki ki-close"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{$t('assistance.detail')}} <br>
+                                <input type="text" class="form-control" name="motivo_finalizado" id="motivo_finalizado" v-model="motivo_finalizado" ref="motivo_finalizado" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{{$t('general.cancel')}}</button>
+                                <button v-if="assistances.is_asigne==1" type="button" class="btn btn-primary font-weight-bold"  @click="finalizar">{{$t('assistance.Finish')}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+
+
                 <div v-if="assistances.is_asigne==1" style="float: right; position: relative; top: -50px;height: 10px; ">
                   
-                        <button v-if="assistances.approved_status_user==2 && permission.show_provider" class="btn btn-info" style="margin-bottom: 4px;" @click="finalizar">{{$t('assistance.Finish')}}</button>
+                        <button v-if="assistances.approved_status_user==2 && permission.show_provider" class="btn btn-info" style="margin-bottom: 4px;" data-toggle="modal" data-target="#finish">{{$t('assistance.Finish')}}</button>
                         <button v-if="assistances.approved_status_user==1 && permission.show_provider" class="btn btn-info" style="margin-bottom: 4px;"  @click="aprobar">{{$t('assistance.AcceptCase')}}</button>
             
                     <br>
@@ -633,7 +655,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_gop_'+idAssist" ico="fa flaticon-interface-5" v-if="permission.hidden_tab_voucher">
+                <AssistAccordion :id="'_gop_'+idAssist" ico="fa flaticon-interface-5" v-if="assistances.is_asigne==1 && permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.GOP')|upper}}</template>
                     <template slot="title-left">
                         <a href="#" @click="donwload(assistances.codeAssist,'VOB')">
@@ -647,7 +669,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_credit_auth_'+idAssist" ico="fa flaticon-lock" v-if="permission.hidden_tab_voucher">
+                <AssistAccordion :id="'_credit_auth_'+idAssist" ico="fa flaticon-lock" v-if="assistances.is_asigne==1 && permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.authorization')|upper}}</template>
                     <template slot="title-left">
                         <a href="#" @click="donwload(assistances.codeAssist,'AUTORIZATION')">
@@ -662,7 +684,7 @@ iframe{
                         
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_credit_auth_cc_'+idAssist" ico="fa fa-credit-card" v-if="permission.hidden_tab_voucher && assistances.paymentCC=='Y'">
+                <AssistAccordion :id="'_credit_auth_cc_'+idAssist" ico="fa fa-credit-card" v-if="assistances.is_asigne==1 && permission.hidden_tab_voucher && assistances.paymentCC=='Y'">
                     <template slot="title">{{$t('assistance.creditAuthorization')|upper}}</template>
                     <template slot="title-left">
                         <a href="#" @click="donwload(assistances.codeAssist,'CCAUTORIZATION')">
@@ -743,7 +765,8 @@ export default {
             this.showLoader = true;
             this.axios
                 .post("finalizaProveedor", {
-                    idAssist: this.idAssist
+                    idAssist: this.idAssist,
+                    motivo: this.motivo_finalizado
                 })
                 .then(() => {
                     this.showLoader = false;

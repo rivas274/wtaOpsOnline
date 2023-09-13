@@ -71,6 +71,15 @@
                     :selected="filters.arrPrefix"
                     v-on:input="setDataFilter"
                 ></multi-selects>
+                <select-from-table
+                    class="col-md-4 form-group"
+                    name="managementStatus"
+                    :watermark="$t('assistance.managementStatus')"
+                    :options="arrManagementStatus"
+                    :selected="filters.managementStatus"
+                    v-on:input="setDataFilter"
+                ></select-from-table>
+               
             </div>
             <div class="row m--align-right">
                 <div v-if="error" class="col-lg-9">
@@ -129,7 +138,7 @@
                     {{$t('assistance.countryService')}}
                 </th>
                 <th>
-                    {{$t('general.status')}}
+                    {{$t('assistance.managementStatus')}}
                 </th>
                 <th>
                     {{$t('general.options')}}
@@ -186,6 +195,7 @@
                     <span v-if="assist.approved_status==2">{{$t('assistance.applicationProcess')}}</span>
                     <span v-if="assist.approved_status==3">{{$t('assistance.applicationCompleted')}}</span>
                     <span v-if="assist.approved_status==4">{{$t('assistance.requestRejected')}}</span>
+                    <span v-if="assist.approved_status==5">{{$t('assistance.relatedCase')}}</span>
                 </span>
                 <span v-else>
                     <i :class="assist.statusAssist.icon" v-tooltip:top="assist.statusAssist.label || 'Not Found'"></i>
@@ -250,6 +260,7 @@ export default {
                 codeVoucher:"",
                 dob: "",
                 arrAssistStatus:"",
+                arrManagementStatus:"",
                 arrPrefix: [],
                 passager: "",
                 date: {
@@ -264,6 +275,7 @@ export default {
                 size: 0
             },
             arrAssistStatus:[],
+            arrManagementStatus:[],
             statusAssist:[],
             clients: [],
             billsOption: [
@@ -291,6 +303,11 @@ export default {
         getAssistStatus: function () {
             this.axios.get("getAssistStatus").then(response => {
                 this.arrAssistStatus = response.data.RESPONSE.RESULTS;
+            });
+        },
+        getAssistManagementStatus: function () {
+            this.axios.get("getAssistManagementStatus").then(response => {
+                this.arrManagementStatus = response.data.RESPONSE.RESULTS;
             });
         },
         dowload: function() {
@@ -371,6 +388,7 @@ export default {
                     codeVoucher: (this.filters.codeVoucher||'').trim(),
                     dob: (this.filters.dob||'').trim(),
                     assistStatus: this.filters.assistStatus,
+                    managementStatus: this.filters.managementStatus,
                     passenger: (this.filters.passager||'').trim(),
                     endDate: this.filters.date.endDate,
                     startDate: this.filters.date.startDate
@@ -430,6 +448,7 @@ export default {
         this.getAssistance();
         this.getClients();
         this.getAssistStatus();
+        this.getAssistManagementStatus();
     },
     watch: {
         openAsist: function(newVal) {
