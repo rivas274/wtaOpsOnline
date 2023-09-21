@@ -72,6 +72,7 @@
                     v-on:input="setDataFilter"
                 ></multi-selects>
                 <select-from-table
+                    v-if="permission.show_provider"
                     class="col-md-4 form-group"
                     name="managementStatus"
                     :watermark="$t('assistance.managementStatus')"
@@ -137,7 +138,7 @@
                 <th>
                     {{$t('assistance.countryService')}}
                 </th>
-                <th>
+                <th  v-if="permission.show_provider">
                     {{$t('assistance.managementStatus')}}
                 </th>
                 <th>
@@ -188,7 +189,7 @@
                     <Flag :iso="assist.isoCountry"></Flag>
                 </td>
              
-                <td class="text-center fa-status">
+                <td class="text-center fa-status" v-if="permission.show_provider">
                     <span v-if="permission.show_provider">
                     <span v-if="assist['view'] == 'N' && assist.approved_status==1">{{$t('assistance.requestSent')}}</span>
                     <span v-if="assist['view'] != 'N' && assist.approved_status==1">{{$t('assistance.openRequest')}}</span>
