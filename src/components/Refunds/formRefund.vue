@@ -246,39 +246,6 @@
                                     :errors_form="errors"
                                 ></form-error>
                             </div>
-                            <div
-                                class="form-group m-form__group"
-                                :class="{'has-danger': errors.has('reference')}"
-                            >
-                                <strong>{{ $t('reimbursement.reference') }}</strong>
-                                <div
-                                    class="m-input-icon m-input-icon--left m-input-icon--right"
-                                >
-                                    <input
-                                        type="text"
-                                        name="reference"
-                                        class="form-control m-input"
-                                        :placeholder="$t('reimbursement.reference')"
-                                        v-validate="'required|min:2|max:40|'"
-                                        :data-vv-as="$t('reimbursement.reference')"
-                                        v-model.lazy="inputsData.reference"
-                                        ref="reference"
-                                    />
-                                    <span
-                                        class="m-input-icon__icon m-input-icon__icon--left"
-                                    >
-                                        <span>
-                                            <i
-                                                class="la la-tag"
-                                            ></i>
-                                        </span>
-                                    </span>
-                                </div>
-                                <form-error
-                                    :attribute_name="'reference'"
-                                    :errors_form="errors"
-                                ></form-error>
-                            </div>
                         </div>
                         <div
                             class="form-group m-form__group"
