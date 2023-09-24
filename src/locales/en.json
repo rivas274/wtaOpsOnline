@@ -85,6 +85,7 @@
         "company": "Company"
     },
     "document": {
+        "document": "Document",
         "category": "Category",
         "add": "Add document",
         "type": "Document Type",

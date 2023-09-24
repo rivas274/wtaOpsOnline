@@ -85,6 +85,7 @@
         "company": "Compañía"
     },
     "document": {
+        "document": "Documento",
         "category": "Categoría",
         "add": "Agregar documentos",
         "type": "Tipo de Documento",

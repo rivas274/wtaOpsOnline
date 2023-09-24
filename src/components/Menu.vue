@@ -36,6 +36,18 @@
                 </li>
                 <li
                     class="m-menu__item"
+                    :class="[subIsActive('/documents_client')?'m-menu__item--active':'']"
+                    aria-haspopup="true"
+                    v-if="addDocuments"
+                >
+                    <router-link :to="{ path: '/documents_client'}" replace class="m-menu__link">
+                        <span class="m-menu__item-here"></span>
+                        <i class="m-menu__link-icon flaticon-folder-1"></i>
+                        <span class="m-menu__link-text">{{$t('document.document')}}</span>
+                    </router-link>
+                </li>
+                <li
+                    class="m-menu__item"
                     :class="[subIsActive('/re-pricing')?'m-menu__item--active':'']"
                     aria-haspopup="true"
                     v-if="repricing"
@@ -84,6 +96,7 @@ export default {
             assist: this.middleware("assist", "read"),
             invoice: this.middleware("invoiceProvider", "read"),
             reportsClient: this.middleware("guard_by_client", "read"),
+            addDocuments: this.middleware("add_documents", "read"),
         };
     },
     methods: {

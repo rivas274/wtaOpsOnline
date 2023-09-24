@@ -2,6 +2,7 @@ import Login from '../components/Login/Login';
 import MyAcount from '../components/Login/MyAcount';
 import http404 from '../components/http404';
 import MainAsistencia from '../components/Assists/MainAsistencia';
+import MainDocument from '../components/DocumentsClient/MainDocument';
 import VoucherCase from '../components/VoucherCase/dasboard';
 import Refunds from '../components/Refunds/dasboard';
 import RePricing from '../components/RePricing/dasboard';
@@ -14,6 +15,11 @@ export default [
         name: 'dasboard',
         path: '/dasboard',
         component: MainAsistencia,
+    },
+    {
+        name: 'documents_client',
+        path: '/documents_client',
+        component: MainDocument,
     },
     {
         name: 'VoucherCase',
