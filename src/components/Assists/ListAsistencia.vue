@@ -302,7 +302,8 @@ export default {
     },
     methods: {
         getAssistStatus: function () {
-            this.axios.get("getAssistStatus").then(response => {
+            let list_provider = this.permission.show_provider ? 1 : 0;
+            this.axios.get("getAssistStatus?provider="+list_provider).then(response => {
                 this.arrAssistStatus = response.data.RESPONSE.RESULTS;
             });
         },
