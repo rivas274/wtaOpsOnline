@@ -210,7 +210,7 @@ export default {
     methods: {
         getDocumentsType: function() {
             this.axios
-                .get("getDocumentsType?docType[]=4&docType[]=5&docType[]=8&docType[]=7")
+                .get("getDocumentsType?docType[]=7&docType[]=8&docType[]=17")
                 .then(response => {
                     this.documentsType = response.data.RESPONSE.RESULTS;
                 });
