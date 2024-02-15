@@ -188,7 +188,7 @@ export default {
                                         type: "success",
                                         confirmButtonText: this.$t("general.ok"),
                                     }).then(() => {
-                                        this.$emit("update:status", "F");
+                                        this.$emit("update:status", "L");
                                     });
                                 } else {
                                     this.disableForm = false;

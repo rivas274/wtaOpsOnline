@@ -263,7 +263,8 @@ export default {
             };
         },
         formShow: function () {
-            if ('method_payment' in this.results.refundAdm && this.results.refundAdm.method_payment.status.code == 'P') {
+            if ('method_payment' in this.results.refundAdm &&
+                ['S'].includes(this.results.refundAdm.method_payment.status.code)) {
                 return 'paymentMethod';
             }
             if (this.results.refundAdm.declarationOfUse == 'N') {
