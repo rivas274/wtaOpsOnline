@@ -46,9 +46,9 @@
                 <div class="col m--align-right">
                     <button
                         class="btn btn-primary ml-2 pull-right"
-                        @click="dowload"
+                        @click="download"
                     >
-                        {{ $t("general.dowload") }}
+                        {{ $t("general.download") }}
                     </button>
                     <button class="btn btn-info" @click="clear">
                         {{ $t("general.clear") }}
@@ -115,7 +115,7 @@ export default {
                 
             });
         },
-        dowload: function () {
+        download: function () {
             let requiered = {
                 idReport: this.filters.idReport,
                 endDate: this.filters.date.endDate,

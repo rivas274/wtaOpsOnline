@@ -93,16 +93,16 @@
                     <!-- <button class="btn btn-brand" @click="getAssistance(0)">Search</button> -->
                     <button
                         class="btn btn-primary ml-2 pull-right"
-                        @click="dowload"
+                        @click="download"
                         v-if="permission.RP002A"
-                    >{{$t('general.dowload')}}</button>
+                    >{{$t('general.download')}}</button>
                     <button class="btn btn-info ml-2 pull-right" @click="clear">{{$t('general.clear')}}</button>
                 </div>
             </div>
         </template>
         <template slot="thead">
             <tr>
-                <th style="min-width: 90px;">
+                <th style="min-width: 100px;">
                     {{$t('assistance.caseNumber')}}
                 </th>
                 <th v-if="!permission.hidden_client">
@@ -188,7 +188,6 @@
                 <td>
                     <Flag :iso="assist.isoCountry"></Flag>
                 </td>
-             
                 <td class="text-center fa-status" v-if="permission.show_provider">
                     <span v-if="permission.show_provider">
                     <span v-if="assist['view'] == 'N' && assist.approved_status==1">{{$t('assistance.requestSent')}}</span>
@@ -247,7 +246,7 @@ export default {
     },
     props: ["open-asist"],
     data: function() {
-        var permission = {
+        const permission = {
             bills: this.middleware("bills", "read"),
             RP002A: this.middleware("RP002A", "read"),
             hidden_client: this.middleware("hidden_client_in_assistance", "read"),
@@ -312,23 +311,25 @@ export default {
                 this.arrManagementStatus = response.data.RESPONSE.RESULTS;
             });
         },
-        dowload: function() {
+        
+        download: function () {
             let arrPrefix =
                 this.filters.arrPrefix.length == 0
                     ? this.$session.get("prefix")
                     : this.filters.arrPrefix;
-            let requiered = {
-                    code: (this.filters.code||'').trim(),
-                    codeVoucher: (this.filters.codeVoucher||'').trim(),
-                    passenger: (this.filters.passager||'').trim(),
-                    dob: (this.filters.dob||'').trim(),
+            let paramsSearch = {
+                code: (this.filters.code || '').trim(),
+                codeVoucher: (this.filters.codeVoucher || '').trim(),
+                passenger: (this.filters.passager || '').trim(),
+                dob: (this.filters.dob || '').trim(),
                     endDate: this.filters.date.endDate,
                     startDate: this.filters.date.startDate,
                 },
                 valid = false,
                 type = this.$session.get("permission")['RP002A']['additional_data'];
-            for (var field in requiered) {
-                if (requiered[field] != "") {
+
+            for (let field in paramsSearch) {
+                if (paramsSearch[field] != "") {
                     valid = true;
                 }
             }
@@ -338,21 +339,14 @@ export default {
             } else {
                 this.error = null;
             }
-            requiered["prefix"] = arrPrefix;
+
+            paramsSearch["prefix"] = arrPrefix;
+            paramsSearch["type"] = type;
+
             this.showLoader = true;
             this.axios
                 .post("getAssistsCustomXLS",
-                    {
-                        prefix: arrPrefix,
-                        code: (this.filters.code||'').trim(),
-                        codeVoucher: (this.filters.codeVoucher||'').trim(),
-                        assistStatus: this.filters.assistStatus,
-                        passenger: (this.filters.passager||'').trim(),
-                        dob: (this.filters.dob||'').trim(),
-                        endDate: this.filters.date.endDate,
-                        startDate: this.filters.date.startDate,
-                        type:type,
-                    },
+                    paramsSearch,
                     {
                         responseType: "blob"
                     }
