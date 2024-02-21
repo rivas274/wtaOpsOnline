@@ -2,7 +2,8 @@ import Login from '../components/Login/Login';
 import MyAcount from '../components/Login/MyAcount';
 import http404 from '../components/http404';
 import MainAsistencia from '../components/Assists/MainAsistencia';
-import MainDocument from '../components/DocumentsClient/MainDocument';
+import uploadDocument from '../components/DocumentsClient/MainDocument';
+import sharedDocument from '../components/DocumentsClientShared/MainDocument';
 import VoucherCase from '../components/VoucherCase/dasboard';
 import Refunds from '../components/Refunds/dasboard';
 import RePricing from '../components/RePricing/dasboard';
@@ -17,9 +18,14 @@ export default [
         component: MainAsistencia,
     },
     {
-        name: 'documents_client',
-        path: '/documents_client',
-        component: MainDocument,
+        name: 'upload_document',
+        path: '/upload_document',
+        component: uploadDocument,
+    },
+    {
+        name: 'shared_document',
+        path: '/shared_document',
+        component: sharedDocument,
     },
     {
         name: 'VoucherCase',
