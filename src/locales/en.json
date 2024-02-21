@@ -97,7 +97,9 @@
         "choose": "Choose File",
         "send": "Sent Document",
         "uploaded": "Your document has been successfully uploaded",
-        "uploadAnother": "Upload Another Document"
+        "uploadAnother": "Upload Another Document",
+        "uploadDocuments": "Upload Documents",
+        "sharedDocuments": "Shared Documents"
     },
     "assistance": {
         "procedureCode":"Procedure Code",

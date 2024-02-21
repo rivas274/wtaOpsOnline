@@ -97,7 +97,9 @@
         "choose": "Elegir archivo",
         "send": "Documento Enviado",
         "uploaded": "Su documento ha sido cargado exitosamente",
-        "uploadAnother": "Subir otro documento"
+        "uploadAnother": "Subir otro documento",
+        "uploadDocuments": "Subir Documentos",
+        "sharedDocuments": "Documentos Compartidos"
     },
     "assistance": {
         "procedureCode":"Código de procedimiento",

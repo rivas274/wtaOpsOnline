@@ -43,7 +43,7 @@
                     <router-link :to="{ path: '/documents_client'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
                         <i class="m-menu__link-icon flaticon-folder-1"></i>
-                        <span class="m-menu__link-text">{{$t('document.document')}}</span>
+                        <span class="m-menu__link-text">{{$t('document.uploadDocuments')}}</span>
                     </router-link>
                 </li>
                 <li
