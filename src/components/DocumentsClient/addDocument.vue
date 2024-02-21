@@ -6,7 +6,7 @@
                 @submit.prevent="validDocument"
                 enctype="multipart/form-data"
                 ref="form">
-                <div class="form-group" :class="{'has-danger': errors.has('Description')}">
+                <div class="form-group m-form__group" :class="{'has-danger': errors.has('Description')}">
                     <strong>{{ $t('document.description') }}</strong>
                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                         <textarea
@@ -25,6 +25,21 @@
                         </span>
                     </div>
                     <form-error :attribute_name="'Description'" :errors_form="errors"></form-error>
+                </div>
+                <div class="form-group m-form__group" 
+                    :class="{'has-danger': errors.has('Description')}"
+                    v-if="clients.length>1">
+                    <strong>{{ $t('assistance.clients') }}</strong>
+                    <select-from-table
+                        name="prefijo"
+                        :watermark="$t('assistance.clients')"
+                        :options="clients"
+                        :selected="inputsData.prefijo"
+                        v-on:input="setDataFilter"
+                        v-validate="'required'"
+                        :data-vv-as="$t('assistance.clients')">
+                    </select-from-table>
+                    <form-error :attribute_name="'prefijo'" :errors_form="errors"></form-error>
                 </div>
                 <div class="form-group" :class="{'has-danger': errors.has('file')}" >
                     <strong>{{ $t('document.file') }}</strong>
@@ -83,12 +98,15 @@ export default {
         selectFromTable,
     },
     data() {
+        const prefix = this.$session.get("prefix");
         return {
             uploadPercentage: 0,
             disableForm: false,
             inputsData: {
-                description: ""
+                description: "",
+                prefijo: prefix.length == 1 ? prefix[0] : ''
             },
+            clients: [],
             file: false,
             previewSrc: null,
             displayAlert: false
@@ -99,11 +117,10 @@ export default {
             if (!this.disableForm) {
                 this.$validator.validateAll().then(result => {
                     const formData = new FormData();
-                    const prefix = this.$session.get("prefix");
 
                     formData.append("file", this.file);
                     formData.append("description", this.inputsData.description);
-                    formData.append("prefijo", prefix[0]);
+                    formData.append("prefijo", this.inputsData.prefijo);
 
                     if (result) {
                         this.disableForm = true;
@@ -155,12 +172,30 @@ export default {
                 });
             }
         },
+        getClients: function() {
+            this.axios
+                .post("getClient", {
+                    prefix: this.$session.get("prefix")
+                })
+                .then(response => {
+                    let data = response.data.RESPONSE.RESULTS;
+                    this.clients = data.map(function(value) {
+                        return {
+                            id: value.prefix,
+                            name: value.clientName,
+                        };
+                    });
+                });
+        },
         setDataFilter: function(campo, value) {
             this.inputsData[campo] = value;
         },
         handleFileUpload: function(event) {
             this.file = event.target.files[0];
         }
+    },
+    mounted() {
+        this.getClients();
     },
     computed: {
         preview: function() {

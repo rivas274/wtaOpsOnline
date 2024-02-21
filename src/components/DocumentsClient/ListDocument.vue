@@ -2,6 +2,15 @@
     <TableBasic :show-loader="showLoader">
         <template slot="filters">
             <div class="row" :class="{'has-danger':error}">
+                <multi-selects
+                    v-if="clients.length>1"
+                    class="col-md-4 form-group"
+                    name="arrPrefix"
+                    :options="clients"
+                    :watermark="$t('assistance.clients')"
+                    :selected="filters.arrPrefix"
+                    v-on:input="setDataFilter"
+                ></multi-selects>
                 <input-from-table
                     class="col-md-4 form-group"
                     name="description"
@@ -35,7 +44,10 @@
                 <th>
                     id
                 </th>
-                <th>
+                <th v-if="clients.length>1">
+                    {{$t('assistance.clients')}}
+                </th>
+                <th class="text-center">
                     {{$t('general.date')}}
                 </th>
                 <th>
@@ -51,8 +63,12 @@
                 <td>
                     {{documents.id}}
                 </td>
-                <td>
-                    {{documents.created}}
+                <td v-if="clients.length>1">
+                    {{documents.client}}
+                </td>
+                <td class="text-center">
+                    <div>{{documents.created.split(' ')[0]}}</div>
+                    <small><b>({{documents.created.split(' ')[1]}})</b></small>
                 </td>
                 <td>
                     {{documents.description}}
@@ -82,14 +98,16 @@
 import dateRangeBt from "../Tables/filters/dateRangeBt.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
 import pagination from "../pagination/pagination.vue";
-import Flag from "../Element/Flag.vue";
 import TableBasic from "../Tables/TableBasic.vue";
+import MultiSelects from "../Tables/filters/Multiselect.vue";
+
 export default {
     components: {
         TableBasic,
         inputFromTable,
         dateRangeBt,
         pagination,
+        MultiSelects,
     },
     data: function() {
         return {
@@ -97,7 +115,9 @@ export default {
             filters: {
                 description: "",
                 date: {},
+                arrPrefix:[]
             },
+            clients: [],
             results: [],
             footerTable: {
                 start: 0,
@@ -116,7 +136,7 @@ export default {
                 .post("getDocumentClient", {
                     start: pg,
                     limit: this.footerTable.limit,
-                    prefix: this.$session.get("prefix"),
+                    prefix: this.filters.arrPrefix,
                     description: this.filters.description,
                     endDate: this.filters.date.endDate,
                     startDate: this.filters.date.startDate
@@ -129,6 +149,18 @@ export default {
                         limit: response.data.RESPONSE.limit,
                         size: response.data.RESPONSE.size
                     };
+                });
+        },
+        getClients: function() {
+            this.axios
+                .post("getClient", {
+                    prefix: this.$session.get("prefix")
+                })
+                .then(response => {
+                    let data = response.data.RESPONSE.RESULTS;
+                    this.clients = data.map(function(value) {
+                        return { name: value.clientName, code: value.prefix };
+                    });
                 });
         },
         setDataFilter: function(campo, value) {
@@ -151,6 +183,7 @@ export default {
         },
     },
     mounted() {
+        this.getClients();
         this.getDocument();
     },
     watch: {
