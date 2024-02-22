@@ -729,6 +729,7 @@ export default {
             notificationFinish: false,
             notificationRejected: false,
             showLoader: false,
+            motivo_finalizado:'',
             benefit: [],
             permission: {
                 hidden_tab_voucher: this.middleware("hidden_tab_voucher", "read"),

@@ -16,8 +16,8 @@
                 <div class="m-timeline-1__items">
                     <div class="m-timeline-1__marker"></div>
 
-                    <div v-for="dates in this.events " :key="dates">
-                        <div v-for="(date,key) in dates" :key="date">
+                    <div v-for="(dates,keyDates) in this.events " :key="keyDates">
+                        <div v-for="(date,key) in dates" :key="key">
                             <div
                                 class="m-timeline-1__item m-timeline-1__item--first"
                                 :class="[key%2==0?'m-timeline-1__item--left':'m-timeline-1__item--right']"
