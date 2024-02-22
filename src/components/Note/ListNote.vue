@@ -5,77 +5,48 @@
 </style>
 <style src="../Element/custom-m-loader.css"></style>
 <template>
-    <section :class="{'m-loader m-loader--metal m-loader--div':showLoader}">
+    <section :class="{ 'm-loader m-loader--metal m-loader--div': showLoader }">
         <form class="m-form m--align-right" role="form" v-if="canAdd" @submit.prevent="addNote">
             <div class="form-group">
-                <textarea 
-                    name="description" 
-                    cols="30"
-                    rows="3"
-                    class="form-control m-input"
-                    :placeholder="$t('assistance.addNote')"
-                    autocomplete="off"
-                    v-validate="'required|min:1|max:5000'"
-                    v-model="description"
-                    ref="description"
-                ></textarea>
+                <textarea name="description" cols="30" rows="3" class="form-control m-input"
+                    :placeholder="$t('assistance.addNote')" autocomplete="off" v-validate="'required|min:1|max:5000'"
+                    v-model="description" ref="description"></textarea>
                 <form-error :attribute_name="'description'" :errors_form="errors"></form-error>
             </div>
-            <button type="submit" class="btn btn-primary pull-end">{{$t('general.save')}}</button>
+            <button type="submit" class="btn btn-primary pull-end">{{ $t('general.save') }}</button>
             <hr>
         </form>
         <div class="form-group m-form__group row">
-            <date-range-bt
-                class="col-md-4 m-form__group-sub"
-                name="date"
-                :watermark="$t('general.selectDateRange')"
-                v-on:input="setDataFilter"
-                :value="filters.date"
-            ></date-range-bt>
-            <input-from-table
-                class="col-md-4 m-form__group-sub"
-                name="search"
-                :watermark="$t('general.search')"
-                icon="flaticon-interface-5"
-                v-on:input="setDataFilter"
-                :value="filters.search"
-            ></input-from-table>
+            <date-range-bt class="col-md-4 m-form__group-sub" name="date" :watermark="$t('general.selectDateRange')"
+                v-on:input="setDataFilter" :value="filters.date"></date-range-bt>
+            <input-from-table class="col-md-4 m-form__group-sub" name="search" :watermark="$t('general.search')"
+                icon="flaticon-interface-5" v-on:input="setDataFilter" :value="filters.search"></input-from-table>
             <div class="col m--align-right">
-                <button class="btn btn-info" @click="clear">{{$t('general.clear')}}</button>
+                <button class="btn btn-info" @click="clear">{{ $t('general.clear') }}</button>
             </div>
         </div>
-        <div
-            class="m-messenger m-messenger--message-arrow m-messenger--skin-light"
-            v-if="noteToShow.length>0"
-        >
+        <div class="m-messenger m-messenger--message-arrow m-messenger--skin-light" v-if="noteToShow.length > 0">
             <div class="m-messenger__messages m-scrollable m-scroller ps ps--active-y">
-                <div class="m-messenger__wrapper" v-for="note in noteToShow" :key="type+note.id">
-                    <div
-                        class="m-messenger__message"
-                        :class="[isUserNote(note)?'m-messenger__message--out':'m-messenger__message--in']"
-                    >
-                        <div
-                            class="m-messenger__message-no-pic"
-                            :class="['m--bg-fill-'+colorNote(note)]"
-                            v-if="!isUserNote(note)"
-                        >
-                            <span v-if="!('displayAuditor' in note)">{{note.user.user | firstLetter }}</span>
+                <div class="m-messenger__wrapper" v-for="note in noteToShow" :key="type + note.id">
+                    <div class="m-messenger__message"
+                        :class="[isUserNote(note) ? 'm-messenger__message--out' : 'm-messenger__message--in']">
+                        <div class="m-messenger__message-no-pic" :class="['m--bg-fill-' + colorNote(note)]"
+                            v-if="!isUserNote(note)">
+                            <span v-if="!('displayAuditor' in note)">{{ note.user.user | firstLetter }}</span>
                         </div>
                         <div class="m-messenger__message-body">
-                            <div class="m-messenger__message-arrow" :class="['m--font-'+colorNote(note)]"></div>
-                            <div class="m-messenger__message-content"  :class="['m--bg-fill-'+colorNote(note)]">
+                            <div class="m-messenger__message-arrow" :class="['m--font-' + colorNote(note)]"></div>
+                            <div class="m-messenger__message-content" :class="['m--bg-fill-' + colorNote(note)]">
                                 <div class="m-messenger__message-username" v-if="!('displayAuditor' in note)">
-                                    <b>{{note.user.user}}@{{note.createdDate.date}} {{note.createdDate.hour}} | {{note.eventDetaill.description||$t('general.notLoaded')}}</b>
+                                    <b>{{ note.user.user }}@{{ note.createdDate.date }} {{ note.createdDate.hour }} |
+                                        {{ note.eventDetaill.description || $t('general.notLoaded') }}</b>
                                 </div>
                                 <div class="m-messenger__message-text" v-html="note.description"></div>
                             </div>
                         </div>
-                        <div
-                            class="m-messenger__message-no-pic"
-                            :class="['m--bg-fill-'+colorNote(note)]"
-                            v-if="isUserNote(note)"
-                        >
-                            <span v-if="!('displayAuditor' in note)">{{note.user.user | firstLetter }}</span>
+                        <div class="m-messenger__message-no-pic" :class="['m--bg-fill-' + colorNote(note)]"
+                            v-if="isUserNote(note)">
+                            <span v-if="!('displayAuditor' in note)">{{ note.user.user | firstLetter }}</span>
                         </div>
                     </div>
                 </div>
@@ -83,10 +54,8 @@
             </div>
         </div>
         <div class="text-center" v-else>
-            <h1
-                class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide"
-                @click="clear"
-            >{{$t('general.noRecordsFound')}}</h1>
+            <h1 class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide" @click="clear">{{ $t('general.noRecordsFound') }}
+            </h1>
         </div>
     </section>
 </template>
@@ -95,8 +64,8 @@ import dateRangeBt from "../Tables/filters/dateRangeBt.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
 export default {
     components: { dateRangeBt, inputFromTable },
-    props: ["id-assist","type","can-add"],
-    data: function() {
+    props: ["id-assist", "type", "can-add"],
+    data: function () {
         return {
             filters: {
                 search: "",
@@ -105,7 +74,7 @@ export default {
                     startDate: ""
                 }
             },
-            description:'',
+            description: '',
             results: [],
             showLoader: false,
             usersColor: {},
@@ -120,16 +89,16 @@ export default {
                 "warning",
                 "danger"
             ],
-            interval:null
+            interval: null
         };
     },
     methods: {
-        getNote: function() {
+        getNote: function () {
             this.showLoader = true;
             this.axios
                 .post("getNote", {
                     idAssist: this.idAssist,
-                    type:this.type
+                    type: this.type
                 })
                 .then(response => {
                     this.showLoader = false;
@@ -146,13 +115,14 @@ export default {
         },
         colorNote(note) {
             var show = null;
-            /* if('displayAuditor' in note){
-                if(note.displayAuditor.whatsapp){
+            if ('displayAuditor' in note) {
+                return 'info';
+                if (note.displayAuditor.whatsapp) {
                     return 'success';
-                }else{
+                } else {
                     return 'info';
                 }
-            } */
+            }
             if (note.user.id in this.usersColor) {
                 show = this.usersColor[note.user.id];
             } else {
@@ -162,10 +132,10 @@ export default {
             }
             return show;
         },
-        setDataFilter: function(campo, value) {
+        setDataFilter: function (campo, value) {
             this.filters[campo] = value;
         },
-        clear: function() {
+        clear: function () {
             this.filters = {
                 search: "",
                 date: {
@@ -174,16 +144,16 @@ export default {
                 }
             };
         },
-        addNote: function() {
+        addNote: function () {
             if (!this.disableForm) {
                 this.$validator.validateAll().then(result => {
                     if (result) {
                         this.disableForm = true;
                         this.axios
                             .post("addNote", {
-                                description:this.description,
-                                idAssist:this.idAssist,
-                                type:this.type,
+                                description: this.description,
+                                idAssist: this.idAssist,
+                                type: this.type,
                             })
                             .then(() => {
                                 this.disableForm = false;
@@ -196,9 +166,9 @@ export default {
         },
     },
     computed: {
-        noteToShow: function() {
+        noteToShow: function () {
             let filters = this.filters;
-            return this.results.filter(function(v) {
+            return this.results.filter(function (v) {
                 let description = v.description
                     .replace(/(<([^>]+)>)/gi, "")
                     .toLowerCase();
@@ -222,7 +192,7 @@ export default {
     },
     mounted() {
         this.getNote();
-        this.interval = setInterval(this.getNote,0.5 * 60 * 1000);
+        this.interval = setInterval(this.getNote, 0.5 * 60 * 1000);
     },
     beforeDestroy() {
         clearInterval(this.interval);
