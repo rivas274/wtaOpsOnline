@@ -146,13 +146,13 @@ export default {
         },
         colorNote(note) {
             var show = null;
-            if('displayAuditor' in note){
+            /* if('displayAuditor' in note){
                 if(note.displayAuditor.whatsapp){
                     return 'success';
                 }else{
                     return 'info';
                 }
-            }
+            } */
             if (note.user.id in this.usersColor) {
                 show = this.usersColor[note.user.id];
             } else {
