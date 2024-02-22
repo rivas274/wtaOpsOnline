@@ -1,25 +1,6 @@
-<style scoped>
-.options-btn {
-    display: inline-flex;
-}
-iframe {
-    height: 360px;
-    width: 100%;
-    border: 0px !important;
-}
+<style>
 .m-messenger__message-text {
     font-weight: 400;
-}
-.m-messenger
-    .m-messenger__messages
-    .m-messenger__message.m-messenger__message--out
-    .m-messenger__message-content {
-    background: #36a3f7;
-}
-.m-messenger.m-messenger.m-messenger--message-arrow
-    .m-messenger__message.m-messenger__message--out
-    .m-messenger__message-arrow {
-    color: #36a3f7;
 }
 </style>
 <style src="../Element/custom-m-loader.css"></style>
@@ -75,15 +56,15 @@ iframe {
                     >
                         <div
                             class="m-messenger__message-no-pic"
-                            :class="['m--bg-fill-'+colorByUser(note)]"
+                            :class="['m--bg-fill-'+colorNote(note)]"
                             v-if="!isUserNote(note)"
                         >
                             <span>{{note.user.user | firstLetter }}</span>
                         </div>
                         <div class="m-messenger__message-body">
-                            <div class="m-messenger__message-arrow"></div>
-                            <div class="m-messenger__message-content">
-                                <div class="m-messenger__message-username">
+                            <div class="m-messenger__message-arrow" :class="['m--font-'+colorNote(note)]"></div>
+                            <div class="m-messenger__message-content"  :class="['m--bg-fill-'+colorNote(note)]">
+                                <div class="m-messenger__message-username" v-if="!('displayAuditor' in note)">
                                     <b>{{note.user.user}}@{{note.createdDate.date}} {{note.createdDate.hour}} | {{note.eventDetaill.description||$t('general.notLoaded')}}</b>
                                 </div>
                                 <div class="m-messenger__message-text" v-html="note.description"></div>
@@ -91,7 +72,7 @@ iframe {
                         </div>
                         <div
                             class="m-messenger__message-no-pic"
-                            :class="['m--bg-fill-'+colorByUser(note)]"
+                            :class="['m--bg-fill-'+colorNote(note)]"
                             v-if="isUserNote(note)"
                         >
                             <span>{{note.user.user | firstLetter }}</span>
@@ -163,8 +144,15 @@ export default {
             }
             return [6, 8].includes(parseInt(note.eventDetaill.id));
         },
-        colorByUser(note) {
+        colorNote(note) {
             var show = null;
+            if('displayAuditor' in note){
+                if(note.displayAuditor.whatsapp){
+                    return 'success';
+                }else{
+                    return 'info';
+                }
+            }
             if (note.user.id in this.usersColor) {
                 show = this.usersColor[note.user.id];
             } else {
