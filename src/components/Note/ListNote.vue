@@ -59,7 +59,7 @@
                             :class="['m--bg-fill-'+colorNote(note)]"
                             v-if="!isUserNote(note)"
                         >
-                            <span>{{note.user.user | firstLetter }}</span>
+                            <span v-if="!('displayAuditor' in note)">{{note.user.user | firstLetter }}</span>
                         </div>
                         <div class="m-messenger__message-body">
                             <div class="m-messenger__message-arrow" :class="['m--font-'+colorNote(note)]"></div>
@@ -75,7 +75,7 @@
                             :class="['m--bg-fill-'+colorNote(note)]"
                             v-if="isUserNote(note)"
                         >
-                            <span>{{note.user.user | firstLetter }}</span>
+                            <span v-if="!('displayAuditor' in note)">{{note.user.user | firstLetter }}</span>
                         </div>
                     </div>
                 </div>
