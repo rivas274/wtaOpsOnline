@@ -116,7 +116,6 @@ export default {
         colorNote(note) {
             var show = null;
             if ('displayAuditor' in note) {
-                return 'info';
                 if (note.displayAuditor.whatsapp) {
                     return 'success';
                 } else {
