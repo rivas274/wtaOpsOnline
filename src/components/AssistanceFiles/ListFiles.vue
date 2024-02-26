@@ -245,7 +245,7 @@ export default {
             return this.results.map(value =>{
                 return {
                     ...value,
-                    displayDate: ('displayAuditor' in value) ? (value.displayAuditor['creation']||true) : true,
+                    displayDate: ('displayAuditor' in value) ? ('creation' in value.displayAuditor? value.displayAuditor.creation : true) : true,
                     checkVisibility: this.checkVisibility(value),
                     color:this.billStatusColor(value.billStatus)
                 };
