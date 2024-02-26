@@ -41,7 +41,7 @@ iframe {
                 <th>
                     {{$t('document.description')}}
                 </th>
-                <th style="width: 90px;">
+                <th style="width: 90px;" v-if="computedDocument.length>0 && computedDocument[0].checkVisibility">
                     {{$t('assistanceBills.date.document')}}
                 </th>
                 <th>
@@ -62,7 +62,7 @@ iframe {
             </tr>
         </template>
         <template slot="tbody">
-            <template v-for="bill in results">
+            <template v-for="bill in computedDocument">
                 <tr :key="bill.idFile">
                     <td>
                         <span>{{bill.idFile}}</span>
@@ -70,7 +70,7 @@ iframe {
                     <td>
                         <span>{{bill.description||$t('general.notLoaded')}}</span>
                     </td>
-                    <td class="text-center">
+                    <td class="text-center" v-if="bill.checkVisibility">
                         <div>{{bill.date.date}}</div>
                         <small><b>({{bill.date.hour}})</b></small>
                     </td>
@@ -88,7 +88,7 @@ iframe {
                     <td class="text-center">
                         <span
                             class="m-badge m-badge--wide"
-                            :class="[billStatusColor(bill.billStatus)]"
+                            :class="[bill.color]"
                         >{{ bill.billStatusDesc }}</span>
                     </td>
                     <td class="text-center fa-status">
@@ -99,7 +99,7 @@ iframe {
                             >
                                 <i
                                     class="fa"
-                                    :class="[checkVisibility(bill)?'fa-eye-slash':'fa-eye']"
+                                    :class="[bill.checkVisibility?'fa-eye-slash':'fa-eye']"
                                 ></i>
                             </a>
                             <a
@@ -113,7 +113,7 @@ iframe {
                     </td>
                 </tr>
                 <tr :key="bill.idFile+'Iframe'"></tr>
-                <tr :key="bill.idFile+'IframeShow'" v-if="checkVisibility(bill)">
+                <tr :key="bill.idFile+'IframeShow'" v-if="bill.checkVisibility">
                     <td class="text-center" colspan="10">
                         <iframe :src="streaming(bill)"></iframe>
                     </td>
@@ -238,6 +238,18 @@ export default {
                 }
             };
             this.getBill(0);
+        }
+    },
+    computed: {
+        computedDocument: function () {
+            return this.results.map(value =>{
+                return {
+                    ...value,
+                    displayDate: ('displayAuditor' in value) ? value.displayAuditor.creation : false,
+                    checkVisibility: this.checkVisibility(value),
+                    color:this.billStatusColor(value.billStatus)
+                };
+            });
         }
     },
     mounted() {
