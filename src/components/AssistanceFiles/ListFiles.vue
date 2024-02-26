@@ -41,7 +41,7 @@ iframe {
                 <th>
                     {{$t('document.description')}}
                 </th>
-                <th style="width: 90px;" v-if="computedDocument.length>0 && computedDocument[0].checkVisibility">
+                <th style="width: 90px;" v-if="computedDocument.length>0 && computedDocument[0].displayDate">
                     {{$t('assistanceBills.date.document')}}
                 </th>
                 <th>
@@ -70,7 +70,7 @@ iframe {
                     <td>
                         <span>{{bill.description||$t('general.notLoaded')}}</span>
                     </td>
-                    <td class="text-center" v-if="bill.checkVisibility">
+                    <td class="text-center" v-if="bill.displayDate">
                         <div>{{bill.date.date}}</div>
                         <small><b>({{bill.date.hour}})</b></small>
                     </td>
@@ -245,7 +245,7 @@ export default {
             return this.results.map(value =>{
                 return {
                     ...value,
-                    displayDate: ('displayAuditor' in value) ? value.displayAuditor.creation : false,
+                    displayDate: ('displayAuditor' in value) ? (value.displayAuditor['creation']||true) : true,
                     checkVisibility: this.checkVisibility(value),
                     color:this.billStatusColor(value.billStatus)
                 };
