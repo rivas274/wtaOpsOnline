@@ -47,10 +47,10 @@ iframe {
                 <th>
                     {{$t('assistanceBills.classification')}}
                 </th>
-                <th v-if="bill.displayDate">
+                <th v-if="computedDocument.length>0 && computedDocument[0].displayDate">
                     {{$t('provider.provider')}}
                 </th>
-                <th v-if="bill.displayDate">
+                <th v-if="computedDocument.length>0 && computedDocument[0].displayDate">
                     {{$t('assistanceBills.originalAmount')}}
                 </th>
                 <th>
