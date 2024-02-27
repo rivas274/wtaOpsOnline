@@ -47,10 +47,10 @@ iframe {
                 <th>
                     {{$t('assistanceBills.classification')}}
                 </th>
-                <th>
+                <th v-if="bill.displayDate">
                     {{$t('provider.provider')}}
                 </th>
-                <th>
+                <th v-if="bill.displayDate">
                     {{$t('assistanceBills.originalAmount')}}
                 </th>
                 <th>
@@ -77,10 +77,10 @@ iframe {
                     <td>
                         <span>{{bill.category||$t('general.notLoaded')}}</span>
                     </td>
-                    <td>
+                    <td v-if="bill.displayDate">
                         <span>{{bill.provider.providerName||$t('general.notLoaded')}}</span>
                     </td>
-                    <td>
+                    <td v-if="bill.displayDate">
                         <span
                             v-tooltip="'Currency '+bill.currency"
                         >{{ bill.amount | currency(bill.currency) }}</span>
