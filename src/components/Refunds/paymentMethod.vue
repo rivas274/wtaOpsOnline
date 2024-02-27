@@ -29,7 +29,7 @@
                                         class="form-control m-input" 
                                         v-if="saveData[keyField] == fieldConfig.show_custom_field"
                                         :data-vv-as="fieldConfig.title"
-                                        v-validate="'required|alpha_numeric_space'" 
+                                        v-validate="'required'" 
                                         v-model.lazy="saveData[keyField+'_custom']" 
                                         :name="keyField+'_custom'" />
                             </div>
