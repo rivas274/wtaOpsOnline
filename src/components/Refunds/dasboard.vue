@@ -9,7 +9,7 @@
                                 <div class="m-invoice__head">
                                     <div class="m-invoice__container m-invoice__container--centered p-0">
                                         <div class="d-flex justify-content-between align-items-center p-1 mt-4">
-                                            <h1>{{ $t('reimbursement.reimbursement') }}</h1>
+                                            <h2>{{ $t('reimbursement.reimbursement') }}</h2>
                                             <custom-img v-if="results.logo" height="65" :src="results.logo"></custom-img>
                                         </div>
                                         <div class="m-demo__preview p-0 pt-2" v-if="'processRefund' in results">
