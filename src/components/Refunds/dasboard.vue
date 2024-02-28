@@ -11,19 +11,14 @@
                                         class="m-invoice__container m-invoice__container--centered p-0"
                                     >
                                         <div
-                                            class="m-invoice__logo"
-                                            style="padding-top: 0px; margin-top:40px;"
+                                            class="d-flex justify-content-between align-items-center p-1 mt-4"
                                         >
-                                            <a>
-                                                <h1>{{ $t('reimbursement.reimbursement') }}</h1>
-                                            </a>
-                                            <a class="m--hidden-mobile" >
-                                                <custom-img
-                                                    v-if="results.logo"
-                                                    height="65"
-                                                    :src="results.logo"
-                                                ></custom-img>
-                                            </a>
+                                            <h1>{{ $t('reimbursement.reimbursement') }}</h1>
+                                            <custom-img
+                                                v-if="results.logo"
+                                                height="65"
+                                                :src="results.logo"
+                                            ></custom-img>
                                         </div>
                                         <div
                                             class="m-demo__preview"
@@ -278,9 +273,9 @@ export default {
     }
 };
 </script>
-<style scoped>
+<style>
 .dropdown-header {
-    font-size: .999rem;
+    font-size: .999rem !important;
 }
 .m-invoice__items{
     padding:2rem 0 3rem;
@@ -289,8 +284,11 @@ export default {
     padding:3rem;
 }
 .bg-preview{
-    padding: 5px;
+    padding: 0.5rem !important;
     text-align: center; 
-    background: #36a3f7;
+    background: #36a3f7 !important;
+}
+.text-wrap {
+    white-space: pre-wrap !important;
 }
 </style>

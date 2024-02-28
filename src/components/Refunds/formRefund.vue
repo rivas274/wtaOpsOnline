@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="documentsTypeGroup.length>1 && !inputsData.docTypeGroup">
-            <div class="m-portlet__head">
+            <div class="m-portlet__head m--hidden-mobile">
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">
                         <span class="m-portlet__head-icon m--hide">
@@ -15,19 +15,19 @@
             </div>
             <div class="m-portlet__body">
                 <div class="row">
-                    <div class="col-md-6" v-for="group in documentsTypeGroup " :key="group.id">
-                        <div class="form-group">
-                            <button  class="btn-block btn btn-lg btn-primary"
-                                    @click.prevent="setDataFilter('docTypeGroup',group.id)"
-                                    type="button">
-                                    {{ group.name }}
+                    <div class="col-md-6 d-flex align-items-start" v-for="group in documentsTypeGroup " :key="group.id">
+                        <button  class="btn-block btn btn-lg btn-primary text-wrap text-left mb-2 align-self-stretch"
+                                @click.prevent="setDataFilter('docTypeGroup',group.id)"
+                                type="button">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span>{{ group.name }}</span>
                                 <span class="pull-right badge badge-secondary">
                                     <span class="m-0 h5">
                                         {{ group['total'] }}/{{ group['uploaded'] }}
                                     </span>
                                 </span>
-                            </button>
-                        </div>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
