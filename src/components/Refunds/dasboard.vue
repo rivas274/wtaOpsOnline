@@ -21,14 +21,11 @@
                                             ></custom-img>
                                         </div>
                                         <div
-                                            class="m-demo__preview"
-                                            style="padding: 20px 0px 0px 0px;"
+                                            class="m-demo__preview p-0 pt-2"
+                                            v-if="'processRefund' in results"
                                         >
                                             <div
                                                 class="m-demo"
-                                                data-code-preview="true"
-                                                data-code-html="true"
-                                                data-code-js="false"
                                             >
                                                 <div
                                                     class="m-demo__preview bg-preview"
