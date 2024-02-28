@@ -14,7 +14,7 @@
                                         </div>
                                         <div class="m-demo__preview p-0 pt-2" v-if="'processRefund' in results">
                                             <div class="m-demo">
-                                                <div class="m-demo__preview bg-preview d-flex align-items-start flex-column-reverse flex-md-row align-items-center">
+                                                <div class="m-demo__preview bg-preview d-flex align-items-start flex-column-reverse flex-md-row align-items-center justify-content-center">
                                                     <ul class="m-nav m-nav--inline">
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link" v-tooltip:top="$t('general.client')">
