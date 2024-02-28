@@ -83,9 +83,25 @@ textarea.v-center {
 .m-nav .m-nav__item > .m-nav__link .m-nav__link-icon {
   color: #f8f9fc;
 }
-@media (min-width: 430px) {
-  .m-nav.m-nav--inline {
-      display: inline !important;
+.locale-changer {
+  min-width: 140px;
+}
+.locale-changer .filter-option {
+  padding: 6px !important;
+}
+.locale-changer img {
+  max-height: 22px !important;
+  max-width: 40px !important;
+  margin-right: 4px;
+}
+@media (max-width:1024px) {
+  .m-nav.m-nav--inline > .m-nav__item {
+      width: 33% !important;
+      padding: 0 0 0 12px !important;
+  }
+  .m-form__group {
+      padding-left: 5px !important;
+      padding-right: 5px !important;
   }
 }
 @media (max-width: 427px) {
@@ -96,5 +112,83 @@ textarea.v-center {
   .m-form__group {
       padding-left: 5px !important;
       padding-right: 5px !important;
+  }
+}
+.dropdown-header {
+  font-size: .999rem !important;
+}
+
+.m-invoice__items {
+  padding: 2rem 0 3rem;
+}
+
+.portlet-no-client {
+  padding: 3rem;
+}
+
+.bg-preview {
+  padding: 0.5rem !important;
+  text-align: center;
+  background: #36a3f7 !important;
+}
+
+.text-wrap {
+  white-space: pre-wrap !important;
+}
+
+.m-form__actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.m-invoice__items {
+  padding: 2rem 0 !important;
+}
+
+.m-form__actions .btn,
+.m-portlet__head .btn {
+  min-width: 150px;
+}
+.m-form__group .col-form-label{
+  font-weight: bold;
+}
+@media only screen and (max-width: 767px) {
+  .m-form__actions {
+      flex-direction: column !important;
+  }
+
+  .m-form__actions,
+  .m-portlet__head {
+      padding: 1rem 0px !important;
+  }
+
+  .m-form__actions>.btn,
+  .m-portlet__head>.btn {
+      align-self: stretch !important;
+      min-width: auto;
+  }
+
+  .form-control,
+  .input-group>.form-control,
+  .bootstrap-select>.dropdown-toggle,
+  .custom-file-label,
+  .custom-file-label::after,
+  .bootstrap-select .dropdown-menu li .dropdown-item{
+      padding: 1rem 1.5rem;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      border-radius: 0.3rem;
+  }
+  .custom-file-label,
+  .custom-file-label::after{
+      height: auto;
+  }
+  .locale-changer .filter-option {
+    top: 5px !important;
+  }
+  .locale-changer{
+    width: 100% !important;
+    margin-bottom: 1.2rem !important;
   }
 }

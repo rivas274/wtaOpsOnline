@@ -7,126 +7,69 @@
                         <div class="m-invoice-2">
                             <div class="m-invoice__wrapper">
                                 <div class="m-invoice__head">
-                                    <div
-                                        class="m-invoice__container m-invoice__container--centered p-0"
-                                    >
-                                        <div
-                                            class="d-flex justify-content-between align-items-center p-1 mt-4"
-                                        >
+                                    <div class="m-invoice__container m-invoice__container--centered p-0">
+                                        <div class="d-flex justify-content-between align-items-center p-1 mt-4">
                                             <h1>{{ $t('reimbursement.reimbursement') }}</h1>
-                                            <custom-img
-                                                v-if="results.logo"
-                                                height="65"
-                                                :src="results.logo"
-                                            ></custom-img>
+                                            <custom-img v-if="results.logo" height="65" :src="results.logo"></custom-img>
                                         </div>
-                                        <div
-                                            class="m-demo__preview p-0 pt-2"
-                                            v-if="'processRefund' in results"
-                                        >
-                                            <div
-                                                class="m-demo"
-                                            >
-                                                <div
-                                                    class="m-demo__preview bg-preview"
-                                                >
-                                                    <locale-changer class="pull-right"></locale-changer>
+                                        <div class="m-demo__preview p-0 pt-2" v-if="'processRefund' in results">
+                                            <div class="m-demo">
+                                                <div class="m-demo__preview bg-preview d-flex align-items-start flex-column-reverse flex-md-row align-items-center">
                                                     <ul class="m-nav m-nav--inline">
                                                         <li class="m-nav__item">
-                                                            <a
-                                                                class="m-nav__link"
-                                                                v-tooltip:top="$t('general.client')"
-                                                            >
-                                                                <i
-                                                                    class="m-nav__link-icon flaticon-suitcase"
-                                                                ></i>
+                                                            <a class="m-nav__link" v-tooltip:top="$t('general.client')">
+                                                                <i class="m-nav__link-icon flaticon-suitcase"></i>
                                                                 <span
-                                                                    class="m-nav__link-text"
-                                                                >{{results.clientName}}</span>
+                                                                    class="m-nav__link-text text-left">{{ results.clientName }}</span>
                                                             </a>
                                                         </li>
                                                         <li class="m-nav__item">
-                                                            <a
-                                                                class="m-nav__link"
-                                                                v-tooltip:top="$t('assistance.code')"
-                                                            >
-                                                                <i
-                                                                    class="m-nav__link-icon flaticon-shapes"
-                                                                ></i>
+                                                            <a class="m-nav__link" v-tooltip:top="$t('assistance.code')">
+                                                                <i class="m-nav__link-icon flaticon-shapes"></i>
                                                                 <span
-                                                                    class="m-nav__link-text"
-                                                                >{{results.codeAssist}}</span>
+                                                                    class="m-nav__link-text text-left">{{ results.codeAssist }}</span>
                                                             </a>
                                                         </li>
-                                                        <li
-                                                            class="m-nav__item"
-                                                            v-if="results.codeAssist!=results.codigo"
-                                                        >
-                                                            <a
-                                                                class="m-nav__link"
-                                                                v-tooltip:top="$t('voucher.voucher')"
-                                                            >
-                                                                <i
-                                                                    class="m-nav__link-icon flaticon-interface-5"
-                                                                ></i>
-                                                                <span
-                                                                    class="m-nav__link-text"
-                                                                >{{results.codigo}}</span>
+                                                        <li class="m-nav__item" v-if="results.codeAssist != results.codigo">
+                                                            <a class="m-nav__link" v-tooltip:top="$t('voucher.voucher')">
+                                                                <i class="m-nav__link-icon flaticon-interface-5"></i>
+                                                                <span class="m-nav__link-text text-left">{{ results.codigo }}</span>
                                                             </a>
                                                         </li>
                                                         <li class="m-nav__item">
-                                                            <a
-                                                                class="m-nav__link"
-                                                                v-tooltip:top="$t('voucher.name')"
-                                                            >
-                                                                <i
-                                                                    class="m-nav__link-icon flaticon-avatar"
-                                                                ></i>
+                                                            <a class="m-nav__link" v-tooltip:top="$t('voucher.name')">
+                                                                <i class="m-nav__link-icon flaticon-avatar"></i>
                                                                 <span
-                                                                    class="m-nav__link-text"
-                                                                >{{results.firstName+' '+results.lastName}}</span>
+                                                                    class="m-nav__link-text text-left">{{ results.firstName + ' ' + results.lastName }}</span>
                                                             </a>
                                                         </li>
-                                                        <li
-                                                            class="m-nav__item"
-                                                            v-if="results.registeredDate"
-                                                        >
-                                                            <a
-                                                                class="m-nav__link"
-                                                                v-tooltip:top="$t('assistance.date.case')"
-                                                            >
-                                                                <i
-                                                                    class="m-nav__link-icon flaticon-calendar-1"
-                                                                ></i>
+                                                        <li class="m-nav__item" v-if="results.registeredDate">
+                                                            <a class="m-nav__link"
+                                                                v-tooltip:top="$t('assistance.date.case')">
+                                                                <i class="m-nav__link-icon flaticon-calendar-1"></i>
                                                                 <span
-                                                                    class="m-nav__link-text"
-                                                                >{{results.registeredDate.date}}</span>
+                                                                    class="m-nav__link-text text-left">{{ results.registeredDate.date }}</span>
                                                             </a>
                                                         </li>
                                                         <li class="m-nav__item">
-                                                            <a
-                                                                class="m-nav__link"
-                                                                v-tooltip:top="$t('assistance.date.birth')"
-                                                            >
-                                                                <i
-                                                                    class="m-nav__link-icon flaticon-lifebuoy"
-                                                                ></i>
+                                                            <a class="m-nav__link"
+                                                                v-tooltip:top="$t('assistance.date.birth')">
+                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
                                                                 <span
-                                                                    class="m-nav__link-text"
-                                                                >{{results.birthDate}}</span>
+                                                                    class="m-nav__link-text text-left">{{ results.birthDate }}</span>
                                                             </a>
                                                         </li>
                                                     </ul>
+                                                    <locale-changer></locale-changer>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="m-invoice__items" v-if="results.processRefund=='Y'">
+                                        <div class="m-invoice__items" v-if="results.processRefund == 'Y'">
                                             <declaration-of-use class="m-portlet m-portlet--tab"
-                                                                :id-assist="results.idAssist" 
-                                                                v-if="formShow=='declarationOfUse'"
-                                                                :accepted.sync="results.refundAdm.declarationOfUse">
+                                                :id-assist="results.idAssist" v-if="formShow == 'declarationOfUse'"
+                                                :accepted.sync="results.refundAdm.declarationOfUse">
                                             </declaration-of-use>
-                                            <div v-show="formShow=='showStatus'">
+                                            <div v-show="formShow == 'showStatus'">
                                                 <div class="m-portlet m-portlet--tab">
                                                     <div class="m-portlet__head">
                                                         <div class="m-portlet__head-caption">
@@ -163,34 +106,30 @@
                                                     </div>
                                                     <div class="m-portlet__foot text-center">
                                                         <div class="m-form__actions">
-                                                            <a  class="btn btn-primary mx-1" 
-                                                                v-if="results.refundAdm.status.code=='C'"
+                                                            <a class="btn btn-lg btn-primary mx-1"
+                                                                v-if="results.refundAdm.status.code == 'C'"
                                                                 :href="results.refundAdm.payment_proof">
                                                                 {{ $t('reimbursement.paymentProof') }}</a>
-                                                            <button @click="showStatus = false" 
-                                                                v-if="results.refundAdm.status.canUpload" 
-                                                                class="btn btn-primary mx-1"
-                                                            >{{ $t('general.return') }}</button>
+                                                            <button @click="showStatus = false"
+                                                                v-if="results.refundAdm.status.canUpload"
+                                                                class="btn btn-lg btn-primary mx-1">{{ $t('general.return') }}</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <form-refund v-show="formShow=='refund'"
-                                                        class="m-portlet m-portlet--tab"
-                                                        :id-assist="results.idAssist"
-                                                        v-on:complete-documents="getAssistance"
-                                                        :default-data="defaultData">
+                                            <form-refund v-show="formShow == 'refund'" class="m-portlet m-portlet--tab"
+                                                :id-assist="results.idAssist" v-on:complete-documents="getAssistance"
+                                                :default-data="defaultData">
                                             </form-refund>
-                                            <payment-method v-if="formShow=='paymentMethod'"
-                                                        class="m-portlet m-portlet--tab"
-                                                        :id-assist="results.idAssist"
-                                                        :status.sync="results.refundAdm.method_payment.status.code">
+                                            <payment-method v-if="formShow == 'paymentMethod'"
+                                                class="m-portlet m-portlet--tab" :id-assist="results.idAssist"
+                                                :status.sync="results.refundAdm.method_payment.status.code">
                                             </payment-method>
                                         </div>
                                         <div v-else>
                                             <div class="m-portlet m-portlet--tab text-center portlet-no-client">
                                                 <h1>
-                                                    {{$t('reimbursement.clientNotProcessRefunds')}}
+                                                    {{ $t('reimbursement.clientNotProcessRefunds') }}
                                                 </h1>
                                             </div>
                                         </div>
@@ -221,7 +160,7 @@ export default {
     data() {
         return {
             code: this.$route.params.code,
-            showStatus:true,
+            showStatus: true,
             results: {},
         };
     },
@@ -229,12 +168,12 @@ export default {
         this.getAssistance();
     },
     methods: {
-        getAssistance: function() {
+        getAssistance: function () {
             this.axios
                 .get("getAssistancePublic", {
                     params: {
                         codeAssist: this.code,
-                        extra:['refund_adm']
+                        extra: ['refund_adm']
                     }
                 })
                 .then(response => {
@@ -270,22 +209,3 @@ export default {
     }
 };
 </script>
-<style>
-.dropdown-header {
-    font-size: .999rem !important;
-}
-.m-invoice__items{
-    padding:2rem 0 3rem;
-}
-.portlet-no-client{
-    padding:3rem;
-}
-.bg-preview{
-    padding: 0.5rem !important;
-    text-align: center; 
-    background: #36a3f7 !important;
-}
-.text-wrap {
-    white-space: pre-wrap !important;
-}
-</style>

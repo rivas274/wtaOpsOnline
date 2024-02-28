@@ -1,37 +1,9 @@
 <template>
     <div>
-        <div v-if="documentsTypeGroup.length>1 && !inputsData.docTypeGroup">
-            <div class="m-portlet__head m--hidden-mobile">
-                <div class="m-portlet__head-caption">
-                    <div class="m-portlet__head-title">
-                        <span class="m-portlet__head-icon m--hide">
-                            <i class="la la-gear"></i>
-                        </span>
-                        <h3 class="m-portlet__head-text">
-                            {{ $t('reimbursement.information') }}
-                        </h3>
-                    </div>
-                </div>
-            </div>
-            <div class="m-portlet__body">
-                <div class="row">
-                    <div class="col-md-6 d-flex align-items-start" v-for="group in documentsTypeGroup " :key="group.id">
-                        <button  class="btn-block btn btn-lg btn-primary text-wrap text-left mb-2 align-self-stretch"
-                                @click.prevent="setDataFilter('docTypeGroup',group.id)"
-                                type="button">
-                            <div class="d-flex align-items-center justify-content-between">
-                                <span>{{ group.name }}</span>
-                                <span class="pull-right badge badge-secondary">
-                                    <span class="m-0 h5">
-                                        {{ group['total'] }}/{{ group['uploaded'] }}
-                                    </span>
-                                </span>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <group-btn-refund v-if="documentsTypeGroup.length>1 && !inputsData.docTypeGroup"
+            :groups="documentsTypeGroup"
+            @set-group="setDataFilter">
+        </group-btn-refund>
         <div v-else>
             <div class="row mx-0">
                 <form
@@ -71,7 +43,7 @@
                             class="form-group m-form__group"
                             v-if="defaultData.caseType"
                         >
-                            <strong>{{ $t('assistance.type') }}</strong>
+                            <label class="col-form-label">{{ $t('assistance.type') }}</label>
                             <input-from-table
                                 class="m-form__group-sub"
                                 icon="flaticon-lifebuoy"
@@ -83,7 +55,7 @@
                             class="form-group m-form__group"
                             v-if="defaultData.assistanceType"
                         >
-                            <strong>{{ $t('assistance.typeAssistance') }}</strong>
+                            <label class="col-form-label">{{ $t('assistance.typeAssistance') }}</label>
                             <input-from-table
                                 class="m-form__group-sub"
                                 icon="flaticon-lifebuoy"
@@ -95,7 +67,7 @@
                             class="ffilorm-group m-form__group"
                             :class="{'has-danger': errors.has('docType')}"
                         >
-                            <strong>{{ $t('document.type') }}</strong>
+                            <label class="col-form-label">{{ $t('document.type') }}</label>
                             <select-from
                                 name="docType"
                                 v-validate="'required'"
@@ -128,7 +100,7 @@
                                         <span></span>
                                     </div>
                                     <div class="m-alert__text py-3">
-                                        <strong>{{ $t('general.important') }}</strong>
+                                        <label class="col-form-label">{{ $t('general.important') }}</label>
                                         {{ extraCausal.description }}
                                     </div>
                                 </div>
@@ -142,7 +114,7 @@
                                         <span></span>
                                     </div>
                                     <div class="m-alert__text py-3">
-                                        <strong>{{ $t('general.important') }}</strong>
+                                        <label class="col-form-label">{{ $t('general.important') }}</label>
                                         {{ extraInsurance.description }}
                                     </div>
                                 </div>
@@ -153,7 +125,7 @@
                                 class="form-group m-form__group"
                                 :class="{'has-danger': errors.has('date')}"
                             >
-                                <strong>{{ $t('reimbursement.date.document') }}</strong>
+                                <label class="col-form-label">{{ $t('reimbursement.date.document') }}</label>
                                 <date-single-bt
                                     class="m-input"
                                     name="date"
@@ -173,7 +145,7 @@
                                 class="form-group m-form__group"
                                 :class="{'has-danger': errors.has('amount')}"
                             >
-                                <strong>{{ $t('document.amount') }}</strong>
+                                <label class="col-form-label">{{ $t('document.amount') }}</label>
                                 <div
                                     class="m-input-icon m-input-icon--left m-input-icon--right"
                                 >
@@ -205,7 +177,7 @@
                             <div
                                 class="form-group m-form__group"
                             >
-                                <strong>{{ $t('document.currency') }}</strong>
+                                <label class="col-form-label">{{ $t('document.currency') }}</label>
                                 <select-from
                                     name="currency"
                                     :options="currencyFromSelect"
@@ -217,7 +189,7 @@
                                 class="form-group m-form__group"
                                 :class="{'has-danger': errors.has('nameBen')}"
                             >
-                                <strong>{{ $t('reimbursement.payee') }}</strong>
+                                <label class="col-form-label">{{ $t('reimbursement.payee') }}</label>
                                 <div
                                     class="m-input-icon m-input-icon--left m-input-icon--right"
                                 >
@@ -251,7 +223,7 @@
                             class="form-group m-form__group"
                             :class="{'has-danger': errors.has('Description')}"
                         >
-                            <strong>{{ $t('document.description') }}</strong>
+                            <label class="col-form-label">{{ $t('document.description') }}</label>
                             <div
                                 class="m-input-icon m-input-icon--left m-input-icon--right"
                             >
@@ -283,7 +255,7 @@
                             class="form-group m-form__group"
                             :class="{'has-danger': errors.has('file')}"
                         >
-                            <strong>{{ $t('document.file') }}</strong>
+                            <label class="col-form-label">{{ $t('document.file') }}</label>
                             <div class="custom-file">
                                 <input
                                     type="file"
@@ -359,7 +331,7 @@
                                 :disabled="disableForm"
                                 :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
                                 type="submit"
-                                class="btn btn-primary"
+                                class="btn btn-lg btn-primary"
                             >{{ $t('general.send') }}</button>
                         </div>
                     </div>
@@ -372,11 +344,13 @@
                         v-if="typeFile=='pdf'"
                         class="rounded h-100 w-100"
                         :src="previewSrc"
+                        title="PDF Preview"
                     ></iframe>
                     <img
                         v-if="typeFile=='image'"
                         class="m-0 my-auto rounded w-100 h-auto"
                         :src="previewSrc"
+                        alt="Image Preview"
                     />
                 </div>
             </div>
@@ -391,6 +365,7 @@ import inputFromTable from "../Tables/filters/inputFromTable.vue";
 import currency from "../Labels/currency.json";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import VueRecaptcha from "vue-recaptcha";
+import groupBtnRefund from './groupBtnRefund.vue';
 
 export default {
     components: {
@@ -398,7 +373,8 @@ export default {
         selectFrom,
         inputFromTable,
         dateSingleBt,
-        VueRecaptcha
+        VueRecaptcha,
+        groupBtnRefund
     },
     props:['idAssist','default-data'],
     data() {

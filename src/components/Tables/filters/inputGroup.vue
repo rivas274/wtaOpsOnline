@@ -1,6 +1,8 @@
 <template>
     <div>
-        <div class="input-group">
+        <div class="input-group"
+            :class="[size?'input-group-'+size:'']"
+            >
             <input
                 type="text"
                 class="form-control m-input"
@@ -19,7 +21,7 @@
 </template>
 <script>
 export default {
-    props: ["watermark", "name", "icon", "value"],
+    props: ["watermark", "name", "icon", "value","size"],
     data: function () {
         return {
             ico: this.icon || "la la-search",

@@ -1,16 +1,3 @@
-<style>
-.locale-changer {
-    width: 130px;
-}
-.locale-changer .filter-option {
-    padding: 6px !important;
-}
-.locale-changer img {
-    max-height: 22px !important;
-    max-width: 40px !important;
-    margin-right: 4px;
-}
-</style>
 <template>
     <div class="locale-changer">
         <select

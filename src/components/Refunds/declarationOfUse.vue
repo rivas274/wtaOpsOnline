@@ -46,7 +46,7 @@
                                 :disabled="disableForm"
                                 :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
                                 type="submit"
-                                class="btn btn-primary"
+                                class="btn btn-lg btn-primary"
                         >{{ $t('general.continue') }}</button>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                             :disabled="disableForm"
                             :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
                             type="submit"
-                            class="btn btn-primary"
+                            class="btn btn-lg btn-primary"
                         >{{ $t('general.ok') }}</button>
                 </div>
             </div>

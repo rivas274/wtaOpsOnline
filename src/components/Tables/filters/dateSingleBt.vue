@@ -6,6 +6,7 @@
                 :name="name"
                 :value="value"
                 class="form-control m-input date-bt-vue"
+                :class="[size?'form-control-'+size:'']"
                 :placeholder="watermark"
                 readonly
             />
@@ -19,7 +20,7 @@
 </template>
 <script>
 export default {
-    props: ["watermark", "name", "value"],
+    props: ["watermark", "name", "value","size"],
     mounted() {
         let _self = this;
         window.$(_self.$el)

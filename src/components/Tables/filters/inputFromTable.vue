@@ -4,6 +4,7 @@
             <input
                 type="text"
                 class="form-control m-input"
+                :class="[size?'form-control-'+size:'']"
                 :placeholder="watermark"
                 :id="'Search'+name"
                 :name="name"
@@ -21,7 +22,7 @@
 </template>
 <script>
 export default {
-    props: ["watermark", "name", "icon", "value","readonly"],
+    props: ["watermark", "name", "icon", "value","readonly","size"],
     data: function() {
         return {
             ico: this.icon || "la la-search",

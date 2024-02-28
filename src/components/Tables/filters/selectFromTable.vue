@@ -2,6 +2,7 @@
     <div>
         <select 
             class="form-control m-bootstrap-select m_selectpicker"
+            :class="[size?'form-control-'+size:'']"
             data-live-search="true"
             data-style="form-control"
             :id="'Search'+name"
@@ -20,7 +21,7 @@
 </template>
 <script>
 export default {
-    props: ["name", "options", "selected", "v-validate", "watermark"],
+    props: ["name", "options", "selected", "v-validate", "watermark","size"],
     data: function () {
         return {
             value: this.selected
