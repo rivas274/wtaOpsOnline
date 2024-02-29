@@ -98,10 +98,12 @@
                     </div>
                 </transition>
             </div>
-            <div class="m-portlet__foot text-center">
-                <button :disabled="disableForm"
-                    :class="{ 'm-login__btn--primary m-loader m-loader--right m-loader--light': disableForm }" type="submit"
-                    class="btn btn-lg btn-primary">{{ $t('general.save') }}</button>
+            <div class="m-portlet__foot m-portlet__foot--fit text-center">
+                <div class="m-form__actions">
+                    <button :disabled="disableForm"
+                        :class="{ 'm-login__btn--primary m-loader m-loader--right m-loader--light': disableForm }" type="submit"
+                        class="btn btn-lg btn-primary">{{ $t('general.save') }}</button>
+                </div>
             </div>
         </div>
     </form>

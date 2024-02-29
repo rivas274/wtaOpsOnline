@@ -19,7 +19,7 @@ export default {
             var genreDetaill = {
                 'F': 'general.genre.male',
                 'M': 'general.genre.female',
-                'I': 'general.genre.indefined',
+                'I': 'general.genre.undefined',
             };
             str = (typeof str === 'string') ? str.toUpperCase() : str;
             return genreDetaill[str] || genreDetaill['I'];

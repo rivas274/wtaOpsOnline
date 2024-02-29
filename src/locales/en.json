@@ -99,7 +99,8 @@
         "uploaded": "Your document has been successfully uploaded",
         "uploadAnother": "Upload Another Document",
         "uploadDocuments": "Upload Documents",
-        "sharedDocuments": "Shared Documents"
+        "sharedDocuments": "Shared Documents",
+        "remarks": "Remarks"
     },
     "assistance": {
         "procedureCode":"Procedure Code",
@@ -243,7 +244,7 @@
         "genre":{
             "male": "Male",
             "female": "Female",
-            "indefined": "Undefined"
+            "undefined": "Undefined"
         },
         "copyrightLogin":"All users of our online services subject to Privacy Statement and agree to be bound by Terms of Service. Please read. © {year} Ils. All rights reserved. Powered by ilstechnik.com",
         "records": "records",

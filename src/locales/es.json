@@ -99,7 +99,8 @@
         "uploaded": "Su documento ha sido cargado exitosamente",
         "uploadAnother": "Subir otro documento",
         "uploadDocuments": "Subir Documentos",
-        "sharedDocuments": "Documentos Compartidos"
+        "sharedDocuments": "Documentos Compartidos",
+        "remarks":  "Observaciones"
     },
     "assistance": {
         "procedureCode":"Código de procedimiento",
@@ -243,7 +244,7 @@
         "genre":{
             "male": "Hombre",
             "female": "Femenino",
-            "indefined": "Indefinido"
+            "undefined": "Indefinido"
         },
         "copyrightLogin": "Todos los usuarios de nuestros servicios en línea están sujetos a la Declaración de Privacidad y aceptan las Condiciones de Servicio. Por favor, © {year} ILS. Todos los derechos reservados. Desarrollado por ilstechnik.com",
         "records": "registros",

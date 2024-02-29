@@ -64,12 +64,28 @@
                                                                     class="m-nav__link-text text-left">{{ results.birthDate }}</span>
                                                             </a>
                                                         </li>
+                                                        <li class="m-nav__item">
+                                                            <a class="m-nav__link"
+                                                                v-tooltip:top="$t('assistance.type')">
+                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                <span
+                                                                    class="m-nav__link-text text-left">{{ results.descCaseType }}</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="m-nav__item">
+                                                            <a class="m-nav__link"
+                                                                v-tooltip:top="$t('assistance.typeAssistance')">
+                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                <span
+                                                                    class="m-nav__link-text text-left">{{ results.descAssistanceType }}</span>
+                                                            </a>
+                                                        </li>
                                                     </ul>
                                                     <locale-changer></locale-changer>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="m-invoice__items" v-if="results.processRefund == 'Y'">
+                                        <div class="m-invoice__items m-form" v-if="results.processRefund == 'Y'">
                                             <declaration-of-use class="m-portlet m-portlet--tab"
                                                 :id-assist="results.idAssist" v-if="formShow == 'declarationOfUse'"
                                                 :accepted.sync="results.refundAdm.declarationOfUse">
@@ -109,7 +125,7 @@
                                                             </h2>
                                                         </div>
                                                     </div>
-                                                    <div class="m-portlet__foot text-center">
+                                                    <div class="m-portlet__foot m-portlet__foot--fit text-center">
                                                         <div class="m-form__actions">
                                                             <a class="btn btn-lg btn-primary mx-1"
                                                                 v-if="results.refundAdm.status.code == 'C'"

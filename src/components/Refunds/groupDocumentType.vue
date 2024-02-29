@@ -1,12 +1,19 @@
 <template>
     <div>
-        <div class="m-portlet__head m--hidden-mobile">
+        <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
                     <h3 class="m-portlet__head-text">
-                        {{ $t('reimbursement.information') }}
+                        {{ groupSelected?groupSelected.name: $t('reimbursement.information') }}
                     </h3>
                 </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <button v-if="groups.length>1" class="btn"
+                        @click.prevent="back()"
+                        type="button"
+                    >{{ $t('general.back') }}
+                </button>
             </div>
         </div>
         <div class="m-portlet__body">
@@ -31,7 +38,7 @@
 </template>
 <script>
 export default {
-    props: ['documents-type'],
+    props: ['documents-type','groups'],
     data() {
         return {};
     },
@@ -43,7 +50,21 @@ export default {
     methods: {
         setType: function ({ id }) {
             this.$emit('set-document-type', 'docType', id);
+        },
+        back: function () {
+            this.$emit('set-document-type', 'docTypeGroup', null);
         }
+    },
+    computed: {
+        groupSelected: function () {
+            let selected = this.groups.filter((v) => {
+                return v.selected;
+            });
+            if(selected.length==1) {
+                return selected[0];
+            }
+            return false;
+        },
     }
 };
 </script>

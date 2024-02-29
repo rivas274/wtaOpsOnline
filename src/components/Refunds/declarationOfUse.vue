@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="m-portlet__foot text-center">
+                <div class="m-portlet__foot m-portlet__foot--fit text-center">
                     <div class="m-form__actions">
                         <button
                                 :disabled="disableForm"
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            <div class="m-portlet__foot text-center">
+            <div class="m-portlet__foot m-portlet__foot--fit text-center">
                 <div class="m-form__actions">
                     <button
                             :disabled="disableForm"

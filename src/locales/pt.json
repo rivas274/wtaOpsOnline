@@ -15,7 +15,9 @@
         "paymentInformationUploaded": "Informações de pagamento enviadas"
     },
     "document": {
+        "document": "Documento",
         "category": "Categoria",
+        "add": "Adicionar",
         "type": "Tipo de documento",
         "classification": "Classificação de documentos",
         "amount": "Montante",
@@ -25,7 +27,10 @@
         "choose": "Escolher Ficheiro",
         "send": "Documento Enviado",
         "uploaded": "Seu documento foi enviado com sucesso",
-        "uploadAnother": "Upload de outro documento"
+        "uploadAnother": "Upload de outro documento",
+        "uploadDocuments": "Enviar Documentos",
+        "sharedDocuments": "Documentos Compartilhados",
+        "remarks": "Observações"
     },
     "assistance": {
         "code": "Código de Assistência",
@@ -37,7 +42,11 @@
         }
     },
     "voucher": {
-        "name": "Nome do passageiro"
+        "voucher": "Voucher",
+        "name": "Nome do passageiro",
+        "date": {
+            "purchase": "Data de compra"
+        }
     },
     "general": {
         "refund": "Reembolso",
@@ -45,6 +54,7 @@
         "voucher": "Voucher",
         "send": "Enviar",
         "no": "No",
+        "yes": "Sim",
         "date": "Data",
         "upload_assistance_bills": "Enviar Contas de Assistência",
         "case_number": "Número do caso",
