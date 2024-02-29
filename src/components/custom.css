@@ -165,8 +165,8 @@ textarea.v-center {
   .m-demo__preview .m-nav--inline{
     padding-left: 0;
   }
-  .m-form__actions,
-  .m-portlet__head {
+  .form-refund .m-form__actions,
+  .form-refund .m-portlet__head {
       padding: 1rem 0px !important;
   }
 

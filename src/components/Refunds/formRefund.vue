@@ -1,357 +1,374 @@
 <template>
     <div>
-        <group-btn-refund v-if="documentsTypeGroup.length>1 && !inputsData.docTypeGroup"
-            :groups="documentsTypeGroup"
-            @set-group="setDataFilter">
-        </group-btn-refund>
-        <div v-else>
-            <div class="row mx-0">
-                <form
-                    class="m-form m-form--fit m-form--label-align-right"
-                    :class="[typeFile?'col-md-6':'col-md-12 mx-auto']"
-                    @submit.prevent="validRefunds"
-                    enctype="multipart/form-data"
-                    ref="form"
-                >
-                    <div class="m-portlet__head">
-                        <div
-                            class="m-portlet__head-caption"
-                        >
+        <div
+            class="progress progress-refund align-items-center"
+        >
+            <div
+                class="progress-bar m--bg-primary"
+                role="progressbar"
+                :aria-valuenow="documentProgress.percentage"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                :style="{width: documentProgress.percentage+'%'}"
+            >
+            &nbsp;
+            <span v-if="documentProgress.percentage>35">
+                {{ documentProgress.html }}
+            </span>
+            </div>
+            <span class="px-2" v-if="documentProgress.percentage<35">
+                {{ documentProgress.html }}
+            </span>
+        </div>
+        <div class="m-portlet m-portlet--tab form-refund">
+            <group-btn-refund v-if="documentsTypeGroup.length>1 && !inputsData.docTypeGroup"
+                :groups="documentsTypeGroup"
+                @set-group="setDataFilter">
+            </group-btn-refund>
+            <div v-else>
+                <div class="row mx-0">
+                    <form
+                        class="m-form m-form--fit m-form--label-align-right"
+                        :class="[typeFile?'col-md-6':'col-md-12 mx-auto']"
+                        @submit.prevent="validRefunds"
+                        enctype="multipart/form-data"
+                        ref="form"
+                    >
+                        <div class="m-portlet__head">
                             <div
-                                class="m-portlet__head-title"
+                                class="m-portlet__head-caption"
                             >
-                                <span
-                                    class="m-portlet__head-icon m--hide"
-                                >
-                                    <i class="la la-gear"></i>
-                                </span>
-                                <h3
-                                    class="m-portlet__head-text"
-                                >{{ $t('reimbursement.information') }}</h3>
-                            </div>
-                        </div>
-                        <div class="m-portlet__head-tools">
-                            <button v-if="documentsTypeGroup.length>1" class="btn"
-                                    @click.prevent="inputsData.docTypeGroup = null"
-                                    type="button"
-                                >{{ $t('general.back') }}
-                            </button>
-                        </div>
-                    </div>
-                    <div class="m-portlet__body">
-                        <div
-                            class="form-group m-form__group"
-                            v-if="defaultData.caseType"
-                        >
-                            <label class="col-form-label">{{ $t('assistance.type') }}</label>
-                            <input-from-table
-                                class="m-form__group-sub"
-                                icon="flaticon-lifebuoy"
-                                :value="defaultData.caseType"
-                                :readonly="true"
-                            ></input-from-table>
-                        </div>
-                        <div
-                            class="form-group m-form__group"
-                            v-if="defaultData.assistanceType"
-                        >
-                            <label class="col-form-label">{{ $t('assistance.typeAssistance') }}</label>
-                            <input-from-table
-                                class="m-form__group-sub"
-                                icon="flaticon-lifebuoy"
-                                :value="defaultData.assistanceType"
-                                :readonly="true"
-                            ></input-from-table>
-                        </div>
-                        <div
-                            class="ffilorm-group m-form__group"
-                            :class="{'has-danger': errors.has('docType')}"
-                        >
-                            <label class="col-form-label">{{ $t('document.type') }}</label>
-                            <select-from
-                                name="docType"
-                                v-validate="'required'"
-                                :data-vv-as="$t('document.type')"
-                                :options="documentsTypeVisible"
-                                :selected="inputsData.docType"
-                                v-on:input="setDataFilter"
-                            ></select-from>
-                            <form-error
-                                :attribute_name="'docType'"
-                                :errors_form="errors"
-                            ></form-error>
-                        </div>
-                        <div class="form-group m-form__group pt-2 pb-0" v-if="docTypeSelected && docTypeSelected.description">
-                            <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-info alert-dismissible fade show m-0" role="alert">
-                                <div class="m-alert__icon py-3 px-3">
-                                    <i class="fa fa-2x fa-info-circle"></i>
-                                    <span></span>
-                                </div>
-                                <div class="m-alert__text py-3">
-                                    {{ docTypeSelected.description }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group m-form__group pt-2 pb-0" v-if="extraCausal">
-                            <a :href="extraCausal.file" download target="_blank">
-                                <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
-                                    <div class="m-alert__icon py-3 px-3">
-                                        <i class="fa fa-2x fa-cloud-download-alt"></i>
-                                        <span></span>
-                                    </div>
-                                    <div class="m-alert__text py-3">
-                                        <label class="col-form-label">{{ $t('general.important') }}</label>
-                                        {{ extraCausal.description }}
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="form-group m-form__group pt-2 pb-0" v-if="extraInsurance">
-                            <a :href="extraInsurance.file" download target="_blank">
-                                <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
-                                    <div class="m-alert__icon py-3 px-3">
-                                        <i class="fa fa-2x fa-cloud-download-alt"></i>
-                                        <span></span>
-                                    </div>
-                                    <div class="m-alert__text py-3">
-                                        <label class="col-form-label">{{ $t('general.important') }}</label>
-                                        {{ extraInsurance.description }}
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div v-if="docTypeSelected && docTypeSelected.refund == 'Y'">
-                            <div
-                                class="form-group m-form__group"
-                                :class="{'has-danger': errors.has('date')}"
-                            >
-                                <label class="col-form-label">{{ $t('reimbursement.date.document') }}</label>
-                                <date-single-bt
-                                    class="m-input"
-                                    name="date"
-                                    watermark="Date"
-                                    v-validate="'required'"
-                                    :data-vv-as="$t('eimbursement.date.document')"
-                                    v-on:input="setDataFilter"
-                                    :value="inputsData.date"
-                                ></date-single-bt>
-                                
-                                <form-error
-                                    :attribute_name="'date'"
-                                    :errors_form="errors"
-                                ></form-error>
-                            </div>
-                            <div
-                                class="form-group m-form__group"
-                                :class="{'has-danger': errors.has('amount')}"
-                            >
-                                <label class="col-form-label">{{ $t('document.amount') }}</label>
                                 <div
-                                    class="m-input-icon m-input-icon--left m-input-icon--right"
+                                    class="m-portlet__head-title"
                                 >
-                                    <input
-                                        type="text"
-                                        name="amount"
-                                        class="form-control m-input"
-                                        :placeholder="$t('document.amount')"
-                                        v-validate="'required|min:1|max:10|decimal:2'"
-                                        :data-vv-as="$t('document.amount')"
-                                        v-model.lazy="inputsData.amount"
-                                        ref="amount"
-                                    />
-                                    <span
-                                        class="m-input-icon__icon m-input-icon__icon--left"
-                                    >
-                                        <span>
-                                            <i
-                                                class="la la-money"
-                                            ></i>
-                                        </span>
-                                    </span>
+                                    <h3
+                                        class="m-portlet__head-text"
+                                    >{{ $t('reimbursement.information') }}</h3>
                                 </div>
-                                <form-error
-                                    :attribute_name="'amount'"
-                                    :errors_form="errors"
-                                ></form-error>
+                            </div>
+                            <div class="m-portlet__head-tools">
+                                <button v-if="documentsTypeGroup.length>1" class="btn"
+                                        @click.prevent="inputsData.docTypeGroup = null"
+                                        type="button"
+                                    >{{ $t('general.back') }}
+                                </button>
+                            </div>
+                        </div>
+                        <div class="m-portlet__body">
+                            <div
+                                class="form-group m-form__group"
+                                v-if="defaultData.caseType"
+                            >
+                                <label class="col-form-label">{{ $t('assistance.type') }}</label>
+                                <input-from-table
+                                    class="m-form__group-sub"
+                                    icon="flaticon-lifebuoy"
+                                    :value="defaultData.caseType"
+                                    :readonly="true"
+                                ></input-from-table>
                             </div>
                             <div
                                 class="form-group m-form__group"
+                                v-if="defaultData.assistanceType"
                             >
-                                <label class="col-form-label">{{ $t('document.currency') }}</label>
+                                <label class="col-form-label">{{ $t('assistance.typeAssistance') }}</label>
+                                <input-from-table
+                                    class="m-form__group-sub"
+                                    icon="flaticon-lifebuoy"
+                                    :value="defaultData.assistanceType"
+                                    :readonly="true"
+                                ></input-from-table>
+                            </div>
+                            <div
+                                class="ffilorm-group m-form__group"
+                                :class="{'has-danger': errors.has('docType')}"
+                            >
+                                <label class="col-form-label">{{ $t('document.type') }}</label>
                                 <select-from
-                                    name="currency"
-                                    :options="currencyFromSelect"
-                                    :selected="inputsData.currency"
+                                    name="docType"
+                                    v-validate="'required'"
+                                    :data-vv-as="$t('document.type')"
+                                    :options="documentsTypeVisible"
+                                    :selected="inputsData.docType"
                                     v-on:input="setDataFilter"
                                 ></select-from>
+                                <form-error
+                                    :attribute_name="'docType'"
+                                    :errors_form="errors"
+                                ></form-error>
+                            </div>
+                            <div class="form-group m-form__group pt-2 pb-0" v-if="docTypeSelected && docTypeSelected.description">
+                                <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-info alert-dismissible fade show m-0" role="alert">
+                                    <div class="m-alert__icon py-3 px-3">
+                                        <i class="fa fa-2x fa-info-circle"></i>
+                                        <span></span>
+                                    </div>
+                                    <div class="m-alert__text py-3">
+                                        {{ docTypeSelected.description }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group m-form__group pt-2 pb-0" v-if="extraCausal">
+                                <a :href="extraCausal.file" download target="_blank">
+                                    <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
+                                        <div class="m-alert__icon py-3 px-3">
+                                            <i class="fa fa-2x fa-cloud-download-alt"></i>
+                                            <span></span>
+                                        </div>
+                                        <div class="m-alert__text py-3">
+                                            <label class="col-form-label">{{ $t('general.important') }}</label>
+                                            {{ extraCausal.description }}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="form-group m-form__group pt-2 pb-0" v-if="extraInsurance">
+                                <a :href="extraInsurance.file" download target="_blank">
+                                    <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
+                                        <div class="m-alert__icon py-3 px-3">
+                                            <i class="fa fa-2x fa-cloud-download-alt"></i>
+                                            <span></span>
+                                        </div>
+                                        <div class="m-alert__text py-3">
+                                            <label class="col-form-label">{{ $t('general.important') }}</label>
+                                            {{ extraInsurance.description }}
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div v-if="docTypeSelected && docTypeSelected.refund == 'Y'">
+                                <div
+                                    class="form-group m-form__group"
+                                    :class="{'has-danger': errors.has('date')}"
+                                >
+                                    <label class="col-form-label">{{ $t('reimbursement.date.document') }}</label>
+                                    <date-single-bt
+                                        class="m-input"
+                                        name="date"
+                                        watermark="Date"
+                                        v-validate="'required'"
+                                        :data-vv-as="$t('eimbursement.date.document')"
+                                        v-on:input="setDataFilter"
+                                        :value="inputsData.date"
+                                    ></date-single-bt>
+                                    
+                                    <form-error
+                                        :attribute_name="'date'"
+                                        :errors_form="errors"
+                                    ></form-error>
+                                </div>
+                                <div
+                                    class="form-group m-form__group"
+                                    :class="{'has-danger': errors.has('amount')}"
+                                >
+                                    <label class="col-form-label">{{ $t('document.amount') }}</label>
+                                    <div
+                                        class="m-input-icon m-input-icon--left m-input-icon--right"
+                                    >
+                                        <input
+                                            type="text"
+                                            name="amount"
+                                            class="form-control m-input"
+                                            :placeholder="$t('document.amount')"
+                                            v-validate="'required|min:1|max:10|decimal:2'"
+                                            :data-vv-as="$t('document.amount')"
+                                            v-model.lazy="inputsData.amount"
+                                            ref="amount"
+                                        />
+                                        <span
+                                            class="m-input-icon__icon m-input-icon__icon--left"
+                                        >
+                                            <span>
+                                                <i
+                                                    class="la la-money"
+                                                ></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <form-error
+                                        :attribute_name="'amount'"
+                                        :errors_form="errors"
+                                    ></form-error>
+                                </div>
+                                <div
+                                    class="form-group m-form__group"
+                                >
+                                    <label class="col-form-label">{{ $t('document.currency') }}</label>
+                                    <select-from
+                                        name="currency"
+                                        :options="currencyFromSelect"
+                                        :selected="inputsData.currency"
+                                        v-on:input="setDataFilter"
+                                    ></select-from>
+                                </div>
+                                <div
+                                    class="form-group m-form__group"
+                                    :class="{'has-danger': errors.has('nameBen')}"
+                                >
+                                    <label class="col-form-label">{{ $t('reimbursement.payee') }}</label>
+                                    <div
+                                        class="m-input-icon m-input-icon--left m-input-icon--right"
+                                    >
+                                        <input
+                                            type="text"
+                                            name="nameBen"
+                                            class="form-control m-input"
+                                            :placeholder="$t('reimbursement.payee')"
+                                            v-validate="'required|min:2|max:250|'"
+                                            :data-vv-as="$t('reimbursement.payee')"
+                                            v-model.lazy="inputsData.nameBen"
+                                            ref="nameBen"
+                                        />
+                                        <span
+                                            class="m-input-icon__icon m-input-icon__icon--left"
+                                        >
+                                            <span>
+                                                <i
+                                                    class="la la-user"
+                                                ></i>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <form-error
+                                        :attribute_name="'nameBen'"
+                                        :errors_form="errors"
+                                    ></form-error>
+                                </div>
                             </div>
                             <div
                                 class="form-group m-form__group"
-                                :class="{'has-danger': errors.has('nameBen')}"
+                                :class="{'has-danger': errors.has('Description')}"
                             >
-                                <label class="col-form-label">{{ $t('reimbursement.payee') }}</label>
+                                <label class="col-form-label">{{ $t('document.description') }}</label>
                                 <div
                                     class="m-input-icon m-input-icon--left m-input-icon--right"
                                 >
-                                    <input
-                                        type="text"
-                                        name="nameBen"
+                                    <textarea
+                                        name="Description"
                                         class="form-control m-input"
-                                        :placeholder="$t('reimbursement.payee')"
-                                        v-validate="'required|min:2|max:250|'"
-                                        :data-vv-as="$t('reimbursement.payee')"
-                                        v-model.lazy="inputsData.nameBen"
-                                        ref="nameBen"
-                                    />
+                                        :placeholder="$t('document.description')"
+                                        v-validate="'required|min:2|max:255|'"
+                                        :data-vv-as="$t('document.description')"
+                                        v-model="inputsData.description"
+                                        ref="Description"
+                                    ></textarea>
                                     <span
                                         class="m-input-icon__icon m-input-icon__icon--left"
                                     >
                                         <span>
                                             <i
-                                                class="la la-user"
+                                                class="la la-pencil-square-o"
                                             ></i>
                                         </span>
                                     </span>
                                 </div>
                                 <form-error
-                                    :attribute_name="'nameBen'"
+                                    :attribute_name="'Description'"
                                     :errors_form="errors"
                                 ></form-error>
                             </div>
-                        </div>
-                        <div
-                            class="form-group m-form__group"
-                            :class="{'has-danger': errors.has('Description')}"
-                        >
-                            <label class="col-form-label">{{ $t('document.description') }}</label>
                             <div
-                                class="m-input-icon m-input-icon--left m-input-icon--right"
+                                class="form-group m-form__group"
+                                :class="{'has-danger': errors.has('file')}"
                             >
-                                <textarea
-                                    name="Description"
-                                    class="form-control m-input"
-                                    :placeholder="$t('document.description')"
-                                    v-validate="'required|min:2|max:255|'"
-                                    :data-vv-as="$t('document.description')"
-                                    v-model="inputsData.description"
-                                    ref="Description"
-                                ></textarea>
-                                <span
-                                    class="m-input-icon__icon m-input-icon__icon--left"
+                                <label class="col-form-label">{{ $t('document.file') }}</label>
+                                <div class="custom-file">
+                                    <input
+                                        type="file"
+                                        name="file"
+                                        class="custom-file-input"
+                                        id="file"
+                                        accept="application/pdf, image/gif, image/jpg, image/jpeg, image/png"
+                                        v-validate="'required|ext:jpeg,jpg,pdf,png,gif,bmp'"
+                                        :data-vv-as="$t('document.file')"
+                                        ref="file"
+                                        v-on:change="handleFileUpload"
+                                    />
+                                    <label
+                                        class="custom-file-label"
+                                        :class="['custom-file-'+$root.$i18n.locale]"
+                                        for="file"
+                                    >{{(typeof file =='object' &&'name' in file)?file.name:$t('document.choose')}}</label>
+                                </div>
+                                <div
+                                    class="progress"
+                                    v-if="uploadPercentage>0"
                                 >
-                                    <span>
-                                        <i
-                                            class="la la-pencil-square-o"
-                                        ></i>
-                                    </span>
-                                </span>
+                                    <div
+                                        class="progress-bar progress-bar-striped progress-bar-animated"
+                                        role="progressbar"
+                                        :aria-valuenow="uploadPercentage"
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                        :style="{width: uploadPercentage+'%'}"
+                                    ></div>
+                                </div>
+                                <form-error
+                                    :attribute_name="'file'"
+                                    :errors_form="errors"
+                                ></form-error>
                             </div>
-                            <form-error
-                                :attribute_name="'Description'"
-                                :errors_form="errors"
-                            ></form-error>
-                        </div>
-                        <div
-                            class="form-group m-form__group"
-                            :class="{'has-danger': errors.has('file')}"
-                        >
-                            <label class="col-form-label">{{ $t('document.file') }}</label>
-                            <div class="custom-file">
-                                <input
-                                    type="file"
-                                    name="file"
-                                    class="custom-file-input"
-                                    id="file"
-                                    accept="application/pdf, image/gif, image/jpg, image/jpeg, image/png"
-                                    v-validate="'required|ext:jpeg,jpg,pdf,png,gif,bmp'"
-                                    :data-vv-as="$t('document.file')"
-                                    ref="file"
-                                    v-on:change="handleFileUpload"
-                                />
-                                <label
-                                    class="custom-file-label"
-                                    :class="['custom-file-'+$root.$i18n.locale]"
-                                    for="file"
-                                >{{(typeof file =='object' &&'name' in file)?file.name:$t('document.choose')}}</label>
-                            </div>
-                            <div
-                                class="progress"
-                                v-if="uploadPercentage>0"
+                            <transition
+                                :duration="1500"
+                                name="fade"
+                                mode="in-out"
                             >
                                 <div
-                                    class="progress-bar progress-bar-striped progress-bar-animated"
-                                    role="progressbar"
-                                    :aria-valuenow="uploadPercentage"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                    :style="{width: uploadPercentage+'%'}"
-                                ></div>
-                            </div>
-                            <form-error
-                                :attribute_name="'file'"
-                                :errors_form="errors"
-                            ></form-error>
+                                    v-show="disableForm?false:(captcha.length==0)"
+                                    class="form-group m-form__group"
+                                    :class="{'has-danger': errors.has('recaptcha')}"
+                                >
+                                    <vue-recaptcha
+                                        :sitekey="siteKey"
+                                        ref="recaptcha"
+                                        v-on:verify="onCaptchaVerified"
+                                        v-on:expired="onCaptchaExpired"
+                                        :loadRecaptchaScript="true"
+                                    ></vue-recaptcha>
+                                    <input
+                                        type="hidden"
+                                        name="recaptcha"
+                                        id="recaptcha"
+                                        v-validate="'recaptcha'"
+                                        v-model="captcha"
+                                    />
+                                    <form-error
+                                        :attribute_name="'recaptcha'"
+                                        :errors_form="errors"
+                                    ></form-error>
+                                </div>
+                            </transition>
                         </div>
-                        <transition
-                            :duration="1500"
-                            name="fade"
-                            mode="in-out"
+                        <div
+                            class="m-portlet__foot m-portlet__foot--fit text-center"
                         >
-                            <div
-                                v-show="disableForm?false:(captcha.length==0)"
-                                class="form-group m-form__group"
-                                :class="{'has-danger': errors.has('recaptcha')}"
-                            >
-                                <vue-recaptcha
-                                    :sitekey="siteKey"
-                                    ref="recaptcha"
-                                    v-on:verify="onCaptchaVerified"
-                                    v-on:expired="onCaptchaExpired"
-                                    :loadRecaptchaScript="true"
-                                ></vue-recaptcha>
-                                <input
-                                    type="hidden"
-                                    name="recaptcha"
-                                    id="recaptcha"
-                                    v-validate="'recaptcha'"
-                                    v-model="captcha"
-                                />
-                                <form-error
-                                    :attribute_name="'recaptcha'"
-                                    :errors_form="errors"
-                                ></form-error>
+                            <div class="m-form__actions">
+                                <button
+                                    :disabled="disableForm"
+                                    :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
+                                    type="submit"
+                                    class="btn btn-lg btn-primary"
+                                >{{ $t('general.send') }}</button>
                             </div>
-                        </transition>
-                    </div>
-                    <div
-                        class="m-portlet__foot m-portlet__foot--fit text-center"
-                    >
-                        <div class="m-form__actions">
-                            <button
-                                :disabled="disableForm"
-                                :class="{'m-login__btn--primary m-loader m-loader--right m-loader--light': disableForm}"
-                                type="submit"
-                                class="btn btn-lg btn-primary"
-                            >{{ $t('general.send') }}</button>
                         </div>
+                    </form>
+                    <div
+                        :class="typeFile?'d-flex':'d-none'"
+                        class="col-md-6 rounded bg-dark preview-container p-0"
+                    >
+                        <iframe
+                            v-if="typeFile=='pdf'"
+                            class="rounded h-100 w-100"
+                            :src="previewSrc"
+                            title="PDF Preview"
+                        ></iframe>
+                        <img
+                            v-if="typeFile=='image'"
+                            class="m-0 my-auto rounded w-100 h-auto"
+                            :src="previewSrc"
+                            alt="Image Preview"
+                        />
                     </div>
-                </form>
-                <div
-                    :class="typeFile?'d-flex':'d-none'"
-                    class="col-md-6 rounded bg-dark preview-container p-0"
-                >
-                    <iframe
-                        v-if="typeFile=='pdf'"
-                        class="rounded h-100 w-100"
-                        :src="previewSrc"
-                        title="PDF Preview"
-                    ></iframe>
-                    <img
-                        v-if="typeFile=='image'"
-                        class="m-0 my-auto rounded w-100 h-auto"
-                        :src="previewSrc"
-                        alt="Image Preview"
-                    />
                 </div>
             </div>
         </div>
@@ -627,6 +644,26 @@ export default {
                 return false;
             }
             return docTypeSelected[0];
+        },
+        documentProgress: function () { 
+            let percentage = this.documentsType.reduce(function (m, e) {
+                m['total']=(m['total']||0)+1; 
+                m['uploaded']=(m['uploaded']||0)+(e['uploaded']?1:0); 
+                m['pending']=(m['pending']||0)+(e['pending']?0:1); 
+
+                return m;
+            }, {
+                total: 0,
+                uploaded:0,
+                pending: 0,
+                percentage:0,
+                html:''
+            });
+            if (percentage.uploaded > 0) {
+                percentage.percentage = Math.round((percentage.uploaded / percentage.total) * 100);
+            }
+            percentage.html = '(' + percentage.total + '/' + percentage.uploaded + ') ' + percentage.percentage + '%';
+            return percentage;
         },
         documentsTypeGroup: function () {
             let self = this,

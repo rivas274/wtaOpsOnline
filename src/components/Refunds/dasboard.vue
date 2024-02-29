@@ -117,7 +117,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <form-refund v-show="formShow == 'refund'" class="m-portlet m-portlet--tab"
+                                            <form-refund v-show="formShow == 'refund'"
                                                 :id-assist="results.idAssist" v-on:complete-documents="getAssistance"
                                                 :default-data="defaultData">
                                             </form-refund>
@@ -209,3 +209,14 @@ export default {
     }
 };
 </script>
+<style>
+    .progress-refund{
+        height: 3rem;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .progress-refund .progressbar{
+        height: 3rem;
+    }
+</style>
