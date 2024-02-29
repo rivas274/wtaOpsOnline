@@ -21,10 +21,16 @@
             </span>
         </div>
         <div class="m-portlet m-portlet--tab form-refund">
-            <group-btn-refund v-if="documentsTypeGroup.length>1 && !inputsData.docTypeGroup"
+            <group-btn-refund
+                v-if="documentsTypeGroup.length>1 && !inputsData.docTypeGroup"
                 :groups="documentsTypeGroup"
                 @set-group="setDataFilter">
             </group-btn-refund>
+            <group-document-type
+                v-else-if="!inputsData.docType"
+                :documents-type="documentsTypeVisible"
+                @set-document-type="setDataFilter">
+            </group-document-type>
             <div v-else>
                 <div class="row mx-0">
                     <form
@@ -383,6 +389,7 @@ import currency from "../Labels/currency.json";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import VueRecaptcha from "vue-recaptcha";
 import groupBtnRefund from './groupBtnRefund.vue';
+import groupDocumentType from './groupDocumentType.vue';
 
 export default {
     components: {
@@ -391,7 +398,8 @@ export default {
         inputFromTable,
         dateSingleBt,
         VueRecaptcha,
-        groupBtnRefund
+        groupBtnRefund,
+        groupDocumentType
     },
     props:['idAssist','default-data'],
     data() {
@@ -662,7 +670,7 @@ export default {
             if (percentage.uploaded > 0) {
                 percentage.percentage = Math.round((percentage.uploaded / percentage.total) * 100);
             }
-            percentage.html = '(' + percentage.total + '/' + percentage.uploaded + ') ' + percentage.percentage + '%';
+            percentage.html = '(' + percentage.uploaded + '/' + percentage.total + ') ' + percentage.percentage + '%';
             return percentage;
         },
         documentsTypeGroup: function () {

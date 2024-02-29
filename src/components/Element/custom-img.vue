@@ -4,8 +4,8 @@ img[alt]:after {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: auto;
+    height: auto;
     background-color: #fff;
     text-align: center;
     content: attr(alt);

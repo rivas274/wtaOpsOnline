@@ -12,14 +12,24 @@
         <div class="m-portlet__body">
             <div class="row">
                 <div class="col-md-6 d-flex align-items-start py-3" v-for="group in groups " :key="group.id">
-                    <button  class="btn-block btn btn-lg btn-primary text-wrap text-left align-self-stretch"
+                    <button  class="btn-block btn btn-type-document btn-lg text-wrap text-left align-self-stretch"
                             @click.prevent="setGroup(group)"
+                            :class="{'btn-success':group['uploaded']==group['total']}"
                             type="button">
                         <div class="d-flex align-items-center justify-content-between">
-                            <span>{{ group.name }}</span>
-                            <span class="pull-right badge badge-secondary">
+                            <div class="d-flex align-items-center justify-content-start">
+                                <i  v-if="group['uploaded']==group['total']"
+                                    class="fa fa-2x fa-check pr-3"
+                                ></i>
+                                <i  v-else
+                                    class="fa fa-2x fa-info-circle pr-3"
+                                ></i>
+                                <span>{{ group.name }}</span>
+                            </div>
+                            <span   class="pull-right badge me-2 px-1"
+                                    :class ="[group['uploaded']==group['total']?'badge-secondary':'badge-primary']">
                                 <span class="m-0 h5">
-                                    {{ group['total'] }}/{{ group['uploaded'] }}
+                                    {{ group['uploaded'] }}/{{ group['total'] }}
                                 </span>
                             </span>
                         </div>

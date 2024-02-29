@@ -9,12 +9,16 @@
                                 <div class="m-invoice__head">
                                     <div class="m-invoice__container m-invoice__container--centered p-0">
                                         <div class="d-flex justify-content-between align-items-center p-1 mt-4">
-                                            <h2>{{ $t('reimbursement.reimbursement') }}</h2>
-                                            <custom-img v-if="results.logo" height="65" :src="results.logo"></custom-img>
+                                            <div class="title-refund-dashboard">{{ $t('reimbursement.reimbursement') }}
+                                            </div>
+                                            <div class="d-flex pl-2">
+                                                <custom-img class="logo-refund-dashboard " v-if="results.logo" height="65" :src="results.logo"></custom-img>
+                                            </div>
                                         </div>
                                         <div class="m-demo__preview p-0 pt-2" v-if="'processRefund' in results">
                                             <div class="m-demo">
-                                                <div class="m-demo__preview bg-preview d-flex align-items-start flex-column-reverse flex-md-row align-items-center justify-content-between">
+                                                <div
+                                                    class="m-demo__preview bg-preview d-flex align-items-start flex-column-reverse flex-md-row align-items-center justify-content-between">
                                                     <ul class="m-nav m-nav--inline">
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link" v-tooltip:top="$t('general.client')">
@@ -33,7 +37,8 @@
                                                         <li class="m-nav__item" v-if="results.codeAssist != results.codigo">
                                                             <a class="m-nav__link" v-tooltip:top="$t('voucher.voucher')">
                                                                 <i class="m-nav__link-icon flaticon-interface-5"></i>
-                                                                <span class="m-nav__link-text text-left">{{ results.codigo }}</span>
+                                                                <span
+                                                                    class="m-nav__link-text text-left">{{ results.codigo }}</span>
                                                             </a>
                                                         </li>
                                                         <li class="m-nav__item">
@@ -117,9 +122,8 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <form-refund v-show="formShow == 'refund'"
-                                                :id-assist="results.idAssist" v-on:complete-documents="getAssistance"
-                                                :default-data="defaultData">
+                                            <form-refund v-show="formShow == 'refund'" :id-assist="results.idAssist"
+                                                v-on:complete-documents="getAssistance" :default-data="defaultData">
                                             </form-refund>
                                             <payment-method v-if="formShow == 'paymentMethod'"
                                                 class="m-portlet m-portlet--tab" :id-assist="results.idAssist"
@@ -210,13 +214,37 @@ export default {
 };
 </script>
 <style>
-    .progress-refund{
-        height: 3rem;
-        margin-bottom: 1rem;
-        font-size: 1.5rem;
-        font-weight: bold;
+.progress-refund {
+    height: 3rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.progress-refund .progressbar {
+    height: 3rem;
+}
+
+.btn-type-document {
+    min-height: 8rem;
+}
+
+.title-refund-dashboard {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.logo-refund-dashboard{
+    max-width: 100%; 
+    height: auto;
+}
+@media only screen and (max-width: 1024px) {
+    .title-refund-dashboard {
+        font-size: 2rem;
     }
-    .progress-refund .progressbar{
-        height: 3rem;
+}
+@media only screen and (max-width: 427px) {
+    .title-refund-dashboard {
+        font-size: 1.8rem;
     }
+}
 </style>
