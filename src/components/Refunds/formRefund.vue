@@ -475,6 +475,7 @@ export default {
                                         this.previewSrc = false;
                                         this.typeFile = false;
                                         this.$refs.file.value = null;
+                                        this.back();
                                         this.getDocumentsType();
                                         if (
                                             result.dismiss === window.Swal.DismissReason.cancel
@@ -487,7 +488,6 @@ export default {
                                                         this.idFiles = [];
                                                     })
                                             }
-                                            this.back();
                                         }
                                     });
                                 } else {
@@ -550,10 +550,10 @@ export default {
             this.$refs.recaptcha.reset();
         },
         back: function() {
-            this.inputsData.docType = null;
             if(this.documentsTypeVisible.length==1){
                 this.inputsData.docTypeGroup = null;
             }
+            this.inputsData.docType = null;
         }
     },
     computed: {
