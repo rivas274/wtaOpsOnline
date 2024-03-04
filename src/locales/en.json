@@ -322,7 +322,8 @@
     },
     "refunds":{
         "documentToProvide":"Documents I must provide",
-        "documentToDownload":"Documents to download"
+        "documentToDownload":"Documents to download",
+        "toContinue":"To continue, please write your name"
     },
     "notification":{
         "notifications":"Notification",

@@ -322,7 +322,8 @@
     },
     "refunds":{
         "documentToProvide":"Documentos que debo proporcionar",
-        "documentToDownload":"Documentos que debo bajar"
+        "documentToDownload":"Documentos que debo bajar",
+        "toContinue":"Para continuar, escriba su nombre"
     },
     "notification":{
         "notifications":"Notificación",

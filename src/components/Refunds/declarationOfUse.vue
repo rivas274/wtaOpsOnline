@@ -55,7 +55,10 @@
                     <div class="col-md-12 declaration-of-use text-justify" v-html="declarationOfUse.description"></div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <div class="form-group m-form__group m-0" :class="{'has-danger': errors.has('nameBenefit')}">
+                    <div class="form-group m-form__group m-0 mt-2" :class="{'has-danger': errors.has('nameBenefit')}">
+                        <span class="m--font-bold declaration-of-use text-justify">
+                            {{  $t('refunds.toContinue') }}
+                        </span>
                         <input-from-table
                             class="m-form__group-sub"
                             :watermark="$t('general.name')"

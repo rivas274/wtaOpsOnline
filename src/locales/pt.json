@@ -80,6 +80,7 @@
     },
     "refunds":{
         "documentToProvide":"Documentos que devo fornecer",
-        "documentToDownload":"Documentos para descarregar"
+        "documentToDownload":"Documentos para descarregar",
+        "toContinue":"Para continuar, por gentileza, escreva seu nome"
     }
 }
