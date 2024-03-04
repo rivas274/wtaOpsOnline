@@ -81,6 +81,7 @@
     "refunds":{
         "documentToProvide":"Documentos que devo fornecer",
         "documentToDownload":"Documentos para descarregar",
-        "toContinue":"Para continuar, por gentileza, escreva seu nome"
+        "toContinue":"Para continuar, por gentileza, escreva seu nome",
+        "toContinueEmail":"Por gentileza, pode escrever um correio eletrônico, en caso de que precisemos contatá-lo"
     }
 }

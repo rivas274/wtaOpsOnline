@@ -323,7 +323,8 @@
     "refunds":{
         "documentToProvide":"Documents I must provide",
         "documentToDownload":"Documents to download",
-        "toContinue":"To continue, please write your name"
+        "toContinue":"To continue, please write your name",
+        "toContinueEmail": "Please write us an e-mail in case we need to contact you."
     },
     "notification":{
         "notifications":"Notification",
