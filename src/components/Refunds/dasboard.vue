@@ -18,7 +18,7 @@
                                         <div class="m-demo__preview p-0 pt-2" v-if="'processRefund' in results">
                                             <div class="m-demo">
                                                 <div class="m-demo__preview p-1 px-2 text-center d-flex align-items-start flex-column-reverse flex-md-row align-items-center justify-content-between"
-                                                    :style="{background:(results?.infoColor || '#36a3f7')}">
+                                                    :style="{background:(results['infoColor'] || '#36a3f7')}">
                                                     <ul class="m-nav m-nav--inline">
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link" v-tooltip:top="$t('general.client')">
