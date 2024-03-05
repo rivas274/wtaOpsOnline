@@ -322,7 +322,7 @@
     },
     "refunds":{
         "documentToProvide":"Documents I must provide",
-        "documentToDownload":"Documents to download",
+        "documentToDownload":"Documents to download and fill out",
         "toContinue":"To continue, please write your name",
         "toContinueEmail": "Please write us an e-mail in case we need to contact you."
     },
