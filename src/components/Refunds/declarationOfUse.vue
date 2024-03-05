@@ -21,7 +21,7 @@
                     <div class="d-flex justify-content-center">
                         <div class="form-group m-form__group m-0 mt-2" :class="{'has-danger': errors.has('email')}">
                             <span class="m--font-bold declaration-of-use text-justify">
-                                {{  $t('refunds.toContinueEmail') }}
+                                {{ $t('refunds.toContinueEmail') }}
                             </span>
                             <input-from-table
                                 class="m-form__group-sub"
@@ -119,10 +119,14 @@ export default {
             this[item] = value;
         },
         getContents: function () {
-            this.axios.get("getDeclarationOfUseRefund").then(response => {
+            this.axios.get("getDeclarationOfUseRefund", {
+                params: { idAssist: this.idAssist }
+            }).then(response => {
                 this.declaration = response.data.RESPONSE;
             });
-            this.axios.get("getInstructionsRefund").then(response => {
+            this.axios.get("getInstructionsRefund", {
+                params: { idAssist: this.idAssist }
+            }).then(response => {
                 this.instruction = response.data.RESPONSE;
             });
         },
