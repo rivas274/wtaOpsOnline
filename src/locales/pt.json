@@ -7,7 +7,7 @@
         "date": {
             "document": "Data do reembolso"
         },
-        "clientNotProcessRefunds":"O cliente não processa o reembolso",
+        "clientNotProcessRefunds": "O cliente não processa o reembolso",
         "caseNumber": "Número do caso de reembolso",
         "statusOfYour": "Estado do seu reembolso",
         "paymentProof": "Comprovante de pagamento",
@@ -60,11 +60,11 @@
         "case_number": "Número do caso",
         "patient_name": "Nome do Paciente",
         "sentRepricing": "Enviado para Rericing",
-        "pleaseSelect":"Seleccione por favor",
-        "important":"Importante!",
-        "back":"Voltar",
-        "continue":"Continuar",
-        "return":"voltar"
+        "pleaseSelect": "Seleccione por favor",
+        "important": "Importante!",
+        "back": "Voltar",
+        "continue": "Continuar",
+        "return": "voltar"
     },
     "assistanceBills": {
         "information": "Informações da fatura",
@@ -78,10 +78,11 @@
         "close": "Feche as janelas",
         "pleaseClose": "O processo terminou satisfatoriamente, por favor feche a janela"
     },
-    "refunds":{
-        "documentToProvide":"Documentos que devo fornecer",
-        "documentToDownload":"Documentos que debo abaixar e preencher",
-        "toContinue":"Para continuar, por gentileza, escreva seu nome",
-        "toContinueEmail":"Por gentileza, pode escrever um correio eletrônico, en caso de que precisemos contatá-lo"
+    "refunds": {
+        "documentToProvide": "Documentos que devo fornecer",
+        "documentToDownload": "Documentos que debo abaixar e preencher",
+        "toContinue": "Para continuar, por gentileza, escreva seu nome",
+        "toContinueEmail": "Por gentileza, pode escrever um correio eletrônico, en caso de que precisemos contatá-lo",
+        "downloadAndFill": "Debe abaixar o Documento e preencher"
     }
 }
