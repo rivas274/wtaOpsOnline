@@ -62,7 +62,24 @@
                                 </div>
                             </div>
                             <div class="m-portlet__body">
-                                <div class="form-group m-form__group pt-2 pb-0" v-if="docTypeSelected && docTypeSelected.description">
+                                <div class="form-group m-form__group pt-0 pb-2" v-if="extraInsurance">
+                                    <h5>{{ $t('refunds.downloadAndFill') }}</h5>
+                                </div>
+                                <div class="form-group m-form__group py-1" v-if="extraInsurance">
+                                    <a :href="extraInsurance.file" download target="_blank">
+                                        <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
+                                            <div class="m-alert__icon py-3 px-3">
+                                                <i class="fa fa-2x fa-cloud-download-alt"></i>
+                                                <span></span>
+                                            </div>
+                                            <div class="m-alert__text py-3">
+                                                <label class="col-form-label">{{ $t('general.important') }}</label>
+                                                {{ extraInsurance.description }}
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="form-group m-form__group py-1" v-if="docTypeSelected && docTypeSelected.description">
                                     <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-info alert-dismissible fade show m-0" role="alert">
                                         <div class="m-alert__icon py-3 px-3">
                                             <i class="fa fa-2x fa-info-circle"></i>
@@ -73,7 +90,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group m-form__group pt-2 pb-0" v-if="extraCausal">
+                                <div class="form-group m-form__group py-1" v-if="extraCausal">
                                     <a :href="extraCausal.file" download target="_blank">
                                         <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
                                             <div class="m-alert__icon py-3 px-3">
@@ -83,20 +100,6 @@
                                             <div class="m-alert__text py-3">
                                                 <label class="col-form-label">{{ $t('general.important') }}</label>
                                                 {{ extraCausal.description }}
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="form-group m-form__group pt-2 pb-0" v-if="extraInsurance">
-                                    <a :href="extraInsurance.file" download target="_blank">
-                                        <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
-                                            <div class="m-alert__icon py-3 px-3">
-                                                <i class="fa fa-2x fa-cloud-download-alt"></i>
-                                                <span></span>
-                                            </div>
-                                            <div class="m-alert__text py-3">
-                                                <label class="col-form-label">{{ $t('general.important') }}</label>
-                                                {{ extraInsurance.description }}
                                             </div>
                                         </div>
                                     </a>
@@ -236,7 +239,8 @@
                                     class="form-group m-form__group"
                                     :class="{'has-danger': errors.has('file')}"
                                 >
-                                    <label class="col-form-label">{{ $t('document.file') }}</label>
+                                    <h5 v-if="extraInsurance">{{ $t('refunds.uploadCompletedDocument') }}</h5>
+                                    <label class="col-form-label" v-else>{{ $t('document.file') }}</label>
                                     <div class="custom-file">
                                         <input
                                             type="file"
@@ -253,7 +257,7 @@
                                             class="custom-file-label"
                                             :class="['custom-file-'+$root.$i18n.locale]"
                                             for="file"
-                                        >{{(typeof file =='object' &&'name' in file)?file.name:$t('document.choose')}}</label>
+                                        >{{ (typeof file =='object' &&'name' in file)?file.name:$t('document.choose') }}</label>
                                     </div>
                                     <div
                                         class="progress"
@@ -567,17 +571,11 @@ export default {
             }, []);
         },
         extraInsurance: function () {
-            let docTypeSelected = this.documentsType.filter((v) => {
-                return v.id == this.inputsData.docType && this.inputsData.docTypeGroup == v['group'];
-            });
-            if (docTypeSelected.length == 0) {
-                return false;
-            }
-            if ('insurance' in docTypeSelected[0]) {
+            if ('insurance' in this.documentsTypeSelected) {
                 return {
-                    description: docTypeSelected[0].insurance['description'][this.$root.$i18n.locale],
-                    file: docTypeSelected[0].insurance.file,
-                    name: docTypeSelected[0].name
+                    description: this.documentsTypeSelected.insurance['description'][this.$root.$i18n.locale],
+                    file: this.documentsTypeSelected.insurance.file,
+                    name: this.documentsTypeSelected.name
                 }
             }
             return false;
@@ -673,6 +671,14 @@ export default {
                 return selected[0];
             }
             return false;
+        }
+    },
+    watch:{
+        '$root.$i18n.locale': {
+            handler(newVal) {
+                this.getDocumentsType();
+            },
+            deep: true
         }
     }
 };
