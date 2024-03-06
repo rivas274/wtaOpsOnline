@@ -204,7 +204,7 @@ export default {
         };
     },
     mounted() {
-        //this.getAssistance();
+        this.getAssistance();
     },
     methods: {
         getAssistance: function () {
