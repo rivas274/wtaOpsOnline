@@ -57,7 +57,7 @@
                                     <button class="btn"
                                             @click.prevent="back()"
                                             type="button"
-                                        >{{ $t('general.back') }}
+                                        >{{ $t('general.back') | upper }}
                                     </button>
                                 </div>
                             </div>
