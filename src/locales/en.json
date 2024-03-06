@@ -325,7 +325,8 @@
         "documentToDownload": "Documents to download and fill out",
         "toContinue": "To continue, please write your name",
         "toContinueEmail": "Please write us an e-mail in case we need to contact you.",
-        "downloadAndFill": "Download and complete"
+        "downloadAndFill": "Download and complete",
+        "uploadCompletedDocument": "Upload the completed document"
     },
     "notification": {
         "notifications": "Notification",
