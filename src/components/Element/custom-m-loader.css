@@ -1,4 +1,4 @@
-.m-loader.m-loader--div::after {
+.m-loader.m-loader--div:not(.m-loader-full):after {
   position: absolute;
   background: #282a3a1f;
   top: -20px;
@@ -15,4 +15,26 @@
   margin-left: -4rem;
   border-top-width: 7px;
   border-right-width: 7px;
+}
+.m-loader.m-loader--div.m-loader-full::after {
+  background: transparent !important;
+}
+.m-loader.m-loader--div.m-loader-full {
+  height: 100vh  !important;
+}
+.m-loader.m-loader--div.m-loader-full:before {
+  width: 8rem;
+  height: 8rem;
+  margin-top: -8rem;
+  margin-left: -4rem;
+  border-top-width: 7px;
+  border-right-width: 7px;
+}
+.m-loader.m-loader--xl:before {
+  width: 6rem;
+  height: 6rem;
+  margin-top: -3rem;
+  margin-left: -3rem;
+  border-top-width: 7px;
+  border-right-width: 7px
 }

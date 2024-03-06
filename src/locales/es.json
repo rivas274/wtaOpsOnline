@@ -178,6 +178,7 @@
         "searchMultipleCommas": "Puede buscar varios voucher separándoles con comas (,) como comodin para separar los registros"
     },
     "general": {
+        "loading": "Cargando...",
         "total": "Total",
         "add": "Agregar",
         "delete": "Eliminar",

@@ -7,18 +7,32 @@
                         <div class="m-invoice-2">
                             <div class="m-invoice__wrapper">
                                 <div class="m-invoice__head">
-                                    <div class="m-invoice__container m-invoice__container--centered p-0">
+                                    <div class="d-flex justify-content-center align-items-center vh-100" v-if="!('idAssist' in results)">
+                                        <div>
+                                            <div class="m-loader m-loader--xl m-loader--metal mb-5">
+
+                                            </div>
+                                            <h5>
+                                                {{$t('general.loading')}}
+                                            </h5>
+                                        </div>
+                                    </div>
+                                    <div v-else class="m-invoice__container m-invoice__container--centered p-0">
                                         <div class="d-flex justify-content-between align-items-center p-1 mt-4">
                                             <div class="title-refund-dashboard">{{ $t('reimbursement.reimbursement') }}
                                             </div>
                                             <div class="d-flex pl-2">
-                                                <custom-img class="logo-refund-dashboard " v-if="results.logo" height="65" :src="results.logo"></custom-img>
+                                                <custom-img class="logo-refund-dashboard " 
+                                                            v-if="results.logo"
+                                                            height="65" 
+                                                            :src="results.logo">
+                                                </custom-img>
                                             </div>
                                         </div>
                                         <div class="m-demo__preview p-0 pt-2" v-if="'processRefund' in results">
                                             <div class="m-demo">
                                                 <div class="m-demo__preview p-1 px-2 text-center d-flex align-items-start flex-column-reverse flex-md-row align-items-center justify-content-between"
-                                                    :style="{background:(results['infoColor'] || '#36a3f7')}">
+                                                    :style="{ background: (results['infoColor'] || '#36a3f7') }">
                                                     <ul class="m-nav m-nav--inline">
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link" v-tooltip:top="$t('general.client')">
@@ -28,14 +42,17 @@
                                                             </a>
                                                         </li>
                                                         <li class="m-nav__item">
-                                                            <a class="m-nav__link" v-tooltip:top="$t('assistance.code')">
+                                                            <a class="m-nav__link"
+                                                                v-tooltip:top="$t('assistance.code')">
                                                                 <i class="m-nav__link-icon flaticon-shapes"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.codeAssist }}</span>
                                                             </a>
                                                         </li>
-                                                        <li class="m-nav__item" v-if="results.codeAssist != results.codigo">
-                                                            <a class="m-nav__link" v-tooltip:top="$t('voucher.voucher')">
+                                                        <li class="m-nav__item"
+                                                            v-if="results.codeAssist != results.codigo">
+                                                            <a class="m-nav__link"
+                                                                v-tooltip:top="$t('voucher.voucher')">
                                                                 <i class="m-nav__link-icon flaticon-interface-5"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.codigo }}</span>
@@ -121,7 +138,8 @@
                                                             </h2>
                                                             <h2 v-if="'method_payment' in results.refundAdm">
                                                                 <br>
-                                                                {{ $t('reimbursement.paymentInformationUploaded') }} <br>
+                                                                {{ $t('reimbursement.paymentInformationUploaded') }}
+                                                                <br>
                                                             </h2>
                                                         </div>
                                                     </div>
@@ -163,6 +181,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import customImg from "../Element/custom-img";
 import localeChanger from "../locales/locale-changer.vue";
@@ -185,7 +204,7 @@ export default {
         };
     },
     mounted() {
-        this.getAssistance();
+        //this.getAssistance();
     },
     methods: {
         getAssistance: function () {
@@ -229,6 +248,7 @@ export default {
     }
 };
 </script>
+
 <style>
 .progress-refund {
     height: 3rem;
@@ -249,18 +269,23 @@ export default {
     font-size: 2.5rem;
     font-weight: bold;
 }
-.logo-refund-dashboard{
-    max-width: 100%; 
+
+.logo-refund-dashboard {
+    max-width: 100%;
     height: auto;
 }
+
 @media only screen and (max-width: 1024px) {
     .title-refund-dashboard {
         font-size: 2rem;
     }
 }
+
 @media only screen and (max-width: 427px) {
     .title-refund-dashboard {
         font-size: 1.8rem;
     }
 }
 </style>
+
+<style src="../Element/custom-m-loader.css"></style>

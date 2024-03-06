@@ -49,6 +49,7 @@
         }
     },
     "general": {
+        "loading": "Carregando...",
         "refund": "Reembolso",
         "client": "Cliente",
         "voucher": "Voucher",

@@ -178,6 +178,7 @@
         "searchMultipleCommas": "You can search for multiple vouchers by separating them with commas (,) as a wildcard to separate the records."
     },
     "general": {
+        "loading": "Loading...",
         "total": "Total",
         "add": "Add",
         "delete": "Delete",
