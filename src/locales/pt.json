@@ -1,4 +1,11 @@
 {
+    "menu": {
+        "assistance": "Assistência",
+        "rePricing": "Repricing",
+        "invoice": "Fatura",
+        "documents": "Documentos",
+        "voucherCase": "Voucher"
+    },
     "reimbursement": {
         "reimbursement": "Reembolso",
         "information": "Informações de Reembolso",
@@ -13,6 +20,9 @@
         "paymentProof": "Comprovante de pagamento",
         "methodPayment": "Método de pagamento",
         "paymentInformationUploaded": "Informações de pagamento enviadas"
+    },
+    "company": {
+        "company": "Empresa"
     },
     "document": {
         "document": "Documento",
@@ -37,6 +47,8 @@
         "type": "Tipo de caso",
         "typeAssistance": "Tipo de Assistência",
         "date": {
+            "opening": "Data de abertura",
+            "event": "Data do evento",
             "case": "Data do caso",
             "birth": "Data de nascimento"
         }
@@ -50,16 +62,11 @@
     },
     "general": {
         "loading": "Carregando...",
-        "refund": "Reembolso",
         "client": "Cliente",
-        "voucher": "Voucher",
         "send": "Enviar",
         "no": "No",
         "yes": "Sim",
         "date": "Data",
-        "upload_assistance_bills": "Enviar Contas de Assistência",
-        "case_number": "Número do caso",
-        "patient_name": "Nome do Paciente",
         "sentRepricing": "Enviado para Rericing",
         "pleaseSelect": "Seleccione por favor",
         "important": "Importante!",
@@ -79,6 +86,11 @@
         "close": "Feche as janelas",
         "pleaseClose": "O processo terminou satisfatoriamente, por favor feche a janela"
     },
+    "errorPage": {
+        "notFound": "Página não encontrada",
+        "notFoundDetaill": "A página que você está procurando não existe ou foi movida",
+        "returnHome": "Voltar para a página inicial"
+    },
     "refunds": {
         "documentToProvide": "Documentos que devo fornecer",
         "documentToDownload": "Documentos que debo abaixar e preencher",
@@ -86,5 +98,12 @@
         "toContinueEmail": "Por gentileza, pode escrever um correio eletrônico, en caso de que precisemos contatá-lo",
         "downloadAndFill": "Debe abaixar o Documento e preencher",
         "uploadCompletedDocument": "Suba o Documento preenchido"
+    },
+    "notification": {
+        "notifications": "Notificações",
+        "userNotifications": "Notificações do usuário",
+        "messagge": "Mensagem",
+        "pending": "Pendente",
+        "read": "Ler"
     }
 }
