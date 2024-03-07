@@ -25,7 +25,8 @@ export default {
             return genreDetaill[str] || genreDetaill['I'];
         });
         Vue.filter("currency", (amount, currency) => {
-            currency = currency instanceof String && currency.length == 3 ? currency : 'USD';
+            currency = (currency || '').length == 3 ? currency : 'USD';
+
             let formatter = new Intl.NumberFormat('es', {
                 style: 'currency',
                 currency: (currency || 'USD'),
