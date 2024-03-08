@@ -62,7 +62,7 @@ iframe {
                 <th>
                     {{$t('general.status')}}
                 </th>
-                <th>
+                <th v-if="showField.download || showField.preview">
                     {{$t('general.options')}}
                 </th>
             </tr>
