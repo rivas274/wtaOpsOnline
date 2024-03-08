@@ -107,8 +107,8 @@ iframe{
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok" v-if="!permission.hidden_tab_voucher">
-                    <template slot="title" >{{ $t('voucher.voucher') | upper}} <small>({{assistances.voucher.code}})</small></template>
+                <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok" v-if="!permission.hidden_tab_voucher && 'voucher' in assistances">
+                    <template slot="title" >{{ $t('voucher.voucher') | upper}} <small v-if="'code' in assistances.voucher">({{assistances.voucher.code}})</small></template>
                     <template slot="body">
                         <AssistAccordionDetaill class="col-md-4">
                             <template slot="title">{{$t('voucher.travelSource')|upper}}</template>
@@ -157,7 +157,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill class="col-md-4">
+                        <AssistAccordionDetaill class="col-md-4" v-if ="'passenger' in assistances">
                             <template slot="title">{{$t('voucher.passenger')|upper}}</template>
                             <template slot="body">
                                 <div class="m-widget16__item">

@@ -28,5 +28,16 @@ Middleware.install = function (Vue, options) {
         }
         return Vue.$canSee(Middleware.access(action, option));
     }
+    Vue.prototype.middlewareAdditional = Vue.$middlewareAdditional = function (action) {
+        let permission = Vue._session.get('permission');
+        if (permission) {
+            if (action in permission) {
+                if ('additional_data' in permission[action]) {
+                    return permission[action]['additional_data'];
+                }
+            }
+        }
+        return null;
+    }
 }
 export default Middleware;

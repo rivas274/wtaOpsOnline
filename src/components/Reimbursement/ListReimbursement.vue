@@ -35,7 +35,7 @@ iframe {
         </template>
         <template slot="thead">
             <tr>
-                <th>
+                <th v-if="showField.idFile">
                     ID
                 </th>
                 <th>
@@ -47,16 +47,16 @@ iframe {
                 <th>
                     {{$t('assistanceBills.classification')}}
                 </th>
-                <th>
+                <th v-if="showField.originalAmount">
                     {{$t('assistanceBills.originalAmount')}}
                 </th>
-                <th>
+                <th v-if="showField.originalAmount">
                     {{$t('assistanceBills.exchangeRate')}}
                 </th>
-                <th>
+                <th v-if="showField.amountUsd">
                     {{$t('assistanceBills.amountUSD')}}
                 </th>
-                <th>
+                <th v-if="showField.coveredAmount">
                     {{$t('assistanceBills.coveredAmount')}}
                 </th>
                 <th>
@@ -70,7 +70,7 @@ iframe {
         <template slot="tbody">
             <template v-for="bill in results">
                 <tr :key="bill.idFile">
-                    <td>
+                    <td v-if="showField.idFile">
                         <span>{{bill.idFile}}</span>
                     </td>
                     <td>
@@ -83,18 +83,18 @@ iframe {
                     <td>
                         <span>{{bill.category||$t('general.notLoaded')}}</span>
                     </td>
-                    <td>
+                    <td v-if="showField.originalAmount">
                         <span
                             v-tooltip="'Currency '+bill.currency"
                         >{{ bill.originalAmount | currency(bill.currency) }}</span>
                     </td>
-                    <td>
+                    <td v-if="showField.originalAmount">
                         <span>{{ parseFloat(bill.exchangeRate) }}</span>
                     </td>
-                    <td>
+                    <td v-if="showField.amountUsd">
                         <span v-tooltip="'Currency USD'">{{ bill.usdAmount | currency("USD") }}</span>
                     </td>
-                    <td>
+                    <td v-if="showField.coveredAmount">
                         <span v-tooltip="'Currency USD'">{{ bill.coveredAmount | currency("USD") }}</span>
                     </td>
                     <td class="text-center">
@@ -103,9 +103,9 @@ iframe {
                             :class="[billStatusColor(bill.billStatus)]"
                         >{{ bill.billStatusDesc }}</span>
                     </td>
-                    <td class="text-center fa-status">
+                    <td class="text-center fa-status" v-if="showField.download || showField.preview">
                         <span class="options-btn">
-                            <a
+                            <a  v-if="showField.preview"
                                 @click="togleBill(bill)"
                                 class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
                             >
@@ -114,7 +114,7 @@ iframe {
                                     :class="[checkVisibility(bill)?'fa-eye-slash':'fa-eye']"
                                 ></i>
                             </a>
-                            <a
+                            <a  v-if="showField.download"
                                 :href="download(bill)"
                                 target="_blank"
                                 class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
@@ -172,7 +172,15 @@ export default {
                 size: 0
             },
             showLoader: false,
-            view: []
+            view: [],
+            showField: {
+                idFile: this.canSeeField('idFile'),
+                originalAmount: this.canSeeField('originalAmount'),
+                amountUsd: this.canSeeField('amountUsd'),
+                coveredAmount: this.canSeeField('coveredAmount'),
+                download: this.canSeeField('download'),
+                preview: this.canSeeField('preview'),
+            },
         };
     },
     methods: {
@@ -250,6 +258,10 @@ export default {
                 }
             };
             this.getReimbursement(0);
+        },
+        canSeeField: function (field) {
+            const permission =this.middlewareAdditional("reimbursement_documents");
+            return permission === null || permission.includes(field);
         }
     },
     mounted() {
