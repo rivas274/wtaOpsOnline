@@ -27,7 +27,7 @@
                     class="col-md-4 form-group"
                     name="code"
                     :watermark="$t('assistance.caseNumber')"
-                    icon="la flaticon-interface-5"
+                    icon="la flaticon-lifebuoy"
                     v-on:input="setDataFilter"
                     :value="filters.code"
                 ></input-from-table>
@@ -47,6 +47,14 @@
                     v-on:input="setDataFilter"
                     :value="filters.passager"
                 ></input-from-table>
+                <input-from-table
+                    class="col-md-4 form-group"
+                    name="passport"
+                    :watermark="$t('general.passport')"
+                    icon="fa fa-address-card"
+                    v-on:input="setDataFilter"
+                    :value="filters.passport"
+                ></input-from-table>
                 <date-single-bt
                     class="col-md-4 form-group"
                     name="dob"
@@ -54,6 +62,15 @@
                     v-on:input="setDataFilter"
                     :value="filters.dob"
                 ></date-single-bt>
+                <multi-selects
+                    v-if="typeAssist.length>1"
+                    class="col-md-4 form-group"
+                    name="typeAssist"
+                    :options="typeAssist"
+                    :watermark="$t('assistance.typeAssistance')"
+                    :selected="filters.typeAssist"
+                    v-on:input="setDataFilter"
+                ></multi-selects>
                 <select-from-table
                     class="col-md-4 form-group"
                     name="assistStatus"
@@ -72,7 +89,7 @@
                     v-on:input="setDataFilter"
                 ></multi-selects>
                 <select-from-table
-                    v-if="permission.show_provider"
+                    v-if="arrManagementStatus.length>1"
                     class="col-md-4 form-group"
                     name="managementStatus"
                     :watermark="$t('assistance.managementStatus')"
@@ -257,12 +274,14 @@ export default {
             error: null,
             filters: {
                 code: "",
-                codeVoucher:"",
+                codeVoucher: "",
                 dob: "",
-                arrAssistStatus:"",
-                arrManagementStatus:"",
+                arrAssistStatus: "",
+                arrManagementStatus: "",
                 arrPrefix: [],
                 passager: "",
+                typeAssist: [],
+                passport: "",
                 date: {
                     endDate: "",
                     startDate: ""
@@ -278,6 +297,7 @@ export default {
             arrManagementStatus:[],
             statusAssist:[],
             clients: [],
+            typeAssist:[],
             billsOption: [
                 {
                     id: "",
@@ -307,23 +327,27 @@ export default {
             });
         },
         getAssistManagementStatus: function () {
+            if(!this.permission.show_provider){
+                return false;
+            }
             this.axios.get("getAssistManagementStatus").then(response => {
                 this.arrManagementStatus = response.data.RESPONSE.RESULTS;
             });
         },
-        
         download: function () {
             let arrPrefix =
                 this.filters.arrPrefix.length == 0
                     ? this.$session.get("prefix")
                     : this.filters.arrPrefix;
             let paramsSearch = {
-                code: (this.filters.code || '').trim(),
-                codeVoucher: (this.filters.codeVoucher || '').trim(),
-                passenger: (this.filters.passager || '').trim(),
-                dob: (this.filters.dob || '').trim(),
+                    code: (this.filters.code || '').trim(),
+                    codeVoucher: (this.filters.codeVoucher || '').trim(),
+                    passenger: (this.filters.passager || '').trim(),
+                    dob: (this.filters.dob || '').trim(),
                     endDate: this.filters.date.endDate,
                     startDate: this.filters.date.startDate,
+                    typeAssist: this.filters.typeAssist,
+                    passport: this.filters.passport,
                 },
                 valid = false,
                 type = this.$session.get("permission")['RP002A']['additional_data'];
@@ -387,7 +411,9 @@ export default {
                     managementStatus: this.filters.managementStatus,
                     passenger: (this.filters.passager||'').trim(),
                     endDate: this.filters.date.endDate,
-                    startDate: this.filters.date.startDate
+                    startDate: this.filters.date.startDate,
+                    typeAssist:this.filters.typeAssist,
+                    passport:this.filters.passport,
                 })
                 .then(response => {
                     this.showLoader = false;
@@ -401,7 +427,7 @@ export default {
         },
         getClients: function() {
             if(this.permission.show_provider){
-                return 0;
+                return false;
             }
             this.axios
                 .post("getClient", {
@@ -411,6 +437,19 @@ export default {
                     let data = response.data.RESPONSE.RESULTS;
                     this.clients = data.map(function(value) {
                         return { name: value.clientName, code: value.prefix };
+                    });
+                });
+        },
+        getAssistType: function() {
+            if(this.permission.show_provider){
+                return false;
+            }
+            this.axios
+                .get("getAssistType")
+                .then(response => {
+                    let data = response.data.RESPONSE;
+                    this.typeAssist = data.map(function(value) {
+                        return { name: value.name, code: value.id };
                     });
                 });
         },
@@ -429,9 +468,14 @@ export default {
         clear: function() {
             this.filters = {
                 code: "",
-                /* billExists: "", */
+                codeVoucher: "",
+                dob: "",
+                arrAssistStatus: "",
+                arrManagementStatus: "",
                 arrPrefix: [],
                 passager: "",
+                typeAssist: [],
+                passport: "",
                 date: {
                     endDate: "",
                     startDate: ""
@@ -445,6 +489,7 @@ export default {
         this.getClients();
         this.getAssistStatus();
         this.getAssistManagementStatus();
+        this.getAssistType();
     },
     watch: {
         openAsist: function(newVal) {

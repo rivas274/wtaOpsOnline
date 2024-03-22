@@ -25,9 +25,9 @@
                         :value="filters.date.startDate" v-validate="'required|date_format:yyyy-MM-dd'">
                     <form-error class="mr-2" :attribute_name="'startDate'" :errors_form="errors"></form-error>
                 </div>
-                <div class="form-group m-form__group col-md-4">
+                <div class="form-group m-form__group col-md-4" v-if="clients.length > 1" >
                     <strong>{{ $t('assistance.clients') }}</strong>
-                    <multi-selects v-if="clients.length > 1" class="m-form__group-sub" name="prefix" :options="clients"
+                    <multi-selects class="m-form__group-sub" name="prefix" :options="clients"
                         :watermark="$t('assistance.clients')" :selected="filters.prefix"
                         v-on:input="setDataFilter"></multi-selects>
                 </div>
