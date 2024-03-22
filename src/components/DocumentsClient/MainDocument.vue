@@ -1,6 +1,6 @@
 <template>
-    <content-m :navigation="[{ title: $t('menu.assistance') }]">
-        <template slot="title">{{ $t('menu.assistance') }}</template>
+    <content-m :navigation="[{ title: $t('document.uploadDocuments') }]">
+        <template slot="title">{{ $t('document.uploadDocuments') }}</template>
         <template slot="body">
             <ul class="nav nav-tabs m-tabs-line m-tabs-line--success m-tabs-line--2x mb-2">
                 <li class="nav-item m-tabs__item">
