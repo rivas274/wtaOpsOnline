@@ -33,10 +33,10 @@
                 </div>
 
                 <div class="col m--align-right">
-                    <button class="btn btn-primary ml-2 pull-right" @click="download">
+                    <button class="btn btn-outline-focus ml-2 pull-right" @click="download">
                         {{ $t("general.download") }}
                     </button>
-                    <button class="btn btn-info" @click="clear">
+                    <button class="btn btn-outline-info" @click="clear">
                         {{ $t("general.clear") }}
                     </button>
                 </div>

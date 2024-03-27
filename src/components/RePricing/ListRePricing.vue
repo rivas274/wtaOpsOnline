@@ -92,14 +92,14 @@
                     </div>
                 </div>
                 <div class="col-md-3" :class="{'offset-md-9':error==null}">
-                    <button class="btn btn-info ml-2 pull-right" @click="clear">{{$t('general.clear')}}</button>
+                    <button class="btn btn-outline-info ml-2 pull-right" @click="clear">{{$t('general.clear')}}</button>
                 </div>
             </div>
         </template>
         <template slot="thead">
             <tr>
                 <th>
-                   {{$t('voucher.voucher')}}
+                    {{$t('voucher.voucher')}}
                 </th>
                 <th>
                     {{$t('assistance.caseNumber')}}

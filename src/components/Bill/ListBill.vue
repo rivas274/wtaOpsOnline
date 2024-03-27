@@ -29,7 +29,7 @@ iframe {
                     :value="filters.code"
                 ></input-from-table>
                 <div class="col m--align-right">
-                    <button class="btn btn-info" @click="clear">{{$t('general.clear')}}</button>
+                    <button class="btn btn-outline-info" @click="clear">{{$t('general.clear')}}</button>
                 </div>
             </div>
         </template>

@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3" :class="{'offset-lg-9':error==null}">
-                    <button class="btn btn-info ml-2 pull-right" @click="clear">{{$t('general.clear')}}</button>
+                    <button class="btn btn-outline-info ml-2 pull-right" @click="clear">{{$t('general.clear')}}</button>
                 </div>
             </div>
         </template>

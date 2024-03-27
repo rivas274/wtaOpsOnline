@@ -22,7 +22,7 @@
             <input-from-table class="col-md-4 m-form__group-sub" name="search" :watermark="$t('general.search')"
                 icon="flaticon-interface-5" v-on:input="setDataFilter" :value="filters.search"></input-from-table>
             <div class="col m--align-right">
-                <button class="btn btn-info" @click="clear">{{ $t('general.clear') }}</button>
+                <button class="btn btn-outline-info" @click="clear">{{ $t('general.clear') }}</button>
             </div>
         </div>
         <div class="m-messenger m-messenger--message-arrow m-messenger--skin-light" v-if="noteToShow.length > 0">

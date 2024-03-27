@@ -106,14 +106,21 @@
                         <span>{{ error }}</span>
                     </div>
                 </div>
-                <div class="col-lg-3" :class="{'offset-lg-9':error==null}">
-                    <!-- <button class="btn btn-brand" @click="getAssistance(0)">Search</button> -->
+                <div class="col-lg-4 d-flex bd-highlight" :class="{'offset-lg-8':error==null}">
+                    <button class="btn btn-primary ml-2 flex-fill bd-highlight"
+                            @click="getAssistance(0)">
+                        {{$t('general.search')}}
+                    </button>
+                    <button class="btn btn-outline-info ml-2 flex-fill bd-highlight"
+                            @click="clear">
+                        {{$t('general.clear')}}
+                    </button>
                     <button
-                        class="btn btn-primary ml-2 pull-right"
+                        class="btn btn-outline-focus ml-2 flex-fill bd-highlight"
                         @click="download"
-                        v-if="permission.RP002A"
-                    >{{$t('general.download')}}</button>
-                    <button class="btn btn-info ml-2 pull-right" @click="clear">{{$t('general.clear')}}</button>
+                        v-if="permission.RP002A">
+                        {{$t('general.download')}}
+                    </button>
                 </div>
             </div>
         </template>
@@ -233,6 +240,7 @@
         </template>
         <template slot="footer">
             <pagination
+                v-if="footerTable.size>footerTable.limit"
                 :start="footerTable.start"
                 :limit="footerTable.limit"
                 :size="footerTable.size"
@@ -391,7 +399,7 @@ export default {
                     this.showLoader = false;
                 });
         },
-        getAssistance: function(pg) {
+        getAssistance: function(pg,showTotal) {
             let arrPrefix =
                 this.filters.arrPrefix.length == 0
                     ? this.$session.get("prefix")
@@ -414,6 +422,7 @@ export default {
                     startDate: this.filters.date.startDate,
                     typeAssist:this.filters.typeAssist,
                     passport:this.filters.passport,
+                    showTotal: showTotal==false?0:1
                 })
                 .then(response => {
                     this.showLoader = false;
@@ -455,7 +464,6 @@ export default {
         },
         setDataFilter: function(campo, value) {
             this.filters[campo] = value;
-            this.getAssistance(0);
         },
         setDataPaginate: function(campo, value) {
             this.footerTable[campo] = value;
@@ -481,15 +489,15 @@ export default {
                     startDate: ""
                 }
             };
-            this.getAssistance(0);
+            this.getAssistance(0,false);
         }
     },
     mounted() {
-        this.getAssistance();
         this.getClients();
         this.getAssistStatus();
         this.getAssistManagementStatus();
         this.getAssistType();
+        this.getAssistance(0,false);
     },
     watch: {
         openAsist: function(newVal) {
