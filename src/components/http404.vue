@@ -10,7 +10,7 @@
             </span>
             <h3 class="m-error_desc">{{$t('errorPage.notFound')}}</h3>
             <p class="m-error_desc">
-                {{$t('errorPage.notFoundDetaill')}}
+                {{$t('errorPage.notFoundDetail')}}
                 <br />
                 <router-link :to="{ path: '/'}" replace>{{$t('errorPage.returnHome')}}</router-link>
             </p>

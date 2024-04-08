@@ -294,7 +294,7 @@
     },
     "errorPage": {
         "notFound": "Page not found",
-        "notFoundDetaill": "We can not find the page you're looking for.",
+        "notFoundDetail": "We can not find the page you're looking for.",
         "returnHome": "Return home"
     },
     "datePicker": {

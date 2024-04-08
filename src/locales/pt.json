@@ -1,7 +1,7 @@
 {
     "menu": {
         "assistance": "Assistência",
-        "rePricing": "Repricing",
+        "rePricing": "Reprecificação",
         "invoice": "Fatura",
         "documents": "Documentos",
         "voucherCase": "Voucher"
@@ -9,12 +9,12 @@
     "reimbursement": {
         "reimbursement": "Reembolso",
         "information": "Informações de Reembolso",
-        "payee": "Beneficiário do reembolso (nome)",
+        "payee": "Beneficiário do reembolso",
         "reference": "Reembolso de referência",
         "date": {
             "document": "Data do reembolso"
         },
-        "clientNotProcessRefunds": "O cliente não processa o reembolso",
+        "clientNotProcessRefunds": "O cliente não processa reembolsos",
         "caseNumber": "Número do caso de reembolso",
         "statusOfYour": "Estado do seu reembolso",
         "paymentProof": "Comprovante de pagamento",
@@ -34,10 +34,10 @@
         "currency": "Moeda",
         "description": "Descrição",
         "file": "Documento",
-        "choose": "Escolher Ficheiro",
+        "choose": "Escolher Arquivo",
         "send": "Documento Enviado",
         "uploaded": "Seu documento foi enviado com sucesso",
-        "uploadAnother": "Upload de outro documento",
+        "uploadAnother": "Enviar outro documento",
         "uploadDocuments": "Enviar Documentos",
         "sharedDocuments": "Documentos Compartilhados",
         "remarks": "Observações"
@@ -55,49 +55,49 @@
     },
     "voucher": {
         "voucher": "Voucher",
-        "name": "Nome do passageiro",
+        "name": "Nome do beneficiário",
         "date": {
-            "purchase": "Data de compra"
+            "purchase": "Data da compra"
         }
     },
     "general": {
         "loading": "Carregando...",
         "client": "Cliente",
         "send": "Enviar",
-        "no": "No",
+        "no": "Não",
         "yes": "Sim",
         "date": "Data",
-        "sentRepricing": "Enviado para Rericing",
-        "pleaseSelect": "Seleccione por favor",
+        "sentRepricing": "Enviado para Reprecificação",
+        "pleaseSelect": "Selecione por favor",
         "important": "Importante!",
         "back": "Voltar",
         "continue": "Continuar",
-        "return": "voltar"
+        "return": "Retornar"
     },
     "assistanceBills": {
         "information": "Informações da fatura",
-        "providerName": "Nome do provedor",
+        "providerName": "Nome do fornecedor",
         "reference": "Referência",
         "date": {
-            "document": "Date"
+            "document": "Data"
         }
     },
     "windows": {
-        "close": "Feche as janelas",
+        "close": "Fechar as janelas",
         "pleaseClose": "O processo terminou satisfatoriamente, por favor feche a janela"
     },
     "errorPage": {
         "notFound": "Página não encontrada",
-        "notFoundDetaill": "A página que você está procurando não existe ou foi movida",
+        "notFoundDetail": "A página que você está procurando não existe ou foi movida",
         "returnHome": "Voltar para a página inicial"
     },
     "refunds": {
         "documentToProvide": "Documentos que devo fornecer",
         "documentToDownload": "Documentos que devo baixar e preencher",
         "toContinue": "Para continuar, por gentileza, escreva seu nome",
-        "toContinueEmail": "Por gentileza, pode escrever um correio eletrônico, en caso de que precisemos contatá-lo",
-        "downloadAndFill": "Debe abaixar o Documento e preencher",
-        "uploadCompletedDocument": "Suba o Documento preenchido"
+        "toContinueEmail": "Por gentileza, pode escrever um e-mail, em caso de que precisemos contatá-lo",
+        "downloadAndFill": "Devo baixar o Documento e preencher",
+        "uploadCompletedDocument": "Subir o Documento preenchido"
     },
     "notification": {
         "notifications": "Notificações",
