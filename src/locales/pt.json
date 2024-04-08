@@ -9,7 +9,7 @@
     "reimbursement": {
         "reimbursement": "Reembolso",
         "information": "Informações de Reembolso",
-        "payee": "Beneficiário do reembolso",
+        "payee": "Beneficiário do reembolso (nome)",
         "reference": "Reembolso de referência",
         "date": {
             "document": "Data do reembolso"
@@ -34,10 +34,10 @@
         "currency": "Moeda",
         "description": "Descrição",
         "file": "Documento",
-        "choose": "Escolher Arquivo",
+        "choose": "Escolher Ficheiro",
         "send": "Documento Enviado",
         "uploaded": "Seu documento foi enviado com sucesso",
-        "uploadAnother": "Enviar outro documento",
+        "uploadAnother": "Upload de outro documento",
         "uploadDocuments": "Enviar Documentos",
         "sharedDocuments": "Documentos Compartilhados",
         "remarks": "Observações"
@@ -55,7 +55,7 @@
     },
     "voucher": {
         "voucher": "Voucher",
-        "name": "Nome do beneficiário",
+        "name": "Nome do passageiro",
         "date": {
             "purchase": "Data da compra"
         }
@@ -72,11 +72,11 @@
         "important": "Importante!",
         "back": "Voltar",
         "continue": "Continuar",
-        "return": "Retornar"
+        "return": "voltar"
     },
     "assistanceBills": {
         "information": "Informações da fatura",
-        "providerName": "Nome do fornecedor",
+        "providerName": "Nome do provedor",
         "reference": "Referência",
         "date": {
             "document": "Data"
