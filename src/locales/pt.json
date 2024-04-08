@@ -93,7 +93,7 @@
     },
     "refunds": {
         "documentToProvide": "Documentos que devo fornecer",
-        "documentToDownload": "Documentos que debo abaixar e preencher",
+        "documentToDownload": "Documentos que devo baixar e preencher",
         "toContinue": "Para continuar, por gentileza, escreva seu nome",
         "toContinueEmail": "Por gentileza, pode escrever um correio eletrônico, en caso de que precisemos contatá-lo",
         "downloadAndFill": "Debe abaixar o Documento e preencher",
