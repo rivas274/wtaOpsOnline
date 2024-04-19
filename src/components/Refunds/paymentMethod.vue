@@ -55,6 +55,17 @@
                             <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
                         </div>
                     </div>
+                    <div v-else-if="fieldConfig.type == 'date'" class="form-group m-form__group mb-3"
+                        :class="{ 'has-danger': errors.has(keyField) }">
+                        <strong>{{ fieldConfig.title }}</strong>
+                        <input  type="date"
+                                class="form-control m-input" 
+                                v-validate="fieldConfig.vee"
+                                :data-vv-as="fieldConfig.title" 
+                                v-model.lazy="saveData[keyField]" 
+                                :name="keyField" />
+                        <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
+                    </div>
                     <div v-else class="form-group m-form__group mb-3"
                         :class="{ 'has-danger': errors.has(keyField) }">
                         <strong>{{ fieldConfig.title }}</strong>

@@ -24,4 +24,13 @@ VeeValidate.Validator.extend('alpha_numeric_space', {
         return strongRegex.test(value);
     }
 });
+VeeValidate.Validator.extend('zip_code', {
+    getMessage: field => {
+        return `Enter a valid zip code (Ex. 12345-1234 or 12345)`;
+    },
+    validate: value => {
+        var strongRegex = new RegExp("^[0-9]{4,5}([- ]?[0-9]{0,4})?$");
+        return strongRegex.test(value);
+    }
+});
 export default VeeValidate;
