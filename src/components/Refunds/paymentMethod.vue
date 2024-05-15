@@ -11,71 +11,82 @@
                 </div>
             </div>
             <div class="m-portlet__body pb-3">
-                <div :key="keyField" v-for="(fieldConfig, keyField) in configData.fields">
-                    <div v-if="fieldConfig.type == 'select'">
-                        <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has(keyField) || errors.has(keyField+'_custom')}">
-                            <strong>{{ fieldConfig.title }}</strong>
-                            <div :class="{'input-group':saveData[keyField] == fieldConfig.show_custom_field}">
-                                <select-from :name="keyField" 
-                                        v-validate="fieldConfig.vee" 
-                                        :data-vv-as="fieldConfig.title"
-                                        :options="fieldConfig.options" 
-                                        :selected="saveData[keyField]" 
-                                        v-on:input="setData"></select-from>
-                                <input  type="text" 
-                                        class="form-control m-input" 
-                                        v-if="saveData[keyField] == fieldConfig.show_custom_field"
-                                        :data-vv-as="fieldConfig.title"
-                                        v-validate="'required'" 
-                                        v-model.lazy="saveData[keyField+'_custom']" 
-                                        :name="keyField+'_custom'" />
+                <div class="m-section" :key="keygroup" v-if="'group' in configData" v-for="(groupConfig, keygroup) in groupFields">
+                    <h3 class="m-section__heading">
+                        {{ groupConfig.title }}
+                    </h3>
+                    <div class="m-section__content">
+                        <div class="row" >
+                            <div class="col-md-6" :key="keyField"  v-for="(fieldConfig, keyField) in groupConfig.fields">
+                                <div v-if="fieldConfig.type == 'select'" >
+                                    <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has(keyField) || errors.has(keyField+'_custom')}">
+                                        <strong>{{ fieldConfig.title }}</strong>
+                                        <div :class="{'input-group':saveData[keyField] == fieldConfig.show_custom_field}">
+                                            <select-from :name="keyField" 
+                                                    v-validate="fieldConfig.vee" 
+                                                    :data-vv-as="fieldConfig.title"
+                                                    :options="fieldConfig.options" 
+                                                    :selected="saveData[keyField]" 
+                                                    v-on:input="setData"></select-from>
+                                            <input  type="text" 
+                                                    class="form-control m-input" 
+                                                    v-if="saveData[keyField] == fieldConfig.show_custom_field"
+                                                    :data-vv-as="fieldConfig.title"
+                                                    v-validate="'required'" 
+                                                    v-model.lazy="saveData[keyField+'_custom']" 
+                                                    :name="keyField+'_custom'" />
+                                        </div>
+                                        <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
+                                        <form-error :attribute_name="keyField+'_custom'" :errors_form="errors"></form-error>
+                                    </div>
+                                </div>
+                                <div v-else-if="fieldConfig.type == 'phone'">
+                                    <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has('cod_'+keyField) || errors.has(keyField)}">
+                                        <strong>{{ fieldConfig.title }}</strong>
+                                        <div class="input-group">
+                                            <select-from :name="keyField" 
+                                                    v-validate="'required'" 
+                                                    :data-vv-as="fieldConfig.title"
+                                                    :options="fieldConfig.options" 
+                                                    :selected="saveData['cod_'+keyField]" 
+                                                    v-on:input="setData"></select-from>
+                                            <input  type="text" 
+                                                    class="form-control m-input"
+                                                    :data-vv-as="fieldConfig.title"
+                                                    v-validate="fieldConfig.vee"
+                                                    v-model.lazy="saveData[keyField]" 
+                                                    :name="keyField" />
+                                        </div>
+                                        <form-error :attribute_name="'cod_'+keyField" :errors_form="errors"></form-error>
+                                        <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
+                                    </div>
+                                </div>
+                                <div v-else-if="fieldConfig.type == 'date'">
+                                    <div class="form-group m-form__group mb-3" :class="{ 'has-danger': errors.has(keyField) }">
+                                        <strong>{{ fieldConfig.title }}</strong>
+                                        <input  type="date"
+                                                class="form-control m-input" 
+                                                v-validate="fieldConfig.vee"
+                                                :data-vv-as="fieldConfig.title" 
+                                                v-model.lazy="saveData[keyField]" 
+                                                :name="keyField" />
+                                        <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    <div class="form-group m-form__group mb-3" :class="{ 'has-danger': errors.has(keyField) }">
+                                        <strong>{{ fieldConfig.title }}</strong>
+                                        <input  type="text" 
+                                                class="form-control m-input" 
+                                                v-validate="fieldConfig.vee"
+                                                :data-vv-as="fieldConfig.title" 
+                                                v-model.lazy="saveData[keyField]" 
+                                                :name="keyField" />
+                                        <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
+                                    </div>
+                                </div>
                             </div>
-                            <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
-                            <form-error :attribute_name="keyField+'_custom'" :errors_form="errors"></form-error>
                         </div>
-                    </div>
-                    <div v-else-if="fieldConfig.type == 'phone'">
-                        <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has('cod_'+keyField) || errors.has(keyField)}">
-                            <strong>{{ fieldConfig.title }}</strong>
-                            <div class="input-group">
-                                <select-from :name="keyField" 
-                                        v-validate="'required'" 
-                                        :data-vv-as="fieldConfig.title"
-                                        :options="fieldConfig.options" 
-                                        :selected="saveData['cod_'+keyField]" 
-                                        v-on:input="setData"></select-from>
-                                <input  type="text" 
-                                        class="form-control m-input"
-                                        :data-vv-as="fieldConfig.title"
-                                        v-validate="fieldConfig.vee"
-                                        v-model.lazy="saveData[keyField]" 
-                                        :name="keyField" />
-                            </div>
-                            <form-error :attribute_name="'cod_'+keyField" :errors_form="errors"></form-error>
-                            <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
-                        </div>
-                    </div>
-                    <div v-else-if="fieldConfig.type == 'date'" class="form-group m-form__group mb-3"
-                        :class="{ 'has-danger': errors.has(keyField) }">
-                        <strong>{{ fieldConfig.title }}</strong>
-                        <input  type="date"
-                                class="form-control m-input" 
-                                v-validate="fieldConfig.vee"
-                                :data-vv-as="fieldConfig.title" 
-                                v-model.lazy="saveData[keyField]" 
-                                :name="keyField" />
-                        <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
-                    </div>
-                    <div v-else class="form-group m-form__group mb-3"
-                        :class="{ 'has-danger': errors.has(keyField) }">
-                        <strong>{{ fieldConfig.title }}</strong>
-                        <input  type="text" 
-                                class="form-control m-input" 
-                                v-validate="fieldConfig.vee"
-                                :data-vv-as="fieldConfig.title" 
-                                v-model.lazy="saveData[keyField]" 
-                                :name="keyField" />
-                        <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
                     </div>
                 </div>
                 <transition
@@ -85,7 +96,7 @@
                 >
                     <div
                         v-show="disableForm?false:(captcha.length==0)"
-                        class="form-group m-form__group"
+                        class="form-group m-form__group pt-0"
                         :class="{'has-danger': errors.has('recaptcha')}"
                     >
                         <vue-recaptcha
@@ -147,7 +158,6 @@ export default {
         setData: function (item, value) {
             this.saveData[item] = value;
         },
-        
         onCaptchaVerified: function(recaptchaToken) {
             this.captcha = recaptchaToken;
         },
@@ -221,6 +231,25 @@ export default {
                 );
             }
         }
+    },
+    computed: {
+        groupFields() {
+            let groupFields = {};
+            console.log('groupFields',this.configData)
+            for (let key in this.configData.fields) {
+                let group = this.configData.fields[key].group || "default";
+                if (!groupFields[group]) {
+                    let titleGroup = this.configData.group[group] ? this.configData.group[group].title : group;
+
+                    groupFields[group] = {
+                        title: titleGroup,
+                        fields: {}
+                    };
+                }
+                groupFields[group].fields[key] = this.configData.fields[key];
+            }
+            return groupFields;
+        }
     }
 };
 </script>
@@ -228,5 +257,16 @@ export default {
 <style>
 .bootstrap-select.form-control:not([class*=col-]) {
     min-width: 80px !important;
+}
+.m-section{
+    border: 4px solid #f7f7fa;
+    padding: 15px;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-top: -15px;
+    margin-bottom: 0px;
+}
+.m-section:not(:last-child){
+    margin-bottom: 30px;
 }
 </style>
