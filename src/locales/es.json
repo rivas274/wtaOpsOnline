@@ -336,5 +336,14 @@
         "messagge": "Mensajes",
         "pending": "Pendiente",
         "read": "Leido"
+    },
+    "validations": {
+        "messages": {
+            "verify_password": "El campo {field} debe contener al menos: 1 letra mayúscula, 1 letra minúscula, 1 número",
+            "recaptcha": "Por favor completa el captcha",
+            "alpha_numeric_space": "El campo {field} solo puede contener caracteres alfabéticos, números y espacios",
+            "numeric_space": "El campo {field} solo puede contener números, espacios y guiones (-).",
+            "zip_code": "Ingresa un código postal válido (Ej. 12345-1234 o 12345)"
+        }
     }
 }

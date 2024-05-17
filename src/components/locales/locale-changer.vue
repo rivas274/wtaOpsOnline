@@ -62,7 +62,7 @@ export default {
             this.setLangApi(this.selected);
         },
         setLangApi: function (lang) {
-            if(this.$session.get("user")){
+            if(this.$session.exists()){
                 this.axios.post("setLang", {
                     lang: lang,
                     user: this.$session.get("user")

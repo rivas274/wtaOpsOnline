@@ -336,5 +336,14 @@
         "messagge": "Messages",
         "pending": "Pending",
         "read": "Read"
+    },
+    "validations": {
+        "messages":{
+            "verify_password": "The {field} must contain at least: 1 uppercase letter, 1 lowercase letter, 1 number",
+            "recaptcha": "Please complete the captcha",
+            "alpha_numeric_space": "The {field} may only contain alphabetic characters, numbers and spaces",
+            "numeric_space": "The {field} may only contain numbers, spaces, and hyphens (-).",
+            "zip_code": "Enter a valid zip code (Ex. 12345-1234 or 12345)"
+        }
     }
 }

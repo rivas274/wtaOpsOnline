@@ -1,21 +1,17 @@
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import VeeValidate from 'vee-validate';
+import VeeValidate from './vue-vee-custom';
 import validationMessagesEn from 'vee-validate/dist/locale/en';
 import validationMessagesEs from 'vee-validate/dist/locale/es';
 import validationMessagesPt from 'vee-validate/dist/locale/pt_BR';
 
-Vue.use(VueI18n);
+const dictionary = {
+    en: validationMessagesEn,
+    es: validationMessagesEs,
+    pt: validationMessagesPt,
+};
 
-Vue.use(VeeValidate, {
-    i18nRootKey: 'validations',
-    VueI18n,
-    dictionary: {
-        en: validationMessagesEn,
-        es: validationMessagesEs,
-        pt: validationMessagesPt,
-    }
-});
+Vue.use(VueI18n);
 
 function loadLocaleMessages() {
     /* eslint-disable no-undef */
@@ -30,9 +26,16 @@ function loadLocaleMessages() {
     })
     return messages
 }
-
-export default new VueI18n({
+const i18n = new VueI18n({
     locale: 'en',
     fallbackLocale: 'en',
     messages: loadLocaleMessages()
 });
+
+Vue.use(VeeValidate, {
+    i18nRootKey: 'validations',
+    i18n,
+    dictionary
+});
+
+export default i18n;

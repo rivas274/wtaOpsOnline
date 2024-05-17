@@ -9,10 +9,10 @@ import middleware from './custom/middleware';
 import permission from './custom/permission.json';
 import globalFilters from './custom/vue-global-filters';
 import globalDirectives from './custom/vue-global-directives';
-import VeeValidate from 'vee-validate';
 import i18n from "./custom/i18n";
-import './custom/vue-vee-custom';
+import VeeValidate from'./custom/vue-vee-custom';
 import store from './store/store';
+
 Vue.use(VueRouter);
 Vue.use(globalDirectives);
 Vue.use(globalFilters);
@@ -50,8 +50,8 @@ customAxios.interceptors.request.use(function (config) {
     if (i18n._vm.$root.$root.locale) {
         config.headers.common['lang'] = i18n._vm.$root.$root.locale;
     }
-    
-    if (config.baseURL.indexOf(['net'])>-1) {
+
+    if (config.baseURL.indexOf(['net']) > -1) {
         config.headers.common['DEBUG'] = true;
     }
     if ((Vue._session.get('TOKEN') || '').length == 16 && (config.headers.common['TOKEN'] || '').length == 0) {
@@ -75,8 +75,9 @@ Vue.mixin({
 Vue.use(VueAxios, customAxios);
 
 router.beforeEach((to, from, next) => {
-    i18n._vm.$root.$root.locale = (to.params.lang || (Vue._session.get('lang')||'en'));
+    i18n._vm.$root.$root.locale = (to.params.lang || (Vue._session.get('lang') || 'en'));
     VeeValidate.Validator.locale = i18n._vm.$root.$root.locale;
+
     if (to.meta.isPublic) {
         if (to.name == "Login" && (Vue._session.get('TOKEN') || '').length == 16) {
             if (Vue.$middleware("repricing", "read")) {
