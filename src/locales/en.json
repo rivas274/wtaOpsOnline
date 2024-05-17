@@ -341,6 +341,7 @@
         "read": "Read"
     },
     "validations": {
+        "attributes": {},
         "messages":{
             "verify_password": "The {field} must contain at least: 1 uppercase letter, 1 lowercase letter, 1 number",
             "recaptcha": "Please complete the captcha",

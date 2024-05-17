@@ -341,6 +341,7 @@
         "read": "Leido"
     },
     "validations": {
+        "attributes": {},
         "messages": {
             "verify_password": "El campo {field} debe contener al menos: 1 letra mayúscula, 1 letra minúscula, 1 número",
             "recaptcha": "Por favor completa el captcha",
