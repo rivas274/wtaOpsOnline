@@ -443,12 +443,12 @@ iframe{
                                 </div>
                                 <div class="m-widget16__item" v-if="assistances.showautorizegod==Y &&  (assistances.assistanceType.idType==77 || assistances.assistanceType.idType == 78)">
                                     <span class="m-widget16__date">{{$t('general.authorizedgop')}}</span>
-                                    <span v-if="assistances.authorizedgop == 1"
-                                        class="m-widget16__price m--align-right"
-                                    >{{$t('general.yes')}}</span>
-                                    <span v-if="assistances.authorizedgop == 0 || !assistances.authorizedgop"
-                                        class="m-widget16__price m--align-right"
-                                    >{{$t('general.no')}}</span>
+                                    <span v-if="assistances.authorizedgop == 1" class="m-widget16__price m--align-right">
+                                        {{$t('general.yes')}}
+                                    </span>
+                                    <span v-if="assistances.authorizedgop == 0 || !assistances.authorizedgop" class="m-widget16__price m--align-right">
+                                        {{$t('general.no')}}
+                                    </span>
                                 </div>
                                 
                             </template>
