@@ -40,7 +40,7 @@ iframe {
                 <th>
                     {{$t('provider.asign')}}
                 </th>
-                <th>
+                <th class="text-center">
                     {{$t('general.status')}}
                 </th>
             </tr>
@@ -119,7 +119,7 @@ iframe {
                     :key="provider.providerAssist.id+'payment'"
                     v-show="checkVisibility(provider.providerAssist)"
                 >
-                    <td class="text-center" colspan="9">
+                    <td class="text-center" colspan="10">
                         <table class="table" v-if="provider.providerAssist.paymentType">
                             <thead>
                                 <tr>
