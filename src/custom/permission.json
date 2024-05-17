@@ -29,6 +29,11 @@
         "write": [],
         "delete": []
     },
+    "quality_notes": {
+        "read": [],
+        "write": [],
+        "delete": []
+    },
     "show_provider": {
         "read": [52],
         "write": [52],

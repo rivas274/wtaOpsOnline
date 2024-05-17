@@ -86,6 +86,16 @@
                         <span>{{$t('assistance.medicalNotes')}}</span>
                     </a>
                 </li>
+                <li v-if="permission.quality_notes" :class="{active:tabShow=='quality_notes'}" v-tooltip:top="$t('assistance.medicalNotes')">
+                    <a
+                        class="nav-link"
+                        :class="{'m--font-success':tabShow=='quality_notes'}"
+                        @click.prevent="showTab('quality_notes')"
+                    >
+                        <i class="fa fa-sticky-note" aria-hidden="true"></i>
+                        <span>{{$t('assistance.qualityNotes')}}</span>
+                    </a>
+                </li>
                 <li v-if="permission.refund_notes" :class="{active:tabShow=='refund_notes'}" v-tooltip:top="$t('assistance.reimbursementNotes')">
                     <a
                         class="nav-link"
@@ -150,6 +160,9 @@
                 <div v-if="permission.medical_notes" class="tab-pane" :class="{active:tabShow=='medical_notes'}">
                     <list-note :id-assist="assistBase.idAssist" :type="'medical_notes'"></list-note>
                 </div>
+                <div v-if="permission.quality_notes" class="tab-pane" :class="{active:tabShow=='quality_notes'}">
+                    <list-note :id-assist="assistBase.idAssist" :type="'quality_notes'"></list-note>
+                </div>
                 <div v-if="permission.refund_notes" class="tab-pane" :class="{active:tabShow=='refund_notes'}">
                     <list-note :id-assist="assistBase.idAssist" :type="'refund_notes'"></list-note>
                 </div>
@@ -188,6 +201,7 @@ export default {
                 reimbursement: this.middleware("reimbursement_documents", "read"),
                 notes: this.middleware("notes", "read"),
                 medical_notes: this.middleware("medical_notes", "read"),
+                quality_notes: this.middleware("quality_notes", "read"),
                 refund_notes: this.middleware("refund_notes", "read"),
                 notes_provider: this.middleware("notes_provider", "read"),
                 provider: this.middleware("provider", "read"),

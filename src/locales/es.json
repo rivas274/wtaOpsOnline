@@ -110,6 +110,7 @@
         "addNote": "Agregar Nota",
         "notes_provider": "Notas de proveedor",
         "medicalNotes": "Notas Médicas",
+        "qualityNotes": "Notas de Calidad",
         "reimbursementNotes": "Notas de Reembolso",
         "triage": "Triage",
         "facial_scan": "Escaneo facial",
