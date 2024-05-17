@@ -449,7 +449,6 @@ iframe{
                                     <span v-if="assistances.authorizedgop == 0 || !assistances.authorizedgop"
                                         class="m-widget16__price m--align-right"
                                     >{{$t('general.no')}}</span>
-                                    {{ assistances.authorizedgop }}
                                 </div>
                                 
                             </template>
