@@ -263,7 +263,8 @@
         "refresh": "Actualizar",
         "informationSentCorrectly": "Información Enviada Correctamente",
         "active": "Activo",
-        "inactive": "Inactivo"
+        "inactive": "Inactivo",
+        "authorizedgop": "Autorización GOP"
     },
     "provider": {
         "provider": "Proveedor",

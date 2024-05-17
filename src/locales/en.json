@@ -263,7 +263,8 @@
         "refresh": "Refresh",
         "informationSentCorrectly": "Information sent correctly",
         "active": "Active",
-        "inactive": "Inactive"
+        "inactive": "Inactive",
+        "authorizedgop": "Authorized GOP"
     },
     "provider": {
         "provider": "Provider",
