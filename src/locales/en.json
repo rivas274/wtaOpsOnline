@@ -261,7 +261,9 @@
         "continue": "Continue",
         "return": "Return",
         "refresh": "Refresh",
-        "informationSentCorrectly": "Information sent correctly"
+        "informationSentCorrectly": "Information sent correctly",
+        "active": "Active",
+        "inactive": "Inactive"
     },
     "provider": {
         "provider": "Provider",

@@ -261,7 +261,9 @@
         "continue": "Continuar",
         "return": "Volver",
         "refresh": "Actualizar",
-        "informationSentCorrectly": "Información Enviada Correctamente"
+        "informationSentCorrectly": "Información Enviada Correctamente",
+        "active": "Activo",
+        "inactive": "Inactivo"
     },
     "provider": {
         "provider": "Proveedor",

@@ -40,6 +40,9 @@ iframe {
                 <th>
                     {{$t('provider.asign')}}
                 </th>
+                <th>
+                    {{$t('general.status')}}
+                </th>
             </tr>
         </template>
         <template slot="tbody">
@@ -103,6 +106,12 @@ iframe {
                             ></i>
                         </button>
                         <i v-else class="fa fa-ban text-danger fa-2x" v-tooltip:top="'No'"></i>
+                    </td>
+                    <td class="text-center">
+                        <span
+                            class="m-badge m-badge--wide"
+                            :class="[provider.providerAssist.assigned?'m-badge--success':'m-badge--danger']"
+                        >{{ provider.providerAssist.assigned?$t('general.active'):$t('general.inactive') }}</span>
                     </td>
                 </tr>
                 <tr :key="provider.providerAssist.id+'wrap'"></tr>
