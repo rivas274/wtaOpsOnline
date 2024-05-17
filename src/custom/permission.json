@@ -39,6 +39,16 @@
         "write": [52],
         "delete": [52]
     },
+    "triage": {
+        "read": [52],
+        "write": [52],
+        "delete": [52]
+    },
+    "facial_scan": {
+        "read": [52],
+        "write": [52],
+        "delete": [52]
+    },
     "RP002A": {
         "read": [],
         "write": [],

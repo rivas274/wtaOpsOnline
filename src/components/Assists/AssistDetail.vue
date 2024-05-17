@@ -620,16 +620,15 @@ iframe{
                         </AssistAccordionDetaill>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_triage_'+idAssist" ico="fa flaticon-list" v-if="permission.hidden_tab_voucher">
+                <AssistAccordion :id="'_triage_'+idAssist" ico="fa flaticon-list" v-if="permission.triage">
                     <template slot="title">
                         {{$t('assistance.triage')|upper}}
-                        <span class="text-danger" v-if="assistances.triage!='F'">({{$t('general.notApplicable')}})</span>          
+                        <span class="text-danger" v-if="assistances.triage!='F'">({{$t('general.notApplicable')}})</span>
                     </template>
                     <template slot="title-left" v-if="assistances.triage=='F'">
                         <a href="#" @click="donwload(assistances.codeAssist,'TRIAGE')">
                             <i class="fa fa-lg fa-cloud-download-alt"></i>
                         </a>
-                        
                     </template>
                     <template slot="body" v-if="assistances.triage=='F'">
                         <iframe class="preview"
@@ -637,7 +636,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_facial_'+idAssist" ico="fa flaticon-avatar" v-if="permission.hidden_tab_voucher">
+                <AssistAccordion :id="'_facial_'+idAssist" ico="fa flaticon-avatar" v-if="permission.facial_scan">
                     <template slot="title">
                         {{$t('assistance.facial_scan')|upper}}
                         <span class="text-danger" v-if="assistances.facialScan!='F'">({{$t('general.notApplicable')}})</span>
@@ -733,6 +732,8 @@ export default {
             benefit: [],
             permission: {
                 hidden_tab_voucher: this.middleware("hidden_tab_voucher", "read"),
+                triage: this.middleware("triage", "read"),
+                facial_scan: this.middleware("facial_scan", "read"),
                 show_provider: this.middleware("show_provider", "read")
             }
         };
