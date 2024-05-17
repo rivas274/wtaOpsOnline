@@ -435,69 +435,6 @@ iframe{
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.symptom.description}} </span>
                                 </div>
-                                <div class="m-widget16__head mt-2">
-                                    <div class="m-widget16__item">
-                                        <span class="m-widget16__amount m--align-center">{{ $t('supervision.supervision') }}</span>
-                                    </div>
-                                </div>
-                                <div class="m-widget16__item" v-if="assistances.showautorizegod==Y &&  (assistances.assistanceType.idType==77 || assistances.assistanceType.idType == 78)">
-                                    <span class="m-widget16__date">{{$t('general.authorizedgop')}}</span>
-                                    <span v-if="assistances.authorizedgop == 1" class="m-widget16__price m--align-right">
-                                        {{$t('general.yes')}}
-                                    </span>
-                                    <span v-if="assistances.authorizedgop == 0 || !assistances.authorizedgop" class="m-widget16__price m--align-right">
-                                        {{$t('general.no')}}
-                                    </span>
-                                </div>
-                                <div class="m-widget16__item">
-                                    <span class="m-widget16__date">{{$t('assistance.typeCoordination')}}</span>
-                                    <span
-                                        class="m-widget16__price m--align-right"
-                                    >{{assistances.coordination.description}}</span>
-                                </div>
-                                <div class="m-widget16__item" >
-                                    <span class="m-widget16__date">{{$t('voucher.benefit')}}</span>
-                                    <span
-                                        class="m-widget16__price m--align-right"
-                                        v-if="assistances.evento.name"
-                                    >{{ assistances.evento.name }} </span>
-                                    <span
-                                        class="m-widget16__price m--align-right"
-                                        v-else
-                                    >{{  $t('notification.pending')}} </span>
-                                </div>
-                                <div class="m-widget16__item" >
-                                    <span class="m-widget16__date">
-                                        {{$t('invoice.benefitValue')}} USD
-                                    </span>
-                                    <span
-                                        class="m-widget16__price m--align-right"
-                                    >{{ assistances.evento.maxAmount | currency(assistances.evento.currency) }}</span>
-                                </div>
-                                <div class="m-widget16__item" >
-                                    <span class="m-widget16__date">
-                                        {{$t('assistanceBills.exchangeRate')}}
-                                    </span>
-                                    <span
-                                        class="m-widget16__price m--align-right"
-                                    >{{ assistances.evento.exchangeRate }}</span>
-                                </div>
-                                <div class="m-widget16__item" >
-                                    <span class="m-widget16__date">
-                                        {{$t('invoice.benefitValue')}}
-                                    </span>
-                                    <span
-                                        class="m-widget16__price m--align-right"
-                                    >{{ assistances.evento.maxAmountUsd | currency('USD') }}</span>
-                                </div>
-                                <div class="m-widget16__item" >
-                                    <span class="m-widget16__date">
-                                        {{$t('invoice.consumedBenefit')}}
-                                    </span>
-                                    <span
-                                        class="m-widget16__price m--align-right"
-                                    >{{ assistances.evento.consumedAmount | currency("USD") }}</span>
-                                </div>
                             </template>
                         </AssistAccordionDetaill>
                         <div class="col-md-4">
@@ -524,6 +461,71 @@ iframe{
                                             v-html="assistances.remark"
                                         ></span>
                                         <span class="m-widget16__date m--align-center" v-else>{{$t('general.notLoaded')}}</span>
+                                    </div>
+                                </template>
+                            </AssistAccordionDetaill>
+                        </div>
+                        <div class="col-md-4">
+                            <AssistAccordionDetaill>
+                                <template slot="title">{{ $t('supervision.supervision') | upper }}</template>
+                                <template slot="body">
+                                    <div class="m-widget16__item" v-if="assistances.showautorizegod==Y &&  (assistances.assistanceType.idType==77 || assistances.assistanceType.idType == 78)">
+                                        <span class="m-widget16__date">{{$t('general.authorizedgop')}}</span>
+                                        <span v-if="assistances.authorizedgop == 1" class="m-widget16__price m--align-right">
+                                            {{$t('general.yes')}}
+                                        </span>
+                                        <span v-if="assistances.authorizedgop == 0 || !assistances.authorizedgop" class="m-widget16__price m--align-right">
+                                            {{$t('general.no')}}
+                                        </span>
+                                    </div>
+                                    <div class="m-widget16__item">
+                                        <span class="m-widget16__date">{{$t('assistance.typeCoordination')}}</span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                        >{{assistances.coordination.description}}</span>
+                                    </div>
+                                    <div class="m-widget16__item" >
+                                        <span class="m-widget16__date">{{$t('voucher.benefit')}}</span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                            v-if="assistances.evento.name"
+                                        >{{ assistances.evento.name }} </span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                            v-else
+                                        >{{  $t('notification.pending')}} </span>
+                                    </div>
+                                    <div class="m-widget16__item" >
+                                        <span class="m-widget16__date">
+                                            {{$t('invoice.benefitValue')}} USD
+                                        </span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                        >{{ assistances.evento.maxAmount | currency(assistances.evento.currency) }}</span>
+                                    </div>
+                                    <div class="m-widget16__item" >
+                                        <span class="m-widget16__date">
+                                            {{$t('assistanceBills.exchangeRate')}}
+                                        </span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                        >{{ assistances.evento.exchangeRate }}</span>
+                                    </div>
+                                    <div class="m-widget16__item" >
+                                        <span class="m-widget16__date">
+                                            {{$t('invoice.benefitValue')}}
+                                        </span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                        >{{ assistances.evento.maxAmountUsd | currency('USD') }}</span>
+                                    </div>
+                                    <div class="m-widget16__item" >
+                                        <span class="m-widget16__date">
+                                            {{$t('invoice.consumedBenefit')}}
+                                        </span>
+                                        <span
+                                            class="m-widget16__price m--align-right"
+                                        >{{ assistances.evento.consumedAmount | currency("USD") }}</span>
                                     </div>
                                 </template>
                             </AssistAccordionDetaill>
