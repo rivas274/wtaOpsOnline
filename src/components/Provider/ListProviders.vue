@@ -43,8 +43,11 @@ iframe {
             </tr>
         </template>
         <template slot="tbody">
-            <template v-for="provider in results">
-                <tr :key="provider.id">
+            <template v-for="provider in results" :key="provider.id">
+                <tr :class="{
+                    'font-weight-bold': provider.providerAssist.assigned,
+                    'text-danger': !providerAssist.assigned
+                }">
                     <td v-html="provider.locality.name">
                     </td>
                     <td>
@@ -90,7 +93,7 @@ iframe {
                     <td>
                         <button
                             class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
-                            v-if="provider.providerAssist.paymentType"
+                            v-if="provider.providerAssist.assigned"
                             v-tooltip:top="provider.providerAssist.paymentType.description"
                             @click="togleProvider(provider.providerAssist)"
                         >
@@ -102,9 +105,8 @@ iframe {
                         <i v-else class="fa fa-ban text-danger fa-2x" v-tooltip:top="'No'"></i>
                     </td>
                 </tr>
-                <tr :key="provider.providerAssist.id+'wrap'"></tr>
+                <tr></tr>
                 <tr
-                    :key="provider.providerAssist.id+'payment'"
                     v-show="checkVisibility(provider.providerAssist)"
                 >
                     <td class="text-center" colspan="9">
