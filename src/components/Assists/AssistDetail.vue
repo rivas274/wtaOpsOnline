@@ -678,17 +678,22 @@ iframe{
                         </AssistAccordionDetaill>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_triage_'+idAssist" ico="fa flaticon-list" v-if="permission.triage">
+                <AssistAccordion :id="'_triage_'+idAssist" ico="fa flaticon-list" v-if="permission.triage && assistances.triage.label">
                     <template slot="title">
                         {{$t('assistance.triage')|upper}}
-                        <span class="text-danger" v-if="assistances.triage!='F'">({{$t('general.notApplicable')}})</span>
+                        <small :class="['m--font-bolder m--font-' + assistances.triage.color]" >
+                            {{ assistances.triage.label }}
+                            <span v-if="assistances.triage.cancelReason && assistances.triage.status != 'F'">
+                                : {{ assistances.triage.cancelReason }}
+                            </span>
+                        </small>
                     </template>
-                    <template slot="title-left" v-if="assistances.triage=='F'">
+                    <template slot="title-left" v-if="assistances.triage.status == 'F'">
                         <a href="#" @click="donwload(assistances.codeAssist,'TRIAGE')">
                             <i class="fa fa-lg fa-cloud-download-alt"></i>
                         </a>
                     </template>
-                    <template slot="body" v-if="assistances.triage=='F'">
+                    <template slot="body" v-if="assistances.triage.status == 'F'">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/TRIAGE/'+assistances.codeAssist"
                         ></iframe>
