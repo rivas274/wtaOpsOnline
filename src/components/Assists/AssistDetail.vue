@@ -699,7 +699,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_facial_'+idAssist" ico="fa flaticon-avatar" v-if="permission.facial_scan">
+                <AssistAccordion :id="'_facial_'+idAssist" ico="fa flaticon-avatar" v-if="permission.facial_scan && assistances.facialScan.label">
                     <template slot="title">
                         {{$t('assistance.facial_scan')|upper}}
                         <small :class="['m--font-bolder m--font-' + assistances.facialScan.color]" >
