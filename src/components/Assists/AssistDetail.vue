@@ -702,16 +702,19 @@ iframe{
                 <AssistAccordion :id="'_facial_'+idAssist" ico="fa flaticon-avatar" v-if="permission.facial_scan">
                     <template slot="title">
                         {{$t('assistance.facial_scan')|upper}}
-                        <span class="text-danger" v-if="assistances.facialScan!='F'">({{$t('general.notApplicable')}})</span>
+                        <small :class="['m--font-bolder m--font-' + assistances.facialScan.color]" >
+                            {{ assistances.facialScan.label }}
+                            <span v-if="assistances.facialScan.cancelReason && assistances.facialScan.status != 'F'">
+                                : {{ assistances.facialScan.cancelReason }}
+                            </span>
+                        </small>
                     </template>
-                    <template slot="title-left" v-if="assistances.facialScan=='F'">
-                        
+                    <template slot="title-left" v-if="assistances.facialScan.status=='F'">
                         <a href="#"  @click="donwload(assistances.codeAssist,'FACIALSCAN')">
                             <i class="fa fa-lg fa-cloud-download-alt"></i>
                         </a>
-                       
                     </template>
-                    <template slot="body" v-if="assistances.facialScan=='F'">
+                    <template slot="body" v-if="assistances.facialScan.status=='F'">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/FACIALSCAN/'+assistances.codeAssist"
                         ></iframe>
