@@ -441,7 +441,8 @@ iframe{
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.symptom.description}} </span>
                                 </div>
-                                <div class="m-widget16__item" v-if="assistances.showautorizegod==Y &&  (assistances.assistanceType.idType==77 || assistances.assistanceType.idType == 78)">
+                                <!-- requerido en el ticket #3897 -->
+                                <div class="m-widget16__item" v-if="assistances.showautorizegod==Y &&  [77, 78, 114, 135,155].includes(assistances.assistanceType.idType)">
                                     <span class="m-widget16__date">{{$t('general.authorizedgop')}}</span>
                                     <span v-if="assistances.authorizedgop == 1" class="m-widget16__price m--align-right">
                                         {{$t('general.yes')}}
