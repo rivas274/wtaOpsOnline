@@ -50,7 +50,9 @@
         "amountNotCovered": "Amount Not Covered",
         "coveredAmount": "Covered Amount",
         "billedAmount": "Billed Amount",
-        "amountToCovere": "Amount To Covere",
+        "amountToCover": "Amount To Cover",
+        "benefitValue": "Benefit Value",
+        "consumedBenefit": "Consumed Benefit",
         "savingAmount": "Saving Amount",
         "adjustedAmount": "Adjusted Amount",
         "benefitAmountAvailable": "Benefit/Amount Available",
@@ -101,6 +103,9 @@
         "uploadDocuments": "Upload Documents",
         "sharedDocuments": "Shared Documents",
         "remarks": "Remarks"
+    },
+    "supervision":{
+        "supervision": "Supervision"
     },
     "assistance": {
         "procedureCode": "Procedure Code",
@@ -153,7 +158,7 @@
         "uploadBills": "Upload assistance Invoices",
         "generalConditions": "General Conditions",
         "information": "information",
-        "caseTypeFields,": "Case Type Fields",
+        "caseTypeFields": "Case Type Fields",
         "insuranceFields": "Insurance Fields",
         "namePlace": "Name/Place",
         "room": "Room",

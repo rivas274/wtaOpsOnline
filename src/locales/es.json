@@ -50,7 +50,9 @@
         "amountNotCovered": "Monto no Cubierto",
         "coveredAmount": "Monto Cubierto",
         "billedAmount": "Monto Facturado",
-        "amountToCovere": "Monto a Cubrir",
+        "amountToCover": "Monto a Cubrir",
+        "benefitValue": "Valor del Beneficio",
+        "consumedBenefit": "Beneficio Consumido",
         "savingAmount": "Cantidad de Ahorro",
         "adjustedAmount": "Cantidad Ajustada",
         "benefitAmountAvailable": "Beneficio/Monto disponible",
@@ -101,6 +103,9 @@
         "uploadDocuments": "Subir Documentos",
         "sharedDocuments": "Documentos Compartidos",
         "remarks": "Observaciones"
+    },
+    "supervision":{
+        "supervision": "Supervisión"
     },
     "assistance": {
         "procedureCode": "Código de procedimiento",
@@ -153,7 +158,7 @@
         "uploadBills": "Subir Facturas de Asistencia",
         "generalConditions": "Condicionado General",
         "information": "Información",
-        "caseTypeFields,": "Campos del tipo de caso",
+        "caseTypeFields": "Campos del tipo de caso",
         "insuranceFields": "Campos del seguro",
         "namePlace": "Nombre/Lugar",
         "room": "Habitación",
@@ -174,7 +179,8 @@
         "destination": "Destino",
         "plan": "Plan",
         "passenger": "Pasajero",
-        "benefit": "Beneficios",
+        "benefits": "Beneficios",
+        "benefit": "Beneficio",
         "medicalComments": "Comentarios médicos",
         "emergencyContact": "Contacto de emergencia",
         "searchMultipleCommas": "Puede buscar varios voucher separándoles con comas (,) como comodin para separar los registros"
