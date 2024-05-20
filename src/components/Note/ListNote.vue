@@ -29,23 +29,23 @@
             <div class="m-messenger__messages m-scrollable m-scroller ps ps--active-y">
                 <div class="m-messenger__wrapper" v-for="note in noteToShow" :key="type + note.id">
                     <div class="m-messenger__message"
-                        :class="[isUserNote(note) ? 'm-messenger__message--out' : 'm-messenger__message--in']">
-                        <div class="m-messenger__message-no-pic" :class="['m--bg-fill-' + colorNote(note)]"
-                            v-if="!isUserNote(note)">
+                        :class="[note.isUserNote ? 'm-messenger__message--out' : 'm-messenger__message--in']">
+                        <div class="m-messenger__message-no-pic" :class="['m--bg-fill-' + note.color]"
+                            v-if="!note.isUserNote">
                             <span v-if="!('displayAuditor' in note)">{{ note.user.user | firstLetter }}</span>
                         </div>
                         <div class="m-messenger__message-body">
-                            <div class="m-messenger__message-arrow" :class="['m--font-' + colorNote(note)]"></div>
-                            <div class="m-messenger__message-content" :class="['m--bg-fill-' + colorNote(note)]">
-                                <div class="m-messenger__message-username" v-if="!('displayAuditor' in note)">
+                            <div class="m-messenger__message-arrow" :class="['m--font-' + note.color]"></div>
+                            <div class="m-messenger__message-content" :class="['m--bg-fill-' + note.color]">
+                                <div class="m-messenger__message-username" :class="['m--font-inverse-'+note.color]" v-if="!('displayAuditor' in note)">
                                     <b>{{ note.user.user }}@{{ note.createdDate.date }} {{ note.createdDate.hour }} |
                                         {{ note.eventDetaill.description || $t('general.notLoaded') }}</b>
                                 </div>
-                                <div class="m-messenger__message-text" v-html="note.description"></div>
+                                <div class="m-messenger__message-text" :class="['m--font-inverse-'+note.color]" v-html="note.description"></div>
                             </div>
                         </div>
-                        <div class="m-messenger__message-no-pic" :class="['m--bg-fill-' + colorNote(note)]"
-                            v-if="isUserNote(note)">
+                        <div class="m-messenger__message-no-pic" :class="['m--bg-fill-' + note.color]"
+                            v-if="note.isUserNote">
                             <span v-if="!('displayAuditor' in note)">{{ note.user.user | firstLetter }}</span>
                         </div>
                     </div>
@@ -78,17 +78,6 @@ export default {
             results: [],
             showLoader: false,
             usersColor: {},
-            colors: [
-                "brand",
-                "metal",
-                "accent",
-                "focus",
-                "primary",
-                "success",
-                "info",
-                "warning",
-                "danger"
-            ],
             interval: null
         };
     },
@@ -112,24 +101,6 @@ export default {
                 }
             }
             return [6, 8].includes(parseInt(note.eventDetaill.id));
-        },
-        colorNote(note) {
-            var show = null;
-            if ('displayAuditor' in note) {
-                if (note.displayAuditor.whatsapp) {
-                    return 'success';
-                } else {
-                    return 'info';
-                }
-            }
-            if (note.user.id in this.usersColor) {
-                show = this.usersColor[note.user.id];
-            } else {
-                show = this.usersColor[note.user.id] = this.colors[
-                    Math.floor(Math.random() * this.colors.length)
-                ];
-            }
-            return show;
         },
         setDataFilter: function (campo, value) {
             this.filters[campo] = value;
@@ -186,7 +157,13 @@ export default {
                         ? true
                         : v.createdDate.date >= filters.date.startDate;
                 return noteDesc && startDate && endDate;
-            });
+            }).map(value =>{
+                return {
+                    ...value,
+                    isUserNote: this.isUserNote(value),
+                    color:this.isUserNote(value)?'primary':'info'
+                };
+            })
         }
     },
     mounted() {
