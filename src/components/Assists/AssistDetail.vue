@@ -469,7 +469,7 @@ iframe{
                             <AssistAccordionDetaill>
                                 <template slot="title">{{ $t('supervision.supervision') | upper }}</template>
                                 <template slot="body">
-                                    <div class="m-widget16__item" v-if="assistances.showautorizegod==Y &&  (assistances.assistanceType.idType==77 || assistances.assistanceType.idType == 78)">
+                                    <div class="m-widget16__item" v-if="assistances.showautorizegod == 'Y'">
                                         <span class="m-widget16__date">{{$t('general.authorizedgop')}}</span>
                                         <span v-if="assistances.authorizedgop == 1" class="m-widget16__price m--align-right">
                                             {{$t('general.yes')}}
