@@ -187,7 +187,7 @@
                                         >{{ this.noCovered }}</span>
                                     </div>
                                     <div class="m-widget16__item">
-                                        <span class="m-widget16__date">{{$t('invoice.amountToCover')}}</span>
+                                        <span class="m-widget16__date">{{$t('invoice.amountToCovere')}}</span>
                                         <span
                                             class="m-widget16__price m--align-right"
                                         >{{ this.covered_amount }}</span>

@@ -194,12 +194,7 @@
                     {{assist.symptomDetaill}}
                 </td>
                 <td>
-                    <div>{{assist.descAssistanceType}} </div>
-                    <div v-if="permission.triage && assist.triage.label">
-                        <small :class="['m--font-bolder m--font-' + assist.triage.color]" >
-                            Triaje | {{assist.triage.label}}
-                        </small>
-                    </div>
+                    {{assist.descAssistanceType}}
                 </td>
                 <td v-if="permission.show_provider">
                     {{assist.speciality_location}}
@@ -280,8 +275,7 @@ export default {
             bills: this.middleware("bills", "read"),
             RP002A: this.middleware("RP002A", "read"),
             hidden_client: this.middleware("hidden_client_in_assistance", "read"),
-            show_provider: this.middleware("show_provider", "read"),
-            triage: this.middleware("triage", "read"),
+            show_provider: this.middleware("show_provider", "read")
         };
         return {
             permission: permission,

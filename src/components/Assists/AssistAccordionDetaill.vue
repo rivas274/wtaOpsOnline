@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="m-portlet__body pb-0">
+        <div class="m-portlet__body">
             <div class="m-widget16">
                 <div class="row">
                     <div class="col-md-12">

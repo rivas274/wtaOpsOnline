@@ -279,7 +279,7 @@ iframe{
                                     >{{assistances.voucher.contact.phone}}</span>
                                 </div>
                                 <div class="m-widget16__item" v-if="benefit.SOURCE">
-                                    <span class="m-widget16__date">{{$t('voucher.benefits')}}</span>
+                                    <span class="m-widget16__date">{{$t('voucher.benefit')}}</span>
                                     <span class="m-widget16__price m--align-right">
                                         {{benefit.SOURCE}}
                                         <pop-over
@@ -430,11 +430,28 @@ iframe{
                                     >{{assistances.assistanceType.description}}</span>
                                 </div>
                                 <div class="m-widget16__item">
+                                    <span class="m-widget16__date">{{$t('assistance.typeCoordination')}}</span>
+                                    <span
+                                        class="m-widget16__price m--align-right"
+                                    >{{assistances.coordination.description}}</span>
+                                </div>
+                                <div class="m-widget16__item">
                                     <span class="m-widget16__date">{{$t('assistance.symptom')}}</span>
                                     <span
                                         class="m-widget16__price m--align-right"
                                     >{{assistances.symptom.description}} </span>
                                 </div>
+                                <!-- requerido en el ticket #3897 -->
+                                <div class="m-widget16__item" v-if="assistances.showautorizegod==Y &&  [77, 78, 114, 135,155].includes(assistances.assistanceType.idType)">
+                                    <span class="m-widget16__date">{{$t('general.authorizedgop')}}</span>
+                                    <span v-if="assistances.authorizedgop == 1" class="m-widget16__price m--align-right">
+                                        {{$t('general.yes')}}
+                                    </span>
+                                    <span v-if="assistances.authorizedgop == 0 || !assistances.authorizedgop" class="m-widget16__price m--align-right">
+                                        {{$t('general.no')}}
+                                    </span>
+                                </div>
+                                
                             </template>
                         </AssistAccordionDetaill>
                         <div class="col-md-4">
@@ -461,71 +478,6 @@ iframe{
                                             v-html="assistances.remark"
                                         ></span>
                                         <span class="m-widget16__date m--align-center" v-else>{{$t('general.notLoaded')}}</span>
-                                    </div>
-                                </template>
-                            </AssistAccordionDetaill>
-                        </div>
-                        <div class="col-md-4">
-                            <AssistAccordionDetaill>
-                                <template slot="title">{{ $t('supervision.supervision') | upper }}</template>
-                                <template slot="body">
-                                    <div class="m-widget16__item" v-if="assistances.showautorizegod == 'Y'">
-                                        <span class="m-widget16__date">{{$t('general.authorizedgop')}}</span>
-                                        <span v-if="assistances.authorizedgop == 1" class="m-widget16__price m--align-right">
-                                            {{$t('general.yes')}}
-                                        </span>
-                                        <span v-if="assistances.authorizedgop == 0 || !assistances.authorizedgop" class="m-widget16__price m--align-right">
-                                            {{$t('general.no')}}
-                                        </span>
-                                    </div>
-                                    <div class="m-widget16__item">
-                                        <span class="m-widget16__date">{{$t('assistance.typeCoordination')}}</span>
-                                        <span
-                                            class="m-widget16__price m--align-right"
-                                        >{{assistances.coordination.description}}</span>
-                                    </div>
-                                    <div class="m-widget16__item" >
-                                        <span class="m-widget16__date">{{$t('voucher.benefit')}}</span>
-                                        <span
-                                            class="m-widget16__price m--align-right"
-                                            v-if="assistances.evento.name"
-                                        >{{ assistances.evento.name }} </span>
-                                        <span
-                                            class="m-widget16__price m--align-right"
-                                            v-else
-                                        >{{  $t('notification.pending')}} </span>
-                                    </div>
-                                    <div class="m-widget16__item" >
-                                        <span class="m-widget16__date">
-                                            {{$t('invoice.benefitValue')}} USD
-                                        </span>
-                                        <span
-                                            class="m-widget16__price m--align-right"
-                                        >{{ assistances.evento.maxAmount | currency(assistances.evento.currency) }}</span>
-                                    </div>
-                                    <div class="m-widget16__item" >
-                                        <span class="m-widget16__date">
-                                            {{$t('assistanceBills.exchangeRate')}}
-                                        </span>
-                                        <span
-                                            class="m-widget16__price m--align-right"
-                                        >{{ assistances.evento.exchangeRate }}</span>
-                                    </div>
-                                    <div class="m-widget16__item" >
-                                        <span class="m-widget16__date">
-                                            {{$t('invoice.benefitValue')}}
-                                        </span>
-                                        <span
-                                            class="m-widget16__price m--align-right"
-                                        >{{ assistances.evento.maxAmountUsd | currency('USD') }}</span>
-                                    </div>
-                                    <div class="m-widget16__item" >
-                                        <span class="m-widget16__date">
-                                            {{$t('invoice.consumedBenefit')}}
-                                        </span>
-                                        <span
-                                            class="m-widget16__price m--align-right"
-                                        >{{ assistances.evento.consumedAmount | currency("USD") }}</span>
                                     </div>
                                 </template>
                             </AssistAccordionDetaill>
@@ -678,43 +630,35 @@ iframe{
                         </AssistAccordionDetaill>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_triage_'+idAssist" ico="fa flaticon-list" v-if="permission.triage && assistances.triage.label">
+                <AssistAccordion :id="'_triage_'+idAssist" ico="fa flaticon-list" v-if="permission.triage">
                     <template slot="title">
                         {{$t('assistance.triage')|upper}}
-                        <small :class="['m--font-bolder m--font-' + assistances.triage.color]" >
-                            {{ assistances.triage.label }}
-                            <span v-if="assistances.triage.cancelReason && assistances.triage.status != 'F'">
-                                : {{ assistances.triage.cancelReason }}
-                            </span>
-                        </small>
+                        <span class="text-danger" v-if="assistances.triage!='F'">({{$t('general.notApplicable')}})</span>
                     </template>
-                    <template slot="title-left" v-if="assistances.triage.status == 'F'">
+                    <template slot="title-left" v-if="assistances.triage=='F'">
                         <a href="#" @click="donwload(assistances.codeAssist,'TRIAGE')">
                             <i class="fa fa-lg fa-cloud-download-alt"></i>
                         </a>
                     </template>
-                    <template slot="body" v-if="assistances.triage.status == 'F'">
+                    <template slot="body" v-if="assistances.triage=='F'">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/TRIAGE/'+assistances.codeAssist"
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_facial_'+idAssist" ico="fa flaticon-avatar" v-if="permission.facial_scan && assistances.facialScan.label">
+                <AssistAccordion :id="'_facial_'+idAssist" ico="fa flaticon-avatar" v-if="permission.facial_scan">
                     <template slot="title">
                         {{$t('assistance.facial_scan')|upper}}
-                        <small :class="['m--font-bolder m--font-' + assistances.facialScan.color]" >
-                            {{ assistances.facialScan.label }}
-                            <span v-if="assistances.facialScan.cancelReason && assistances.facialScan.status != 'F'">
-                                : {{ assistances.facialScan.cancelReason }}
-                            </span>
-                        </small>
+                        <span class="text-danger" v-if="assistances.facialScan!='F'">({{$t('general.notApplicable')}})</span>
                     </template>
-                    <template slot="title-left" v-if="assistances.facialScan.status=='F'">
+                    <template slot="title-left" v-if="assistances.facialScan=='F'">
+                        
                         <a href="#"  @click="donwload(assistances.codeAssist,'FACIALSCAN')">
                             <i class="fa fa-lg fa-cloud-download-alt"></i>
                         </a>
+                       
                     </template>
-                    <template slot="body" v-if="assistances.facialScan.status=='F'">
+                    <template slot="body" v-if="assistances.facialScan=='F'">
                         <iframe class="preview"
                                 :src="baseUrlApi()+'provider-files/FACIALSCAN/'+assistances.codeAssist"
                         ></iframe>
@@ -809,8 +753,7 @@ export default {
             this.showLoader = true;
             this.axios
                 .post("getAssistanceDetail", {
-                    idAssist: this.idAssist,
-                    rand: Math.random()
+                    idAssist: this.idAssist
                 })
                 .then(response => {
                     this.showLoader = false;
