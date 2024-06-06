@@ -337,7 +337,13 @@
         "toContinue": "To continue, please write your name",
         "toContinueEmail": "Please write us an e-mail in case we need to contact you.",
         "downloadAndFill": "Download and complete",
-        "uploadCompletedDocument": "Upload the completed document"
+        "uploadCompletedDocument": "Upload the completed document",
+        "thirdPartyAuthorization": "Third Party Authorization",
+        "beneficiaryOrThirdParty": "Does the payment information for the reimbursement pertain to you, or do you want to authorize a third party?",
+        "iAmBeneficiary": "I am the beneficiary",
+        "authorizeThirdParty": "Authorize a third party",
+        "uploadSignAuthorization": "Upload signed authorization",
+        "downloadSignUpload": "Click to download your authorization, sign it, and upload it again."
     },
     "notification": {
         "notifications": "Notification",

@@ -338,7 +338,13 @@
         "toContinue": "Para continuar, escriba su nombre",
         "toContinueEmail": "Para continuar, escriba su correo electrónico",
         "downloadAndFill": "Descargar y completar el documento",
-        "uploadCompletedDocument": "Sube el documento completado"
+        "uploadCompletedDocument": "Sube el documento completado",
+        "thirdPartyAuthorization": "Autorización de terceros",
+        "beneficiaryOrThirdParty": "¿La información proporcionada para el pago del reembolso corresponde a usted o desea autorizar a un tercero?",
+        "iAmBeneficiary": "Soy el beneficiario",
+        "authorizeThirdParty": "Autorizar a un tercero",
+        "uploadSignAuthorization": "Subir autorización firmada",
+        "downloadSignUpload": "Haga clic para descargar su autorización, fírmela y vuelva a subirla."
     },
     "notification": {
         "notifications": "Notificación",

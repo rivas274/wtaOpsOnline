@@ -1,6 +1,33 @@
 <template>
     <form @submit.prevent="saveDataMethodPayment" class="m-form">
-        <div>
+        <div v-if = "configData.thirdPartyAuthorization == 'P'">
+            <div class="m-portlet__body pb-3">
+                <h2 v-if = "configData.thirdPartyAuthorization == 'P'" >
+                    {{ $t('refunds.beneficiaryOrThirdParty') }}
+                </h2>
+                <div class="row">
+                    <div class="col-md-6 d-flex align-items-start py-3">
+                        <button  class="btn-block btn btn-type-document btn-lg text-wrap text-left align-self-stretch"
+                                @click.prevent="setThirdPartyAuthorization('Y')"
+                                type="button">
+                            <h3>
+                                {{ $t('refunds.iAmBeneficiary') }}
+                            </h3>
+                        </button>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-start py-3">
+                        <button  class="btn-block btn btn-type-document btn-lg text-wrap text-left align-self-stretch"
+                                @click.prevent="setThirdPartyAuthorization('N')"
+                                type="button">
+                            <h3>
+                                {{ $t('refunds.authorizeThirdParty') }}
+                            </h3>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else>
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">
@@ -11,12 +38,15 @@
                 </div>
             </div>
             <div class="m-portlet__body pb-3">
-                <div class="m-section" :key="keygroup" v-if="'group' in configData" v-for="(groupConfig, keygroup) in groupFields">
+                <div v-if = "configData.thirdPartyAuthorization == 'P'" >
+                    {{ $t('refunds.beneficiaryOrThirdParty') }}
+                </div>
+                <div class="m-section" :key="keygroup" v-else-if="'group' in configData" v-for="(groupConfig, keygroup) in groupFields">
                     <h3 class="m-section__heading">
                         {{ groupConfig.title }}
                     </h3>
                     <div class="m-section__content">
-                        <div class="row" >
+                        <div class="row">
                             <div class="col-md-6" :key="keyField"  v-for="(fieldConfig, keyField) in groupConfig.fields">
                                 <div v-if="fieldConfig.type == 'select'" >
                                     <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has(keyField) || errors.has(keyField+'_custom')}">
@@ -89,6 +119,60 @@
                         </div>
                     </div>
                 </div>
+                <div class="m-section">
+                    <h3 class="m-section__heading">
+                        {{ $t('refunds.thirdPartyAuthorization') }}
+                    </h3>
+                    <div class="m-section__content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button class="btn btn-block btn-lg text-wrap align-self-stretch">
+                                    {{ $t('refunds.downloadSignUpload')}}
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <div
+                                    class="form-group m-form__group"
+                                    :class="{'has-danger': errors.has('file')}">
+                                    <strong>{{ $t('refunds.uploadSignAuthorization') }}</strong>
+                                    <div class="custom-file">
+                                        <input
+                                            type="file"
+                                            name="file"
+                                            class="custom-file-input"
+                                            id="file"
+                                            accept="application/pdf, image/gif, image/jpg, image/jpeg, image/png"
+                                            v-validate="'required|ext:jpeg,jpg,pdf,png,gif,bmp'"
+                                            ref="file"
+                                            v-on:change="handleFileUpload"
+                                        />
+                                        <label
+                                            class="custom-file-label"
+                                            :class="['custom-file-'+$root.$i18n.locale]"
+                                            for="file"
+                                        >{{(typeof file =='object' &&'name' in file)?file.name:$t('document.choose')}}</label>
+                                    </div>
+                                    <div
+                                        class="progress"
+                                        v-if="uploadPercentage>0">
+                                        <div
+                                            class="progress-bar progress-bar-striped progress-bar-animated"
+                                            role="progressbar"
+                                            :aria-valuenow="uploadPercentage"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            :style="{width: uploadPercentage+'%'}"
+                                        ></div>
+                                    </div>
+                                    <form-error
+                                        :attribute_name="'file'"
+                                        :errors_form="errors"
+                                    ></form-error>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <transition
                     :duration="1500"
                     name="fade"
@@ -149,6 +233,8 @@ export default {
             saveData: {},
             captcha: "",
             disableForm: false,
+            thirdPartyAuthorizationFile:null,
+            uploadPercentage: 0,
         };
     },
     mounted() {
@@ -186,21 +272,43 @@ export default {
                 }
             });
         },
+        setThirdPartyAuthorization: function (value) {
+            this.configData.thirdPartyAuthorization = value;
+        },
+        handleFileUpload: function (event) {
+            this.file = event.target.files[0];
+        },
         saveDataMethodPayment: function () {
-            window.console.log('saveDataMethodPayment init')
             if (!this.disableForm) {
-                window.console.log('saveDataMethodPayment active form')
                 this.$validator.validateAll().then(result => {
-                    window.console.log('saveDataMethodPayment valid',{result})
                     if (result) {
                         this.disableForm = true;
+
+                        const formData = new FormData();
+                        formData.append("idAssist", this.idAssist);
+                        formData.append("data", this.saveData);
+                        formData.append("thirdPartyAuthorization", this.thirdPartyAuthorization);
+                        formData.append("file", this.thirdPartyAuthorizationFile);
+                        formData.append("g-recaptcha", this.captcha);
+
                         this.axios
-                            .post("setPaymentFieldsRefundByAssist", {
-                                idAssist: this.idAssist,
-                                data: this.saveData,
-                                "g-recaptcha":this.captcha
-                            })
+                            .post("setPaymentFieldsRefundByAssist",
+                                formData,
+                                {
+                                    headers: {
+                                        "Content-Type": "multipart/form-data"
+                                    },
+                                    onUploadProgress: function(progressEvent) {
+                                        this.uploadPercentage = parseInt(
+                                            Math.round(
+                                                (progressEvent.loaded * 100) /
+                                                    progressEvent.total
+                                            )
+                                        );
+                                    }.bind(this)
+                                })
                             .then(response => {
+                                this.uploadPercentage = 0;
                                 if (response.data.STATUS == "OK") {
                                     window.Swal.fire({
                                         title: this.$t("general.sent"),
@@ -225,9 +333,9 @@ export default {
                     }
                 },
                 errors => {
-                    window.console.log('saveDataMethodPayment invalid',errors)
-                    this.disableForm = false;
-                }
+                        window.console.log('saveDataMethodPayment invalid',errors)
+                        this.disableForm = false;
+                    }
                 );
             }
         }
