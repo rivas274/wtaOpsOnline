@@ -21,7 +21,7 @@
                     <form-error :attribute_name="'docType'" :errors_form="errors"></form-error>
                 </div>
                 <div v-if="isBill" class="form-group" :class="{'has-danger': errors.has('date')}">
-                    <strong>{{ $t('general.date') }}</strong>
+                    <strong>{{ $t('invoice.date.service') }}</strong>
                     <date-single-bt
                         class="m-input"
                         name="date"
@@ -87,14 +87,14 @@
                     ></select-from-table>
                 </div>
                 <div class="form-group" :class="{'has-danger': errors.has('reference')}">
-                    <strong>{{ $t('reimbursement.reference') }}</strong>
+                    <strong>{{ $t('assistanceBills.reference') }}</strong>
                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                         <input
                             type="text"
                             name="reference"
                             class="form-control m-input"
-                            :placeholder="$t('reimbursement.reference')"
-                            :data-vv-as="$t('reimbursement.reference')"
+                            :placeholder="$t('invoice.watermark.reference')"
+                            :data-vv-as="$t('assistanceBills.reference')"
                             v-validate="'required|min:2|max:40|'"
                             v-model.lazy="inputsData.reference"
                             ref="reference"
@@ -113,7 +113,7 @@
                         <textarea
                             name="Description"
                             class="form-control m-input"
-                            :placeholder="$t('document.description')"
+                            :placeholder="$t('invoice.watermark.description')"
                             :data-vv-as="$t('document.description')"
                             v-validate="'required|min:2|max:255|'"
                             v-model="inputsData.description"

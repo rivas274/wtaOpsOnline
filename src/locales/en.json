@@ -59,7 +59,12 @@
         "benefitAmountPaid": "Benefit/Amount Paid",
         "amountPaid": "Amount Paid",
         "date": {
+            "service": "Date of Service",
             "bill": "Bill Date"
+        },
+        "watermark":{
+            "reference": "# Invoice",
+            "description": "# Case # | # Invoice | Beneficiary's name | Date of service"
         }
     },
     "acount": {
@@ -179,6 +184,7 @@
         "destination": "destination",
         "plan": "Plan",
         "passenger": "Passenger",
+        "benefits": "Benefits",
         "benefit": "Benefit",
         "medicalComments": "Medical Comments",
         "emergencyContact": "Emergency Contact",
