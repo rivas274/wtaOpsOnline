@@ -59,7 +59,12 @@
         "benefitAmountPaid": "Beneficio/Monto a pagar",
         "amountPaid": "Monto a pagar",
         "date": {
+            "service": "Fecha de Servicio",
             "bill": "fecha de la factura"
+        },
+        "watermark":{
+            "reference": "# de factura",
+            "description": "# Caso | # de factura | Nombre del beneficiario | Fecha del servicio"
         }
     },
     "acount": {
