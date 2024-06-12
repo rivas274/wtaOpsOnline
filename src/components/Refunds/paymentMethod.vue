@@ -325,7 +325,9 @@ export default {
 
                     if (this.showFileAuthorization) {
                         formData.append("authorization", this.authorization);
-                        formData.append("authorizationFile", this.authorizationFile);
+                        if (this.authorizationFile) {
+                            formData.append("authorizationFile", this.authorizationFile);
+                        }
                     }
 
                     this.axios
