@@ -33,7 +33,7 @@ export default {
         };
     },
     mounted() {
-        if (!this.middleware("add_documents", "read")) {
+        if (!this.middleware("shared_documents", "read")) {
             this.$router.push("http404");
         }
     },
