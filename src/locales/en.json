@@ -64,7 +64,7 @@
         },
         "watermark":{
             "reference": "# Invoice",
-            "description": "# Case # | # Invoice | Beneficiary's name | Date of service"
+            "description": "# Case # | # Invoice | Pax Name | Date of Service"
         }
     },
     "acount": {
