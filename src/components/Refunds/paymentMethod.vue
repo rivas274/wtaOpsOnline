@@ -193,11 +193,11 @@
                     mode="in-out"
                 >
                     <div
-                        v-show="disableForm?false:(captcha.length==0)"
                         class="form-group m-form__group pt-0"
                         :class="{'has-danger': errors.has('recaptcha')}"
                     >
                         <vue-recaptcha
+                            v-show="disableForm?false:(captcha.length==0)"
                             :sitekey="siteKey"
                             ref="recaptcha"
                             v-on:verify="onCaptchaVerified"
