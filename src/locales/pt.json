@@ -97,7 +97,13 @@
         "toContinue": "Para continuar, por gentileza, escreva seu nome",
         "toContinueEmail": "Por gentileza, pode escrever um e-mail, em caso de que precisemos contatá-lo",
         "downloadAndFill": "Devo baixar o Documento e preencher",
-        "uploadCompletedDocument": "Subir o Documento preenchido"
+        "uploadCompletedDocument": "Subir o Documento preenchido",
+        "thirdPartyAuthorization": "Autorização de terceiros",
+        "beneficiaryOrThirdParty": "As informações fornecidas para o pagamento do reembolso correspondem a você ou deseja autorizar um terceiro?",
+        "iAmBeneficiary": "Sou o beneficiário",
+        "authorizeThirdParty": "Autorização de um terceiro",
+        "uploadSignAuthorization": "Subir a autorização assinada",
+        "downloadSignUpload": "Clique para baixar sua autorização, assine-a e envie-a novamente."
     },
     "notification": {
         "notifications": "Notificações",

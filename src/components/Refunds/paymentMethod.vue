@@ -1,6 +1,33 @@
 <template>
     <form @submit.prevent="saveDataMethodPayment" class="m-form">
-        <div>
+        <div v-if = "configData.thirdPartyAuthorization == 'P'">
+            <div class="m-portlet__body pb-3">
+                <h2 v-if = "configData.thirdPartyAuthorization == 'P'" >
+                    {{ $t('refunds.beneficiaryOrThirdParty') }}
+                </h2>
+                <div class="row">
+                    <div class="col-md-6 d-flex align-items-start py-3">
+                        <button  class="btn-block btn btn-type-document btn-lg text-wrap text-left align-self-stretch"
+                                @click.prevent="setThirdPartyAuthorization('N')"
+                                type="button">
+                            <h3>
+                                {{ $t('refunds.iAmBeneficiary') }}
+                            </h3>
+                        </button>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-start py-3">
+                        <button  class="btn-block btn btn-type-document btn-lg text-wrap text-left align-self-stretch"
+                                @click.prevent="setThirdPartyAuthorization('Y')"
+                                type="button">
+                            <h3>
+                                {{ $t('refunds.authorizeThirdParty') }}
+                            </h3>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div v-else>
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">
@@ -11,83 +38,154 @@
                 </div>
             </div>
             <div class="m-portlet__body pb-3">
-                <div class="m-section" :key="keygroup" v-if="'group' in configData" v-for="(groupConfig, keygroup) in groupFields">
+                <div v-if = "configData.thirdPartyAuthorization == 'P'" >
+                    {{ $t('refunds.beneficiaryOrThirdParty') }}
+                </div>
+                <div class="m-section" :key="keygroup" v-else-if="'group' in configData" v-for="(groupConfig, keygroup) in groupFields">
                     <h3 class="m-section__heading">
                         {{ groupConfig.title }}
                     </h3>
                     <div class="m-section__content">
-                        <div class="row" >
+                        <div class="row">
                             <div class="col-md-6" :key="keyField"  v-for="(fieldConfig, keyField) in groupConfig.fields">
                                 <div v-if="fieldConfig.type == 'select'" >
-                                    <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has(keyField) || errors.has(keyField+'_custom')}">
+                                    <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has('custom-fields.'+keyField) || errors.has('custom-fields.'+keyField+'_custom')}">
                                         <strong>{{ fieldConfig.title }}</strong>
                                         <div :class="{'input-group':saveData[keyField] == fieldConfig.show_custom_field}">
                                             <select-from :name="keyField" 
-                                                    v-validate="fieldConfig.vee" 
+                                                    v-validate="fieldConfig.vee"
                                                     :data-vv-as="fieldConfig.title"
-                                                    :options="fieldConfig.options" 
-                                                    :selected="saveData[keyField]" 
+                                                    data-vv-scope="custom-fields"
+                                                    :options="fieldConfig.options"
+                                                    :selected="saveData[keyField]"
                                                     v-on:input="setData"></select-from>
                                             <input  type="text" 
                                                     class="form-control m-input" 
                                                     v-if="saveData[keyField] == fieldConfig.show_custom_field"
                                                     :data-vv-as="fieldConfig.title"
+                                                    data-vv-scope="custom-fields"
                                                     v-validate="'required'" 
                                                     v-model.lazy="saveData[keyField+'_custom']" 
                                                     :name="keyField+'_custom'" />
                                         </div>
-                                        <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
-                                        <form-error :attribute_name="keyField+'_custom'" :errors_form="errors"></form-error>
+                                        <form-error :attribute_name="'custom-fields.'+keyField" :errors_form="errors"></form-error>
+                                        <form-error :attribute_name="'custom-fields.'+keyField+'_custom'" :errors_form="errors"></form-error>
                                     </div>
                                 </div>
                                 <div v-else-if="fieldConfig.type == 'phone'">
-                                    <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has('cod_'+keyField) || errors.has(keyField)}">
+                                    <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has('custom-fields.'+'cod_'+keyField) || errors.has('custom-fields.'+keyField)}">
                                         <strong>{{ fieldConfig.title }}</strong>
                                         <div class="input-group">
                                             <select-from :name="keyField" 
                                                     v-validate="'required'" 
                                                     :data-vv-as="fieldConfig.title"
+                                                    data-vv-scope="custom-fields"
                                                     :options="fieldConfig.options" 
                                                     :selected="saveData['cod_'+keyField]" 
                                                     v-on:input="setData"></select-from>
                                             <input  type="text" 
                                                     class="form-control m-input"
                                                     :data-vv-as="fieldConfig.title"
+                                                    data-vv-scope="custom-fields"
                                                     v-validate="fieldConfig.vee"
                                                     v-model.lazy="saveData[keyField]" 
                                                     :name="keyField" />
                                         </div>
-                                        <form-error :attribute_name="'cod_'+keyField" :errors_form="errors"></form-error>
-                                        <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
+                                        <form-error :attribute_name="'custom-fields.'+'cod_'+keyField" :errors_form="errors"></form-error>
+                                        <form-error :attribute_name="'custom-fields.'+keyField" :errors_form="errors"></form-error>
                                     </div>
                                 </div>
                                 <div v-else-if="fieldConfig.type == 'date'">
-                                    <div class="form-group m-form__group mb-3" :class="{ 'has-danger': errors.has(keyField) }">
+                                    <div class="form-group m-form__group mb-3" :class="{ 'has-danger': errors.has('custom-fields.'+keyField) }">
                                         <strong>{{ fieldConfig.title }}</strong>
                                         <input  type="date"
                                                 class="form-control m-input" 
                                                 v-validate="fieldConfig.vee"
                                                 :data-vv-as="fieldConfig.title" 
+                                                data-vv-scope="custom-fields"
                                                 v-model.lazy="saveData[keyField]" 
                                                 :name="keyField" />
-                                        <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
+                                        <form-error :attribute_name="'custom-fields.'+keyField" :errors_form="errors"></form-error>
                                     </div>
                                 </div>
                                 <div v-else>
-                                    <div class="form-group m-form__group mb-3" :class="{ 'has-danger': errors.has(keyField) }">
+                                    <div class="form-group m-form__group mb-3" :class="{ 'has-danger': errors.has('custom-fields.'+keyField) }">
                                         <strong>{{ fieldConfig.title }}</strong>
                                         <input  type="text" 
-                                                class="form-control m-input" 
+                                                class="form-control m-input"
                                                 v-validate="fieldConfig.vee"
-                                                :data-vv-as="fieldConfig.title" 
-                                                v-model.lazy="saveData[keyField]" 
+                                                :data-vv-as="fieldConfig.title"
+                                                data-vv-scope="custom-fields"
+                                                v-model.lazy="saveData[keyField]"
                                                 :name="keyField" />
-                                        <form-error :attribute_name="keyField" :errors_form="errors"></form-error>
+                                        <form-error :attribute_name="'custom-fields.'+keyField" :errors_form="errors"></form-error>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="m-section" v-if="configData.thirdPartyAuthorization == 'Y'">
+                    <h3 class="m-section__heading">
+                        {{ $t('refunds.thirdPartyAuthorization') }}
+                    </h3>
+                    <div class="m-section__content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button class="btn btn-block btn-lg text-wrap align-self-stretch"
+                                        @click.prevent="generatePdfAuthorization">
+                                    {{ $t('refunds.downloadSignUpload')}}
+                                </button>
+                            </div>
+                            <div class="col-md-6" v-if="showFileAuthorization">
+                                <div
+                                    class="form-group m-form__group"
+                                    :class="{'has-danger': errors.has('file')}">
+                                    <strong>{{ $t('refunds.uploadSignAuthorization') }}</strong>
+                                    <div class="custom-file">
+                                        <input
+                                            type="file"
+                                            name="file"
+                                            class="custom-file-input"
+                                            id="file"
+                                            accept="application/pdf, image/gif, image/jpg, image/jpeg, image/png"
+                                            v-validate="'required|ext:jpeg,jpg,pdf,png,gif,bmp'"
+                                            :data-vv-as="$t('document.file')"
+                                            ref="file"
+                                            v-on:change="handleFileUpload"
+                                        />
+                                        <label
+                                            class="custom-file-label"
+                                            :class="['custom-file-'+$root.$i18n.locale]"
+                                            for="authorizationFile"
+                                        >
+                                            <span v-if="authorizationFile">
+                                                {{ authorizationFile.name }}
+                                            </span>
+                                            <span v-else>
+                                                {{$t('document.choose')}}
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <form-error
+                                        :attribute_name="'file'"
+                                        :errors_form="errors"
+                                    ></form-error>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="progress"
+                    v-if="uploadPercentage>0">
+                    <div
+                        class="progress-bar progress-bar-striped progress-bar-animated"
+                        role="progressbar"
+                        :aria-valuenow="uploadPercentage"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        :style="{width: uploadPercentage+'%'}"
+                    ></div>
                 </div>
                 <transition
                     :duration="1500"
@@ -149,6 +247,9 @@ export default {
             saveData: {},
             captcha: "",
             disableForm: false,
+            uploadPercentage: 0,
+            authorization: "",
+            authorizationFile: null,
         };
     },
     mounted() {
@@ -173,35 +274,98 @@ export default {
                 }
             }).then(response => {
                 this.configData = response.data.RESPONSE;
-                //ciclo para cargar los valores de data config en saveData
-                for (var prop in this.configData.fields) {
-                    if ('value' in this.configData.fields[prop]) {
-                        if (this.configData.fields[prop].type == 'phone') {
-                            this.saveData['cod_'+prop] = this.configData.fields[prop].value['cod_phone'];
-                            this.saveData[prop] = this.configData.fields[prop].value['phone'];
-                        } else {
-                            this.saveData[prop] = this.configData.fields[prop].value;
-                        }
-                    }
-                }
+                this.setFields(this.configData.fields);
             });
         },
-        saveDataMethodPayment: function () {
-            window.console.log('saveDataMethodPayment init')
+        setThirdPartyAuthorization: function (value) {
+            this.configData.thirdPartyAuthorization = value;
+            this.authorization = value;
+        },
+        handleFileUpload: function (event) {
+            this.authorizationFile = event.target.files[0];
+        },
+        setFields(arrData) {
+            for (let key in arrData) {
+                if (!('value' in arrData[key])) {
+                    continue;
+                }
+                this.saveData[key] = arrData[key].value;
+                if (arrData[key].type == 'phone' && 'value' in arrData[key]) {
+                    this.saveData['cod_' + key] = arrData[key].value['cod_phone'];
+                    this.saveData[key] = arrData[key].value['phone'];
+                }else if ('show_custom_field' in arrData[key]) {
+                    if (!(arrData[key].value in arrData[key].options)) {
+                        this.saveData[key + '_custom'] = arrData[key].value;
+                        this.saveData[key] = arrData[key].show_custom_field;
+                    }
+                }
+            }
+        },
+        generatePdfAuthorization: function () {
+            this.callApi('pdfAuthorizationRefund', 'custom-fields');
+        },
+        saveDataMethodPayment:function () {
+            this.callApi('setPaymentFieldsRefundByAssist');
+        },
+        callApi: function (endPoint, validateScope) {
             if (!this.disableForm) {
-                window.console.log('saveDataMethodPayment active form')
-                this.$validator.validateAll().then(result => {
-                    window.console.log('saveDataMethodPayment valid',{result})
-                    if (result) {
-                        this.disableForm = true;
-                        this.axios
-                            .post("setPaymentFieldsRefundByAssist", {
-                                idAssist: this.idAssist,
-                                data: this.saveData,
-                                "g-recaptcha":this.captcha
+                this.$validator.validateAll(validateScope).then(result => {
+                    if (!result) {
+                        return;
+                    }
+                    this.disableForm = true;
+
+                    const formData = new FormData();
+                    formData.append("idAssist", this.idAssist);
+                    formData.append("g-recaptcha", this.captcha);
+
+                    for (var prop in this.saveData) {
+                        formData.append(prop, this.saveData[prop]);
+                    }
+
+                    if (this.showFileAuthorization) {
+                        formData.append("authorization", this.authorization);
+                        if (this.authorizationFile) {
+                            formData.append("authorizationFile", this.authorizationFile);
+                        }
+                    }
+
+                    this.axios
+                        .post(endPoint,
+                            formData,
+                            {
+                                responseType: "blob",
+                                headers: {
+                                    "Content-Type": "multipart/form-data"
+                                },
+                                onUploadProgress: function (progressEvent) {
+                                    this.uploadPercentage = parseInt(
+                                        Math.round(
+                                            (progressEvent.loaded * 100) /
+                                            progressEvent.total
+                                        )
+                                    );
+                                }.bind(this)
                             })
-                            .then(response => {
-                                if (response.data.STATUS == "OK") {
+                        .then(response => {
+                            this.uploadPercentage = 0;
+                            this.disableForm = false;
+                            if (response.headers['content-type'] == 'application/pdf') {
+                                const tempDownload = document.createElement("a");
+                                tempDownload.href = window.URL.createObjectURL(
+                                    new Blob([response.data])
+                                );
+                                tempDownload.setAttribute(
+                                    "download", "authorization.pdf"
+                                );
+                                document.body.appendChild(tempDownload);
+                                tempDownload.click();
+                                return;
+                            }
+                            response.data.text().then(text => {
+                                const jsonResponse = JSON.parse(text);
+
+                                if ('STATUS' in jsonResponse && jsonResponse.STATUS == "OK") {
                                     window.Swal.fire({
                                         title: this.$t("general.sent"),
                                         text: this.$t("general.informationSentCorrectly"),
@@ -210,32 +374,32 @@ export default {
                                     }).then(() => {
                                         this.$emit("update:status", "L");
                                     });
-                                } else {
-                                    this.disableForm = false;
-                                    if (response.data.ERRORS) {
-                                        for (var prop in response.data.ERRORS) {
-                                            this.errors.add({
-                                                field: prop,
-                                                msg: response.data.ERRORS[prop]
-                                            });
-                                        }
+                                } 
+
+                                if ('ERRORS' in jsonResponse && jsonResponse.ERRORS) {
+                                    for (let prop in jsonResponse.ERRORS) {
+                                        this.errors.add({
+                                            field: prop,
+                                            msg: jsonResponse.ERRORS[prop]
+                                        });
                                     }
                                 }
                             });
-                    }
+
+                        });
                 },
                 errors => {
-                    window.console.log('saveDataMethodPayment invalid',errors)
-                    this.disableForm = false;
-                }
-                );
+                    this.disableForm = true;
+                });
             }
         }
     },
     computed: {
+        showFileAuthorization() {
+            return this.configData.thirdPartyAuthorization == 'Y';
+        },
         groupFields() {
             let groupFields = {};
-            console.log('groupFields',this.configData)
             for (let key in this.configData.fields) {
                 let group = this.configData.fields[key].group || "default";
                 if (!groupFields[group]) {
