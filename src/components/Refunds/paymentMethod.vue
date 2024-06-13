@@ -76,7 +76,7 @@
                                     <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has('custom-fields.'+'cod_'+keyField) || errors.has('custom-fields.'+keyField)}">
                                         <strong>{{ fieldConfig.title }}</strong>
                                         <div class="input-group">
-                                            <select-from :name="keyField" 
+                                            <select-from :name="'cod_'+keyField" 
                                                     v-validate="'required'" 
                                                     :data-vv-as="fieldConfig.title"
                                                     data-vv-scope="custom-fields"
@@ -91,7 +91,7 @@
                                                     v-model.lazy="saveData[keyField]" 
                                                     :name="keyField" />
                                         </div>
-                                        <form-error :attribute_name="'custom-fields.'+'cod_'+keyField" :errors_form="errors"></form-error>
+                                        <form-error :attribute_name="'custom-fields.cod_'+keyField" :errors_form="errors"></form-error>
                                         <form-error :attribute_name="'custom-fields.'+keyField" :errors_form="errors"></form-error>
                                     </div>
                                 </div>
