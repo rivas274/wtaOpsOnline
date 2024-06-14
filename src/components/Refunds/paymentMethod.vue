@@ -140,12 +140,12 @@
                             <div class="col-md-6" v-if="showFileAuthorization">
                                 <div
                                     class="form-group m-form__group"
-                                    :class="{'has-danger': errors.has('file')}">
+                                    :class="{'has-danger': errors.has('authorizationFile')}">
                                     <strong>{{ $t('refunds.uploadSignAuthorization') }}</strong>
                                     <div class="custom-file">
                                         <input
                                             type="file"
-                                            name="file"
+                                            name="authorizationFile"
                                             class="custom-file-input"
                                             id="file"
                                             accept="application/pdf, image/gif, image/jpg, image/jpeg, image/png"
@@ -168,7 +168,7 @@
                                         </label>
                                     </div>
                                     <form-error
-                                        :attribute_name="'file'"
+                                        :attribute_name="'authorizationFile'"
                                         :errors_form="errors"
                                     ></form-error>
                                 </div>
@@ -187,36 +187,30 @@
                         :style="{width: uploadPercentage+'%'}"
                     ></div>
                 </div>
-                <transition
-                    :duration="1500"
-                    name="fade"
-                    mode="in-out"
+                <div
+                    class="form-group m-form__group pt-0"
+                    :class="{'has-danger': errors.has('g-recaptcha')}"
                 >
-                    <div
-                        class="form-group m-form__group pt-0"
-                        :class="{'has-danger': errors.has('recaptcha')}"
-                    >
-                        <vue-recaptcha
-                            v-show="disableForm?false:(captcha.length==0)"
-                            :sitekey="siteKey"
-                            ref="recaptcha"
-                            v-on:verify="onCaptchaVerified"
-                            v-on:expired="onCaptchaExpired"
-                            :loadRecaptchaScript="true"
-                        ></vue-recaptcha>
-                        <input
-                            type="hidden"
-                            name="recaptcha"
-                            id="recaptcha"
-                            v-validate="'recaptcha'"
-                            v-model="captcha"
-                        />
-                        <form-error
-                            :attribute_name="'recaptcha'"
-                            :errors_form="errors"
-                        ></form-error>
-                    </div>
-                </transition>
+                    <vue-recaptcha
+                        v-show="disableForm?false:(captcha.length==0)"
+                        :sitekey="siteKey"
+                        ref="recaptcha"
+                        data-vv-as="Captcha"
+                        v-on:verify="onCaptchaVerified"
+                        v-on:expired="onCaptchaExpired"
+                        :loadRecaptchaScript="true"
+                    ></vue-recaptcha>
+                    <input
+                        type="hidden"
+                        name="g-recaptcha"
+                        v-validate="'required|recaptcha'"
+                        v-model="captcha"
+                    />
+                    <form-error
+                        :attribute_name="'g-recaptcha'"
+                        :errors_form="errors"
+                    ></form-error>
+                </div>
             </div>
             <div class="m-portlet__foot m-portlet__foot--fit text-center">
                 <div class="m-form__actions">
@@ -377,9 +371,12 @@ export default {
                                 } 
 
                                 if ('ERRORS' in jsonResponse && jsonResponse.ERRORS) {
+                                    //limpiamos los errores
+                                    this.errors.clear();
                                     for (let prop in jsonResponse.ERRORS) {
+                                        const group = prop in this.configData.fields ?'custom-fields.' + prop : prop;
                                         this.errors.add({
-                                            field: prop,
+                                            field: group,
                                             msg: jsonResponse.ERRORS[prop]
                                         });
                                     }
