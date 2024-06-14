@@ -145,13 +145,18 @@
                                                     </div>
                                                     <div class="m-portlet__foot m-portlet__foot--fit text-center">
                                                         <div class="m-form__actions">
-                                                            <a class="btn btn-lg btn-primary mx-1"
-                                                                v-if="results.refundAdm.status.code == 'C'"
-                                                                :href="results.refundAdm.payment_proof">
-                                                                {{ $t('reimbursement.paymentProof') }}</a>
-                                                            <button @click="showStatus = false"
-                                                                v-if="results.refundAdm.status.canUpload"
-                                                                class="btn btn-lg btn-primary mx-1">{{ $t('general.return') }}</button>
+                                                            <div>
+                                                                <button @click="showStatus = false"
+                                                                    v-if="results.refundAdm.status.canUpload"
+                                                                    class="btn btn-lg btn-primary mx-1">
+                                                                    {{ $t('reimbursement.returnTo.document') }}
+                                                                </button>
+                                                                <button @click="setPaymentMethodStatus('S')"
+                                                                    v-if="paymentMethodStatus == 'L'" 
+                                                                    class="btn btn-lg btn-primary mx-1">
+                                                                    {{ $t('reimbursement.returnTo.paymentInformation') }}
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -221,6 +226,9 @@ export default {
                     }
                     this.results = response.data.RESPONSE.RESULTS[0];
                 });
+        },
+        setPaymentMethodStatus: function (status) {
+            this.results.refundAdm.method_payment.status.code = status;
         }
     },
     computed: {
@@ -232,13 +240,18 @@ export default {
                 assistanceType: this.results.descAssistanceType
             };
         },
-        formShow: function () {
-            if ('method_payment' in this.results.refundAdm &&
-                ['S'].includes(this.results.refundAdm.method_payment.status.code)) {
-                return 'paymentMethod';
+        paymentMethodStatus: function () {
+            if (!('method_payment' in this.results.refundAdm)) {
+                return 'N';
             }
+            return this.results.refundAdm.method_payment.status.code;
+        },
+        formShow: function () {
             if (this.results.refundAdm.declarationOfUse == 'N') {
                 return 'declarationOfUse';
+            }
+            if (['S'].includes(this.paymentMethodStatus)) {
+                return 'paymentMethod';
             }
             if (this.results.refundAdm.status.show && this.showStatus) {
                 return 'showStatus';

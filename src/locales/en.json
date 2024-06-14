@@ -86,7 +86,11 @@
         "statusOfYour": "Status of your Reimbursement",
         "paymentProof": "Proof of payment",
         "methodPayment": "Method of payment",
-        "paymentInformationUploaded": "Payment information uploaded"
+        "paymentInformationUploaded": "Payment information uploaded",
+        "returnTo":{
+            "paymentInformation": "Return to payment information",
+            "document": "Return to document"
+        }
     },
     "company": {
         "company": "Company"

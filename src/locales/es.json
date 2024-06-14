@@ -86,7 +86,11 @@
         "statusOfYour": "Estatus de su reembolso",
         "paymentProof": "Comprobante de pago",
         "methodPayment": "Método de pago",
-        "paymentInformationUploaded": "Información de pago cargada"
+        "paymentInformationUploaded": "Información de pago cargada",
+        "returnTo":{
+            "paymentInformation": "Volver a la información de pago",
+            "document": "Volver a documentos"
+        }
     },
     "company": {
         "company": "Compañía"

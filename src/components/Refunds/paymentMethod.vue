@@ -2,7 +2,7 @@
     <form @submit.prevent="saveDataMethodPayment" class="m-form">
         <div v-if = "configData.thirdPartyAuthorization == 'P'">
             <div class="m-portlet__body pb-3">
-                <h2 v-if = "configData.thirdPartyAuthorization == 'P'" >
+                <h2>
                     {{ $t('refunds.beneficiaryOrThirdParty') }}
                 </h2>
                 <div class="row">
@@ -35,6 +35,13 @@
                             {{ $t('reimbursement.methodPayment') }} | {{ configData.title }}
                         </h3>
                     </div>
+                </div>
+                <div class="m-portlet__head-tools">
+                    <button class="btn"
+                            @click.prevent="configData.thirdPartyAuthorization = 'P'"
+                            type="button"
+                        >{{ $t('general.back') | upper }}
+                    </button>
                 </div>
             </div>
             <div class="m-portlet__body pb-3">
