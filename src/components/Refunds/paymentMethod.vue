@@ -32,7 +32,7 @@
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">
                         <h3 class="m-portlet__head-text">
-                            {{ $t('reimbursement.methodPayment') }} | {{ configData.title }}
+                            {{ $t('reimbursement.methodPayment') | upper }} | {{ configData.title | upper }}
                         </h3>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="m-section" :key="keygroup" v-else-if="'group' in configData" v-for="(groupConfig, keygroup) in groupFields">
                     <h3 class="m-section__heading">
-                        {{ groupConfig.title }}
+                        {{ groupConfig.title | upper}}
                     </h3>
                     <div class="m-section__content">
                         <div class="row">
