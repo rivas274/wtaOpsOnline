@@ -110,6 +110,7 @@
                                                 v-validate="fieldConfig.vee"
                                                 :data-vv-as="fieldConfig.title" 
                                                 data-vv-scope="custom-fields"
+                                                @blur="onBlurCustomFields(keyField)"
                                                 v-model.lazy="saveData[keyField]" 
                                                 :name="keyField" />
                                         <form-error :attribute_name="'custom-fields.'+keyField" :errors_form="errors"></form-error>
@@ -124,6 +125,7 @@
                                                 :data-vv-as="fieldConfig.title"
                                                 data-vv-scope="custom-fields"
                                                 v-model.lazy="saveData[keyField]"
+                                                @blur="onBlurCustomFields(keyField)"
                                                 :name="keyField" />
                                         <form-error :attribute_name="'custom-fields.'+keyField" :errors_form="errors"></form-error>
                                     </div>
@@ -267,6 +269,35 @@ export default {
             this.captcha = "";
             this.$refs.recaptcha.reset();
         },
+        onBlurCustomFields: function (keyField) {
+            const self = this;
+            const field = this.configData.fields[keyField];
+            const urlBlur ='onBlur' in field ? field.onBlur : false;
+            if(!urlBlur){
+                return;
+            }
+            this.axios.post(urlBlur, {
+                ...this.saveData,
+                field: keyField,
+            }).then(response => {
+                if ('RESPONSE' in response.data) {
+                    this.saveData = {
+                        ...this.saveData,
+                        ...response.data.RESPONSE
+                    };
+                }
+                if ('ERRORS' in response.data) {
+                    for (let key in response.data.ERRORS) {
+                        const group = key in this.configData.fields ?'custom-fields.' + key : key;
+                        self.errors.add({
+                            field: group,
+                            msg: response.data.ERRORS[key]
+                        });
+                    }
+                }
+            });
+
+        },
         getContents: function () {
             this.axios.get("getPaymentFieldsRefundByAssist", {
                 params: {
@@ -274,8 +305,9 @@ export default {
                     timestamp: (new Date()).getTime(),//enviamos un parámetro dinámico para deshabilitar la cache de axios
                 }
             }).then(response => {
-                this.configData = response.data.RESPONSE;
-                this.setFields(this.configData.fields);
+                const tempResponse = response.data.RESPONSE;
+                this.setFields(tempResponse.fields);
+                this.configData = tempResponse;
             });
         },
         setThirdPartyAuthorization: function (value) {
@@ -287,17 +319,18 @@ export default {
         },
         setFields(arrData) {
             for (let key in arrData) {
+                this.setData(key,'');
                 if (!('value' in arrData[key])) {
                     continue;
                 }
-                this.saveData[key] = arrData[key].value;
+                this.setData(key,arrData[key].value);
                 if (arrData[key].type == 'phone' && 'value' in arrData[key]) {
-                    this.saveData['cod_' + key] = arrData[key].value['cod_phone'];
-                    this.saveData[key] = arrData[key].value['phone'];
+                    this.setData('cod_' + key,arrData[key].value['cod_phone']);
+                    this.setData(key,arrData[key].value['phone']);
                 }else if ('show_custom_field' in arrData[key]) {
                     if (!(arrData[key].value in arrData[key].options)) {
-                        this.saveData[key + '_custom'] = arrData[key].value;
-                        this.saveData[key] = arrData[key].show_custom_field;
+                        this.setData(key + '_custom',arrData[key].value);
+                        this.setData(key,arrData[key].show_custom_field);
                     }
                 }
             }
@@ -320,7 +353,7 @@ export default {
                     formData.append("idAssist", this.idAssist);
                     formData.append("g-recaptcha", this.captcha);
 
-                    for (var prop in this.saveData) {
+                    for (let prop in this.saveData) {
                         formData.append(prop, this.saveData[prop]);
                     }
 
