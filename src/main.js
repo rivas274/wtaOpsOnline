@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
-import axios from 'axios';
 import VueAxios from 'vue-axios';
+import customAxios from './custom/axios-custom';
 import VueSession from './custom/vue-session-custom';
 import routes from './custom/routes';
 import middleware from './custom/middleware';
@@ -24,9 +24,6 @@ Vue.use(VueSession, {
 Vue.use(middleware, permission);
 
 const router = new VueRouter({ mode: 'history', routes: routes });
-const customAxios = axios.create({
-    baseURL: process.env.VUE_APP_URL + '/app/apiWtaOnline/',
-});
 
 customAxios.interceptors.response.use(
     function (response) {

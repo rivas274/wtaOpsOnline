@@ -1,4 +1,5 @@
 import  VeeValidate, { Validator } from 'vee-validate';
+import customAxios from './axios-custom';
 
 Validator.extend('verify_password', {
     getMessage: field => {
@@ -9,10 +10,28 @@ Validator.extend('verify_password', {
         return strongRegex.test(value);
     }
 });
+
 Validator.extend('recaptcha', {
     getMessage: () => `Please complete the captcha`,
-    validate: value => {
-        return value.toString().split('').length > 0;
+    validate: async value => {
+        console.log('recaptcha', value);
+        //si esta vacio retornamos false
+        if (value.toString().split('').length === 0) {
+            return false;
+        }
+        //validamos el captcha con axios llamando a por post a checkCaptcha
+        try {
+            const response = await customAxios.post('checkCaptcha', {
+                'g-recaptcha': value
+            });
+            if (response.data.STATUS === 'OK') {
+                return true;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            return false;
+        }
+        return false;
     }
 });
 Validator.extend('alpha_numeric_space', {

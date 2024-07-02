@@ -201,7 +201,7 @@
                     :class="{'has-danger': errors.has('g-recaptcha')}"
                 >
                     <vue-recaptcha
-                        v-show="disableForm?false:(captcha.length==0)"
+                        v-show="disableForm?false:(captcha.length==0 || errors.has('g-recaptcha'))"
                         :sitekey="siteKey"
                         ref="recaptcha"
                         data-vv-as="Captcha"
@@ -212,7 +212,7 @@
                     <input
                         type="hidden"
                         name="g-recaptcha"
-                        v-validate="'required|recaptcha'"
+                        v-validate="'recaptcha'"
                         v-model="captcha"
                     />
                     <form-error
@@ -351,7 +351,6 @@ export default {
 
                     const formData = new FormData();
                     formData.append("idAssist", this.idAssist);
-                    formData.append("g-recaptcha", this.captcha);
 
                     for (let prop in this.saveData) {
                         formData.append(prop, this.saveData[prop]);

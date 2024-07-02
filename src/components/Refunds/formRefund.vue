@@ -283,7 +283,7 @@
                                     mode="in-out"
                                 >
                                     <div
-                                        v-show="disableForm?false:(captcha.length==0)"
+                                        v-show="(disableForm?false:(captcha.length==0 || errors.has('recaptcha')))"
                                         class="form-group m-form__group"
                                         :class="{'has-danger': errors.has('recaptcha')}"
                                     >
@@ -429,7 +429,6 @@ export default {
                     const formData = new FormData();
                     formData.append("file", this.file);
                     formData.append("idAssist", this.idAssist);
-                    formData.append("g-recaptcha", this.captcha);
                     formData.append("reference", this.inputsData.reference);
                     formData.append("description", this.inputsData.description);
                     formData.append("currency", this.inputsData.currency);
