@@ -298,6 +298,10 @@ export default {
     .title-refund-dashboard {
         font-size: 1.8rem;
     }
+    .m-portlet__foot .m-form__actions .btn-lg{
+        width: 100%;
+        margin-top: 5px;
+    }
 }
 </style>
 
