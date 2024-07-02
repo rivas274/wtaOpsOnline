@@ -495,17 +495,22 @@ export default {
                                         }
                                     });
                                 } else {
+                                    let listErrors = [];
                                     if (response.data.ERRORS) {
                                         for (var prop in response.data.ERRORS) {
                                             this.errors.add({
                                                 field: prop,
                                                 msg: response.data.ERRORS[prop]
                                             });
+                                            listErrors.push(response.data.ERRORS[prop]);
                                         }
                                     }
                                     window.Swal.fire({
-                                        title: "Error",
-                                        text: response.data.MESSAGE,
+                                        title: response.data.MESSAGE,
+                                        html: (listErrors.length>0?
+                                            '<ol><li class="text-left">' +
+                                            listErrors.join('</li><li class="class="text-left">') +
+                                            '</li><ol>':''),
                                         confirmButtonText: this.$t("general.ok"),
                                         type: "error"
                                     });
