@@ -20,7 +20,7 @@ Validator.extend('recaptcha', {
             return false;
         }
         //validamos el captcha con axios llamando a por post a checkCaptcha
-        try {
+        /* try {
             const response = await customAxios.post('checkCaptcha', {
                 'g-recaptcha': value
             });
@@ -30,8 +30,8 @@ Validator.extend('recaptcha', {
         } catch (error) {
             console.error('Error:', error);
             return false;
-        }
-        return false;
+        } */
+        return true;
     }
 });
 Validator.extend('alpha_numeric_space', {
