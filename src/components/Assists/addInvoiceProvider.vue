@@ -184,7 +184,7 @@ export default {
         selectFromTable,
         dateSingleBt,
     },
-    props: ["id-assist"],
+    props: ["id-assist","detaill"],
     data() {
         return {
             uploadPercentage: 0,
@@ -207,7 +207,19 @@ export default {
     mounted() {
         this.getDocumentsType();
     },
+    watch: {
+    'inputsData.date': 'updateDescription',
+    'inputsData.reference': 'updateDescription'
+  },
     methods: {
+         updateDescription() {
+            console.log(this.detaill.codeAssist)
+            const   code = this.detaill.codeAssist;
+            const   nameP = this.detaill.firstName;
+            const   LastnameP = this.detaill.lastName;
+            const { reference, date  } = this.inputsData;
+            this.inputsData.description = `${code} | ${reference} | ${nameP} ${LastnameP} | ${date}`;
+    },
         getDocumentsType: function() {
             this.axios
                 .get("getDocumentsType?docType[]=7&docType[]=8&docType[]=17")

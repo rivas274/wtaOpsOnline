@@ -36,16 +36,6 @@
                         <span>{{$t('reimbursement.reimbursement')}}</span>
                     </a>
                 </li>
-                <li v-if="permission.documents" :class="{active:tabShow=='documents'}" v-tooltip:top="$t('menu.documents')">
-                    <a
-                        class="nav-link"
-                        :class="{'m--font-success':tabShow=='documents'}"
-                        @click.prevent="showTab('documents')"
-                    >
-                        <i class="fa fa-folder" aria-hidden="true"></i>
-                        <span>{{$t('menu.documents')}}</span>
-                    </a>
-                </li>
                 <li v-if="permission.add_invoice" :class="{active:tabShow=='add_invoice'}" v-tooltip:top="$t('menu.documents')">
                     <a
                         class="nav-link"
@@ -56,6 +46,17 @@
                         <span>{{$t('document.add')}}</span>
                     </a>
                 </li>
+                <li v-if="permission.documents" :class="{active:tabShow=='documents'}" v-tooltip:top="$t('menu.documents')">
+                    <a
+                        class="nav-link"
+                        :class="{'m--font-success':tabShow=='documents'}"
+                        @click.prevent="showTab('documents')"
+                    >
+                        <i class="fa fa-folder" aria-hidden="true"></i>
+                        <span>{{$t('menu.documents')}}</span>
+                    </a>
+                </li>
+               
                 <li v-if="permission.notes" :class="{active:tabShow=='Note'}" v-tooltip:top="$t('assistance.notes')">
                     <a
                         class="nav-link"
@@ -149,7 +150,10 @@
                     <list-files :id-assist="assistBase.idAssist"></list-files>
                 </div>
                 <div v-if="permission.documents" class="tab-pane" :class="{active:tabShow=='add_invoice'}">
-                    <add-invoice v-on:addInvoice="[]" :id-assist="assistBase.idAssist"></add-invoice>
+                    <add-invoice v-on:addInvoice="[]" 
+                                :id-assist="assistBase.idAssist"
+                                :detaill="assistBase">
+                    </add-invoice>
                 </div>
                 <div v-if="permission.notes" class="tab-pane" :class="{active:tabShow=='Note'}">
                     <list-note :id-assist="assistBase.idAssist" :type="'notes'"></list-note>
