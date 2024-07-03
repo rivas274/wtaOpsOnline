@@ -51,7 +51,7 @@
                             class="custom-file-input"
                             id="fileEob"
                             accept="application/pdf"
-                            v-validate="this.requiredEOB+'|ext:pdf'"
+                            v-validate="this.requiredEOB+'|max_size|ext:pdf'"
                             ref="fileEob"
                             v-on:change="handleFileUploadEOB()"
                         />

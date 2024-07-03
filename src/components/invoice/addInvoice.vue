@@ -136,7 +136,7 @@
                             class="custom-file-input"
                             id="file"
                             accept="application/pdf"
-                            v-validate="'required|ext:pdf'"
+                            v-validate="'required|max_size|ext:pdf'"
                             :data-vv-as="$t('document.file')"
                             ref="file"
                             v-on:change="handleFileUpload"

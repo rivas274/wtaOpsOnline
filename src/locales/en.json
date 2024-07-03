@@ -369,7 +369,8 @@
             "recaptcha": "Please complete the captcha",
             "alpha_numeric_space": "The {field} may only contain alphabetic characters, numbers and spaces",
             "numeric_space": "The {field} may only contain numbers, spaces, and hyphens (-).",
-            "zip_code": "Enter a valid zip code (Ex. 12345-1234 or 12345)"
+            "zip_code": "Enter a valid zip code (Ex. 12345-1234 or 12345)",
+            "max_size":"The {field} may not be greater than 30 MB"
         }
     }
 }

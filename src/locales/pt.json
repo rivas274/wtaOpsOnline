@@ -123,7 +123,8 @@
             "recaptcha": "Por favor, complete o captcha",
             "alpha_numeric_space": "A {field} só pode conter caracteres alfabéticos, números e espaços",
             "numeric_space": "A {field} só pode conter números, espaços e hífens (-)",
-            "zip_code": "Insira um código postal válido (Ex. 12345-1234 ou 12345)"
+            "zip_code": "Insira um código postal válido (Ex. 12345-1234 ou 12345)",
+            "max_size":"O tamanho do arquivo não pode exceder 30 MB"
         }
     }
 }

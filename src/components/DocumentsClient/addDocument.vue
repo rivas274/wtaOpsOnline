@@ -50,7 +50,7 @@
                             class="custom-file-input"
                             id="file"
                             accept=".pdf,.gif,.jpeg,.jpg,.png,.bmp,.gif,.csv,.xlsx,.xls,.txt"
-                            v-validate="'required|ext:pdf,gif,jpeg,jpg,png,bmp,gif,csv,xlsx,xls,zip,txt'"
+                            v-validate="'required|max_size|ext:pdf,gif,jpeg,jpg,png,bmp,gif,csv,xlsx,xls,zip,txt'"
                             :data-vv-as="$t('document.file')"
                             ref="file"
                             v-on:change="handleFileUpload"

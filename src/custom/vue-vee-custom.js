@@ -1,4 +1,4 @@
-import  VeeValidate, { Validator } from 'vee-validate';
+import VeeValidate, { Validator } from 'vee-validate';
 import customAxios from './axios-custom';
 
 Validator.extend('verify_password', {
@@ -10,28 +10,30 @@ Validator.extend('verify_password', {
         return strongRegex.test(value);
     }
 });
+const cacheCaptcha = {};
 
 Validator.extend('recaptcha', {
     getMessage: () => `Please complete the captcha`,
     validate: async value => {
         console.log('recaptcha', value);
-        //si esta vacio retornamos false
+        //si esta vacío retornamos false
         if (value.toString().split('').length === 0) {
             return false;
         }
+        if (value in cacheCaptcha) {
+            return cacheCaptcha[value];
+        }
         //validamos el captcha con axios llamando a por post a checkCaptcha
-        /* try {
+        try {
             const response = await customAxios.post('checkCaptcha', {
                 'g-recaptcha': value
             });
-            if (response.data.STATUS === 'OK') {
-                return true;
-            }
+            cacheCaptcha[value] = response.data.STATUS === 'OK';
         } catch (error) {
             console.error('Error:', error);
-            return false;
-        } */
-        return true;
+            cacheCaptcha[value] = false;
+        }
+        return cacheCaptcha[value];
     }
 });
 Validator.extend('alpha_numeric_space', {
@@ -60,6 +62,17 @@ Validator.extend('zip_code', {
     validate: value => {
         const strongRegex = /^\d{4,5}(-?\d{0,4})$/;
         return strongRegex.test(value);
+    }
+});
+Validator.extend('max_size', {
+    getMessage:  field => `El archivo ${field} es demasiado grande. El tamaño máximo permitido es de 30 MB.`,
+    validate: value => {
+        if (!value || !value.length) {
+            return true;
+        }
+        const file = value[0];
+        const maxBytes = 30 * 1024 * 1024;
+        return file.size <= maxBytes;
     }
 });
 export default VeeValidate;

@@ -528,7 +528,7 @@
                                         class="custom-file-input"
                                         id="fileFee"
                                         accept="application/pdf"
-                                        v-validate="this.requiredFee+'|ext:pdf'"
+                                        v-validate="this.requiredFee+'|max_size|ext:pdf'"
                                         ref="fileFee"
                                         v-on:change="handleFileUploadFee()"
                                     />
