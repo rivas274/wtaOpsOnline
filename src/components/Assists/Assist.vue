@@ -67,6 +67,17 @@
                         <span>{{$t('assistance.notes')}}</span>
                     </a>
                 </li>
+                <li v-if="permission.shared_notes" :class="{active:tabShow=='shared_notes'}" v-tooltip:top="$t('assistance.reimbursementNotes')">
+                    <a
+                        class="nav-link"
+                        :class="{'m--font-success':tabShow == 'shared_notes'}"
+                        @click.prevent="showTab('shared_notes')"
+                    >
+                        <i class="fa fa-sticky-note" aria-hidden="true"></i>
+                        <span v-if="permission.notes">{{$t('provider.publicNote')}}</span>
+                        <span v-else>{{$t('assistance.notes')}}</span>
+                    </a>
+                </li>
                 <li v-if="permission.notes_provider" :class="{active:tabShow=='notes_provider'}" v-tooltip:top="$t('assistance.notes_provider')">
                     <a
                         class="nav-link"
@@ -170,6 +181,9 @@
                 <div v-if="permission.refund_notes" class="tab-pane" :class="{active:tabShow=='refund_notes'}">
                     <list-note :id-assist="assistBase.idAssist" :type="'refund_notes'"></list-note>
                 </div>
+                <div v-if="permission.shared_notes" class="tab-pane" :class="{active:tabShow=='shared_notes'}">
+                    <list-note :id-assist="assistBase.idAssist" :type="'shared_notes'"></list-note>
+                </div>
                 <div v-if="permission.provider" class="tab-pane" :class="{active:tabShow=='Providers'}">
                     <Providers :id-assist="assistBase.idAssist"></Providers>
                 </div>
@@ -207,6 +221,7 @@ export default {
                 medical_notes: this.middleware("medical_notes", "read"),
                 quality_notes: this.middleware("quality_notes", "read"),
                 refund_notes: this.middleware("refund_notes", "read"),
+                shared_notes: this.middleware("shared_notes", "read"),
                 notes_provider: this.middleware("notes_provider", "read"),
                 provider: this.middleware("provider", "read"),
                 time_line: this.middleware("time_line", "read"),
