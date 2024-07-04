@@ -86,7 +86,7 @@
                         v-on:input="setDataFilter"
                     ></select-from-table>
                 </div>
-                <div class="form-group" :class="{'has-danger': errors.has('reference')}">
+                <div v-if="isBill" class="form-group" :class="{'has-danger': errors.has('reference')}">
                     <strong>{{ $t('assistanceBills.reference') }}</strong>
                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                         <input
