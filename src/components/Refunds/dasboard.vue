@@ -102,6 +102,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <h4 class="text-center">{{ refundStatus }}</h4>
                                         <div class="m-invoice__items m-form" v-if="results.processRefund == 'Y'">
                                             <declaration-of-use class="m-portlet m-portlet--tab"
                                                 :id-assist="results.idAssist" v-if="formShow == 'declarationOfUse'"
@@ -245,6 +246,12 @@ export default {
                 return 'N';
             }
             return this.results.refundAdm.method_payment.status.code;
+        },
+        refundStatus: function () {
+            if (['P'].includes(this.results.refundAdm.status.code)) {
+                return '';
+            }
+            return this.results.refundAdm.status.description.title;
         },
         formShow: function () {
             if (this.results.refundAdm.declarationOfUse == 'N') {
