@@ -10,10 +10,11 @@
                 <div class="form-group" :class="{'has-danger': errors.has('docType')}">
                     <strong>{{ $t('document.type') }}</strong>
                     <select-from-table
+                        :key="selectTableKey"
                         name="docType"
                         v-validate="'required'"
-                        :data-vv-as="$t('document.type')"
                         :watermark="$t('document.type')"
+                        :data-vv-as="$t('document.type')"
                         :options="documentsType"
                         :selected="inputsData.docType"
                         v-on:input="setDataFilter"
@@ -201,26 +202,33 @@ export default {
             documentsType: [],
             file: false,
             previewSrc: null,
-            displayAlert: false
+            displayAlert: false,
+            selectTableKey: 0 // Clave dinámica inicial
         };
     },
     mounted() {
         this.getDocumentsType();
     },
     watch: {
-    'inputsData.date': 'updateDescription',
-    'inputsData.reference': 'updateDescription'
-  },
-    methods: {
-         updateDescription() {
-            console.log(this.detaill.codeAssist)
-            const   code = this.detaill.codeAssist;
-            const   nameP = this.detaill.firstName;
-            const   LastnameP = this.detaill.lastName;
-            const { reference, date  } = this.inputsData;
-            this.inputsData.description = `${code} | ${reference} | ${nameP} ${LastnameP} | ${date}`;
+        'inputsData.date': 'updateDescription',
+        'inputsData.reference': 'updateDescription',
+        '$root.$i18n.locale': {
+            handler(newVal) {
+                this.getDocumentsType();
+                this.selectTableKey += 1; // Cambia la clave para forzar la re-renderización
+            },
+            deep: true
+        }
     },
-        getDocumentsType: function() {
+    methods: {
+        updateDescription() {
+            const code = this.detaill.codeAssist;
+            const nameP = this.detaill.firstName;
+            const LastnameP = this.detaill.lastName;
+            const { reference, date } = this.inputsData;
+            this.inputsData.description = `${code} | ${reference} | ${nameP} ${LastnameP} | ${date}`;
+        },
+        getDocumentsType() {
             this.axios
                 .get("getDocumentsType?docType[]=7&docType[]=8&docType[]=17")
                 .then(response => {
@@ -296,7 +304,7 @@ export default {
                                         }
                                     }
                                     window.Swal.fire({
-                                        title: response.data.MESSAGE||"Error Form",
+                                        title: response.data.MESSAGE || "Error Form",
                                         confirmButtonText: this.$t("general.ok"),
                                         type: "error"
                                     });
@@ -322,7 +330,7 @@ export default {
         }
     },
     computed: {
-        currencyFromSelect: function() {
+        currencyFromSelect() {
             return currency.reduce(function(m, e) {
                 m.push({
                     id: e.code,
@@ -338,11 +346,11 @@ export default {
             return URL.createObjectURL(this.file);
         },
         isBill:function(){
-            let keyValTypeDoc = this.documentsType.reduce(function(acum,val){
-                acum[val['id']]=val;
+            let keyValTypeDoc = this.documentsType.reduce(function(acum, val) {
+                acum[val['id']] = val;
                 return acum;
-            },{});
-            return keyValTypeDoc[this.inputsData.docType]?keyValTypeDoc[this.inputsData.docType]['bill']=='Y':false;
+            }, {});
+            return keyValTypeDoc[this.inputsData.docType] ? keyValTypeDoc[this.inputsData.docType]['bill'] == 'Y' : false;
         }
     }
 };
