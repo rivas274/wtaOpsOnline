@@ -54,12 +54,12 @@ export default {
             this.$root.$i18n.locale = this.selected;
             this.$validator.localize(this.selected);
             this.$session.set('lang',this.selected);
+            this.setLangApi(this.selected);
             this.$router.replace({
                 params: {
                     lang: this.$root.$i18n.locale
                 }
             });
-            this.setLangApi(this.selected);
         },
         setLangApi: function (lang) {
             if(this.$session.exists()){

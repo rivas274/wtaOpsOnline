@@ -908,6 +908,15 @@ export default {
                     });
             });
         this.getAssistanceDetail();
-    }
+    },
+    watch: {
+            '$root.$i18n.locale': {
+                handler(newVal) {
+                    this.getAssistanceDetail();
+                },
+                deep: true
+            }
+        },
+
 };
 </script>
