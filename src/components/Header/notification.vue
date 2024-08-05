@@ -2,7 +2,7 @@
     <div class="m-nav__item m-nav__item--accent m-dropdown m-dropdown--large m-dropdown--arrow m-dropdown--align-center m-dropdown--mobile-full-width"
         m-dropdown-toggle="click">
         <a class=" m-dropdown__toggle" id="m_topbar_notification_icon">
-            <span class="m-nav__link-badge m-badge m-badge--dot m-badge--dot-small m-badge--danger"
+            <span class="pulse-warning m-nav__link-badge m-badge m-badge--dot m-badge--dot-large m-badge--danger"
                 v-if="hasNotifications"></span>
             <span class="m-nav__link-icon">
                 <span class="m-nav__link-icon-wrapper">
@@ -66,6 +66,29 @@
         </div>
     </div>
 </template>
+
+<style>
+.pulse-warning {
+    animation-name: pulse-warning;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes pulse-warning {
+    0% {
+        box-shadow: 0px 0px 5px 0px #f80606;
+    }
+
+    65% {
+        box-shadow: 0px 0px 5px 10px #fa3b014d;
+    }
+
+    90% {
+        box-shadow: 0px 0px 5px 10px #f8930600;
+    }
+}
+</style>
 
 <script>
 
