@@ -96,7 +96,7 @@
                             class="form-control m-input"
                             :placeholder="$t('invoice.watermark.reference')"
                             :data-vv-as="$t('assistanceBills.reference')"
-                            v-validate="'required|min:2|max:40|'"
+                            v-validate="'required|min:2|max:60|'"
                             v-model.lazy="inputsData.reference"
                             ref="reference"
                         />

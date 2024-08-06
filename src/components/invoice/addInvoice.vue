@@ -95,7 +95,7 @@
                             class="form-control m-input"
                             :placeholder="$t('reimbursement.reference')"
                             :data-vv-as="$t('reimbursement.reference')"
-                            v-validate="'required|min:2|max:40|'"
+                            v-validate="'required|min:2|max:60|'"
                             v-model.lazy="inputsData.reference"
                             ref="reference"
                         />
