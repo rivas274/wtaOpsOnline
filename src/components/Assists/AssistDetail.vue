@@ -695,7 +695,7 @@ iframe{
                     </template>
                     <template slot="body" v-if="assistances.triage.status == 'F'">
                         <iframe class="preview"
-                                :src="baseUrlApi()+'provider-files/TRIAGE/'+assistances.codeAssist"
+                                :src="urlTriage"
                         ></iframe>
                     </template>
                 </AssistAccordion>
@@ -857,13 +857,19 @@ export default {
                 });
         },
         donwload: function (codigoAsssit,typeFile) {
-            let name =typeFile+'_'+codigoAsssit+'.pdf';
+            let name = typeFile + '_' + codigoAsssit + '.pdf';
+            let urlFile = this.baseUrlApi()+'provider-files/'+typeFile+'/'+codigoAsssit;
+
+            if(typeFile == 'TRIAGE'){
+                urlFile = this.urlTriage;
+            }
+
             this.$validator.validateAll().then(result => {
                 if(result){
                     this.showLoader = true;
                     this.axios
                         .post('downloadPDF',{
-                            url:this.baseUrlApi()+'provider-files/'+typeFile+'/'+codigoAsssit,
+                            url:urlFile,
                             name:name
                         },{responseType: "blob"})
                         .then(response => {
@@ -884,7 +890,17 @@ export default {
             });
         }
     },
-
+    computed: {
+        urlTriage: function () {
+            return [
+                this.baseUrlApi(),
+                'provider-files/',
+                this.$t('isoLang'),
+                '/TRIAGE/',
+                this.assistances.codeAssist
+            ].join('');
+        }
+    },
     mounted() {
         this.axios
             .post("GetBenefitToCase", {
