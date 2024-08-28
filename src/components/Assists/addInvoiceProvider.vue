@@ -69,6 +69,7 @@
                             v-model.lazy="inputsData.amount"
                             ref="amount"
                             @input="sanitizeAmount"
+                            @paste="handlePaste"
                         />
                         <span class="m-input-icon__icon m-input-icon__icon--left">
                             <span>
@@ -245,6 +246,39 @@ export default {
                 event.target.value = value;
                 this.inputsData.amount = value;
             }
+        },
+        handlePaste(event) {
+        event.preventDefault(); // Previene el comportamiento por defecto del pegado
+
+        // Obtiene el valor del portapapeles
+        let pasteValue = (event.clipboardData || window.clipboardData).getData('text');
+
+        // Normaliza el valor pegado
+        const normalizedValue = this.normalizeAmount(pasteValue);
+
+        // Inserta el valor normalizado en el campo de entrada y en el modelo
+        event.target.value = normalizedValue;
+        this.inputsData.amount = normalizedValue;
+        },
+        normalizeAmount(value) {
+            // Elimina espacios y caracteres no numéricos excepto los que se usan para la separación de decimales y miles
+            value = value.replace(/[^\d.,]/g, '');
+
+            const commaCount = value.indexOf(',');
+            const dotCount = value.indexOf('.');
+
+            // Si hay más comas que puntos, asumimos que la coma es el separador decimal
+            if (commaCount > dotCount) {
+                value = value.replace(/\./g, ''); // Elimina los puntos
+                value = value.replace(/,/g, '.'); // Reemplaza comas con puntos
+            } else {
+                value = value.replace(/,/g, ''); // Elimina las comas
+            }
+
+            // Convierte el valor a float y luego a formato con dos decimales
+            const floatValue = parseFloat(value) || 0;
+
+            return floatValue.toFixed(2); // Formatea a dos decimales
         },
         updateDescription() {
             const code = this.detaill.codeAssist;
