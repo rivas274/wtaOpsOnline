@@ -60,7 +60,7 @@ Validator.extend('zip_code', {
         return `Enter a valid zip code (Ex. 12345-1234 or 12345)`;
     },
     validate: value => {
-        const strongRegex = /^\d{4,5}(-?\d{0,4})$/;
+        const strongRegex = /^[0-9A-Za-z]{3,5}[\s-]?[0-9A-Za-z]{0,4}$/;
         return strongRegex.test(value);
     }
 });
