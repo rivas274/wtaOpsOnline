@@ -58,7 +58,8 @@
                     <strong>{{ $t('document.amount') }}</strong>
                     <div class="m-input-icon m-input-icon--left m-input-icon--right">
                         <input
-                            type="text"
+                            type="number"
+                            step="0.01"
                             name="amount"
                             class="form-control m-input"
                             :placeholder="$t('document.amount')"
@@ -66,6 +67,7 @@
                             v-validate="'required|min:1|max:10|decimal:2'"
                             v-model.lazy="inputsData.amount"
                             ref="amount"
+                            @input="sanitizeAmount"
                         />
                         <span class="m-input-icon__icon m-input-icon__icon--left">
                             <span>
@@ -173,6 +175,17 @@
         </div>
     </div>
 </template>
+<style>
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+  appearance: textfield; /* Estándar */
+}
+</style>
 <script>
 import FormError from "../FormError";
 import customImg from "../Element/custom-img";
@@ -212,6 +225,17 @@ export default {
         this.getDocumentsType();
     },
     methods: {
+        sanitizeAmount(event) {
+            // Aquí puedes validar y ajustar el valor si es necesario
+            let value = event.target.value;
+
+            // Por ejemplo, asegurarte de que no haya más de dos decimales
+            if (value && !/^\d+(\.\d{1,2})?$/.test(value)) {
+                value = parseFloat(value).toFixed(2);
+                event.target.value = value;
+                this.inputsData.amount = value;
+            }
+        },
         getDocumentsType: function() {
             this.axios
                 .get("getDocumentsType?docType[]=4&docType[]=5&docType[]=8")
