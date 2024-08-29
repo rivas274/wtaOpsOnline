@@ -340,6 +340,20 @@
             "october": "Octubre",
             "november": "Noviembre",
             "december": "Diciembre"
+        },
+        "monthshortNames": {
+            "january": "Ene",
+            "february": "Feb",
+            "march": "Mar",
+            "april": "Abr",
+            "may": "May",
+            "june": "Jun",
+            "july": "Jul",
+            "august": "Ago",
+            "september": "Sep",
+            "october": "Oct",
+            "november": "Nov",
+            "december": "Dic"
         }
     },
     "refunds": {

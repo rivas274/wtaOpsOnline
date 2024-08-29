@@ -17,8 +17,8 @@ export default {
         });
         Vue.filter("genreDetaill", str => {
             var genreDetaill = {
-                'F': 'general.genre.male',
-                'M': 'general.genre.female',
+                'M': 'general.genre.male',
+                'F': 'general.genre.female',
                 'I': 'general.genre.undefined',
             };
             str = (typeof str === 'string') ? str.toUpperCase() : str;

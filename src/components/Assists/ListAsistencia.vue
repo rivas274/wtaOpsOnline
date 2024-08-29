@@ -17,6 +17,7 @@
         <template slot="filters">
             <div class="row" :class="{'has-danger':error}">
                 <date-range-bt
+                :key="`${selectTableKey}-${$i18n.locale}`"
                     class="col-md-4 form-group"
                     name="date"
                     :watermark="$t('general.selectDateRange')"
@@ -56,6 +57,7 @@
                     :value="filters.passport"
                 ></input-from-table>
                 <date-single-bt
+                    :key="`${selectTableKey}-${$i18n.locale}`"
                     class="col-md-4 form-group"
                     name="dob"
                     :watermark="$t('general.dateOfBirth')"
@@ -72,6 +74,7 @@
                     v-on:input="setDataFilter"
                 ></multi-selects>
                 <select-from-table
+                     :key="`${selectTableKey}-${$i18n.locale}`"
                     class="col-md-4 form-group"
                     name="assistStatus"
                     :watermark="$t('general.status')"
@@ -89,6 +92,7 @@
                     v-on:input="setDataFilter"
                 ></multi-selects>
                 <select-from-table
+                    :key="`${selectTableKey}-${$i18n.locale}`"
                     v-if="arrManagementStatus.length>1"
                     class="col-md-4 form-group"
                     name="managementStatus"
@@ -275,6 +279,15 @@ export default {
         dateSingleBt
     },
     props: ["open-asist"],
+    updated() {
+    if (this.$i18n.locale !== this.previousLocale) {
+        this.previousLocale = this.$i18n.locale;
+        this.selectTableKey += 1;
+        this.getAssistance();
+        this.getAssistManagementStatus();
+        this.getAssistStatus();
+    }
+},
     data: function() {
         const permission = {
             bills: this.middleware("bills", "read"),
@@ -330,7 +343,8 @@ export default {
                 }
             ],
             open: [],
-            showLoader: false
+            showLoader: false,
+            previousLocale: this.$i18n.locale
         };
     },
     methods: {
