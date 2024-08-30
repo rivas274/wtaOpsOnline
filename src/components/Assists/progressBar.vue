@@ -72,6 +72,15 @@ export default {
                 });
         }
     },
+    watch: {
+ 
+        '$root.$i18n.locale': {
+            handler(newVal) {
+                this.getStatus();
+            },
+            deep: true
+        }
+    },
     computed: {
         statusShow: function() {
             let color = {

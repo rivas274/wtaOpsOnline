@@ -163,6 +163,15 @@ export default {
             view: []
         };
     },
+    watch: {
+
+        '$root.$i18n.locale': {
+            handler(newVal) {
+                this.getBill();
+            },
+            deep: true
+        }
+    },
     methods: {
         getBill: function(pg) {
             pg = Number.isInteger(pg) ? pg : this.footerTable.start;
