@@ -283,7 +283,6 @@ export default {
                                         title: this.$t("document.send"),
                                         html: message,
                                         type: "success",
-                                        showCancelButton: true,
                                         confirmButtonText: this.$t("general.ok"),
                                     });
                                 } else {
