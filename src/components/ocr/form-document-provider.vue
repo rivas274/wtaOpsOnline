@@ -240,7 +240,15 @@ export default {
             const formData = new FormData();
 
             for (let key in this.formInputs) {
-                formData.append(key, this.formInputs[key]);
+                let value = this.formInputs[key];
+                if (Array.isArray(value)) {
+                    for (let item of value) {
+                        formData.append(key + '[]', item);
+                    }
+                    continue;
+                }
+                formData.append(key, value);
+
             }
 
             if (typeof this.inputs.file === 'string') {
@@ -513,6 +521,7 @@ export default {
                 "date": this.inputs.date,
                 "dateOfService": this.inputs.dateOfService,
                 "amount": this.inputs.amount,
+                "page": this.inputs.page,
 
                 "dataAssistance": this.preAuditData.dataAssistance,
                 "dataOcr": this.preAuditData.dataOcr,
