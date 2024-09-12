@@ -94,7 +94,8 @@
         }
     },
     "company": {
-        "company": "Company"
+        "company": "Company",
+        "CompanyName": "Company Name"
     },
     "document": {
         "document": "Document",

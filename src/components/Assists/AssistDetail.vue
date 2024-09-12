@@ -464,6 +464,19 @@ iframe{
                                     </div>
                                 </template>
                             </AssistAccordionDetaill>
+                            <AssistAccordionDetaill>
+                                <template slot="title"> {{$t('company.CompanyName')}}</template>
+                                <template slot="body">
+                                    <div class="m-widget16__item">
+                                        <span
+                                            class="m-widget16__date m--align-center"
+                                            v-if="assistances.company"
+                                            v-html="assistances.company"
+                                        ></span>
+                                        <span class="m-widget16__date m--align-center" v-else>{{$t('general.notLoaded')}}</span>
+                                    </div>
+                                </template>
+                            </AssistAccordionDetaill>
                         </div>
                         <div class="col-md-4">
                             <AssistAccordionDetaill>
