@@ -465,7 +465,7 @@ iframe{
                                 </template>
                             </AssistAccordionDetaill>
                             <AssistAccordionDetaill>
-                                <template slot="title"> {{$t('company.CompanyName')}}</template>
+                                <template slot="title"> {{$t('company.companyName')}}</template>
                                 <template slot="body">
                                     <div class="m-widget16__item">
                                         <span
