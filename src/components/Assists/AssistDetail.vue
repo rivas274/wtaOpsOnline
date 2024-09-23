@@ -912,8 +912,8 @@ export default {
 
             if (showProvider) {
                 hiddenVoucher = hiddenVoucher || this.assistances.is_asigne==1;
-                triage = false;
-                facialScan = false;
+                triage = triage && this.assistances.is_asigne==1;
+                facialScan = facialScan && this.assistances.is_asigne==1;
             }
 
             return {
