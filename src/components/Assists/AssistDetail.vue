@@ -911,7 +911,7 @@ export default {
             let facialScan = this.middleware("facial_scan", "read");
 
             if (showProvider) {
-                hiddenVoucher = hiddenVoucher || this.assistances.is_asigne==1;
+                hiddenVoucher = hiddenVoucher && this.assistances.is_asigne==1;
                 triage = triage && this.assistances.is_asigne==1;
                 facialScan = facialScan && this.assistances.is_asigne==1;
             }
