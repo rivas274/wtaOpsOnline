@@ -175,7 +175,7 @@
             </tr>
         </template>
         <template slot="tbody">
-            <tr v-for="assist in results" :key="assist.codeAssist">
+            <tr v-for="assist in arrAssistance" :key="assist.codeAssist">
                 <td>
                     <span
                         class="openAssist"
@@ -222,17 +222,7 @@
                     <Flag :iso="assist.isoCountry"></Flag>
                 </td>
                 <td class="text-center fa-status" v-if="permission.show_provider">
-                    <span v-if="permission.show_provider">
-                    <span v-if="assist['view'] == 'N' && assist.approved_status==1">{{$t('assistance.requestSent')}}</span>
-                    <span v-if="assist['view'] != 'N' && assist.approved_status==1">{{$t('assistance.openRequest')}}</span>
-                    <span v-if="assist.approved_status==2">{{$t('assistance.applicationProcess')}}</span>
-                    <span v-if="assist.approved_status==3">{{$t('assistance.applicationCompleted')}}</span>
-                    <span v-if="assist.approved_status==4">{{$t('assistance.requestRejected')}}</span>
-                    <span v-if="assist.approved_status==5">{{$t('assistance.relatedCase')}}</span>
-                </span>
-                <span v-else>
-                    <i :class="assist.statusAssist.icon" v-tooltip:top="assist.statusAssist.label || 'Not Found'"></i>
-                </span>
+                    <span>{{$t(assist.managementStatusProvider)}}</span>
                 </td>
                 <td class="text-center fa-status">
                     <a
@@ -518,6 +508,39 @@ export default {
         this.getAssistManagementStatus();
         this.getAssistType();
         this.getAssistance(0,false);
+    },
+    computed: {
+        arrAssistance: function () {
+            const self = this;
+            return this.results.map(function (assist) {
+                let extra = {};
+                if (self.permission.show_provider) {
+                    let managementStatus = '';
+                    if (assist['assignedToAssistance'] == 'N') {
+                        managementStatus = 'assistance.administrative';
+                    } else if (assist['view'] == 'N' && assist['approved_status'] == 1) {
+                        managementStatus = 'assistance.requestSent';
+                    } else if (assist['view'] != 'N' && assist['approved_status'] == 1) {
+                        managementStatus = 'assistance.openRequest';
+                    } else if (assist['approved_status'] == 2) {
+                        managementStatus = 'assistance.applicationProcess';
+                    } else if (assist['approved_status'] == 3) {
+                        managementStatus = 'assistance.applicationCompleted';
+                    } else if (assist['approved_status'] == 4) {
+                        managementStatus = 'assistance.requestRejected';
+                    } else if (assist['approved_status'] == 5) {
+                        managementStatus = 'assistance.relatedCase';
+                    }
+                    if (managementStatus) {
+                        extra['managementStatusProvider'] = managementStatus;
+                    }
+                }
+                return {
+                    ...assist,
+                    ...extra
+                };
+            });
+        }
     },
     watch: {
         openAsist: function(newVal) {

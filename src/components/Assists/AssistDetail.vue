@@ -77,18 +77,15 @@ iframe{
                     </div>
                 </div> 
 
-
                 <div v-if="assistances.is_asigne==1" style="float: right; position: relative; top: -50px;height: 10px; ">
-                  
-                        <button v-if="assistances.approved_status_user==2 && permission.show_provider" class="btn btn-info" style="margin-bottom: 4px;" data-toggle="modal" data-target="#finish">{{$t('assistance.Finish')}}</button>
-                        <button v-if="assistances.approved_status_user==1 && permission.show_provider" class="btn btn-info" style="margin-bottom: 4px;"  @click="aprobar">{{$t('assistance.AcceptCase')}}</button>
-            
+                    <button v-if="assistances.approved_status_user==2 && permission.showProvider" class="btn btn-info" style="margin-bottom: 4px;" data-toggle="modal" data-target="#finish">{{$t('assistance.Finish')}}</button>
+                    <button v-if="assistances.approved_status_user==1 && permission.showProvider" class="btn btn-info" style="margin-bottom: 4px;"  @click="aprobar">{{$t('assistance.acceptCase')}}</button>
                     <br>
-                        <button style="float: right; position: absolute;" v-if="assistances.approved_status_user==1 && permission.show_provider" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                        {{$t('assistance.rejectCase')}}
-                        </button>
-                </div><br><br>
-                
+                    <button style="float: right; position: absolute;" v-if="assistances.approved_status_user==1 && permission.showProvider" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                    {{$t('assistance.rejectCase')}}
+                    </button>
+                </div>
+                <br><br>
                 <div class="alert alert-success alert-dismissible fade show" v-if="notificationApprove" role="alert"  name="notificationApprove" id="notificationApprove"  ref="notificationApprove">
                     <strong>{{$t('assistance.caseAccepted')}}.</strong>
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -556,7 +553,7 @@ iframe{
                                 </div>
                             </template>
                         </AssistAccordionDetaill>
-                        <AssistAccordionDetaill class="col-md-4" v-if="Object.keys(assistances.insuranceField).length>0 && !permission.show_provider"> 
+                        <AssistAccordionDetaill class="col-md-4" v-if="Object.keys(assistances.insuranceField).length>0 && !permission.showProvider"> 
                             <template slot="title">{{$t('assistance.insuranceFields')}}</template>
                             <template slot="body">
                                 <div
@@ -733,7 +730,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_gop_'+idAssist" ico="fa flaticon-interface-5" v-if="assistances.is_asigne==1 && permission.hidden_tab_voucher">
+                <AssistAccordion :id="'_gop_'+idAssist" ico="fa flaticon-interface-5" v-if="permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.GOP')|upper}}</template>
                     <template slot="title-left">
                         <a href="#" @click="donwload(assistances.codeAssist,'VOB')">
@@ -747,7 +744,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_credit_auth_'+idAssist" ico="fa flaticon-lock" v-if="assistances.is_asigne==1 && permission.hidden_tab_voucher">
+                <AssistAccordion :id="'_credit_auth_'+idAssist" ico="fa flaticon-lock" v-if="permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.authorization')|upper}}</template>
                     <template slot="title-left">
                         <a href="#" @click="donwload(assistances.codeAssist,'AUTORIZATION')">
@@ -762,7 +759,7 @@ iframe{
                         
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_credit_auth_cc_'+idAssist" ico="fa fa-credit-card" v-if="assistances.is_asigne==1 && permission.hidden_tab_voucher && assistances.paymentCC=='Y'">
+                <AssistAccordion :id="'_credit_auth_cc_'+idAssist" ico="fa fa-credit-card" v-if="permission.hidden_tab_voucher && assistances.paymentCC=='Y'">
                     <template slot="title">{{$t('assistance.creditAuthorization')|upper}}</template>
                     <template slot="title-left">
                         <a href="#" @click="donwload(assistances.codeAssist,'CCAUTORIZATION')">
@@ -798,10 +795,10 @@ export default {
         progressBar
     },
     props: ["id-assist"],
-    data: function() {
+    data: function () {
         return {
             assist: this.idAssist,
-            assistances: [],
+            assistances: {},
             motivo:'',
             notificationApprove: false,
             notificationFinish: false,
@@ -809,12 +806,6 @@ export default {
             showLoader: false,
             motivo_finalizado:'',
             benefit: [],
-            permission: {
-                hidden_tab_voucher: this.middleware("hidden_tab_voucher", "read"),
-                triage: this.middleware("triage", "read"),
-                facial_scan: this.middleware("facial_scan", "read"),
-                show_provider: this.middleware("show_provider", "read")
-            }
         };
     },
     methods: {
@@ -912,6 +903,25 @@ export default {
                 '/TRIAGE/',
                 this.assistances.codeAssist
             ].join('');
+        },
+        permission: function () {
+            let showProvider = this.middleware("show_provider", "read");
+            let hiddenVoucher = this.middleware("hidden_tab_voucher", "read");
+            let triage = this.middleware("triage", "read");
+            let facialScan = this.middleware("facial_scan", "read");
+
+            if (showProvider) {
+                hiddenVoucher = hiddenVoucher || this.assistances.is_asigne==1;
+                triage = false;
+                facialScan = false;
+            }
+
+            return {
+                hidden_tab_voucher: hiddenVoucher,
+                triage: triage,
+                facial_scan: facialScan,
+                showProvider: showProvider
+            }
         }
     },
     mounted() {
