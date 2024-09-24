@@ -358,7 +358,11 @@ export default {
             });
         },
         setThirdPartyAuthorization: function (value) {
-            if (this.configData.bankCertification == 'Y' && !this.bankCertificationFile) {
+            //verificamos di es necesario el archivo de certificación bancaria
+            //si no se ha seleccionado el archivo de certificación bancaria
+            if (this.configData.bankCertification == 'Y' &&
+                !this.configData.bankCertificationFile &&
+                !this.bankCertificationFile) {
                 this.errors.add({
                     field: 'bankCertificationFile',
                     msg: this.$t('refunds.selectBankCertificationToContinue')
