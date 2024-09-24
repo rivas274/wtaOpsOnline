@@ -127,6 +127,15 @@
                         </select-from-table>
                         <form-error :attribute_name="'idAssist'" :errors_form="errors"></form-error>
                     </div>
+                    <div class="m-alert alert alert-warning pl-0 text-dark m--font-bolder"
+                        v-show="errorFilesLabels.length > 0">
+                        <h4 class="ml-4">{{ $t('ocr.preAudit') }}</h4>
+                        <ol>
+                            <li v-for="(errVal, errKey) in errorFiles">
+                                {{ $t('ocr.preAuditMismatch.' + errKey, errVal) }}
+                            </li>
+                        </ol>
+                    </div>
                 </div>
                 <div class="d-flex justify-content-center p-4">
                     <button :disabled="disableForm"
