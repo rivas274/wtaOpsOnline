@@ -370,7 +370,9 @@
         "iAmBeneficiary": "Soy el beneficiario",
         "authorizeThirdParty": "Autorizar a un tercero",
         "uploadSignAuthorization": "Subir autorización firmada",
-        "downloadSignUpload": "Haga clic para descargar su autorización, fírmela y vuelva a subirla."
+        "downloadSignUpload": "Haga clic para descargar su autorización, fírmela y vuelva a subirla.",
+        "bankCertificationRequired":"Por favor, proporcione la certificación bancaria correspondiente para poder procesar el pago.",
+        "selectBankCertificationToContinue":"Por favor, seleccione la certificación bancaria para continuar"
     },
     "notification": {
         "notifications": "Notificación",

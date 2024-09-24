@@ -165,8 +165,8 @@
                                             <form-refund v-show="formShow == 'refund'" :id-assist="results.idAssist"
                                                 v-on:complete-documents="getAssistance" :default-data="defaultData">
                                             </form-refund>
-                                            <payment-method v-if="formShow == 'paymentMethod'"
-                                                class="m-portlet m-portlet--tab" :id-assist="results.idAssist"
+                                            <payment-method v-if="formShow == 'paymentMethod'" 
+                                                :id-assist="results.idAssist"
                                                 :status.sync="results.refundAdm.method_payment.status.code">
                                             </payment-method>
                                         </div>

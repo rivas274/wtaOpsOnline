@@ -370,7 +370,9 @@
         "iAmBeneficiary": "I am the beneficiary",
         "authorizeThirdParty": "Authorize a third party",
         "uploadSignAuthorization": "Upload signed authorization",
-        "downloadSignUpload": "Click to download your authorization, sign it, and upload it again."
+        "downloadSignUpload": "Click to download your authorization, sign it, and upload it again.",
+        "bankCertificationRequired":"Please provide the corresponding bank certification to proceed with the payment.",
+        "selectBankCertificationToContinue":"Select the bank certification to continue"
     },
     "notification": {
         "notifications": "Notification",
