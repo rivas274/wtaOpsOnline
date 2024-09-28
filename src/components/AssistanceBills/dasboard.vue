@@ -192,7 +192,7 @@
                                                                                 name="amount"
                                                                                 class="form-control m-input"
                                                                                 :placeholder="$t('document.amount')"
-                                                                                v-validate="'required|min:1|max:10|decimal:2'"
+                                                                                v-validate="'required|min:1|max:13|decimal:2'"
                                                                                 v-model.lazy="inputsData.amount"
                                                                                 ref="amount"
                                                                             />

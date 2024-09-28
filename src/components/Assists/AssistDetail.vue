@@ -28,10 +28,10 @@ iframe{
         <div class="m-portlet__body">
             <progress-bar :id-assist="idAssist"></progress-bar>
             <div
-            
                 class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg"
                 :id="'m_accordion_'+idAssist"
                 role="tablist"
+                v-if="'codeAssist' in assistances"
             >
         
                 <div class="modal fade" id="exampleModalLong" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
@@ -925,6 +925,7 @@ export default {
         }
     },
     mounted() {
+        this.getAssistanceDetail();
         this.axios
             .post("GetBenefitToCase", {
                 idAssist: this.idAssist
@@ -946,16 +947,14 @@ export default {
                         }
                     });
             });
-        this.getAssistanceDetail();
     },
     watch: {
-            '$root.$i18n.locale': {
-                handler(newVal) {
-                    this.getAssistanceDetail();
-                },
-                deep: true
-            }
-        },
-
+        '$root.$i18n.locale': {
+            handler(newVal) {
+                this.getAssistanceDetail();
+            },
+            deep: true
+        }
+    },
 };
 </script>

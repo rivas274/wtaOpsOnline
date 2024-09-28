@@ -161,10 +161,7 @@
                     <list-files :id-assist="assistBase.idAssist"></list-files>
                 </div>
                 <div v-if="permission.documents" class="tab-pane" :class="{active:tabShow=='add_invoice'}">
-                    <add-invoice v-on:addInvoice="[]" 
-                                :id-assist="assistBase.idAssist"
-                                :detaill="assistBase">
-                    </add-invoice>
+                    <ocr-provider :id-assist="assistBase.idAssist"></ocr-provider>
                 </div>
                 <div v-if="permission.notes" class="tab-pane" :class="{active:tabShow=='Note'}">
                     <list-note :id-assist="assistBase.idAssist" :type="'notes'"></list-note>
@@ -206,9 +203,9 @@ import Providers from "../Provider/ListProviders.vue";
 import ListNote from "../Note/ListNote.vue";
 import TimeLine from "../timeline/TimeLine.vue";
 import AssistDetail from "./AssistDetail.vue";
-import addInvoice from "./addInvoiceProvider.vue";
+import ocrProvider from "./ocrProvider.vue";
 export default {
-    components: { Providers, ListBill, AssistDetail, ListNote, TimeLine, ListFiles,ListReimbursement, addInvoice},
+    components: { Providers, ListBill, AssistDetail, ListNote, TimeLine, ListFiles,ListReimbursement, ocrProvider},
     props: ["assist"],
     data() {
         return {

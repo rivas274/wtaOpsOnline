@@ -139,9 +139,9 @@
                                                 name="amount"
                                                 class="form-control m-input"
                                                 :placeholder="$t('document.amount')"
-                                                v-validate="'required|min:1|max:10|decimal:2'"
+                                                v-validate="'required|min:1|max:13|decimal:2'"
                                                 :data-vv-as="$t('document.amount')"
-                                                v-model.lazy="inputsData.amount"
+                                                v-model="inputsData.amount"
                                                 ref="amount"
                                                 @input="sanitizeAmount"
                                                 @paste="handlePaste"
@@ -366,6 +366,7 @@ import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import VueRecaptcha from "vue-recaptcha";
 import groupBtnRefund from './groupBtnRefund.vue';
 import groupDocumentType from './groupDocumentType.vue';
+import sanitize from '../../custom/sanitize-data';
 
 export default {
     components: {
@@ -423,49 +424,11 @@ export default {
         };
     },
     methods: {
-        sanitizeAmount(event) {
-            // Aquí puedes validar y ajustar el valor si es necesario
-            let value = event.target.value;
-
-            // Por ejemplo, asegurarte de que no haya más de dos decimales
-            if (value && !/^\d+(\.\d{1,2})?$/.test(value)) {
-                value = parseFloat(value).toFixed(2);
-                event.target.value = value;
-                this.inputsData.amount = value;
-            }
+        sanitizeAmount() {
+            this.inputsData.amount = sanitize.sanitizeAmount(this.inputsData.amount);
         },
         handlePaste(event) {
-            event.preventDefault(); // Previene el comportamiento por defecto del pegado
-
-            // Obtiene el valor del portapapeles
-            let pasteValue = (event.clipboardData || window.clipboardData).getData('text');
-
-            // Normaliza el valor pegado
-            const normalizedValue = this.normalizeAmount(pasteValue);
-
-            // Inserta el valor normalizado en el campo de entrada y en el modelo
-            event.target.value = normalizedValue;
-            this.inputsData.amount = normalizedValue;
-        },
-        normalizeAmount(value) {
-            // Elimina espacios y caracteres no numéricos excepto los que se usan para la separación de decimales y miles
-            value = value.replace(/[^\d.,]/g, '');
-
-            const commaCount = value.indexOf(',');
-            const dotCount = value.indexOf('.');
-
-            // Si hay más comas que puntos, asumimos que la coma es el separador decimal
-            if (commaCount > dotCount) {
-                value = value.replace(/\./g, ''); // Elimina los puntos
-                value = value.replace(/,/g, '.'); // Reemplaza comas con puntos
-            } else {
-                value = value.replace(/,/g, ''); // Elimina las comas
-            }
-
-            // Convierte el valor a float y luego a formato con dos decimales
-            const floatValue = parseFloat(value) || 0;
-
-            return floatValue.toFixed(2); // Formatea a dos decimales
+            this.inputsData.amount = sanitize.handlePaste(event, sanitize.normalizeAmount);
         },
         getDocumentsType: function () {
             this.documentsType = [];
