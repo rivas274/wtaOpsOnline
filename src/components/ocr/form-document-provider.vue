@@ -222,8 +222,14 @@ export default {
     methods: {
         updateDescription() {
             const { patientName, code } = this.assistData;
-            const { reference, dateOfService } = this.inputs;
-            this.inputs.description = `${code} | ${reference} | ${patientName} | ${dateOfService}`;
+            let { reference, dateOfService } = this.inputs;
+            let description = `${code} | ${reference} | ${patientName}`;
+
+            if (this.isBill) {
+                description = `${description} | ${dateOfService}`;
+            }
+
+            this.inputs.description = description;
         },
         getDocumentsType() {
             this.axios
@@ -551,6 +557,7 @@ export default {
     watch: {
         'inputs.dateOfService': 'updateDescription',
         'inputs.reference': 'updateDescription',
+        'inputs.docType': 'updateDescription',
         '$root.$i18n.locale': {
             handler(newVal) {
                 this.getDocumentsType();
