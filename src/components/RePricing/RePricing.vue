@@ -600,6 +600,8 @@ import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import AssistAccordionDetaill from "../Assists/AssistAccordionDetaill.vue";
 import formEob from "./formEob.vue";
 import uploadEob from "./uploadEob.vue";
+import Swal from "sweetalert2";
+
 export default {
     props: ["re-pricing"],
     components: {
@@ -782,7 +784,7 @@ export default {
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
                                     this.$emit("completeRepricing", response.data.RESPONSE);
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: this.$t("general.sent"),
                                         type: "success",
                                         showCancelButton: true,
@@ -798,7 +800,7 @@ export default {
                                             });
                                         }
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: response.data.MESSAGE||"Error Form",
                                         confirmButtonText: this.$t("general.ok"),
                                         type: "error"
@@ -847,7 +849,7 @@ export default {
                         this.disableForm = false;
                         if (response.data.STATUS == "OK") {
                             this.$emit("addFilesRepricing", response.data.RESPONSE);
-                            window.Swal.fire({
+                            Swal.fire({
                                 title: this.$t("general.sent"),
                                 text: this.$t("document.uploaded"),
                                 type: "success",
@@ -864,7 +866,7 @@ export default {
                                     });
                                 }
                             }
-                            window.Swal.fire({
+                            Swal.fire({
                                 title: response.data.MESSAGE||"Error Form",
                                 confirmButtonText: this.$t("general.ok"),
                                 type: "error"

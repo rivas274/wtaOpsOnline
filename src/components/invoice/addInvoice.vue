@@ -194,6 +194,8 @@ import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import currency from "../Labels/currency.json";
 import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
+import Swal from "sweetalert2";
+
 export default {
     components: {
         FormError,
@@ -328,7 +330,7 @@ export default {
                                     this.file = false;
                                     this.$refs.file.value = null;
                                     this.$emit("addInvoice", response.data.RESPONSE);
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: this.$t("document.send"),
                                         text: this.$t("document.uploaded"),
                                         type: "success",
@@ -345,7 +347,7 @@ export default {
                                             });
                                         }
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: response.data.MESSAGE||"Error Form",
                                         confirmButtonText: this.$t("general.ok"),
                                         type: "error"

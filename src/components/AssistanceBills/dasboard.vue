@@ -437,6 +437,8 @@ import currency from "../Labels/currency.json";
 import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import VueRecaptcha from "vue-recaptcha";
+import Swal from "sweetalert2";
+
 export default {
     components: {
         FormError,
@@ -551,7 +553,7 @@ export default {
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
                                     //this.$refs.recaptcha.reset();
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: this.$t("document.send"),
                                         text: this.$t("document.uploaded"),
                                         type: "success",
@@ -567,10 +569,10 @@ export default {
                                             this.file = false;
                                             this.$refs.file.value = null;
                                         } else if (
-                                            result.dismiss === window.Swal.DismissReason.cancel
+                                            result.dismiss === Swal.DismissReason.cancel
                                         ) {
                                             window.close();
-                                            window.Swal.fire({
+                                            Swal.fire({
                                                 title: this.$t("windows.close"),
                                                 text: this.$t("windows.pleaseClose"),
                                                 confirmButtonText: this.$t("general.ok"),
@@ -587,7 +589,7 @@ export default {
                                             });
                                         }
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: "Error",
                                         text: response.data.MESSAGE,
                                         confirmButtonText: this.$t("general.ok"),

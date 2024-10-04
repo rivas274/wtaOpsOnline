@@ -357,7 +357,6 @@ input[type=number] {
 }
 </style>
 <script>
-
 import FormError from "../FormError";
 import selectFrom from "../Tables/filters/selectFromTable.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
@@ -367,6 +366,7 @@ import VueRecaptcha from "vue-recaptcha";
 import groupBtnRefund from './groupBtnRefund.vue';
 import groupDocumentType from './groupDocumentType.vue';
 import sanitize from '../../custom/sanitize-data';
+import Swal from "sweetalert2";
 
 export default {
     components: {
@@ -484,7 +484,7 @@ export default {
                                         this.idFiles.push(response.data.ID);
                                     }
                                     /* this.$refs.recaptcha.reset(); */
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: null,
                                         text: this.$t("document.uploaded"),
                                         type: "success",
@@ -502,7 +502,7 @@ export default {
                                         this.back();
                                         this.getDocumentsType();
                                         if (
-                                            result.dismiss === window.Swal.DismissReason.cancel
+                                            result.dismiss === Swal.DismissReason.cancel
                                         ) {
                                             if (this.idFiles.length > 0) {
                                                 this.axios
@@ -525,7 +525,7 @@ export default {
                                             listErrors.push(response.data.ERRORS[prop]);
                                         }
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: response.data.MESSAGE,
                                         html: (listErrors.length>0?
                                             '<ol><li class="text-left">' +

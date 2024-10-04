@@ -165,6 +165,7 @@ import selectMultiple from "../Tables/filters/selectFromMultipleTable.vue";
 import currency from "../Labels/currency.json";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import sanitize from '../../custom/sanitize-data';
+import Swal from "sweetalert2";
 
 export default {
     components: {
@@ -293,7 +294,7 @@ export default {
                                     if ('isDuplicate' in this.response.RESPONSE) {
                                         message = message + "<br>" + this.$t("ocr.possibleDuplicate", this.response.RESPONSE.isDuplicate);
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: this.$t("document.send"),
                                         html: message,
                                         type: "success",
@@ -308,7 +309,7 @@ export default {
                                             });
                                         }
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: response.data.MESSAGE || "Error Form",
                                         confirmButtonText: this.$t("general.ok"),
                                         type: "error"

@@ -281,6 +281,7 @@
 import FormError from "../FormError";
 import selectFrom from "../Tables/filters/selectFromTable.vue";
 import VueRecaptcha from "vue-recaptcha";
+import Swal from "sweetalert2";
 
 export default {
     components: {
@@ -462,7 +463,7 @@ export default {
                                 const jsonResponse = JSON.parse(text);
 
                                 if ('STATUS' in jsonResponse && jsonResponse.STATUS == "OK") {
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: this.$t("general.sent"),
                                         text: this.$t("general.informationSentCorrectly"),
                                         type: "success",

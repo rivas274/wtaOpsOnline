@@ -92,6 +92,8 @@
 <script>
 import FormError from "../FormError";
 import selectFromTable from "../Tables/filters/selectFromTable.vue";
+import Swal from "sweetalert2";
+
 export default {
     components: {
         FormError,
@@ -144,7 +146,7 @@ export default {
                                     this.inputsData.description = "";
                                     this.file = false;
                                     this.$refs.file.value = null;
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: this.$t("document.send"),
                                         text: this.$t("document.uploaded"),
                                         type: "success",
@@ -160,7 +162,7 @@ export default {
                                             });
                                         }
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: response.data.MESSAGE||"Error Form",
                                         confirmButtonText: this.$t("general.ok"),
                                         type: "error"
