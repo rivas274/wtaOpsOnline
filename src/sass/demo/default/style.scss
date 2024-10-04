@@ -18,6 +18,8 @@
 @import "../../framework/vendors/bootstrap/bootstrap.scss";
 
 //== 4: Framework Components
+
+@import "./include_plugins";
 @import "../../framework/include";
 
 //== 5: Snippets
@@ -32,7 +34,7 @@
 @import "header/_config";
 @import "aside/_config";
 @import "menu-header/_config";
-@import "menu-aside/_config";   
+@import "menu-aside/_config";
 @import "footer/_config";
 
 //== 7: Demo Layout
