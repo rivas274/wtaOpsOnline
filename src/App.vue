@@ -46,7 +46,3 @@ export default {
 };
 
 </script>
-
-<style lang="scss">
-  @import './sass/demo/default/style.scss';
-</style>
