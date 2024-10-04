@@ -13,6 +13,7 @@ import i18n from "./custom/i18n";
 import VeeValidate from'./custom/vue-vee-custom';
 import store from './store/store';
 import "@/sass/demo/default/style.scss";
+import moment from 'moment';
 
 Vue.use(VueRouter);
 Vue.use(globalDirectives);
@@ -28,7 +29,7 @@ const router = new VueRouter({ mode: 'history', routes: routes });
 
 customAxios.interceptors.response.use(
     function (response) {
-        Vue._session.set('lastCheck', window.moment().format('YYYY-MM-DD hh:mm A'));
+        Vue._session.set('lastCheck', moment().format('YYYY-MM-DD hh:mm A'));
         Vue._session.set('checkTimeOut', false);
         return response;
     },
@@ -108,13 +109,13 @@ new Vue({
     mounted: function () {
         setInterval(() => {
             if (router.currentRoute.fullPath !== '/') {
-                let lastCheck = window.moment(Vue._session.get('lastCheck')),
+                let lastCheck = moment(Vue._session.get('lastCheck')),
                     check = Vue._session.get('checkTimeOut'),
-                    duration = window.moment.duration(window.moment().diff(lastCheck)).asMinutes();
+                    duration = moment.duration(moment().diff(lastCheck)).asMinutes();
                 if (duration >= 10) {
                     this.axios.post("timeOut", { 'reset': check }).then(response => {
                         if (response.data.STATUS == "OK") {
-                            Vue._session.set('lastCheck', window.moment().format('YYYY-MM-DD hh:mm A'));
+                            Vue._session.set('lastCheck', moment().format('YYYY-MM-DD hh:mm A'));
                             Vue._session.set('checkTimeOut', false);
                         }
                     });
