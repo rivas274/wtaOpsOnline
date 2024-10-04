@@ -19,10 +19,12 @@
 </template>
 
 <script>
+import $ from '@/custom/jquery-custom';
+
 export default {
     props: ["data-style", "active-langs"],
     mounted() {
-        window.$(this.$el)
+        $(this.$el)
             .find(".m_selectpicker")
             .selectpicker();
     },

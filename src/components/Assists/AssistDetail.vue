@@ -778,13 +778,12 @@ iframe{
     </div>
 </template>
 <script>
-
-
 import Flag from "../Element/Flag.vue";
 import AssistAccordion from "./AssistAccordion.vue";
 import AssistAccordionDetaill from "./AssistAccordionDetaill.vue";
 import popOver from "../Element/pop-over.vue";
 import progressBar from "./progressBar.vue";
+import $ from '@/custom/jquery-custom';
 
 export default {
     components: {
@@ -932,16 +931,16 @@ export default {
             })
             .then(response => {
                 this.benefit = response.data.RESPONSE;
-                window.$(this.$el)
+                $(this.$el)
                     .find('[data-toggle="popover"]')
                     .popover({
                         html: true,
                         trigger: "focus",
                         title: function() {
-                            return window.$(this).attr("title");
+                            return $(this).attr("title");
                         },
                         content: function() {
-                            return window.$(this)
+                            return $(this)
                                 .find(".popover-content")
                                 .html();
                         }

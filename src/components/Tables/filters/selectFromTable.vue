@@ -20,6 +20,8 @@
     </div>
 </template>
 <script>
+import $ from '@/custom/jquery-custom';
+
 export default {
     props: ["name", "options", "selected", "v-validate", "watermark","size"],
     data: function () {
@@ -29,7 +31,7 @@ export default {
     },
     mounted() {
         let self = this;
-        window.$(this.$el)
+        $(this.$el)
             .find(".m_selectpicker")
             .selectpicker({
                 noneSelectedText: this.watermark || this.$t('general.pleaseSelect')
@@ -62,7 +64,7 @@ export default {
         selected: {
             handler(newVal) {
                 this.value = newVal;
-                window.$(this.$el)
+                $(this.$el)
                     .find(".m_selectpicker")
                     .val(newVal)
                     .trigger("change");
@@ -73,7 +75,7 @@ export default {
             handler() {
                 window.setTimeout(
                     function () {
-                        window.$(this.$el)
+                        $(this.$el)
                             .find(".m_selectpicker")
                             .selectpicker("refresh");
                     }.bind(this),

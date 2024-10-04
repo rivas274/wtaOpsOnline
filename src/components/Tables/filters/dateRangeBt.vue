@@ -21,11 +21,13 @@
     </div>
 </template>
 <script>
+import $ from '@/custom/jquery-custom';
+
 export default {
     props: ["watermark", "name", "value","size"],
     mounted() {
         let _self = this;
-        window.$(_self.$el)
+        $(_self.$el)
             .find(".date-bt-vue")
             .daterangepicker(
                 {
@@ -66,7 +68,7 @@ export default {
                     }
                 },
                 function (a, t) {
-                    window.$(_self.$el)
+                    $(_self.$el)
                         .find(".form-control")
                         .val(
                             a.format("YYYY-MM-DD") +
@@ -80,12 +82,12 @@ export default {
                 }
             )
             .on("cancel.daterangepicker", function () {
-                window.$(this).val("");
+                $(this).val("");
             });
     },
     watch: {
         value: function (newVal) {
-            window.$(this.$el)
+            $(this.$el)
                 .find(".form-control")
                 .val(
                     newVal.startDate +

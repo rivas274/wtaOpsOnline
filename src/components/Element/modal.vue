@@ -22,16 +22,18 @@
 </template>
 
 <script>
+import $ from '@/custom/jquery-custom';
+
 export default {
     props: ["title"],
     mounted() {
-        window.$(this.$el).modalCaseStatus({
+        $(this.$el).modalCaseStatus({
             html: true,
             title: function() {
-                return window.$(this).attr("title");
+                return $(this).attr("title");
             },
             content: function() {
-                return window.$(this)
+                return $(this)
                     .find(".modal-content")
                     .html();
             }
