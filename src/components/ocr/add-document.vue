@@ -13,6 +13,7 @@
 </template>
 <script>
 
+import $ from '@/custom/jquery-custom';
 import { Dropzone } from "dropzone";
 
 export default {
