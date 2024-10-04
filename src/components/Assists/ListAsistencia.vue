@@ -17,7 +17,7 @@
         <template slot="filters">
             <div class="row" :class="{'has-danger':error}">
                 <date-range-bt
-                :key="`${selectTableKey}-${$i18n.locale}`"
+                    :key="`date-${selectTableKey}-${$i18n.locale}`"
                     class="col-md-4 form-group"
                     name="date"
                     :watermark="$t('general.selectDateRange')"
@@ -28,7 +28,7 @@
                     class="col-md-4 form-group"
                     name="code"
                     :watermark="$t('assistance.caseNumber')"
-                    icon="la flaticon-lifebuoy"
+                    icon="la fi-rr-life-ring"
                     v-on:input="setDataFilter"
                     :value="filters.code"
                 ></input-from-table>
@@ -36,7 +36,7 @@
                     class="col-md-4 form-group"
                     name="codeVoucher"
                     :watermark="$t('voucher.voucher')"
-                    icon="la flaticon-interface-5"
+                    icon="la fi-rr-ballot"
                     v-on:input="setDataFilter"
                     :value="filters.codeVoucher"
                 ></input-from-table>
@@ -44,7 +44,7 @@
                     class="col-md-4 form-group"
                     name="passager"
                     :watermark="$t('voucher.name')"
-                    icon="la flaticon-avatar"
+                    icon="la fi-rr-user"
                     v-on:input="setDataFilter"
                     :value="filters.passager"
                 ></input-from-table>
@@ -57,7 +57,7 @@
                     :value="filters.passport"
                 ></input-from-table>
                 <date-single-bt
-                    :key="`${selectTableKey}-${$i18n.locale}`"
+                    :key="`dob-${selectTableKey}-${$i18n.locale}`"
                     class="col-md-4 form-group"
                     name="dob"
                     :watermark="$t('general.dateOfBirth')"
@@ -74,7 +74,7 @@
                     v-on:input="setDataFilter"
                 ></multi-selects>
                 <select-from-table
-                     :key="`${selectTableKey}-${$i18n.locale}`"
+                    :key="`assistStatus-${selectTableKey}-${$i18n.locale}`"
                     class="col-md-4 form-group"
                     name="assistStatus"
                     :watermark="$t('general.status')"
@@ -92,7 +92,7 @@
                     v-on:input="setDataFilter"
                 ></multi-selects>
                 <select-from-table
-                    :key="`${selectTableKey}-${$i18n.locale}`"
+                    :key="`managementStatus-${selectTableKey}-${$i18n.locale}`"
                     v-if="arrManagementStatus.length>1"
                     class="col-md-4 form-group"
                     name="managementStatus"
@@ -289,6 +289,7 @@ export default {
         return {
             permission: permission,
             error: null,
+            selectTableKey: 0,
             filters: {
                 code: "",
                 codeVoucher: "",

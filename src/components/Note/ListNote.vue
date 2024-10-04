@@ -20,7 +20,7 @@
             <date-range-bt class="col-md-4 m-form__group-sub" name="date" :watermark="$t('general.selectDateRange')"
                 v-on:input="setDataFilter" :value="filters.date"></date-range-bt>
             <input-from-table class="col-md-4 m-form__group-sub" name="search" :watermark="$t('general.search')"
-                icon="flaticon-interface-5" v-on:input="setDataFilter" :value="filters.search"></input-from-table>
+                icon="fi-rr-ballot" v-on:input="setDataFilter" :value="filters.search"></input-from-table>
             <div class="col m--align-right">
                 <button class="btn btn-outline-info" @click="clear">{{ $t('general.clear') }}</button>
             </div>

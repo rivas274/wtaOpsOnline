@@ -34,7 +34,7 @@
                     <div class="form-group" :class="{ 'has-danger': errors.has('page') }" v-if="pagesShow.length > 1">
                         <strong>{{ $t('ocr.pages') }} ({{ inputs.page.length }} {{ $t('general.of') }}
                             {{ pagesShow.length }})</strong>
-                        <select-multiple :key="selectTableKey" name="page" v-validate="'required'"
+                        <select-multiple :key="`page-${selectTableKey}-${$i18n.locale}`" name="page" v-validate="'required'"
                             :watermark="$t('ocr.pages')" :data-vv-as="$t('ocr.pages')" :options="pagesShow"
                             :selected="inputs.page" v-on:input="setDataFilter">
                         </select-multiple>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group" :class="{ 'has-danger': errors.has('docType') }">
                         <strong>{{ $t('document.type') }}</strong>
-                        <select-from-table :key="selectTableKey" name="docType" v-validate="'required'"
+                        <select-from-table :key="`docType-${selectTableKey}-${$i18n.locale}`" name="docType" v-validate="'required'"
                             :watermark="$t('document.type')" :data-vv-as="$t('document.type')" :options="documentsType"
                             :selected="inputs.docType" v-on:input="setDataFilter"></select-from-table>
                         <form-error :attribute_name="'docType'" :errors_form="errors"></form-error>

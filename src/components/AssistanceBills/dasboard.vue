@@ -75,7 +75,7 @@
                                                                 v-tooltip:top="$t('voucher.voucher')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-interface-5"
+                                                                    class="m-nav__link-icon fi-rr-ballot"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
@@ -88,7 +88,7 @@
                                                                 v-tooltip:top="$t('voucher.name')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-avatar"
+                                                                    class="m-nav__link-icon fi-rr-user"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
@@ -117,7 +117,7 @@
                                                                 v-tooltip:top="$t('assistance.date.birth')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-lifebuoy"
+                                                                    class="m-nav__link-icon fi-rr-life-ring"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"

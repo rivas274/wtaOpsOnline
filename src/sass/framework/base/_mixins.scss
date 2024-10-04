@@ -552,6 +552,11 @@ xl: 1200px
     [class*=" flaticon-"] {
         font-size: array-get($config, metronic);
     }
+    //flaticon
+    [class^="fi-"], 
+    [class*=" fi-"] {
+        font-size: array-get($config, metronic);
+    }
 }
 
 //== Icon attr

@@ -53,14 +53,14 @@
                                                             v-if="results.codeAssist != results.codigo">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('voucher.voucher')">
-                                                                <i class="m-nav__link-icon flaticon-interface-5"></i>
+                                                                <i class="m-nav__link-icon fi-rr-ballot"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.codigo }}</span>
                                                             </a>
                                                         </li>
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link" v-tooltip:top="$t('voucher.name')">
-                                                                <i class="m-nav__link-icon flaticon-avatar"></i>
+                                                                <i class="m-nav__link-icon fi-rr-user"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.firstName + ' ' + results.lastName }}</span>
                                                             </a>
@@ -76,7 +76,7 @@
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('assistance.date.birth')">
-                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                <i class="m-nav__link-icon fi-rr-life-ring"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.birthDate }}</span>
                                                             </a>
@@ -84,7 +84,7 @@
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('assistance.type')">
-                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                <i class="m-nav__link-icon fi-rr-life-ring"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.descCaseType }}</span>
                                                             </a>
@@ -92,7 +92,7 @@
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('assistance.typeAssistance')">
-                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                <i class="m-nav__link-icon fi-rr-life-ring"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.descAssistanceType }}</span>
                                                             </a>

@@ -709,7 +709,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_facial_'+idAssist" ico="fa flaticon-avatar" v-if="permission.facial_scan && assistances.facialScan.label">
+                <AssistAccordion :id="'_facial_'+idAssist" ico="fa fi-rr-user" v-if="permission.facial_scan && assistances.facialScan.label">
                     <template slot="title">
                         {{$t('assistance.facial_scan')|upper}}
                         <small :class="['m--font-bolder m--font-' + assistances.facialScan.color]" >
@@ -730,7 +730,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_gop_'+idAssist" ico="fa flaticon-interface-5" v-if="permission.hidden_tab_voucher">
+                <AssistAccordion :id="'_gop_'+idAssist" ico="fa fi-rr-ballot" v-if="permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.GOP')|upper}}</template>
                     <template slot="title-left">
                         <a href="#" @click="donwload(assistances.codeAssist,'VOB')">
