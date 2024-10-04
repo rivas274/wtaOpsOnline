@@ -6,7 +6,7 @@
                 v-if="hasNotifications"></span>
             <span class="m-nav__link-icon">
                 <span class="m-nav__link-icon-wrapper">
-                    <i class="flaticon-music-2" href="#"></i>
+                    <i class="fa fa-2x fa-bell" href="#"></i>
                 </span>
             </span>
         </a>
