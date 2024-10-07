@@ -1,4 +1,10 @@
-var mLayout = function() {
+import $ from "@/custom/jquery-custom";
+import mUtil from "@/js/framework/base/util";
+import mMenu from "@/js/framework/components/general/menu";
+import mHeader from "@/js/framework/components/general/header";
+import mOffcanvas from "@/js/framework/components/general/offcanvas";
+
+var mLayout = function () {
     var header;
     var horMenu;
     var asideMenu;
@@ -9,12 +15,12 @@ var mLayout = function() {
     var quicksearch;
 
     //== Header
-    var initStickyHeader = function() {
+    var initStickyHeader = function () {
         var tmp;
         var headerEl = mUtil.get('m_header');
         var options = {
             offset: {},
-            minimize:{}       
+            minimize: {}
         };
 
         if (mUtil.attr(headerEl, 'm-minimize-mobile') == 'hide') {
@@ -39,13 +45,13 @@ var mLayout = function() {
 
         if (tmp = mUtil.attr(headerEl, 'm-minimize-mobile-offset')) {
             options.offset.mobile = tmp;
-        }        
+        }
 
         header = new mHeader('m_header', options);
     }
 
     //== Hor menu
-    var initHorMenu = function() { 
+    var initHorMenu = function () {
         // init aside left offcanvas
         horMenuOffcanvas = new mOffcanvas('m_header_menu', {
             overlay: true,
@@ -54,16 +60,16 @@ var mLayout = function() {
             toggleBy: {
                 target: 'm_aside_header_menu_mobile_toggle',
                 state: 'm-brand__toggler--active'
-            }            
+            }
         });
-        
+
         horMenu = new mMenu('m_header_menu', {
             submenu: {
                 desktop: 'dropdown',
                 tablet: 'accordion',
                 mobile: 'accordion'
             },
-            accordion: {   
+            accordion: {
                 slideSpeed: 200,  // accordion toggle slide speed in milliseconds
                 expandAll: false   // allow having multiple expanded accordions in the menu
             }
@@ -71,15 +77,15 @@ var mLayout = function() {
     }
 
     //== Aside menu
-    var initLeftAsideMenu = function() {
+    var initLeftAsideMenu = function () {
         //== Init aside menu
         var menu = mUtil.get('m_ver_menu');
         var menuDesktopMode = (mUtil.attr(menu, 'm-menu-dropdown') === '1' ? 'dropdown' : 'accordion');
 
         var scroll;
-        if ( mUtil.attr(menu, 'm-menu-scrollable') === '1' ) {
+        if (mUtil.attr(menu, 'm-menu-scrollable') === '1') {
             scroll = {
-                height: function() {
+                height: function () {
                     return mUtil.getViewPort().height - parseInt(mUtil.css('m_header', 'height'));
                 }
             };
@@ -96,7 +102,7 @@ var mLayout = function() {
                     default: menuDesktopMode,
                     // whenever body has this class switch the menu mode to dropdown
                     state: {
-                        body: 'm-aside-left--minimize',  
+                        body: 'm-aside-left--minimize',
                         mode: 'dropdown'
                     }
                 },
@@ -108,12 +114,12 @@ var mLayout = function() {
             accordion: {
                 autoScroll: false, // enable auto scrolling(focus) to the clicked menu item
                 expandAll: false   // allow having multiple expanded accordions in the menu
-            }            
+            }
         });
     }
 
     //== Aside
-    var initLeftAside = function() {
+    var initLeftAside = function () {
         // init aside left offcanvas
         var asideLeft = mUtil.get('m_aside_left');
         var asideOffcanvasClass = mUtil.hasClass(asideLeft, 'm-aside-left--offcanvas-default') ? 'm-aside-left--offcanvas-default' : 'm-aside-left';
@@ -124,14 +130,14 @@ var mLayout = function() {
             closeBy: 'm_aside_left_close_btn',
             toggleBy: {
                 target: 'm_aside_left_offcanvas_toggle',
-                state: 'm-brand__toggler--active'                
-            }            
-        });        
+                state: 'm-brand__toggler--active'
+            }
+        });
     }
 
     //== Sidebar toggle
-    var initLeftAsideToggle = function() {
-        if ($('#m_aside_left_minimize_toggle').length === 0 ) {
+    var initLeftAsideToggle = function () {
+        if ($('#m_aside_left_minimize_toggle').length === 0) {
             return;
         }
 
@@ -141,7 +147,7 @@ var mLayout = function() {
             togglerState: 'm-brand__toggler--active'
         });
 
-        asideLeftToggle.on('toggle', function(toggle) {
+        asideLeftToggle.on('toggle', function (toggle) {
             horMenu.pauseDropdownHover(800);
             asideMenu.pauseDropdownHover(800);
 
@@ -154,89 +160,81 @@ var mLayout = function() {
     }
 
     //== Topbar
-    var initTopbar = function() {
-        $('#m_aside_header_topbar_mobile_toggle').click(function() {
+    var initTopbar = function () {
+        $('#m_aside_header_topbar_mobile_toggle').click(function () {
             $('body').toggleClass('m-topbar--on');
-        });    
+        });
     }
 
     //== Quicksearch
-    var initQuicksearch = function() {
-        if ($('#m_quicksearch').length === 0 ) {
+    var initQuicksearch = function () {
+        if ($('#m_quicksearch').length === 0) {
             return;
         }
 
         quicksearch = new mQuicksearch('m_quicksearch', {
-            mode: mUtil.attr( 'm_quicksearch', 'm-quicksearch-mode' ), // quick search type
+            mode: mUtil.attr('m_quicksearch', 'm-quicksearch-mode'), // quick search type
             minLength: 1
-        });    
+        });
 
         //<div class="m-search-results m-search-results--skin-light"><span class="m-search-result__message">Something went wrong</div></div>
 
-        quicksearch.on('search', function(the) {
-            the.showProgress();  
-                      
+        quicksearch.on('search', function (the) {
+            the.showProgress();
+
             $.ajax({
                 url: 'inc/api/quick_search.php',
-                data: {query: the.query},
+                data: { query: the.query },
                 dataType: 'html',
-                success: function(res) {
+                success: function (res) {
                     the.hideProgress();
-                    the.showResult(res);                     
+                    the.showResult(res);
                 },
-                error: function(res) {
+                error: function (res) {
                     the.hideProgress();
-                    the.showError('Connection error. Pleae try again later.');      
+                    the.showError('Connection error. Pleae try again later.');
                 }
             });
-        });  
-    }
-
-    //== Scrolltop
-    var initScrollTop = function() {
-        var scrollTop = new mScrollTop('m_scroll_top', {
-            offset: 300,
-            speed: 600
         });
     }
 
+
     return {
-        init: function() {  
+        init: function () {
             this.initHeader();
             this.initAside();
         },
 
-        initHeader: function() {
+        initHeader: function () {
             initStickyHeader();
             initHorMenu();
             initTopbar();
             initQuicksearch();
-            initScrollTop();
         },
 
-        initAside: function() {
+        initAside: function () {
             initLeftAside();
-            initLeftAsideMenu();            
+            initLeftAsideMenu();
             initLeftAsideToggle();
         },
 
-        getAsideMenu: function() {
+        getAsideMenu: function () {
             return asideMenu;
         },
 
-        onLeftSidebarToggle: function(func) {
+        onLeftSidebarToggle: function (func) {
             if (asideLeftToggle) {
                 asideLeftToggle.on('toggle', func);
-            }            
+            }
         },
 
-        closeMobileAsideMenuOffcanvas: function() {
+        closeMobileAsideMenuOffcanvas: function () {
             if (mUtil.isMobileDevice()) {
                 asideMenuOffcanvas.hide();
             }
         },
 
-        closeMobileHorMenuOffcanvas: function() {
+        closeMobileHorMenuOffcanvas: function () {
             if (mUtil.isMobileDevice()) {
                 horMenuOffcanvas.hide();
             }
@@ -244,7 +242,7 @@ var mLayout = function() {
     };
 }();
 
-$(document).ready(function() {
+$(document).ready(function () {
     if (mUtil.isAngularVersion() === false) {
         mLayout.init();
     }

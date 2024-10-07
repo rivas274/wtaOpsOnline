@@ -13,6 +13,7 @@ import i18n from "./custom/i18n";
 import VeeValidate from'./custom/vue-vee-custom';
 import store from './store/store';
 import "@/sass/demo/demo3/style.scss";
+import "@/custom/metronic";
 import moment from 'moment';
 
 Vue.use(VueRouter);
