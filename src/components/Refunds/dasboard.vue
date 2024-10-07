@@ -59,7 +59,7 @@
                                                         </li>
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link" v-tooltip:top="$t('voucher.name')">
-                                                                <i class="m-nav__link-icon fa-user"></i>
+                                                                <i class="m-nav__link-icon fa fa-user"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.firstName + ' ' + results.lastName }}</span>
                                                             </a>
