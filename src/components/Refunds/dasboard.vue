@@ -76,7 +76,7 @@
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('assistance.date.birth')">
-                                                                <i class="m-nav__link-icon fi-rr-life-ring"></i>
+                                                                <i class="m-nav__link-icon fa fa-calendar-check"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.birthDate }}</span>
                                                             </a>
