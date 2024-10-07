@@ -18,7 +18,7 @@
                 >
                     <router-link :to="{ path: '/dasboard'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
-                        <i class="m-menu__link-icon flaticon-squares-3"></i>
+                        <i class="m-menu__link-icon fa fa-table-cells-large"></i>
                         <span class="m-menu__link-text">{{$t('menu.assistance')}}</span>
                     </router-link>
                 </li>
@@ -30,7 +30,7 @@
                 >
                     <router-link :to="{ path: '/voucher_case'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
-                        <i class="m-menu__link-icon flaticon-list-3"></i>
+                        <i class="m-menu__link-icon fa fa-list"></i>
                         <span class="m-menu__link-text">{{$t('menu.voucherCase')}}</span>
                     </router-link>
                 </li>
@@ -42,7 +42,7 @@
                 >
                     <router-link :to="{ path: '/upload_document'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
-                        <i class="m-menu__link-icon flaticon-folder-1"></i>
+                        <i class="m-menu__link-icon fa fa-folder"></i>
                         <span class="m-menu__link-text">{{$t('document.uploadDocuments')}}</span>
                     </router-link>
                 </li>
@@ -54,7 +54,7 @@
                 >
                     <router-link :to="{ path: '/shared_document'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
-                        <i class="m-menu__link-icon flaticon-share"></i>
+                        <i class="m-menu__link-icon fa fa-share-nodes"></i>
                         <span class="m-menu__link-text">{{$t('document.sharedDocuments')}}</span>
                     </router-link>
                 </li>
@@ -66,7 +66,7 @@
                 >
                     <router-link :to="{ path: '/re-pricing'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
-                        <i class="m-menu__link-icon flaticon-open-box"></i>
+                        <i class="m-menu__link-icon fa fa-box-open"></i>
                         <span class="m-menu__link-text">{{$t('menu.rePricing')}}</span>
                     </router-link>
                 </li>
@@ -78,7 +78,7 @@
                 >
                     <router-link :to="{ path: '/invoice'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
-                        <i class="m-menu__link-icon flaticon-coins"></i>
+                        <i class="m-menu__link-icon fa fa-coins"></i>
                         <span class="m-menu__link-text">{{$t('menu.invoice')}}</span>
                     </router-link>
                 </li>
@@ -90,7 +90,7 @@
                 >
                     <router-link :to="{ path: '/reports-client'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
-                        <i class="m-menu__link-icon flaticon-technology"></i>
+                        <i class="m-menu__link-icon fa fa-chart-bar"></i>
                         <span class="m-menu__link-text">{{$t('general.reports')}}</span>
                     </router-link>
                 </li>

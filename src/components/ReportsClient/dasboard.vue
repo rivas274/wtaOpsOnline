@@ -31,14 +31,16 @@
                         :watermark="$t('assistance.clients')" :selected="filters.prefix"
                         v-on:input="setDataFilter"></multi-selects>
                 </div>
-
-                <div class="col m--align-right">
-                    <button class="btn btn-outline-focus ml-2 pull-right" @click="download">
-                        {{ $t("general.download") }}
-                    </button>
-                    <button class="btn btn-outline-info" @click="clear">
-                        {{ $t("general.clear") }}
-                    </button>
+                <div class="col form-group m-form__group m--align-right">
+                    <strong>&nbsp;&nbsp;</strong>
+                    <div>
+                        <button class="btn btn-outline-info ml-2 " @click="clear">
+                            {{ $t("general.clear") }}
+                        </button>
+                        <button class="btn btn-outline-focus ml-2" @click="download">
+                            {{ $t("general.download") }}
+                        </button>
+                    </div>
                 </div>
             </div>
         </template>
