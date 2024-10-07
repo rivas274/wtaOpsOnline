@@ -88,7 +88,7 @@
                                                                 v-tooltip:top="$t('voucher.name')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon fa-user"
+                                                                    class="m-nav__link-icon fa fa-user"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
