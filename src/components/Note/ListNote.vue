@@ -3,7 +3,7 @@
     font-weight: 400;
 }
 </style>
-<style src="../Element/custom-m-loader.css"></style>
+
 <template>
     <section :class="{ 'm-loader m-loader--metal m-loader--div': showLoader }">
         <form class="m-form m--align-right" role="form" v-if="canAdd" @submit.prevent="addNote">

@@ -126,4 +126,3 @@ export default {
     }
 };
 </script>
-<style src="../Element/custom-m-loader.css"></style>

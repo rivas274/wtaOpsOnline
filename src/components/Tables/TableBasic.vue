@@ -7,7 +7,7 @@
     padding: 1px;
 }
 </style>
-<style src="../Element/custom-m-loader.css"></style>
+
 <template>
     <div :class="{'m-loader m-loader--metal m-loader--div':loader}">
         <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-20">

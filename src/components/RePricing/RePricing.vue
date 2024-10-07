@@ -1,5 +1,5 @@
 <style scoped src="../Assists/Assist.css"></style>
-<style src="../Element/custom-m-loader.css"></style>
+
 <template>
     <div class="content-tabs-left">
         <ul class="nav nav-tabs tabs-left">

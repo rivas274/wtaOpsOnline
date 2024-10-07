@@ -1,4 +1,4 @@
-<style src="../Element/custom-m-loader.css"></style>
+
 <style scoped src="../Assists/Assist.css"></style>
 <style scoped>
 .options-btn {

@@ -312,4 +312,3 @@ export default {
 }
 </style>
 
-<style src="../Element/custom-m-loader.css"></style>
