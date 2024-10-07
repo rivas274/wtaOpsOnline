@@ -7,7 +7,7 @@
     >
         <a href="#" class="m-nav__link m-dropdown__toggle">
             <h5 class="m-topbar__userpic pr-3">
-                <div>{{fullName}}</div>
+                <div class="m--hidden-mobile">{{fullName}}</div>
                 <small v-if="detaillUser">{{detaillUser}}</small>
             </h5>
             <span class="m-topbar__userpic">
