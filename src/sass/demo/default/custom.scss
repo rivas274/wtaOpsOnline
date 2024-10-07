@@ -306,8 +306,9 @@ textarea.v-center {
     height: 3rem;
 }
 
-.btn-type-document {
+.btn-type-document:not(:hover) {
     min-height: 8rem;
+    background-color:#f0f0f0 !important;
 }
 
 .title-refund-dashboard {

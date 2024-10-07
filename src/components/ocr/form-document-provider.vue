@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="m-portlet__head-tools">
-                        <button class="btn" @click.prevent="$emit('remove', file)"
+                        <button class="btn btn-default" @click.prevent="$emit('remove', file)"
                             type="button">{{ $t('general.cancel') | upper }}
                         </button>
                     </div>

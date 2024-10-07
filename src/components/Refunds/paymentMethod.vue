@@ -8,7 +8,7 @@
                     </h2>
                     <div class="row">
                         <div class="col-md-6 d-flex align-items-start py-3">
-                            <button  class="btn-block btn btn-type-document btn-lg text-wrap text-left align-self-stretch"
+                            <button  class="btn-block btn btn-default btn-type-document btn-lg text-wrap text-left align-self-stretch"
                                     @click.prevent="setThirdPartyAuthorization('N')"
                                     type="button">
                                 <h3>
@@ -17,7 +17,7 @@
                             </button>
                         </div>
                         <div class="col-md-6 d-flex align-items-start py-3">
-                            <button  class="btn-block btn btn-type-document btn-lg text-wrap text-left align-self-stretch"
+                            <button  class="btn-block btn btn-default btn-type-document btn-lg text-wrap text-left align-self-stretch"
                                     @click.prevent="setThirdPartyAuthorization('Y')"
                                     type="button">
                                 <h3>
@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 <div class="m-portlet__head-tools">
-                    <button class="btn"
+                    <button class="btn btn-default"
                             @click.prevent="configData.thirdPartyAuthorization = 'P'"
                             type="button"
                         >{{ $t('general.back') | upper }}

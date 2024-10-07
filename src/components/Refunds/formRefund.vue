@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                                 <div class="m-portlet__head-tools">
-                                    <button class="btn"
+                                    <button class="btn btn-default"
                                             @click.prevent="back()"
                                             type="button"
                                         >{{ $t('general.back') | upper }}
