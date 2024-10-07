@@ -10,7 +10,6 @@
                                     <div class="d-flex justify-content-center align-items-center vh-100" v-if="!('idAssist' in results)">
                                         <div>
                                             <div class="m-loader m-loader--xl m-loader--metal mb-5">
-
                                             </div>
                                             <h5>
                                                 {{$t('general.loading')}}
@@ -268,47 +267,3 @@ export default {
     }
 };
 </script>
-
-<style>
-.progress-refund {
-    height: 3rem;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.progress-refund .progressbar {
-    height: 3rem;
-}
-
-.btn-type-document {
-    min-height: 8rem;
-}
-
-.title-refund-dashboard {
-    font-size: 2.5rem;
-    font-weight: bold;
-}
-
-.logo-refund-dashboard {
-    max-width: 100%;
-    height: auto;
-}
-
-@media only screen and (max-width: 1024px) {
-    .title-refund-dashboard {
-        font-size: 2rem;
-    }
-}
-
-@media only screen and (max-width: 427px) {
-    .title-refund-dashboard {
-        font-size: 1.8rem;
-    }
-    .m-portlet__foot .m-form__actions .btn-lg{
-        width: 100%;
-        margin-top: 5px;
-    }
-}
-</style>
-
