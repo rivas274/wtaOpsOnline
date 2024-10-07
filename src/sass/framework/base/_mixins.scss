@@ -633,14 +633,15 @@ xl: 1200px
 
 //== Lineawesome icon
 @mixin la-icon($icon) {
-    font-family: "LineAwesome";
+    font-family: 'Line Awesome Free';
+    font-weight: 900;
     text-decoration: inherit;
     text-rendering: optimizeLegibility;
     text-transform: none;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
-    
+
     &:before {
         content: "#{$icon}";
     }
@@ -648,7 +649,8 @@ xl: 1200px
 
 //== Lineawesome icon
 @mixin la-icon-self($icon) {
-    font-family: "LineAwesome";
+    font-family: 'Line Awesome Free';
+    font-weight: 900;
     text-decoration: inherit;
     text-rendering: optimizeLegibility;
     text-transform: none;
