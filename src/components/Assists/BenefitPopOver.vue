@@ -9,7 +9,7 @@
         />
         <span class="m-input-icon__icon m-input-icon__icon--left">
             <span>
-                <i class="la la-calendar-check-o"></i>
+                <i class="fa fa-calendar-check"></i>
             </span>
         </span>
     </div>

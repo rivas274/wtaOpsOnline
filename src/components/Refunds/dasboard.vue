@@ -36,7 +36,7 @@
                                                     <ul class="m-nav m-nav--inline">
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link" v-tooltip:top="$t('general.client')">
-                                                                <i class="m-nav__link-icon flaticon-suitcase"></i>
+                                                                <i class="m-nav__link-icon fa fa-building"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.clientName }}</span>
                                                             </a>
@@ -44,7 +44,7 @@
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('assistance.code')">
-                                                                <i class="m-nav__link-icon flaticon-shapes"></i>
+                                                                <i class="m-nav__link-icon la fi-rr-ballot"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.codeAssist }}</span>
                                                             </a>
@@ -60,7 +60,7 @@
                                                         </li>
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link" v-tooltip:top="$t('voucher.name')">
-                                                                <i class="m-nav__link-icon fi-rr-user"></i>
+                                                                <i class="m-nav__link-icon fa-user"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.firstName + ' ' + results.lastName }}</span>
                                                             </a>
@@ -68,7 +68,7 @@
                                                         <li class="m-nav__item" v-if="results.registeredDate">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('assistance.date.case')">
-                                                                <i class="m-nav__link-icon flaticon-calendar-1"></i>
+                                                                <i class="m-nav__link-icon fa fa-calendar-check"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.registeredDate.date }}</span>
                                                             </a>

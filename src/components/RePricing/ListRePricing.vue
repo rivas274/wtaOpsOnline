@@ -53,7 +53,7 @@
                     class="col-md-4 m-form__group-sub"
                     name="passager"
                     :watermark="$t('voucher.name')"
-                    icon="la fi-rr-user"
+                    icon="fa fa-user"
                     v-on:input="setDataFilter"
                     :value="filters.passager"
                 ></input-from-table>
@@ -61,7 +61,7 @@
                     class="col-md-4 m-form__group-sub"
                     name="provider"
                     :watermark="$t('invoice.invoiceProvider')"
-                    icon="la fi-rr-user"
+                    icon="fa fa-user"
                     v-on:input="setDataFilter"
                     :value="filters.provider"
                 ></input-from-table>

@@ -285,7 +285,7 @@ iframe{
                                             :title="benefit.SOURCE + ' |   ' + (assistances.voucher.namePlan || '')"
                                         >
                                             <template slot="button">
-                                                <i class="flaticon-suitcase"></i>
+                                                <i class="fa fa-building"></i>
                                             </template>
                                             <template slot="content">
                                                 <table
@@ -709,7 +709,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_facial_'+idAssist" ico="fa fi-rr-user" v-if="permission.facial_scan && assistances.facialScan.label">
+                <AssistAccordion :id="'_facial_'+idAssist" ico="fa fa-user" v-if="permission.facial_scan && assistances.facialScan.label">
                     <template slot="title">
                         {{$t('assistance.facial_scan')|upper}}
                         <small :class="['m--font-bolder m--font-' + assistances.facialScan.color]" >

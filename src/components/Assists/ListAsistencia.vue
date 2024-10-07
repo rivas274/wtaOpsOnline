@@ -44,7 +44,7 @@
                     class="col-md-4 form-group"
                     name="passager"
                     :watermark="$t('voucher.name')"
-                    icon="la fi-rr-user"
+                    icon="fa fa-user"
                     v-on:input="setDataFilter"
                     :value="filters.passager"
                 ></input-from-table>

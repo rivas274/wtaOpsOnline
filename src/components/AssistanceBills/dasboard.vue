@@ -46,7 +46,7 @@
                                                                 v-tooltip:top="$t('general.client')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-suitcase"
+                                                                    class="m-nav__link-icon fa fa-building"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
@@ -59,7 +59,7 @@
                                                                 v-tooltip:top="$t('assistance.code')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-shapes"
+                                                                    class="m-nav__link-icon la fi-rr-ballot"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
@@ -88,7 +88,7 @@
                                                                 v-tooltip:top="$t('voucher.name')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon fi-rr-user"
+                                                                    class="m-nav__link-icon fa-user"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
@@ -104,7 +104,7 @@
                                                                 v-tooltip:top="$t('assistance.date.case')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-calendar-1"
+                                                                    class="m-nav__link-icon fa fa-calendar-check"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
