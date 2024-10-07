@@ -54,7 +54,7 @@
                 >
                     <router-link :to="{ path: '/shared_document'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
-                        <i class="m-menu__link-icon fa fa-share-nodes"></i>
+                        <i class="m-menu__link-icon la la-share-alt"></i>
                         <span class="m-menu__link-text">{{$t('document.sharedDocuments')}}</span>
                     </router-link>
                 </li>
