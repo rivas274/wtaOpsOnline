@@ -35,7 +35,7 @@
                                 href="javascript:;"
                                 class="m-brand__icon m--visible-tablet-and-mobile-inline-block"
                             >
-                                <i class="flaticon-more"></i>
+                                <i class="flaticon-more fa fa-ellipsis"></i>
                             </a>
                         </div>
                     </div>
