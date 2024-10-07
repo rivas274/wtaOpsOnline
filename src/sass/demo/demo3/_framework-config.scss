@@ -1,0 +1,29 @@
+//
+//** Override The Base Framework Config For This Demo
+//
+
+//== The body element font settings
+$m--root-font: (
+    size: (
+        desktop: 13px,
+        tablet: 13px,
+        mobile: 13px
+    ), 
+    weight: 300, 
+    color: (
+        light: #333333, 
+        dark: #efefef
+    )
+);
+//== Font families
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+//== Font families
+$m--font-families: (
+    regular: 'Roboto',
+    heading: 'Montserrat'
+);
+
+//== Brand Color
+$m--brand-color: #716aca;
+$m--brand-inverse-color: #ffffff;

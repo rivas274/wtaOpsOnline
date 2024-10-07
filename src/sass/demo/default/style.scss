@@ -19,7 +19,7 @@
 
 //== 4: Framework Components
 
-@import "./include-plugins";
+@import "../../custom/include-plugins";
 @import "../../framework/include";
 
 //== 5: Snippets
@@ -58,4 +58,4 @@
 @import "footer/default";
 
 //==8 Custom
-@import "./custom";
+@import "../../custom/custom";

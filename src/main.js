@@ -12,7 +12,7 @@ import globalDirectives from './custom/vue-global-directives';
 import i18n from "./custom/i18n";
 import VeeValidate from'./custom/vue-vee-custom';
 import store from './store/store';
-import "@/sass/demo/default/style.scss";
+import "@/sass/demo/demo3/style.scss";
 import moment from 'moment';
 
 Vue.use(VueRouter);
