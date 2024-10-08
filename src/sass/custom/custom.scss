@@ -306,8 +306,11 @@ textarea.v-center {
     height: 3rem;
 }
 
-.btn-type-document.btn-default:not(:hover) {
+.btn-type-document {
     min-height: 8rem;
+}
+
+.btn-type-document.btn-default:not(:hover) {
     background-color:#f0f0f0 !important;
 }
 
