@@ -46,7 +46,7 @@
                     <div class="m-dropdown__content">
                         <ul class="m-nav m-nav--skin-light">
                             <li class="m-nav__separator m-nav__separator--fit"></li>
-                            <li class="m-nav__item">
+                            <li class="m-nav__item d-flex justify-content-between">
                                 <a
                                     @click.prevent="logOut"
                                     class="btn m-btn--pill btn-outline-primary pull-right m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
