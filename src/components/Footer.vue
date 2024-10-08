@@ -31,7 +31,7 @@
                                 v-tooltip:top="'Support Center'"
                                 data-placement="left"
                             >
-                                <i class="m-nav__link-icon flaticon-info m--icon-font-size-lg3"></i>
+                                <i class="m-nav__link-icon fa fa-info m--icon-font-size-lg3"></i>
                             </a>
                         </li>
                     </ul> -->

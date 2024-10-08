@@ -104,7 +104,7 @@ iframe{
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <AssistAccordion :id="'_general_'+idAssist" ico="fa flaticon-user-ok" v-if="!permission.hidden_tab_voucher && 'voucher' in assistances">
+                <AssistAccordion :id="'_general_'+idAssist" ico="la fi-rr-ballot" v-if="!permission.hidden_tab_voucher && 'voucher' in assistances">
                     <template slot="title" >{{ $t('voucher.voucher') | upper}} <small v-if="'code' in assistances.voucher">({{assistances.voucher.code}})</small></template>
                     <template slot="body">
                         <AssistAccordionDetaill class="col-md-4">
@@ -285,7 +285,7 @@ iframe{
                                             :title="benefit.SOURCE + ' |   ' + (assistances.voucher.namePlan || '')"
                                         >
                                             <template slot="button">
-                                                <i class="fa fa-building"></i>
+                                                <i class="fa fa-suitcase"></i>
                                             </template>
                                             <template slot="content">
                                                 <table
@@ -319,7 +319,7 @@ iframe{
                         </AssistAccordionDetaill>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_general_conditions_'+idAssist" ico="fa flaticon-file" v-if="!permission.hidden_tab_voucher">
+                <AssistAccordion :id="'_general_conditions_'+idAssist" ico="fa fa-newspaper" v-if="!permission.hidden_tab_voucher">
                     <template slot="title">{{ $t('assistance.generalConditions') | upper }}</template>
                     <template slot="body">
                         <iframe class="preview"
@@ -327,7 +327,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_assistance_'+idAssist" ico="fa flaticon-computer">
+                <AssistAccordion :id="'_assistance_'+idAssist" ico="fa fa-headset">
                     <template slot="title">{{ $t('assistance.assistance') | upper }} <small>({{assistances.codeAssist}})</small></template>
                     <template slot="body">
                         <AssistAccordionDetaill class="col-md-4">
@@ -568,7 +568,7 @@ iframe{
                         </AssistAccordionDetaill>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_address_'+idAssist" ico="fa flaticon-placeholder">
+                <AssistAccordion :id="'_address_'+idAssist" ico="fa fa-location-dot">
                     <template slot="title">{{$t('general.address')|upper}}</template>
                     <template slot="body">
                         <AssistAccordionDetaill class="col-md-4">
@@ -688,7 +688,7 @@ iframe{
                         </AssistAccordionDetaill>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_triage_'+idAssist" ico="fa flaticon-list" v-if="permission.triage && assistances.triage.label">
+                <AssistAccordion :id="'_triage_'+idAssist" ico="fa fa-house-medical" v-if="permission.triage && assistances.triage.label">
                     <template slot="title">
                         {{$t('assistance.triage')|upper}}
                         <small :class="['m--font-bolder m--font-' + assistances.triage.color]" >
@@ -709,7 +709,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_facial_'+idAssist" ico="fa fa-user" v-if="permission.facial_scan && assistances.facialScan.label">
+                <AssistAccordion :id="'_facial_'+idAssist" ico="fa fa-face-smile" v-if="permission.facial_scan && assistances.facialScan.label">
                     <template slot="title">
                         {{$t('assistance.facial_scan')|upper}}
                         <small :class="['m--font-bolder m--font-' + assistances.facialScan.color]" >
@@ -744,7 +744,7 @@ iframe{
                         ></iframe>
                     </template>
                 </AssistAccordion>
-                <AssistAccordion :id="'_credit_auth_'+idAssist" ico="fa flaticon-lock" v-if="permission.hidden_tab_voucher">
+                <AssistAccordion :id="'_credit_auth_'+idAssist" ico="fa fa-lock" v-if="permission.hidden_tab_voucher">
                     <template slot="title">{{$t('assistance.authorization')|upper}}</template>
                     <template slot="title-left">
                         <a href="#" @click="donwload(assistances.codeAssist,'AUTORIZATION')">

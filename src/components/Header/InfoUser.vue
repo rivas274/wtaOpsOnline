@@ -6,8 +6,8 @@
         m-dropdown-toggle="click"
     >
         <a href="#" class="m-nav__link m-dropdown__toggle">
-            <h5 class="m-topbar__userpic pr-3">
-                <div class="m--hidden-mobile">{{fullName}}</div>
+            <h5 class="m-topbar__userpic pr-3 m--hidden-mobile">
+                <div>{{fullName}}</div>
                 <small v-if="detaillUser">{{detaillUser}}</small>
             </h5>
             <span class="m-topbar__userpic">

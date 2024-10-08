@@ -71,7 +71,7 @@
                     class="col-md-4 m-form__group-sub"
                     name="amount"
                     :watermark="$t('document.amount')"
-                    icon="la flaticon-coins"
+                    icon="fa fa-coins"
                     v-on:input="setDataFilter"
                     :value="filters.amount"
                 ></input-from-table>
