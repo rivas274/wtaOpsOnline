@@ -18,7 +18,7 @@
                 >
                     <router-link :to="{ path: '/dasboard'}" replace class="m-menu__link">
                         <span class="m-menu__item-here"></span>
-                        <i class="m-menu__link-icon fa fa-table-cells-large"></i>
+                        <i class="m-menu__link-icon fa fa-headset"></i>
                         <span class="m-menu__link-text">{{$t('menu.assistance')}}</span>
                     </router-link>
                 </li>
