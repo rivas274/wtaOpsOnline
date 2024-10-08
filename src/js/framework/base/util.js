@@ -1,3 +1,4 @@
+import PerfectScrollbar from "perfect-scrollbar";
 //
 // requestAnimationFrame polyfill by Erik Möller.
 //  With fixes from Paul Irish and Tino Zijdel
