@@ -5,10 +5,10 @@
     "description": "Portal para clientes y proveedores de wtaops",
     "author": "rivas274 <sr.naspter@gmail.com>",
     "scripts": {
-        "serve": "vue-cli-service serve --open",
+        "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
-        "dev": "vue-cli-service serve --open",
+        "dev": "vue-cli-service serve",
         "lint-fix": "vue-cli-service lint --fix"
     },
     "dependencies": {
@@ -25,7 +25,7 @@
         "line-awesome": "^1.3.0",
         "module": "^1.1.0",
         "moment": "^2.29.1",
-        "sweetalert2": "^11.14.1",
+        "sweetalert2": "^11.14.2",
         "vee-validate": "^2.2.15",
         "vue": "^2.7.16",
         "vue-axios": "^2.1.5",
