@@ -2,10 +2,13 @@
 </style>
 <template>
     <div id="m_header_topbar" class="m-topbar m-stack m-stack--ver m-stack--general d-flex justify-content-end align-items-center">
-        <locale-changer class="pull-right" :active-langs="['es','en']"></locale-changer>
-        <notification v-if="middleware('notes_provider', 'read')"  ref="notificationComponent" class="notification"></notification>
+        <locale-changer :active-langs="['es','en']" class="px-2"></locale-changer>
+        <notification v-if="middleware('notes_provider', 'read')"
+            ref="notificationComponent"
+            class="notification px-2">
+        </notification>
         <div class="m-stack__item m-topbar__nav-wrapper">
-            <ul class="m-topbar__nav m-nav m-nav--inline">
+            <ul class="m-topbar__nav m-nav m-nav--inline ml-0">
                 <info-user></info-user>
             </ul>
         </div>
