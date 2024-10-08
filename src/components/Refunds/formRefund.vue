@@ -62,11 +62,11 @@
                                 </div>
                             </div>
                             <div class="m-portlet__body">
-                                <div class="form-group m-form__group pt-0 pb-2" v-if="extraInsurance">
+                                <div class="form-group m-form__group pt-0 pb-2" v-if="extraToFill">
                                     <h5>{{ $t('refunds.downloadAndFill') }}</h5>
                                 </div>
-                                <div class="form-group m-form__group py-1" v-if="extraInsurance">
-                                    <a :href="extraInsurance.file" download target="_blank">
+                                <div class="form-group m-form__group py-1" v-if="extraToFill">
+                                    <a :href="extraToFill.file" download target="_blank">
                                         <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
                                             <div class="m-alert__icon py-3 px-3">
                                                 <i class="fa fa-2x fa-cloud-download-alt"></i>
@@ -74,7 +74,7 @@
                                             </div>
                                             <div class="m-alert__text py-3">
                                                 <label class="col-form-label">{{ $t('general.important') }}</label>
-                                                {{ extraInsurance.description }}
+                                                {{ extraToFill.description }}
                                             </div>
                                         </div>
                                     </a>
@@ -242,7 +242,7 @@
                                     class="form-group m-form__group"
                                     :class="{'has-danger': errors.has('file')}"
                                 >
-                                    <h5 v-if="extraInsurance">{{ $t('refunds.uploadCompletedDocument') }}</h5>
+                                    <h5 v-if="extraToFill">{{ $t('refunds.uploadCompletedDocument') }}</h5>
                                     <label class="col-form-label" v-else>{{ $t('document.file') }}</label>
                                     <div class="custom-file">
                                         <input
@@ -595,11 +595,11 @@ export default {
                 return m;
             }, []);
         },
-        extraInsurance: function () {
-            if ('insurance' in this.documentsTypeSelected) {
+        extraToFill: function () {
+            if ('toFill' in this.documentsTypeSelected) {
                 return {
-                    description: this.documentsTypeSelected.insurance['description'][this.$root.$i18n.locale],
-                    file: this.documentsTypeSelected.insurance.file,
+                    description: this.documentsTypeSelected.toFill['description'][this.$root.$i18n.locale],
+                    file: this.documentsTypeSelected.toFill.file,
                     name: this.documentsTypeSelected.name
                 }
             }
@@ -654,7 +654,7 @@ export default {
             let self = this,
             arrReturn = [],
             group = this.documentsType.reduce(function (m, e) {
-                let provideOrDownload = 'insurance' in e ? 'download' : 'provide';
+                let provideOrDownload = 'toFill' in e ? 'download' : 'provide';
                 if (!(provideOrDownload in m)) {
                     m[provideOrDownload] = {
                         id:provideOrDownload,
@@ -678,7 +678,7 @@ export default {
         documentsTypeVisible: function () {
             let self = this;
             return this.documentsType.reduce(function (m, e) {
-                e['group'] = 'insurance' in e ? 'download' : 'provide';
+                e['group'] = 'toFill' in e ? 'download' : 'provide';
                 if (e['uploaded']) {
                     e['icon'] = 'fa fa-check text-success';
                 }
