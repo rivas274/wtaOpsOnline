@@ -12,9 +12,9 @@
         <div class="m-portlet__body">
             <div class="row">
                 <div class="col-md-6 d-flex align-items-start py-3" v-for="group in groups " :key="group.id">
-                    <button  class="btn-block btn btn-default btn-type-document btn-lg text-wrap text-left align-self-stretch"
+                    <button  class="btn-block btn btn-type-document btn-lg text-wrap text-left align-self-stretch"
                             @click.prevent="setGroup(group)"
-                            :class="{'btn-success':group['uploaded']==group['total']}"
+                            :class="[group['uploaded']==group['total']?'btn-success':'btn-default']"
                             type="button">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center justify-content-start">
