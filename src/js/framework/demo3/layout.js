@@ -3,6 +3,7 @@ import mUtil from "@/js/framework/base/util";
 import mMenu from "@/js/framework/components/general/menu";
 import mHeader from "@/js/framework/components/general/header";
 import mOffcanvas from "@/js/framework/components/general/offcanvas";
+import "@/js/framework/components/general/dropdown";
 
 var mLayout = function () {
     var header;
@@ -198,7 +199,6 @@ var mLayout = function () {
         });
     }
 
-
     return {
         init: function () {
             this.initHeader();
@@ -216,6 +216,10 @@ var mLayout = function () {
             initLeftAside();
             initLeftAsideMenu();
             initLeftAsideToggle();
+
+            this.onLeftSidebarToggle(function (e) {
+                console.log('onLeftSidebarToggle');
+            });
         },
 
         getAsideMenu: function () {
