@@ -47,8 +47,7 @@
                                                                 class="m-badge m-badge--wide"
                                                                 :class="{ 'm-badge--success': notification.cant_sms <= 0, 'm-badge--warning': notification.cant_sms > 0 }">
                                                                 {{ notification.cant_sms > 0 ? $t('notification.pending')
-                                                                    : $t('notification.read') }} ({{ notification.cant_sms
-    }})
+                                                                    : $t('notification.read') }} ({{ notification.cant_sms}})
                                                             </span>
                                                         </span>
                                                         <span class="m-list-timeline__time">{{ notification.created }}</span>
@@ -66,29 +65,6 @@
         </div>
     </div>
 </template>
-
-<style>
-.pulse-warning {
-    animation-name: pulse-warning;
-    animation-duration: 1.5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-}
-
-@keyframes pulse-warning {
-    0% {
-        box-shadow: 0px 0px 5px 0px #f80606;
-    }
-
-    65% {
-        box-shadow: 0px 0px 5px 10px #fa3b014d;
-    }
-
-    90% {
-        box-shadow: 0px 0px 5px 10px #f8930600;
-    }
-}
-</style>
 
 <script>
 
