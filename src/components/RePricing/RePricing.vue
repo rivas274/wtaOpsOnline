@@ -600,7 +600,7 @@ import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import AssistAccordionDetaill from "../Assists/AssistAccordionDetaill.vue";
 import formEob from "./formEob.vue";
 import uploadEob from "./uploadEob.vue";
-import Swal from "sweetalert2";
+import Swal from "@/custom/sweetalert2";
 
 export default {
     props: ["re-pricing"],

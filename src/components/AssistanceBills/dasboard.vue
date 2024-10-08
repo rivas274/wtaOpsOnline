@@ -437,7 +437,7 @@ import currency from "../Labels/currency.json";
 import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import VueRecaptcha from "vue-recaptcha";
-import Swal from "sweetalert2";
+import Swal from "@/custom/sweetalert2";
 
 export default {
     components: {

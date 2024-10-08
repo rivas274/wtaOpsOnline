@@ -92,7 +92,7 @@
 <script>
 import FormError from "../FormError";
 import selectFromTable from "../Tables/filters/selectFromTable.vue";
-import Swal from "sweetalert2";
+import Swal from "@/custom/sweetalert2";
 
 export default {
     components: {

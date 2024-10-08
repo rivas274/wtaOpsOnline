@@ -422,7 +422,7 @@ import customImg from "../Element/custom-img";
 import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
-import Swal from "sweetalert2";
+import Swal from "@/custom/sweetalert2";
 
 export default {
     props: ['rePricingId'],

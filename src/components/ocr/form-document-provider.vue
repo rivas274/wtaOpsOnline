@@ -165,7 +165,7 @@ import selectMultiple from "../Tables/filters/selectFromMultipleTable.vue";
 import currency from "../Labels/currency.json";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import sanitize from '../../custom/sanitize-data';
-import Swal from "sweetalert2";
+import Swal from "@/custom/sweetalert2";
 
 export default {
     components: {

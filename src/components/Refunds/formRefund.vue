@@ -366,7 +366,7 @@ import VueRecaptcha from "vue-recaptcha";
 import groupBtnRefund from './groupBtnRefund.vue';
 import groupDocumentType from './groupDocumentType.vue';
 import sanitize from '../../custom/sanitize-data';
-import Swal from "sweetalert2";
+import Swal from "@/custom/sweetalert2";
 
 export default {
     components: {

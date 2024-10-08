@@ -94,7 +94,7 @@
 </template>
 
 <script>
-import Swal from "sweetalert2";
+import Swal from "@/custom/sweetalert2";
 
 export default {
     props: ['rePricingDetaill'],
