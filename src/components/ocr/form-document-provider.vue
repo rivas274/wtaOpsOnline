@@ -297,7 +297,7 @@ export default {
                                     Swal.fire({
                                         title: this.$t("document.send"),
                                         html: message,
-                                        type: "success",
+                                        icon: "success",
                                         confirmButtonText: this.$t("general.ok"),
                                     });
                                 } else {
@@ -312,7 +312,7 @@ export default {
                                     Swal.fire({
                                         title: response.data.MESSAGE || "Error Form",
                                         confirmButtonText: this.$t("general.ok"),
-                                        type: "error"
+                                        icon: "error"
                                     });
                                 }
                                 this.uploadPercentage = 0;

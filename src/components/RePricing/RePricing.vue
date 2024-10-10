@@ -786,7 +786,7 @@ export default {
                                     this.$emit("completeRepricing", response.data.RESPONSE);
                                     Swal.fire({
                                         title: this.$t("general.sent"),
-                                        type: "success",
+                                        icon: "success",
                                         showCancelButton: true,
                                         confirmButtonText: this.$t("general.ok"),
                                         cancelButtonText: this.$t("general.no")
@@ -803,7 +803,7 @@ export default {
                                     Swal.fire({
                                         title: response.data.MESSAGE||"Error Form",
                                         confirmButtonText: this.$t("general.ok"),
-                                        type: "error"
+                                        icon: "error"
                                     });
                                 }
                                 this.uploadPercentage = 0;
@@ -852,7 +852,7 @@ export default {
                             Swal.fire({
                                 title: this.$t("general.sent"),
                                 text: this.$t("document.uploaded"),
-                                type: "success",
+                                icon: "success",
                                 showCancelButton: true,
                                 confirmButtonText: this.$t("general.ok"),
                                 cancelButtonText: this.$t("general.no")
@@ -869,7 +869,7 @@ export default {
                             Swal.fire({
                                 title: response.data.MESSAGE||"Error Form",
                                 confirmButtonText: this.$t("general.ok"),
-                                type: "error"
+                                icon: "error"
                             });
                         }
                         this.uploadPercentage = 0;

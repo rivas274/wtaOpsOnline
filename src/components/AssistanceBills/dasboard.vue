@@ -556,7 +556,7 @@ export default {
                                     Swal.fire({
                                         title: this.$t("document.send"),
                                         text: this.$t("document.uploaded"),
-                                        type: "success",
+                                        icon: "success",
                                         showCancelButton: true,
                                         confirmButtonText: this.$t("document.uploadAnother"),
                                         cancelButtonText: this.$t("general.no")
@@ -576,7 +576,7 @@ export default {
                                                 title: this.$t("windows.close"),
                                                 text: this.$t("windows.pleaseClose"),
                                                 confirmButtonText: this.$t("general.ok"),
-                                                type: "error"
+                                                icon: "error"
                                             });
                                         }
                                     });
@@ -593,7 +593,7 @@ export default {
                                         title: "Error",
                                         text: response.data.MESSAGE,
                                         confirmButtonText: this.$t("general.ok"),
-                                        type: "error",
+                                        icon: "error",
                                     });
                                 }
                                 this.uploadPercentage = 0;

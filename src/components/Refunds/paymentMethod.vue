@@ -466,7 +466,7 @@ export default {
                                     Swal.fire({
                                         title: this.$t("general.sent"),
                                         text: this.$t("general.informationSentCorrectly"),
-                                        type: "success",
+                                        icon: "success",
                                         confirmButtonText: this.$t("general.ok"),
                                     }).then(() => {
                                         this.$emit("update:status", "L");

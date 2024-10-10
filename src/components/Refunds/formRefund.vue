@@ -487,7 +487,7 @@ export default {
                                     Swal.fire({
                                         title: null,
                                         text: this.$t("document.uploaded"),
-                                        type: "success",
+                                        icon: "success",
                                         showCancelButton: true,
                                         confirmButtonText: this.$t("document.uploadAnother"),
                                         cancelButtonText: this.$t("general.back")
@@ -532,7 +532,7 @@ export default {
                                             listErrors.join('</li><li class="class="text-left">') +
                                             '</li><ol>':''),
                                         confirmButtonText: this.$t("general.ok"),
-                                        type: "error"
+                                        icon: "error"
                                     });
                                 }
                                 this.uploadPercentage = 0;
