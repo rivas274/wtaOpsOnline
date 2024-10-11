@@ -166,6 +166,7 @@ import currency from "../Labels/currency.json";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import sanitize from '../../custom/sanitize-data';
 import Swal from "@/custom/sweetalert2";
+import moment from 'moment';
 
 export default {
     components: {
