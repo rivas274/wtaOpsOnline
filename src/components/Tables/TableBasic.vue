@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="m-section__content table-responsive">
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped table-bordered table-hover mt-3">
                 <thead>
                     <slot name="thead"></slot>
                 </thead>

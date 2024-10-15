@@ -202,6 +202,8 @@
         "total": "Total",
         "add": "Agregar",
         "delete": "Eliminar",
+        "deleted": "Eliminado",
+        "revert": "Revertir",
         "code": "Código",
         "preview": "Vista Previa",
         "ok": "Aceptar",
@@ -284,7 +286,10 @@
         "inactive": "Inactivo",
         "authorizedgop": "Autorización GOP",
         "selectAll": "Seleccionar todo",
-        "deselectAll": "Deseleccionar todo"
+        "deselectAll": "Deseleccionar todo",
+        "confirm": "Confirmar",
+        "confirmDelete": "¿Está seguro que desea eliminar este registro?",
+        "confirmUndoDelete": "¿Está seguro que desea deshacer la eliminación de este registro?"
     },
     "provider": {
         "provider": "Proveedor",

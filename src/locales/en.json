@@ -202,6 +202,8 @@
         "total": "Total",
         "add": "Add",
         "delete": "Delete",
+        "deleted": "Deleted",
+        "revert": "Revert",
         "code": "Code",
         "preview": "Preview",
         "ok": "Ok",
@@ -284,7 +286,10 @@
         "inactive": "Inactive",
         "authorizedgop": "Authorized GOP",
         "selectAll": "Select all",
-        "deselectAll": "Deselect all"
+        "deselectAll": "Deselect all",
+        "confirm": "Confirm",
+        "confirmDelete": "Are you sure you want to delete this record?",
+        "confirmUndoDelete": "Are you sure you want to undo the deletion of this record?"
     },
     "provider": {
         "provider": "Provider",
