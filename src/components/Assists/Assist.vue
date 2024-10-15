@@ -4,7 +4,7 @@
         <div class="col-12 text-right mb-3">
             <button class="btn btn-warning font-white" @click="refresh"><i class="fa fa-redo mr-1"></i>{{$t('general.refresh')}}</button>
         </div>
-        <div class="content-tabs-left">
+        <div class="content-tabs-left col-12">
             <ul class="nav nav-tabs tabs-left">
                 <li :class="{active:tabShow=='General'}" v-tooltip:top="$t('general.general')">
                     <a
@@ -147,7 +147,7 @@
                     </a>
                 </li>
             </ul>
-            <div class="tab-content container-fluid" v-if="assistBase">
+            <div class="tab-content mx-md-2" v-if="assistBase">
                 <div class="tab-pane" :class="{active:tabShow=='General'}">
                     <AssistDetail :id-assist="assistBase.idAssist"></AssistDetail>
                 </div>
