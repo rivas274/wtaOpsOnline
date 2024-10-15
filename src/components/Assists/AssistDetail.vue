@@ -22,13 +22,29 @@ iframe{
 </style>
 <template>
     <div :class="{'m-loader m-loader--metal m-loader--div':showLoader}">
+        <div v-if="assistances.is_asigne==1" class="d-flex justify-content-end">
+            <button v-if="assistances.approved_status_user==2 && permission.showProvider"
+                class="btn btn-info ml-md-2"
+                data-toggle="modal"
+                data-target="#finish">
+                {{$t('assistance.Finish')}}
+            </button>
+            <button v-if="assistances.approved_status_user==1 && permission.showProvider"
+                class="btn btn-info ml-md-2"
+                @click="aprobar">
+                {{$t('assistance.acceptCase')}}
+            </button>
+            <button
+                v-if="assistances.approved_status_user==1 && permission.showProvider"
+                type="button"
+                class="btn btn-primary ml-md-2"
+                data-toggle="modal"
+                data-target="#exampleModalLong">
+                {{$t('assistance.rejectCase')}}
+            </button>
+        </div>
         <progress-bar :id-assist="idAssist"></progress-bar>
-        <div
-            class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg"
-            :id="'m_accordion_'+idAssist"
-            role="tablist"
-            v-if="'codeAssist' in assistances"
-        >
+        <div>
             <div class="modal fade" id="exampleModalLong" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdrop" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -69,14 +85,6 @@ iframe{
                     </div>
                 </div>
             </div>
-            <div v-if="assistances.is_asigne==1" style="float: right; position: relative; top: -50px;height: 10px; ">
-                <button v-if="assistances.approved_status_user==2 && permission.showProvider" class="btn btn-info" style="margin-bottom: 4px;" data-toggle="modal" data-target="#finish">{{$t('assistance.Finish')}}</button>
-                <button v-if="assistances.approved_status_user==1 && permission.showProvider" class="btn btn-info" style="margin-bottom: 4px;"  @click="aprobar">{{$t('assistance.acceptCase')}}</button>
-                <br>
-                <button style="float: right; position: absolute;" v-if="assistances.approved_status_user==1 && permission.showProvider" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-                {{$t('assistance.rejectCase')}}
-                </button>
-            </div>
             <div class="alert alert-success alert-dismissible fade show" v-if="notificationApprove" role="alert"  name="notificationApprove" id="notificationApprove"  ref="notificationApprove">
                 <strong>{{$t('assistance.caseAccepted')}}.</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -95,6 +103,13 @@ iframe{
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+        </div>
+        <div
+            class="m-accordion m-accordion--default m-accordion--solid m-accordion--section m-accordion--padding-lg"
+            :id="'m_accordion_'+idAssist"
+            role="tablist"
+            v-if="'codeAssist' in assistances"
+        >
             <AssistAccordion :id="'_general_'+idAssist" ico="la fi-rr-ballot" v-if="!permission.hidden_tab_voucher && 'voucher' in assistances">
                 <template slot="title" >{{ $t('voucher.voucher') | upper}} <small v-if="'code' in assistances.voucher">({{assistances.voucher.code}})</small></template>
                 <template slot="body">
