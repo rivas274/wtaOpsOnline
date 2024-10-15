@@ -103,5 +103,10 @@
         "read": [52],
         "write": [52],
         "delete": [52]
+    },
+    "delete_files": {
+        "read": [52],
+        "write": [52],
+        "delete": [52]
     }
 }

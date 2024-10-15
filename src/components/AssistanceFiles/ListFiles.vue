@@ -122,6 +122,7 @@ iframe {
                                 <i class="fa fa-lg fa-cloud-download-alt"></i>
                             </a>
                             <a
+                                v-if="permission.deleteFiles && bill.canDelete"
                                 @click.prevent="deleteOrRevert(bill)"
                                 href="#"
                                 v-tooltip:top="$t(bill.delete?'general.revert':'general.delete')"
@@ -183,7 +184,10 @@ export default {
                 size: 0
             },
             showLoader: false,
-            view: []
+            view: [],
+            permission: {
+                deleteFiles: this.middleware("delete_files", "read"),
+            }
         };
     },
     watch: {
