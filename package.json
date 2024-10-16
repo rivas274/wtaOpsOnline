@@ -23,8 +23,8 @@
         "dropzone": "^6.0.0-beta.2",
         "jquery": "^3.7.1",
         "line-awesome": "^1.3.0",
-        "module": "^1.1.0",
-        "moment": "^2.29.1",
+        "module": "^1.2.5",
+        "moment": "^2.30.1",
         "perfect-scrollbar": "^1.5.5",
         "sweetalert2": "^11.14.3",
         "vee-validate": "^2.2.15",
@@ -35,14 +35,14 @@
         "vue-multiselect": "^2.1.3",
         "vue-recaptcha": "^1.3.0",
         "vue-router": "^3.3.4",
-        "vue-router-prefetch": "^1.6.0",
+        "vue-router-prefetch": "^1.6.3",
         "vuex": "^3.6.2"
     },
     "devDependencies": {
         "@vue/cli-plugin-babel": "^5.0.8",
         "@vue/cli-plugin-eslint": "^5.0.8",
         "@vue/cli-service": "^5.0.8",
-        "sass": "^1.79.4",
+        "sass": "^1.79.5",
         "sass-loader": "^8.0.2",
         "vue-loader": "^17.4.2",
         "vue-template-compiler": "^2.7.16"
