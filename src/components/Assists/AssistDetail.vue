@@ -854,6 +854,8 @@ export default {
                     this.showLoader = false;
                     this.notificationFinish = true;
                     this.assistances.approved_status_user=3;
+
+                    $('#finish').modal('hide');
                 });
         },
         rechazar: function() {
