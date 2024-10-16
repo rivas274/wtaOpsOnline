@@ -24,7 +24,7 @@
                     :data-vv-as="$t('voucher.voucher')"
                     name="codeVoucher"
                     :watermark="$t('voucher.voucher')"
-                    icon="la flaticon-interface-5"
+                    icon="la fi-rr-ballot"
                     v-on:input="setDataFilter"
                     :value="filters.codeVoucher">
                     <button class="btn btn-info" @click="getVoucherWithCases(0)">{{$t('general.search')}}</button>

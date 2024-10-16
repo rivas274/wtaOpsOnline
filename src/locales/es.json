@@ -63,7 +63,7 @@
             "service": "Fecha de Servicio",
             "bill": "fecha de la factura"
         },
-        "watermark":{
+        "watermark": {
             "reference": "# de factura",
             "description": "# Caso | # de factura | Nombre del beneficiario | Fecha del servicio"
         }
@@ -88,7 +88,7 @@
         "paymentProof": "Comprobante de pago",
         "methodPayment": "Método de pago",
         "paymentInformationUploaded": "Información de pago cargada",
-        "returnTo":{
+        "returnTo": {
             "paymentInformation": "Volver a la información de pago",
             "document": "Volver a documentos"
         }
@@ -115,7 +115,7 @@
         "sharedDocuments": "Documentos Compartidos",
         "remarks": "Observaciones"
     },
-    "supervision":{
+    "supervision": {
         "supervision": "Supervisión"
     },
     "assistance": {
@@ -151,7 +151,8 @@
         "applicationCompleted": "Solicitud Completada",
         "requestRejected": "Solicitud Rechazado",
         "relatedCase": "Caso Relacionado",
-        "AcceptCase": "Aceptar Caso",
+        "administrative": "Administrativo",
+        "acceptCase": "Aceptar Caso",
         "caseAccepted": "Caso Aceptado",
         "caseFinished": "Caso Finalizado",
         "caseRejected": "Caso Rechazado",
@@ -201,6 +202,8 @@
         "total": "Total",
         "add": "Agregar",
         "delete": "Eliminar",
+        "deleted": "Eliminado",
+        "revert": "Revertir",
         "code": "Código",
         "preview": "Vista Previa",
         "ok": "Aceptar",
@@ -281,7 +284,12 @@
         "informationSentCorrectly": "Información Enviada Correctamente",
         "active": "Activo",
         "inactive": "Inactivo",
-        "authorizedgop": "Autorización GOP"
+        "authorizedgop": "Autorización GOP",
+        "selectAll": "Seleccionar todo",
+        "deselectAll": "Deseleccionar todo",
+        "confirm": "Confirmar",
+        "confirmDelete": "¿Está seguro que desea eliminar este registro?",
+        "confirmUndoDelete": "¿Está seguro que desea deshacer la eliminación de este registro?"
     },
     "provider": {
         "provider": "Proveedor",
@@ -369,7 +377,9 @@
         "iAmBeneficiary": "Soy el beneficiario",
         "authorizeThirdParty": "Autorizar a un tercero",
         "uploadSignAuthorization": "Subir autorización firmada",
-        "downloadSignUpload": "Haga clic para descargar su autorización, fírmela y vuelva a subirla."
+        "downloadSignUpload": "Haga clic para descargar su autorización, fírmela y vuelva a subirla.",
+        "bankCertificationRequired":"Por favor, proporcione la certificación bancaria correspondiente para poder procesar el pago.",
+        "selectBankCertificationToContinue":"Por favor, seleccione la certificación bancaria para continuar"
     },
     "notification": {
         "notifications": "Notificación",
@@ -386,7 +396,25 @@
             "alpha_numeric_space": "El campo {field} solo puede contener caracteres alfabéticos, números y espacios",
             "numeric_space": "El campo {field} solo puede contener números, espacios y guiones (-).",
             "zip_code": "Ingresa un código postal válido (Ej. 12345-1234 o 12345)",
-            "max_size":"El tamaño del archivo no puede ser mayor a 30 MB"
+            "max_size": "El tamaño del archivo no puede ser mayor a 30 MB"
+        }
+    },
+    "ocr": {
+        "dropOrClickFiles": "Suelte los archivos aquí o haga clic para cargarlos",
+        "uploadingDocument": "Subiendo documento",
+        "analyzingDocumentOCR": "Analizando documento OCR",
+        "processCompleted": "Proceso completado",
+        "uploadSuccess": "El documento subió exitosamente ID File: {idFile}",
+        "possibleDuplicate": "Posible duplicado Caso: {codeAssist} | ID File: {idFile}",
+        "pages": "Páginas",
+        "preAudit": "Pre-auditoría",
+        "preAuditMismatch": {
+            "assistance": "El código de asistencia en el documento ({code}) no coincide con el seleccionado en la asistencia.",
+            "dateOutOfRangeAfter": "La fecha del documento ({date}) es posterior al final de la validez del voucher.",
+            "dateOutOfRangeBefore": "La fecha del documento ({date}) es anterior al inicio de la validez del voucher.",
+            "dob": "La fecha de nacimiento del paciente en el documento ({dob}) no coincide con la registrada en la asistencia.",
+            "passenger": "El nombre del pasajero en el documento ({passenger}) no coincide con el registrado en la asistencia.",
+            "voucher": "El código del voucher en el documento ({voucher}) no coincide con el seleccionado en la asistencia."
         }
     }
 }

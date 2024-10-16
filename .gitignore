@@ -4,6 +4,7 @@ package-lock.json*
 yarn.lock*
 /dist
 *.ppk
+*ssh*
 
 # local env files
 .env.local

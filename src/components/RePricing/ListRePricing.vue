@@ -20,7 +20,7 @@
                     class="col-md-4 m-form__group-sub"
                     name="codeAssist"
                     :watermark="$t('assistance.caseNumber')"
-                    icon="la flaticon-interface-5"
+                    icon="la fi-rr-ballot"
                     v-on:input="setDataFilter"
                     :value="filters.codeAssist"
                 ></input-from-table>
@@ -28,7 +28,7 @@
                     class="col-md-4 m-form__group-sub"
                     name="codeVoucher"
                     :watermark="$t('voucher.voucher')"
-                    icon="la flaticon-interface-5"
+                    icon="la fi-rr-ballot"
                     v-on:input="setDataFilter"
                     :value="filters.codeVoucher"
                 ></input-from-table>
@@ -53,7 +53,7 @@
                     class="col-md-4 m-form__group-sub"
                     name="passager"
                     :watermark="$t('voucher.name')"
-                    icon="la flaticon-avatar"
+                    icon="fa fa-user"
                     v-on:input="setDataFilter"
                     :value="filters.passager"
                 ></input-from-table>
@@ -61,7 +61,7 @@
                     class="col-md-4 m-form__group-sub"
                     name="provider"
                     :watermark="$t('invoice.invoiceProvider')"
-                    icon="la flaticon-avatar"
+                    icon="fa fa-user"
                     v-on:input="setDataFilter"
                     :value="filters.provider"
                 ></input-from-table>
@@ -71,7 +71,7 @@
                     class="col-md-4 m-form__group-sub"
                     name="amount"
                     :watermark="$t('document.amount')"
-                    icon="la flaticon-coins"
+                    icon="fa fa-coins"
                     v-on:input="setDataFilter"
                     :value="filters.amount"
                 ></input-from-table>

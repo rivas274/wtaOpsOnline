@@ -63,7 +63,7 @@
             "service": "Date of Service",
             "bill": "Bill Date"
         },
-        "watermark":{
+        "watermark": {
             "reference": "# Invoice",
             "description": "# Case # | # Invoice | Pax Name | Date of Service"
         }
@@ -88,7 +88,7 @@
         "paymentProof": "Proof of payment",
         "methodPayment": "Method of payment",
         "paymentInformationUploaded": "Payment information uploaded",
-        "returnTo":{
+        "returnTo": {
             "paymentInformation": "Return to payment information",
             "document": "Return to document"
         }
@@ -115,7 +115,7 @@
         "sharedDocuments": "Shared Documents",
         "remarks": "Remarks"
     },
-    "supervision":{
+    "supervision": {
         "supervision": "Supervision"
     },
     "assistance": {
@@ -151,7 +151,8 @@
         "applicationCompleted": "Application Completed",
         "requestRejected": "Request Rejected",
         "relatedCase": "Related Case",
-        "AcceptCase": "Accept Case",
+        "administrative": "Administrative",
+        "acceptCase": "Accept Case",
         "caseAccepted": "Case Accepted",
         "caseFinished": "Case Finished",
         "caseRejected": "Case Rejected",
@@ -201,6 +202,8 @@
         "total": "Total",
         "add": "Add",
         "delete": "Delete",
+        "deleted": "Deleted",
+        "revert": "Revert",
         "code": "Code",
         "preview": "Preview",
         "ok": "Ok",
@@ -281,7 +284,12 @@
         "informationSentCorrectly": "Information sent correctly",
         "active": "Active",
         "inactive": "Inactive",
-        "authorizedgop": "Authorized GOP"
+        "authorizedgop": "Authorized GOP",
+        "selectAll": "Select all",
+        "deselectAll": "Deselect all",
+        "confirm": "Confirm",
+        "confirmDelete": "Are you sure you want to delete this record?",
+        "confirmUndoDelete": "Are you sure you want to undo the deletion of this record?"
     },
     "provider": {
         "provider": "Provider",
@@ -369,7 +377,9 @@
         "iAmBeneficiary": "I am the beneficiary",
         "authorizeThirdParty": "Authorize a third party",
         "uploadSignAuthorization": "Upload signed authorization",
-        "downloadSignUpload": "Click to download your authorization, sign it, and upload it again."
+        "downloadSignUpload": "Click to download your authorization, sign it, and upload it again.",
+        "bankCertificationRequired":"Please provide the corresponding bank certification to proceed with the payment.",
+        "selectBankCertificationToContinue":"Select the bank certification to continue"
     },
     "notification": {
         "notifications": "Notification",
@@ -380,13 +390,31 @@
     },
     "validations": {
         "attributes": {},
-        "messages":{
+        "messages": {
             "verify_password": "The {field} must contain at least: 1 uppercase letter, 1 lowercase letter, 1 number",
             "recaptcha": "Please complete the captcha",
             "alpha_numeric_space": "The {field} may only contain alphabetic characters, numbers and spaces",
             "numeric_space": "The {field} may only contain numbers, spaces, and hyphens (-).",
             "zip_code": "Enter a valid zip code (Ex. 12345-1234 or 12345)",
-            "max_size":"The {field} may not be greater than 30 MB"
+            "max_size": "The {field} may not be greater than 30 MB"
+        }
+    },
+    "ocr": {
+        "dropOrClickFiles": "Drop files here or click to upload",
+        "uploadingDocument": "Uploading document",
+        "analyzingDocumentOCR": "Analyzing document with OCR",
+        "processCompleted": "Process completed",
+        "uploadSuccess": "The document uploaded successfully. File ID: <b>{idFile}</b>",
+        "possibleDuplicate": "Possible duplicate Case: <b>{codeAssist}</b> | File ID: <b>{idFile}</b>",
+        "pages": "Pages",
+        "preAudit": "Pre-Audit",
+        "preAuditMismatch": {
+            "assistance": "The assistance code in the document ({code}) does not match the selected assistance.",
+            "dateOutOfRangeAfter": "The document date ({date}) is after the end of the voucher validity.",
+            "dateOutOfRangeBefore": "The document date ({date}) is before the start of the voucher validity.",
+            "dob": "The patient's date of birth in the document ({dob}) does not match the one recorded in the assistance.",
+            "passenger": "The passenger's name in the document ({passenger}) does not match the one recorded in the assistance.",
+            "voucher": "The voucher code in the document ({voucher}) does not match the selected voucher in the assistance."
         }
     }
 }

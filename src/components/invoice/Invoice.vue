@@ -1,5 +1,5 @@
 <style scoped src="../Assists/Assist.css"></style>
-<style src="../Element/custom-m-loader.css"></style>
+
 <style scoped>
 iframe {
     min-height: 400px !important;

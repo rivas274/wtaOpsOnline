@@ -17,7 +17,7 @@
         <template slot="filters">
             <div class="row" :class="{'has-danger':error}">
                 <date-range-bt
-                :key="`${selectTableKey}-${$i18n.locale}`"
+                    :key="`date-${selectTableKey}-${$i18n.locale}`"
                     class="col-md-4 form-group"
                     name="date"
                     :watermark="$t('general.selectDateRange')"
@@ -28,7 +28,7 @@
                     class="col-md-4 form-group"
                     name="code"
                     :watermark="$t('assistance.caseNumber')"
-                    icon="la flaticon-lifebuoy"
+                    icon="la fi-rr-life-ring"
                     v-on:input="setDataFilter"
                     :value="filters.code"
                 ></input-from-table>
@@ -36,7 +36,7 @@
                     class="col-md-4 form-group"
                     name="codeVoucher"
                     :watermark="$t('voucher.voucher')"
-                    icon="la flaticon-interface-5"
+                    icon="la fi-rr-ballot"
                     v-on:input="setDataFilter"
                     :value="filters.codeVoucher"
                 ></input-from-table>
@@ -44,7 +44,7 @@
                     class="col-md-4 form-group"
                     name="passager"
                     :watermark="$t('voucher.name')"
-                    icon="la flaticon-avatar"
+                    icon="fa fa-user"
                     v-on:input="setDataFilter"
                     :value="filters.passager"
                 ></input-from-table>
@@ -57,7 +57,7 @@
                     :value="filters.passport"
                 ></input-from-table>
                 <date-single-bt
-                    :key="`${selectTableKey}-${$i18n.locale}`"
+                    :key="`dob-${selectTableKey}-${$i18n.locale}`"
                     class="col-md-4 form-group"
                     name="dob"
                     :watermark="$t('general.dateOfBirth')"
@@ -74,7 +74,7 @@
                     v-on:input="setDataFilter"
                 ></multi-selects>
                 <select-from-table
-                     :key="`${selectTableKey}-${$i18n.locale}`"
+                    :key="`assistStatus-${selectTableKey}-${$i18n.locale}`"
                     class="col-md-4 form-group"
                     name="assistStatus"
                     :watermark="$t('general.status')"
@@ -92,7 +92,7 @@
                     v-on:input="setDataFilter"
                 ></multi-selects>
                 <select-from-table
-                    :key="`${selectTableKey}-${$i18n.locale}`"
+                    :key="`managementStatus-${selectTableKey}-${$i18n.locale}`"
                     v-if="arrManagementStatus.length>1"
                     class="col-md-4 form-group"
                     name="managementStatus"
@@ -175,7 +175,7 @@
             </tr>
         </template>
         <template slot="tbody">
-            <tr v-for="assist in results" :key="assist.codeAssist">
+            <tr v-for="assist in arrAssistance" :key="assist.codeAssist">
                 <td>
                     <span
                         class="openAssist"
@@ -222,17 +222,7 @@
                     <Flag :iso="assist.isoCountry"></Flag>
                 </td>
                 <td class="text-center fa-status" v-if="permission.show_provider">
-                    <span v-if="permission.show_provider">
-                    <span v-if="assist['view'] == 'N' && assist.approved_status==1">{{$t('assistance.requestSent')}}</span>
-                    <span v-if="assist['view'] != 'N' && assist.approved_status==1">{{$t('assistance.openRequest')}}</span>
-                    <span v-if="assist.approved_status==2">{{$t('assistance.applicationProcess')}}</span>
-                    <span v-if="assist.approved_status==3">{{$t('assistance.applicationCompleted')}}</span>
-                    <span v-if="assist.approved_status==4">{{$t('assistance.requestRejected')}}</span>
-                    <span v-if="assist.approved_status==5">{{$t('assistance.relatedCase')}}</span>
-                </span>
-                <span v-else>
-                    <i :class="assist.statusAssist.icon" v-tooltip:top="assist.statusAssist.label || 'Not Found'"></i>
-                </span>
+                    <span>{{$t(assist.managementStatusProvider)}}</span>
                 </td>
                 <td class="text-center fa-status">
                     <a
@@ -299,6 +289,7 @@ export default {
         return {
             permission: permission,
             error: null,
+            selectTableKey: 0,
             filters: {
                 code: "",
                 codeVoucher: "",
@@ -518,6 +509,39 @@ export default {
         this.getAssistManagementStatus();
         this.getAssistType();
         this.getAssistance(0,false);
+    },
+    computed: {
+        arrAssistance: function () {
+            const self = this;
+            return this.results.map(function (assist) {
+                let extra = {};
+                if (self.permission.show_provider) {
+                    let managementStatus = '';
+                    if (assist['assignedToAssistance'] == 'N') {
+                        managementStatus = 'assistance.administrative';
+                    } else if (assist['view'] == 'N' && assist['approved_status'] == 1) {
+                        managementStatus = 'assistance.requestSent';
+                    } else if (assist['view'] != 'N' && assist['approved_status'] == 1) {
+                        managementStatus = 'assistance.openRequest';
+                    } else if (assist['approved_status'] == 2) {
+                        managementStatus = 'assistance.applicationProcess';
+                    } else if (assist['approved_status'] == 3) {
+                        managementStatus = 'assistance.applicationCompleted';
+                    } else if (assist['approved_status'] == 4) {
+                        managementStatus = 'assistance.requestRejected';
+                    } else if (assist['approved_status'] == 5) {
+                        managementStatus = 'assistance.relatedCase';
+                    }
+                    if (managementStatus) {
+                        extra['managementStatusProvider'] = managementStatus;
+                    }
+                }
+                return {
+                    ...assist,
+                    ...extra
+                };
+            });
+        }
     },
     watch: {
         openAsist: function(newVal) {

@@ -8,7 +8,7 @@
     width: max-content;
 }
 </style>
-<style src="../Element/custom-m-loader.css"></style>
+
 <template>
     <div class="tab-content">
         <div class="tab-pane active" id="m_widget2_tab1_content" aria-expanded="true">

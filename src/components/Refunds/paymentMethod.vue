@@ -1,33 +1,79 @@
 <template>
-    <form @submit.prevent="saveDataMethodPayment" class="m-form">
+    <form @submit.prevent="saveDataMethodPayment" class="">
         <div v-if = "configData.thirdPartyAuthorization == 'P'">
-            <div class="m-portlet__body pb-3">
-                <h2>
-                    {{ $t('refunds.beneficiaryOrThirdParty') }}
-                </h2>
-                <div class="row">
-                    <div class="col-md-6 d-flex align-items-start py-3">
-                        <button  class="btn-block btn btn-type-document btn-lg text-wrap text-left align-self-stretch"
-                                @click.prevent="setThirdPartyAuthorization('N')"
-                                type="button">
-                            <h3>
-                                {{ $t('refunds.iAmBeneficiary') }}
-                            </h3>
-                        </button>
+            <div class="m-portlet m-portlet--tab m-form">
+                <div class="m-portlet__body pb-3">
+                    <h2>
+                        {{ $t('refunds.beneficiaryOrThirdParty') }}
+                    </h2>
+                    <div class="row">
+                        <div class="col-md-6 d-flex align-items-start py-3">
+                            <button  class="btn-block btn btn-default btn-type-document btn-lg text-wrap text-left align-self-stretch"
+                                    @click.prevent="setThirdPartyAuthorization('N')"
+                                    type="button">
+                                <h3>
+                                    {{ $t('refunds.iAmBeneficiary') }}
+                                </h3>
+                            </button>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-start py-3">
+                            <button  class="btn-block btn btn-default btn-type-document btn-lg text-wrap text-left align-self-stretch"
+                                    @click.prevent="setThirdPartyAuthorization('Y')"
+                                    type="button">
+                                <h3>
+                                    {{ $t('refunds.authorizeThirdParty') }}
+                                </h3>
+                            </button>
+                        </div>
                     </div>
-                    <div class="col-md-6 d-flex align-items-start py-3">
-                        <button  class="btn-block btn btn-type-document btn-lg text-wrap text-left align-self-stretch"
-                                @click.prevent="setThirdPartyAuthorization('Y')"
-                                type="button">
-                            <h3>
-                                {{ $t('refunds.authorizeThirdParty') }}
-                            </h3>
-                        </button>
+                </div>
+            </div>
+            <div class="m-portlet m-portlet--tab m-form" v-if="configData.bankCertification=='Y'">
+                <div class="m-portlet__body pb-3">
+                    <h3>
+                        {{ $t('refunds.bankCertificationRequired') }}
+                    </h3>
+                    <div class="row">
+                        <div class="col-md-12  d-flex align-items-start py-3">
+                            <div
+                                class="form-group m-form__group btn-block"
+                                :class="{'has-danger': errors.has('bankCertificationFile')}">
+                                <div class="custom-file">
+                                    <input
+                                        type="file"
+                                        name="bankCertificationFile"
+                                        class="custom-file-input"
+                                        id="file"
+                                        accept="application/pdf, image/gif, image/jpg, image/jpeg, image/png"
+                                        v-validate="'required|max_size|ext:jpeg,jpg,pdf,png,gif,bmp'"
+                                        :data-vv-as="$t('document.file')"
+                                        ref="file"
+                                        v-on:change="handleFileUpload"
+                                    />
+                                    <label
+                                        class="custom-file-label"
+                                        :class="['custom-file-'+$root.$i18n.locale]"
+                                        for="bankCertificationFile"
+                                    >
+                                        <span v-if="bankCertificationFile">
+                                            {{ bankCertificationFile.name }}
+                                        </span>
+                                        <span v-else>
+                                            {{$t('document.choose')}}
+                                        </span>
+                                    </label>
+                                </div>
+                                <form-error
+                                    :attribute_name="'bankCertificationFile'"
+                                    :errors_form="errors"
+                                ></form-error>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div v-else>
+        <div class="m-portlet m-portlet--tab m-form" v-else>
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">
@@ -37,7 +83,7 @@
                     </div>
                 </div>
                 <div class="m-portlet__head-tools">
-                    <button class="btn"
+                    <button class="btn btn-default"
                             @click.prevent="configData.thirdPartyAuthorization = 'P'"
                             type="button"
                         >{{ $t('general.back') | upper }}
@@ -235,6 +281,7 @@
 import FormError from "../FormError";
 import selectFrom from "../Tables/filters/selectFromTable.vue";
 import VueRecaptcha from "vue-recaptcha";
+import Swal from "@/custom/sweetalert2";
 
 export default {
     components: {
@@ -253,6 +300,7 @@ export default {
             uploadPercentage: 0,
             authorization: "",
             authorizationFile: null,
+            bankCertificationFile: null,
         };
     },
     mounted() {
@@ -311,11 +359,23 @@ export default {
             });
         },
         setThirdPartyAuthorization: function (value) {
+            //verificamos di es necesario el archivo de certificación bancaria
+            //si no se ha seleccionado el archivo de certificación bancaria
+            if (this.configData.bankCertification == 'Y' &&
+                !this.configData.bankCertificationFile &&
+                !this.bankCertificationFile) {
+                this.errors.add({
+                    field: 'bankCertificationFile',
+                    msg: this.$t('refunds.selectBankCertificationToContinue')
+                });
+                return;
+            }
             this.configData.thirdPartyAuthorization = value;
             this.authorization = value;
         },
         handleFileUpload: function (event) {
-            this.authorizationFile = event.target.files[0];
+            const name = event.target.name;
+            this[name] = event.target.files[0];
         },
         setFields(arrData) {
             for (let key in arrData) {
@@ -363,6 +423,10 @@ export default {
                         }
                     }
 
+                    if (this.configData.bankCertification == 'Y' && this.bankCertificationFile) {
+                        formData.append("bankCertificationFile", this.bankCertificationFile);
+                    }
+
                     this.axios
                         .post(endPoint,
                             formData,
@@ -399,10 +463,10 @@ export default {
                                 const jsonResponse = JSON.parse(text);
 
                                 if ('STATUS' in jsonResponse && jsonResponse.STATUS == "OK") {
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: this.$t("general.sent"),
                                         text: this.$t("general.informationSentCorrectly"),
-                                        type: "success",
+                                        icon: "success",
                                         confirmButtonText: this.$t("general.ok"),
                                     }).then(() => {
                                         this.$emit("update:status", "L");

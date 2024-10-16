@@ -24,7 +24,7 @@ iframe {
                     class="col-md-4 m-form__group-sub"
                     name="code"
                     :watermark="$t('assistanceBills.referenceDescription')"
-                    icon="flaticon-interface-5"
+                    icon="fi-rr-ballot"
                     v-on:input="setDataFilter"
                     :value="filters.code"
                 ></input-from-table>

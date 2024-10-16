@@ -43,7 +43,7 @@
 </style>
 <template>
     <div class="text-center progress-container">
-        <ul class="step mb-3">
+        <ul class="step my-3">
             <li v-for="(st,stkey) in statusShow" :key="stkey">
                 <span class="progress-bar" :class="st.color" v-if="stkey>0"></span>
                 <figure v-tooltip:top="st.label" class="m--img-rounded" :class="st.color">

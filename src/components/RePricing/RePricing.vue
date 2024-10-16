@@ -1,5 +1,5 @@
 <style scoped src="../Assists/Assist.css"></style>
-<style src="../Element/custom-m-loader.css"></style>
+
 <template>
     <div class="content-tabs-left">
         <ul class="nav nav-tabs tabs-left">
@@ -267,7 +267,7 @@
                                         />
                                         <span class="m-input-icon__icon m-input-icon__icon--left">
                                             <span>
-                                                <i class="la la-calendar-check-o"></i>
+                                                <i class="fa fa-calendar-check"></i>
                                             </span>
                                         </span>
                                     </div>
@@ -600,6 +600,8 @@ import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import AssistAccordionDetaill from "../Assists/AssistAccordionDetaill.vue";
 import formEob from "./formEob.vue";
 import uploadEob from "./uploadEob.vue";
+import Swal from "@/custom/sweetalert2";
+
 export default {
     props: ["re-pricing"],
     components: {
@@ -782,9 +784,9 @@ export default {
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
                                     this.$emit("completeRepricing", response.data.RESPONSE);
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: this.$t("general.sent"),
-                                        type: "success",
+                                        icon: "success",
                                         showCancelButton: true,
                                         confirmButtonText: this.$t("general.ok"),
                                         cancelButtonText: this.$t("general.no")
@@ -798,10 +800,10 @@ export default {
                                             });
                                         }
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: response.data.MESSAGE||"Error Form",
                                         confirmButtonText: this.$t("general.ok"),
-                                        type: "error"
+                                        icon: "error"
                                     });
                                 }
                                 this.uploadPercentage = 0;
@@ -847,10 +849,10 @@ export default {
                         this.disableForm = false;
                         if (response.data.STATUS == "OK") {
                             this.$emit("addFilesRepricing", response.data.RESPONSE);
-                            window.Swal.fire({
+                            Swal.fire({
                                 title: this.$t("general.sent"),
                                 text: this.$t("document.uploaded"),
-                                type: "success",
+                                icon: "success",
                                 showCancelButton: true,
                                 confirmButtonText: this.$t("general.ok"),
                                 cancelButtonText: this.$t("general.no")
@@ -864,10 +866,10 @@ export default {
                                     });
                                 }
                             }
-                            window.Swal.fire({
+                            Swal.fire({
                                 title: response.data.MESSAGE||"Error Form",
                                 confirmButtonText: this.$t("general.ok"),
-                                type: "error"
+                                icon: "error"
                             });
                         }
                         this.uploadPercentage = 0;

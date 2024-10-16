@@ -10,7 +10,6 @@
                                     <div class="d-flex justify-content-center align-items-center vh-100" v-if="!('idAssist' in results)">
                                         <div>
                                             <div class="m-loader m-loader--xl m-loader--metal mb-5">
-
                                             </div>
                                             <h5>
                                                 {{$t('general.loading')}}
@@ -36,7 +35,7 @@
                                                     <ul class="m-nav m-nav--inline">
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link" v-tooltip:top="$t('general.client')">
-                                                                <i class="m-nav__link-icon flaticon-suitcase"></i>
+                                                                <i class="m-nav__link-icon fa fa-building"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.clientName }}</span>
                                                             </a>
@@ -44,7 +43,7 @@
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('assistance.code')">
-                                                                <i class="m-nav__link-icon flaticon-shapes"></i>
+                                                                <i class="m-nav__link-icon la fi-rr-ballot"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.codeAssist }}</span>
                                                             </a>
@@ -53,14 +52,14 @@
                                                             v-if="results.codeAssist != results.codigo">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('voucher.voucher')">
-                                                                <i class="m-nav__link-icon flaticon-interface-5"></i>
+                                                                <i class="m-nav__link-icon fi-rr-ballot"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.codigo }}</span>
                                                             </a>
                                                         </li>
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link" v-tooltip:top="$t('voucher.name')">
-                                                                <i class="m-nav__link-icon flaticon-avatar"></i>
+                                                                <i class="m-nav__link-icon fa fa-user"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.firstName + ' ' + results.lastName }}</span>
                                                             </a>
@@ -68,7 +67,7 @@
                                                         <li class="m-nav__item" v-if="results.registeredDate">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('assistance.date.case')">
-                                                                <i class="m-nav__link-icon flaticon-calendar-1"></i>
+                                                                <i class="m-nav__link-icon fa fa-calendar-check"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.registeredDate.date }}</span>
                                                             </a>
@@ -76,7 +75,7 @@
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('assistance.date.birth')">
-                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                <i class="m-nav__link-icon fa fa-calendar-check"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.birthDate }}</span>
                                                             </a>
@@ -84,7 +83,7 @@
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('assistance.type')">
-                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                <i class="m-nav__link-icon fi-rr-life-ring"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.descCaseType }}</span>
                                                             </a>
@@ -92,7 +91,7 @@
                                                         <li class="m-nav__item">
                                                             <a class="m-nav__link"
                                                                 v-tooltip:top="$t('assistance.typeAssistance')">
-                                                                <i class="m-nav__link-icon flaticon-lifebuoy"></i>
+                                                                <i class="m-nav__link-icon fi-rr-life-ring"></i>
                                                                 <span
                                                                     class="m-nav__link-text text-left">{{ results.descAssistanceType }}</span>
                                                             </a>
@@ -165,8 +164,8 @@
                                             <form-refund v-show="formShow == 'refund'" :id-assist="results.idAssist"
                                                 v-on:complete-documents="getAssistance" :default-data="defaultData">
                                             </form-refund>
-                                            <payment-method v-if="formShow == 'paymentMethod'"
-                                                class="m-portlet m-portlet--tab" :id-assist="results.idAssist"
+                                            <payment-method v-if="formShow == 'paymentMethod'" 
+                                                :id-assist="results.idAssist"
                                                 :status.sync="results.refundAdm.method_payment.status.code">
                                             </payment-method>
                                         </div>
@@ -268,48 +267,3 @@ export default {
     }
 };
 </script>
-
-<style>
-.progress-refund {
-    height: 3rem;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.progress-refund .progressbar {
-    height: 3rem;
-}
-
-.btn-type-document {
-    min-height: 8rem;
-}
-
-.title-refund-dashboard {
-    font-size: 2.5rem;
-    font-weight: bold;
-}
-
-.logo-refund-dashboard {
-    max-width: 100%;
-    height: auto;
-}
-
-@media only screen and (max-width: 1024px) {
-    .title-refund-dashboard {
-        font-size: 2rem;
-    }
-}
-
-@media only screen and (max-width: 427px) {
-    .title-refund-dashboard {
-        font-size: 1.8rem;
-    }
-    .m-portlet__foot .m-form__actions .btn-lg{
-        width: 100%;
-        margin-top: 5px;
-    }
-}
-</style>
-
-<style src="../Element/custom-m-loader.css"></style>

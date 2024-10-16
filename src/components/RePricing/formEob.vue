@@ -422,6 +422,7 @@ import customImg from "../Element/custom-img";
 import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
+import Swal from "@/custom/sweetalert2";
 
 export default {
     props: ['rePricingId'],
@@ -545,10 +546,10 @@ export default {
                                             });
                                         }
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: response.data.MESSAGE || "Error Form",
                                         confirmButtonText: this.$t("general.ok"),
-                                        type: "error"
+                                        icon: "error"
                                     });
                                 }
                             });
@@ -566,19 +567,19 @@ export default {
                     userID: this.$session.get("idUser")
                 }).then(response => {
                     if (response.data.STATUS == 'OK') {
-                        window.Swal.fire({
+                        Swal.fire({
                             title: "Upload",
                             text: response.data.MESSAGE,
-                            type: "success",
+                            icon: "success",
                             showCancelButton: true,
                             confirmButtonText: this.$t("general.ok"),
                             cancelButtonText: this.$t("general.no")
                         });
                     } else if (response.data.STATUS == 'ERROR') {
-                        window.Swal.fire({
+                        Swal.fire({
                             title: "Upload",
                             text: response.data.MESSAGE,
-                            type: "danger",
+                            icon: "error",
                             showCancelButton: true,
                             confirmButtonText: this.$t("general.ok"),
                             cancelButtonText: this.$t("general.no")

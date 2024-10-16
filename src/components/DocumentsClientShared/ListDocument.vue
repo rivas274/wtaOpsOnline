@@ -15,7 +15,7 @@
                     class="col-md-4 form-group"
                     name="description"
                     :watermark="$t('document.description')"
-                    icon="la flaticon-interface-5"
+                    icon="la fi-rr-ballot"
                     v-on:input="setDataFilter"
                     :value="filters.description"
                 ></input-from-table>

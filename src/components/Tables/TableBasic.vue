@@ -7,10 +7,10 @@
     padding: 1px;
 }
 </style>
-<style src="../Element/custom-m-loader.css"></style>
+
 <template>
     <div :class="{'m-loader m-loader--metal m-loader--div':loader}">
-        <div class="m-form m-form--label-align-right m--margin-top-10 m--margin-bottom-20">
+        <div class="m-form m-form--label-align-right">
             <div class="row align-items-center">
                 <div class="col-md-12 order-2 order-xl-1">
                     <slot name="filters"></slot>
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="m-section__content table-responsive">
-            <table class="table table-striped table-bordered table-hover">
+            <table class="table table-striped table-bordered table-hover mt-3">
                 <thead>
                     <slot name="thead"></slot>
                 </thead>

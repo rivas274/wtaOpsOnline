@@ -27,8 +27,8 @@
             :aria-labelledby="'m_accordion_item_1_head_'+id"
             data-parent=".m-accordion"
         >
-            <div class="m-accordion__item-content">
-                <div class="m-portlet">
+            <div class="m-accordion__item-content p-2">
+                <div class="m-portlet mb-0">
                     <div class="m-portlet__body m-portlet__body--no-padding">
                         <div class="row m-row--no-padding m-row--col-separator-xl">
                             <slot name="body"></slot>

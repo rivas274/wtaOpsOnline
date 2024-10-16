@@ -6,7 +6,7 @@
         m-dropdown-toggle="click"
     >
         <a href="#" class="m-nav__link m-dropdown__toggle">
-            <h5 class="m-topbar__userpic pr-3">
+            <h5 class="m-topbar__userpic pr-3 m--hidden-mobile">
                 <div>{{fullName}}</div>
                 <small v-if="detaillUser">{{detaillUser}}</small>
             </h5>
@@ -46,17 +46,17 @@
                     <div class="m-dropdown__content">
                         <ul class="m-nav m-nav--skin-light">
                             <li class="m-nav__separator m-nav__separator--fit"></li>
-                            <li class="m-nav__item">
-                                <a
-                                    @click.prevent="logOut"
-                                    class="btn m-btn--pill btn-outline-primary pull-right m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
-                                    :class="{'m-login__btn--primary m-loader m-loader--right': spin}"
-                                >{{$t('general.logout')}}</a>
+                            <li class="m-nav__item d-flex justify-content-between">
                                 <router-link
                                     :to="{ path: '/MyAcount'}"
                                     replace
                                     class="btn m-btn--pill btn-outline-success m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
                                 >{{$t('general.account')}}</router-link>
+                                <a
+                                    @click.prevent="logOut"
+                                    class="btn m-btn--pill btn-outline-primary pull-right m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
+                                    :class="{'m-login__btn--primary m-loader m-loader--right': spin}"
+                                >{{$t('general.logout')}}</a>
                             </li>
                         </ul>
                     </div>

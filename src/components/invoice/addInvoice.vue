@@ -64,7 +64,7 @@
                             class="form-control m-input"
                             :placeholder="$t('document.amount')"
                             :data-vv-as="$t('document.amount')"
-                            v-validate="'required|min:1|max:10|decimal:2'"
+                            v-validate="'required|min:1|max:13|decimal:2'"
                             v-model.lazy="inputsData.amount"
                             ref="amount"
                             @input="sanitizeAmount"
@@ -194,6 +194,8 @@ import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import currency from "../Labels/currency.json";
 import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
+import Swal from "@/custom/sweetalert2";
+
 export default {
     components: {
         FormError,
@@ -328,10 +330,10 @@ export default {
                                     this.file = false;
                                     this.$refs.file.value = null;
                                     this.$emit("addInvoice", response.data.RESPONSE);
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: this.$t("document.send"),
                                         text: this.$t("document.uploaded"),
-                                        type: "success",
+                                        icon: "success",
                                         showCancelButton: true,
                                         confirmButtonText: this.$t("general.ok"),
                                         cancelButtonText: this.$t("general.no")
@@ -345,10 +347,10 @@ export default {
                                             });
                                         }
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: response.data.MESSAGE||"Error Form",
                                         confirmButtonText: this.$t("general.ok"),
-                                        type: "error"
+                                        icon: "error"
                                     });
                                 }
                                 this.uploadPercentage = 0;

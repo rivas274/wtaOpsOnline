@@ -1,8 +1,10 @@
+import $ from '@/custom/jquery-custom';
+
 export default {
     install(Vue) {
         Vue.directive('tooltip', function (el, binding) {
             if (binding.value) {
-                window.$(el).attr('title', binding.value).tooltip({
+                $(el).attr('title', binding.value).tooltip({
                     title: binding.value,
                     placement: (binding.arg || 'top'),
                     trigger: 'hover',

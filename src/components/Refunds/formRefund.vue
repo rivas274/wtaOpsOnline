@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                                 <div class="m-portlet__head-tools">
-                                    <button class="btn"
+                                    <button class="btn btn-default"
                                             @click.prevent="back()"
                                             type="button"
                                         >{{ $t('general.back') | upper }}
@@ -62,11 +62,11 @@
                                 </div>
                             </div>
                             <div class="m-portlet__body">
-                                <div class="form-group m-form__group pt-0 pb-2" v-if="extraInsurance">
+                                <div class="form-group m-form__group pt-0 pb-2" v-if="extraToFill">
                                     <h5>{{ $t('refunds.downloadAndFill') }}</h5>
                                 </div>
-                                <div class="form-group m-form__group py-1" v-if="extraInsurance">
-                                    <a :href="extraInsurance.file" download target="_blank">
+                                <div class="form-group m-form__group py-1" v-if="extraToFill">
+                                    <a :href="extraToFill.file" download target="_blank">
                                         <div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show m-0" role="alert">
                                             <div class="m-alert__icon py-3 px-3">
                                                 <i class="fa fa-2x fa-cloud-download-alt"></i>
@@ -74,7 +74,7 @@
                                             </div>
                                             <div class="m-alert__text py-3">
                                                 <label class="col-form-label">{{ $t('general.important') }}</label>
-                                                {{ extraInsurance.description }}
+                                                {{ extraToFill.description }}
                                             </div>
                                         </div>
                                     </a>
@@ -139,9 +139,9 @@
                                                 name="amount"
                                                 class="form-control m-input"
                                                 :placeholder="$t('document.amount')"
-                                                v-validate="'required|min:1|max:10|decimal:2'"
+                                                v-validate="'required|min:1|max:13|decimal:2'"
                                                 :data-vv-as="$t('document.amount')"
-                                                v-model.lazy="inputsData.amount"
+                                                v-model="inputsData.amount"
                                                 ref="amount"
                                                 @input="sanitizeAmount"
                                                 @paste="handlePaste"
@@ -242,7 +242,7 @@
                                     class="form-group m-form__group"
                                     :class="{'has-danger': errors.has('file')}"
                                 >
-                                    <h5 v-if="extraInsurance">{{ $t('refunds.uploadCompletedDocument') }}</h5>
+                                    <h5 v-if="extraToFill">{{ $t('refunds.uploadCompletedDocument') }}</h5>
                                     <label class="col-form-label" v-else>{{ $t('document.file') }}</label>
                                     <div class="custom-file">
                                         <input
@@ -357,7 +357,6 @@ input[type=number] {
 }
 </style>
 <script>
-
 import FormError from "../FormError";
 import selectFrom from "../Tables/filters/selectFromTable.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
@@ -366,6 +365,8 @@ import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import VueRecaptcha from "vue-recaptcha";
 import groupBtnRefund from './groupBtnRefund.vue';
 import groupDocumentType from './groupDocumentType.vue';
+import sanitize from '../../custom/sanitize-data';
+import Swal from "@/custom/sweetalert2";
 
 export default {
     components: {
@@ -423,49 +424,11 @@ export default {
         };
     },
     methods: {
-        sanitizeAmount(event) {
-            // Aquí puedes validar y ajustar el valor si es necesario
-            let value = event.target.value;
-
-            // Por ejemplo, asegurarte de que no haya más de dos decimales
-            if (value && !/^\d+(\.\d{1,2})?$/.test(value)) {
-                value = parseFloat(value).toFixed(2);
-                event.target.value = value;
-                this.inputsData.amount = value;
-            }
+        sanitizeAmount() {
+            this.inputsData.amount = sanitize.sanitizeAmount(this.inputsData.amount);
         },
         handlePaste(event) {
-            event.preventDefault(); // Previene el comportamiento por defecto del pegado
-
-            // Obtiene el valor del portapapeles
-            let pasteValue = (event.clipboardData || window.clipboardData).getData('text');
-
-            // Normaliza el valor pegado
-            const normalizedValue = this.normalizeAmount(pasteValue);
-
-            // Inserta el valor normalizado en el campo de entrada y en el modelo
-            event.target.value = normalizedValue;
-            this.inputsData.amount = normalizedValue;
-        },
-        normalizeAmount(value) {
-            // Elimina espacios y caracteres no numéricos excepto los que se usan para la separación de decimales y miles
-            value = value.replace(/[^\d.,]/g, '');
-
-            const commaCount = value.indexOf(',');
-            const dotCount = value.indexOf('.');
-
-            // Si hay más comas que puntos, asumimos que la coma es el separador decimal
-            if (commaCount > dotCount) {
-                value = value.replace(/\./g, ''); // Elimina los puntos
-                value = value.replace(/,/g, '.'); // Reemplaza comas con puntos
-            } else {
-                value = value.replace(/,/g, ''); // Elimina las comas
-            }
-
-            // Convierte el valor a float y luego a formato con dos decimales
-            const floatValue = parseFloat(value) || 0;
-
-            return floatValue.toFixed(2); // Formatea a dos decimales
+            this.inputsData.amount = sanitize.handlePaste(event, sanitize.normalizeAmount);
         },
         getDocumentsType: function () {
             this.documentsType = [];
@@ -521,10 +484,10 @@ export default {
                                         this.idFiles.push(response.data.ID);
                                     }
                                     /* this.$refs.recaptcha.reset(); */
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: null,
                                         text: this.$t("document.uploaded"),
-                                        type: "success",
+                                        icon: "success",
                                         showCancelButton: true,
                                         confirmButtonText: this.$t("document.uploadAnother"),
                                         cancelButtonText: this.$t("general.back")
@@ -539,7 +502,7 @@ export default {
                                         this.back();
                                         this.getDocumentsType();
                                         if (
-                                            result.dismiss === window.Swal.DismissReason.cancel
+                                            result.dismiss === Swal.DismissReason.cancel
                                         ) {
                                             if (this.idFiles.length > 0) {
                                                 this.axios
@@ -562,14 +525,14 @@ export default {
                                             listErrors.push(response.data.ERRORS[prop]);
                                         }
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: response.data.MESSAGE,
                                         html: (listErrors.length>0?
                                             '<ol><li class="text-left">' +
                                             listErrors.join('</li><li class="class="text-left">') +
                                             '</li><ol>':''),
                                         confirmButtonText: this.$t("general.ok"),
-                                        type: "error"
+                                        icon: "error"
                                     });
                                 }
                                 this.uploadPercentage = 0;
@@ -632,11 +595,11 @@ export default {
                 return m;
             }, []);
         },
-        extraInsurance: function () {
-            if ('insurance' in this.documentsTypeSelected) {
+        extraToFill: function () {
+            if ('toFill' in this.documentsTypeSelected) {
                 return {
-                    description: this.documentsTypeSelected.insurance['description'][this.$root.$i18n.locale],
-                    file: this.documentsTypeSelected.insurance.file,
+                    description: this.documentsTypeSelected.toFill['description'][this.$root.$i18n.locale],
+                    file: this.documentsTypeSelected.toFill.file,
                     name: this.documentsTypeSelected.name
                 }
             }
@@ -691,7 +654,7 @@ export default {
             let self = this,
             arrReturn = [],
             group = this.documentsType.reduce(function (m, e) {
-                let provideOrDownload = 'insurance' in e ? 'download' : 'provide';
+                let provideOrDownload = 'toFill' in e ? 'download' : 'provide';
                 if (!(provideOrDownload in m)) {
                     m[provideOrDownload] = {
                         id:provideOrDownload,
@@ -715,7 +678,7 @@ export default {
         documentsTypeVisible: function () {
             let self = this;
             return this.documentsType.reduce(function (m, e) {
-                e['group'] = 'insurance' in e ? 'download' : 'provide';
+                e['group'] = 'toFill' in e ? 'download' : 'provide';
                 if (e['uploaded']) {
                     e['icon'] = 'fa fa-check text-success';
                 }

@@ -94,6 +94,8 @@
 </template>
 
 <script>
+import Swal from "@/custom/sweetalert2";
+
 export default {
     props: ['rePricingDetaill'],
     data() {
@@ -146,10 +148,10 @@ export default {
                         this.disableForm = false;
                         if (response.data.STATUS == "OK") {
                             this.$emit("addFilesRepricing", response.data.RESPONSE);
-                            window.Swal.fire({
+                            Swal.fire({
                                 title: this.$t("general.sent"),
                                 text: this.$t("document.uploaded"),
-                                type: "success",
+                                icon: "success",
                                 showCancelButton: true,
                                 confirmButtonText: this.$t("general.ok"),
                                 cancelButtonText: this.$t("general.no")
@@ -163,10 +165,10 @@ export default {
                                     });
                                 }
                             }
-                            window.Swal.fire({
+                            Swal.fire({
                                 title: response.data.MESSAGE||"Error Form",
                                 confirmButtonText: this.$t("general.ok"),
-                                type: "error"
+                                icon: "error"
                             });
                         }
                         this.uploadPercentage = 0;

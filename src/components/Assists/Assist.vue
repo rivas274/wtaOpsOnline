@@ -4,9 +4,9 @@
         <div class="col-12 text-right mb-3">
             <button class="btn btn-warning font-white" @click="refresh"><i class="fa fa-redo mr-1"></i>{{$t('general.refresh')}}</button>
         </div>
-        <div class="content-tabs-left">
-            <ul class="nav nav-tabs tabs-left">
-                <li :class="{active:tabShow=='General'}" v-tooltip:top="$t('general.general')">
+        <div class="content-tabs-left col-12">
+            <ul class="nav nav-tabs tabs-left d-flex-md bd-highlight">
+                <li class="flex-fill bd-highlight" :class="{active:tabShow=='General'}" v-tooltip:top="$t('general.general')">
                     <a
                         class="nav-link"
                         :class="{'m--font-success':tabShow=='General'}"
@@ -16,7 +16,7 @@
                         <span>{{$t('general.general')}}</span>
                     </a>
                 </li>
-                <li v-if="permission.bills" :class="{active:tabShow=='Bills'}" v-tooltip:top="$t('menu.invoice')">
+                <li class="flex-fill bd-highlight" v-if="permission.bills" :class="{active:tabShow=='Bills'}" v-tooltip:top="$t('menu.invoice')">
                     <a
                         class="nav-link"
                         :class="{'m--font-success':tabShow=='Bills'}"
@@ -26,7 +26,7 @@
                         <span>{{$t('menu.invoice')}}</span>
                     </a>
                 </li>
-                <li v-if="permission.reimbursement" :class="{active:tabShow=='reimbursement'}" v-tooltip:top="$t('reimbursement.reimbursement')">
+                <li class="flex-fill bd-highlight" v-if="permission.reimbursement" :class="{active:tabShow=='reimbursement'}" v-tooltip:top="$t('reimbursement.reimbursement')">
                     <a
                         class="nav-link"
                         :class="{'m--font-success':tabShow=='reimbursement'}"
@@ -36,7 +36,7 @@
                         <span>{{$t('reimbursement.reimbursement')}}</span>
                     </a>
                 </li>
-                <li v-if="permission.add_invoice" :class="{active:tabShow=='add_invoice'}" v-tooltip:top="$t('menu.documents')">
+                <li class="flex-fill bd-highlight" v-if="permission.add_invoice" :class="{active:tabShow=='add_invoice'}" v-tooltip:top="$t('menu.documents')">
                     <a
                         class="nav-link"
                         :class="{'m--font-success':tabShow=='add_invoice'}"
@@ -46,7 +46,7 @@
                         <span>{{$t('document.add')}}</span>
                     </a>
                 </li>
-                <li v-if="permission.documents" :class="{active:tabShow=='documents'}" v-tooltip:top="$t('menu.documents')">
+                <li class="flex-fill bd-highlight" v-if="permission.documents" :class="{active:tabShow=='documents'}" v-tooltip:top="$t('menu.documents')">
                     <a
                         class="nav-link"
                         :class="{'m--font-success':tabShow=='documents'}"
@@ -57,7 +57,7 @@
                     </a>
                 </li>
                
-                <li v-if="permission.notes" :class="{active:tabShow=='Note'}" v-tooltip:top="$t('assistance.notes')">
+                <li class="flex-fill bd-highlight" v-if="permission.notes" :class="{active:tabShow=='Note'}" v-tooltip:top="$t('assistance.notes')">
                     <a
                         class="nav-link"
                         :class="{'m--font-success':tabShow=='Note'}"
@@ -67,7 +67,7 @@
                         <span>{{$t('assistance.notes')}}</span>
                     </a>
                 </li>
-                <li v-if="permission.shared_notes" :class="{active:tabShow=='shared_notes'}" v-tooltip:top="$t('assistance.reimbursementNotes')">
+                <li class="flex-fill bd-highlight" v-if="permission.shared_notes" :class="{active:tabShow=='shared_notes'}" v-tooltip:top="$t('assistance.reimbursementNotes')">
                     <a
                         class="nav-link"
                         :class="{'m--font-success':tabShow == 'shared_notes'}"
@@ -78,7 +78,7 @@
                         <span v-else>{{$t('assistance.notes')}}</span>
                     </a>
                 </li>
-                <li v-if="permission.notes_provider" :class="{active:tabShow=='notes_provider'}" v-tooltip:top="$t('assistance.notes_provider')">
+                <li class="flex-fill bd-highlight" v-if="permission.notes_provider" :class="{active:tabShow=='notes_provider'}" v-tooltip:top="$t('assistance.notes_provider')">
                     <a
                         class="nav-link"
                         :class="{'m--font-success':tabShow=='notes_provider'}"
@@ -88,7 +88,7 @@
                         <span>{{$t('assistance.notes_provider')}}</span>
                     </a>
                 </li>
-                <li v-if="permission.medical_notes" :class="{active:tabShow=='medical_notes'}" v-tooltip:top="$t('assistance.medicalNotes')">
+                <li class="flex-fill bd-highlight" v-if="permission.medical_notes" :class="{active:tabShow=='medical_notes'}" v-tooltip:top="$t('assistance.medicalNotes')">
                     <a
                         class="nav-link"
                         :class="{'m--font-success':tabShow=='medical_notes'}"
@@ -98,7 +98,7 @@
                         <span>{{$t('assistance.medicalNotes')}}</span>
                     </a>
                 </li>
-                <li v-if="permission.quality_notes" :class="{active:tabShow=='quality_notes'}" v-tooltip:top="$t('assistance.medicalNotes')">
+                <li class="flex-fill bd-highlight" v-if="permission.quality_notes" :class="{active:tabShow=='quality_notes'}" v-tooltip:top="$t('assistance.medicalNotes')">
                     <a
                         class="nav-link"
                         :class="{'m--font-success':tabShow=='quality_notes'}"
@@ -108,7 +108,7 @@
                         <span>{{$t('assistance.qualityNotes')}}</span>
                     </a>
                 </li>
-                <li v-if="permission.refund_notes" :class="{active:tabShow=='refund_notes'}" v-tooltip:top="$t('assistance.reimbursementNotes')">
+                <li class="flex-fill bd-highlight" v-if="permission.refund_notes" :class="{active:tabShow=='refund_notes'}" v-tooltip:top="$t('assistance.reimbursementNotes')">
                     <a
                         class="nav-link"
                         :class="{'m--font-success':tabShow=='refund_notes'}"
@@ -147,7 +147,7 @@
                     </a>
                 </li>
             </ul>
-            <div class="tab-content container-fluid" v-if="assistBase">
+            <div class="tab-content mx-md-2" v-if="assistBase">
                 <div class="tab-pane" :class="{active:tabShow=='General'}">
                     <AssistDetail :id-assist="assistBase.idAssist"></AssistDetail>
                 </div>
@@ -161,10 +161,7 @@
                     <list-files :id-assist="assistBase.idAssist"></list-files>
                 </div>
                 <div v-if="permission.documents" class="tab-pane" :class="{active:tabShow=='add_invoice'}">
-                    <add-invoice v-on:addInvoice="[]" 
-                                :id-assist="assistBase.idAssist"
-                                :detaill="assistBase">
-                    </add-invoice>
+                    <ocr-provider :id-assist="assistBase.idAssist"></ocr-provider>
                 </div>
                 <div v-if="permission.notes" class="tab-pane" :class="{active:tabShow=='Note'}">
                     <list-note :id-assist="assistBase.idAssist" :type="'notes'"></list-note>
@@ -206,9 +203,9 @@ import Providers from "../Provider/ListProviders.vue";
 import ListNote from "../Note/ListNote.vue";
 import TimeLine from "../timeline/TimeLine.vue";
 import AssistDetail from "./AssistDetail.vue";
-import addInvoice from "./addInvoiceProvider.vue";
+import ocrProvider from "./ocrProvider.vue";
 export default {
-    components: { Providers, ListBill, AssistDetail, ListNote, TimeLine, ListFiles,ListReimbursement, addInvoice},
+    components: { Providers, ListBill, AssistDetail, ListNote, TimeLine, ListFiles,ListReimbursement, ocrProvider},
     props: ["assist"],
     data() {
         return {

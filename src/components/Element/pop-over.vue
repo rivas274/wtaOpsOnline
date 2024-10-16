@@ -20,16 +20,18 @@ a.toggle-popover {
 </template>
 
 <script>
+import $ from '@/custom/jquery-custom';
+
 export default {
     props: ["title", "placement"],
     mounted() {
-        window.$(this.$el).popover({
+        $(this.$el).popover({
             html: true,
             title: function() {
-                return window.$(this).attr("title");
+                return $(this).attr("title");
             },
             content: function() {
-                return window.$(this)
+                return $(this)
                     .find(".popover-content")
                     .html();
             }

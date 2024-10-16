@@ -46,7 +46,7 @@
                                                                 v-tooltip:top="$t('general.client')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-suitcase"
+                                                                    class="m-nav__link-icon fa fa-building"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
@@ -59,7 +59,7 @@
                                                                 v-tooltip:top="$t('assistance.code')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-shapes"
+                                                                    class="m-nav__link-icon la fi-rr-ballot"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
@@ -75,7 +75,7 @@
                                                                 v-tooltip:top="$t('voucher.voucher')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-interface-5"
+                                                                    class="m-nav__link-icon fi-rr-ballot"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
@@ -88,7 +88,7 @@
                                                                 v-tooltip:top="$t('voucher.name')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-avatar"
+                                                                    class="m-nav__link-icon fa fa-user"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
@@ -104,7 +104,7 @@
                                                                 v-tooltip:top="$t('assistance.date.case')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-calendar-1"
+                                                                    class="m-nav__link-icon fa fa-calendar-check"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
@@ -117,7 +117,7 @@
                                                                 v-tooltip:top="$t('assistance.date.birth')"
                                                             >
                                                                 <i
-                                                                    class="m-nav__link-icon flaticon-lifebuoy"
+                                                                    class="m-nav__link-icon fi-rr-life-ring"
                                                                 ></i>
                                                                 <span
                                                                     class="m-nav__link-text"
@@ -192,7 +192,7 @@
                                                                                 name="amount"
                                                                                 class="form-control m-input"
                                                                                 :placeholder="$t('document.amount')"
-                                                                                v-validate="'required|min:1|max:10|decimal:2'"
+                                                                                v-validate="'required|min:1|max:13|decimal:2'"
                                                                                 v-model.lazy="inputsData.amount"
                                                                                 ref="amount"
                                                                             />
@@ -437,6 +437,8 @@ import currency from "../Labels/currency.json";
 import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
 import VueRecaptcha from "vue-recaptcha";
+import Swal from "@/custom/sweetalert2";
+
 export default {
     components: {
         FormError,
@@ -551,10 +553,10 @@ export default {
                                 this.disableForm = false;
                                 if (response.data.STATUS == "OK") {
                                     //this.$refs.recaptcha.reset();
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: this.$t("document.send"),
                                         text: this.$t("document.uploaded"),
-                                        type: "success",
+                                        icon: "success",
                                         showCancelButton: true,
                                         confirmButtonText: this.$t("document.uploadAnother"),
                                         cancelButtonText: this.$t("general.no")
@@ -567,14 +569,14 @@ export default {
                                             this.file = false;
                                             this.$refs.file.value = null;
                                         } else if (
-                                            result.dismiss === window.Swal.DismissReason.cancel
+                                            result.dismiss === Swal.DismissReason.cancel
                                         ) {
                                             window.close();
-                                            window.Swal.fire({
+                                            Swal.fire({
                                                 title: this.$t("windows.close"),
                                                 text: this.$t("windows.pleaseClose"),
                                                 confirmButtonText: this.$t("general.ok"),
-                                                type: "error"
+                                                icon: "error"
                                             });
                                         }
                                     });
@@ -587,11 +589,11 @@ export default {
                                             });
                                         }
                                     }
-                                    window.Swal.fire({
+                                    Swal.fire({
                                         title: "Error",
                                         text: response.data.MESSAGE,
                                         confirmButtonText: this.$t("general.ok"),
-                                        type: "error",
+                                        icon: "error",
                                     });
                                 }
                                 this.uploadPercentage = 0;

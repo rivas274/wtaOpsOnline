@@ -24,7 +24,7 @@ iframe {
                     class="col-md-4 m-form__group-sub"
                     name="code"
                     :watermark="$t('assistanceBills.referenceDescription')"
-                    icon="flaticon-interface-5"
+                    icon="fi-rr-ballot"
                     v-on:input="setDataFilter"
                     :value="filters.code"
                 ></input-from-table>
@@ -41,7 +41,7 @@ iframe {
                 <th>
                     {{$t('document.description')}}
                 </th>
-                <th style="width: 90px;" v-if="computedDocument.length>0 && computedDocument[0].displayDate">
+                <th style="width: 95px;" v-if="computedDocument.length>0 && computedDocument[0].displayDate">
                     {{$t('assistanceBills.date.document')}}
                 </th>
                 <th>
@@ -53,17 +53,20 @@ iframe {
                 <th class="text-center" v-if="computedDocument.length>0 && computedDocument[0].displayDate">
                     {{$t('assistanceBills.originalAmount')}}
                 </th>
-                <th>
+                <th class="text-center">
                     {{$t('general.status')}}
                 </th>
-                <th>
+                <th class="text-center">
                     {{$t('general.options')}}
                 </th>
             </tr>
         </template>
         <template slot="tbody">
             <template v-for="bill in computedDocument">
-                <tr :key="bill.idFile">
+                <tr :key="bill.idFile" :class="{
+                    'text-danger font-weight-bold': bill.delete,
+                    'text-warning font-weight-bold': bill.billStatus==6,
+                }">
                     <td>
                         <span>{{bill.idFile}}</span>
                     </td>
@@ -86,28 +89,47 @@ iframe {
                         >{{ bill.amount | currency(bill.currency) }}</span>
                     </td>
                     <td class="text-center">
+                        <div>
+                            <span
+                                class="m-badge m-badge--wide"
+                                :class="[bill.color]"
+                            >{{ bill.billStatusDesc }}</span>
+                        </div>
                         <span
-                            class="m-badge m-badge--wide"
-                            :class="[bill.color]"
-                        >{{ bill.billStatusDesc }}</span>
+                            class="m-badge m-badge--wide m-badge--danger mt-2"
+                            v-if="bill.delete"
+                        >{{$t('general.deleted') }}</span>
                     </td>
-                    <td class="text-center fa-status">
+                    <td class="text-center">
                         <span class="options-btn">
                             <a
-                                @click="togleBill(bill)"
-                                class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                                @click.prevent="toggleBill(bill)"
+                                href="#"
+                                v-tooltip:top="$t('general.preview')"
+                                class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill m-btn--air"
                             >
                                 <i
-                                    class="fa"
+                                    class="fa fa-lg"
                                     :class="[bill.checkVisibility?'fa-eye-slash':'fa-eye']"
                                 ></i>
                             </a>
                             <a
                                 :href="download(bill)"
                                 target="_blank"
-                                class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill"
+                                v-tooltip:top="$t('general.download')"
+                                class="btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill m-btn--air"
                             >
-                                <i class="fa fa-cloud-download-alt"></i>
+                                <i class="fa fa-lg fa-cloud-download-alt"></i>
+                            </a>
+                            <a
+                                v-if="permission.deleteFiles && bill.canDelete"
+                                @click.prevent="deleteOrRevert(bill)"
+                                href="#"
+                                v-tooltip:top="$t(bill.delete?'general.revert':'general.delete')"
+                                class="btn m-btn m-btn--icon m-btn--icon-only m-btn--pill m-btn--air"
+                                :class="[bill.delete?'btn-danger':'btn-warning']"
+                            >
+                                <i class="fa fa-lg" :class="[bill.delete?'fa-plus':'fa-minus']"></i>
                             </a>
                         </span>
                     </td>
@@ -135,6 +157,8 @@ import dateRangeBt from "../Tables/filters/dateRangeBt.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
 import pagination from "../pagination/pagination.vue";
 import TableBasic from "../Tables/TableBasic.vue";
+import Swal from "@/custom/sweetalert2";
+
 export default {
     components: {
         TableBasic,
@@ -160,11 +184,13 @@ export default {
                 size: 0
             },
             showLoader: false,
-            view: []
+            view: [],
+            permission: {
+                deleteFiles: this.middleware("delete_files", "read"),
+            }
         };
     },
     watch: {
-
         '$root.$i18n.locale': {
             handler(newVal) {
                 this.getBill();
@@ -209,11 +235,12 @@ export default {
                 2: "m-badge--success",
                 3: "m-badge--danger",
                 4: "m-badge--warning",
-                5: "m-badge--focus"
+                5: "m-badge--focus",
+                6: "m-badge--warning",
             };
             return colors[status];
         },
-        togleBill: function({ idFile }) {
+        toggleBill: function({ idFile }) {
             let tab = this.view.filter(function(v) {
                 return v == idFile;
             });
@@ -237,6 +264,25 @@ export default {
         },
         streaming({ fileName }) {
             return this.baseUrlApi() + "streaming/" + fileName;
+        },
+        deleteOrRevert({ idFile, delete: del }) {
+            Swal.fire({
+                text: del?this.$t("general.confirmUndoDelete"):this.$t("general.confirmDelete"),
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: this.$t("general.continue"),
+                cancelButtonText: this.$t("general.cancel")
+            }).then(result => {
+                if (result.value) {
+                    this.showLoader = true;
+                    this.axios
+                        .post("deleteAndRevertFile", {
+                            idFile: idFile,
+                        }).then(response => {
+                            this.getBill();
+                        });
+                }
+            });
         },
         clear: function() {
             this.filters = {

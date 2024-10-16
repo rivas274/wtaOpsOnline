@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="m-portlet__head-tools">
-                <button v-if="groups.length>1" class="btn"
+                <button v-if="groups.length>1" class="btn btn-default"
                         @click.prevent="back()"
                         type="button"
                     >{{ $t('general.back') | upper }}
@@ -19,12 +19,12 @@
         <div class="m-portlet__body">
             <div class="row">
                 <div class="col-md-6 d-flex align-items-start py-3" v-for="docType in documentsType " :key="docType.id">
-                    <button class="btn-block btn-type-document btn btn-lg text-wrap text-left align-self-stretch"
-                        :class="{ 'btn-success': 'uploaded' in docType && docType.uploaded }"
+                    <button class="btn-block btn btn-type-document btn-lg text-wrap text-left align-self-stretch"
+                        :class="['uploaded' in docType && docType.uploaded?'btn-success':'btn-default']"
                         @click.prevent="setType(docType)" type="button">
                         <div class="d-flex align-items-center justify-content-start title-btn-document-type">
                             <i v-if="'uploaded' in docType && docType.uploaded" class="fa fa-2x fa-check pr-3"></i>
-                            <i v-else class="fa fa-2x fa-info-circle pr-3"></i>
+                            <i v-else class="fa fa-2x fa-info-circle pr-3 text-primary"></i>
                             <div class="w-100">
                                 <div class="m--font-bolder border-bottom mb-2 pb-2 ">{{ docType.name | upper }}</div>
                                 <small class="description-btn-document-type">{{ docType.description }}</small>
