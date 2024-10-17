@@ -22,7 +22,7 @@ iframe{
 </style>
 <template>
     <div :class="{'m-loader m-loader--metal m-loader--div':showLoader}">
-        <div v-if="assistances.is_asigne==1" class="d-flex justify-content-end">
+        <div v-if="assistances.is_asigne==1 || assistances.is_asigne==2" class="d-flex justify-content-end">
             <button v-if="assistances.approved_status_user==2 && permission.showProvider"
                 class="btn btn-info ml-md-2"
                 data-toggle="modal"
@@ -60,7 +60,7 @@ iframe{
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{{$t('general.cancel')}}</button>
-                            <button v-if="assistances.is_asigne==1" type="button" class="btn btn-primary font-weight-bold" data-dismiss="modal" @click="rechazar">{{$t('assistance.rejectCase')}}</button>
+                            <button v-if="assistances.is_asigne==1  || assistances.is_asigne==2" type="button" class="btn btn-primary font-weight-bold" data-dismiss="modal" @click="rechazar">{{$t('assistance.rejectCase')}}</button>
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@ iframe{
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light-primary font-weight-bold" data-dismiss="modal">{{$t('general.cancel')}}</button>
-                            <button v-if="assistances.is_asigne==1" type="button" class="btn btn-primary font-weight-bold"  @click="finalizar">{{$t('assistance.Finish')}}</button>
+                            <button v-if="assistances.is_asigne==1  || assistances.is_asigne==2" type="button" class="btn btn-primary font-weight-bold"  @click="finalizar">{{$t('assistance.Finish')}}</button>
                         </div>
                     </div>
                 </div>
