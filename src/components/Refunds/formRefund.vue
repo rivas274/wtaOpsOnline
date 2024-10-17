@@ -362,7 +362,7 @@ import selectFrom from "../Tables/filters/selectFromTable.vue";
 import inputFromTable from "../Tables/filters/inputFromTable.vue";
 import currency from "../Labels/currency.json";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
-import VueRecaptcha from "vue-recaptcha";
+import { VueRecaptcha } from 'vue-recaptcha';
 import groupBtnRefund from './groupBtnRefund.vue';
 import groupDocumentType from './groupDocumentType.vue';
 import sanitize from '../../custom/sanitize-data';

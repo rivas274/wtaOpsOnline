@@ -378,8 +378,8 @@
         "authorizeThirdParty": "Authorize a third party",
         "uploadSignAuthorization": "Upload signed authorization",
         "downloadSignUpload": "Click to download your authorization, sign it, and upload it again.",
-        "bankCertificationRequired":"Please provide the corresponding bank certification to proceed with the payment.",
-        "selectBankCertificationToContinue":"Select the bank certification to continue"
+        "bankCertificationRequired": "Please provide the corresponding bank certification to proceed with the payment.",
+        "selectBankCertificationToContinue": "Select the bank certification to continue"
     },
     "notification": {
         "notifications": "Notification",
@@ -387,17 +387,6 @@
         "messagge": "Messages",
         "pending": "Pending",
         "read": "Read"
-    },
-    "validations": {
-        "attributes": {},
-        "messages": {
-            "verify_password": "The {field} must contain at least: 1 uppercase letter, 1 lowercase letter, 1 number",
-            "recaptcha": "Please complete the captcha",
-            "alpha_numeric_space": "The {field} may only contain alphabetic characters, numbers and spaces",
-            "numeric_space": "The {field} may only contain numbers, spaces, and hyphens (-).",
-            "zip_code": "Enter a valid zip code (Ex. 12345-1234 or 12345)",
-            "max_size": "The {field} may not be greater than 30 MB"
-        }
     },
     "ocr": {
         "dropOrClickFiles": "Drop files here or click to upload",
@@ -415,6 +404,44 @@
             "dob": "The patient's date of birth in the document ({dob}) does not match the one recorded in the assistance.",
             "passenger": "The passenger's name in the document ({passenger}) does not match the one recorded in the assistance.",
             "voucher": "The voucher code in the document ({voucher}) does not match the selected voucher in the assistance."
+        }
+    },
+    "validations": {
+        "attributes": {},
+        "messages": {
+            "alpha": "The <b>{_field_}</b> field may only contain alphabetic characters",
+            "alpha_num": "The <b>{_field_}</b> field may only contain alpha-numeric characters",
+            "alpha_dash": "The <b>{_field_}</b> field may contain alpha-numeric characters as well as dashes and underscores",
+            "alpha_spaces": "The <b>{_field_}</b> field may only contain alphabetic characters as well as spaces",
+            "between": "The <b>{_field_}</b> field must be between <b>{min}</b> and <b>{max}</b>",
+            "confirmed": "The <b>{_field_}</b> field confirmation does not match",
+            "digits": "The <b>{_field_}</b> field must be numeric and exactly contain <b>{length}</b> digits",
+            "dimensions": "The <b>{_field_}</b> field must be <b>{width}</b> pixels by <b>{height}</b> pixels",
+            "email": "The <b>{_field_}</b> field must be a valid email",
+            "excluded": "The <b>{_field_}</b> field is not a valid value",
+            "ext": "The <b>{_field_}</b> field is not a valid file",
+            "image": "The <b>{_field_}</b> field must be an image",
+            "integer": "The <b>{_field_}</b> field must be an integer",
+            "length": "The <b>{_field_}</b> field must be <b>{length}</b> long",
+            "max_value": "The <b>{_field_}</b> field must be <b>{max}</b> or less",
+            "max": "The <b>{_field_}</b> field may not be greater than <b>{length}</b> characters",
+            "mimes": "The <b>{_field_}</b> field must have a valid file type",
+            "min_value": "The <b>{_field_}</b> field must be <b>{min}</b> or more",
+            "min": "The <b>{_field_}</b> field must be at least <b>{length}</b> characters",
+            "numeric": "The <b>{_field_}</b> field may only contain numeric characters",
+            "oneOf": "The field <b>{_field_}</b> only accepts the following values <b>{_params_}</b>",
+            "regex": "The <b>{_field_}</b> field format is invalid",
+            "required_if": "The <b>{_field_}</b> field is required",
+            "required": "The <b>{_field_}</b> field is required",
+            "size": "The <b>{_field_}</b> field size must be less than <b>{size}KB</b>",
+            "double": "The <b>{_field_}</b> field must be a valid decimal",
+            "dateFormat": "The field <b>{_field_}</b> must have the following format <b>{_params_}</b>",
+            "verify_password": "The {_field_} must contain at least: 1 uppercase letter, 1 lowercase letter, 1 number",
+            "recaptcha": "Please complete the captcha",
+            "alpha_numeric_space": "The {_field_} may only contain alphabetic characters, numbers and spaces",
+            "numeric_space": "The {_field_} may only contain numbers, spaces, and hyphens (-).",
+            "zip_code": "Enter a valid zip code (Ex. 12345-1234 or 12345)",
+            "max_size": "The {_field_} may not be greater than 30 MB"
         }
     }
 }

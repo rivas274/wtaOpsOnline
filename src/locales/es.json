@@ -378,8 +378,8 @@
         "authorizeThirdParty": "Autorizar a un tercero",
         "uploadSignAuthorization": "Subir autorización firmada",
         "downloadSignUpload": "Haga clic para descargar su autorización, fírmela y vuelva a subirla.",
-        "bankCertificationRequired":"Por favor, proporcione la certificación bancaria correspondiente para poder procesar el pago.",
-        "selectBankCertificationToContinue":"Por favor, seleccione la certificación bancaria para continuar"
+        "bankCertificationRequired": "Por favor, proporcione la certificación bancaria correspondiente para poder procesar el pago.",
+        "selectBankCertificationToContinue": "Por favor, seleccione la certificación bancaria para continuar"
     },
     "notification": {
         "notifications": "Notificación",
@@ -387,17 +387,6 @@
         "messagge": "Mensajes",
         "pending": "Pendiente",
         "read": "Leido"
-    },
-    "validations": {
-        "attributes": {},
-        "messages": {
-            "verify_password": "El campo {field} debe contener al menos: 1 letra mayúscula, 1 letra minúscula, 1 número",
-            "recaptcha": "Por favor completa el captcha",
-            "alpha_numeric_space": "El campo {field} solo puede contener caracteres alfabéticos, números y espacios",
-            "numeric_space": "El campo {field} solo puede contener números, espacios y guiones (-).",
-            "zip_code": "Ingresa un código postal válido (Ej. 12345-1234 o 12345)",
-            "max_size": "El tamaño del archivo no puede ser mayor a 30 MB"
-        }
     },
     "ocr": {
         "dropOrClickFiles": "Suelte los archivos aquí o haga clic para cargarlos",
@@ -415,6 +404,44 @@
             "dob": "La fecha de nacimiento del paciente en el documento ({dob}) no coincide con la registrada en la asistencia.",
             "passenger": "El nombre del pasajero en el documento ({passenger}) no coincide con el registrado en la asistencia.",
             "voucher": "El código del voucher en el documento ({voucher}) no coincide con el seleccionado en la asistencia."
+        }
+    },
+    "validations": {
+        "attributes": {},
+        "messages": {
+            "alpha": "El campo <b>{_field_}</b> solo debe contener letras",
+            "alpha_dash": "El campo <b>{_field_}</b> solo debe contener letras, números y guiones",
+            "alpha_num": "El campo <b>{_field_}</b> solo debe contener letras y números",
+            "alpha_spaces": "El campo <b>{_field_}</b> solo debe contener letras y espacios",
+            "between": "El campo <b>{_field_}</b> debe estar entre <b>{min}</b> y <b>{max}</b>",
+            "confirmed": "El campo <b>{_field_}</b> no coincide",
+            "digits": "El campo <b>{_field_}</b> debe ser numérico y contener exactamente <b>{length}</b> dígitos",
+            "dimensions": "El campo <b>{_field_}</b> debe ser de <b>{width}</b> píxeles por <b>{height}</b> píxeles",
+            "email": "El campo <b>{_field_}</b> debe ser un correo electrónico válido",
+            "excluded": "El campo <b>{_field_}</b> debe ser un valor válido",
+            "ext": "El campo <b>{_field_}</b> debe ser un archivo válido",
+            "image": "El campo <b>{_field_}</b> debe ser una imagen",
+            "integer": "El campo <b>{_field_}</b> debe ser un entero",
+            "length": "El largo del campo <b>{_field_}</b> debe ser <b>{length}</b>",
+            "max": "El campo <b>{_field_}</b> no debe ser mayor a <b>{length}</b> caracteres",
+            "max_value": "El campo <b>{_field_}</b> debe de ser <b>{max}</b> o menor",
+            "mimes": "El campo <b>{_field_}</b> debe ser un tipo de archivo válido",
+            "min": "El campo <b>{_field_}</b> debe tener al menos <b>{length}</b> caracteres",
+            "min_value": "El campo <b>{_field_}</b> debe ser <b>{min}</b> o superior",
+            "numeric": "El campo <b>{_field_}</b> debe contener solo caracteres numéricos",
+            "oneOf": "El campo <b>{_field_}</b> solo acepta los siguientes valores <b>{_params_}</b>",
+            "regex": "El formato del campo <b>{_field_}</b> no es válido",
+            "required": "El campo <b>{_field_}</b> es obligatorio",
+            "required_if": "El campo <b>{_field_}</b> es obligatorio",
+            "size": "El campo <b>{_field_}</b> debe ser menor a <b>{size}KB</b>",
+            "double": "El campo <b>{_field_}</b> debe ser un decimal válido",
+            "dateFormat": "The field <b><b>{_field_}</b></b> must have the following format <b>{_params_}</b>",
+            "verify_password": "El campo {_field_} debe contener al menos: 1 letra mayúscula, 1 letra minúscula, 1 número",
+            "recaptcha": "Por favor completa el captcha",
+            "alpha_numeric_space": "El campo {_field_} solo puede contener caracteres alfabéticos, números y espacios",
+            "numeric_space": "El campo {_field_} solo puede contener números, espacios y guiones (-).",
+            "zip_code": "Ingresa un código postal válido (Ej. 12345-1234 o 12345)",
+            "max_size": "El tamaño del archivo no puede ser mayor a 30 MB"
         }
     }
 }

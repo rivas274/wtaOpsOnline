@@ -436,7 +436,7 @@ import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import currency from "../Labels/currency.json";
 import localeChanger from "../locales/locale-changer.vue";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
-import VueRecaptcha from "vue-recaptcha";
+import { VueRecaptcha } from 'vue-recaptcha';
 import Swal from "@/custom/sweetalert2";
 
 export default {

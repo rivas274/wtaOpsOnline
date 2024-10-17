@@ -280,7 +280,7 @@
 <script>
 import FormError from "../FormError";
 import selectFrom from "../Tables/filters/selectFromTable.vue";
-import VueRecaptcha from "vue-recaptcha";
+import { VueRecaptcha } from 'vue-recaptcha';
 import Swal from "@/custom/sweetalert2";
 
 export default {
