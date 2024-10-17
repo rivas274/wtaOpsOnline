@@ -43,7 +43,7 @@
                                                         <span class="m-list-timeline__badge"></span>
                                                         <span class="m-list-timeline__text">
                                                             {{ notification.codigo_asistencia }}
-                                                            <span @click.prevent="addAssistFromNotification(notification)"
+                                                            <span @click.prevent="addAssist(notification)"
                                                                 class="m-badge m-badge--wide"
                                                                 :class="{ 'm-badge--success': notification.cant_sms <= 0, 'm-badge--warning': notification.cant_sms > 0 }">
                                                                 {{ notification.cant_sms > 0 ? $t('notification.pending')
@@ -68,7 +68,9 @@
 
 <script>
 
-import { mapMutations } from "vuex";
+import { mapState,mapActions } from "pinia";
+import assistanceTabStore from '@/store/assistance-tabs';
+
 export default {
     name: 'Notification',
     data() {
@@ -93,7 +95,7 @@ export default {
 
     },
     methods: {
-        ...mapMutations(["addAssist"]),
+        ...mapActions(assistanceTabStore, ["addAssist"]),
         getNotification() {
             this.axios
                 .post("getNotification", {
@@ -106,10 +108,6 @@ export default {
                 .catch(error => {
                     console.error("Error al obtener las notificaciones:", error);
                 });
-        },
-        // Llamar a la mutación para agregar una asistencia desde la notificación
-        addAssistFromNotification(notificacion) {
-            this.addAssist(notificacion);
         },
     },
 };

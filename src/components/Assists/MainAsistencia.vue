@@ -57,7 +57,8 @@ import contentM from "../Content.vue";
 import ListAsistencia from "./ListAsistencia.vue";
 import Assist from "./Assist.vue";
 import Flag from "../Element/Flag.vue";
-import { mapMutations } from "vuex"; // Importar las utilidades de Vuex
+import { mapState,mapActions } from "pinia";
+import assistanceTabStore from '@/store/assistance-tabs';
 
 export default {
     components: {
@@ -67,12 +68,7 @@ export default {
         Flag
     },
     computed: {
-        assistances () {
-            return this.$store.state.assistances
-        },
-        tabShow () {
-            return this.$store.state.tabShow
-        }
+        ...mapState(assistanceTabStore, ["assistances", "tabShow"])
     },
     mounted() {
         if (!this.middleware("assist", "read")) {
@@ -80,8 +76,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(["addAssist", "removeAssist", "updateTabShow"]),
-  
+        ...mapActions(assistanceTabStore, ["addAssist", "removeAssist", "updateTabShow"]),
     }
 };
 </script>

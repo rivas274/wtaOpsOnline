@@ -11,14 +11,15 @@ import globalFilters from './custom/vue-global-filters';
 import globalDirectives from './custom/vue-global-directives';
 import i18n from "./custom/i18n";
 import VeeValidate from'./custom/vue-vee-custom';
-import store from './store/store';
 import "@/sass/demo/demo3/style.scss";
 import "@/custom/metronic";
 import moment from 'moment';
+import { createPinia,PiniaVuePlugin } from 'pinia';
 
 Vue.use(VueRouter);
 Vue.use(globalDirectives);
 Vue.use(globalFilters);
+Vue.use(PiniaVuePlugin);
 
 Vue.use(VueSession, {
     persist: true
@@ -26,6 +27,7 @@ Vue.use(VueSession, {
 
 Vue.use(middleware, permission);
 
+const pinia = createPinia();
 const router = new VueRouter({ mode: 'history', routes: routes });
 
 customAxios.interceptors.response.use(
@@ -127,8 +129,8 @@ new Vue({
             Vue._session.set('checkTimeOut', true);
         });
     },
-    store,
     render: h => h(App),
     router,
     i18n,
+    pinia
 }).$mount('#app')
