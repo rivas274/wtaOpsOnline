@@ -108,5 +108,10 @@
         "read": [52],
         "write": [52],
         "delete": [52]
+    },
+    "no_load_pages_init_assist": {
+        "read": [37,43],
+        "write": [],
+        "delete": []
     }
 }

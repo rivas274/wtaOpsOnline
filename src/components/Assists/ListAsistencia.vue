@@ -433,7 +433,7 @@ export default {
                     startDate: this.filters.date.startDate,
                     typeAssist:this.filters.typeAssist,
                     passport:this.filters.passport,
-                    showTotal: showTotal==false?0:1
+                    showTotal: showTotal==true?0:1
                 })
                 .then(response => {
                     this.showLoader = false;
@@ -508,7 +508,7 @@ export default {
         this.getAssistStatus();
         this.getAssistManagementStatus();
         this.getAssistType();
-        this.getAssistance(0,false);
+        this.getAssistance(0,this.middleware("no_load_pages_init_assist", "read"));
     },
     computed: {
         arrAssistance: function () {
