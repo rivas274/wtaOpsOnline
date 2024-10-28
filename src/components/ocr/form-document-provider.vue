@@ -164,9 +164,10 @@ import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import selectMultiple from "../Tables/filters/selectFromMultipleTable.vue";
 import currency from "../Labels/currency.json";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
-import sanitize from '../../custom/sanitize-data';
+import sanitize from '@/custom/sanitize-data';
 import Swal from "@/custom/sweetalert2";
 import moment from 'moment';
+import general from "@/custom/general";
 
 export default {
     components: {
@@ -270,9 +271,10 @@ export default {
         validateDocument: function () {
             if (!this.disableForm) {
                 this.$validator.validateAll().then(result => {
-                    window.console.log("validateAll", result);
                     if (result) {
                         this.disableForm = true;
+                        //Previene la creacion de posibles duplicados
+                        general.sleep(general.randomNumber(1, 20)*100);
                         this.axios
                             .post("addInvoice", this.formData(), {
                                 headers: {
@@ -366,7 +368,8 @@ export default {
         },
         handlePaste(event) {
             this.inputs.amount = sanitize.handlePaste(event, sanitize.normalizeAmount);
-        }
+        },
+        
     },
     computed: {
         currencyFromSelect() {
