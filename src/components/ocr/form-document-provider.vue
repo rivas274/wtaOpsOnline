@@ -152,7 +152,7 @@
                 </div>
             </form>
             <div class="col-md-6 bg-secondary d-flex preview-container p-0">
-                <iframe v-if="fileUrl" title="preview doc" class="rounded h-100 w-100" :src="fileUrl"></iframe>
+                <iframe v-if="fileUrl" title="preview doc" class="rounded h-100 w-100" :src="previewSrc"></iframe>
                 <h1 v-else class="m-auto d-none d-md-block">{{ $t('general.preview') | upper }}</h1>
             </div>
         </div>
@@ -183,7 +183,7 @@ export default {
         },
         file: {
             type: Object,
-            default: {}
+            required: true
         }
     },
     data() {
