@@ -25,7 +25,6 @@
 .progress-container {
     margin-top: -15px;
 }
-
 .progress-success {
     background-color: #34bfa3 !important;
     border: 0.2rem solid #34bfa3;
@@ -39,6 +38,11 @@
 }
 .progress-metal-o {
     border: 0.2rem solid #c4c5d6;
+}
+.progress-danger {
+    background-color: #f4516c !important;
+    border: 0.2rem solid #f4516c;
+    color: #fff !important;
 }
 </style>
 <template>
@@ -55,53 +59,33 @@
 </template>
 <script>
 export default {
-    props: ["id-assist"],
-    data: function() {
-        return {
-            status: []
-        };
-    },
-    methods: {
-        getStatus: function() {
-            this.axios
-                .post("progressBarAssist", {
-                    idAssist: this.idAssist
-                })
-                .then(response => {
-                    this.status = response.data.RESPONSE;
-                });
-        }
-    },
-    watch: {
-        '$root.$i18n.locale': {
-            handler(newVal) {
-                this.getStatus();
-            },
-            deep: true
-        }
-    },
+    props: ["status"],
     computed: {
         statusShow: function() {
             let color = {
-                old: "progress-success-o",
-                current: "progress-success",
-                new: "progress-metal-o"
+                A: "progress-success-o",
+                F: "progress-success",
+                P: "progress-metal-o",
+                R: "progress-danger",
             };
             return this.status.map(function(value) {
-                let label = [value.label];
-                if (value.date !== null) {
-                    label.push(value.date.user.user + "@" + value.date.date);
+                let label = [value.title];
+                let icon = value.icon;
+                // si termina en -o se quita
+                icon = icon.replace(/-o$/, "");
+                if (icon === 'fa-money') {
+                    icon = 'fa fa-money-bill-alt';
+                }
+                if((value['color']||'').includes('red') && value['activo'] == 'F') {
+                    value['activo'] = 'R';
                 }
                 return {
                     label: label.join("</br>"),
-                    icon: value.icon,
-                    color: color[value.current]
+                    icon: 'fa ' + icon,
+                    color: color[value['activo']||'P']
                 };
             });
         }
-    },
-    mounted() {
-        this.getStatus();
     }
 };
 </script>

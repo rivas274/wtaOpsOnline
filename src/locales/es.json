@@ -289,7 +289,9 @@
         "deselectAll": "Deseleccionar todo",
         "confirm": "Confirmar",
         "confirmDelete": "¿Está seguro que desea eliminar este registro?",
-        "confirmUndoDelete": "¿Está seguro que desea deshacer la eliminación de este registro?"
+        "confirmUndoDelete": "¿Está seguro que desea deshacer la eliminación de este registro?",
+        "approved": "Aprobado",
+        "rejected": "Rechazado"
     },
     "provider": {
         "provider": "Proveedor",
@@ -378,6 +380,7 @@
         "authorizeThirdParty": "Autorizar a un tercero",
         "uploadSignAuthorization": "Subir autorización firmada",
         "downloadSignUpload": "Haga clic para descargar su autorización, fírmela y vuelva a subirla.",
+        "bankCertification": "Certificación bancaria",
         "bankCertificationRequired": "Por favor, proporcione la certificación bancaria correspondiente para poder procesar el pago.",
         "selectBankCertificationToContinue": "Por favor, seleccione la certificación bancaria para continuar"
     },

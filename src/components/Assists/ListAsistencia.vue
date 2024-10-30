@@ -204,6 +204,24 @@
                             Triaje | {{assist.triage.label}}
                         </small>
                     </div>
+                    <div v-if="permission.refund && assist.refund=='Y'">
+                        <small class="m--font-bolder" :class="{
+                                'm--font-success': assist.statusRefund['approved'],
+                                'm--font-danger': assist.statusRefund['rejected'],
+                                'm--font-warning': !assist.statusRefund['closed'],
+                            }">
+                            {{ $t('reimbursement.reimbursement') }} |
+                            <span v-if="assist.statusRefund['approved']">
+                                {{ $t('general.approved') }}
+                            </span>
+                            <span v-else-if="assist.statusRefund['rejected']">
+                                {{ $t('general.rejected') }}
+                            </span>
+                            <span v-else>
+                                {{ $t('notification.pending') }}
+                            </span>
+                        </small>
+                    </div>
                 </td>
                 <td v-if="permission.show_provider">
                     {{assist.speciality_location}}
@@ -285,6 +303,7 @@ export default {
             hidden_client: this.middleware("hidden_client_in_assistance", "read"),
             show_provider: this.middleware("show_provider", "read"),
             triage: this.middleware("triage", "read"),
+            refund: this.middleware("method_payment_refund", "read") || this.middleware("reimbursement_documents", "read")
         };
         return {
             permission: permission,

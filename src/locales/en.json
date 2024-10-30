@@ -289,7 +289,9 @@
         "deselectAll": "Deselect all",
         "confirm": "Confirm",
         "confirmDelete": "Are you sure you want to delete this record?",
-        "confirmUndoDelete": "Are you sure you want to undo the deletion of this record?"
+        "confirmUndoDelete": "Are you sure you want to undo the deletion of this record?",
+        "approved": "Approved",
+        "rejected": "Rejected"
     },
     "provider": {
         "provider": "Provider",
@@ -378,6 +380,7 @@
         "authorizeThirdParty": "Authorize a third party",
         "uploadSignAuthorization": "Upload signed authorization",
         "downloadSignUpload": "Click to download your authorization, sign it, and upload it again.",
+        "bankCertification": "Bank Certification",
         "bankCertificationRequired": "Please provide the corresponding bank certification to proceed with the payment.",
         "selectBankCertificationToContinue": "Select the bank certification to continue"
     },

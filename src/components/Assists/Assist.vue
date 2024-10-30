@@ -33,6 +33,22 @@
                         @click.prevent="showTab('reimbursement')"
                     >
                         <i class="fa fa-money-bill" aria-hidden="true"></i>
+                        <span>{{$t('document.document')}}</span><br>
+                        <span>{{$t('reimbursement.reimbursement')}}</span>
+                    </a>
+                </li>
+                <li class="flex-fill bd-highlight"
+                    v-if="permission.method_payment"
+                    :class="{active:tabShow=='method_payment'}"
+                    v-tooltip:top="$t('reimbursement.information')">
+                    <a
+                        class="nav-link"
+                        :class="{'m--font-success':tabShow=='method_payment'}"
+                        @click.prevent="showTab('method_payment')"
+                    >
+                        <i class="fa fa-money-bill" aria-hidden="true"></i>
+                        <span>{{$t('reimbursement.methodPayment')}}</span>
+                        <br>
                         <span>{{$t('reimbursement.reimbursement')}}</span>
                     </a>
                 </li>
@@ -56,7 +72,6 @@
                         <span>{{$t('menu.documents')}}</span>
                     </a>
                 </li>
-               
                 <li class="flex-fill bd-highlight" v-if="permission.notes" :class="{active:tabShow=='Note'}" v-tooltip:top="$t('assistance.notes')">
                     <a
                         class="nav-link"
@@ -157,6 +172,9 @@
                 <div v-if="permission.reimbursement" class="tab-pane" :class="{active:tabShow=='reimbursement'}">
                     <list-reimbursement :id-assist="assistBase.idAssist"></list-reimbursement>
                 </div>
+                <div v-if="permission.reimbursement" class="tab-pane" :class="{active:tabShow=='method_payment'}">
+                    <method-payment-refund :id-assist="assistBase.idAssist"></method-payment-refund>
+                </div>
                 <div v-if="permission.documents" class="tab-pane" :class="{active:tabShow=='documents'}">
                     <list-files :id-assist="assistBase.idAssist"></list-files>
                 </div>
@@ -201,13 +219,29 @@ import ListBill from "../Bill/ListBill.vue";
 import ListReimbursement from "../Reimbursement/ListReimbursement.vue";
 import Providers from "../Provider/ListProviders.vue";
 import ListNote from "../Note/ListNote.vue";
-import TimeLine from "../timeline/TimeLine.vue";
+import TimeLine from "../timeline/TimeLineAsistance.vue";
 import AssistDetail from "./AssistDetail.vue";
 import ocrProvider from "./ocrProvider.vue";
+import MethodPaymentRefund from "./MethodPaymentRefund.vue";
+
 export default {
-    components: { Providers, ListBill, AssistDetail, ListNote, TimeLine, ListFiles,ListReimbursement, ocrProvider},
+    components: {
+        Providers,
+        ListBill,
+        AssistDetail,
+        ListNote,
+        TimeLine,
+        ListFiles,
+        ListReimbursement,
+        ocrProvider,
+        MethodPaymentRefund
+    },
     props: ["assist"],
     data() {
+        let methodPayment = false;
+        if('refund' in this.assist){
+            methodPayment = this.middleware("method_payment_refund", "read") && this.assist.refund=='Y';
+        }
         return {
             assistBase: this.assist,
             tabShow: "General",
@@ -224,6 +258,7 @@ export default {
                 time_line: this.middleware("time_line", "read"),
                 documents: this.middleware("documents", "read"),
                 add_invoice: this.middleware("add_invoice", "read"),
+                method_payment: methodPayment,
             }
         };
     },

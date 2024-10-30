@@ -6,7 +6,8 @@
             <span class="m-accordion__item-icon">
                 <i :class="[ico]"></i>
             </span>
-            <span class="m-accordion__item-title collapsed"
+            <span   class="m-accordion__item-title collapsed"
+                    :class="[open?'':'collapsed']"
                     role="tab"
                     data-toggle="collapse"
                     :href="'#m_accordion_item_1_body_'+id">
@@ -15,13 +16,15 @@
             <span class="m-accordion__item-icon">
                 <slot name="title-left"></slot>
             </span>
-            <span class="m-accordion__item-mode collapsed"
+            <span   class="m-accordion__item-mode"
+                    :class="[open?'':'collapsed']"
                     role="tab"
                     data-toggle="collapse"
                     :href="'#m_accordion_item_1_body_'+id"></span>
         </div>
         <div
             class="m-accordion__item-body collapse"
+            :class="[open?'show':'']"
             :id="'m_accordion_item_1_body_'+id"
             role="tabpanel"
             :aria-labelledby="'m_accordion_item_1_head_'+id"
@@ -41,6 +44,6 @@
 </template>
 <script>
 export default {
-    props: ["id", "ico"]
+    props: ["id", "ico","open"]
 };
 </script>
