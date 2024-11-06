@@ -276,6 +276,7 @@ export default {
         this.getAssistance();
         this.getAssistManagementStatus();
         this.getAssistStatus();
+        this.getAssistType();
     }
 },
     data: function() {
