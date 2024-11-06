@@ -152,7 +152,7 @@
                 </div>
             </form>
             <div class="col-md-6 bg-secondary d-flex preview-container p-0">
-                <iframe v-if="fileUrl" title="preview doc" class="rounded h-100 w-100" :src="fileUrl"></iframe>
+                <iframe v-if="fileUrl" title="preview doc" class="rounded h-100 w-100" :src="previewSrc"></iframe>
                 <h1 v-else class="m-auto d-none d-md-block">{{ $t('general.preview') | upper }}</h1>
             </div>
         </div>
@@ -164,9 +164,10 @@ import selectFromTable from "../Tables/filters/selectFromTable.vue";
 import selectMultiple from "../Tables/filters/selectFromMultipleTable.vue";
 import currency from "../Labels/currency.json";
 import dateSingleBt from "../Tables/filters/dateSingleBt.vue";
-import sanitize from '../../custom/sanitize-data';
+import sanitize from '@/custom/sanitize-data';
 import Swal from "@/custom/sweetalert2";
 import moment from 'moment';
+import general from "@/custom/general";
 
 export default {
     components: {
@@ -182,7 +183,7 @@ export default {
         },
         file: {
             type: Object,
-            default: {}
+            required: true
         }
     },
     data() {
@@ -270,9 +271,10 @@ export default {
         validateDocument: function () {
             if (!this.disableForm) {
                 this.$validator.validateAll().then(result => {
-                    window.console.log("validateAll", result);
                     if (result) {
                         this.disableForm = true;
+                        //Previene la creacion de posibles duplicados
+                        general.sleep(general.randomNumber(1, 20)*100);
                         this.axios
                             .post("addInvoice", this.formData(), {
                                 headers: {
@@ -366,7 +368,8 @@ export default {
         },
         handlePaste(event) {
             this.inputs.amount = sanitize.handlePaste(event, sanitize.normalizeAmount);
-        }
+        },
+        
     },
     computed: {
         currencyFromSelect() {

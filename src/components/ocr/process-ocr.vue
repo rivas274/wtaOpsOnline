@@ -76,8 +76,9 @@ export default {
                     );
                 }
             }).then(function (response) {
-                const   responseBase = response.data.RESPONSE,
-                        status = response.data.STATUS;
+                const responseBase = response.data.RESPONSE,
+                    status = response.data.STATUS;
+
                 if (status == 'OK') {
                     responseBase.data.forEach((ocr) => {
                         self.fileOcr.push({
@@ -91,7 +92,7 @@ export default {
                     });
                 } else {
                     self.fileOcr.push({
-                        file: responseBase.data.file,
+                        file: responseBase.file,
                         uid: responseBase.data['uid'] || Math.random().toString(36).substr(2, 16),
                         ocr: responseBase.data
                     });
