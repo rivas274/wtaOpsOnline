@@ -146,14 +146,9 @@
                                                                     <div
                                                                         class="m-portlet__head-title"
                                                                     >
-                                                                        <span
-                                                                            class="m-portlet__head-icon m--hide"
-                                                                        >
-                                                                            <i class="la la-gear"></i>
-                                                                        </span>
-                                                                        <h3
-                                                                            class="m-portlet__head-text"
-                                                                        >{{ $t('assistanceBills.information') }}</h3>
+                                                                        <div class="m-portlet__head-text">
+                                                                            {{ $t('assistanceBills.information') }}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>

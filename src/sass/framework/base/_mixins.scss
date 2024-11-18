@@ -499,7 +499,7 @@ xl: 1200px
 
 //== Media Query - Mobile Mode
 @mixin mobile {
-  	@media (max-width: #{map-get($m--layout-breakpoints, md)}) {
+  	@media (max-width: #{map-get($m--layout-breakpoints, sm)}) {
     	@content;
   	}
 } 

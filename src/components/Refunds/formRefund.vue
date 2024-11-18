@@ -20,7 +20,7 @@
                 {{ documentProgress.html }}
             </span>
         </div>
-        <div class="m-portlet m-portlet--tab form-refund">
+        <div class="m-portlet m-portlet--responsive-mobile m-portlet--tab form-refund">
             <group-btn-refund
                 v-if="documentsTypeGroup.length>1 && !inputsData.docTypeGroup"
                 :groups="documentsTypeGroup"
@@ -45,12 +45,12 @@
                             <div class="m-portlet__head">
                                 <div class="m-portlet__head-caption">
                                     <div class="m-portlet__head-title">
-                                        <h3 class="m-portlet__head-text" v-if="documentsTypeSelected">
+                                        <div class="m-portlet__head-text" v-if="documentsTypeSelected">
                                             {{ documentsTypeSelected.name }}
-                                        </h3>
-                                        <h3 v-else
+                                        </div>
+                                        <div v-else
                                             class="m-portlet__head-text"
-                                        >{{ $t('reimbursement.information') }}</h3>
+                                        >{{ $t('reimbursement.information') }}</div>
                                     </div>
                                 </div>
                                 <div class="m-portlet__head-tools">
@@ -479,7 +479,7 @@ export default {
                                 if (response.data.STATUS == "OK") {
                                     if (response.data['NOTIFIED']) {
                                         this.idFiles = [];
-                                        this.$emit('complete-documents');
+                                        this.$emit('complete-documents',true);
                                     } else {
                                         this.idFiles.push(response.data.ID);
                                     }

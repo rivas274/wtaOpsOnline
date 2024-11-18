@@ -13,7 +13,7 @@
 
     $body-padding: $space $space;
     $footer-padding: 1.1rem $space;
-    $responsive-head-padding-y: 0.9rem;
+    $responsive-head-padding-y: 1.1rem;
     $bordered-semi-portlet-body-padding-top: 0.5rem;
 
     .m-portlet  {
@@ -23,7 +23,7 @@
             margin-bottom: 0;
         }
 
-        .m-portlet__head  {            
+        .m-portlet__head  {
             display: flex; 
             flex-direction: row;
             align-items: stretch;
@@ -446,6 +446,14 @@
                         padding-top: $responsive-head-padding-y;
                         padding-bottom: $responsive-head-padding-y;
                         flex-wrap: wrap;
+                        .m-portlet__head-title {
+                            display: flex;
+                            flex: 1 1 auto !important;
+                            justify-content: center !important;
+                        }
+                        .m-portlet__head-text{
+                            font-weight: 600;
+                        }
                     }
 
                     .m-portlet__head-tools  {
@@ -453,6 +461,10 @@
                         padding-top: 0;
                         padding-bottom: $responsive-head-padding-y;
                         flex-wrap: wrap;
+                        .btn {
+                            display: flex;
+                            flex: 1 1 auto !important;
+                        }
                     }
                 }
             }

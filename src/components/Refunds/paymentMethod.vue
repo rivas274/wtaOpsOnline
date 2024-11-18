@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="saveDataMethodPayment" class="">
         <div v-if = "configData.thirdPartyAuthorization == 'P'">
-            <div class="m-portlet m-portlet--tab m-form">
+            <div class="m-portlet m-portlet--responsive-mobile m-portlet--tab m-form">
                 <div class="m-portlet__body pb-3">
                     <h2>
                         {{ $t('refunds.beneficiaryOrThirdParty') }}
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div>
-            <div class="m-portlet m-portlet--tab m-form" v-if="configData.bankCertification=='Y'">
+            <div class="m-portlet m-portlet--responsive-mobile m-portlet--tab m-form" v-if="configData.bankCertification=='Y'">
                 <div class="m-portlet__body pb-3">
                     <h3>
                         {{ $t('refunds.bankCertificationRequired') }}
@@ -73,7 +73,7 @@
                 </div>
             </div>
         </div>
-        <div class="m-portlet m-portlet--tab m-form" v-else>
+        <div class="m-portlet m-portlet--responsive-mobile m-portlet--tab m-form" v-else>
             <div class="m-portlet__head">
                 <div class="m-portlet__head-caption">
                     <div class="m-portlet__head-title">

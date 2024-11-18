@@ -3,12 +3,12 @@
         <div class="m-portlet__head">
             <div class="m-portlet__head-caption">
                 <div class="m-portlet__head-title">
-                    <h3 class="m-portlet__head-text" v-if="show == 'instruction' && 'title' in instructionOfUse">
+                    <div class="m-portlet__head-text" v-if="show == 'instruction' && 'title' in instructionOfUse">
                         {{instructionOfUse.title}}
-                    </h3>
-                    <h3 class="m-portlet__head-text" v-else-if="'title' in declarationOfUse">
+                    </div>
+                    <div class="m-portlet__head-text" v-else-if="'title' in declarationOfUse">
                         {{declarationOfUse.title}}
-                    </h3>
+                    </div>
                 </div>
             </div>
         </div>
