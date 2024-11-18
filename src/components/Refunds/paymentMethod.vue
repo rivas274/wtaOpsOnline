@@ -102,7 +102,7 @@
                         <div class="row">
                             <div class="col-md-6" :key="keyField"  v-for="(fieldConfig, keyField) in groupConfig.fields">
                                 <div v-if="fieldConfig.type == 'select'" >
-                                    <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has('custom-fields.'+keyField) || errors.has('custom-fields.'+keyField+'_custom')}">
+                                    <div class="form-group m-form__group mb-md-3" :class="{'has-danger': errors.has('custom-fields.'+keyField) || errors.has('custom-fields.'+keyField+'_custom')}">
                                         <strong>{{ fieldConfig.title }}</strong>
                                         <div :class="{'input-group':saveData[keyField] == fieldConfig.show_custom_field}">
                                             <select-from :name="keyField" 
@@ -126,7 +126,7 @@
                                     </div>
                                 </div>
                                 <div v-else-if="fieldConfig.type == 'phone'">
-                                    <div class="form-group m-form__group mb-3" :class="{'has-danger': errors.has('custom-fields.'+'cod_'+keyField) || errors.has('custom-fields.'+keyField)}">
+                                    <div class="form-group m-form__group mb-md-3" :class="{'has-danger': errors.has('custom-fields.'+'cod_'+keyField) || errors.has('custom-fields.'+keyField)}">
                                         <strong>{{ fieldConfig.title }}</strong>
                                         <div class="input-group">
                                             <select-from :name="'cod_'+keyField" 
@@ -149,7 +149,7 @@
                                     </div>
                                 </div>
                                 <div v-else-if="fieldConfig.type == 'date'">
-                                    <div class="form-group m-form__group mb-3" :class="{ 'has-danger': errors.has('custom-fields.'+keyField) }">
+                                    <div class="form-group m-form__group mb-md-3" :class="{ 'has-danger': errors.has('custom-fields.'+keyField) }">
                                         <strong>{{ fieldConfig.title }}</strong>
                                         <input  type="date"
                                                 class="form-control m-input" 
@@ -163,7 +163,7 @@
                                     </div>
                                 </div>
                                 <div v-else>
-                                    <div class="form-group m-form__group mb-3" :class="{ 'has-danger': errors.has('custom-fields.'+keyField) }">
+                                    <div class="form-group m-form__group mb-md-3" :class="{ 'has-danger': errors.has('custom-fields.'+keyField) }">
                                         <strong>{{ fieldConfig.title }}</strong>
                                         <input  type="text" 
                                                 class="form-control m-input"
