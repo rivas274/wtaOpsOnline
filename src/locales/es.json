@@ -382,7 +382,8 @@
         "downloadSignUpload": "Haga clic para descargar su autorización, fírmela y vuelva a subirla.",
         "bankCertification": "Certificación bancaria",
         "bankCertificationRequired": "Por favor, proporcione la certificación bancaria correspondiente para poder procesar el pago.",
-        "selectBankCertificationToContinue": "Por favor, seleccione la certificación bancaria para continuar"
+        "selectBankCertificationToContinue": "Por favor, seleccione la certificación bancaria para continuar",
+        "viewLoadedDocuments": "Ver documentos cargados"
     },
     "notification": {
         "notifications": "Notificación",

@@ -110,7 +110,8 @@
         "uploadSignAuthorization": "Subir a autorização assinada",
         "downloadSignUpload": "Clique para baixar sua autorização, assine-a e envie-a novamente.",
         "bankCertificationRequired":"Por favor, forneça a certificação bancária correspondente para prosseguir com o pagamento.",
-        "selectBankCertificationToContinue":"Selecione a certificação bancária para continuar"
+        "selectBankCertificationToContinue":"Selecione a certificação bancária para continuar",
+        "viewLoadedDocuments": "Ver documentos carregados"
     },
     "notification": {
         "notifications": "Notificações",

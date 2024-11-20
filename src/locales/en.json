@@ -382,7 +382,8 @@
         "downloadSignUpload": "Click to download your authorization, sign it, and upload it again.",
         "bankCertification": "Bank Certification",
         "bankCertificationRequired": "Please provide the corresponding bank certification to proceed with the payment.",
-        "selectBankCertificationToContinue": "Select the bank certification to continue"
+        "selectBankCertificationToContinue": "Select the bank certification to continue",
+        "viewLoadedDocuments": "View loaded documents"
     },
     "notification": {
         "notifications": "Notification",
