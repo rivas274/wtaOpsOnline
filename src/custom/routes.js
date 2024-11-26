@@ -6,6 +6,7 @@ import uploadDocument from '../components/DocumentsClient/MainDocument';
 import sharedDocument from '../components/DocumentsClientShared/MainDocument';
 import VoucherCase from '../components/VoucherCase/dasboard';
 import Refunds from '../components/Refunds/dasboard';
+import ViewDocuments from '../components/Refunds/ViewDocuments';
 import RePricing from '../components/RePricing/dasboard';
 import Invoice from '../components/invoice/dasboard';
 import AssistanceBills from '../components/AssistanceBills/dasboard';
@@ -76,6 +77,14 @@ export default [
         name: 'Refunds',
         path: '/:lang/reimbursement/:code',
         component: Refunds,
+        meta: {
+            isPublic: true
+        }
+    },
+    {
+        name: 'ViewDocuments',
+        path: '/:lang/reimbursement/:code/view-documents',
+        component: ViewDocuments,
         meta: {
             isPublic: true
         }

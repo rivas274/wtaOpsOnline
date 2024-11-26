@@ -197,10 +197,10 @@ textarea.v-center {
 .m-loader.m-loader--div:not(.m-loader-full):after {
     position: absolute;
     background: #282a3a1f;
-    top: -20px;
-    bottom: -30px;
-    left: -30px;
-    right: -30px;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
     z-index: 98;
     content: "";
 }
@@ -319,7 +319,7 @@ textarea.v-center {
     }
 }
 
-@media only screen and (max-width: 427px) {
+@media only screen and (max-width: 768px) {
     .title-refund-dashboard {
         font-size: 1.8rem;
     }

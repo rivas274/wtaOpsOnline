@@ -113,7 +113,9 @@
         "uploadAnother": "Subir otro documento",
         "uploadDocuments": "Subir Documentos",
         "sharedDocuments": "Documentos Compartidos",
-        "remarks": "Observaciones"
+        "remarks": "Observaciones",
+        "uploadDate": "Fecha de carga",
+        "pinSent": "Por favor, revise su bandeja de entrada o sus mensajes de texto para encontrar el PIN enviado."
     },
     "supervision": {
         "supervision": "Supervisión"
@@ -291,7 +293,9 @@
         "confirmDelete": "¿Está seguro que desea eliminar este registro?",
         "confirmUndoDelete": "¿Está seguro que desea deshacer la eliminación de este registro?",
         "approved": "Aprobado",
-        "rejected": "Rechazado"
+        "rejected": "Rechazado",
+        "pin": "Pin",
+        "enterPinToContinue": "Ingrese su pin para continuar"
     },
     "provider": {
         "provider": "Proveedor",
@@ -383,7 +387,9 @@
         "bankCertification": "Certificación bancaria",
         "bankCertificationRequired": "Por favor, proporcione la certificación bancaria correspondiente para poder procesar el pago.",
         "selectBankCertificationToContinue": "Por favor, seleccione la certificación bancaria para continuar",
-        "viewLoadedDocuments": "Ver documentos cargados"
+        "viewLoadedDocuments": "Ver documentos cargados",
+        "identityVerification": "Para garantizar la seguridad de su información, necesitamos verificar su identidad.",
+        "verificationCodeSentTo": "Le enviaremos un código de verificación a una de las siguientes opciones:"
     },
     "notification": {
         "notifications": "Notificación",

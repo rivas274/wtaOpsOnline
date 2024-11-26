@@ -113,7 +113,9 @@
         "uploadAnother": "Upload Another Document",
         "uploadDocuments": "Upload Documents",
         "sharedDocuments": "Shared Documents",
-        "remarks": "Remarks"
+        "remarks": "Remarks",
+        "uploadDate": "Upload Date",
+        "pinSent": "Please check your inbox or text messages to find the sent PIN."
     },
     "supervision": {
         "supervision": "Supervision"
@@ -291,7 +293,9 @@
         "confirmDelete": "Are you sure you want to delete this record?",
         "confirmUndoDelete": "Are you sure you want to undo the deletion of this record?",
         "approved": "Approved",
-        "rejected": "Rejected"
+        "rejected": "Rejected",
+        "pin": "Pin",
+        "enterPinToContinue": "Enter the pin to continue"
     },
     "provider": {
         "provider": "Provider",
@@ -383,7 +387,9 @@
         "bankCertification": "Bank Certification",
         "bankCertificationRequired": "Please provide the corresponding bank certification to proceed with the payment.",
         "selectBankCertificationToContinue": "Select the bank certification to continue",
-        "viewLoadedDocuments": "View loaded documents"
+        "viewLoadedDocuments": "View loaded documents",
+        "identityVerification": "To ensure the security of your information, we need to verify your identity.",
+        "verificationCodeSentTo": "We will send a verification code to one of the following options:"
     },
     "notification": {
         "notifications": "Notification",

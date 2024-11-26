@@ -8,6 +8,11 @@
                     </div>
                 </div>
             </div>
+            <div class="m-portlet__head-tools" v-show="totalUploaded>0">
+                <router-link :to="{path: urlViewDocuments}" replace class="btn btn-default">
+                    {{ $t('refunds.viewLoadedDocuments') | upper }}
+                </router-link>
+            </div>
         </div>
         <div class="m-portlet__body">
             <div class="row">
@@ -48,6 +53,14 @@ export default {
     methods: {
         setGroup: function ({id}) {
             this.$emit('set-group','docTypeGroup',id);
+        }
+    },
+    computed: {
+        urlViewDocuments: function () {
+            return `/${this.$route.params.lang}/reimbursement/${this.$route.params.code}/view-documents`;
+        },
+        totalUploaded: function () {
+            return this.groups.reduce((acc, group) => acc + (parseInt(group['uploaded'])||0), 0);
         }
     }
 };

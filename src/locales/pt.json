@@ -42,10 +42,12 @@
         "choose": "Escolher Ficheiro",
         "send": "Documento Enviado",
         "uploaded": "Seu documento foi enviado com sucesso",
-        "uploadAnother": "Upload de outro documento",
+        "uploadAnother": "Enviar outro documento",
         "uploadDocuments": "Enviar Documentos",
         "sharedDocuments": "Documentos Compartilhados",
-        "remarks": "Observações"
+        "remarks": "Observações",
+        "uploadDate": "Data de envio",
+        "pinSent": "Por favor, revise sua caixa de entrada ou suas mensagens de texto para encontrar o PIN enviado."
     },
     "assistance": {
         "code": "Código de Assistência",
@@ -77,7 +79,9 @@
         "important": "Importante!",
         "back": "Voltar",
         "continue": "Continuar",
-        "return": "voltar"
+        "return": "voltar",
+        "pin": "PIN",
+        "enterPinToContinue": "Por favor, insira o seu PIN para continuar"
     },
     "assistanceBills": {
         "information": "Informações da fatura",
@@ -111,7 +115,9 @@
         "downloadSignUpload": "Clique para baixar sua autorização, assine-a e envie-a novamente.",
         "bankCertificationRequired":"Por favor, forneça a certificação bancária correspondente para prosseguir com o pagamento.",
         "selectBankCertificationToContinue":"Selecione a certificação bancária para continuar",
-        "viewLoadedDocuments": "Ver documentos carregados"
+        "viewLoadedDocuments": "Ver documentos carregados",
+        "identityVerification": "Para garantir a segurança das suas informações, precisamos verificar a sua identidade.",
+        "verificationCodeSentTo": "Enviaremos um código de verificação para uma das seguintes opções:"
     },
     "notification": {
         "notifications": "Notificações",

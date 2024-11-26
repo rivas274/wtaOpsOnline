@@ -19,19 +19,19 @@
                     </div>
                     <div class="m-portlet__body">
                         <div class="text-center">
-                            <h1>
+                            <h2>
                                 {{ $t('reimbursement.caseNumber') }}
-                            </h1>
-                            <h2>
+                            </h2>
+                            <h3>
                                 {{ refundAdm.codigo }}
-                            </h2>
+                            </h3>
                             <br>
-                            <h1>
-                                {{ $t('reimbursement.statusOfYour') }}
-                            </h1>
                             <h2>
-                                {{ refundAdm.status.description.title }} <br>
+                                {{ $t('reimbursement.statusOfYour') }}
                             </h2>
+                            <h3>
+                                {{ refundAdm.status.description.title }} <br>
+                            </h3>
                             <h2 v-if="'method_payment' in refundAdm">
                                 <br>
                                 {{ $t('reimbursement.paymentInformationUploaded') }}

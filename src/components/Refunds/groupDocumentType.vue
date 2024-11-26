@@ -14,6 +14,11 @@
                         type="button"
                     >{{ $t('general.back') | upper }}
                 </button>
+                <div class="m-portlet__head-tools" v-else-if="totalUploaded>0">
+                    <router-link :to="{path: urlViewDocuments}" replace class="btn btn-default">
+                        {{ $t('refunds.viewLoadedDocuments') | upper }}
+                    </router-link>
+                </div>
             </div>
         </div>
         <div class="m-portlet__body">
@@ -56,6 +61,9 @@ export default {
         }
     },
     computed: {
+        urlViewDocuments: function () {
+            return `/${this.$route.params.lang}/reimbursement/${this.$route.params.code}/view-documents`;
+        },
         groupSelected: function () {
             let selected = this.groups.filter((v) => {
                 return v.selected;
@@ -64,6 +72,13 @@ export default {
                 return selected[0];
             }
             return false;
+        },
+        totalUploaded: function () {
+            let total = 0;
+            this.groups.forEach((group) => {
+                total += parseInt(group['uploaded'])||0;
+            });
+            return total;
         },
     }
 };

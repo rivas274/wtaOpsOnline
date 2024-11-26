@@ -3,9 +3,9 @@
         <div v-if = "configData.thirdPartyAuthorization == 'P'">
             <div class="m-portlet m-portlet--responsive-mobile m-portlet--tab m-form">
                 <div class="m-portlet__body pb-3">
-                    <h2>
+                    <h3>
                         {{ $t('refunds.beneficiaryOrThirdParty') }}
-                    </h2>
+                    </h3>
                     <div class="row">
                         <div class="col-md-6 d-flex align-items-start py-3">
                             <button  class="btn-block btn btn-default btn-type-document btn-lg text-wrap text-left align-self-stretch"
